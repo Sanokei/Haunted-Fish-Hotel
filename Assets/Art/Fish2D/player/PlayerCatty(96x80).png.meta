@@ -1,0 +1,928 @@
+fileFormatVersion: 2
+guid: eda0747bdde2e2b42b7e504818bae383
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 496
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75dcef61e8e0c394d98321e4cb2183a6
+      internalID: 1279084720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 496
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a8b70bd2a13853439d0f9bd8c8e8c1c
+      internalID: 209224492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_2
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 496
+        width: 44
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c801edc071519b44f98ce05771c1b4dd
+      internalID: 656190535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_3
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 496
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90f2ae979816d544eae1754f7ae9d548
+      internalID: -719971363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_4
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 496
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 889335f4082b7104abfcf1359e8f2671
+      internalID: 1105705123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_5
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 496
+        width: 41
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3ef1b8333b7e174d94258e631799dce
+      internalID: 918035599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 496
+        width: 41
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 032d8804ddff3d448bd176aa8b16c1e7
+      internalID: 1937875461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_7
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 496
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b2a87ca715ba1e41802728aadfa1342
+      internalID: -783541539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_8
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 496
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8868a1fcf5fe6d4b9771eca9c33ad5d
+      internalID: 1081495116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_9
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 496
+        width: 44
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de1a2dd7bd2f5a34b9d6b58ec99c23f5
+      internalID: 479290337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_10
+      rect:
+        serializedVersion: 2
+        x: 983
+        y: 496
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52959f1000474a94786857d0e6fcf3ed
+      internalID: 878411660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_11
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 496
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fdc8dcb537128246b97ccf67cf6eb3c
+      internalID: 385415401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_12
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 496
+        width: 41
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25c030c56ec1b0d499f340b609ac69ad
+      internalID: 8319761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_13
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 496
+        width: 41
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49cc8eac31de4f746b16741d8fe32a28
+      internalID: 660254849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_14
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 421
+        width: 47
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c4608607475e704eb57ded87f4a08ef
+      internalID: -1145612842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_15
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 416
+        width: 44
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa651f79ea5b1da46866b8a6fbbd7541
+      internalID: 808040604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_16
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 416
+        width: 43
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cf1856ec6d6a034e97521e4d078577e
+      internalID: 740876828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_17
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 419
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf5813d30cf79054e8e969fc9e03b889
+      internalID: 510217987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_18
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 416
+        width: 44
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41c35a145be727544bdb64197f631f75
+      internalID: 1769065282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_19
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 416
+        width: 43
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90ff0dcb0df37d24a8394e1fcaa8438a
+      internalID: 1549292995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_20
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 336
+        width: 48
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dabda0c58679aae46afeb9bc332a8a75
+      internalID: -865745476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_21
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 256
+        width: 47
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 512f42ae711541341bd1d7880787ce02
+      internalID: 1304888195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_22
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 176
+        width: 43
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d84a51d6affcaf6469e16ce8bad2457b
+      internalID: -1476155514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_23
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 100
+        width: 53
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ebccb80a52eb240824f2403377d70a
+      internalID: 1768306301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_24
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 101
+        width: 53
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ea9f62630980b84fb03ebac0ea1eef8
+      internalID: 1424022174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_25
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 99
+        width: 53
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb5b008648c7f2d4392f2bb4c64c03a9
+      internalID: -477955564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_26
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 96
+        width: 61
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c79efcbf866414543a163b32c408221b
+      internalID: 1174666183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_27
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 95
+        width: 48
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 213d94e9d8dc2b145a009b65f04e64ef
+      internalID: -564700023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_28
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 96
+        width: 52
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c635a11ad6208c1448b46265e380cb55
+      internalID: 1486287291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_29
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 96
+        width: 53
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0aa874e425d5cb4986bdaa5602b8f1a
+      internalID: -1804831962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_30
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 21
+        width: 48
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd38c7b5a64b2a44ea89c3e03540fcd7
+      internalID: -1070595556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_31
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 22
+        width: 48
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a79efa86568b5b40ad5b6773c6e1371
+      internalID: 778024730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_32
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 20
+        width: 48
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3ccb5cf84244ed4abb007514febea56
+      internalID: -355329099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_33
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 16
+        width: 71
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c444989d6ec32040978c9456523f095
+      internalID: -2073447161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_34
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 16
+        width: 55
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fef7f5664416db45a006e7c8a457bce
+      internalID: -977652492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_35
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 14
+        width: 63
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25b2b371ca7955e49bd1e754b04e553c
+      internalID: -318822016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCatty(96x80)_36
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 14
+        width: 63
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aec1e67fa8eb1c48bb5f5c1554b34e8
+      internalID: -1043675035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: fe2f944d2cfe4af4db550bb3ded7e0ff
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PlayerCatty(96x80)_0: 1279084720
+      PlayerCatty(96x80)_1: 209224492
+      PlayerCatty(96x80)_10: 878411660
+      PlayerCatty(96x80)_11: 385415401
+      PlayerCatty(96x80)_12: 8319761
+      PlayerCatty(96x80)_13: 660254849
+      PlayerCatty(96x80)_14: -1145612842
+      PlayerCatty(96x80)_15: 808040604
+      PlayerCatty(96x80)_16: 740876828
+      PlayerCatty(96x80)_17: 510217987
+      PlayerCatty(96x80)_18: 1769065282
+      PlayerCatty(96x80)_19: 1549292995
+      PlayerCatty(96x80)_2: 656190535
+      PlayerCatty(96x80)_20: -865745476
+      PlayerCatty(96x80)_21: 1304888195
+      PlayerCatty(96x80)_22: -1476155514
+      PlayerCatty(96x80)_23: 1768306301
+      PlayerCatty(96x80)_24: 1424022174
+      PlayerCatty(96x80)_25: -477955564
+      PlayerCatty(96x80)_26: 1174666183
+      PlayerCatty(96x80)_27: -564700023
+      PlayerCatty(96x80)_28: 1486287291
+      PlayerCatty(96x80)_29: -1804831962
+      PlayerCatty(96x80)_3: -719971363
+      PlayerCatty(96x80)_30: -1070595556
+      PlayerCatty(96x80)_31: 778024730
+      PlayerCatty(96x80)_32: -355329099
+      PlayerCatty(96x80)_33: -2073447161
+      PlayerCatty(96x80)_34: -977652492
+      PlayerCatty(96x80)_35: -318822016
+      PlayerCatty(96x80)_36: -1043675035
+      PlayerCatty(96x80)_4: 1105705123
+      PlayerCatty(96x80)_5: 918035599
+      PlayerCatty(96x80)_6: 1937875461
+      PlayerCatty(96x80)_7: -783541539
+      PlayerCatty(96x80)_8: 1081495116
+      PlayerCatty(96x80)_9: 479290337
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

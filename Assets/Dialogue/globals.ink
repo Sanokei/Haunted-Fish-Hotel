@@ -1,0 +1,2 @@
+// global
+VAR name = ""

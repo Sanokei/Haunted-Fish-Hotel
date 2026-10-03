@@ -1,0 +1,1 @@
+These are depreceated because you cant spawn using leanpool onto a persistent object. I could work around it by just using Instantiate instead. However, for now it's a non issue.
