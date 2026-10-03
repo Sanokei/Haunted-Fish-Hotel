@@ -215,11 +215,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: db9edca3aa691f948898ee24da3dedc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -0.8356197687227696
       objectReference: {fileID: 0}
     - target: {fileID: -1077091845090253419, guid: db9edca3aa691f948898ee24da3dedc9, type: 3}
       propertyPath: m_UpdateWhenOffscreen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db9edca3aa691f948898ee24da3dedc9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 153.7601495427283
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db9edca3aa691f948898ee24da3dedc9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 153.7601495427283
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db9edca3aa691f948898ee24da3dedc9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 153.7601495427283
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

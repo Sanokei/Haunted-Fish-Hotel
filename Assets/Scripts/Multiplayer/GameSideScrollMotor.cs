@@ -71,6 +71,8 @@ namespace HauntedFish.Multiplayer
         // ServerRpc validation in HotelPlayer reaches this method only for the owning ready connection.
         public void Accept(float horizontal,bool jump,Vector3 mouse)
         {
+            // Disabled, loading or retired avatars discard commands rather than replaying them after reactivation.
+            if(!Active || !player || !player.SimulationReady){ResetMotion();return;}
             // Bound horizontal intent so a peer cannot request a faster movement magnitude.
             axis=Mathf.Clamp(horizontal,-1,1);
             // Latch an edge until server physics consumes it, even if several commands arrive in one frame.
@@ -83,8 +85,8 @@ namespace HauntedFish.Multiplayer
         // Connected HotelPlayer calls this only on the authoritative server, with Unity's frame delta.
         public void Simulate(float delta)
         {
-            // Observing clients interpolate instead of running a second CharacterController simulation.
-            if (!controller.enabled) return;
+            // enabled alone remains true on an inactive GameObject. Require the actual authoritative spawn/scene/controller lifecycle.
+            if (!Active || !player || !player.SimulationReady) { ResetMotion();return; }
             // A missing command stream cannot leave movement or an old jump running indefinitely.
             if (Time.unscaledTime-lastCommand>.3f) {axis=0;pendingJump=false;}
             // Grounding determines whether the buffered jump may start; there is no extra airborne jump.
@@ -98,7 +100,9 @@ namespace HauntedFish.Multiplayer
             // Consume the jump edge once and integrate the foundation's gravity on the server.
             pendingJump=false;vertical-=player.Gravity*delta;
             // Collision handling, horizontal speed and vertical motion remain server-owned.
-            controller.Move(new Vector3(player.CanMove?axis*player.WalkingSpeed:0,vertical,0)*delta);
+            if(!player.TryMoveAuthoritatively(new Vector3(player.CanMove?axis*player.WalkingSpeed:0,vertical,0)*delta))
+            // Stop a buffered command if the controller became unavailable while its movement was being calculated.
+            {ResetMotion();return;}
             // Enforce the side-scroll plane after collision resolution rather than allowing depth drift.
             var point=transform.position;point.z=0;transform.position=point;
             // Rotate the authored Facing child only when a horizontal direction is actually requested.
@@ -107,7 +111,7 @@ namespace HauntedFish.Multiplayer
                 player.Spin.rotation=Quaternion.Slerp(player.Spin.rotation,Quaternion.Euler(0,axis>0?90:-90,0),player.SpinSpeed*delta);
         }
         // HotelPlayer's synchronized walking flag drives the hub controller on every observing peer.
-        public bool Walking => Mathf.Abs(axis)>.01f && player.CanMove;
+        public bool Walking => player.SimulationReady && Mathf.Abs(axis)>.01f && player.CanMove;
         // Every peer displays the same SyncVar point; only the owning peer supplies the mouse input.
         public void ShowLamp(Vector3 worldPosition)
         {

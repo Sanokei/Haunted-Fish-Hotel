@@ -42,20 +42,32 @@ namespace HauntedFish.Multiplayer
         // Keep a one-frame jump press until the next network send so throttling cannot lose the button edge.
         bool queuedJump;
         // The scene-travel loading gate keeps input from acting against a partially loaded scene.
-        public bool ControlsReady => !HotelLobby.Instance || !HotelLobby.Instance.SceneTravel.Loading;
+        public bool ControlsReady => isActiveAndEnabled && gameObject.activeInHierarchy &&
+            // Networked avatars must be spawned peers; a stopped identity is not an offline player.
+            (!Networked || (Identity.IsSpawned && (IsServer || IsClient))) &&
+            // Scene handoffs gate both input maps until the current authored scene is ready.
+            (!HotelLobby.Instance || !HotelLobby.Instance.SceneTravel.Loading);
+        // Only a ready server or explicitly offline avatar may run collision physics; clients keep their controllers disabled.
+        public bool SimulationReady => ControlsReady && controller && controller.enabled && controller.gameObject.activeInHierarchy &&
+            // A valid collision volume distinguishes an initialized native collider from a logically enabled detached controller.
+            Time.frameCount>resumeMovementAfterFrame && controller.bounds.size.sqrMagnitude>0.000001f &&
+            // The server also waits for this owner's readiness acknowledgement before moving its persistent character.
+            (!Networked || (IsServer && (Identity.Owner==null || Identity.Owner.SceneIsReady)));
         // Ownership restricts this path to the local player, so a remote avatar cannot take local input or camera focus.
         public bool GameInputActive => IsRelevantPlayer && ControlsReady && gameMotor && gameMotor.Active;
         // Ownership restricts this path to the local player, so a remote avatar cannot take local input or camera focus.
         public bool LobbyInputActive => IsRelevantPlayer && ControlsReady && (!gameMotor || !gameMotor.Active);
         // This controller belongs to the authored player prefab; the server uses it to preserve the movement foundation's collision behavior.
         CharacterController controller;
+        // Native collision state must settle after activation/teleport before either motor can move this controller.
+        int resumeMovementAfterFrame;
         Vector2 input;
         // Expire movement intent after a short interval so connection loss cannot leave an avatar moving forever.
         float lastInput, nextSend, verticalSpeed;
         // Distinguish a spawned network identity from local/offline operation before choosing input and simulation behavior.
         bool Connected => Networked && Identity.IsSpawned;
         // Ownership restricts this path to the local player, so a remote avatar cannot take local input or camera focus.
-        public bool IsRelevantPlayer => !Connected || IsLocalPlayer;
+        public bool IsRelevantPlayer => !Networked || (Identity.IsSpawned && IsLocalPlayer);
         // Resolve the authored dependencies early; the scene and prefab data determine what exists.
         void Awake()
         {
@@ -76,16 +88,30 @@ namespace HauntedFish.Multiplayer
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
             if (!Spin) Spin = transform;
             // Keep this small operation on the existing component so callers share one state transition.
-            Identity.OnStartServer.AddListener(() => { position=transform.position; facing=Spin.rotation; });
+            Identity.OnStartServer.AddListener(() => { position=transform.position; facing=Spin.rotation; ResetSceneMotion();SettleController(); });
+            // Stop events clear held movement and owned actions before Mirage releases or reuses the character identity.
+            Identity.OnStopServer.AddListener(StopSimulation);
+            // Client teardown must not promote a disabled observer controller to offline simulation.
+            Identity.OnStopClient.AddListener(StopSimulation);
             // Keep this small operation on the existing component so callers share one state transition.
             Identity.OnStartClient.AddListener(() => {
                 // Only the authoritative server changes shared simulation; remote clients consume the resulting state.
                 if (!IsServer) { controller.enabled = false; transform.position = position; Spin.rotation = facing; }
             });
         }
+        // Retiring a network identity releases input and motion without re-enabling an intentionally disabled controller.
+        void StopSimulation()
+        {
+            // Each avatar owns this private action asset, so stopping it cannot disable another player's actions.
+            if(ownedActions)ownedActions.Disable();
+            // Remove buffered axes/jumps/velocity before any later scene or spawn lifecycle resumes.
+            ResetSceneMotion();walking=false;
+        }
         // Subscribe while this existing component is active so presentation reacts to the current story or scene.
         void OnEnable()
         {
+            // Reactivation does not grant authority or enable the controller; it only delays physics until native state settles.
+            resumeMovementAfterFrame=Time.frameCount+1;
             // Apply the story system's existing authored effects through the selected private or shared authority path.
             StoryFunctions.OnSpeakerEvent += Speaker;
             // The owning client reads input, the server simulates the CharacterController, and SyncVars carry the resulting state to observers.
@@ -120,6 +146,8 @@ namespace HauntedFish.Multiplayer
         {
             // Only the local owner enables gameplay actions. Travel disables both maps until ready.
             bool lobbyEnabled=LobbyInputActive,gameEnabled=GameInputActive;
+            // A stopped identity or loading scene cannot keep an old command alive until a future spawn.
+            if(!ControlsReady){ResetSceneMotion();walking=false;}
             if(lobbyMap!=null) {if(lobbyEnabled)lobbyMap.Enable();else lobbyMap.Disable();}
             if(gameMap!=null) {if(gameEnabled)gameMap.Enable();else gameMap.Disable();}
             // Lobby controls are mutually exclusive with the side-scroll controls and belong only to the local character.
@@ -165,9 +193,9 @@ namespace HauntedFish.Multiplayer
                 if (gameMotor.Active)
                 {
                     // Readiness prevents movement or visibility updates while that connection is loading a different scene.
-                    if (!ControlsReady || (Identity.Owner!=null && !Identity.Owner.SceneIsReady)) gameMotor.ResetMotion();
+                    if (!SimulationReady) gameMotor.ResetMotion();
                     // The light is a serialized child of the network player; only its mouse-derived world position is synchronized.
-                    gameMotor.Simulate(Time.deltaTime);mouseLight=gameMotor.LampPosition;walking=gameMotor.Walking;
+                    if(SimulationReady)gameMotor.Simulate(Time.deltaTime);mouseLight=gameMotor.LampPosition;walking=gameMotor.Walking;
                 }
                 // The scene-travel loading gate keeps input from acting against a partially loaded scene.
                 else if (ControlsReady) Simulate(Time.deltaTime);
@@ -223,13 +251,35 @@ namespace HauntedFish.Multiplayer
             // Disable client collision simulation while interpolating server state; enable it only for authoritative movement.
             var enabled=controller.enabled;controller.enabled=false;transform.position=point;controller.enabled=enabled;
             // Treat the mouse as a world-plane point, clamp it on the server, and publish it for remote light presentation.
-            position=point;ResetSceneMotion();mouseLight=point+Vector3.right;
+            position=point;ResetSceneMotion();mouseLight=point+Vector3.right;SettleController();
+        }
+        // Synchronize an existing enabled collider after an authorized teleport; intentional client/scene disables remain intact.
+        void SettleController()
+        {
+            // Require a complete later frame even when Unity reports the component logically enabled immediately.
+            resumeMovementAfterFrame=Time.frameCount+1;
+            // Flush moved transforms into physics only at lifecycle boundaries, never enable a disabled controller here.
+            if(controller && controller.enabled && controller.gameObject.activeInHierarchy)Physics.SyncTransforms();
+        }
+        // Both Lobby and Game pass through one immediate authority/native-state check before calling Unity's Move API.
+        public bool TryMoveAuthoritatively(Vector3 displacement)
+        {
+            // Recheck at the actual Move boundary, after each motor has calculated its displacement.
+            if(!SimulationReady)return false;
+            // Reject collapsed transform scales; enabled colliders on zero-scale actors have no usable native capsule.
+            var scale=controller.transform.lossyScale;
+            // Preserve intentionally hidden/inactive actors rather than re-enabling or resizing them automatically.
+            if(Mathf.Abs(scale.x)<.0001f || Mathf.Abs(scale.y)<.0001f || Mathf.Abs(scale.z)<.0001f)return false;
+            // The sole Move call remains on an active, spawned authoritative collider with a valid volume.
+            controller.Move(displacement);
+            // Callers update walking/facing only when collision simulation actually ran.
+            return true;
         }
         // The owning client reads input, the server simulates the CharacterController, and SyncVars carry the resulting state to observers.
         void Simulate(float delta)
         {
             // Disable client collision simulation while interpolating server state; enable it only for authoritative movement.
-            if (!controller.enabled) return;
+            if (!SimulationReady) { input=Vector2.zero;verticalSpeed=0;walking=false;return; }
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
             if (controller.isGrounded && verticalSpeed < 0) verticalSpeed = -2;
             // Use the movement foundation's gravity setting for authoritative vertical motion.
@@ -238,7 +288,9 @@ namespace HauntedFish.Multiplayer
             // The owning client reads input, the server simulates the CharacterController, and SyncVars carry the resulting state to observers.
             var direction = Vector3.forward * input.x + Vector3.right * -input.y;
             // Integrate authoritative velocity through Unity collision handling instead of trusting client-provided transforms.
-            controller.Move((direction * (CanMove ? WalkingSpeed : 0) + Vector3.up * verticalSpeed) * delta);
+            if(!TryMoveAuthoritatively((direction * (CanMove ? WalkingSpeed : 0) + Vector3.up * verticalSpeed) * delta))
+            // A lifecycle change discards intent instead of carrying an old axis or falling velocity into reactivation.
+            {input=Vector2.zero;verticalSpeed=0;walking=false;return;}
             // The owning client reads input, the server simulates the CharacterController, and SyncVars carry the resulting state to observers.
             walking = direction.sqrMagnitude > .001f && CanMove;
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.

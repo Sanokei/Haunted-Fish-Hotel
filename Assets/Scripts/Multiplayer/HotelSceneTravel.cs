@@ -110,7 +110,7 @@ namespace HauntedFish.Multiplayer
                         // Read a component already serialized on this object; do not create a runtime replacement for missing authoring.
                         var character=player.Identity.GetComponent<HotelPlayer>();
                         // Ask Mirage to replicate this authoritative object and its initial state to connected observers.
-                        if (character) character.Teleport(GameSceneDefinition.Current?GameSceneDefinition.Current.Spawn(index):new Vector3(index*2.2f,1.1f,0));
+                        if (character) character.Teleport(GameSceneDefinition.Current?GameSceneDefinition.Current.Spawn(index):new Vector3(index*2.2f,1.1f,2));
                         ++index;
                     }
                 // Readiness prevents movement or visibility updates while that connection is loading a different scene.

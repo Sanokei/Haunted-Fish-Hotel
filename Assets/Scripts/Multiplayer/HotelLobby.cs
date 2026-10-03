@@ -24,6 +24,15 @@ namespace HauntedFish.Multiplayer
         public string DirectoryUrl = "http://127.0.0.1:8787";
         // Advertise an address reachable by other players; a local-only address cannot serve a remote client.
         public string AdvertisedAddress = "127.0.0.1";
+        // Entering Lobby creates a private room automatically; tests can isolate this lifecycle without changing scene structure.
+        public bool AutoCreateOnStart = true;
+        // Serialize user-requested switches with transport cleanup so an old peer cannot receive a new room's callbacks.
+        bool switching;
+        // Retry a missing service at most once every fifteen seconds, never continuously each frame.
+        float nextAutoAttempt;
+        // The player menu waits for admission as well as HTTP/transport/scene transitions before offering another action.
+        public bool Transitioning => Busy || leaving || switching || (client && client.Active && !accepted) || (SceneTravel && SceneTravel.Loading);
+
         // Limit room admission including the host; raw transport connections do not bypass this total-player bound.
         public int Port = 7777, Capacity = 4;
         // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
@@ -35,7 +44,7 @@ namespace HauntedFish.Multiplayer
         // Store an explicit authored prefab reference so host and clients agree on network object structure.
         public List<NetworkIdentity> AdditionalPrefabs = new List<NetworkIdentity>();
         // Expose the session result to the authored UI so connection failures and current room state remain visible.
-        public string Status { get; private set; } = "Create a lobby or enter a six-character code.";
+        public string Status { get; private set; } = "Connecting...";
         // Use a normalized six-character room code to resolve the directory entry for this particular host.
         public string Code => room?.code ?? "";
         // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
@@ -71,6 +80,8 @@ namespace HauntedFish.Multiplayer
             if (Instance && Instance != this) { Destroy(gameObject); return; }
             // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
             Instance = this;
+            // Wait through one frame of scene initialization before Update can request automatic recovery.
+            nextAutoAttempt=Time.unscaledTime+1;
             // Keep the established session or spawned network identity alive across connected Lobby/Game travel.
             DontDestroyOnLoad(gameObject);
             // Advertise an address reachable by other players; a local-only address cannot serve a remote client.
@@ -187,7 +198,7 @@ namespace HauntedFish.Multiplayer
             // Send this protocol payload through the established Mirage connection rather than creating a separate gameplay session.
             player.Send(new LobbyWelcome { Accepted = true, Message = "Connected" });
             // Ask Mirage to replicate this authoritative object and its initial state to connected observers.
-            var position = GameSceneDefinition.Current?GameSceneDefinition.Current.Spawn(admitted.Count-1):new Vector3((admitted.Count-1)*2.2f, 1.1f, 0);
+            var position = GameSceneDefinition.Current?GameSceneDefinition.Current.Spawn(admitted.Count-1):new Vector3((admitted.Count-1)*2.2f, 1.1f, 2);
             // Instantiate the assigned authored network prefab for a real network spawn; no scene structure is assembled by code.
             var identity = Instantiate(PlayerPrefab, position, Quaternion.identity);
             // Assign this spawned identity to its connection, which establishes ownership for local input and owner-only RPCs.
@@ -202,12 +213,58 @@ namespace HauntedFish.Multiplayer
         // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
         public void JoinLobby(string code)
         {
-            // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
-            if (Busy || client.Active || server.Active) return;
-            // Expose the session result to the authored UI so connection failures and current room state remain visible.
+            // Reject overlap rather than letting HTTP responses race a scene load or another room switch.
+            if (Transitioning) return;
+            // Normalize the invitation before touching the current room; a typo must not disconnect its players.
             if (!LobbyCode.TryNormalize(code, out var normalized)) { Status = "Enter exactly six letters or digits."; return; }
-            // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
-            StartCoroutine(Join(normalized));
+            // Joining the current invitation is already satisfied and must not tear down its session.
+            if (normalized == Code) return;
+            // The coroutine preflights the code, then waits for old-room cleanup before starting the replacement connection.
+            StartCoroutine(SwitchRoom(normalized));
+        }
+        // Automatic startup uses the real directory and Mirage host path after the authored scene has initialized.
+        IEnumerator Start()
+        {
+            // Let persistent Helper services and the local test fixture initialize before opening a socket.
+            yield return null;
+            // Do not compete with an invitation, loading scene or an existing connection.
+            if (AutoCreateOnStart && !Transitioning && !client.Active && !server.Active && room==null) yield return Create();
+        }
+        // Starting a private room is the normal "Play alone" menu action, not a developer Host button.
+        public void StartPrivateRoom()
+        {
+            // Keep one transition in flight and preserve an already private authoritative room.
+            if (Transitioning || IsHost) return;
+            // Leaving another room must finish before the player can become a new host.
+            StartCoroutine(SwitchRoom(null));
+        }
+        // A valid invitation can replace an automatically created room without requiring a separate Leave action.
+        IEnumerator SwitchRoom(string invitation)
+        {
+            // Lock the compact UI while checking the invitation and shutting down its preceding session.
+            switching=true;
+            // Verify an invitation exists before closing the current private room or interrupting its other players.
+            if (invitation!=null)
+            {
+                // Preserve the internal HTTP error in Status; the player UI presents a concise connection state.
+                Room target=null; Busy=true;
+                // Directory lookup alone changes no game connection or scene.
+                yield return Request("/rooms/"+invitation,"GET",null,value=>target=value);
+                // The lookup is complete before deciding whether old-room teardown is necessary.
+                Busy=false;
+                // Invalid, expired or full invitations leave the current room intact.
+                if (target==null) { switching=false; yield break; }
+            }
+            // Tear down host/client identities, unregister the owner lease, and return to Lobby when necessary.
+            if (room!=null || client.Active || server.Active) yield return Leave();
+            // SessionEnded may asynchronously load Lobby; do not spawn the replacement into the departing Game scene.
+            while (SceneTravel.Loading) yield return null;
+            // A null invitation requests a new private room; a code requests the same real admission path used before.
+            if (invitation==null) yield return Create(); else yield return Join(invitation);
+            // If a room expired between preflight and join, restore private play automatically after the failed lookup.
+            if (invitation!=null && room==null && !client.Active && !server.Active) yield return Create();
+            // Normal player actions become available once this transition and any remaining admission complete.
+            switching=false;
         }
         // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
         bool ConfigureSocket()
@@ -226,6 +283,8 @@ namespace HauntedFish.Multiplayer
         // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
         IEnumerator Create()
         {
+            // A failed endpoint is recoverable when the service comes online; space retries without hiding the failure.
+            nextAutoAttempt=Time.unscaledTime+15;
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
             if (!ConfigureSocket()) yield break;
             // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
@@ -381,6 +440,8 @@ namespace HauntedFish.Multiplayer
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     // Expose the session result to the authored UI so connection failures and current room state remain visible.
+                    // Keep a concise diagnostic for developer logs without printing HTTP credentials or response bodies.
+                    if (showErrors) Debug.LogWarning("Room directory request failed: "+request.result+" (HTTP "+request.responseCode+").",this);
                     if (showErrors) Status = !string.IsNullOrEmpty(result?.error) ? result.error :
                         "Lobby directory unavailable. Start the local directory and check its URL.";
                     // This component coordinates the persistent host/client session; scene objects and network prefabs are assigned in authored assets.
@@ -393,6 +454,12 @@ namespace HauntedFish.Multiplayer
         // Service local presentation and authoritative simulation each frame, with ownership/readiness checks inside the path.
         void Update()
         {
+            // Recover private play after a late directory startup or completed disconnect, using actual registration.
+            if (AutoCreateOnStart && !Transitioning && room==null && !client.Active && !server.Active &&
+                // The retry deadline also prevents an unavailable transport from producing a busy request loop.
+                Time.unscaledTime>=nextAutoAttempt && SceneManager.GetActiveScene().name=="Lobby")
+                // Creating succeeds only after the directory and Mirage host setup succeed; no fake code or offline success is shown.
+                CreateLobby();
             // Use a bounded timeout so a failed host or admission handshake cannot leave the UI connecting forever.
             if (client.Active && !accepted && !Busy && Time.unscaledTime > deadline)
             // Expose the session result to the authored UI so connection failures and current room state remain visible.
