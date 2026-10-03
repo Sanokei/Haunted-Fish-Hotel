@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -33,7 +33,7 @@ namespace Monologue
 
         void Update()
         {
-            if(!_calledHelperEvent && _TotalNotDestroyable == _NotDestroyableCount)
+            if(!_calledHelperEvent && _NotDestroyableCount >= _TotalNotDestroyable)
             {
                 NotDestroyedHelperEvent?.Invoke();
                 _calledHelperEvent = true;

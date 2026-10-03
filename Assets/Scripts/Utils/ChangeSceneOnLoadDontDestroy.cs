@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Monologue;
 using UnityEngine;
@@ -10,6 +10,7 @@ public class ChangeSceneOnLoadDontDestroy : MonoBehaviour
     [SerializeField] string _SceneName;
     [SerializeField] int _TotalChangeSceneCount;
     int _ChangeSceneCount;
+    bool _transitionStarted;
     void Awake()
     {
         if (!Instance)
@@ -24,7 +25,11 @@ public class ChangeSceneOnLoadDontDestroy : MonoBehaviour
     }
     void Update()
     {
-        if(_TotalChangeSceneCount == _ChangeSceneCount)
-            SceneManager.LoadScene(_SceneName);
+        if(!_transitionStarted && _ChangeSceneCount >= _TotalChangeSceneCount)
+        {
+            _transitionStarted=true;
+            // Existing Helper serializes the destination with literal quotes.
+            SceneManager.LoadScene(_SceneName.Trim().Trim('"'));
+        }
     }
 }

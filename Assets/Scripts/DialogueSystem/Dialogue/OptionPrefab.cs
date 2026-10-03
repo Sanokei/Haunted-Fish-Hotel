@@ -29,6 +29,8 @@ namespace Monologue.Dialogue
         }
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (eventData.button != PointerEventData.InputButton.Left) return;
+            if (DialogueManager.Instance && DialogueManager.Instance.IsWaiting) return;
             OnChoiceSelectedEvent?.Invoke(this);
         }
         public void OnPointerEnter(PointerEventData eventData)

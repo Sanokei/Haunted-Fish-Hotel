@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +28,7 @@ namespace Monologue.StoryInput
             {
                 _isProfileIncluded = value;
                 m_CurrInputTextField = _isProfileIncluded ? _InputTextFieldWithProfile : _InputTextField;
-                ProfileImage.gameObject.SetActive(value);
+                if (ProfileImage) ProfileImage.gameObject.SetActive(value);
             }
         }
         public Image ProfileImage

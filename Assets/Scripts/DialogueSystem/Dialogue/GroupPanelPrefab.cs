@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,7 @@ namespace Monologue
         {
             get
             {
+                if (!_VerticalGroup) _VerticalGroup = GetComponentInChildren<LayoutGroup>(true);
                 return _VerticalGroup;
             }
         }
@@ -28,7 +29,10 @@ namespace Monologue
         public List<GameObject> Children = new();
         public T Create<T>(T prefab) where T : Component
         {
-            T go = Instantiate<T>(prefab,_VerticalGroup.transform);
+            T go = Instantiate<T>(prefab,VerticalGroup.transform);
+            Children.RemoveAll(child => !child);
+            go.transform.localScale = Vector3.one;
+            if (go.transform is RectTransform rect) rect.anchoredPosition3D = Vector3.zero;
             Children.Add(go.gameObject);
             return go;
         }

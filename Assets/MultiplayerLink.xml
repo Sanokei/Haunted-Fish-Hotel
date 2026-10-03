@@ -1,0 +1,4 @@
+<linker>
+  <assembly fullname="Mirage" preserve="all" ignoreIfMissing="1" />
+  <assembly fullname="Mirage.SocketLayer" preserve="all" ignoreIfMissing="1" />
+</linker>

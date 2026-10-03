@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,7 +88,7 @@ namespace Monologue.Dialogue
             set
             {
                 _isProfileIncluded = value;
-                ProfileImage.gameObject.SetActive(value);
+                if (ProfileImage) ProfileImage.gameObject.SetActive(value);
             }
         }
         public Image ProfileImage
@@ -133,6 +133,8 @@ namespace Monologue.Dialogue
 
                     index++;
                 }
+                Canvas.ForceUpdateCanvases();
+                if (_DialogueChoicePanel.VerticalGroup.transform is RectTransform rect) LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
             }
         }
 

@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using Monologue.StoryInput;
 
 using Ink.Runtime;
+using HauntedFish.Multiplayer;
 
 using System.Linq;
 
@@ -30,6 +31,17 @@ namespace Monologue.Dialogue
         public delegate void OnAnimation(string animation);
         public static event OnAnimation OnAnimationEvent;
 
+        public static void ApplyNetworkCue(SharedWorldCue cue)
+        {
+            switch (cue.Type)
+            {
+                case 0: OnSpeakerEvent?.Invoke(cue.First); break;
+                case 1: OnCameraSetEvent?.Invoke(cue.First,cue.Flag); break;
+                case 2: OnMoveToEvent?.Invoke(cue.First,cue.X,cue.Y,cue.Delay,cue.Flag); break;
+                case 3: OnEmojiEvent?.Invoke(cue.First,cue.Second); break;
+                case 4: OnAnimationEvent?.Invoke(cue.First); break;
+            }
+        }
         public static List<string> TagtoList(string tagValue)
         {
             if(tagValue.ToCharArray().Count() == 0)
