@@ -1,4 +1,4 @@
-using Mirage;
+﻿using Mirage;
 using Monologue.Dialogue;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -105,13 +105,6 @@ namespace HauntedFish.Multiplayer
             if (walking)
                 Spin.rotation = Quaternion.Slerp(Spin.rotation,
                     Quaternion.Euler(0, Mathf.Atan2(-input.y, input.x) * Mathf.Rad2Deg, 0), delta * SpinSpeed);
-        }
-        void LateUpdate()
-        {
-            if (!IsRelevantPlayer || !Camera.main) return;
-            var camera = Camera.main.transform;
-            camera.position = transform.position + new Vector3(8, 8, -10);
-            camera.LookAt(transform.position + Vector3.up);
         }
         [ServerRpc] public void RequestDialogue(int action, string story, Vector3 anchor, int choice, int revision, string inputKey, string inputValue)
         {

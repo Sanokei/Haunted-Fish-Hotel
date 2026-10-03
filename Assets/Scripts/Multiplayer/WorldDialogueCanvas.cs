@@ -10,9 +10,10 @@ namespace HauntedFish.Multiplayer
     [RequireComponent(typeof(Canvas))]
     public sealed class WorldDialogueCanvas : MonoBehaviour
     {
-        public Vector3 Offset = new Vector3(1.2f,3.2f,0);
-        public Vector2 Size = new Vector2(1920,1080);
-        public float WorldScale = .002f;
+        public Vector3 Offset = new Vector3(3.3f,4.2f,0);
+        public Vector2 Size = new Vector2(900,440);
+        public float WorldScale = .009f;
+        public bool AdaptLegacyLayout = true;
         public Transform Follow;
         public bool FaceCamera = true;
         Vector3 anchor;
@@ -27,6 +28,8 @@ namespace HauntedFish.Multiplayer
             placement.anchor=point;
             placement.Follow=null;
             placement.Configure();
+            if (placement.AdaptLegacyLayout && panel is Panel dialogue) dialogue.ConfigureWorldLayout();
+            if (placement.AdaptLegacyLayout && panel is Monologue.StoryInput.TextFieldPanel input) input.ConfigureWorldLayout();
             return placement;
         }
         public void Configure()

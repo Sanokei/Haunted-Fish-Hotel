@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Lean.Gui;
 using Lean.Transition;
@@ -40,7 +40,8 @@ namespace HauntedFish.UI
         public LeanWindow ArrivalWindow;
         [Min(0)] public float LightningDuration,PushDuration,DollyDuration;
         public LeanEase Ease=LeanEase.Smooth;
-        public UnityEvent OnLightning,OnKnock,OnDeliveredItem,OnLetter,OnSlide,OnPush,OnDolly,OnArrival;
+        public UnityEvent OnLightning=new UnityEvent(),OnKnock=new UnityEvent(),OnDeliveredItem=new UnityEvent(),
+            OnLetter=new UnityEvent(),OnSlide=new UnityEvent(),OnPush=new UnityEvent(),OnDolly=new UnityEvent(),OnArrival=new UnityEvent();
         readonly List<LeanState> running=new List<LeanState>();
         readonly Dictionary<RectTransform,(Vector2 position,Vector3 scale)> originals=
             new Dictionary<RectTransform,(Vector2,Vector3)>();
