@@ -2,11 +2,17 @@ using System;
 using System.Text.RegularExpressions;
 namespace HauntedFish.Multiplayer
 {
+    // Injected into both host and client avatars; no global session lookup is required.
+    public sealed class HotelSessionContext
+    {
+        public bool Loading { get; internal set; }
+        public bool InputFocused { get; internal set; }
+    }
     // These small serialized messages separate room-directory admission, shared story state and server-issued world effects.
     [Serializable] public class Room
     {
         // The directory-issued invitation secret prevents an unrelated connection from claiming this room by code alone.
-        public string code, address, joinKey, ownerKey, error;
+        public string code, address, joinKey, ownerKey, error, reservation, status;
         // These small serialized messages separate room-directory admission, shared story state and server-issued world effects.
         public int port, capacity, players;
     }
@@ -27,7 +33,7 @@ namespace HauntedFish.Multiplayer
         }
     }
     // Verify the directory-issued invitation secret as well as the public room code before admitting a peer.
-    public struct LobbyHello { public string Code, JoinKey; }
+    public struct LobbyHello { public string Code, JoinKey, Reservation; }
     // These small serialized messages separate room-directory admission, shared story state and server-issued world effects.
     public struct LobbyWelcome { public bool Accepted; public string Message; }
     // These small serialized messages separate room-directory admission, shared story state and server-issued world effects.

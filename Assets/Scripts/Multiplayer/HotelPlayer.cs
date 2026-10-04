@@ -21,6 +21,8 @@ namespace HauntedFish.Multiplayer
         public InputAction GameJump {get;private set;}
         // The active map is exposed for validation of exclusive scene controls.
         public string ActiveInputMap => gameMap!=null&&gameMap.enabled?"Game":lobbyMap!=null&&lobbyMap.enabled?"Lobby":"";
+        HotelSessionContext session;
+        public void Configure(HotelSessionContext context) { session = context; }
         public bool Networked = true;
         // Use the movement foundation's gravity setting for authoritative vertical motion.
         public float WalkingSpeed = 4.5f, SpinSpeed = 12f, Gravity = 25f;
@@ -46,7 +48,7 @@ namespace HauntedFish.Multiplayer
             // Networked avatars must be spawned peers; a stopped identity is not an offline player.
             (!Networked || (Identity.IsSpawned && (IsServer || IsClient))) &&
             // Scene handoffs gate both input maps until the current authored scene is ready.
-            (!HotelLobby.Instance || !HotelLobby.Instance.SceneTravel.Loading);
+            (session == null ? !Networked : !session.Loading);
         // Only a ready server or explicitly offline avatar may run collision physics; clients keep their controllers disabled.
         public bool SimulationReady => ControlsReady && controller && controller.enabled && controller.gameObject.activeInHierarchy &&
             // A valid collision volume distinguishes an initialized native collider from a logically enabled detached controller.
@@ -142,6 +144,7 @@ namespace HauntedFish.Multiplayer
         // Mirage weaves this call into an owner-authorized client-to-server message; the server still validates the requested values.
         [ServerRpc] void SetTalking(bool value) { talking = value; }
         // Service local presentation and authoritative simulation each frame, with ownership/readiness checks inside the path.
+        
         void Update()
         {
             // Only the local owner enables gameplay actions. Travel disables both maps until ready.
@@ -155,7 +158,7 @@ namespace HauntedFish.Multiplayer
             {
                 // The owning client reads input, the server simulates the CharacterController, and SyncVars carry the resulting state to observers.
                 // Read the authored Lobby map; text focus and movement locks suppress its command.
-                Vector2 value=CanMove&&ControlsReady&&!HotelLobby.InputFocused&&lobbyMove!=null?lobbyMove.ReadValue<Vector2>():Vector2.zero;
+                Vector2 value=CanMove&&ControlsReady&&!(session != null && session.InputFocused)&&lobbyMove!=null?lobbyMove.ReadValue<Vector2>():Vector2.zero;
                 if (DialogueManager.Instance && DialogueManager.Instance.ActiveDialoguePanel) value = Vector2.zero;
                 // Clamp the requested value to the allowed range before it reaches authoritative simulation or world-space presentation.
                 value = Vector2.ClampMagnitude(value, 1);
@@ -174,7 +177,7 @@ namespace HauntedFish.Multiplayer
             if (GameInputActive)
             {
                 // The owning client reads input, the server simulates the CharacterController, and SyncVars carry the resulting state to observers.
-                bool canMove=CanMove && !HotelLobby.InputFocused && !(DialogueManager.Instance && DialogueManager.Instance.ActiveDialoguePanel);
+                bool canMove=CanMove && !(session != null && session.InputFocused) && !(DialogueManager.Instance && DialogueManager.Instance.ActiveDialoguePanel);
                 // Treat the mouse as a world-plane point, clamp it on the server, and publish it for remote light presentation.
                 gameMotor.ReadOwnedInput(canMove,out var horizontal,out var jump,out var mouse);
                 // Keep a one-frame jump press until the next network send so throttling cannot lose the button edge.

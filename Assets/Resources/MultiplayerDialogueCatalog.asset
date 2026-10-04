@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 720e1a47200d4b65a3bb221097f1ca9a, type: 3}
   m_Name: MultiplayerDialogueCatalog
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Stories:
   - {fileID: 4900000, guid: 23ccfb5918eb8d249978d820143a7aac, type: 3}
   - {fileID: 4900000, guid: 61754f0c58f32c34db5074d905e2b12a, type: 3}

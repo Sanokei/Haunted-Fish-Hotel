@@ -42,7 +42,7 @@ public class CinemachineCameraManager : MonoBehaviour
     void AddCameras(Scene scene0, Scene scene1)
     {
         _Cameras = new();
-        List<CinemachineCamera> _AllCameras = FindObjectsOfType<CinemachineCamera>(true).ToList();
+        List<CinemachineCamera> _AllCameras = FindObjectsByType<CinemachineCamera>(sortMode: FindObjectsSortMode.None).ToList();
         foreach(var cam in _AllCameras)
             _Cameras.Add(cam.name, cam);
     }
@@ -78,5 +78,10 @@ public class CinemachineCameraManager : MonoBehaviour
         _Cameras.Values.ToList().ForEach(cam => cam.Priority = 0);
         idx.Priority = 1;
         _CurrentCamera = new KeyValuePair<string, CinemachineCamera>(idx.name, idx);
+    }
+
+    public void SetFollowTarget(GameObject target)
+    {
+        _CurrentCamera.Value.Follow = target.transform;
     }
 }
