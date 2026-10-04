@@ -7,14 +7,17 @@ namespace HauntedFish.Multiplayer
     public sealed class HotelLobbyPanel : MonoBehaviour
     {
         // A six-character invitation is the only editable networking value shown to players.
-        public TMP_InputField Code;
+        [SerializeField] TMP_InputField Code;
         // Display the room code and a concise connection state without revealing technical endpoint details.
-        public TMP_Text Status;
+        [SerializeField] TMP_Text Status;
         // Sharing and joining act on serialized widgets; regular game actions remain in a separate authored menu.
         [UnityEngine.Serialization.FormerlySerializedAs("Create")]
-        public Button Share;
+        [SerializeField] Button Share;
         // Preserve the other established widget references while migrating old saved Create bindings to Copy code.
-        public Button Join,Leave,StartGame,ReturnLobby;
+        [SerializeField] Button Join;
+
+        HotelLobby _CurrentLobby; 
+
         // Bind existing scene controls to the persistent session rather than assembling UI at runtime.
         void Awake()
         {
@@ -22,36 +25,24 @@ namespace HauntedFish.Multiplayer
             Share.onClick.AddListener(()=>GUIUtility.systemCopyBuffer=HotelLobby.Instance.Code);
             // A connected player can enter another invitation; HotelLobby serializes cleanup and replacement admission.
             Join.onClick.AddListener(()=>HotelLobby.Instance.JoinLobby(Code.text));
-            // The ordinary menu returns a guest to their own automatically created private room.
-            Leave.onClick.AddListener(()=>HotelLobby.Instance.StartPrivateRoom());
-            // Scene travel preserves the same Mirage session and remains an authoritative host decision.
-            StartGame.onClick.AddListener(()=>HotelLobby.Instance.SceneTravel.GoToGame());
-            // Returning to Lobby uses the same reliable scene readiness handshake.
-            ReturnLobby.onClick.AddListener(()=>HotelLobby.Instance.SceneTravel.ReturnToLobby());
+
+            _CurrentLobby=HotelLobby.Instance;
         }
         // Keep the compact invitation controls synchronized with admission and the current game scene.
         void Update()
         {
             // Helper initializes the persistent session before Lobby becomes playable.
-            var lobby=HotelLobby.Instance;if(!lobby)return;
+            if(!_CurrentLobby)return;
             // A room invitation is useful only once its code exists; no URL or IP address is shown here.
-            bool connected=!string.IsNullOrEmpty(lobby.Code),transition=lobby.Transitioning;
+            bool connected=!string.IsNullOrEmpty(_CurrentLobby.Code),transition=_CurrentLobby.Transitioning;
             // Keep service error details internal while telling players whether a room is available.
-            Status.text=connected?"Room code: "+lobby.Code:(transition?"Connecting...":"Unable to connect.");
+            Status.text=connected?"Room code: "+_CurrentLobby.Code:(transition?"Connecting...":"Unable to connect.");
             // Room changes and invitation editing wait for the preceding scene/socket transition to finish.
             Code.interactable=Join.interactable=!transition;
             // Prevent empty or malformed invitations from becoming a destructive room change.
             Join.interactable &= Code.text.Trim().Length==6;
             // An invitation can be copied only when the current room is known.
             Share.interactable=connected&&!transition;
-            // Only a guest needs to leave a shared room for private play; hosts already own their room.
-            Leave.gameObject.SetActive(connected&&!lobby.IsHost);
-            // A regular game action enters Game from Lobby; it does not advertise transport/server terminology.
-            StartGame.gameObject.SetActive(connected&&lobby.IsHost&&lobby.SceneTravel.TargetScene=="Lobby");
-            // The return action belongs to Game and is absent from Lobby's menu.
-            ReturnLobby.gameObject.SetActive(connected&&lobby.IsHost&&lobby.SceneTravel.TargetScene=="Game");
-            // Disable game actions during loading or invitation switching, even if the last code is still visible.
-            Leave.interactable=StartGame.interactable=ReturnLobby.interactable=!transition;
             // Typing an invitation must not simultaneously move the local avatar.
             HotelLobby.SetInputFocused(Code.isFocused);
         }
