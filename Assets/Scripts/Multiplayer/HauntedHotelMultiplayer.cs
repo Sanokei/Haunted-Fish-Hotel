@@ -224,7 +224,7 @@ namespace HauntedFish.Multiplayer
                 yield break;
             }
 
-            SetState(HotelSessionState.Connected, "Connected to " + Code + ". WASD or arrow keys to move.");
+            SetState(HotelSessionState.Connected, "Connected to " + Code);
             if (_Network.IsHost)
                 _Heartbeat = StartCoroutine(KeepRoomAlive(version));
             _Operation = null;

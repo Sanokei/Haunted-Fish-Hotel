@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -16,11 +16,11 @@ namespace PrettyHierarchy
 
         private static void HandleHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
         {
-            UnityEngine.Object instance = EditorUtility.InstanceIDToObject(instanceID);
+            GameObject instance = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
 
             if (instance != null)
             {
-                PrettyObject prettyObject = (instance as GameObject).GetComponent<PrettyObject>();
+                PrettyObject prettyObject = instance.GetComponent<PrettyObject>();
 
                 if (prettyObject != null)
                 {
@@ -96,11 +96,23 @@ namespace PrettyHierarchy
             if (item.GameObject.transform.childCount > 0)
             {
                 Type sceneHierarchyWindowType = typeof(Editor).Assembly.GetType("UnityEditor.SceneHierarchyWindow");
-                PropertyInfo sceneHierarchyWindow = sceneHierarchyWindowType.GetProperty("lastInteractedHierarchyWindow", BindingFlags.Public | BindingFlags.Static);
+                PropertyInfo sceneHierarchyWindow = sceneHierarchyWindowType?.GetProperty("lastInteractedHierarchyWindow", BindingFlags.Public | BindingFlags.Static);
 
-                int[] expandedIDs = (int[])sceneHierarchyWindowType.GetMethod("GetExpandedIDs", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(sceneHierarchyWindow.GetValue(null), null);
+                MethodInfo getExpandedIDs = sceneHierarchyWindowType?.GetMethod("GetExpandedIDs", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                object window = sceneHierarchyWindow?.GetValue(null);
+                if (window == null || getExpandedIDs == null)
+                    return;
 
-                string iconID = expandedIDs.Contains(item.InstanceID) ? "IN Foldout on" : "IN foldout";
+                // Older editors return int[], while Unity 6.3 returns EntityId[].
+                IList expandedIDs = getExpandedIDs.Invoke(window, null) as IList;
+                if (expandedIDs == null)
+                    return;
+
+                bool isExpanded = expandedIDs.Contains(item.InstanceID);
+#if UNITY_6000_3_OR_NEWER
+                isExpanded |= expandedIDs.Contains(item.GameObject.GetEntityId());
+#endif
+                string iconID = isExpanded ? "IN Foldout on" : "IN foldout";
 
                 GUI.DrawTexture(item.CollapseToggleIconRect, EditorGUIUtility.IconContent(iconID).image, ScaleMode.StretchToFill, true, 0f, EditorColors.CollapseIconTintColor, 0f, 0f);
             }

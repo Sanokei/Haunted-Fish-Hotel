@@ -123,7 +123,6 @@ namespace HauntedFish.Multiplayer
             SetLoading(true);
             foreach (var player in _Server.AuthenticatedPlayers)
                 AwaitReadiness(player);
-            DestroyPreviousSceneObjects();
             _Server.SendToAll(CurrentTravelMessage(), authenticatedOnly: true, excludeLocalPlayer: true);
             StartCoroutine(LoadScene(scene, true));
         }
@@ -182,13 +181,17 @@ namespace HauntedFish.Multiplayer
         IEnumerator LoadScene(string scene, bool host)
         {
             _Callbacks.ReportStatus("Loading " + scene + "...");
-            yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
-            _ClientObjects.PrepareToSpawnSceneObjects();
-            _Callbacks.ResetMotion();
-            if (host)
-                CompleteHostLoad();
-            else
-                _Client.Send(new HotelTravelReady { Version = _Version, Scene = scene });
+            yield return BubbleSceneTransition.Travel(scene,
+                host ? (Action)DestroyPreviousSceneObjects : null,
+                () =>
+                {
+                    _ClientObjects.PrepareToSpawnSceneObjects();
+                    _Callbacks.ResetMotion();
+                    if (host)
+                        CompleteHostLoad();
+                    else
+                        _Client.Send(new HotelTravelReady { Version = _Version, Scene = scene });
+                });
             SetLoading(false);
             _Callbacks.ReportStatus("Connected to " + _Callbacks.RoomCode() + " - " + scene + ".");
         }
@@ -258,7 +261,7 @@ namespace HauntedFish.Multiplayer
         IEnumerator ReturnOffline()
         {
             SetLoading(true);
-            yield return SceneManager.LoadSceneAsync("Lobby", LoadSceneMode.Single);
+            yield return BubbleSceneTransition.Travel("Lobby");
             SetLoading(false);
         }
 

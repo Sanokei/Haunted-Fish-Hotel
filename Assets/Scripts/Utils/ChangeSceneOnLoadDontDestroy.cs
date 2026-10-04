@@ -29,7 +29,7 @@ public class ChangeSceneOnLoadDontDestroy : MonoBehaviour
         {
             _transitionStarted=true;
             // Existing Helper serializes the destination with literal quotes.
-            SceneManager.LoadScene(_SceneName.Trim().Trim('"'));
+            BubbleSceneTransition.Load(_SceneName.Trim().Trim('"'));
         }
     }
 }
