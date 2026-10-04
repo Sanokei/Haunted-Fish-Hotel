@@ -8,150 +8,260 @@ using UnityEngine.SceneManagement;
 
 namespace HauntedFish.Multiplayer
 {
-    public struct HotelTravel { public int Version; public string Scene; }
-    public struct HotelTravelReady { public int Version; public string Scene; }
+    public struct HotelTravel
+    {
+        public int Version;
+        public string Scene;
+    }
 
-    // Only the reliable scene protocol and readiness barrier live here.
+    public struct HotelTravelReady
+    {
+        public int Version;
+        public string Scene;
+    }
+
+    public sealed class HotelTravelCallbacks
+    {
+        public readonly Action<string> ReportStatus;
+        public readonly Func<string> RoomCode;
+        public readonly Action BeforeLoad;
+        public readonly Action ResetMotion;
+        public readonly Action PositionCharacters;
+
+        public HotelTravelCallbacks(Action<string> reportStatus, Func<string> roomCode,
+            Action beforeLoad, Action resetMotion, Action positionCharacters)
+        {
+            ReportStatus = reportStatus;
+            RoomCode = roomCode;
+            BeforeLoad = beforeLoad;
+            ResetMotion = resetMotion;
+            PositionCharacters = positionCharacters;
+        }
+    }
+
+    // Owns scene-message ordering and the peer readiness barrier.
     public sealed class HauntedHotelMessageTravel : MonoBehaviour
     {
+        [SerializeField] NetworkServer _Server;
+        [SerializeField] NetworkClient _Client;
+        [SerializeField] ServerObjectManager _ServerObjects;
+        [SerializeField] ClientObjectManager _ClientObjects;
+
+        const float _ReadinessTimeout = 30f;
+        readonly Dictionary<INetworkPlayer, float> _Waiting = new Dictionary<INetworkPlayer, float>();
+        HotelSessionContext _Session;
+        HotelTravelCallbacks _Callbacks;
+        int _Version;
+        bool _ServerLoaded;
+
         public bool Loading { get; private set; }
         public string TargetScene { get; private set; } = "Lobby";
+        public bool CanTravel => _Server && _Server.Active && !Loading && _Waiting.Count == 0;
         public event Action StateChanged;
-        NetworkServer server;
-        NetworkClient client;
-        ServerObjectManager serverObjects;
-        ClientObjectManager clientObjects;
-        HotelSessionContext session;
-        Action<string> reportStatus;
-        Func<string> roomCode;
-        Action beforeTravel;
-        Func<int, Vector3> spawnPosition;
-        int version;
-        bool serverLoaded;
-        readonly Dictionary<INetworkPlayer, float> waiting = new Dictionary<INetworkPlayer, float>();
 
-        public void Configure(NetworkServer host, NetworkClient peer, ServerObjectManager hostObjects,
-            ClientObjectManager peerObjects, HotelSessionContext context, Action<string> status,
-            Func<string> code, Action prepareTravel, Func<int, Vector3> spawn)
+        public void Configure(HotelSessionContext context, HotelTravelCallbacks lifecycle)
         {
             Unconfigure();
-            server = host; client = peer; serverObjects = hostObjects; clientObjects = peerObjects;
-            session = context; reportStatus = status; roomCode = code; beforeTravel = prepareTravel; spawnPosition = spawn;
-            server.Started.AddListener(RegisterServer);
-            client.Started.AddListener(RegisterClient);
-            server.Disconnected.AddListener(OnDisconnected);
+            _Session = context;
+            _Callbacks = lifecycle;
+            _Server.Started.AddListener(RegisterServerMessages);
+            _Client.Started.AddListener(RegisterClientMessages);
+            _Server.Disconnected.AddListener(OnPeerDisconnected);
         }
+
         public void Unconfigure()
         {
             StopAllCoroutines();
-            if (server)
+            if (_Server)
             {
-                server.Started.RemoveListener(RegisterServer);
-                server.Disconnected.RemoveListener(OnDisconnected);
+                _Server.Started.RemoveListener(RegisterServerMessages);
+                _Server.Disconnected.RemoveListener(OnPeerDisconnected);
             }
-            if (client) client.Started.RemoveListener(RegisterClient);
-            waiting.Clear();
+            if (_Client)
+                _Client.Started.RemoveListener(RegisterClientMessages);
+            _Waiting.Clear();
             SetLoading(false);
-            server = null; client = null;
-            reportStatus = null; roomCode = null; beforeTravel = null; spawnPosition = null;
-            session = null;
+            _Session = null;
+            _Callbacks = null;
         }
-        void OnDestroy() => Unconfigure();
-        void RegisterServer() => server.MessageHandler.RegisterHandler<HotelTravelReady>(Ready, allowUnauthenticated: false);
-        void RegisterClient() => client.MessageHandler.RegisterHandler<HotelTravel>(Receive, allowUnauthenticated: false);
-        void OnDisconnected(INetworkPlayer player) => waiting.Remove(player);
-        void SetLoading(bool value)
+
+        void RegisterServerMessages()
         {
-            Loading = value;
-            if (session != null) session.Loading = value;
-            StateChanged?.Invoke();
+            _Server.MessageHandler.RegisterHandler<HotelTravelReady>(OnPeerReady, allowUnauthenticated: false);
         }
-        // A second transition cannot overtake peers still loading the first scene.
-        public bool CanTravel => server && server.Active && !Loading && waiting.Count == 0;
-        public void GoToGame() { if (CanTravel && TargetScene == "Lobby") Begin("Game"); }
-        public void ReturnToLobby() { if (CanTravel && TargetScene == "Game") Begin("Lobby"); }
-        void Begin(string scene)
+
+        void RegisterClientMessages()
         {
-            if (!Application.CanStreamedLevelBeLoaded(scene)) { reportStatus?.Invoke("Add " + scene + " to the build scene list."); return; }
-            beforeTravel?.Invoke();
-            ++version; TargetScene = scene; serverLoaded = false; SetLoading(true); waiting.Clear();
-            foreach (var player in server.AuthenticatedPlayers) WaitFor(player);
-            foreach (var identity in server.World.SpawnedIdentities.ToArray())
-                if (identity && identity.gameObject.scene.name != "DontDestroyOnLoad") serverObjects.Destroy(identity);
-            server.SendToAll(new HotelTravel { Version = version, Scene = scene }, authenticatedOnly: true, excludeLocalPlayer: true);
-            StartCoroutine(Load(scene, true));
+            _Client.MessageHandler.RegisterHandler<HotelTravel>(OnTravelRequested, allowUnauthenticated: false);
         }
-        void WaitFor(INetworkPlayer player)
+
+        public void GoToGame()
         {
-            player.SceneIsReady = false;
-            waiting[player] = Time.unscaledTime + 30;
+            if (CanTravel && TargetScene == "Lobby")
+                BeginTravel("Game");
         }
-        public void Admit(INetworkPlayer player)
+
+        public void ReturnToLobby()
         {
-            if (TargetScene == "Lobby" && !Loading) { player.SceneIsReady = true; return; }
-            WaitFor(player);
-            if (player != server.LocalPlayer) player.Send(new HotelTravel { Version = version, Scene = TargetScene });
+            if (CanTravel && TargetScene == "Game")
+                BeginTravel("Lobby");
         }
-        void Receive(INetworkPlayer sender, HotelTravel message)
+
+        void BeginTravel(string scene)
         {
-            if (server.Active || (message.Scene != "Game" && message.Scene != "Lobby") || message.Version <= version) return;
-            if (!Application.CanStreamedLevelBeLoaded(message.Scene))
+            if (!Application.CanStreamedLevelBeLoaded(scene))
             {
-                reportStatus?.Invoke("Scene missing from this build: " + message.Scene);
-                client.Disconnect();
+                _Callbacks.ReportStatus("Add " + scene + " to the build scene list.");
                 return;
             }
-            version = message.Version; TargetScene = message.Scene; SetLoading(true);
-            StartCoroutine(Load(message.Scene, false));
+
+            _Callbacks.BeforeLoad();
+            ++_Version;
+            TargetScene = scene;
+            _ServerLoaded = false;
+            _Waiting.Clear();
+            SetLoading(true);
+            foreach (var player in _Server.AuthenticatedPlayers)
+                AwaitReadiness(player);
+            DestroyPreviousSceneObjects();
+            _Server.SendToAll(CurrentTravelMessage(), authenticatedOnly: true, excludeLocalPlayer: true);
+            StartCoroutine(LoadScene(scene, true));
         }
-        IEnumerator Load(string scene, bool host)
+
+        void DestroyPreviousSceneObjects()
         {
-            reportStatus?.Invoke("Loading " + scene + " with the connected room...");
-            yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
-            clientObjects.PrepareToSpawnSceneObjects();
-            foreach (var player in FindObjectsByType<HotelPlayer>(FindObjectsSortMode.None)) player.ResetSceneMotion();
-            if (host)
+            foreach (var identity in _Server.World.SpawnedIdentities.ToArray())
             {
-                serverLoaded = true;
-                var index = 0;
-                foreach (var player in server.AuthenticatedPlayers)
-                    if (player.HasCharacter)
-                    {
-                        var character = player.Identity.GetComponent<HotelPlayer>();
-                        if (character) character.Teleport(spawnPosition(index));
-                        ++index;
-                    }
-                if (server.LocalPlayer != null) { server.LocalPlayer.SceneIsReady = true; waiting.Remove(server.LocalPlayer); }
-                serverObjects.SpawnSceneObjects();
-                foreach (var player in server.AuthenticatedPlayers)
-                    if (player.SceneIsReady) serverObjects.SpawnVisibleObjects(player);
+                if (identity && identity.gameObject.scene.name != "DontDestroyOnLoad")
+                    _ServerObjects.Destroy(identity);
             }
-            else client.Send(new HotelTravelReady { Version = version, Scene = scene });
-            SetLoading(false);
-            reportStatus?.Invoke("Connected to " + roomCode?.Invoke() + " - " + scene + ".");
         }
-        void Ready(INetworkPlayer player, HotelTravelReady message)
+
+        HotelTravel CurrentTravelMessage()
         {
-            if (!waiting.ContainsKey(player) || message.Version != version || message.Scene != TargetScene) return;
-            waiting.Remove(player); player.SceneIsReady = true;
-            if (serverLoaded) serverObjects.SpawnVisibleObjects(player);
+            return new HotelTravel { Version = _Version, Scene = TargetScene };
         }
+
+        void AwaitReadiness(INetworkPlayer player)
+        {
+            player.SceneIsReady = false;
+            _Waiting[player] = Time.unscaledTime + _ReadinessTimeout;
+        }
+
+        public void Admit(INetworkPlayer player)
+        {
+            if (TargetScene == "Lobby" && !Loading)
+            {
+                player.SceneIsReady = true;
+                return;
+            }
+            AwaitReadiness(player);
+            if (player != _Server.LocalPlayer)
+                player.Send(CurrentTravelMessage());
+        }
+
+        void OnTravelRequested(INetworkPlayer sender, HotelTravel message)
+        {
+            if (_Server.Active || message.Version <= _Version)
+                return;
+            if (message.Scene != "Game" && message.Scene != "Lobby")
+                return;
+            if (!Application.CanStreamedLevelBeLoaded(message.Scene))
+            {
+                _Callbacks.ReportStatus("Scene missing from this build: " + message.Scene);
+                _Client.Disconnect();
+                return;
+            }
+
+            _Version = message.Version;
+            TargetScene = message.Scene;
+            SetLoading(true);
+            StartCoroutine(LoadScene(message.Scene, false));
+        }
+
+        IEnumerator LoadScene(string scene, bool host)
+        {
+            _Callbacks.ReportStatus("Loading " + scene + "...");
+            yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+            _ClientObjects.PrepareToSpawnSceneObjects();
+            _Callbacks.ResetMotion();
+            if (host)
+                CompleteHostLoad();
+            else
+                _Client.Send(new HotelTravelReady { Version = _Version, Scene = scene });
+            SetLoading(false);
+            _Callbacks.ReportStatus("Connected to " + _Callbacks.RoomCode() + " - " + scene + ".");
+        }
+
+        void CompleteHostLoad()
+        {
+            _ServerLoaded = true;
+            _Callbacks.PositionCharacters();
+            if (_Server.LocalPlayer != null)
+            {
+                _Server.LocalPlayer.SceneIsReady = true;
+                _Waiting.Remove(_Server.LocalPlayer);
+            }
+            _ServerObjects.SpawnSceneObjects();
+            foreach (var player in _Server.AuthenticatedPlayers)
+            {
+                if (player.SceneIsReady)
+                    _ServerObjects.SpawnVisibleObjects(player);
+            }
+        }
+
+        void OnPeerReady(INetworkPlayer player, HotelTravelReady message)
+        {
+            if (!_Waiting.ContainsKey(player) || message.Version != _Version || message.Scene != TargetScene)
+                return;
+            _Waiting.Remove(player);
+            player.SceneIsReady = true;
+            if (_ServerLoaded)
+                _ServerObjects.SpawnVisibleObjects(player);
+        }
+
+        void OnPeerDisconnected(INetworkPlayer player) => _Waiting.Remove(player);
+
         void Update()
         {
-            if (!server || !server.Active) return;
-            foreach (var entry in waiting.ToArray())
-                if (Time.unscaledTime > entry.Value) { waiting.Remove(entry.Key); entry.Key.Disconnect(); }
+            if (!_Server || !_Server.Active)
+                return;
+            foreach (var entry in _Waiting.ToArray())
+            {
+                if (Time.unscaledTime <= entry.Value)
+                    continue;
+                _Waiting.Remove(entry.Key);
+                entry.Key.Disconnect();
+            }
         }
+
+        void SetLoading(bool loading)
+        {
+            Loading = loading;
+            if (_Session != null)
+                _Session.Loading = loading;
+            StateChanged?.Invoke();
+        }
+
         public void SessionEnded()
         {
-            StopAllCoroutines(); waiting.Clear(); SetLoading(false); version = 0; TargetScene = "Lobby"; serverLoaded = false;
-            if (SceneManager.GetActiveScene().name == "Game" && Application.CanStreamedLevelBeLoaded("Lobby")) StartCoroutine(ReturnOffline());
+            StopAllCoroutines();
+            _Waiting.Clear();
+            _Version = 0;
+            TargetScene = "Lobby";
+            _ServerLoaded = false;
+            SetLoading(false);
+            if (SceneManager.GetActiveScene().name == "Game" && Application.CanStreamedLevelBeLoaded("Lobby"))
+                StartCoroutine(ReturnOffline());
         }
+
         IEnumerator ReturnOffline()
         {
             SetLoading(true);
             yield return SceneManager.LoadSceneAsync("Lobby", LoadSceneMode.Single);
             SetLoading(false);
         }
+
+        void OnDestroy() => Unconfigure();
     }
 }

@@ -24,8 +24,8 @@ namespace HauntedFish.Multiplayer
         public Transform Follow;
         // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
         public bool FaceCamera = true;
-        Vector3 anchor;
-        Canvas canvas;
+        Vector3 _Anchor;
+        Canvas _Canvas;
         // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
         public static WorldDialogueCanvas Place(Component panel, Vector3 point)
         {
@@ -40,7 +40,7 @@ namespace HauntedFish.Multiplayer
             // Report a missing authored dependency instead of adding objects or components at runtime.
             if (!placement) {Debug.LogError("Panel requires an authored WorldDialogueCanvas.",panel);return null;}
             // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
-            placement.anchor=point;
+            placement._Anchor=point;
             // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
             placement.Follow=null;
             // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
@@ -52,11 +52,11 @@ namespace HauntedFish.Multiplayer
         public void Configure()
         {
             // Read a component already serialized on this object; do not create a runtime replacement for missing authoring.
-            canvas=GetComponent<Canvas>();
+            _Canvas=GetComponent<Canvas>();
             // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
-            canvas.renderMode=RenderMode.WorldSpace;
+            _Canvas.renderMode=RenderMode.WorldSpace;
             // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
-            canvas.worldCamera=Camera.main;
+            _Canvas.worldCamera=Camera.main;
             // Read a component already serialized on this object; do not create a runtime replacement for missing authoring.
             var rect=GetComponent<RectTransform>();
             // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
@@ -109,13 +109,13 @@ namespace HauntedFish.Multiplayer
         void LateUpdate()
         {
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
-            if (!canvas) return;
+            if (!_Canvas) return;
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-            if (!canvas.worldCamera) canvas.worldCamera=Camera.main;
+            if (!_Canvas.worldCamera) _Canvas.worldCamera=Camera.main;
             // The authored world Canvas follows the relevant speaker and uses the active scene camera for rendering and pointer raycasts.
-            transform.position=(Follow ? Follow.position : anchor)+Offset;
+            transform.position=(Follow ? Follow.position : _Anchor)+Offset;
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-            if (FaceCamera && canvas.worldCamera) transform.rotation=canvas.worldCamera.transform.rotation;
+            if (FaceCamera && _Canvas.worldCamera) transform.rotation=_Canvas.worldCamera.transform.rotation;
         }
     }
 }

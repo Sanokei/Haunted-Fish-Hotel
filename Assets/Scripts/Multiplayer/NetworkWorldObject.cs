@@ -13,22 +13,22 @@ namespace HauntedFish.Multiplayer
         // Shared world simulation belongs to the server; observers apply synchronized pose and visibility without simulating a second world.
         public GameObject Visual;
         // Mirage serializes this authoritative server value to observers; clients use the received state for presentation.
-        [SyncVar] Vector3 position;
+        [SyncVar] Vector3 _Position;
         // Mirage serializes this authoritative server value to observers; clients use the received state for presentation.
-        [SyncVar] Quaternion rotation;
+        [SyncVar] Quaternion _Rotation;
         // Mirage serializes this authoritative server value to observers; clients use the received state for presentation.
-        [SyncVar] bool visible = true;
+        [SyncVar] bool _Visible = true;
         // Only the authoritative server changes shared simulation; remote clients consume the resulting state.
         public bool CanSimulate => !Networked || !Identity.IsSpawned || IsServer;
         // Resolve the authored dependencies early; the scene and prefab data determine what exists.
         void Awake()
         {
             // Keep this small operation on the existing component so callers share one state transition.
-            Identity.OnStartServer.AddListener(() => { position=transform.position; rotation=transform.rotation; });
+            Identity.OnStartServer.AddListener(() => { _Position=transform.position; _Rotation=transform.rotation; });
             // Keep this small operation on the existing component so callers share one state transition.
             Identity.OnStartClient.AddListener(() => {
                 // Only the authoritative server changes shared simulation; remote clients consume the resulting state.
-                if (!IsServer) { transform.SetPositionAndRotation(position, rotation); ApplyVisibility(); }
+                if (!IsServer) { transform.SetPositionAndRotation(_Position, _Rotation); ApplyVisibility(); }
             });
         }
         // Service local presentation and authoritative simulation each frame, with ownership/readiness checks inside the path.
@@ -37,26 +37,26 @@ namespace HauntedFish.Multiplayer
             // This opt-in setting decides whether the object participates in shared network authority or existing local behavior.
             if (!Networked || !Identity.IsSpawned) return;
             // Only the authoritative server changes shared simulation; remote clients consume the resulting state.
-            if (IsServer) { position = transform.position; rotation = transform.rotation; }
+            if (IsServer) { _Position = transform.position; _Rotation = transform.rotation; }
             else
             {
                 // Interpolate toward the received authoritative position to hide network update steps on observing clients.
-                transform.SetPositionAndRotation(Vector3.Lerp(transform.position, position, 1-Mathf.Exp(-18*Time.deltaTime)),
+                transform.SetPositionAndRotation(Vector3.Lerp(transform.position, _Position, 1-Mathf.Exp(-18*Time.deltaTime)),
                     // Smooth visible facing between authoritative rotations without giving the observer simulation authority.
-                    Quaternion.Slerp(transform.rotation, rotation, 1-Mathf.Exp(-18*Time.deltaTime)));
+                    Quaternion.Slerp(transform.rotation, _Rotation, 1-Mathf.Exp(-18*Time.deltaTime)));
             }
             // Shared world simulation belongs to the server; observers apply synchronized pose and visibility without simulating a second world.
             ApplyVisibility();
         }
         // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-        void ApplyVisibility() { if (Visual && Visual != gameObject) Visual.SetActive(visible); }
+        void ApplyVisibility() { if (Visual && Visual != gameObject) Visual.SetActive(_Visible); }
         // Shared world simulation belongs to the server; observers apply synchronized pose and visibility without simulating a second world.
         public void SetVisible(bool value)
         {
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
             if (!CanSimulate) return;
             // Shared world simulation belongs to the server; observers apply synchronized pose and visibility without simulating a second world.
-            visible = value;
+            _Visible = value;
             // Shared world simulation belongs to the server; observers apply synchronized pose and visibility without simulating a second world.
             ApplyVisibility();
         }

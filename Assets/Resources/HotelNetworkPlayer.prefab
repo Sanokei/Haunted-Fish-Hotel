@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpSpeed: 12
-  lamp: {fileID: 21000011}
-  marker: {fileID: 21000013}
+  _Lamp: {fileID: 21000011}
+  _Marker: {fileID: 21000013}
 --- !u!1 &21000009
 GameObject:
   m_ObjectHideFlags: 0

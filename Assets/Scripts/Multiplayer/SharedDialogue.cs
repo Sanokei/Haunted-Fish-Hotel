@@ -14,17 +14,17 @@ namespace HauntedFish.Multiplayer
         // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
         public static SharedDialogue Instance { get; private set; }
         // Mirage serializes this authoritative server value to observers; clients use the received state for presentation.
-        [SyncVar] string snapshotJson = "";
+        [SyncVar] string _SnapshotJson = "";
         // Mirage serializes this authoritative server value to observers; clients use the received state for presentation.
         [SyncVar] public uint SpeakerPlayerId;
-        DialogueCatalog catalog;
+        DialogueCatalog _Catalog;
         // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
-        string lastApplied = "", lastContent = "";
+        string _LastApplied = "", _LastContent = "";
         // Require the currently displayed story revision so duplicated or stale clicks cannot advance the shared story twice.
-        int revision;
-        float nextCapture;
+        int _Revision;
+        float _NextCapture;
         // Require the currently displayed story revision so duplicated or stale clicks cannot advance the shared story twice.
-        public int Revision => revision;
+        public int Revision => _Revision;
         // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
         public static bool Applying { get; private set; }
         // Resolve the authored dependencies early; the scene and prefab data determine what exists.
@@ -33,7 +33,7 @@ namespace HauntedFish.Multiplayer
             // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
             Instance = this;
             // Resolve an existing authored resource asset by name; resource lookup does not construct scene dependencies.
-            catalog = Resources.Load<DialogueCatalog>("MultiplayerDialogueCatalog");
+            _Catalog = Resources.Load<DialogueCatalog>("MultiplayerDialogueCatalog");
         }
         // Subscribe while this existing component is active so presentation reacts to the current story or scene.
         void OnEnable()
@@ -113,7 +113,7 @@ namespace HauntedFish.Multiplayer
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
             if (!Identity.IsSpawned || !player) return false;
             // Require the currently displayed story revision so duplicated or stale clicks cannot advance the shared story twice.
-            player.RequestDialogue(0, DialogueCatalog.Key(story), anchor, -1, revision, "", "");
+            player.RequestDialogue(0, DialogueCatalog.Key(story), anchor, -1, _Revision, "", "");
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
             return true;
         }
@@ -125,7 +125,7 @@ namespace HauntedFish.Multiplayer
             // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
             var player = LocalPlayer();
             // Require the currently displayed story revision so duplicated or stale clicks cannot advance the shared story twice.
-            if (player) player.RequestDialogue(action, "", Vector3.zero, choice, revision, key, value);
+            if (player) player.RequestDialogue(action, "", Vector3.zero, choice, _Revision, key, value);
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
             return true;
         }
@@ -135,7 +135,7 @@ namespace HauntedFish.Multiplayer
         public void HandleRequest(HotelPlayer player, int action, string storyKey, Vector3 anchor, int choice, int expectedRevision, string inputKey, string inputValue)
         {
             // Only the authoritative server changes shared simulation; remote clients consume the resulting state.
-            if (!IsServer || !player || !player.Identity.IsSpawned || !DialogueManager.Instance || !catalog) return;
+            if (!IsServer || !player || !player.Identity.IsSpawned || !DialogueManager.Instance || !_Catalog) return;
             // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
             var manager = DialogueManager.Instance;
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
@@ -143,7 +143,7 @@ namespace HauntedFish.Multiplayer
             {
                 // Only scene-authored shared sources are allowed; clients cannot choose arbitrary story/location.
                 // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
-                var story = catalog.Find(storyKey);
+                var story = _Catalog.Find(storyKey);
                 // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
                 if (!story || manager.ActiveDialoguePanel || manager.IsSharedDialogue) return;
                 // Look up objects already present in the loaded scenes; ownership and scene checks select the appropriate one.
@@ -165,7 +165,7 @@ namespace HauntedFish.Multiplayer
             {
                 // Revision prevents simultaneous clicks from skipping two lines/choices.
                 // Require the currently displayed story revision so duplicated or stale clicks cannot advance the shared story twice.
-                if (!manager.IsSharedDialogue || expectedRevision != revision || manager.IsWaiting) return;
+                if (!manager.IsSharedDialogue || expectedRevision != _Revision || manager.IsWaiting) return;
                 // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
                 if (action==1 && manager.CurrentStory?.currentChoices.Count==0) Apply(manager.ContinueStory);
                 // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
@@ -201,28 +201,28 @@ namespace HauntedFish.Multiplayer
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
             if (!Identity.IsSpawned) return;
             // Only the authoritative server changes shared simulation; remote clients consume the resulting state.
-            if (IsServer && Time.unscaledTime>=nextCapture)
+            if (IsServer && Time.unscaledTime>=_NextCapture)
             {
                 // Use real session time so UI pauses or time-scale changes cannot defeat networking deadlines.
-                nextCapture=Time.unscaledTime+.05f;
+                _NextCapture=Time.unscaledTime+.05f;
                 // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
                 if (DialogueManager.Instance && DialogueManager.Instance.IsSharedDialogue) Publish();
             }
             // Only the authoritative server changes shared simulation; remote clients consume the resulting state.
-            if (!IsServer && snapshotJson!="" && snapshotJson!=lastApplied && DialogueManager.Instance && catalog)
+            if (!IsServer && _SnapshotJson!="" && _SnapshotJson!=_LastApplied && DialogueManager.Instance && _Catalog)
             {
                 // Publish or apply a complete authoritative dialogue view so late joiners see the same current prompt and choices.
-                var snapshot=JsonUtility.FromJson<DialogueSnapshot>(snapshotJson);
+                var snapshot=JsonUtility.FromJson<DialogueSnapshot>(_SnapshotJson);
                 // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
-                var story=catalog.Find(snapshot.storyKey);
+                var story=_Catalog.Find(snapshot.storyKey);
                 // Report a missing authored dependency instead of adding objects or components at runtime.
                 if (snapshot.active && !story) { Debug.LogError("Shared dialogue missing from catalog. Rebuild catalog on all clients."); return; }
                 // Require the currently displayed story revision so duplicated or stale clicks cannot advance the shared story twice.
-                revision=snapshot.revision;
+                _Revision=snapshot.revision;
                 // Publish or apply a complete authoritative dialogue view so late joiners see the same current prompt and choices.
                 Apply(() => DialogueManager.Instance.ApplySharedSnapshot(snapshot,story));
                 // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
-                lastApplied=snapshotJson;
+                _LastApplied=_SnapshotJson;
             }
         }
         // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
@@ -258,13 +258,13 @@ namespace HauntedFish.Multiplayer
             // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
             var content=JsonUtility.ToJson(data);
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
-            if (content==lastContent) return;
+            if (content==_LastContent) return;
             // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
-            lastContent=content;
+            _LastContent=content;
             // Require the currently displayed story revision so duplicated or stale clicks cannot advance the shared story twice.
-            data.revision=++revision;
+            data.revision=++_Revision;
             // Only the server executes shared Ink. Clients request actions with revisions, then render the authoritative snapshot instead of running story effects twice.
-            snapshotJson=JsonUtility.ToJson(data);
+            _SnapshotJson=JsonUtility.ToJson(data);
         }
     }
 }

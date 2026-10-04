@@ -16,6 +16,16 @@ static class Program
         ++checks;
     }
     static void Call(object instance, string name) => instance.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(instance, null);
+    static void Configure(HauntedHotelMessageTravel travel, NetworkServer server, NetworkClient client,
+        ServerObjectManager serverObjects, ClientObjectManager clientObjects, HotelSessionContext context)
+    {
+        var flags = BindingFlags.Instance | BindingFlags.NonPublic;
+        typeof(HauntedHotelMessageTravel).GetField("_Server", flags).SetValue(travel, server);
+        typeof(HauntedHotelMessageTravel).GetField("_Client", flags).SetValue(travel, client);
+        typeof(HauntedHotelMessageTravel).GetField("_ServerObjects", flags).SetValue(travel, serverObjects);
+        typeof(HauntedHotelMessageTravel).GetField("_ClientObjects", flags).SetValue(travel, clientObjects);
+        travel.Configure(context, new HotelTravelCallbacks(_ => { }, () => "ABC123", () => { }, () => { }, () => { }));
+    }
     static void Main()
     {
         var host = new NetworkServer { Active = true };
@@ -27,7 +37,7 @@ static class Program
         host.LocalPlayer = local;
         host.AuthenticatedPlayers.Add(local); host.AuthenticatedPlayers.Add(remote);
         var travel = new HauntedHotelMessageTravel();
-        travel.Configure(host, client, objects, peerObjects, session, _ => { }, () => "ABC123", () => { }, _ => new Vector3());
+        Configure(travel, host, client, objects, peerObjects, session);
         host.Started.Invoke(); client.Started.Invoke();
         travel.GoToGame();
         Check(travel.Loading && session.Loading && !local.SceneIsReady && !remote.SceneIsReady, "Travel gates every peer and injected input context");
@@ -57,7 +67,7 @@ static class Program
 
         host = new NetworkServer(); client = new NetworkClient(); session = new HotelSessionContext();
         travel = new HauntedHotelMessageTravel();
-        travel.Configure(host, client, new ServerObjectManager(), new ClientObjectManager(), session, _ => { }, () => "ABC123", () => { }, _ => new Vector3());
+        Configure(travel, host, client, new ServerObjectManager(), new ClientObjectManager(), session);
         client.Started.Invoke();
         client.MessageHandler.Deliver(remote, new HotelTravel { Version = 1, Scene = "Game" });
         Check(session.Loading, "Client receives loading gate through injected context");
@@ -75,6 +85,7 @@ static class Program
 }
 namespace UnityEngine
 {
+    public sealed class SerializeField : Attribute { }
     public class Object
     {
         public static implicit operator bool(Object value) => value != null;

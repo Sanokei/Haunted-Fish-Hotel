@@ -18,29 +18,29 @@ namespace HauntedFish.Multiplayer
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
         public bool FollowOwnedPlayer;
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-        static readonly HashSet<LobbyCameraZone> zones=new HashSet<LobbyCameraZone>();
+        static readonly HashSet<LobbyCameraZone> _Zones=new HashSet<LobbyCameraZone>();
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-        static LobbyCameraZone active;
+        static LobbyCameraZone _Active;
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-        static int evaluatedFrame=-1;
+        static int _EvaluatedFrame=-1;
         // Use Cinemachine priority to enter a local zone, retaining the original value so leaving restores the authored composition.
-        PrioritySettings previousPriority;
-        Transform previousFollow;
+        PrioritySettings _PreviousPriority;
+        Transform _PreviousFollow;
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-        static void ResetStatics() { zones.Clear(); active=null; evaluatedFrame=-1; }
+        static void ResetStatics() { _Zones.Clear(); _Active=null; _EvaluatedFrame=-1; }
         // Read a component already serialized on this object; do not create a runtime replacement for missing authoring.
         void Awake() { if (!Volume) Volume=GetComponent<Collider>(); }
         // Subscribe while this existing component is active so presentation reacts to the current story or scene.
-        void OnEnable() { zones.Add(this); evaluatedFrame=-1; }
+        void OnEnable() { _Zones.Add(this); _EvaluatedFrame=-1; }
         // Unsubscribe on deactivation to prevent stale listeners from acting on a later scene/session.
         void OnDisable()
         {
             // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-            zones.Remove(this); evaluatedFrame=-1;
+            _Zones.Remove(this); _EvaluatedFrame=-1;
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-            if (active==this) { Restore(); active=null; }
+            if (_Active==this) { Restore(); _Active=null; }
         }
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
         bool Contains(HotelPlayer player)
@@ -58,9 +58,9 @@ namespace HauntedFish.Multiplayer
         void LateUpdate()
         {
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
-            if (evaluatedFrame==Time.frameCount) return;
+            if (_EvaluatedFrame==Time.frameCount) return;
             // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-            evaluatedFrame=Time.frameCount;
+            _EvaluatedFrame=Time.frameCount;
             // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
             HotelPlayer owner=null;
             // Look up objects already present in the loaded scenes; ownership and scene checks select the appropriate one.
@@ -72,31 +72,31 @@ namespace HauntedFish.Multiplayer
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
             if (owner)
                 // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-                foreach (var zone in zones)
+                foreach (var zone in _Zones)
                     // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
                     if (zone && zone.isActiveAndEnabled && zone.Contains(owner) &&
                         // Use Cinemachine priority to enter a local zone, retaining the original value so leaving restores the authored composition.
                         (!chosen || zone.Priority>chosen.Priority || (zone.Priority==chosen.Priority && zone.GetInstanceID()<chosen.GetInstanceID()))) chosen=zone;
             // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-            if (active!=chosen)
+            if (_Active!=chosen)
             {
                 // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-                if (active) active.Restore();
+                if (_Active) _Active.Restore();
                 // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
-                active=chosen;
+                _Active=chosen;
                 // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-                if (active)
+                if (_Active)
                 {
                     // Use Cinemachine priority to enter a local zone, retaining the original value so leaving restores the authored composition.
-                    active.previousPriority=active.Camera.Priority;
+                    _Active._PreviousPriority=_Active.Camera.Priority;
                     // Assign the local owned character as the follow target of this authored virtual camera.
-                    active.previousFollow=active.Camera.Follow;
+                    _Active._PreviousFollow=_Active.Camera.Follow;
                     // Use Cinemachine priority to enter a local zone, retaining the original value so leaving restores the authored composition.
-                    active.Camera.Priority=active.Priority;
+                    _Active.Camera.Priority=_Active.Priority;
                 }
             }
             // Assign the local owned character as the follow target of this authored virtual camera.
-            if (active && active.FollowOwnedPlayer) active.Camera.Follow=owner.transform;
+            if (_Active && _Active.FollowOwnedPlayer) _Active.Camera.Follow=owner.transform;
         }
         // Camera zones are local presentation. Only the owned player can activate a zone; priority and follow targets are restored when it leaves.
         void Restore()
@@ -104,9 +104,9 @@ namespace HauntedFish.Multiplayer
             // Leave this path once the result is known; guards keep an invalid or irrelevant peer from changing shared state.
             if (!Camera) return;
             // Use Cinemachine priority to enter a local zone, retaining the original value so leaving restores the authored composition.
-            Camera.Priority=previousPriority;
+            Camera.Priority=_PreviousPriority;
             // Assign the local owned character as the follow target of this authored virtual camera.
-            if (FollowOwnedPlayer) Camera.Follow=previousFollow;
+            if (FollowOwnedPlayer) Camera.Follow=_PreviousFollow;
         }
     }
 }
