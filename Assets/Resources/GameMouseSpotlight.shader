@@ -2,6 +2,7 @@ Shader "HauntedFish/GameMouseSpotlight"
 {
     Properties
     {
+        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Mouse ("Mouse", Vector) = (.5,.5,0,0)
         _Aspect ("Aspect", Float) = 1
         _Radius ("Radius", Float) = .18
