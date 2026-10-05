@@ -26,7 +26,7 @@ namespace HauntedFish.Multiplayer
         public event Action<HotelLobbyPlayer> PlayerLeft;
         public event Action<HotelLobbyPlayer> PlayerChanged;
         INetworkPlayer _Leader;
-        Collider _Stairs;
+        Func<HotelPlayer, bool> _IsInReadyZone;
         float _NextRoster;
         bool _Starting;
         INetworkPlayer _NextHost;
@@ -42,15 +42,26 @@ namespace HauntedFish.Multiplayer
         public bool IsLeader => _Client.Player != null && _Client.Player.HasCharacter &&
             _Client.Player.Identity.NetId == Roster.Leader;
 
-        public void BindStairs(Collider stairs) => _Stairs = stairs;
+        public void BindReadyZone(Func<HotelPlayer, bool> isInReadyZone) => _IsInReadyZone = isInReadyZone;
         public void Command(LobbyAction action, uint target = 0)
         {
             if (IsLeader && _Context.Connected && !_Context.Loading)
                 _Client.Send(new LobbyCommand { Action = action, Target = target });
         }
 
-        public bool AllInStairs => _Members.Count > 0 && _Members.Values.All(p => p.InStairs(_Stairs));
-        public bool CanStartGame => _Starting && AllInStairs;
+        bool IsReady(INetworkPlayer player) => player.HasCharacter && player.SceneIsReady &&
+            _IsInReadyZone != null && _IsInReadyZone(player.Identity.GetComponent<HotelPlayer>());
+        public bool AllReady => _Members.Count > 0 && _Members.Keys.All(IsReady);
+        public bool CanStartGame => _Starting && AllReady;
+
+        void StartWhenReady()
+        {
+            if (!_Server.Active || !_Context.Connected || _Context.Loading || _Starting ||
+                _NextHost != null || _Travel.TargetScene != "Lobby" || !_Travel.CanTravel || !AllReady) return;
+            _Starting = true;
+            try { _Travel.GoToGame(); }
+            finally { _Starting = false; }
+        }
 
         void OnCommand(INetworkPlayer sender, LobbyCommand command)
         {
@@ -58,12 +69,7 @@ namespace HauntedFish.Multiplayer
                 _Context.Loading || _NextHost != null || _Travel.TargetScene != "Lobby") return;
             if (command.Action == LobbyAction.Start)
             {
-                if (AllInStairs)
-                {
-                    _Starting = true;
-                    try { _Travel.GoToGame(); }
-                    finally { _Starting = false; }
-                }
+                StartWhenReady();
                 return;
             }
             var target = _Admitted.FirstOrDefault(p => p.HasCharacter && p.Identity.NetId == command.Target);
@@ -159,7 +165,7 @@ namespace HauntedFish.Multiplayer
                     _RosterMembers.Add(new LobbyMember
                     {
                         Id = player.Identity.NetId,
-                        Ready = _Members.TryGetValue(player, out var member) && member.InStairs(_Stairs)
+                        Ready = IsReady(player)
                     });
             _RosterMembers.Sort(_CompareMembers);
             if (!force && LobbyRules.RosterMatches(Roster, leader, host, _RosterMembers)) return;
@@ -246,6 +252,7 @@ namespace HauntedFish.Multiplayer
             if (Time.unscaledTime < _NextRoster) return;
             _NextRoster = Time.unscaledTime + .1f;
             PublishRoster();
+            StartWhenReady();
         }
 
         void RegisterServerMessages()

@@ -1,13 +1,11 @@
 using System;
 using Mirage;
-using UnityEngine;
 
 namespace HauntedFish.Multiplayer
 {
     // Lobby state belongs to each player, separate from movement, admission and UI.
     public sealed class HotelLobbyPlayer
     {
-        readonly INetworkPlayer _Connection;
         public uint Id { get; }
         public bool IsConnected { get; private set; } = true;
         public bool Ready { get; private set; }
@@ -18,12 +16,8 @@ namespace HauntedFish.Multiplayer
         internal HotelLobbyPlayer(uint id) => Id = id;
         internal HotelLobbyPlayer(INetworkPlayer connection)
         {
-            _Connection = connection;
             Id = connection.Identity.NetId;
         }
-
-        internal bool InStairs(Collider stairs) => _Connection != null && _Connection.HasCharacter &&
-            _Connection.SceneIsReady && LobbyTrigger.Contains(stairs, _Connection.Identity.GetComponent<HotelPlayer>());
 
         internal bool Apply(bool ready, bool host)
         {

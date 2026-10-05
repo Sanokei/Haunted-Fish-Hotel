@@ -107,10 +107,54 @@ static class Program
         Check(!LobbyRules.AllReady(new[] { new LobbyMember { Ready = true }, new LobbyMember { Ready = false } }), "Every member must be ready");
         Check(LobbyRules.AllReady(new[] { new LobbyMember { Ready = true }, new LobbyMember { Ready = true } }), "All members ready allows the start UI");
         Check(LobbyCode.TryNormalize(" abc123 ", out var normalized) && normalized == "ABC123", "Invitations normalize before own-lobby comparison");
+        TestAutomaticStairsTravel();
         TestLobbyAuthority();
         TestConnectionLifecycle();
         Console.WriteLine($"Passed {checks} multiplayer checks.");
     }
+    static void TestAutomaticStairsTravel()
+    {
+        Application.CanLoad = true;
+        Time.unscaledTime = 0;
+        var host = new NetworkServer { Active = true };
+        var client = new NetworkClient();
+        var local = new Peer(); var guest = new Peer();
+        host.LocalPlayer = local;
+        host.AuthenticatedPlayers.AddRange(new[] { local, guest });
+        var objects = new ServerObjectManager(); var peerObjects = new ClientObjectManager();
+        var context = new HotelSessionContext { Connected = true };
+        var travel = new HauntedHotelMessageTravel();
+        Configure(travel, host, client, objects, peerObjects, context);
+        using var network = new HotelNetworkSession(host, client, objects, peerObjects, new Mirage.SocketLayer.SocketFactory(),
+            new NetworkIdentity(), new NetworkIdentity(), Array.Empty<NetworkIdentity>(), context, travel, _ => default);
+        var callbacks = (HotelTravelCallbacks)typeof(HauntedHotelMessageTravel).GetField("_Callbacks", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(travel);
+        callbacks.CanStartGame = () => network.LobbyPlayers.CanStartGame;
+        network.LobbyPlayers.BindReadyZone(player => player != null && player.Ready);
+        network.StartHost(new Room { code = "ABC123", joinKey = "secret" }, 4);
+        host.Started.Invoke(); client.Started.Invoke();
+        network.Tick();
+        Check(!travel.Loading, "Empty lobby does not automatically travel");
+        foreach (var peer in new[] { local, guest })
+            host.MessageHandler.Deliver(peer, new LobbyConnectionRequest { Code = "ABC123", JoinKey = "secret" });
+        local.Identity.Character.Ready = true;
+        Time.unscaledTime = 1; network.Tick();
+        Check(!travel.Loading, "Automatic travel waits for every player on the stairs");
+        guest.Identity.Character.Ready = true;
+        context.Loading = true;
+        Time.unscaledTime = 2; network.Tick();
+        Check(!travel.Loading, "Automatic travel respects the session loading gate");
+        context.Loading = false;
+        Time.unscaledTime = 3; network.Tick();
+        Check(travel.Loading && travel.TargetScene == "Game" && host.Sent.Count == 1,
+            "All players on stairs starts shared Game travel without a command");
+        Time.unscaledTime = 4; network.Tick();
+        Check(host.Sent.Count == 1, "Automatic start broadcasts travel exactly once");
+        travel.CompleteLoads();
+        Time.unscaledTime = 5; network.Tick();
+        Check(host.Sent.Count == 1 && travel.TargetScene == "Game", "Game scene does not retrigger stairs travel");
+        travel.Unconfigure();
+    }
+
     static void TestLobbyAuthority()
     {
         Application.CanLoad = true;
@@ -127,6 +171,7 @@ static class Program
         var network = new HotelNetworkSession(host, client, objects, peerObjects, new Mirage.SocketLayer.SocketFactory(),
             new NetworkIdentity(), new NetworkIdentity(), Array.Empty<NetworkIdentity>(), context, travel, _ => default);
         var callbacks = (HotelTravelCallbacks)typeof(HauntedHotelMessageTravel).GetField("_Callbacks", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(travel);
+        network.LobbyPlayers.BindReadyZone(player => player != null && player.Ready);
         callbacks.CanStartGame = () => network.LobbyPlayers.CanStartGame;
         network.StartHost(new Room { code = "ABC123", joinKey = "secret" }, 4);
         host.Started.Invoke(); client.Started.Invoke();
@@ -200,6 +245,7 @@ static class Program
         host.MessageHandler.Deliver(new Peer(), new LobbyCommand { Action = LobbyAction.Start });
         Check(!travel.Loading, "Unadmitted sender cannot start");
         host.MessageHandler.Deliver(guest, new LobbyCommand { Action = LobbyAction.King, Target = other.Identity.NetId });
+        guest.Identity.Character.Ready = false;
         Time.unscaledTime = 46;
         network.Tick();
         Check(other.Sent.Exists(m => m is LobbyHostCancel { Version: 2 }), "Timed-out replacement preserves the current lobby and notifies peers");
@@ -213,6 +259,7 @@ static class Program
         Check(!travel.Loading, "Unselected guest cannot cancel another player's handoff");
         host.MessageHandler.Deliver(other, new LobbyHostCancel { Version = 4 });
         Check(other.Sent.Exists(m => m is LobbyHostCancel { Version: 4 }), "Successor can abort a failed transport preparation");
+        guest.Identity.Character.Ready = true;
         host.MessageHandler.Deliver(guest, new LobbyCommand { Action = LobbyAction.Start });
         Check(travel.Loading, "Current host can resume gameplay after an aborted transfer");
         network.Dispose(); travel.Unconfigure();
@@ -233,6 +280,7 @@ static class Program
         var network = new HotelNetworkSession(server, client, objects, clientObjects, new Mirage.SocketLayer.SocketFactory(),
             new NetworkIdentity(), new NetworkIdentity(), Array.Empty<NetworkIdentity>(), context, travel, _ => default);
         var lobby = network.LobbyPlayers;
+        lobby.BindReadyZone(player => player != null && player.Ready);
         var joined = 0; var left = 0; var changed = 0; var admitted = 0;
         var rosterChanges = 0;
         lobby.RosterChanged += () => ++rosterChanges;
@@ -455,10 +503,6 @@ namespace HauntedFish.Multiplayer
 
 
 namespace Mirage.SocketLayer { public class SocketFactory { } }
-namespace HauntedFish.Multiplayer
-{
-    public static class LobbyTrigger { public static bool Contains(UnityEngine.Collider volume, HotelPlayer player) => player != null && player.Ready; }
-}
 namespace Monologue.Dialogue { public static class StoryFunctions { public static void ApplyNetworkCue(HauntedFish.Multiplayer.SharedWorldCue cue) { } } }
 public static class BubbleSceneTransition
 {

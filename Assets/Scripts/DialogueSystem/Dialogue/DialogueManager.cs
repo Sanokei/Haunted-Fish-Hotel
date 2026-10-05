@@ -49,8 +49,7 @@ namespace Monologue.Dialogue
         {
             get
             {
-                // FIXME: Psuedo flag variable. Its actually worse, creating edge cases.
-                return _DialoguePanel && _DialoguePanel.gameObject.activeSelf;
+                return _DialoguePanel && _DialoguePanel.gameObject.activeInHierarchy;
             }
             set
             {
@@ -255,7 +254,6 @@ namespace Monologue.Dialogue
             if (SharedDialogue.Instance && SharedDialogue.Instance.Route(2, idx)) return;
             if (IsSharedDialogue && !SharedDialogue.Applying) return;
             if (CurrentStory == null || idx < 0 || idx >= CurrentStory.currentChoices.Count) return;
-            print("int" + idx);
             CurrentStory.ChooseChoiceIndex(idx);
             ContinueStory();
         }

@@ -1,0 +1,75 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+namespace HauntedFish.Multiplayer
+{
+    public sealed class GameMouseSpotlight : MonoBehaviour
+    {
+        [Range(.02f, .5f)] public float Radius = .18f;
+        [Range(.001f, .3f)] public float Softness = .12f;
+        [Range(0, 1)] public float Darkness = .92f;
+        Material _Material;
+        Canvas _Canvas;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void Register()
+        {
+            SceneManager.sceneLoaded -= Attach;
+            SceneManager.sceneLoaded += Attach;
+        }
+
+        static void Attach(Scene scene, LoadSceneMode mode)
+        {
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                var definition = root.GetComponentInChildren<GameSceneDefinition>(true);
+                if (definition && !definition.GetComponent<GameMouseSpotlight>())
+                    definition.gameObject.AddComponent<GameMouseSpotlight>();
+            }
+        }
+
+        void Awake()
+        {
+            var shader = Resources.Load<Shader>("GameMouseSpotlight");
+            if (!shader)
+            {
+                Debug.LogError("Missing GameMouseSpotlight shader.", this);
+                return;
+            }
+            _Material = new Material(shader);
+            var overlay = new GameObject("Mouse spotlight", typeof(RectTransform), typeof(Canvas));
+            overlay.transform.SetParent(transform, false);
+            _Canvas = overlay.GetComponent<Canvas>();
+            _Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            _Canvas.sortingOrder = 100;
+            var imageObject = new GameObject("Darkness", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            imageObject.transform.SetParent(overlay.transform, false);
+            var rect = imageObject.GetComponent<RectTransform>();
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = rect.offsetMax = Vector2.zero;
+            var image = imageObject.GetComponent<Image>();
+            image.material = _Material;
+            image.raycastTarget = false;
+        }
+
+        void LateUpdate()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            if (!_Material) return;
+            var mouse = Mouse.current != null ? Mouse.current.position.ReadValue() : new Vector2(Screen.width, Screen.height) * .5f;
+            _Material.SetVector("_Mouse", new Vector4(mouse.x / Mathf.Max(1, Screen.width), mouse.y / Mathf.Max(1, Screen.height), 0, 0));
+            _Material.SetFloat("_Aspect", Screen.width / (float)Mathf.Max(1, Screen.height));
+            _Material.SetFloat("_Radius", Radius);
+            _Material.SetFloat("_Softness", Softness);
+            _Material.SetFloat("_Darkness", Darkness);
+        }
+
+        void OnEnable() { if (_Canvas) _Canvas.enabled = true; }
+        void OnDisable() { if (_Canvas) _Canvas.enabled = false; }
+        void OnDestroy() { if (_Material) Destroy(_Material); }
+    }
+}

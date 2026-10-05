@@ -3,11 +3,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="../../Assets/Scripts/Multiplayer/HotelConnection.cs" Link="HotelConnection.cs" />
-    <Compile Include="../../Assets/Scripts/Lobby/HotelLobbyPlayers.cs" Link="HotelLobbyPlayers.cs" />
-    <Compile Include="../../Assets/Scripts/Lobby/HotelLobbyPlayer.cs" Link="HotelLobbyPlayer.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/HotelLobbyPlayers.cs" Link="HotelLobbyPlayers.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/HotelLobbyPlayer.cs" Link="HotelLobbyPlayer.cs" />
 
     <Compile Include="../../Assets/Scripts/Multiplayer/HotelNetworkSession.cs" Link="HotelNetworkSession.cs" />
     <Compile Include="../../Assets/Scripts/Multiplayer/HauntedHotelMessageTravel.cs" Link="HauntedHotelMessageTravel.cs" />
-    <Compile Include="../../Assets/Scripts/Lobby/LobbyContracts.cs" Link="LobbyContracts.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/LobbyContracts.cs" Link="LobbyContracts.cs" />
   </ItemGroup>
 </Project>

@@ -10,16 +10,17 @@ namespace HauntedFish.Multiplayer
         [SerializeField] Transform _FinPivot;
         [SerializeField] SpriteRenderer _Fin;
         [SerializeField] bool _FaceCamera = true;
-        [SerializeField] float _IdleFinAngle = 5;
-        [SerializeField] float _MovingFinAngle = 18;
-        [SerializeField] float _IdleFinFrequency = .8f;
-        [SerializeField] float _MovingFinFrequency = 3;
+        [SerializeField] float _IdleFinAngle = 3;
+        [SerializeField] float _MovingFinAngle = 9;
+        [SerializeField] float _IdleFinFrequency = .65f;
+        [SerializeField] float _MovingFinFrequency = 1.8f;
 
         bool _FacingLeft, _Walking, _Talking;
         bool _FacingInitialized;
         Vector3 _RightFinPosition;
+        Vector3 _FinRestScale;
         Quaternion _FinRestRotation;
-        float _Phase, _FinAngle;
+        float _Phase, _FinAngle, _FinFrequency, _Activity;
 
         void Awake()
         {
@@ -30,7 +31,11 @@ namespace HauntedFish.Multiplayer
                 return;
             }
             _RightFinPosition = _FinPivot.localPosition;
+            _FinRestScale = _FinPivot.localScale;
             _FinRestRotation = _FinPivot.localRotation;
+            _Phase = Random.value;
+            _FinAngle = _IdleFinAngle;
+            _FinFrequency = _IdleFinFrequency;
             _Fin.sortingLayerID = _Body.sortingLayerID;
             _Fin.sortingOrder = _Body.sortingOrder - 1;
             ApplyFacing();
@@ -51,7 +56,7 @@ namespace HauntedFish.Multiplayer
             _Body.sprite = _FacingLeft ? _LeftBody : _RightBody;
             float sign = _FacingLeft ? -1 : 1;
             _FinPivot.localPosition = new Vector3(_RightFinPosition.x * sign, _RightFinPosition.y, _RightFinPosition.z);
-            _FinPivot.localScale = new Vector3(sign, 1, 1);
+            _FinPivot.localScale = Vector3.Scale(_FinRestScale, new Vector3(sign, 1, 1));
         }
 
         void LateUpdate()
@@ -59,12 +64,23 @@ namespace HauntedFish.Multiplayer
             var camera = _FaceCamera ? Camera.main : null;
             if (camera) transform.rotation = camera.transform.rotation;
             float sign = _FacingLeft ? -1 : 1;
-            bool animated = _Walking || _Talking;
-            _Phase = Mathf.Repeat(_Phase + Time.deltaTime * (animated ? _MovingFinFrequency : _IdleFinFrequency), 1);
-            _FinAngle = Mathf.Lerp(_FinAngle, animated ? _MovingFinAngle : _IdleFinAngle,
-                1 - Mathf.Exp(-10 * Time.deltaTime));
+            float blend = 1 - Mathf.Exp(-5 * Time.deltaTime);
+            // Speaking gets a small expressive flutter, rather than a full swimming stroke.
+            _Activity = Mathf.Lerp(_Activity, _Walking ? 1 : (_Talking ? .25f : 0), blend);
+            _FinAngle = Mathf.Lerp(_IdleFinAngle, _MovingFinAngle, _Activity);
+            _FinFrequency = Mathf.Lerp(_FinFrequency,
+                Mathf.Lerp(_IdleFinFrequency, _MovingFinFrequency, _Activity), blend);
+            _Phase = Mathf.Repeat(_Phase + Time.deltaTime * _FinFrequency, 1);
+            float cycle = _Phase * Mathf.PI * 2;
+            // A quicker push and softer recovery give the tail a paddling rhythm.
+            float stroke = (Mathf.Sin(cycle) + .22f * Mathf.Sin(cycle * 2)) / 1.1f;
+            float fold = Mathf.Sin(cycle - .45f);
             _FinPivot.localRotation = _FinRestRotation *
-                Quaternion.Euler(0, 0, Mathf.Sin(_Phase * Mathf.PI * 2) * _FinAngle * sign);
+                Quaternion.Euler(fold * Mathf.Lerp(8, 24, _Activity), 0, stroke * _FinAngle * sign);
+            // The fin opens on the push and relaxes on recovery, anchored at its root.
+            _FinPivot.localScale = Vector3.Scale(_FinRestScale,
+                new Vector3(sign * (1 + stroke * Mathf.Lerp(.025f, .07f, _Activity)),
+                    1 - stroke * .025f * _Activity, 1));
         }
     }
 }

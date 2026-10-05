@@ -22,6 +22,7 @@ namespace HauntedFish.Multiplayer
         float _NextLease;
         public string AuthorizationToken => _Session?.token;
         public string Failure { get; private set; }
+        public float RetryDelay { get; private set; }
         public bool Ready => _Verified && Failure == null && _Prepared != null && _Prepared.Ready;
         public IPEndPoint RelayEndPoint => _Prepared?.RelayEndPoint;
         // The legacy lobby interface configures Port; real bind/connect endpoints use verified allocations.
@@ -87,9 +88,15 @@ namespace HauntedFish.Multiplayer
                 request.SetRequestHeader("Content-Type", "application/json");
                 if (authenticated && _Session != null) request.SetRequestHeader("Authorization", "Bearer " + _Session.token);
                 yield return request.SendWebRequest();
+                // Older relay versions report policy limits as 400. Back off for both
+                // until the deployed API distinguishes rate limits with 429.
+                if (path == "/sessions" && method == "POST")
+                    RetryDelay = request.responseCode == 400 || request.responseCode == 429 || request.responseCode == 503 ? 65f : 0f;
                 // Credentials and response bodies never enter diagnostics or authored assets.
                 _LastHttpError = request.result == UnityWebRequest.Result.Success ? null :
                     "Relay request failed (HTTP " + request.responseCode + ", " + request.result + ": " + request.error + ").";
+                if (request.responseCode == 429)
+                    _LastHttpError = "Relay rate limit reached. Waiting at least one minute before retrying.";
                 if (_LastHttpError != null)
                     Debug.LogWarning("Relay control " + method + " " + path + ": " + _LastHttpError, this);
                 callback(request.result == UnityWebRequest.Result.Success ? request.downloadHandler.text : null);

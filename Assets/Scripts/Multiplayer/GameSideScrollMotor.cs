@@ -12,7 +12,7 @@ namespace HauntedFish.Multiplayer
         HotelPlayerMovement _Movement;
         CharacterController _Controller;
         float _Axis, _Vertical, _LastCommand;
-        bool _PendingJump, _WasActive;
+        bool _PendingJump;
         Vector3 _LocalMouse;
 
         public bool Active => GameSceneDefinition.Current;
@@ -24,9 +24,8 @@ namespace HauntedFish.Multiplayer
         {
             _Movement = GetComponent<HotelPlayerMovement>();
             _Controller = GetComponent<CharacterController>();
-            if (!_Lamp || !_Marker)
-                Debug.LogError("Assign the authored mouse-light child in the player prefab.", this);
             if (_Lamp) _Lamp.gameObject.SetActive(false);
+            if (_Marker) _Marker.enabled = false;
         }
 
         public void ResetMotion()
@@ -90,20 +89,9 @@ namespace HauntedFish.Multiplayer
 
         public void ShowLamp(Vector3 worldPosition, uint playerId)
         {
-            if (!_Lamp) return;
-            bool active = Active && _Movement.ControlsReady;
-            if (_Lamp.gameObject.activeSelf != active) _Lamp.gameObject.SetActive(active);
-            if (active)
-            {
-                if (!_WasActive)
-                {
-                    var definition = GameSceneDefinition.Current;
-                    if (_Marker && definition.LampMaterial) _Marker.sharedMaterial = definition.LampMaterial;
-                    _Lamp.color = Color.HSVToRGB((playerId * .23f) % 1, .45f, 1);
-                }
-                _Lamp.transform.position = worldPosition;
-            }
-            _WasActive = active;
+            // The local screen shader owns the spotlight; network avatars have no light or marker.
+            if (_Lamp && _Lamp.gameObject.activeSelf) _Lamp.gameObject.SetActive(false);
+            if (_Marker) _Marker.enabled = false;
         }
     }
 }

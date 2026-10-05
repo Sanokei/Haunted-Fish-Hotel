@@ -44,8 +44,7 @@ namespace HauntedFish.Multiplayer
         HotelFishSprite _Visual;
         float _NextSend;
         bool _QueuedJump;
-        bool _ControlStateInitialized;
-        (bool authority, bool ready, bool local, bool blocked, bool sharedDialogue, bool game) _ControlState;
+        GameObject _TriggerSensor;
 
         bool Connected => Networked && Identity.IsSpawned;
         public bool IsRelevantPlayer => !Networked || (Identity.IsSpawned && IsLocalPlayer);
@@ -98,10 +97,28 @@ namespace HauntedFish.Multiplayer
             if (IsServer) return;
             _Movement.SetSimulationAuthority(false);
             transform.position = _Position;
+            if (!_TriggerSensor)
+            {
+                var controller = GetComponent<CharacterController>();
+                _TriggerSensor = new GameObject("Lobby trigger sensor");
+                _TriggerSensor.tag = "Player";
+                _TriggerSensor.layer = gameObject.layer;
+                _TriggerSensor.transform.SetParent(transform, false);
+                var sensor = _TriggerSensor.AddComponent<CapsuleCollider>();
+                sensor.center = controller.center;
+                sensor.height = controller.height;
+                sensor.radius = controller.radius;
+                sensor.isTrigger = true;
+                var body = _TriggerSensor.AddComponent<Rigidbody>();
+                body.isKinematic = true;
+                body.useGravity = false;
+            }
+            _TriggerSensor.SetActive(true);
         }
 
         void OnEnable()
         {
+            if (_TriggerSensor && Connected && IsClient && !IsServer) _TriggerSensor.SetActive(true);
             RegisterLocalPlayer();
             if (_Session != null) _Session.InputFocusChanged += OnInputFocusChanged;
             StoryFunctions.OnSpeakerEvent += Speaker;
@@ -118,9 +135,9 @@ namespace HauntedFish.Multiplayer
 
         void StopSimulation()
         {
+            if (_TriggerSensor) _TriggerSensor.SetActive(false);
             ReleaseLocalPlayer();
             if (!_Movement) return;
-            _ControlStateInitialized = false;
             _Movement.SetControlState(false, false, true);
             _Movement.SetSimulationAuthority(false);
             ResetSceneMotion();
@@ -172,15 +189,11 @@ namespace HauntedFish.Multiplayer
             bool ownerReady = !Networked || Identity.Owner == null || Identity.Owner.SceneIsReady;
             bool sharedDialogue = DialogueManager.Instance && DialogueManager.Instance.IsSharedDialogue;
             bool inputBlocked = InputBlocked;
-            var state = (authority: !Networked || (Connected && IsServer), ready: ControlsReady && ownerReady,
-                local: IsRelevantPlayer, blocked: inputBlocked, sharedDialogue, game: _Movement.GameActive);
-            if (_ControlStateInitialized && _ControlState == state) return;
-            _ControlStateInitialized = true;
-            _ControlState = state;
-            _Movement.SetSimulationAuthority(state.authority);
-            _Movement.SetControlState(state.ready, state.local, state.blocked);
+            var ready = ControlsReady && ownerReady;
+            _Movement.SetSimulationAuthority(!Networked || (Connected && IsServer));
+            _Movement.SetControlState(ready, IsRelevantPlayer, inputBlocked);
             _Movement.SharedDialogueLocked = sharedDialogue;
-            if (!state.ready || inputBlocked) _QueuedJump = false;
+            if (!ready || inputBlocked) _QueuedJump = false;
         }
 
         void SendOwnedInput()

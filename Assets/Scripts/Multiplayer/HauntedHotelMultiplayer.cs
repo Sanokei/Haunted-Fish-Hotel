@@ -59,7 +59,12 @@ namespace HauntedFish.Multiplayer
         public bool IsLobbyLeader => _Network != null && _Network.LobbyPlayers.IsLeader;
         public LobbyRoster Roster => _Network != null ? _Network.LobbyPlayers.Roster : default;
         public uint TransportHostId => Roster.TransportHost;
-        public void BindStairs(Collider stairs) => _Network?.LobbyPlayers.BindStairs(stairs);
+        Func<HotelPlayer, bool> _ReadyZone;
+        public void BindReadyZone(Func<HotelPlayer, bool> isInReadyZone)
+        {
+            _ReadyZone = isInReadyZone;
+            _Network?.LobbyPlayers.BindReadyZone(_ReadyZone);
+        }
         public void LobbyCommand(LobbyAction action, uint target = 0) => _Network?.LobbyPlayers.Command(action, target);
         public bool ReadyToPlay => State == HotelSessionState.Connected && !_SceneTravel.Loading;
         public bool Busy => State != HotelSessionState.Idle && State != HotelSessionState.Connected && State != HotelSessionState.Failed;
@@ -75,6 +80,7 @@ namespace HauntedFish.Multiplayer
         {
             _Network = new HotelNetworkSession(_Server, _Client, _ServerObjects, _ClientObjects, _Socket,
                 _PlayerPrefab, _DialoguePrefab, _AdditionalPrefabs, Session, _SceneTravel, SpawnPosition);
+            _Network.LobbyPlayers.BindReadyZone(_ReadyZone);
             _Network.PlayerAdmitted += OnPlayerAdmitted;
             _Network.PlayerLeft += OnPlayerLeft;
             _Network.ConnectionLost += OnConnectionLost;
@@ -156,7 +162,7 @@ namespace HauntedFish.Multiplayer
                 yield return null;
             if (version != _OperationVersion)
                 yield break;
-            _NextAutoAttempt = Time.unscaledTime + _RetryInterval;
+            _NextAutoAttempt = Time.unscaledTime + Mathf.Max(_RetryInterval, _Relay ? _Relay.RetryDelay : 0f);
 
             if (!_Socket.IsSupported || !(_Socket is IHasPort configurablePort))
             {
@@ -253,7 +259,7 @@ namespace HauntedFish.Multiplayer
         {
             yield return CloseSession();
             SetState(HotelSessionState.Idle, "Disconnected.");
-            _NextAutoAttempt = Time.unscaledTime + _RetryInterval;
+            _NextAutoAttempt = Time.unscaledTime + Mathf.Max(_RetryInterval, _Relay ? _Relay.RetryDelay : 0f);
             _Operation = null;
         }
 
@@ -285,7 +291,7 @@ namespace HauntedFish.Multiplayer
         {
             yield return CloseSession();
             SetState(HotelSessionState.Failed, message);
-            _NextAutoAttempt = Time.unscaledTime + _RetryInterval;
+            _NextAutoAttempt = Time.unscaledTime + Mathf.Max(_RetryInterval, _Relay ? _Relay.RetryDelay : 0f);
             _Operation = null;
         }
 

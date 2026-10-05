@@ -21,6 +21,7 @@ namespace HauntedFish.Multiplayer
         float _VerticalSpeed, _LastInput;
         int _ResumeAfterFrame;
         bool _AuthorityInitialized, _SimulationAuthority, _InputBlocked;
+        bool _ControlStateInitialized, _LocalControl, _GameControl;
 
         public bool ControlsReady { get; private set; }
         public bool SharedDialogueLocked { get; set; }
@@ -37,7 +38,7 @@ namespace HauntedFish.Multiplayer
         // Collision state needs a frame to settle after activation or teleport.
         public bool SimulationReady => ControlsReady && _SimulationAuthority && isActiveAndEnabled &&
             Controller.enabled && Controller.gameObject.activeInHierarchy &&
-            Time.frameCount > _ResumeAfterFrame && Controller.bounds.size.sqrMagnitude > .000001f;
+            Time.frameCount > _ResumeAfterFrame;
 
         void Awake()
         {
@@ -53,12 +54,17 @@ namespace HauntedFish.Multiplayer
             _GameJump = _GameMap.FindAction("Jump", true);
         }
 
-        void OnEnable() => _ResumeAfterFrame = Time.frameCount + 1;
+        void OnEnable()
+        {
+            _ControlStateInitialized = false;
+            _ResumeAfterFrame = Time.frameCount + 1;
+        }
 
         void OnDisable()
         {
             if (_OwnedActions) _OwnedActions.Disable();
             ControlsReady = false;
+            _ControlStateInitialized = false;
             ResetMotion();
         }
 
@@ -78,12 +84,19 @@ namespace HauntedFish.Multiplayer
 
         public void SetControlState(bool ready, bool local, bool inputBlocked)
         {
+            var game = GameActive;
+            var blocked = local && inputBlocked;
+            if (_ControlStateInitialized && ControlsReady == ready && _LocalControl == local &&
+                _InputBlocked == blocked && _GameControl == game) return;
+            _ControlStateInitialized = true;
+            _LocalControl = local;
+            _GameControl = game;
             var wasReady = ControlsReady;
             var wasBlocked = _InputBlocked;
             ControlsReady = ready;
-            _InputBlocked = local && inputBlocked;
-            SetMap(_LobbyMap, ready && local && !inputBlocked && !GameActive);
-            SetMap(_GameMap, ready && local && !inputBlocked && GameActive);
+            _InputBlocked = blocked;
+            SetMap(_LobbyMap, ready && local && !blocked && !game);
+            SetMap(_GameMap, ready && local && !blocked && game);
             if ((wasReady && !ready) || (!wasBlocked && _InputBlocked)) ResetMotion();
         }
 
@@ -99,6 +112,16 @@ namespace HauntedFish.Multiplayer
             bool canMove = CanMove && ControlsReady && !_InputBlocked && !SharedDialogueLocked;
             var action = GameActive ? _GameMove : _LobbyMove;
             move = canMove && action != null ? Vector2.ClampMagnitude(action.ReadValue<Vector2>(), 1) : Vector2.zero;
+            if (!GameActive && move != Vector2.zero)
+            {
+                var camera = Camera.main;
+                var right = camera ? Vector3.ProjectOnPlane(camera.transform.right, Vector3.up) : Vector3.right;
+                right = right.sqrMagnitude > .0001f ? right.normalized : Vector3.right;
+                var forward = Vector3.Cross(right, Vector3.up);
+                var direction = right * move.x + forward * move.y;
+                // Send world XZ input; the server must not reinterpret another player's camera axes.
+                move = new Vector2(direction.x, direction.z);
+            }
             jump = GameActive && canMove && _GameJump != null && _GameJump.WasPressedThisFrame();
             mouse = GameActive ? Motor.ReadMouse() : Vector3.zero;
         }
@@ -128,7 +151,7 @@ namespace HauntedFish.Multiplayer
             if (Time.unscaledTime - _LastInput > .3f || SharedDialogueLocked) _Input = Vector2.zero;
             if (Controller.isGrounded && _VerticalSpeed < 0) _VerticalSpeed = -2;
             _VerticalSpeed -= Gravity * delta;
-            var direction = Vector3.forward * _Input.x - Vector3.right * _Input.y;
+            var direction = Vector3.right * _Input.x + Vector3.forward * _Input.y;
             if (!TryMove((direction * (CanMove ? WalkingSpeed : 0) + Vector3.up * _VerticalSpeed) * delta))
             {
                 ResetMotion();

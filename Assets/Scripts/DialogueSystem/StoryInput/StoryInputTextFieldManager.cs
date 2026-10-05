@@ -22,7 +22,7 @@ namespace Monologue.StoryInput
         {
             get
             {
-                return _InputPanel.gameObject.activeSelf;
+                return _InputPanel && _InputPanel.gameObject.activeInHierarchy;
             }
             set
             {
