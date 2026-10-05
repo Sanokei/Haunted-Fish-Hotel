@@ -504,11 +504,3 @@ namespace HauntedFish.Multiplayer
 
 namespace Mirage.SocketLayer { public class SocketFactory { } }
 namespace Monologue.Dialogue { public static class StoryFunctions { public static void ApplyNetworkCue(HauntedFish.Multiplayer.SharedWorldCue cue) { } } }
-public static class BubbleSceneTransition
-{
-    public static IEnumerator Travel(string scene, Action covered = null, Action loaded = null)
-    {
-        yield return null;
-        covered?.Invoke(); loaded?.Invoke();
-    }
-}

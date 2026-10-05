@@ -183,17 +183,15 @@ namespace HauntedFish.Multiplayer
         IEnumerator LoadScene(string scene, bool host)
         {
             _Callbacks.ReportStatus("Loading " + scene + "...");
-            yield return BubbleSceneTransition.Travel(scene,
-                host ? (Action)DestroyPreviousSceneObjects : null,
-                () =>
-                {
-                    _ClientObjects.PrepareToSpawnSceneObjects();
-                    _Callbacks.ResetMotion();
-                    if (host)
-                        CompleteHostLoad();
-                    else
-                        _Client.Send(new HotelTravelReady { Version = _Version, Scene = scene });
-                });
+            if (host)
+                DestroyPreviousSceneObjects();
+            yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+            _ClientObjects.PrepareToSpawnSceneObjects();
+            _Callbacks.ResetMotion();
+            if (host)
+                CompleteHostLoad();
+            else
+                _Client.Send(new HotelTravelReady { Version = _Version, Scene = scene });
             SetLoading(false);
             _Callbacks.ReportStatus("Connected - " + scene + ".");
         }
@@ -265,7 +263,7 @@ namespace HauntedFish.Multiplayer
         IEnumerator ReturnOffline()
         {
             SetLoading(true);
-            yield return BubbleSceneTransition.Travel("Lobby");
+            yield return SceneManager.LoadSceneAsync("Lobby", LoadSceneMode.Single);
             SetLoading(false);
         }
 

@@ -147,7 +147,7 @@ namespace Monologue.Dialogue
 
             story.BindExternalFunction("ChangeScene", (string sceneName) =>
             {
-                BubbleSceneTransition.Load(sceneName);
+                SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
             });
         }
 
