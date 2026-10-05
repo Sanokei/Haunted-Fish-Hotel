@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Mirage;
 using Mirage.SocketLayer;
 using UnityEngine;
 
 namespace HauntedFish.Multiplayer
 {
-    // Owns Mirage subscriptions, room admission and network prefab lifetime.
+    // Composes connection and lobby services, and owns network prefab lifetime.
     // The composition root supplies every dependency before a peer is started.
     internal sealed class HotelNetworkSession : IDisposable
     {
@@ -21,19 +20,17 @@ namespace HauntedFish.Multiplayer
         readonly HotelSessionContext _Context;
         readonly HauntedHotelMessageTravel _Travel;
         readonly Func<int, Vector3> _SpawnPosition;
-        readonly HashSet<INetworkPlayer> _Admitted = new HashSet<INetworkPlayer>();
-        readonly Dictionary<INetworkPlayer, float> _Pending = new Dictionary<INetworkPlayer, float>();
+        readonly HotelConnection _Connection;
+        readonly HotelLobbyPlayers _LobbyPlayers;
         readonly Dictionary<NetworkIdentity, HotelPlayer> _Characters = new Dictionary<NetworkIdentity, HotelPlayer>();
-        Room _Room;
-        int _Capacity;
-
-        public event Action<INetworkPlayer> PlayerAdmitted;
-        public event Action<INetworkPlayer> PlayerLeft;
-        public event Action<string> ConnectionLost;
+        public HotelLobbyPlayers LobbyPlayers => _LobbyPlayers;
+        public event Action<INetworkPlayer> PlayerAdmitted { add => _Connection.Connected += value; remove => _Connection.Connected -= value; }
+        public event Action<INetworkPlayer> PlayerLeft { add => _Connection.Disconnected += value; remove => _Connection.Disconnected -= value; }
+        public event Action<string> ConnectionLost { add => _Connection.ConnectionLost += value; remove => _Connection.ConnectionLost -= value; }
         public bool IsHost => _Server.Active;
         public bool IsRunning => _Server.Active || _Client.Active;
-        public bool IsAdmitted { get; private set; }
-        public int PlayerCount => _Admitted.Count;
+        public bool IsAdmitted => _Connection.IsAdmitted;
+        public int PlayerCount => _Connection.Players.Count;
         public bool HasLocalCharacter => _Client.Player != null && _Client.Player.HasCharacter &&
             _Client.Player.Identity.IsSpawned && _Client.Player.Identity.gameObject.activeInHierarchy;
 
@@ -58,18 +55,18 @@ namespace HauntedFish.Multiplayer
             client.ObjectManager = clientObjects;
             server.SocketFactory = socket;
             client.SocketFactory = socket;
-            server.Started.AddListener(RegisterServerMessages);
-            server.Authenticated.AddListener(OnServerAuthenticated);
-            server.Disconnected.AddListener(OnServerDisconnected);
+            _Connection = new HotelConnection(server, client);
+            _Connection.Connected += OnConnection;
+            _Connection.Disconnected += OnDisconnection;
+            _LobbyPlayers = new HotelLobbyPlayers(_Connection, server, client, context, travel);
             server.Stopped.AddListener(OnServerStopped);
             client.Started.AddListener(RegisterClientMessages);
-            client.Authenticated.AddListener(OnClientAuthenticated);
             client.Disconnected.AddListener(OnClientDisconnected);
         }
 
         public void StartHost(Room room, int capacity)
         {
-            SetRoom(room, capacity);
+            _Connection.Begin(room, capacity);
             _Server.MaxConnections = capacity;
             _Server.StartServer(_Client);
             var dialogue = UnityEngine.Object.Instantiate(_DialoguePrefab);
@@ -79,49 +76,26 @@ namespace HauntedFish.Multiplayer
 
         public void StartClient(Room room, int capacity)
         {
-            SetRoom(room, capacity);
+            _Connection.Begin(room, capacity);
             _Client.Connect(room.address, (ushort)room.port);
-        }
-
-        void SetRoom(Room value, int limit)
-        {
-            _Room = value;
-            _Capacity = limit;
-            IsAdmitted = false;
         }
 
         public void Stop()
         {
-            _Room = null;
-            IsAdmitted = false;
-            if (_Server.Active)
-                _Server.Stop();
-            else if (_Client.Active)
-                _Client.Disconnect();
-            _Admitted.Clear();
-            _Pending.Clear();
+            if (_Server.Active) _Server.Stop();
+            else if (_Client.Active) _Client.Disconnect();
+            _Connection.Reset();
             _Characters.Clear();
         }
 
         public void Tick()
         {
-            foreach (var entry in _Pending.ToArray())
-            {
-                if (Time.unscaledTime <= entry.Value)
-                    continue;
-                _Pending.Remove(entry.Key);
-                entry.Key.Disconnect();
-            }
-        }
-
-        void RegisterServerMessages()
-        {
-            _Server.MessageHandler.RegisterHandler<LobbyHello>(OnHello, allowUnauthenticated: false);
+            _Connection.Tick();
+            _LobbyPlayers.Tick();
         }
 
         void RegisterClientMessages()
         {
-            _Client.MessageHandler.RegisterHandler<LobbyWelcome>(OnWelcome, allowUnauthenticated: false);
             _Client.MessageHandler.RegisterHandler<SharedWorldCue>(OnWorldCue, allowUnauthenticated: false);
             _ClientObjects.UnregisterSpawnHandler(_PlayerPrefab.PrefabHash);
             _ClientObjects.UnregisterSpawnHandler(_DialoguePrefab.PrefabHash);
@@ -134,61 +108,19 @@ namespace HauntedFish.Multiplayer
             }
         }
 
-        void OnServerAuthenticated(INetworkPlayer player)
+        void OnConnection(INetworkPlayer player)
         {
-            if (!_Admitted.Contains(player))
-                _Pending[player] = Time.unscaledTime + 8f;
-        }
-
-        void OnClientAuthenticated(INetworkPlayer player)
-        {
-            if (_Room == null)
-                return;
-            _Client.Send(new LobbyHello
-            {
-                Code = _Room.code,
-                JoinKey = _Room.joinKey,
-                Reservation = _Room.reservation
-            });
-        }
-
-        void OnHello(INetworkPlayer player, LobbyHello hello)
-        {
-            if (_Admitted.Contains(player))
-                return;
-            var error = ValidateInvitation(hello);
-            if (error != null)
-            {
-                player.Send(new LobbyWelcome { Accepted = false, Message = error });
-                _Pending[player] = Time.unscaledTime + .25f;
-                return;
-            }
-
-            _Admitted.Add(player);
-            _Pending.Remove(player);
-            player.Send(new LobbyWelcome { Accepted = true, Message = "Connected" });
-            var identity = UnityEngine.Object.Instantiate(_PlayerPrefab, _SpawnPosition(_Admitted.Count - 1), Quaternion.identity);
+            var identity = UnityEngine.Object.Instantiate(_PlayerPrefab, _SpawnPosition(_Connection.Players.Count - 1), Quaternion.identity);
             BindCharacter(identity);
             _Travel.Admit(player);
             _ServerObjects.AddCharacter(player, identity);
-            PlayerAdmitted?.Invoke(player);
         }
 
-        string ValidateInvitation(LobbyHello hello)
+        void OnDisconnection(INetworkPlayer player)
         {
-            if (_Room == null || hello.Code != _Room.code || hello.JoinKey != _Room.joinKey)
-                return "This lobby is unavailable or the invitation has expired.";
-            if (_Admitted.Count >= _Capacity)
-                return "Lobby is full.";
-            return null;
-        }
-
-        void OnWelcome(INetworkPlayer player, LobbyWelcome message)
-        {
-            if (message.Accepted)
-                IsAdmitted = true;
-            else
-                ConnectionLost?.Invoke(message.Message);
+            if (!player.HasCharacter) return;
+            _Characters.Remove(player.Identity);
+            _ServerObjects.DestroyCharacter(player);
         }
 
         static void OnWorldCue(INetworkPlayer player, SharedWorldCue cue)
@@ -196,31 +128,8 @@ namespace HauntedFish.Multiplayer
             Monologue.Dialogue.StoryFunctions.ApplyNetworkCue(cue);
         }
 
-        void OnClientDisconnected(ClientStoppedReason reason)
-        {
-            IsAdmitted = false;
-            _Characters.Clear();
-            ConnectionLost?.Invoke("Host unavailable or connection lost.");
-        }
-
-        void OnServerDisconnected(INetworkPlayer player)
-        {
-            if (player.HasCharacter)
-            {
-                _Characters.Remove(player.Identity);
-                _ServerObjects.DestroyCharacter(player);
-            }
-            _Pending.Remove(player);
-            if (_Admitted.Remove(player))
-                PlayerLeft?.Invoke(player);
-        }
-
-        void OnServerStopped()
-        {
-            _Admitted.Clear();
-            _Pending.Clear();
-            _Characters.Clear();
-        }
+        void OnClientDisconnected(ClientStoppedReason reason) => _Characters.Clear();
+        void OnServerStopped() => _Characters.Clear();
 
         NetworkIdentity SpawnClientPlayer(SpawnMessage message)
         {
@@ -260,14 +169,14 @@ namespace HauntedFish.Multiplayer
 
         public void Dispose()
         {
-            _Server.Started.RemoveListener(RegisterServerMessages);
-            _Server.Authenticated.RemoveListener(OnServerAuthenticated);
-            _Server.Disconnected.RemoveListener(OnServerDisconnected);
             _Server.Stopped.RemoveListener(OnServerStopped);
             _Client.Started.RemoveListener(RegisterClientMessages);
-            _Client.Authenticated.RemoveListener(OnClientAuthenticated);
             _Client.Disconnected.RemoveListener(OnClientDisconnected);
             Stop();
+            _Connection.Connected -= OnConnection;
+            _Connection.Disconnected -= OnDisconnection;
+            _LobbyPlayers.Dispose();
+            _Connection.Dispose();
             _Characters.Clear();
         }
     }

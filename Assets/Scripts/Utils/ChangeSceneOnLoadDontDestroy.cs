@@ -22,14 +22,21 @@ public class ChangeSceneOnLoadDontDestroy : MonoBehaviour
     public void NextScene()
     {
         _ChangeSceneCount++;
+        LoadWhenReady();
     }
-    void Update()
+    void Start() => LoadWhenReady();
+    void LoadWhenReady()
     {
         if(!_transitionStarted && _ChangeSceneCount >= _TotalChangeSceneCount)
         {
             _transitionStarted=true;
-            // Existing Helper serializes the destination with literal quotes.
-            BubbleSceneTransition.Load(_SceneName.Trim().Trim('"'));
+            StartCoroutine(LoadNextFrame());
         }
+    }
+    IEnumerator LoadNextFrame()
+    {
+        yield return null;
+        // Existing Helper serializes the destination with literal quotes.
+        BubbleSceneTransition.Load(_SceneName.Trim().Trim('"'));
     }
 }

@@ -27,17 +27,26 @@ namespace Monologue
         void AddToCounter()
         {
             _NotDestroyableCount++;
+            NotifyWhenReady();
         }
 
         // void Start
 
-        void Update()
+        void Start() => NotifyWhenReady();
+
+        void NotifyWhenReady()
         {
             if(!_calledHelperEvent && _NotDestroyableCount >= _TotalNotDestroyable)
             {
-                NotDestroyedHelperEvent?.Invoke();
                 _calledHelperEvent = true;
+                StartCoroutine(NotifyNextFrame());
             }
+        }
+        IEnumerator NotifyNextFrame()
+        {
+            // Start callbacks must finish moving their objects into the persistent scene.
+            yield return null;
+            NotDestroyedHelperEvent?.Invoke();
         }
     }
 }

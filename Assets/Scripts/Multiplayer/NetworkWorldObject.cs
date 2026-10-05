@@ -49,7 +49,7 @@ namespace HauntedFish.Multiplayer
             ApplyVisibility();
         }
         // Check the current session or presentation state before continuing; this path must not run against an invalid dependency.
-        void ApplyVisibility() { if (Visual && Visual != gameObject) Visual.SetActive(_Visible); }
+        void ApplyVisibility() { if (Visual && Visual != gameObject && Visual.activeSelf != _Visible) Visual.SetActive(_Visible); }
         // Shared world simulation belongs to the server; observers apply synchronized pose and visibility without simulating a second world.
         public void SetVisible(bool value)
         {

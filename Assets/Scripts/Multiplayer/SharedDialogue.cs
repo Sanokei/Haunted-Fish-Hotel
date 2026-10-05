@@ -19,7 +19,8 @@ namespace HauntedFish.Multiplayer
         DialogueCatalog _Catalog;
         string _LastApplied = "", _LastContent = "";
         int _Revision;
-        float _NextCapture;
+        bool _PublishPending;
+        bool _SharedWasActive;
         public int Revision => _Revision;
         public static bool Applying { get; private set; }
 
@@ -36,6 +37,11 @@ namespace HauntedFish.Multiplayer
             StoryFunctions.OnMoveToEvent += MoveCue;
             StoryFunctions.OnEmojiEvent += EmojiCue;
             StoryFunctions.OnAnimationEvent += AnimationCue;
+            DialogueManager.OnDialogueStartEvent += RequestPublish;
+            DialogueManager.OnDialogueContinuedEvent += RequestPublish;
+            DialogueManager.OnDialogueEndEvent += RequestPublish;
+            StoryInputTextFieldManager.OnStoryInputStartEvent += RequestPublish;
+            StoryInputTextFieldManager.OnStoryInputEndEvent += RequestPublish;
         }
 
         void OnDisable()
@@ -45,10 +51,16 @@ namespace HauntedFish.Multiplayer
             StoryFunctions.OnMoveToEvent -= MoveCue;
             StoryFunctions.OnEmojiEvent -= EmojiCue;
             StoryFunctions.OnAnimationEvent -= AnimationCue;
+            DialogueManager.OnDialogueStartEvent -= RequestPublish;
+            DialogueManager.OnDialogueContinuedEvent -= RequestPublish;
+            DialogueManager.OnDialogueEndEvent -= RequestPublish;
+            StoryInputTextFieldManager.OnStoryInputStartEvent -= RequestPublish;
+            StoryInputTextFieldManager.OnStoryInputEndEvent -= RequestPublish;
         }
 
         void SendCue(SharedWorldCue cue)
         {
+            RequestPublish();
             if (IsServer && DialogueManager.Instance && DialogueManager.Instance.IsSharedDialogue)
                 Server.SendToAll(cue, authenticatedOnly: true, excludeLocalPlayer: true);
         }
@@ -94,7 +106,8 @@ namespace HauntedFish.Multiplayer
             return true;
         }
 
-        HotelPlayer LocalPlayer() => FindObjectsByType<HotelPlayer>(FindObjectsSortMode.None).FirstOrDefault(p => p.IsLocalPlayer);
+        HotelPlayer LocalPlayer() => HotelPlayer.LocalPlayer && HotelPlayer.LocalPlayer.IsLocalPlayer
+            ? HotelPlayer.LocalPlayer : null;
 
         public void HandleRequest(HotelPlayer player, int action, string storyKey, Vector3 anchor, int choice, int expectedRevision, string inputKey, string inputValue)
         {
@@ -150,15 +163,19 @@ namespace HauntedFish.Multiplayer
             }
         }
 
-        void Update()
+        void RequestPublish()
+        {
+            if (IsServer && (_SharedWasActive || (DialogueManager.Instance && DialogueManager.Instance.IsSharedDialogue)))
+                _PublishPending = true;
+        }
+
+        void LateUpdate()
         {
             if (!Identity.IsSpawned)
                 return;
-            if (IsServer && Time.unscaledTime >= _NextCapture)
+            if (IsServer && _PublishPending)
             {
-                _NextCapture = Time.unscaledTime + .05f;
-                if (DialogueManager.Instance && DialogueManager.Instance.IsSharedDialogue)
-                    Publish();
+                Publish();
             }
 
             if (!IsServer)
@@ -189,6 +206,8 @@ namespace HauntedFish.Multiplayer
             var manager = DialogueManager.Instance;
             if (!manager)
                 return;
+            _PublishPending = false;
+            _SharedWasActive = manager.IsSharedDialogue;
             var input = StoryInputTextFieldManager.Instance;
             var data = new DialogueSnapshot
             {

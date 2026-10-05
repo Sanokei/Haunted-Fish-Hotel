@@ -27,6 +27,7 @@ namespace HauntedFish.Multiplayer
         public readonly Action BeforeLoad;
         public readonly Action ResetMotion;
         public readonly Action PositionCharacters;
+        public Func<bool> CanStartGame;
 
         public HotelTravelCallbacks(Action<string> reportStatus, Func<string> roomCode,
             Action beforeLoad, Action resetMotion, Action positionCharacters)
@@ -49,6 +50,7 @@ namespace HauntedFish.Multiplayer
 
         const float _ReadinessTimeout = 30f;
         readonly Dictionary<INetworkPlayer, float> _Waiting = new Dictionary<INetworkPlayer, float>();
+        readonly List<INetworkPlayer> _Expired = new List<INetworkPlayer>();
         HotelSessionContext _Session;
         HotelTravelCallbacks _Callbacks;
         int _Version;
@@ -97,7 +99,7 @@ namespace HauntedFish.Multiplayer
 
         public void GoToGame()
         {
-            if (CanTravel && TargetScene == "Lobby")
+            if (CanTravel && TargetScene == "Lobby" && (_Callbacks.CanStartGame == null || _Callbacks.CanStartGame()))
                 BeginTravel("Game");
         }
 
@@ -193,7 +195,7 @@ namespace HauntedFish.Multiplayer
                         _Client.Send(new HotelTravelReady { Version = _Version, Scene = scene });
                 });
             SetLoading(false);
-            _Callbacks.ReportStatus("Connected to " + _Callbacks.RoomCode() + " - " + scene + ".");
+            _Callbacks.ReportStatus("Connected - " + scene + ".");
         }
 
         void CompleteHostLoad()
@@ -229,13 +231,15 @@ namespace HauntedFish.Multiplayer
         {
             if (!_Server || !_Server.Active)
                 return;
-            foreach (var entry in _Waiting.ToArray())
+            _Expired.Clear();
+            foreach (var entry in _Waiting)
             {
                 if (Time.unscaledTime <= entry.Value)
                     continue;
-                _Waiting.Remove(entry.Key);
-                entry.Key.Disconnect();
+                _Expired.Add(entry.Key);
             }
+            foreach (var player in _Expired)
+                if (_Waiting.Remove(player)) player.Disconnect();
         }
 
         void SetLoading(bool loading)

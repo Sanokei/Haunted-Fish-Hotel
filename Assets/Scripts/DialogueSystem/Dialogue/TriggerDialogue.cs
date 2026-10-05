@@ -32,21 +32,20 @@ namespace Monologue.Dialogue
             _IsPlayerInRange = players.Count > 0;
             // Client controllers are disabled; test the authored trigger volume against
             // the owned player's synchronized pose instead of requiring physics callbacks.
-            if (volume && volume.enabled && volume.isTrigger)
-                foreach (var player in FindObjectsByType<HotelPlayer>(FindObjectsSortMode.None))
+            var player = HotelPlayer.LocalPlayer;
+            if (volume && volume.enabled && volume.isTrigger && player)
                 {
-                    if (!player.IsRelevantPlayer) continue;
                     var controller=player.GetComponent<CharacterController>();
                     var point=player.transform.TransformPoint(controller.center);
                     if (Vector3.Distance(volume.ClosestPoint(point),point)<=controller.radius+.05f)
-                    { _IsPlayerInRange=true; break; }
+                    { _IsPlayerInRange=true; }
                 }
-            if(!(DialogueManager.Instance.ActiveDialoguePanel || StoryInputTextFieldManager.Instance.ActiveInputPanel) && _IsPlayerInRange)
-                { if (_VisualCue) _VisualCue.SetActive(true); }
-            else
-                { if (_VisualCue) _VisualCue.SetActive(false); }
+            var blocked = DialogueManager.Instance.ActiveDialoguePanel || StoryInputTextFieldManager.Instance.ActiveInputPanel ||
+                (player && player.InputBlocked);
+            var showCue = !blocked && _IsPlayerInRange;
+            if (_VisualCue && _VisualCue.activeSelf != showCue) _VisualCue.SetActive(showCue);
             
-            if (DialogueManager.Instance.ActiveDialoguePanel || StoryInputTextFieldManager.Instance.ActiveInputPanel || !_IsPlayerInRange)
+            if (blocked || !_IsPlayerInRange)
                 return;
 
             var keyboard = Keyboard.current;

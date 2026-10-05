@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
 {
-    [RequireComponent(typeof(CharacterController), typeof(GameSideScrollMotor))]
+    // fixme epsilon
+    [RequireComponent(typeof(CharacterController), typeof(GameSideScrollMotor))]  
     public sealed class HotelPlayerMovement : MonoBehaviour
     {
         public InputActionAsset InputActions;
@@ -75,13 +76,15 @@ namespace HauntedFish.Multiplayer
             if (authority) SettleController();
         }
 
-        public void SetControlState(bool ready, bool owned, bool inputBlocked)
+        public void SetControlState(bool ready, bool local, bool inputBlocked)
         {
+            var wasReady = ControlsReady;
+            var wasBlocked = _InputBlocked;
             ControlsReady = ready;
-            _InputBlocked = inputBlocked;
-            SetMap(_LobbyMap, ready && owned && !GameActive);
-            SetMap(_GameMap, ready && owned && GameActive);
-            if (!ready) ResetMotion();
+            _InputBlocked = local && inputBlocked;
+            SetMap(_LobbyMap, ready && local && !inputBlocked && !GameActive);
+            SetMap(_GameMap, ready && local && !inputBlocked && GameActive);
+            if ((wasReady && !ready) || (!wasBlocked && _InputBlocked)) ResetMotion();
         }
 
         static void SetMap(InputActionMap map, bool enabled)

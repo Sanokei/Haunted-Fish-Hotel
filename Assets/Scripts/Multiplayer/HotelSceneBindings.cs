@@ -6,19 +6,19 @@ namespace HauntedFish.Multiplayer
     // One authored root per scene supplies the scene's UI, spawn definition and dialogue dependency.
     public sealed class HotelSceneBindings : MonoBehaviour
     {
-        [SerializeField] HotelLobbyPanel _LobbyPanel;
+        [SerializeField] LobbyManager _LobbyManager;
         [SerializeField] HotelConnectionScreen _ConnectionScreen;
         [SerializeField] GameSceneDefinition _GameDefinition;
         [SerializeField] DialogueManager _Dialogue;
 
-        public bool HasSpawnDefinition => _GameDefinition || _LobbyPanel;
+        public bool HasSpawnDefinition => _GameDefinition || _LobbyManager;
 
         public void Bind(HauntedHotelMultiplayer session)
         {
             if (_Dialogue)
                 session.BindDialogue(_Dialogue);
-            if (_LobbyPanel)
-                _LobbyPanel.Bind(session);
+            if (_LobbyManager)
+                _LobbyManager.Bind(session);
             if (_ConnectionScreen)
                 _ConnectionScreen.Bind(session);
         }

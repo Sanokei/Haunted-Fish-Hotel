@@ -105,11 +105,13 @@ namespace Monologue.Dialogue
         }
         void Update()
         {
+            if (!ActiveDialoguePanel || IsWaiting || CurrentStory == null) return;
             var keyboard = Keyboard.current;
             var mouse = Mouse.current;
-            if (((keyboard != null && (keyboard.spaceKey.wasPressedThisFrame || keyboard.eKey.wasPressedThisFrame || keyboard.fKey.wasPressedThisFrame)) || (mouse != null && mouse.leftButton.wasPressedThisFrame && CurrentStory?.currentChoices.Count == 0))
-            && !IsWaiting)
-                ContinueStory();
+            var advance = (keyboard != null && (keyboard.spaceKey.wasPressedThisFrame ||
+                keyboard.eKey.wasPressedThisFrame || keyboard.fKey.wasPressedThisFrame)) ||
+                (mouse != null && mouse.leftButton.wasPressedThisFrame && CurrentStory.currentChoices.Count == 0);
+            if (advance) ContinueStory();
         }
         // FIXME: stupid flag variable
         bool _isAlreadyContinued;

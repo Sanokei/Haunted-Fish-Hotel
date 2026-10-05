@@ -43,6 +43,11 @@ namespace HauntedFish.Multiplayer
         float _NextAutoAttempt;
         bool _OwnsSession;
         string _ConnectionFailure;
+        SocketFactory _PreparedHostSocket;
+        Room _PreparedHostRoom;
+        Coroutine _HostTransfer;
+        Coroutine _PreparedLease;
+        bool _TransferringHost, _SwitchingHost;
 
         public HotelSessionContext Session { get; } = new HotelSessionContext();
         public HotelSessionState State { get; private set; } = HotelSessionState.Idle;
@@ -50,6 +55,12 @@ namespace HauntedFish.Multiplayer
         public string Code => _Room?.code ?? string.Empty;
         public HauntedHotelMessageTravel SceneTravel => _SceneTravel;
         public bool IsHost => _Network != null && _Network.IsHost;
+        public HotelLobbyPlayers LobbyPlayers => _Network?.LobbyPlayers;
+        public bool IsLobbyLeader => _Network != null && _Network.LobbyPlayers.IsLeader;
+        public LobbyRoster Roster => _Network != null ? _Network.LobbyPlayers.Roster : default;
+        public uint TransportHostId => Roster.TransportHost;
+        public void BindStairs(Collider stairs) => _Network?.LobbyPlayers.BindStairs(stairs);
+        public void LobbyCommand(LobbyAction action, uint target = 0) => _Network?.LobbyPlayers.Command(action, target);
         public bool ReadyToPlay => State == HotelSessionState.Connected && !_SceneTravel.Loading;
         public bool Busy => State != HotelSessionState.Idle && State != HotelSessionState.Connected && State != HotelSessionState.Failed;
         public bool Transitioning => Busy || (_SceneTravel && _SceneTravel.Loading);
@@ -62,25 +73,21 @@ namespace HauntedFish.Multiplayer
 
         void Awake()
         {
-            if (!HasAuthoredDependencies())
-            {
-                SetState(HotelSessionState.Failed, "Assign the network dependencies and player prefabs in the Inspector.");
-                Debug.LogError(Status, this);
-                enabled = false;
-                return;
-            }
-
             _Network = new HotelNetworkSession(_Server, _Client, _ServerObjects, _ClientObjects, _Socket,
                 _PlayerPrefab, _DialoguePrefab, _AdditionalPrefabs, Session, _SceneTravel, SpawnPosition);
             _Network.PlayerAdmitted += OnPlayerAdmitted;
             _Network.PlayerLeft += OnPlayerLeft;
             _Network.ConnectionLost += OnConnectionLost;
+            _Network.LobbyPlayers.RosterChanged += PublishState;
+            _Network.LobbyPlayers.HostPreparing += OnHostPreparing;
+            _Network.LobbyPlayers.HostSwitching += OnHostSwitching;
+            _Network.LobbyPlayers.HostCancelled += OnHostCancelled;
             _SceneTravel.Configure(Session, new HotelTravelCallbacks(
                 reportStatus: SetStatus,
                 roomCode: GetRoomCode,
                 beforeLoad: PrepareTravel,
                 resetMotion: _Network.ResetCharacterMotion,
-                positionCharacters: _Network.PositionCharacters));
+                positionCharacters: _Network.PositionCharacters) { CanStartGame = () => _Network.LobbyPlayers.CanStartGame });
             _SceneTravel.StateChanged += PublishState;
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -96,9 +103,6 @@ namespace HauntedFish.Multiplayer
             if (_Network == null)
                 return;
             _OwnsSession = true;
-            DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(_Server.transform.root.gameObject);
-            DontDestroyOnLoad(_Client.transform.root.gameObject);
             Application.runInBackground = true;
             for (var index = 0; index < SceneManager.sceneCount; ++index)
                 BindScene(SceneManager.GetSceneAt(index));
@@ -123,8 +127,12 @@ namespace HauntedFish.Multiplayer
                 SetStatus("Enter exactly six letters or digits.");
                 return;
             }
-            if (code != Code)
-                BeginSession(code);
+            if (string.Equals(code, Code, StringComparison.OrdinalIgnoreCase))
+            {
+                SetStatus("You are already in this lobby.");
+                return;
+            }
+            BeginSession(code);
         }
 
         public void StartPrivateRoom()
@@ -196,7 +204,7 @@ namespace HauntedFish.Multiplayer
             }
 
             _Room = result;
-            SetState(HotelSessionState.Connecting, "Connecting to " + Code + "...");
+            SetState(HotelSessionState.Connecting, "Connecting to lobby...");
             try
             {
                 if (invitation == null)
@@ -224,7 +232,7 @@ namespace HauntedFish.Multiplayer
                 yield break;
             }
 
-            SetState(HotelSessionState.Connected, "Connected to " + Code);
+            SetState(HotelSessionState.Connected, "Connected");
             if (_Network.IsHost)
                 _Heartbeat = StartCoroutine(KeepRoomAlive(version));
             _Operation = null;
@@ -235,6 +243,9 @@ namespace HauntedFish.Multiplayer
             if (_Network == null)
                 return;
             CancelOperation();
+            if (_HostTransfer != null) { StopCoroutine(_HostTransfer); _HostTransfer = null; }
+            _TransferringHost = _SwitchingHost = false;
+            StartCoroutine(ClearPreparedHost());
             _Operation = StartCoroutine(LeaveSession());
         }
 
@@ -258,7 +269,7 @@ namespace HauntedFish.Multiplayer
             yield return null;
             var previousRoom = _Room;
             _Room = null;
-            Session.InputFocused = false;
+            Session.SetInputFocused(false);
             _Network.Stop();
             if (previousRoom != null && !string.IsNullOrEmpty(previousRoom.ownerKey))
             {
@@ -328,13 +339,23 @@ namespace HauntedFish.Multiplayer
                 return;
             _Network.Tick();
             var waitingForRoom = State == HotelSessionState.Idle || State == HotelSessionState.Failed;
-            if (_AutoCreateOnStart && waitingForRoom && !_Network.IsRunning && !_SceneTravel.Loading &&
+            if (_AutoCreateOnStart && _HostTransfer == null && waitingForRoom && !_Network.IsRunning && !_SceneTravel.Loading &&
                 Time.unscaledTime >= _NextAutoAttempt && SceneManager.GetActiveScene().name == "Lobby")
                 CreateLobby();
         }
 
         void OnConnectionLost(string message)
         {
+            if (_SwitchingHost) return;
+            if (_TransferringHost)
+            {
+                if (_HostTransfer != null) { StopCoroutine(_HostTransfer); _HostTransfer = null; }
+                _TransferringHost = _SwitchingHost = false;
+                StartCoroutine(ClearPreparedHost());
+                CancelOperation();
+                _Operation = StartCoroutine(FailSession(message));
+                return;
+            }
             if (State == HotelSessionState.Leaving)
                 return;
             _ConnectionFailure = message;
@@ -364,7 +385,161 @@ namespace HauntedFish.Multiplayer
             StateChanged?.Invoke();
         }
 
-        public void SetInputFocused(bool focused) => Session.InputFocused = focused;
+        public void SetInputFocused(bool focused) => Session.SetInputFocused(focused);
+
+        void OnHostPreparing(bool becomingHost)
+        {
+            if (_TransferringHost || State != HotelSessionState.Connected) return;
+            _TransferringHost = true;
+            SetState(HotelSessionState.PreparingTransport, "Transferring host...");
+            if (becomingHost) _HostTransfer = StartCoroutine(PrepareNewHost());
+        }
+
+        IEnumerator PrepareNewHost()
+        {
+            // Prepare a distinct socket while the old connection remains available for the handoff.
+            var root = new GameObject("Prepared Lobby Host Transport");
+            root.transform.SetParent(transform, false);
+            _PreparedHostSocket = root.AddComponent(_Socket.GetType()) as SocketFactory;
+            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(_Socket), _PreparedHostSocket);
+            if (_PreparedHostSocket is IHasPort port) port.Port = _Port;
+            var relay = _PreparedHostSocket as HotelTurnSocketFactory;
+            var address = LocalAddress();
+            var endpointPort = _Port;
+            if (relay)
+            {
+                yield return relay.Prepare(_DirectoryUrl);
+                if (!relay.Ready)
+                {
+                    _Network.LobbyPlayers.HostPrepared(string.Empty);
+                    yield break;
+                }
+                address = relay.RelayEndPoint.Address.ToString();
+                endpointPort = relay.RelayEndPoint.Port;
+            }
+            string failure = null;
+            yield return HotelRoomDirectory.Request(_DirectoryUrl, relay ? relay.AuthorizationToken : null,
+                "/rooms", "POST", JsonUtility.ToJson(new CreateRoom { address = address, port = endpointPort, capacity = _Room != null ? _Room.capacity : _Capacity }),
+                (room, error) => { _PreparedHostRoom = room; failure = error; });
+            if (failure != null || _PreparedHostRoom == null)
+                _Network.LobbyPlayers.HostPrepared(string.Empty);
+            else
+            {
+                _PreparedLease = StartCoroutine(KeepPreparedHostAlive());
+                _Network.LobbyPlayers.HostPrepared(_PreparedHostRoom.code);
+            }
+            _HostTransfer = null;
+        }
+
+        IEnumerator KeepPreparedHostAlive()
+        {
+            while (_PreparedHostRoom != null && _PreparedHostSocket)
+            {
+                yield return new WaitForSecondsRealtime(5f);
+                var room = _PreparedHostRoom;
+                var relay = _PreparedHostSocket as HotelTurnSocketFactory;
+                if (room == null || !_PreparedHostSocket) yield break;
+                string failure = null;
+                yield return HotelRoomDirectory.Request(_DirectoryUrl, relay ? relay.AuthorizationToken : null,
+                    "/rooms/" + room.code + "/heartbeat", "POST",
+                    JsonUtility.ToJson(new RoomHeartbeat { ownerKey = room.ownerKey, players = 1 }),
+                    (value, error) => failure = error);
+                if (failure != null && !_SwitchingHost)
+                {
+                    _Network.LobbyPlayers.HostFailed("The new host could not keep its lobby connection alive.");
+                    yield break;
+                }
+            }
+        }
+
+        void OnHostCancelled(string message)
+        {
+            if (_HostTransfer != null) { StopCoroutine(_HostTransfer); _HostTransfer = null; }
+            StartCoroutine(ClearPreparedHost());
+            _TransferringHost = _SwitchingHost = false;
+            SetState(HotelSessionState.Connected, message);
+        }
+
+        IEnumerator ClearPreparedHost()
+        {
+            if (_PreparedLease != null) { StopCoroutine(_PreparedLease); _PreparedLease = null; }
+            var room = _PreparedHostRoom;
+            var socket = _PreparedHostSocket;
+            _PreparedHostRoom = null;
+            _PreparedHostSocket = null;
+            var relay = socket as HotelTurnSocketFactory;
+            if (room != null)
+                yield return HotelRoomDirectory.Request(_DirectoryUrl, relay ? relay.AuthorizationToken : null,
+                    "/rooms/" + room.code, "DELETE", JsonUtility.ToJson(new RoomHeartbeat { ownerKey = room.ownerKey }), IgnoreRoomResponse);
+            if (relay) yield return relay.EndSession();
+            if (socket) Destroy(socket.gameObject);
+        }
+
+        void OnHostSwitching(string code, bool becomingHost)
+        {
+            _SwitchingHost = true;
+            CancelOperation();
+            _HostTransfer = StartCoroutine(SwitchHost(code, becomingHost));
+        }
+
+        IEnumerator SwitchHost(string code, bool becomingHost)
+        {
+            // Give the old server time to deliver the reliable switch to every acknowledged peer.
+            yield return new WaitForSecondsRealtime(.75f);
+            if (!becomingHost)
+            {
+                yield return CloseSession();
+                yield return new WaitForSecondsRealtime(1f);
+                _TransferringHost = _SwitchingHost = false;
+                var version = _OperationVersion;
+                var reconnectDeadline = Time.unscaledTime + 60f;
+                do
+                {
+                    _ConnectionFailure = null;
+                    yield return OpenSession(code, version);
+                    if (version != _OperationVersion || State == HotelSessionState.Connected) break;
+                    SetState(HotelSessionState.PreparingTransport, "Waiting for the new host...");
+                    yield return new WaitForSecondsRealtime(1f);
+                } while (Time.unscaledTime < reconnectDeadline);
+                if (version == _OperationVersion && State != HotelSessionState.Connected)
+                    SetState(HotelSessionState.Failed, "Unable to reconnect to the transferred lobby.");
+                _HostTransfer = null;
+                yield break;
+            }
+            if (!_PreparedHostSocket || _PreparedHostRoom == null || _PreparedHostRoom.code != code)
+            {
+                _TransferringHost = _SwitchingHost = false;
+                yield return FailSession("The new host transport was unavailable.");
+                yield break;
+            }
+            yield return CloseSession();
+            var oldSocket = _Socket;
+            _Socket = _PreparedHostSocket;
+            _Room = _PreparedHostRoom;
+            _Capacity = _Room.capacity;
+            _PreparedHostSocket = null;
+            _PreparedHostRoom = null;
+            if (_PreparedLease != null) { StopCoroutine(_PreparedLease); _PreparedLease = null; }
+            _Server.SocketFactory = _Socket;
+            _Client.SocketFactory = _Socket;
+            if (oldSocket) Destroy(oldSocket);
+            _ConnectionFailure = null;
+            SetState(HotelSessionState.Connecting, "Starting the transferred lobby...");
+            try { _Network.StartHost(_Room, _Capacity); }
+            catch (Exception exception) { _ConnectionFailure = "Unable to start the new host: " + exception.Message; }
+            var deadline = Time.unscaledTime + _AdmissionTimeout;
+            while (_ConnectionFailure == null && !_Network.HasLocalCharacter && Time.unscaledTime < deadline)
+                yield return null;
+            _TransferringHost = _SwitchingHost = false;
+            if (_ConnectionFailure != null || !_Network.IsAdmitted || !_Network.HasLocalCharacter)
+                yield return FailSession(_ConnectionFailure ?? "The new host could not start.");
+            else
+            {
+                SetState(HotelSessionState.Connected, "Host transferred");
+                _Heartbeat = StartCoroutine(KeepRoomAlive(_OperationVersion));
+            }
+            _HostTransfer = null;
+        }
         string GetRoomCode() => Code;
         void OnPlayerAdmitted(INetworkPlayer player) => PlayerAdmitted?.Invoke(player);
         void OnPlayerLeft(INetworkPlayer player) => PlayerLeft?.Invoke(player);
@@ -437,11 +612,15 @@ namespace HauntedFish.Multiplayer
             _Network.PlayerAdmitted -= OnPlayerAdmitted;
             _Network.PlayerLeft -= OnPlayerLeft;
             _Network.ConnectionLost -= OnConnectionLost;
+            _Network.LobbyPlayers.RosterChanged -= PublishState;
+            _Network.LobbyPlayers.HostPreparing -= OnHostPreparing;
+            _Network.LobbyPlayers.HostSwitching -= OnHostSwitching;
+            _Network.LobbyPlayers.HostCancelled -= OnHostCancelled;
             _Network.Dispose();
             _SceneTravel.StateChanged -= PublishState;
             _SceneTravel.Unconfigure();
             Session.Connected = false;
-            Session.InputFocused = false;
+            Session.SetInputFocused(false);
         }
     }
 }
