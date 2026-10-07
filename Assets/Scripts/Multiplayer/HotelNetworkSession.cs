@@ -64,9 +64,10 @@ namespace HauntedFish.Multiplayer
             client.Disconnected.AddListener(OnClientDisconnected);
         }
 
-        public void StartHost(Room room, int capacity)
+        public void StartHost(Room room, int capacity, IEnumerable<string> kickedPlayerIds = null)
         {
-            _Connection.Begin(room, capacity);
+            _Context.RoomScope=(room.code ?? "").ToUpperInvariant();_Context.ConnectionGeneration++;
+            _Connection.Begin(room, capacity, kickedPlayerIds);
             _Server.MaxConnections = capacity;
             _Server.StartServer(_Client);
             var dialogue = UnityEngine.Object.Instantiate(_DialoguePrefab);
@@ -76,12 +77,15 @@ namespace HauntedFish.Multiplayer
 
         public void StartClient(Room room, int capacity)
         {
+            _Context.RoomScope=(room.code ?? "").ToUpperInvariant();_Context.ConnectionGeneration++;
             _Connection.Begin(room, capacity);
             _Client.Connect(room.address, (ushort)room.port);
         }
 
         public void Stop()
         {
+            foreach(var character in _Characters.Values) if(character) character.ClearRoundInventory();
+            _Context.RoomScope="";_Context.ConnectionGeneration++;
             if (_Server.Active) _Server.Stop();
             else if (_Client.Active) _Client.Disconnect();
             _Connection.Reset();
@@ -110,7 +114,10 @@ namespace HauntedFish.Multiplayer
 
         void OnConnection(INetworkPlayer player)
         {
-            var identity = UnityEngine.Object.Instantiate(_PlayerPrefab, _SpawnPosition(_Connection.Players.Count - 1), Quaternion.identity);
+            // During travel the scene behavior is retired. CompleteHostLoad places these players
+            // using the destination scene before making their characters visible to peers.
+            var position = _Travel.Loading ? default : _SpawnPosition(_Connection.Players.Count - 1);
+            var identity = UnityEngine.Object.Instantiate(_PlayerPrefab, position, Quaternion.identity);
             BindCharacter(identity);
             _Travel.Admit(player);
             _ServerObjects.AddCharacter(player, identity);

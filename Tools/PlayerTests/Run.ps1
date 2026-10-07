@@ -4,16 +4,24 @@ param(
 $ErrorActionPreference = 'Stop'
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $validationRoot = Join-Path $env:TEMP ('HotelPlayerValidation-' + [guid]::NewGuid().ToString('N'))
-New-Item -ItemType Directory -Path "$validationRoot/Assets", "$validationRoot/Packages", "$validationRoot/ProjectSettings" | Out-Null
+New-Item -ItemType Directory -Path "$validationRoot/Assets/Resources", "$validationRoot/Packages", "$validationRoot/ProjectSettings" | Out-Null
 
-foreach ($name in @('HotelPlayerMovement', 'GameSideScrollMotor', 'HotelFishSprite', 'GameSceneDefinition')) {
+foreach ($name in @('HotelPlayerMovement', 'GameSideScrollMotor', 'HotelFishSprite', 'GameSceneController', 'IHotelScene', 'GhostSelectionPresentation', 'GhostSelectionWheel', 'GhostPlacementController', 'GhostPlacementWorld', 'GhostPlacementGrid', 'GameRoundGate', 'GhostTrapAreaPresentation', 'GameEditorRoleSwitch', 'HotelPalette', 'IGhostTrap', 'GhostTrap', 'GhostTrapSupply','TrapDefinition','TrapManager', 'RoundIntroductionSettings', 'AtticReturnBlur')) {
     Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs" -Destination "$validationRoot/Assets"
     Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs.meta" -Destination "$validationRoot/Assets"
 }
+foreach($source in @('Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionPanelShape.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionSkipCircle.cs')) {
+ Copy-Item -LiteralPath "$repoRoot/$source" -Destination "$validationRoot/Assets"
+ Copy-Item -LiteralPath "$repoRoot/$source.meta" -Destination "$validationRoot/Assets"
+}
+Copy-Item -LiteralPath "$repoRoot/Library/ScriptAssemblies/Ink-Libraries.dll" -Destination "$validationRoot/Assets"
+Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/Lobby/LobbyMovementMotor.cs" -Destination "$validationRoot/Assets"
+Copy-Item -LiteralPath "$repoRoot/Assets/Resources/GhostPlacementGrid.shader" -Destination "$validationRoot/Assets/Resources"
 Copy-Item -LiteralPath "$PSScriptRoot/ValidatePlayer.cs" -Destination "$validationRoot/Assets/PlayerValidationRunner.cs"
+Copy-Item -LiteralPath "$PSScriptRoot/SceneTestDependencies.cs" -Destination "$validationRoot/Assets"
 Copy-Item -LiteralPath "$repoRoot/Assets/Art/HotelFish" -Destination "$validationRoot/Assets" -Recurse
-Copy-Item -LiteralPath "$repoRoot/Assets/Resources/HotelMultiplayerActions.inputactions" -Destination "$validationRoot/Assets"
-Copy-Item -LiteralPath "$repoRoot/Assets/Resources/HotelMultiplayerActions.inputactions.meta" -Destination "$validationRoot/Assets"
+Copy-Item -LiteralPath "$repoRoot/Assets/Resources/HotelMultiplayerActions.inputactions" -Destination "$validationRoot/Assets/Resources"
+Copy-Item -LiteralPath "$repoRoot/Assets/Resources/HotelMultiplayerActions.inputactions.meta" -Destination "$validationRoot/Assets/Resources"
 Copy-Item -LiteralPath "$repoRoot/ProjectSettings/ProjectVersion.txt" -Destination "$validationRoot/ProjectSettings"
 
 # Test the authored movement and visual hierarchy without booting a lobby or a network connection.
@@ -27,13 +35,14 @@ $prefabText = $prefabText -replace '\{fileID: 2100000, guid: 9dfc825aed78fcd4ba0
 Set-Content -LiteralPath "$validationRoot/Assets/HotelNetworkPlayer.prefab" -Value $prefabText
 
 $dependencies = @{
+    'com.unity.modules.audio' = '1.0.0'
     'com.unity.modules.physics' = '1.0.0'
     'com.unity.modules.imageconversion' = '1.0.0'
     'com.unity.modules.imgui' = '1.0.0'
     'com.unity.modules.ui' = '1.0.0'
     'com.unity.modules.uielements' = '1.0.0'
 }
-foreach ($packageName in @('com.unity.inputsystem', 'com.unity.2d.sprite')) {
+foreach ($packageName in @('com.unity.inputsystem', 'com.unity.2d.sprite', 'com.unity.ugui')) {
     $packagePath = Get-ChildItem -LiteralPath "$repoRoot/Library/PackageCache" -Directory |
         Where-Object { $_.Name.StartsWith($packageName + '@') } | Select-Object -First 1
     if (!$packagePath) { throw "Missing local package cache: $packageName" }

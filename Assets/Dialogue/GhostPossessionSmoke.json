@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["ev","str","^puff_burst","/str",1.0,0.16,{"x()":"DollyTo","exArgs":3},"pop","/ev","\n","ev","str","^puff_clear","/str",1.0,0.32,{"x()":"DollyTo","exArgs":3},"pop","/ev","\n","end",["done",{"#f":5,"#n":"g-0"}],null],"done",{"#f":1}],"listDefs":{}}

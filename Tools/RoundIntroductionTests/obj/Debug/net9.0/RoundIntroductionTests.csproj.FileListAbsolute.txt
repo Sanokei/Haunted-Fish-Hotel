@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\bin\Debug\net9.0\RoundIntroductionTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\bin\Debug\net9.0\RoundIntroductionTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\bin\Debug\net9.0\RoundIntroductionTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\bin\Debug\net9.0\RoundIntroductionTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\bin\Debug\net9.0\RoundIntroductionTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\refint\RoundIntroductionTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\RoundIntroductionTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\RoundIntroductionTests\obj\Debug\net9.0\ref\RoundIntroductionTests.dll

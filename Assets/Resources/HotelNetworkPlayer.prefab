@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cede74245cd94dc2b92bccd5d551646e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpSpeed: 12
+  JumpSpeed: 7
   _Lamp: {fileID: 21000011}
   _Marker: {fileID: 21000013}
 --- !u!114 &21000007

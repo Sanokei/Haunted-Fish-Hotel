@@ -59,6 +59,14 @@ class Directory:
                 if type(count) is not int or not 1 <= count <= room["capacity"]:
                     raise RoomError(400,"Invalid player count.")
                 room.update(players=count,expires=self.clock()+self.ttl)
+                room["queue_until"] = self.clock()+12 if data.get("quickplay") is True else 0
+                if data.get("quickplay") is True and count == 1:
+                    # Only join an earlier room; concurrent solo hosts cannot swap rooms.
+                    for candidate in self.rooms.values():
+                        if candidate is room: break
+                        if candidate.get("queue_until",0)>self.clock() and candidate["players"]<4:
+                            room["queue_until"] = 0
+                            return dict(self.public(candidate),status="matched")
                 return self.public(room)
             if method=="DELETE" and len(parts)==2:
                 del self.rooms[code]

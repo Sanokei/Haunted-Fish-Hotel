@@ -10,6 +10,7 @@ namespace HauntedFish.Multiplayer
     {
         [SerializeField] TMP_InputField _Code;
         [SerializeField] TMP_Text _Status;
+        [SerializeField] GameObject _StatusContainer;
         [SerializeField] TMP_Text _RoomCode;
         [SerializeField] Button _Share;
         [SerializeField] Button _Join;
@@ -22,7 +23,7 @@ namespace HauntedFish.Multiplayer
 
         Material _CodeMaterial, _OriginalCodeMaterial;
         bool _CanUseDesk;
-        bool _Connected;
+        bool _Connected, _OnStairs;
         bool _Transitioning, _MenuOpen;
         bool? _MaterialHidden;
         string _CurrentRoomCode = "";
@@ -88,17 +89,19 @@ namespace HauntedFish.Multiplayer
             if (EventSystem.current && EventSystem.current.currentSelectedGameObject == _Code.gameObject)
                 EventSystem.current.SetSelectedGameObject(null);
         }
-        public void Render(bool connected, bool transitioning, bool menuOpen, string roomCode, LobbyRoster roster, string status)
+        public void Render(bool connected, bool transitioning, bool menuOpen, string roomCode, LobbyRoster roster, string status, bool onStairs = false)
         {
             if (!connected) _Hidden = true;
             _Connected = connected;
+            _OnStairs = onStairs;
             _Transitioning = transitioning;
             _MenuOpen = menuOpen;
             _CurrentRoomCode = roomCode;
             var members = roster.Members ?? Array.Empty<LobbyMember>();
             var ready = 0;
             foreach (var member in members) if (member.Ready) ++ready;
-            _Status.text = connected ? $"{ready}/{members.Length}" : status;
+            _Status.text = roster.Quickplay && !Application.isEditor ? $"Quickplay {members.Length}/4 fish" : $"{ready}/{members.Length} ready";
+            SetVisible(_Status.gameObject, connected && onStairs && !menuOpen);
             RefreshRoomCode();
             RefreshDeskControls();
         }
@@ -106,6 +109,8 @@ namespace HauntedFish.Multiplayer
         {
             var deskVisible = isActiveAndEnabled && _Connected && !_MenuOpen && _DeskZone &&
                 _DeskZone.Contains(HotelPlayer.LocalPlayer);
+            if (_StatusContainer) SetVisible(_StatusContainer, deskVisible ||
+                (isActiveAndEnabled && _Connected && _OnStairs && !_MenuOpen));
             _CanUseDesk = deskVisible && !_Transitioning;
             if (!_CanUseDesk && InputFocused) ClearSelection();
             if (_DeskControls) SetVisible(_DeskControls, deskVisible);
@@ -140,7 +145,7 @@ namespace HauntedFish.Multiplayer
                 _CodeMaterial.SetFloat(ShaderUtilities.ID_OutlineSoftness, _Hidden ? 1f : 0f);
                 _RoomCode.UpdateMeshPadding();
             }
-            if (_ToggleIcon) _ToggleIcon.color = _Hidden ? new Color(.65f, .65f, .65f) : Color.white;
+            if (_ToggleIcon) _ToggleIcon.color = _Hidden ? HotelPalette.Moss : HotelPalette.Light;
         }
         void OnDestroy()
         {

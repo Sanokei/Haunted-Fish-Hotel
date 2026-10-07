@@ -1,0 +1,8 @@
+PASS full production Unity 6000.3.6f1 compile/Mirage weaving
+PASS 109 isolated Unity regressions, including weighted selection/injection/cadence/pause/shared identity/placement/session lifetime and original cutscene/inventory checks
+PASS 2098 Ink/wheel/gate checks; PASS 127 multiplayer lifecycle checks
+PASS actual direct Game: empty authored manager, dependency save/reload, weighted boxes, E opening, Q disposal and unchanged gameplay
+PASS actual solo network-host Lobby-to-Game: moving box/art match, E opening/configured placement/possession, Q disposal, runtime chandelier art injection and unchanged intro/movement
+Original user Editor preserved; no server/deployment settings changed
+UNVERIFIED real two-client visibility/reconnect due earlier admission failure; replica identity/state tests passed locally
+NOTE isolated regression log contains UnityEditor.Search index exception outside game/test routines

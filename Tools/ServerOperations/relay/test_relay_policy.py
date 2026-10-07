@@ -48,6 +48,22 @@ class PolicyTests(unittest.TestCase):
   self.now+=40;self.assertIsNotNone(self.p.session("live"))
   self.now+=61
   with self.assertRaises(PolicyError):self.p.renew("live")
+ def test_quickplay_queue(self):
+  self.room();self.issue(2);self.p.create("2","DEF456","owner-two","join-two")
+  self.assertIsNone(self.p.quickplay("1","ABC123","owner-test",True))
+  self.assertEqual(self.p.quickplay("2","DEF456","owner-two",True),"ABC123")
+  self.assertIsNone(self.p.quickplay("1","ABC123","owner-test",True))
+  self.p.quickplay("1","ABC123","owner-test",False)
+  self.assertIsNone(self.p.quickplay("2","DEF456","owner-two",True))
+  self.p.quickplay("1","ABC123","owner-test",True)
+  self.now+=13
+  self.assertIsNone(self.p.quickplay("2","DEF456","owner-two",True))
+  with self.assertRaises(PolicyError):self.p.quickplay("2","ABC123","owner-test",True)
+  self.p.quickplay("1","ABC123","owner-test",True)
+  for n in range(3,6):
+   self.issue(n);self.p.reserve(str(n),"ABC123",str(n))
+  self.assertIsNone(self.p.quickplay("2","DEF456","owner-two",True))
+
  def test_cutoff(self):
   self.room();self.p.cutoff()
   with self.assertRaises(PolicyError):self.p.issue("198.51.100.2","2")

@@ -34,6 +34,7 @@ namespace HauntedFish.Multiplayer
         float _MigrationDeadline;
         LobbyHostCommit _Commit, _ClientCommit;
         readonly HashSet<INetworkPlayer> _MigrationAcks = new HashSet<INetworkPlayer>();
+        public string[] TransferKickedPlayerIds { get; private set; } = Array.Empty<string>();
         public event Action<bool> HostPreparing;
         public event Action<string, bool> HostSwitching;
         public event Action<string> HostCancelled;
@@ -52,12 +53,14 @@ namespace HauntedFish.Multiplayer
         bool IsReady(INetworkPlayer player) => player.HasCharacter && player.SceneIsReady &&
             _IsInReadyZone != null && _IsInReadyZone(player.Identity.GetComponent<HotelPlayer>());
         public bool AllReady => _Members.Count > 0 && _Members.Keys.All(IsReady);
-        public bool CanStartGame => _Starting && AllReady;
+        public bool AllowEditorSolo { get; set; }
+        public bool CanStartGame => _Starting && CanStart;
+        bool CanStart => AllReady && _Members.Count >= (AllowEditorSolo ? 1 : _Connection.Quickplay ? 4 : 2);
 
         void StartWhenReady()
         {
             if (!_Server.Active || !_Context.Connected || _Context.Loading || _Starting ||
-                _NextHost != null || _Travel.TargetScene != "Lobby" || !_Travel.CanTravel || !AllReady) return;
+                _NextHost != null || _Travel.TargetScene != "Lobby" || !_Travel.CanTravel || !CanStart) return;
             _Starting = true;
             try { _Travel.GoToGame(); }
             finally { _Starting = false; }
@@ -66,7 +69,7 @@ namespace HauntedFish.Multiplayer
         void OnCommand(INetworkPlayer sender, LobbyCommand command)
         {
             if (!_Admitted.Contains(sender) || sender != _Leader || !_Context.Connected ||
-                _Context.Loading || _NextHost != null || _Travel.TargetScene != "Lobby") return;
+                _Context.Loading || _NextHost != null) return;
             if (command.Action == LobbyAction.Start)
             {
                 StartWhenReady();
@@ -74,7 +77,11 @@ namespace HauntedFish.Multiplayer
             }
             var target = _Admitted.FirstOrDefault(p => p.HasCharacter && p.Identity.NetId == command.Target);
             if (target == null || target == sender) return;
-            if (command.Action == LobbyAction.King)
+            if (command.Action == LobbyAction.King && _Travel.TargetScene != "Lobby")
+            {
+                _Leader = target;
+            }
+            else if (command.Action == LobbyAction.King)
             {
                 _NextHost = target;
                 ++_MigrationVersion;
@@ -84,7 +91,7 @@ namespace HauntedFish.Multiplayer
                 foreach (var member in _Admitted)
                     member.Send(new LobbyHostPrepare { Version = _MigrationVersion, Target = target.Identity.NetId });
             }
-            else if (command.Action == LobbyAction.Kick && target != _Server.LocalPlayer) target.Disconnect();
+            else if (command.Action == LobbyAction.Kick && target != _Server.LocalPlayer) _Connection.Kick(target);
             PublishRoster();
         }
 
@@ -110,7 +117,7 @@ namespace HauntedFish.Multiplayer
                 CancelHostTransfer("The new host could not prepare its connection.");
                 return;
             }
-            _Commit = new LobbyHostCommit { Version = message.Version, Target = sender.Identity.NetId, Code = code };
+            _Commit = new LobbyHostCommit { Version = message.Version, Target = sender.Identity.NetId, Code = code, KickedPlayerIds = _Connection.KickedPlayerIds };
             _MigrationDeadline = Time.unscaledTime + 8f;
             foreach (var member in _Admitted) member.Send(_Commit);
         }
@@ -118,6 +125,7 @@ namespace HauntedFish.Multiplayer
         {
             if (message.Version != _ClientMigrationVersion || message.Target != _ClientCommit.Target || !LobbyCode.TryNormalize(message.Code, out _)) return;
             _ClientCommit = message;
+            TransferKickedPlayerIds = message.KickedPlayerIds ?? Array.Empty<string>();
             _Client.Send(new LobbyHostAck { Version = message.Version });
         }
         void OnHostAck(INetworkPlayer sender, LobbyHostAck message)
@@ -168,9 +176,10 @@ namespace HauntedFish.Multiplayer
                         Ready = IsReady(player)
                     });
             _RosterMembers.Sort(_CompareMembers);
-            if (!force && LobbyRules.RosterMatches(Roster, leader, host, _RosterMembers)) return;
+            if (!force && Roster.Quickplay == _Connection.Quickplay && LobbyRules.RosterMatches(Roster, leader, host, _RosterMembers)) return;
             var roster = new LobbyRoster
             {
+                Quickplay = _Connection.Quickplay,
                 Leader = leader,
                 TransportHost = host,
                 Members = _RosterMembers.ToArray()
@@ -182,7 +191,7 @@ namespace HauntedFish.Multiplayer
         void OnRoster(INetworkPlayer sender, LobbyRoster roster)
         {
             var members = roster.Members ?? Array.Empty<LobbyMember>();
-            if (LobbyRules.RosterMatches(Roster, roster.Leader, roster.TransportHost, members)) return;
+            if (Roster.Quickplay == roster.Quickplay && LobbyRules.RosterMatches(Roster, roster.Leader, roster.TransportHost, members)) return;
             Roster = roster;
             _Present.Clear();
             foreach (var member in members)
@@ -282,6 +291,7 @@ namespace HauntedFish.Multiplayer
             _NextRoster = 0;
             _ClientMigrationVersion = 0;
             _ClientCommit = _Commit = default;
+            TransferKickedPlayerIds = Array.Empty<string>();
             _MigrationAcks.Clear();
             Roster = default;
             foreach (var player in leaving)

@@ -76,6 +76,8 @@ public sealed class PlayerValidationRunner : MonoBehaviour
         Check(prefab, "Prefab imports");
         var player = Instantiate(prefab, new Vector3(0, 1.1f, 0), Quaternion.identity);
         var other = Instantiate(prefab, new Vector3(5, 1.1f, 0), Quaternion.identity);
+        player.AddComponent<HotelPlayer>();
+        other.AddComponent<HotelPlayer>();
         var movement = player.GetComponent<HotelPlayerMovement>();
         var otherMovement = other.GetComponent<HotelPlayerMovement>();
         Check(movement && player.GetComponent<GameSideScrollMotor>(), "Authored movement components resolve");
@@ -93,7 +95,8 @@ public sealed class PlayerValidationRunner : MonoBehaviour
         Check(movement.ActiveInputMap == "" && otherMovement.ActiveInputMap == "Lobby", "Owned input maps are isolated");
         movement.SetControlState(true, true, false);
         var before = player.transform.position;
-        movement.AcceptInput(new Vector2(0, -10), false, Vector3.zero);
+        // AcceptInput receives world XZ axes; camera-relative conversion happens before sending.
+        movement.AcceptInput(Vector2.right * 10, false, Vector3.zero);
         movement.Simulate(.1f);
         Check(Mathf.Abs(player.transform.position.x - before.x - .45f) < .03f,
             "Lobby input is clamped to walking speed");
@@ -114,7 +117,17 @@ public sealed class PlayerValidationRunner : MonoBehaviour
         movement.Simulate(.1f);
         Check(player.transform.position == before && movement.ActiveInputMap == "", "Loading gates input and physics");
 
-        var definition = new GameObject("Game definition").AddComponent<GameSceneDefinition>();
+        var game = new GameObject("Game controller").AddComponent<GameSceneController>();
+        Check(movement.GameActive && otherMovement.GameActive, "Game entry binds existing players");
+        var latePlayer = Instantiate(prefab, new Vector3(10, 1.1f, 0), Quaternion.identity);
+        latePlayer.AddComponent<HotelPlayer>();
+        var lateMovement = latePlayer.GetComponent<HotelPlayerMovement>();
+        Check(lateMovement.GameActive, "Game entry also binds players enabled later");
+        latePlayer.SetActive(false);
+        Check(!lateMovement.GameActive, "Disabled player releases game behavior");
+        latePlayer.SetActive(true);
+        Check(lateMovement.GameActive, "Re-enabled player reacquires game behavior");
+        movement.SetMode(HotelControlMode.Fish);
         movement.SetControlState(true, true, false);
         yield return null;
         yield return null;
@@ -128,7 +141,7 @@ public sealed class PlayerValidationRunner : MonoBehaviour
             "Game movement clamps speed and selects left direction");
         Check(player.transform.position.y > before.y, "Grounded buffered jump lifts player");
         Check(Mathf.Abs(player.transform.position.z) < .0001f, "Game movement remains on its 2D plane");
-        Check(movement.LampPosition == definition.ClampMouse(new Vector3(999, 999, 999)), "Pointer light is clamped");
+        Check(movement.LampPosition == new Vector3(15, 16, -3), "Authoritative pointer input respects Game's bounds and depth");
         movement.SharedDialogueLocked = true;
         before = player.transform.position;
         movement.Simulate(.1f);
@@ -140,6 +153,20 @@ public sealed class PlayerValidationRunner : MonoBehaviour
         before = player.transform.position;
         movement.Simulate(.1f);
         Check(Mathf.Abs(player.transform.position.x - before.x) < .0001f, "Stale commands stop movement");
+        game.Exit();
+        movement.SetMode(HotelControlMode.Lobby);
+        Check(!movement.GameActive && !otherMovement.GameActive && !lateMovement.GameActive,
+            "Game exit unbinds every persistent player");
+        movement.SetControlState(true, true, false);
+        Check(movement.ActiveInputMap == "Lobby", "Game exit restores Lobby input");
+        Check(player.GetComponent<GameSideScrollMotor>().ReadMouse() == Vector3.zero,
+            "Unbound motor safely ignores mouse input");
+        game.Enter(null);
+        Check(movement.GameActive && lateMovement.GameActive, "Game can re-enter without stale bindings");
+        Destroy(game.gameObject);
+        yield return null;
+        Check(!movement.GameActive && !lateMovement.GameActive, "Unloading Game releases player dependencies");
+        latePlayer.SetActive(false);
 
         var visual = player.GetComponentInChildren<HotelFishSprite>();
         var body = Field<SpriteRenderer>(visual, "_Body");

@@ -6,6 +6,8 @@ namespace HauntedFish.Multiplayer
     // Injected into both host and client avatars; no global session lookup is required.
     public sealed class HotelSessionContext
     {
+        public string RoomScope { get; internal set; } = "";
+        public int ConnectionGeneration { get; internal set; }
         public bool Connected { get; internal set; }
         public bool Loading { get; internal set; }
         public bool InputFocused { get; private set; }
@@ -22,10 +24,11 @@ namespace HauntedFish.Multiplayer
         // The directory-issued invitation secret prevents an unrelated connection from claiming this room by code alone.
         public string code, address, joinKey, ownerKey, error, reservation, status;
         public int port, capacity, players;
+        public bool quickplay;
     }
     [Serializable] public class CreateRoom { public string address; public int port, capacity; }
     // Refresh the directory lease and player count; abrupt host exits are handled by lease expiration.
-    [Serializable] public class RoomHeartbeat { public string ownerKey; public int players; }
+    [Serializable] public class RoomHeartbeat { public string ownerKey; public int players; public bool quickplay; }
     // Use a normalized six-character room code to resolve the directory entry for this particular host.
     public static class LobbyCode
     {
@@ -37,15 +40,15 @@ namespace HauntedFish.Multiplayer
         }
     }
     // Verify the directory-issued invitation secret as well as the public room code before admitting a peer.
-    public struct LobbyConnectionRequest { public string Code, JoinKey, Reservation; }
+    public struct LobbyConnectionRequest { public string Code, JoinKey, Reservation, PlayerId; public bool Quickplay; }
     public struct LobbyConnectionResult { public bool Accepted; public string Message; }
     public struct LobbyMember { public uint Id; public bool Ready; }
-    public struct LobbyRoster { public uint Leader, TransportHost; public LobbyMember[] Members; }
+    public struct LobbyRoster { public uint Leader, TransportHost; public LobbyMember[] Members; public bool Quickplay; }
     public enum LobbyAction { Start, Kick, King }
     public struct LobbyCommand { public LobbyAction Action; public uint Target; }
     public struct LobbyHostPrepare { public int Version; public uint Target; }
     public struct LobbyHostPrepared { public int Version; public string Code; }
-    public struct LobbyHostCommit { public int Version; public uint Target; public string Code; }
+    public struct LobbyHostCommit { public int Version; public uint Target; public string Code; public string[] KickedPlayerIds; }
     public struct LobbyHostAck { public int Version; }
     public struct LobbyHostSwitch { public int Version; }
     public struct LobbyHostCancel { public int Version; public string Message; }
@@ -61,6 +64,8 @@ namespace HauntedFish.Multiplayer
                 if (previous[i].Id != members[i].Id || previous[i].Ready != members[i].Ready) return false;
             return true;
         }
+        public static bool CanStart(LobbyMember[] members, bool quickplay, bool editorSolo) =>
+            AllReady(members) && members.Length >= (editorSolo ? 1 : quickplay ? 4 : 2);
         public static bool AllReady(LobbyMember[] members)
         {
             if (members == null || members.Length == 0) return false;

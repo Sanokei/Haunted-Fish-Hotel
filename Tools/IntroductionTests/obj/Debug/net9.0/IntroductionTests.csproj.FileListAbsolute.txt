@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\bin\Debug\net9.0\IntroductionTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\bin\Debug\net9.0\IntroductionTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\bin\Debug\net9.0\IntroductionTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\bin\Debug\net9.0\IntroductionTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\bin\Debug\net9.0\IntroductionTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\refint\IntroductionTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\IntroductionTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\IntroductionTests\obj\Debug\net9.0\ref\IntroductionTests.dll

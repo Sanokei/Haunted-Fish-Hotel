@@ -52,6 +52,7 @@
 ExportedObj/
 .consulo/
 *.csproj
+!Tools/IntroductionTests/IntroductionTests.csproj
 *.unityproj
 *.sln
 *.slnx

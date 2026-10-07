@@ -44,6 +44,23 @@ class DirectoryTests(unittest.TestCase):
             self.directory.execute("POST","/rooms",dict(address="localhost",port=7777,capacity=1))
         with self.assertRaises(RoomError):
             self.call("POST","/heartbeat",ownerKey=self.room["ownerKey"],players=99)
+    def test_quickplay_queue(self):
+        self.directory.rooms[self.room["code"]]["capacity"]=4
+        def beat(room, enabled=True, count=1):
+            return self.directory.execute("POST","/rooms/"+room["code"]+"/heartbeat",
+                dict(ownerKey=room["ownerKey"],players=count,quickplay=enabled))
+        self.assertNotIn("status",beat(self.room))
+        second=self.directory.execute("POST","/rooms",dict(address="localhost",port=7778,capacity=4))
+        self.assertEqual(beat(second)["code"],self.room["code"])
+        self.assertEqual(beat(second)["status"],"matched")
+        beat(self.room,False)
+        self.assertNotIn("status",beat(second))
+        beat(self.room)
+        self.now+=13
+        self.assertNotIn("status",beat(second))
+        beat(self.room,True,4)
+        self.assertNotIn("status",beat(second))
+
     def test_concurrent_creation(self):
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
             rooms=list(pool.map(lambda _:self.directory.execute("POST","/rooms",dict(address="localhost",port=7777,capacity=4)),range(100)))

@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
 {
+    public enum HotelControlMode { Lobby, Selection, Fish, Ghost }
     // fixme epsilon
     [RequireComponent(typeof(CharacterController), typeof(GameSideScrollMotor))]  
     public sealed class HotelPlayerMovement : MonoBehaviour
@@ -17,12 +18,19 @@ namespace HauntedFish.Multiplayer
         InputAction _LobbyMove, _GameMove, _GameJump;
         CharacterController _Controller;
         GameSideScrollMotor _GameMotor;
-        Vector2 _Input;
-        float _VerticalSpeed, _LastInput;
+        readonly LobbyMovementMotor _LobbyMotor = new LobbyMovementMotor();
         int _ResumeAfterFrame;
         bool _AuthorityInitialized, _SimulationAuthority, _InputBlocked;
         bool _ControlStateInitialized, _LocalControl, _GameControl;
 
+        public HotelControlMode Mode { get; private set; }
+        public void SetMode(HotelControlMode mode)
+        {
+            if (Mode == mode) return;
+            Mode = mode;
+            ResetMotion();
+            _ControlStateInitialized = false;
+        }
         public bool ControlsReady { get; private set; }
         public bool SharedDialogueLocked { get; set; }
         public bool Walking { get; private set; }
@@ -32,6 +40,7 @@ namespace HauntedFish.Multiplayer
         public string ActiveInputMap => _GameMap != null && _GameMap.enabled ? "Game" :
             _LobbyMap != null && _LobbyMap.enabled ? "Lobby" : "";
 
+        public CharacterController BodyController => Controller;
         CharacterController Controller => _Controller ? _Controller : (_Controller = GetComponent<CharacterController>());
         GameSideScrollMotor Motor => _GameMotor ? _GameMotor : (_GameMotor = GetComponent<GameSideScrollMotor>());
 
@@ -52,6 +61,7 @@ namespace HauntedFish.Multiplayer
             _LobbyMove = _LobbyMap.FindAction("Move", true);
             _GameMove = _GameMap.FindAction("Move", true);
             _GameJump = _GameMap.FindAction("Jump", true);
+
         }
 
         void OnEnable()
@@ -96,7 +106,7 @@ namespace HauntedFish.Multiplayer
             ControlsReady = ready;
             _InputBlocked = blocked;
             SetMap(_LobbyMap, ready && local && !blocked && !game);
-            SetMap(_GameMap, ready && local && !blocked && game);
+            SetMap(_GameMap, ready && local && !blocked && Mode == HotelControlMode.Fish);
             if ((wasReady && !ready) || (!wasBlocked && _InputBlocked)) ResetMotion();
         }
 
@@ -109,12 +119,12 @@ namespace HauntedFish.Multiplayer
 
         public void ReadOwnedInput(out Vector2 move, out bool jump, out Vector3 mouse)
         {
-            bool canMove = CanMove && ControlsReady && !_InputBlocked && !SharedDialogueLocked;
+            bool canMove = Mode != HotelControlMode.Ghost && Mode != HotelControlMode.Selection && CanMove && ControlsReady && !_InputBlocked && !SharedDialogueLocked;
             var action = GameActive ? _GameMove : _LobbyMove;
             move = canMove && action != null ? Vector2.ClampMagnitude(action.ReadValue<Vector2>(), 1) : Vector2.zero;
             if (!GameActive && move != Vector2.zero)
             {
-                var camera = Camera.main;
+                var camera = HotelViewCamera.Current;
                 var right = camera ? Vector3.ProjectOnPlane(camera.transform.right, Vector3.up) : Vector3.right;
                 right = right.sqrMagnitude > .0001f ? right.normalized : Vector3.right;
                 var forward = Vector3.Cross(right, Vector3.up);
@@ -122,21 +132,25 @@ namespace HauntedFish.Multiplayer
                 // Send world XZ input; the server must not reinterpret another player's camera axes.
                 move = new Vector2(direction.x, direction.z);
             }
-            jump = GameActive && canMove && _GameJump != null && _GameJump.WasPressedThisFrame();
+            jump = Mode == HotelControlMode.Fish && canMove && _GameJump != null && _GameJump.WasPressedThisFrame();
             mouse = GameActive ? Motor.ReadMouse() : Vector3.zero;
         }
 
         public void AcceptInput(Vector2 move, bool jump, Vector3 mouse)
         {
             if (!SimulationReady) return;
-            _LastInput = Time.unscaledTime;
-            _Input = Vector2.ClampMagnitude(move, 1);
-            if (GameActive) Motor.Accept(move.x, jump, mouse);
+            if (GameActive) Motor.Accept(move, jump, mouse);
+            else _LobbyMotor.Accept(move);
         }
 
         public void Simulate(float delta)
         {
             if (!SimulationReady)
+            {
+                ResetMotion();
+                return;
+            }
+            if (Mode == HotelControlMode.Ghost || Mode == HotelControlMode.Selection)
             {
                 ResetMotion();
                 return;
@@ -148,40 +162,37 @@ namespace HauntedFish.Multiplayer
                 return;
             }
 
-            if (Time.unscaledTime - _LastInput > .3f || SharedDialogueLocked) _Input = Vector2.zero;
-            if (Controller.isGrounded && _VerticalSpeed < 0) _VerticalSpeed = -2;
-            _VerticalSpeed -= Gravity * delta;
-            var direction = Vector3.right * _Input.x + Vector3.forward * _Input.y;
-            if (!TryMove((direction * (CanMove ? WalkingSpeed : 0) + Vector3.up * _VerticalSpeed) * delta))
-            {
-                ResetMotion();
-                return;
-            }
-            Walking = direction.sqrMagnitude > .001f && CanMove;
-            if (Walking) FaceDirection(direction);
+            Walking = _LobbyMotor.Simulate(this, Controller, delta);
         }
 
         public void FaceDirection(Vector3 direction)
         {
             // Lobby movement is on XZ; choose left/right relative to the active view.
-            float horizontal = GameActive || !Camera.main ? direction.x :
-                Vector3.Dot(direction, Camera.main.transform.right);
+            var camera = HotelViewCamera.Current;
+            float horizontal = GameActive || !camera ? direction.x :
+                Vector3.Dot(direction, camera.transform.right);
             if (Mathf.Abs(horizontal) > .01f) FacingLeft = horizontal < 0;
         }
 
-        public bool TryMove(Vector3 displacement)
+        public bool TryMove(Vector3 displacement) => TryMove(displacement, out _);
+
+        public bool TryMove(Vector3 displacement, out Vector3 applied)
         {
+            applied = Vector3.zero;
             if (!SimulationReady) return false;
             var scale = Controller.transform.lossyScale;
             if (Mathf.Abs(scale.x) < .0001f || Mathf.Abs(scale.y) < .0001f || Mathf.Abs(scale.z) < .0001f) return false;
+            var before = transform.position;
             Controller.Move(displacement);
+            applied = transform.position - before;
+            // Keep the original return contract (valid controller), while callers
+            // that push bodies can inspect the displacement collisions allowed.
             return true;
         }
 
         public void ResetMotion()
         {
-            _Input = Vector2.zero;
-            _VerticalSpeed = 0;
+            _LobbyMotor.Reset();
             Walking = false;
             Motor.ResetMotion();
         }

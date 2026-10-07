@@ -61,7 +61,7 @@ namespace HauntedFish.Multiplayer
 
         void LateUpdate()
         {
-            var camera = _FaceCamera ? Camera.main : null;
+            var camera = _FaceCamera ? HotelViewCamera.Current : null;
             if (camera) transform.rotation = camera.transform.rotation;
             float sign = _FacingLeft ? -1 : 1;
             float blend = 1 - Mathf.Exp(-5 * Time.deltaTime);

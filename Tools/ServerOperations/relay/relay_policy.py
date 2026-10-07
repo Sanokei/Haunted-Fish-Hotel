@@ -102,6 +102,21 @@ class RelayPolicy:
             if type(players) is not int or not 1<=players<=4: raise PolicyError("Invalid occupancy")
             room.update(players=players,lease=self.clock()+30)
 
+    def quickplay(self, owner_session, code, owner_key, enabled):
+        with self.lock:
+            self.session(owner_session)
+            room=self.rooms.get(code)
+            if room is None or room["owner"]!=owner_session or not hmac.compare_digest(room["owner_key"],owner_key):
+                raise PolicyError("Only room owner may queue")
+            room["queue_until"]=self.clock()+12 if enabled else 0
+            if enabled and room["players"]==1 and not room["reservations"]:
+                for candidate_code,candidate in self.rooms.items():
+                    if candidate_code==code: break
+                    if candidate.get("queue_until",0)>self.clock() and candidate["players"]+len(candidate["reservations"])<4:
+                        room["queue_until"]=0
+                        return candidate_code
+            return None
+
     def reap(self):
         now=self.clock()
         for key,s in list(self.sessions.items()):

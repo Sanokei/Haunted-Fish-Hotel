@@ -1,48 +1,58 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using Monologue.Dialogue;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
 {
-    public sealed class LobbyManager : MonoBehaviour
+    public sealed class LobbyManager : MonoBehaviour, IHotelScene
     {
+        public void Enter(HauntedHotelMultiplayer session) => Bind(session);
+        public void Exit() => Bind(null);
+        public Vector3 SpawnPosition(int index) => new Vector3(index * 2.2f, 1.1f, 2f);
+
         [SerializeField] HotelLobbyPanel _Panel;
-        bool _AtDesk, _MenuOpen;
+        bool _AtDesk, _WasOnStairs;
+        bool MenuOpen => _Lobby && _Lobby.MemberMenuOpen;
         [SerializeField] LobbyTrigger _DeskZone;
         [SerializeField] LobbyTrigger _StairZone;
         [SerializeField] Texture2D _DeskCursor;
         [SerializeField] HauntedHotelMultiplayer _Lobby;
-        [SerializeField] GameObject _Menu;
-        [SerializeField] Button _Start;
-        [SerializeField] Button _Resume;
-        [SerializeField] MemberRow[] _MemberRows;
-        LobbyRoster _RenderedRoster;
-        bool _RenderedLeader, _RenderedTransition, _RosterRendered;
-        InputAction _ToggleMenu;
-        [Serializable]
-        sealed class MemberRow
-        {
-            public RectTransform Root;
-            public TMP_Text Label;
-            public GameObject Crown;
-            public Button King, Kick;
-            [NonSerialized] public uint Id;
-            [NonSerialized] public UnityAction Promote, Remove;
-        }
+        [Header("Introduction (compiled Ink JSON)")]
+        [SerializeField] TextAsset _IntroductionInk;
+        [SerializeField, Min(.1f)] float _SkipHoldSeconds = 1f;
+        [SerializeField] LobbyIntroductionPresentation _IntroductionPresentation;
+        [SerializeField] LightningEffectManager _LightningEffect;
+        [Tooltip("Restore custom scene state here; called after completion, skipping, or an error.")]
+        [SerializeField] UnityEvent _IntroductionFinished = new UnityEvent();
+        InputAction _SkipIntroduction;
+        Coroutine _Introduction;
+        bool _IntroductionPlayed;
+        const string IntroductionSeenKey = "HauntedFish.IntroductionSeen.v1";
+        // Editor and development builds replay without reading or writing the saved flag.
+        static bool RememberIntroduction => !Application.isEditor && !Debug.isDebugBuild;
+        float _SkipHeldSeconds;
+        public bool IntroductionPlaying { get; private set; }
         readonly HashSet<HotelPlayer> _DeskPlayers = new HashSet<HotelPlayer>();
         void Awake()
         {
-            _ToggleMenu = new InputAction("Lobby menu", InputActionType.Button, "<Keyboard>/escape");
-            _ToggleMenu.performed += ToggleMenu;
-            foreach (var row in _MemberRows)
-            {
-                row.Promote = () => { if (_Lobby) _Lobby.LobbyCommand(LobbyAction.King, row.Id); };
-                row.Remove = () => { if (_Lobby) _Lobby.LobbyCommand(LobbyAction.Kick, row.Id); };
-            }
+            _SkipIntroduction = new InputAction("Skip lobby introduction", InputActionType.Button, "<Keyboard>/space");
+        }
+        void Update()
+        {
+            // Also covers teleport/spawn occupancy without a trigger callback.
+            var onStairs = IsInReadyZone(HotelPlayer.LocalPlayer);
+            if (_WasOnStairs != onStairs) { _WasOnStairs = onStairs; Refresh(); }
+            var atDesk = _Lobby && _Lobby.ReadyToPlay && _DeskZone && _DeskZone.ContainsPosition(HotelPlayer.LocalPlayer);
+            if (_AtDesk != atDesk) Refresh();
+            if (!IntroductionPlaying) { _SkipHeldSeconds = 0; return; }
+            _SkipHeldSeconds = _SkipIntroduction.IsPressed() ? _SkipHeldSeconds + Time.unscaledDeltaTime : 0;
+            var progress = Mathf.Clamp01(_SkipHeldSeconds / Mathf.Max(.1f, _SkipHoldSeconds));
+            if (_IntroductionPresentation) _IntroductionPresentation.SetSkipProgress(progress);
+            if (progress >= 1) SkipIntroduction();
         }
         void Start()
         {
@@ -54,9 +64,10 @@ namespace HauntedFish.Multiplayer
         public void Bind(HauntedHotelMultiplayer session)
         {
             Unsubscribe();
-            _AtDesk = _MenuOpen = false;
+            _AtDesk = false;
             if (_Panel) _Panel.ClearSelection();
             _Lobby = session;
+            if (_Lobby) _Lobby.SetIntroductionPlaying(IntroductionPlaying);
             if (_Lobby)
             {
                 _Lobby.BindReadyZone(IsInReadyZone);
@@ -66,17 +77,11 @@ namespace HauntedFish.Multiplayer
         }
         void OnEnable()
         {
-            _Start.onClick.AddListener(StartGame);
-            _Resume.onClick.AddListener(Resume);
-            foreach (var row in _MemberRows)
-            {
-                row.King.onClick.AddListener(row.Promote);
-                row.Kick.onClick.AddListener(row.Remove);
-            }
+            _SkipIntroduction.Enable();
+            PrepareIntroduction();
             _Panel.CopyRequested += CopyCode;
             _Panel.JoinRequested += JoinRoom;
             _Panel.InputFocusChanged += OnInputFocusChanged;
-            _ToggleMenu.Enable();
             HotelPlayer.LocalPlayerChanged += OnLocalPlayerChanged;
             if (_Lobby) _Lobby.StateChanged += Refresh;
             if (_Lobby) _Lobby.BindReadyZone(IsInReadyZone);
@@ -89,22 +94,16 @@ namespace HauntedFish.Multiplayer
         }
         void OnDisable()
         {
-            if (_Start) _Start.onClick.RemoveListener(StartGame);
-            if (_Resume) _Resume.onClick.RemoveListener(Resume);
-            foreach (var row in _MemberRows)
-            {
-                if (row.King) row.King.onClick.RemoveListener(row.Promote);
-                if (row.Kick) row.Kick.onClick.RemoveListener(row.Remove);
-            }
+            _SkipIntroduction.Disable();
+            CancelIntroduction(false);
             if (_DeskZone) _DeskZone.ZonePresenceChanged -= OnZonePresenceChanged;
             _Panel.CopyRequested -= CopyCode;
             _Panel.JoinRequested -= JoinRoom;
             _Panel.InputFocusChanged -= OnInputFocusChanged;
-            _ToggleMenu.Disable();
             HotelPlayer.LocalPlayerChanged -= OnLocalPlayerChanged;
             Unsubscribe();
             _DeskPlayers.Clear();
-            _AtDesk = _MenuOpen = false;
+            _AtDesk = false;
             if (_Panel) _Panel.ClearSelection();
             Refresh();
         }
@@ -124,16 +123,11 @@ namespace HauntedFish.Multiplayer
             else players.Remove(player);
             if (players == _DeskPlayers && player.IsRelevantPlayer)
             {
-                _AtDesk = _Lobby && _Lobby.ReadyToPlay && _DeskPlayers.Contains(player);
+                _AtDesk = _Lobby && _Lobby.ReadyToPlay && _DeskZone && _DeskZone.ContainsPosition(player);
                 RefreshInputFocus();
             }
         }
-        void ToggleMenu(InputAction.CallbackContext context)
-        {
-            _MenuOpen = !_MenuOpen && _Lobby && _Lobby.ReadyToPlay;
-            Refresh();
-        }
-        bool IsInReadyZone(HotelPlayer player) => isActiveAndEnabled && _StairZone && player &&
+        bool IsInReadyZone(HotelPlayer player) => isActiveAndEnabled && !IntroductionPlaying && _StairZone && player &&
             player.gameObject.activeInHierarchy && (_StairZone.Contains(player) || _StairZone.ContainsPosition(player));
         void OnLocalPlayerChanged(HotelPlayer player)
         {
@@ -144,74 +138,117 @@ namespace HauntedFish.Multiplayer
         void Refresh()
         {
             var connected = isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay;
-            _AtDesk = connected && _DeskPlayers.Contains(HotelPlayer.LocalPlayer);
+            _AtDesk = connected && _DeskZone && _DeskZone.ContainsPosition(HotelPlayer.LocalPlayer);
             var transition = !_Lobby || _Lobby.Transitioning;
             var roster = _Lobby ? _Lobby.Roster : default;
-            var members = roster.Members ?? Array.Empty<LobbyMember>();
-            if (!connected) _AtDesk = _MenuOpen = false;
-            if (_Panel) _Panel.Render(connected, transition, _MenuOpen, _Lobby ? _Lobby.Code : "",
-                roster, _Lobby ? _Lobby.Status : "Connecting...");
-            if (_Menu)
-            {
-                _Menu.SetActive(_MenuOpen);
-                _Start.gameObject.SetActive(connected && _Lobby.IsLobbyLeader);
-                _Start.interactable = connected && !transition && LobbyRules.AllReady(members);
-                if (_MenuOpen) RefreshMembers(roster);
-            }
+            if (!connected) _AtDesk = false;
+            if (_Panel) _Panel.Render(connected, transition, MenuOpen || IntroductionPlaying, _Lobby ? _Lobby.Code : "",
+                roster, _Lobby ? _Lobby.Status : "Connecting...", IsInReadyZone(HotelPlayer.LocalPlayer));
             RefreshInputFocus();
         }
         void OnInputFocusChanged(bool focused) => RefreshInputFocus();
         void RefreshInputFocus()
         {
             var active = isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay;
-            var cursor = active && (_AtDesk || _MenuOpen);
+            var cursor = active && (_AtDesk || MenuOpen);
+            if (MenuOpen)
+            {
+                if (_Lobby) _Lobby.SetInputFocused(false);
+                return;
+            }
             Cursor.visible = cursor;
             Cursor.lockState = cursor ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.SetCursor(active && _AtDesk ? _DeskCursor : null, Vector2.zero, CursorMode.Auto);
-            if (_Lobby) _Lobby.SetInputFocused(active && (_MenuOpen || (CanUseDesk && _Panel.InputFocused)));
+            if (_Lobby) _Lobby.SetInputFocused(active && CanUseDesk && _Panel.InputFocused);
         }
-        bool CanUseDesk => isActiveAndEnabled && _AtDesk && !_MenuOpen && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning;
+        bool CanUseDesk => isActiveAndEnabled && _AtDesk && !MenuOpen && !IntroductionPlaying && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning;
         void CopyCode() { if (CanUseDesk) GUIUtility.systemCopyBuffer = _Lobby.Code; }
         void JoinRoom(string code) { if (CanUseDesk) _Lobby.JoinLobby(code); }
-        void StartGame()
+
+        public void PrepareIntroduction()
         {
-            if (_Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && _Lobby.IsLobbyLeader)
-                _Lobby.LobbyCommand(LobbyAction.Start);
-        }
-        void Resume() { _MenuOpen = false; Refresh(); }
-        void RefreshMembers(LobbyRoster roster)
-        {
-            var members = roster.Members ?? Array.Empty<LobbyMember>();
-            var leader = _Lobby && _Lobby.IsLobbyLeader;
-            var transition = _Lobby && _Lobby.Transitioning;
-            if (_RosterRendered && _RenderedLeader == leader && _RenderedTransition == transition &&
-                LobbyRules.RosterMatches(_RenderedRoster, roster.Leader, roster.TransportHost, members)) return;
-            _RosterRendered = true;
-            _RenderedLeader = leader;
-            _RenderedTransition = transition;
-            _RenderedRoster = roster;
-            for (var i = 0; i < _MemberRows.Length; ++i)
+            if (_IntroductionPlayed || !_IntroductionInk || !isActiveAndEnabled) return;
+            if (RememberIntroduction && PlayerPrefs.GetInt(IntroductionSeenKey, 0) == 1)
             {
-                var row = _MemberRows[i];
-                var occupied = i < members.Length;
-                row.Root.gameObject.SetActive(occupied);
-                if (!occupied) { row.Id = 0; continue; }
-                var member = members[i];
-                row.Id = member.Id;
-                row.Label.text = $"Player {member.Id}  {(member.Ready ? "Ready" : "Waiting")}" +
-                    (member.Id == roster.TransportHost ? "\nConnection host" : "");
-                row.Crown.SetActive(member.Id == roster.Leader);
-                var controls = leader && member.Id != roster.Leader;
-                row.King.gameObject.SetActive(controls);
-                row.Kick.gameObject.SetActive(controls);
-                row.King.interactable = !transition;
-                row.Kick.interactable = !transition && member.Id != roster.TransportHost;
+                _IntroductionPlayed = true;
+                if (_LightningEffect) _LightningEffect.StartAmbient();
+                return;
+            }
+            BeginIntroduction();
+        }
+        void BeginIntroduction()
+        {
+            _IntroductionPlayed = true;
+            try
+            {
+                var steps = StoryFunctions.ReadAnimationSequence(_IntroductionInk.text);
+                if (!_IntroductionPresentation) throw new InvalidOperationException("Assign the introduction UI presentation.");
+                _IntroductionPresentation.ValidateSequence(steps);
+                IntroductionPlaying = true;
+                if (_Lobby) _Lobby.SetIntroductionPlaying(true);
+                _IntroductionPresentation.Prepare();
+                _Introduction = StartCoroutine(PlayIntroduction(steps));
+            }
+            catch (Exception error)
+            {
+                Debug.LogError("Unable to play lobby introduction: " + error.Message, this);
+                FinishIntroduction();
+            }
+        }
+        IEnumerator PlayIntroduction(IReadOnlyList<StorySequenceStep> steps)
+        {
+            // Defer execution so the coroutine handle exists even for an empty sequence.
+            yield return null;
+            try
+            {
+                foreach (var step in steps)
+                {
+                    if (step.Kind == StorySequenceStepKind.Wait)
+                    {
+                        yield return new WaitForSecondsRealtime(step.Seconds);
+                        continue;
+                    }
+                    yield return _IntroductionPresentation.Play(step);
+                }
+                FinishIntroduction(true);
+            }
+            finally { FinishIntroduction(); }
+        }
+        public void SkipIntroduction()
+        {
+            CancelIntroduction(true);
+        }
+        void CancelIntroduction(bool completed)
+        {
+            if (!IntroductionPlaying) return;
+            var routine = _Introduction;
+            _Introduction = null;
+            FinishIntroduction(completed);
+            if (routine != null) StopCoroutine(routine);
+        }
+        void FinishIntroduction(bool completed = false)
+        {
+            var wasPlaying = IntroductionPlaying;
+            IntroductionPlaying = false;
+            _SkipHeldSeconds = 0;
+            _Introduction = null;
+            if (_IntroductionPresentation) _IntroductionPresentation.Close();
+            if (_Lobby) _Lobby.SetIntroductionPlaying(false);
+            if (wasPlaying)
+            {
+                if (completed && _LightningEffect) _LightningEffect.Play();
+                if (completed && RememberIntroduction)
+                {
+                    PlayerPrefs.SetInt(IntroductionSeenKey, 1);
+                    PlayerPrefs.Save();
+                }
+                _IntroductionFinished?.Invoke();
+                Refresh();
             }
         }
         void OnDestroy()
         {
-            _ToggleMenu.performed -= ToggleMenu;
-            _ToggleMenu.Dispose();
+            _SkipIntroduction.Dispose();
         }
     }
 }

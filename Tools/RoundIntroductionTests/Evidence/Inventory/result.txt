@@ -1,0 +1,11 @@
+PASS production Unity 6000.3.6f1 compile and Mirage weaving
+PASS 69 Unity lifecycle checks (network endpoints doubled)
+PASS 32 existing Unity player/movement checks
+PASS 2098 Ink/random wheel/round gate checks
+PASS 127 multiplayer lifecycle checks
+PASS actual direct Game entry and solo network-host Lobby-to-Game entry
+PASS actual held/possessed Q input, foreground tentacle/cloud renders and puff cleanup
+Jump: direct 0.98 units / 0.56 seconds; host 0.97 units / 0.57 seconds
+UNVERIFIED real two-client admission/reconnect/visibility/disconnect (earlier admission timeout)
+NOTE isolated UnityEditor.Search index exception appears in validation logs; game/test routines passed
+Original user Editor PID 13188 preserved. No server/deployment settings changed.

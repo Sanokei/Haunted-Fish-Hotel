@@ -14,10 +14,14 @@ namespace HauntedFish.Multiplayer
         readonly HashSet<INetworkPlayer> _Players = new HashSet<INetworkPlayer>();
         readonly Dictionary<INetworkPlayer, float> _Pending = new Dictionary<INetworkPlayer, float>();
         readonly List<INetworkPlayer> _Expired = new List<INetworkPlayer>();
+        readonly Dictionary<INetworkPlayer, string> _PlayerIds = new Dictionary<INetworkPlayer, string>();
+        readonly HashSet<string> _KickedPlayerIds = new HashSet<string>(StringComparer.Ordinal);
+        public string[] KickedPlayerIds => _KickedPlayerIds.ToArray();
         Room _Room;
         int _Capacity;
         public IReadOnlyCollection<INetworkPlayer> Players => _Players;
         public bool IsAdmitted { get; private set; }
+        public bool Quickplay => _Room != null && _Room.quickplay;
         public event Action<INetworkPlayer> Connected;
         public event Action<INetworkPlayer> Disconnected;
         public event Action<string> ConnectionLost;
@@ -36,8 +40,11 @@ namespace HauntedFish.Multiplayer
             client.Disconnected.AddListener(OnConnectionLost);
         }
 
-        public void Begin(Room room, int capacity)
+        public void Begin(Room room, int capacity, IEnumerable<string> kickedPlayerIds = null)
         {
+            _KickedPlayerIds.Clear();
+            if (kickedPlayerIds != null)
+                foreach (var id in kickedPlayerIds) _KickedPlayerIds.Add(id);
             _Room = room;
             _Capacity = capacity;
             IsAdmitted = false;
@@ -54,15 +61,46 @@ namespace HauntedFish.Multiplayer
         void RequestConnection(INetworkPlayer player)
         {
             if (_Room == null) return;
-            _Client.Send(new LobbyConnectionRequest { Code = _Room.code, JoinKey = _Room.joinKey, Reservation = _Room.reservation });
+            _Client.Send(new LobbyConnectionRequest { Code = _Room.code, JoinKey = _Room.joinKey, Reservation = _Room.reservation, PlayerId = LocalPlayerId(), Quickplay = _Room.quickplay });
+        }
+
+        static string LocalPlayerId()
+        {
+            const string key = "HauntedHotel.PlayerId";
+            var id = PlayerPrefs.GetString(key, "");
+            if (!Guid.TryParseExact(id, "N", out _))
+            {
+                id = Guid.NewGuid().ToString("N");
+                PlayerPrefs.SetString(key, id);
+                PlayerPrefs.Save();
+            }
+            return id;
+        }
+
+        public void Kick(INetworkPlayer player)
+        {
+            if (player == _Server.LocalPlayer || !_PlayerIds.TryGetValue(player, out var id)) return;
+            _KickedPlayerIds.Add(id);
+            player.Send(new LobbyConnectionResult { Accepted = false, Message = "You were kicked from this lobby and cannot rejoin it." });
+            OnDisconnection(player);
+            player.Disconnect();
         }
 
         void OnConnection(INetworkPlayer player, LobbyConnectionRequest request)
         {
             if (_Players.Contains(player)) return;
+            var playerId = Guid.TryParseExact(request.PlayerId, "N", out var parsedId) ? parsedId.ToString("N") : null;
             string error = null;
             if (_Room == null || request.Code != _Room.code || request.JoinKey != _Room.joinKey)
                 error = "This lobby is unavailable or the invitation has expired.";
+            else if (player != _Server.LocalPlayer && request.Quickplay && !_Room.quickplay)
+                error = "This lobby is now a friend lobby.";
+            else if (playerId == null)
+                error = "Invalid player identity.";
+            else if (_KickedPlayerIds.Contains(playerId))
+                error = "You were kicked from this lobby and cannot rejoin it.";
+            else if (_PlayerIds.Values.Contains(playerId))
+                error = "This player is already in the lobby.";
             else if (_Players.Count >= _Capacity)
                 error = "Lobby is full.";
             if (error != null)
@@ -71,7 +109,9 @@ namespace HauntedFish.Multiplayer
                 _Pending[player] = Time.unscaledTime + .25f;
                 return;
             }
+            if (player != _Server.LocalPlayer && !request.Quickplay) _Room.quickplay = false;
             _Players.Add(player);
+            _PlayerIds.Add(player, playerId);
             _Pending.Remove(player);
             player.Send(new LobbyConnectionResult { Accepted = true, Message = "Connected" });
             Connected?.Invoke(player);
@@ -86,6 +126,7 @@ namespace HauntedFish.Multiplayer
         void OnDisconnection(INetworkPlayer player)
         {
             _Pending.Remove(player);
+            _PlayerIds.Remove(player);
             if (_Players.Remove(player)) Disconnected?.Invoke(player);
         }
 
@@ -114,6 +155,8 @@ namespace HauntedFish.Multiplayer
             _Room = null;
             IsAdmitted = false;
             _Players.Clear();
+            _PlayerIds.Clear();
+            _KickedPlayerIds.Clear();
             _Pending.Clear();
             if (hadConnection) Resetting?.Invoke();
         }

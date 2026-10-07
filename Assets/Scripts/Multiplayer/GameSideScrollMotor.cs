@@ -3,9 +3,14 @@ using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
 {
+    public interface IGameMovementEnvironment
+    {
+        Vector3 ClampMouse(Vector3 point);
+    }
+
     public sealed class GameSideScrollMotor : MonoBehaviour
     {
-        public float JumpSpeed = 12;
+        public float JumpSpeed = 7;
         [SerializeField] Light _Lamp;
         [SerializeField] MeshRenderer _Marker;
 
@@ -15,7 +20,21 @@ namespace HauntedFish.Multiplayer
         bool _PendingJump;
         Vector3 _LocalMouse;
 
-        public bool Active => GameSceneDefinition.Current;
+        IGameMovementEnvironment _Environment;
+        public bool Active => _Environment != null &&
+            !(_Environment is Object owner && !owner);
+
+        public void Bind(IGameMovementEnvironment environment)
+        {
+            if (ReferenceEquals(_Environment, environment)) return;
+            _Environment = environment;
+            ResetMotion();
+        }
+
+        public void Unbind(IGameMovementEnvironment environment)
+        {
+            if (ReferenceEquals(_Environment, environment)) Bind(null);
+        }
         public Vector3 LampPosition { get; private set; }
         public bool Walking => _Movement.SimulationReady && Mathf.Abs(_Axis) > .01f &&
             _Movement.CanMove && !_Movement.SharedDialogueLocked;
@@ -38,22 +57,24 @@ namespace HauntedFish.Multiplayer
 
         public Vector3 ReadMouse()
         {
-            if (Mouse.current != null && Camera.main)
+            if (!Active) return Vector3.zero;
+            var camera = HotelViewCamera.Current;
+            if (Mouse.current != null && camera)
             {
-                var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                var ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
                 if (new Plane(Vector3.forward, Vector3.zero).Raycast(ray, out var distance))
                     _LocalMouse = ray.GetPoint(distance);
             }
-            return GameSceneDefinition.Current.ClampMouse(_LocalMouse);
+            return _Environment.ClampMouse(_LocalMouse);
         }
 
-        public void Accept(float horizontal, bool jump, Vector3 mouse)
+        public void Accept(Vector2 move, bool jump, Vector3 mouse)
         {
             if (!Active || !_Movement.SimulationReady) return;
-            _Axis = Mathf.Clamp(horizontal, -1, 1);
+            _Axis = Mathf.Clamp(move.x, -1, 1);
             _PendingJump |= jump;
             _LastCommand = Time.unscaledTime;
-            LampPosition = GameSceneDefinition.Current.ClampMouse(mouse);
+            LampPosition = _Environment.ClampMouse(mouse);
         }
 
         public void Simulate(float delta)

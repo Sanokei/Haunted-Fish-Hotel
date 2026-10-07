@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mirage;
 using Monologue.Dialogue;
 using Monologue.StoryInput;
@@ -8,14 +9,23 @@ namespace HauntedFish.Multiplayer
     [RequireComponent(typeof(NetworkIdentity), typeof(HotelPlayerMovement))]
     public sealed class HotelPlayer : NetworkBehaviour
     {
+        static readonly List<HotelPlayer> _ActivePlayers = new List<HotelPlayer>();
+        public static IReadOnlyList<HotelPlayer> ActivePlayers { get; } = _ActivePlayers.AsReadOnly();
         public static HotelPlayer LocalPlayer { get; private set; }
+        public HotelPlayerMovement Movement => _Movement;
+        public CharacterController BodyController => _Movement ? _Movement.BodyController : null;
         public static event System.Action<HotelPlayer> LocalPlayerChanged;
+        public static event System.Action<HotelPlayer> PlayerEnabled;
+        public static event System.Action<HotelPlayer> PlayerDisabled;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetLocalPlayer()
         {
+            _ActivePlayers.Clear();
             LocalPlayer = null;
             LocalPlayerChanged = null;
+            PlayerEnabled = null;
+            PlayerDisabled = null;
         }
 
         void RegisterLocalPlayer()
@@ -32,6 +42,96 @@ namespace HauntedFish.Multiplayer
             LocalPlayerChanged?.Invoke(null);
         }
         public bool Networked = true;
+
+        [SyncVar] public int RoundVersion;
+        [SyncVar] public string RoundRoster = "";
+        [SyncVar] public uint GhostId;
+        [SyncVar] public bool RoundReleased;
+        [SyncVar] public string PlacedObjectsJson = "";
+        [SyncVar] public int ControlledCube = -1;
+        [SyncVar] public Vector3 GhostFlightPosition;
+        [SyncVar] public bool GhostFlightReady;
+        [SyncVar] public int GhostPlacementReply;
+        [SyncVar] public bool GhostPlacementAccepted;
+        [SyncVar] int _EditorRole = -1;
+        public HotelControlMode ControlMode => !_Movement.GameActive ? HotelControlMode.Lobby :
+            !RoundReleased ? HotelControlMode.Selection : _EditorRole >= 0 ?
+                (_EditorRole == 1 ? HotelControlMode.Ghost : HotelControlMode.Fish) :
+                NetId == GhostId ? HotelControlMode.Ghost : HotelControlMode.Fish;
+
+        public void SwitchEditorRole()
+        {
+#if UNITY_EDITOR
+            if (!IsRelevantPlayer || !RoundReleased || !_Movement.GameActive) return;
+            bool ghost = ControlMode != HotelControlMode.Ghost;
+            if (Networked) RequestEditorRole(ghost);
+            else ApplyEditorRole(ghost);
+#endif
+        }
+        [ServerRpc]
+        void RequestEditorRole(bool ghost)
+        {
+#if UNITY_EDITOR
+            if (RoundReleased && _Movement.GameActive) ApplyEditorRole(ghost);
+#endif
+        }
+        void ApplyEditorRole(bool ghost)
+        {
+            ControlledCube = -1;
+            _EditorRole = ghost ? 1 : 0;
+            var world = GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;
+            if (world && ghost) PlacedObjectsJson = world.Snapshot;
+            ResetSceneMotion();
+        }
+        public void ResetEditorRole() => _EditorRole = -1;
+
+        [ServerRpc]
+        public void FinishGhostSelection(int version)
+        {
+            var scene = GameSceneController.Current;
+            if (scene) scene.Acknowledge(this, version);
+        }
+
+        [SyncVar] public string HeldTrapFamily = "", RoundStateKey = "";
+        [SyncVar] public string ConveyorJson = "";
+        [SyncVar] public int PossessionEffectVersion;
+        [SyncVar] public Vector3 PossessionEffectPosition;
+        string _InventoryScope = "";
+        int _InventoryGeneration;
+        public string InventoryScope => Networked ? _InventoryScope : "editor-preview";
+        public void ClearRoundInventory() { HeldTrapFamily="";ConveyorJson="";PlacedObjectsJson="";ControlledCube=-1;RoundStateKey="";RoundRoster="";RoundReleased=false;GhostFlightReady=false;PossessionEffectVersion=0; }
+        [ServerRpc]
+        public void SendGhostFlightInput(Vector2 axis, string key, int version)
+        {
+            var world = GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;
+            if (world) world.AcceptFlightInput(this, axis, key, version);
+        }
+        [ServerRpc]
+        public void RequestConveyorPackage(int id,Vector3 position,string key,int version)
+        {
+            var manager=GameSceneController.Current ? GameSceneController.Current.Traps : null;
+            GhostPlacementAccepted=manager&&manager.TryTake(this,id,position,key,version);GhostPlacementReply++;
+        }
+        [ServerRpc]
+        public void RequestPlaceHeldTrap(Vector3 position,string family,string key,int version)
+        {
+            var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;GhostPlacementAccepted=world&&world.RequestMatches(this,key,version)&&world.PlacementNearFlight(this,position,family)&&world.TryPlace(this,position,family);GhostPlacementReply++;
+        }
+        [ServerRpc]
+        public void RequestDisposeTrap(int id,string key,int version)
+        {
+            var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;GhostPlacementAccepted=world&&world.RequestMatches(this,key,version)&&world.Dispose(this,id);GhostPlacementReply++;
+        }
+        [ServerRpc]
+        public void RequestScopedTrapPossession(int id,Vector3 position,string key,int version)
+        {
+            var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;if(world&&world.RequestMatches(this,key,version))world.Possess(this,id,position);
+        }
+        [ServerRpc]
+        public void SendScopedTrapAction(int id,int kind,float axis,Vector3 point,string key,int version)
+        {
+            if(kind<0||kind>(int)TrapInputKind.Reset)return;var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;if(world&&world.RequestMatches(this,key,version))world.AcceptTrapAction(this,id,new TrapInput((TrapInputKind)kind,axis,point));
+        }
 
         [SyncVar] Vector3 _Position;
         [SyncVar] bool _FacingLeft;
@@ -58,6 +158,8 @@ namespace HauntedFish.Multiplayer
         public void Configure(HotelSessionContext context)
         {
             if (_Session != null) _Session.InputFocusChanged -= OnInputFocusChanged;
+            if(context==null || _InventoryScope!=context.RoomScope || _InventoryGeneration!=context.ConnectionGeneration) ClearRoundInventory();
+            _InventoryScope=context?.RoomScope ?? "";_InventoryGeneration=context?.ConnectionGeneration ?? 0;
             _Session = context;
             if (_Session != null && isActiveAndEnabled)
                 _Session.InputFocusChanged += OnInputFocusChanged;
@@ -76,7 +178,9 @@ namespace HauntedFish.Multiplayer
             _Movement = GetComponent<HotelPlayerMovement>();
             _Visual = GetComponentInChildren<HotelFishSprite>(true);
             _Movement.SetSimulationAuthority(!Networked);
-            DontDestroyOnLoad(transform.root.gameObject);
+            // Network avatars travel with the session. The authored offline Editor
+            // preview belongs to Game and must unload with its scene and input maps.
+            if (Networked) DontDestroyOnLoad(transform.root.gameObject);
             Identity.OnStartServer.AddListener(StartServer);
             Identity.OnStartClient.AddListener(StartClient);
             Identity.OnStopServer.AddListener(StopSimulation);
@@ -86,6 +190,7 @@ namespace HauntedFish.Multiplayer
 
         void StartServer()
         {
+            RegisterActivePlayer();
             _Position = transform.position;
             _Movement.SetSimulationAuthority(true);
             ResetSceneMotion();
@@ -94,6 +199,7 @@ namespace HauntedFish.Multiplayer
 
         void StartClient()
         {
+            RegisterActivePlayer();
             if (IsServer) return;
             _Movement.SetSimulationAuthority(false);
             transform.position = _Position;
@@ -118,6 +224,7 @@ namespace HauntedFish.Multiplayer
 
         void OnEnable()
         {
+            RegisterActivePlayer();
             if (_TriggerSensor && Connected && IsClient && !IsServer) _TriggerSensor.SetActive(true);
             RegisterLocalPlayer();
             if (_Session != null) _Session.InputFocusChanged += OnInputFocusChanged;
@@ -127,14 +234,27 @@ namespace HauntedFish.Multiplayer
 
         void OnDisable()
         {
+            UnregisterActivePlayer();
             if (_Session != null) _Session.InputFocusChanged -= OnInputFocusChanged;
             StoryFunctions.OnSpeakerEvent -= Speaker;
             DialogueManager.OnDialogueTryingToContinueEvent -= StopTalking;
             StopSimulation();
         }
 
+        void RegisterActivePlayer()
+        {
+            if (_ActivePlayers.Contains(this)) return;
+            _ActivePlayers.Add(this);
+            PlayerEnabled?.Invoke(this);
+        }
+        void UnregisterActivePlayer()
+        {
+            if (!_ActivePlayers.Remove(this)) return;
+            PlayerDisabled?.Invoke(this);
+        }
         void StopSimulation()
         {
+            UnregisterActivePlayer();
             if (_TriggerSensor) _TriggerSensor.SetActive(false);
             ReleaseLocalPlayer();
             if (!_Movement) return;
@@ -180,6 +300,7 @@ namespace HauntedFish.Multiplayer
                     1 - Mathf.Exp(-18 * Time.deltaTime));
             }
 
+            if (_Visual) _Visual.gameObject.SetActive(ControlMode != HotelControlMode.Ghost);
             _Movement.ShowLamp(_MouseLight, NetId);
             if (_Visual) _Visual.Present(_FacingLeft, _Walking && ControlsReady, _Talking && ControlsReady);
         }
@@ -189,8 +310,9 @@ namespace HauntedFish.Multiplayer
             bool ownerReady = !Networked || Identity.Owner == null || Identity.Owner.SceneIsReady;
             bool sharedDialogue = DialogueManager.Instance && DialogueManager.Instance.IsSharedDialogue;
             bool inputBlocked = InputBlocked;
-            var ready = ControlsReady && ownerReady;
-            _Movement.SetSimulationAuthority(!Networked || (Connected && IsServer));
+            var ready = ControlsReady && ownerReady && ControlMode != HotelControlMode.Selection;
+            _Movement.SetMode(ControlMode);
+            _Movement.SetSimulationAuthority((!Networked || (Connected && IsServer)) && ControlMode != HotelControlMode.Ghost);
             _Movement.SetControlState(ready, IsRelevantPlayer, inputBlocked);
             _Movement.SharedDialogueLocked = sharedDialogue;
             if (!ready || inputBlocked) _QueuedJump = false;
@@ -208,17 +330,17 @@ namespace HauntedFish.Multiplayer
             else
             {
                 _NextSend = Time.unscaledTime + .05f;
-                SetInput(_Movement.GameActive, move, _QueuedJump, mouse);
+                SetInput((int)ControlMode, move, _QueuedJump, mouse);
             }
             _QueuedJump = false;
         }
 
         [ServerRpc]
-        void SetInput(bool game, Vector2 move, bool jump, Vector3 mouse)
+        void SetInput(int mode, Vector2 move, bool jump, Vector3 mouse)
         {
             ConfigureMovement();
             if (!ControlsReady || (Identity.Owner != null && !Identity.Owner.SceneIsReady)) return;
-            if (game != _Movement.GameActive) return;
+            if (mode != (int)ControlMode || ControlMode == HotelControlMode.Selection) return;
             if (!Finite(move.x) || !Finite(move.y) || !Finite(mouse.x) || !Finite(mouse.y) || !Finite(mouse.z)) return;
             _Movement.AcceptInput(Vector2.ClampMagnitude(move, 1), jump, mouse);
         }

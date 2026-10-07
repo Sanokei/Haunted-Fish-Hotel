@@ -50,7 +50,7 @@ namespace HauntedFish.Multiplayer
             if (_EvaluatedFrame == Time.frameCount) return;
             _EvaluatedFrame = Time.frameCount;
             var owner = HotelPlayer.LocalPlayer;
-            var controller = owner ? owner.GetComponent<CharacterController>() : null;
+            var controller = owner ? owner.BodyController : null;
             LobbyCameraZone chosen = null;
             if (controller)
             {

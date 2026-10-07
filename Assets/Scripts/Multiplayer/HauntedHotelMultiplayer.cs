@@ -33,8 +33,12 @@ namespace HauntedFish.Multiplayer
         [SerializeField] float _RetryInterval = 15f;
         [SerializeField] float _AdmissionTimeout = 10f;
 
+        MemberMenu _MemberMenu;
+        bool _DeskInputFocused;
+        public bool MemberMenuOpen { get; private set; }
+        public bool IntroductionPlaying { get; private set; }
         HotelNetworkSession _Network;
-        HotelSceneBindings _SceneBindings;
+        IHotelScene _Scene;
         DialogueManager _Dialogue;
         Room _Room;
         Coroutine _Operation;
@@ -54,6 +58,7 @@ namespace HauntedFish.Multiplayer
         public string Status { get; private set; } = "Connecting...";
         public string Code => _Room?.code ?? string.Empty;
         public HauntedHotelMessageTravel SceneTravel => _SceneTravel;
+        public int PlayerCount => _Network?.PlayerCount ?? 0;
         public bool IsHost => _Network != null && _Network.IsHost;
         public HotelLobbyPlayers LobbyPlayers => _Network?.LobbyPlayers;
         public bool IsLobbyLeader => _Network != null && _Network.LobbyPlayers.IsLeader;
@@ -80,6 +85,7 @@ namespace HauntedFish.Multiplayer
         {
             _Network = new HotelNetworkSession(_Server, _Client, _ServerObjects, _ClientObjects, _Socket,
                 _PlayerPrefab, _DialoguePrefab, _AdditionalPrefabs, Session, _SceneTravel, SpawnPosition);
+            _Network.LobbyPlayers.AllowEditorSolo = Application.isEditor;
             _Network.LobbyPlayers.BindReadyZone(_ReadyZone);
             _Network.PlayerAdmitted += OnPlayerAdmitted;
             _Network.PlayerLeft += OnPlayerLeft;
@@ -109,6 +115,9 @@ namespace HauntedFish.Multiplayer
             if (_Network == null)
                 return;
             _OwnsSession = true;
+            _MemberMenu = Instantiate(Resources.Load<MemberMenu>("MemberMenu"));
+            DontDestroyOnLoad(_MemberMenu.gameObject);
+            _MemberMenu.Bind(this);
             Application.runInBackground = true;
             for (var index = 0; index < SceneManager.sceneCount; ++index)
                 BindScene(SceneManager.GetSceneAt(index));
@@ -147,15 +156,20 @@ namespace HauntedFish.Multiplayer
                 BeginSession(null);
         }
 
-        void BeginSession(string invitation)
+        void BeginSession(string invitation, bool quickplay = false)
         {
             CancelOperation();
             _ConnectionFailure = null;
-            _Operation = StartCoroutine(OpenSession(invitation, _OperationVersion));
+            _Operation = StartCoroutine(OpenSession(invitation, _OperationVersion, quickplay));
         }
 
-        IEnumerator OpenSession(string invitation, int version)
+        IEnumerator OpenSession(string invitation, int version, bool quickplay)
         {
+            // Start the client-local overlay immediately; connection continues behind it.
+            foreach (var manager in FindObjectsByType<LobbyManager>(FindObjectsSortMode.None))
+            {
+                manager.PrepareIntroduction();
+            }
             if (_Room != null || _Network.IsRunning)
                 yield return CloseSession();
             while (_SceneTravel.Loading)
@@ -209,6 +223,7 @@ namespace HauntedFish.Multiplayer
                 yield break;
             }
 
+            result.quickplay = invitation == null || quickplay;
             _Room = result;
             SetState(HotelSessionState.Connecting, "Connecting to lobby...");
             try
@@ -303,9 +318,20 @@ namespace HauntedFish.Multiplayer
                 if (version != _OperationVersion || !IsHost || _Room == null)
                     yield break;
                 string failure = null;
-                var payload = new RoomHeartbeat { ownerKey = _Room.ownerKey, players = Mathf.Max(1, _Network.PlayerCount) };
+                var queued = !Application.isEditor && ReadyToPlay && !IntroductionPlaying &&
+                    _SceneTravel.TargetScene == "Lobby" && _Network.LobbyPlayers.Roster.Quickplay &&
+                    _Network.LobbyPlayers.AllReady;
+                var payload = new RoomHeartbeat { ownerKey = _Room.ownerKey, players = Mathf.Max(1, _Network.PlayerCount), quickplay = queued };
+                Room response = null;
                 yield return Request("/rooms/" + Code + "/heartbeat", "POST", JsonUtility.ToJson(payload),
-                    (value, error) => failure = error);
+                    (value, error) => { response = value; failure = error; });
+                if (version == _OperationVersion && response != null && response.status == "matched" &&
+                    queued && _Network.PlayerCount == 1 && _Network.LobbyPlayers.AllReady && _Room.quickplay)
+                {
+                    _Heartbeat = null;
+                    BeginSession(response.code, true);
+                    yield break;
+                }
                 if (version == _OperationVersion && failure != null)
                 {
                     _Heartbeat = null;
@@ -391,7 +417,24 @@ namespace HauntedFish.Multiplayer
             StateChanged?.Invoke();
         }
 
-        public void SetInputFocused(bool focused) => Session.SetInputFocused(focused);
+        public void SetInputFocused(bool focused)
+        {
+            _DeskInputFocused = focused;
+            Session.SetInputFocused(focused || MemberMenuOpen || IntroductionPlaying);
+        }
+        public void SetMemberMenuOpen(bool open)
+        {
+            if (MemberMenuOpen == open) return;
+            MemberMenuOpen = open;
+            Session.SetInputFocused(open || _DeskInputFocused || IntroductionPlaying);
+            StateChanged?.Invoke();
+        }
+        public void SetIntroductionPlaying(bool playing)
+        {
+            if (IntroductionPlaying == playing) return;
+            IntroductionPlaying = playing;
+            Session.SetInputFocused(playing || MemberMenuOpen || _DeskInputFocused);
+        }
 
         void OnHostPreparing(bool becomingHost)
         {
@@ -490,6 +533,8 @@ namespace HauntedFish.Multiplayer
 
         IEnumerator SwitchHost(string code, bool becomingHost)
         {
+            var quickplay = Roster.Quickplay;
+            var kickedPlayerIds = _Network.LobbyPlayers.TransferKickedPlayerIds;
             // Give the old server time to deliver the reliable switch to every acknowledged peer.
             yield return new WaitForSecondsRealtime(.75f);
             if (!becomingHost)
@@ -502,7 +547,7 @@ namespace HauntedFish.Multiplayer
                 do
                 {
                     _ConnectionFailure = null;
-                    yield return OpenSession(code, version);
+                    yield return OpenSession(code, version, quickplay);
                     if (version != _OperationVersion || State == HotelSessionState.Connected) break;
                     SetState(HotelSessionState.PreparingTransport, "Waiting for the new host...");
                     yield return new WaitForSecondsRealtime(1f);
@@ -522,6 +567,7 @@ namespace HauntedFish.Multiplayer
             var oldSocket = _Socket;
             _Socket = _PreparedHostSocket;
             _Room = _PreparedHostRoom;
+            _Room.quickplay = quickplay;
             _Capacity = _Room.capacity;
             _PreparedHostSocket = null;
             _PreparedHostRoom = null;
@@ -531,7 +577,7 @@ namespace HauntedFish.Multiplayer
             if (oldSocket) Destroy(oldSocket);
             _ConnectionFailure = null;
             SetState(HotelSessionState.Connecting, "Starting the transferred lobby...");
-            try { _Network.StartHost(_Room, _Capacity); }
+            try { _Network.StartHost(_Room, _Capacity, kickedPlayerIds); }
             catch (Exception exception) { _ConnectionFailure = "Unable to start the new host: " + exception.Message; }
             var deadline = Time.unscaledTime + _AdmissionTimeout;
             while (_ConnectionFailure == null && !_Network.HasLocalCharacter && Time.unscaledTime < deadline)
@@ -549,13 +595,26 @@ namespace HauntedFish.Multiplayer
         string GetRoomCode() => Code;
         void OnPlayerAdmitted(INetworkPlayer player) => PlayerAdmitted?.Invoke(player);
         void OnPlayerLeft(INetworkPlayer player) => PlayerLeft?.Invoke(player);
-        Vector3 SpawnPosition(int index) => _SceneBindings ? _SceneBindings.SpawnPosition(index) : new Vector3(index * 2.2f, 1.1f, 2f);
+        Vector3 SpawnPosition(int index)
+        {
+            if (_Scene == null || (_Scene is UnityEngine.Object owner && !owner))
+                throw new InvalidOperationException("The loaded scene must provide an IHotelScene before spawning players.");
+            return _Scene.SpawnPosition(index);
+        }
         internal void BindDialogue(DialogueManager service) => _Dialogue = service;
 
         void PrepareTravel()
         {
             if (_Dialogue && _Dialogue.IsSharedDialogue)
                 _Dialogue.ExitDialogMode();
+            ExitScene();
+        }
+
+        void ExitScene()
+        {
+            if (_Scene != null && !(_Scene is UnityEngine.Object owner && !owner))
+                _Scene.Exit();
+            _Scene = null;
         }
         static void IgnoreRoomResponse(Room result, string error) { }
 
@@ -578,23 +637,33 @@ namespace HauntedFish.Multiplayer
             if (!_OwnsSession)
                 return;
             if (mode == LoadSceneMode.Single)
-                _SceneBindings = null;
+            {
+                ExitScene();
+                _Dialogue = null;
+            }
             BindScene(scene);
         }
 
         void BindScene(Scene scene)
         {
-            // Scene entry is the only discovery boundary. Each root supplies serialized dependencies.
+            // Discover scene services once at scene entry and bind them directly to the session.
             foreach (var root in scene.GetRootGameObjects())
             {
                 if (root.TryGetComponent<HauntedHotelMultiplayer>(out var duplicate) && duplicate != this)
                     duplicate.RetireAuthoredSession();
-                if (root.TryGetComponent<HotelSceneBindings>(out var bindings))
+                foreach (var dialogue in root.GetComponentsInChildren<DialogueManager>(true))
+                    BindDialogue(dialogue);
+                foreach (var component in root.GetComponentsInChildren<MonoBehaviour>(true))
                 {
-                    if (bindings.HasSpawnDefinition)
-                        _SceneBindings = bindings;
-                    bindings.Bind(this);
+                    if (!(component is IHotelScene behavior))
+                        continue;
+                    if (_Scene != null && !ReferenceEquals(_Scene, behavior))
+                        throw new InvalidOperationException("Only one hotel scene behavior can own the session at a time.");
+                    _Scene = behavior;
+                    behavior.Enter(this);
                 }
+                foreach (var screen in root.GetComponentsInChildren<HotelConnectionScreen>(true))
+                    screen.Bind(this);
             }
         }
 
@@ -609,6 +678,8 @@ namespace HauntedFish.Multiplayer
 
         void OnDestroy()
         {
+            ExitScene();
+            if (_MemberMenu) Destroy(_MemberMenu.gameObject);
             CancelOperation();
             if (_Heartbeat != null)
                 StopCoroutine(_Heartbeat);

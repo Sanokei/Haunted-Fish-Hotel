@@ -1,0 +1,1 @@
+PASS actual authored Game scene entry, wheel/pulse/Ink attic/wall/blur/release, existing role button both directions, prefab references survive save/reload

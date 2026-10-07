@@ -1,0 +1,9 @@
+{
+  "Assets/Scenes/Lobby.unity": "937c6e9e87cd2b0f5e0234bb5b837bafe8d6cc5ce9eec4f13b773e4099649fab",
+  "Assets/Scenes/Game.unity": "f3ee852d228a1ff6b47d7f05ca3ad4efe582cbd9ecbffd2ac3eefdd1ef8aa6f3",
+  "Assets/Scripts/Multiplayer/GhostPlacementWorld.cs": "602e5691d734bb847ae5d0cfef1978aeb490b712b84ac4ab5bff80ca61681816",
+  "Assets/Scripts/Multiplayer/GhostPlacementController.cs": "eccb01284fa26db627a7fd5c5537c4d3b7d254425d33f520aaee8f3dee4f7b6d",
+  "Assets/Scripts/Multiplayer/GhostTrapAreaPresentation.cs": "d4c1d82ff92347d1d01196fbcb8bd76922b64a266edec048b91c95231acd4e0a",
+  "Assets/Resources/Traps/ClickTrap.prefab": "51d93d26b1669dad2d1dd53e35498e3f171392b2498f1a1c28c3d084367d8f9f",
+  "Assets/Resources/Traps/ShoppingCartTrap.prefab": "b9412fdb135404b5f85f1d590db45c2fb8e4cd5379d8c8ef953b6ca6c5ac26b2"
+}

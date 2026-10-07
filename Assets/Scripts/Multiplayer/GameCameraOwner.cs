@@ -1,13 +1,13 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 namespace HauntedFish.Multiplayer
 {
     // Game-only framing for the local player. Cinemachine still owns camera positioning.
     public sealed class GameCameraOwner : MonoBehaviour
     {
         public CinemachineCamera Camera;
+        public Transform FollowOverride { get; set; }
         [Min(.1f)] public float RestingSize = 3.8f;
         [Range(0, .5f)] public float MovingExpansion = .15f;
         [Range(0, .25f)] public float MousePadding = .08f;
@@ -18,34 +18,37 @@ namespace HauntedFish.Multiplayer
         HotelPlayer _Player;
         HotelPlayerMovement _Movement;
         CinemachinePositionComposer _Composer;
+        CinemachineCamera _BoundCamera;
         Vector3 _PreviousPosition, _MouseOffset, _OffsetVelocity;
         float _ZoomVelocity;
         void OnEnable()
         {
             HotelPlayer.LocalPlayerChanged += BindPlayer;
-            SceneManager.sceneLoaded += OnSceneLoaded;
             BindPlayer(HotelPlayer.LocalPlayer);
         }
         void OnDisable()
         {
             HotelPlayer.LocalPlayerChanged -= BindPlayer;
-            SceneManager.sceneLoaded -= OnSceneLoaded;
             if (Camera) Camera.Follow = null;
             _Player = null;
             _Movement = null;
         }
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode) => BindPlayer(HotelPlayer.LocalPlayer);
         void BindPlayer(HotelPlayer player)
         {
-            if (!Camera || !GameSceneDefinition.Current || gameObject.scene!=GameSceneDefinition.Current.gameObject.scene) return;
+            if (_BoundCamera != Camera)
+            {
+                if (_BoundCamera) _BoundCamera.Follow = null;
+                _BoundCamera=Camera;
+                _Composer=Camera ? Camera.GetComponent<CinemachinePositionComposer>() : null;
+            }
+            if (!Camera) return;
             _Player = player;
-            _Movement = player ? player.GetComponent<HotelPlayerMovement>() : null;
-            _Composer = Camera.GetComponent<CinemachinePositionComposer>();
+            _Movement = player ? player.Movement : null;
             _MouseOffset = _OffsetVelocity = Vector3.zero;
             _ZoomVelocity = 0;
             if (player) _PreviousPosition = player.transform.position;
             Camera.Lens.OrthographicSize = RestingSize;
-            Camera.Follow = player ? player.transform : null;
+            Camera.Follow = FollowOverride ? FollowOverride : player ? player.transform : null;
             Camera.PreviousStateIsValid = false;
             if (_Composer)
             {
@@ -56,13 +59,13 @@ namespace HauntedFish.Multiplayer
 
         void Update()
         {
-            if (!Camera || !GameSceneDefinition.Current || gameObject.scene != GameSceneDefinition.Current.gameObject.scene) return;
-            // Also recover when player registration preceded the scene marker's Awake.
-            if (_Player != HotelPlayer.LocalPlayer || Camera.Follow != (HotelPlayer.LocalPlayer ? HotelPlayer.LocalPlayer.transform : null))
+            if (!Camera) return;
+            // Recover if the camera or local player was assigned after activation.
+            if (_BoundCamera != Camera || _Player != HotelPlayer.LocalPlayer || Camera.Follow != (FollowOverride ? FollowOverride : HotelPlayer.LocalPlayer ? HotelPlayer.LocalPlayer.transform : null))
                 BindPlayer(HotelPlayer.LocalPlayer);
             if (!_Player || !_Composer) return;
 
-            var position = _Player.transform.position;
+            var position = FollowOverride ? FollowOverride.position : _Player.transform.position;
             var delta = position - _PreviousPosition;
             _PreviousPosition = position;
             // Ignore teleports, and measure horizontal motion on both hosts and interpolated clients.
@@ -72,7 +75,7 @@ namespace HauntedFish.Multiplayer
             Camera.Lens.OrthographicSize = Mathf.SmoothDamp(Camera.Lens.OrthographicSize, targetSize,
                 ref _ZoomVelocity, ZoomSmoothTime);
 
-            var output = UnityEngine.Camera.main;
+            var output = HotelViewCamera.Current;
             var offset = Vector3.zero;
             if (output && Mouse.current != null && Application.isFocused)
             {

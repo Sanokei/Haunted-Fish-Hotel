@@ -1,0 +1,18 @@
+// Server selects the outcome; keep the existing seven-second eased pointer spin.
+EXTERNAL DollyTo(tag, amount, seconds)
+EXTERNAL Knock(tag, count, interval)
+EXTERNAL Wait(seconds)
+EXTERNAL SetVisible(tag, visible)
+~ DollyTo("wheel_spin", 1.0, 7.0)
+~ Knock("selected_slice", 3, 0.4)
+~ Wait(0.8)
+~ SetVisible("attic_cutscene", true)
+~ DollyTo("attic_top", 1.0, 4.0)
+~ SetVisible("ghost", true)
+~ Knock("ghost", 1, 0.5)
+~ Wait(1.5)
+~ SetVisible("return_blur", true)
+~ DollyTo("hotel_bottom", 1.0, 0.45)
+~ SetVisible("return_blur", false)
+~ Wait(0.2)
+-> END

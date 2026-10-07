@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Monologue.Dialogue
 {
-    public class StoryFunctions
+    public partial class StoryFunctions
     {
         public delegate void OnEmoji(string emojiName, string characterTag);
         public static event OnEmoji OnEmojiEvent;
@@ -103,6 +103,7 @@ namespace Monologue.Dialogue
 
         public static void BindFunctions(Story story)
         {
+            BindAnimationFunctions(story);
             // lambda optional parameters aren't avaiable until C# 12.0. Fucking Unity.
             // and because the bind stores everything to a Dictonary I cannot create variant functions
             story.BindExternalFunction("InputText",(string question, string key, string profile) =>
@@ -153,6 +154,7 @@ namespace Monologue.Dialogue
 
         public static void UnbindFunctions(Story story)
         {
+            UnbindAnimationFunctions(story);
             story.UnbindExternalFunction("InputText");
             story.UnbindExternalFunction("Emoji");
             // story.UnbindExternalFunction("CreateQuest");

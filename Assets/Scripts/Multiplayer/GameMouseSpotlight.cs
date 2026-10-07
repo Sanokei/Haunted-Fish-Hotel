@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace HauntedFish.Multiplayer
@@ -11,24 +10,8 @@ namespace HauntedFish.Multiplayer
         [Range(.001f, .3f)] public float Softness = .12f;
         [Range(0, 1)] public float Darkness = .92f;
         Material _Material;
-        Canvas _Canvas;
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        static void Register()
-        {
-            SceneManager.sceneLoaded -= Attach;
-            SceneManager.sceneLoaded += Attach;
-        }
-
-        static void Attach(Scene scene, LoadSceneMode mode)
-        {
-            foreach (var root in scene.GetRootGameObjects())
-            {
-                var definition = root.GetComponentInChildren<GameSceneDefinition>(true);
-                if (definition && !definition.GetComponent<GameMouseSpotlight>())
-                    definition.gameObject.AddComponent<GameMouseSpotlight>();
-            }
-        }
+        [SerializeField] Canvas _Canvas;
+        [SerializeField] Image _Image;
 
         void Awake()
         {
@@ -39,24 +22,14 @@ namespace HauntedFish.Multiplayer
                 return;
             }
             _Material = new Material(shader);
-            var overlay = new GameObject("Mouse spotlight", typeof(RectTransform), typeof(Canvas));
-            overlay.transform.SetParent(transform, false);
-            _Canvas = overlay.GetComponent<Canvas>();
-            _Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            _Canvas.sortingOrder = 100;
-            var imageObject = new GameObject("Darkness", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-            imageObject.transform.SetParent(overlay.transform, false);
-            var rect = imageObject.GetComponent<RectTransform>();
-            rect.anchorMin = Vector2.zero;
-            rect.anchorMax = Vector2.one;
-            rect.offsetMin = rect.offsetMax = Vector2.zero;
-            var image = imageObject.GetComponent<Image>();
-            image.material = _Material;
-            image.raycastTarget = false;
+            if (_Image) _Image.material = _Material;
         }
 
         void LateUpdate()
         {
+            var player = HotelPlayer.LocalPlayer;
+            if (_Canvas) _Canvas.enabled = player && player.ControlMode == HotelControlMode.Fish;
+            if (player && player.ControlMode == HotelControlMode.Ghost) return;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             if (!_Material) return;

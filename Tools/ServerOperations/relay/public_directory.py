@@ -88,7 +88,11 @@ class Handler(BaseHTTPRequestHandler):
    admitted=policy.consume(sid,code,str(data.get('ownerKey','')),str(data.get('reservation','')))
    return {'status':'admitted','session':admitted}
   if len(parts)==3 and parts[2]=='heartbeat' and method=='POST':
-   policy.heartbeat(sid,code,str(data.get('ownerKey','')),data.get('players'));return self.public(code,room)
+   owner=str(data.get('ownerKey',''))
+   policy.heartbeat(sid,code,owner,data.get('players'))
+   matched=policy.quickplay(sid,code,owner,data.get('quickplay') is True)
+   if matched:return {'code':matched,'status':'matched'}
+   return self.public(code,room)
   if len(parts)==2 and method=='DELETE':
    if sid!=room['owner'] or not hmac.compare_digest(str(data.get('ownerKey','')),room['owner_key']):raise PolicyError('Only owner may close')
    with policy.lock:policy.rooms.pop(code,None)

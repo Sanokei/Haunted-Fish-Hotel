@@ -46,7 +46,7 @@ namespace HauntedFish.Multiplayer
         {
             _Canvas = GetComponent<Canvas>();
             _Canvas.renderMode = RenderMode.WorldSpace;
-            _Canvas.worldCamera = Camera.main;
+            _Canvas.worldCamera = HotelViewCamera.Current;
             var rect = GetComponent<RectTransform>();
             rect.anchorMin = rect.anchorMax = new Vector2(.5f, .5f);
             rect.pivot = new Vector2(.5f, .5f);
@@ -73,19 +73,25 @@ namespace HauntedFish.Multiplayer
         void OnEnable()
         {
             StoryFunctions.OnSpeakerEvent += FollowSpeaker;
+            HotelViewCamera.Changed += BindCamera;
+            BindCamera(HotelViewCamera.Current);
         }
 
         void OnDisable()
         {
             StoryFunctions.OnSpeakerEvent -= FollowSpeaker;
+            HotelViewCamera.Changed -= BindCamera;
+            if(_Canvas)_Canvas.worldCamera=null;
         }
+
+        void BindCamera(Camera camera){if(_Canvas)_Canvas.worldCamera=camera;}
 
         void FollowSpeaker(string speaker)
         {
             if (speaker == "player")
             {
-                var player = FindObjectsByType<HotelPlayer>(FindObjectsSortMode.None)
-                    .FirstOrDefault(IsSpeakingPlayer);
+                HotelPlayer player=null;
+                for(int i=0;i<HotelPlayer.ActivePlayers.Count;i++)if(IsSpeakingPlayer(HotelPlayer.ActivePlayers[i])){player=HotelPlayer.ActivePlayers[i];break;}
                 if (player)
                     Follow = player.transform;
             }
@@ -109,8 +115,8 @@ namespace HauntedFish.Multiplayer
         {
             if (!_Canvas)
                 return;
-            if (!_Canvas.worldCamera)
-                _Canvas.worldCamera = Camera.main;
+            if (_Canvas.worldCamera != HotelViewCamera.Current)
+                _Canvas.worldCamera = HotelViewCamera.Current;
             transform.position = (Follow ? Follow.position : _Anchor) + Offset;
             if (FaceCamera && _Canvas.worldCamera)
                 transform.rotation = _Canvas.worldCamera.transform.rotation;
