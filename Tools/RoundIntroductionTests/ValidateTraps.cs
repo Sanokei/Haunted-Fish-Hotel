@@ -16,9 +16,10 @@ public static class TrapValidation
   var actions=Resources.Load<InputActionAsset>("HotelMultiplayerActions");var map=actions.FindActionMap("Ghost",true);
   check(map.FindAction("TrapClick",true).bindings[0].path=="<Mouse>/leftButton" && map.FindAction("TrapActivate",true).bindings[0].path=="<Keyboard>/space" && map.FindAction("TrapPoint",true)!=null,"Ghost mouse/Space dispatch uses New Input System bindings");
   check(map.FindAction("Dispose",true).bindings[0].path=="<Keyboard>/q","Q disposal has its own New Input System action");
-  var world=new GameObject("Trap authority validation").AddComponent<GhostPlacementWorld>();world.enabled=false;Set(world,"_TrapPrefabs",catalog);world.BeginRound("editor-preview","round-A",1);
+  var world=new GameObject("Trap authority validation").AddComponent<GhostPlacementWorld>();Set(world,"_TrapPrefabs",catalog);world.BeginRound("editor-preview","round-A",1);
   check(world.Count==0,"Fresh round contains no preplaced traps");
   var owner=new GameObject("Ghost authority").AddComponent<HotelPlayer>();owner.gameObject.AddComponent<HotelPlayerMovement>().SetMode(HotelControlMode.Ghost);owner.ControlsReady=true;owner.RoundReleased=true;owner.RoundStateKey="round-A";owner.RoundVersion=1;owner.NetId=12;
+  world.enabled=false;check(!world.Hold(owner,"cart",Vector3.zero),"Disabled world rejects inventory authoring");world.enabled=true;
   check(world.Hold(owner,"cart",new Vector3(-8,1,0))&&owner.PossessionEffectVersion==1,"Authority owns held inventory and emits one possession effect");
   check(!world.Hold(owner,"cart",Vector3.zero),"Duplicate pickup does not duplicate inventory or effect");
   check(world.Dispose(owner,-1)&&!world.Dispose(owner,-1)&&owner.HeldTrapFamily=="","Q discards held inventory exactly once");
@@ -37,7 +38,7 @@ public static class TrapValidation
   owner.RoundReleased=false;check(!world.AcceptTrapAction(owner,0,new TrapInput(TrapInputKind.Move,1)),"Round barrier blocks trap control");owner.RoundReleased=true;
   var intruder=new GameObject("Wrong owner").AddComponent<HotelPlayer>();intruder.gameObject.AddComponent<HotelPlayerMovement>().SetMode(HotelControlMode.Ghost);intruder.ControlsReady=intruder.RoundReleased=true;intruder.RoundStateKey="round-A";intruder.RoundVersion=1;intruder.NetId=13;intruder.ControlledCube=0;
   check(!world.Dispose(intruder,0)&&!world.AcceptTrapAction(intruder,0,new TrapInput(TrapInputKind.Move,1)),"Wrong owner cannot control or dispose another player's trap");intruder.gameObject.SetActive(false);Object.Destroy(intruder.gameObject);
-  var observer=new GameObject("Reconnected round observer").AddComponent<GhostPlacementWorld>();observer.enabled=false;Set(observer,"_TrapPrefabs",catalog);observer.BeginRound("editor-preview","round-A",1);
+  var observer=new GameObject("Reconnected round observer").AddComponent<GhostPlacementWorld>();Set(observer,"_TrapPrefabs",catalog);observer.BeginRound("editor-preview","round-A",1);
   string current=world.Snapshot;
   owner.Networked=true;owner.IsServer=false;owner.ControlsReady=false;owner.PlacedObjectsJson=current;
   observer.GetType().GetMethod("Update",BindingFlags.NonPublic|BindingFlags.Instance).Invoke(observer,null);
@@ -46,9 +47,16 @@ public static class TrapValidation
   observer.GetType().GetMethod("Update",BindingFlags.NonPublic|BindingFlags.Instance).Invoke(observer,null);
   check(observer.Count==1,"Connected same-round replica applies the authoritative snapshot");owner.Networked=false;
   check(observer.ApplySnapshot(current)&&observer.Count==1,"Same-lobby same-round reconnect reconstructs current authored inventory");
+  owner.Networked=true;owner.IsServer=false;
+  int observedRevision=JsonUtility.FromJson<GhostCubeSnapshot>(current).Revision;
+  observer.enabled=false;observer.enabled=true;observer.BeginRound("editor-preview","round-A",1);
+  check(JsonUtility.FromJson<GhostCubeSnapshot>(observer.Snapshot).Revision==observedRevision&&observer.ApplySnapshot(current)&&observer.Trap(0),"Observer teardown preserves server revision N and reconstructs unchanged stationary snapshot N");
+  owner.Networked=false;world.Possess(owner,-1,cart.Position);check(owner.ControlledCube==-1,"Reconstructed same-round inventory leaves unpossess available on authority");world.Possess(owner,0,cart.Position);owner.Networked=true;owner.IsServer=false;
+
   observer.BeginRound("new-room","round-B",1);check(observer.Count==0&&!observer.ApplySnapshot(current),"New lobby rejects prior lobby serialized inventory");
   observer.BeginRound("editor-preview","round-B",1);check(!observer.ApplySnapshot(current),"Reused room code rejects old round nonce and cached snapshots");
   check(!world.RequestMatches(owner,"round-old",1)&&!world.RequestMatches(owner,"round-A",0),"Delayed commands cannot mutate a different round");
+  owner.Networked=false;
   check(world.Dispose(owner,0)&&owner.ControlledCube==-1&&world.Count==0&&!world.Dispose(owner,0),"Q removes owned possessed trap once and exits possession cleanly");
   observer.BeginRound("editor-preview","round-A",1);check(observer.ApplySnapshot(world.Snapshot)&&!observer.ApplySnapshot(current),"Deleted inventory stays deleted when an older revision arrives");
   yield return new WaitForSecondsRealtime(.21f);world.Hold(owner,"cart",Vector3.zero);check(world.TryPlace(owner,new Vector3(-4,1,0),"cart")&&world.Trap(1)&&!world.Trap(0),"Disposed IDs are never reused within a round");
@@ -59,14 +67,14 @@ public static class TrapValidation
   check(!click.AcceptInput(new TrapInput(TrapInputKind.Click,point:Vector3.one*100),0),"Click trap rejects hits outside its collider");
   check(click.AcceptInput(new TrapInput(TrapInputKind.Click,point:click.Position),0),"Click trap accepts a hit on its own body");
   check(!click.AcceptInput(new TrapInput(TrapInputKind.Click,point:click.Position),0),"Active click trap rejects repeated activation");click.Simulate(1,1);check(click.Phase==TrapPhase.Armed && click.CaptureState().Activations==1,"Click pulse completes once and rearms");
-  var chandelier=Object.Instantiate(catalog[2]);chandelier.Initialize(world,new GhostCubePlacement{Position=new Vector3(8,3.9f,0),Origin=new Vector3(8,.5f,0),FamilyTag="chandelier"},2);
+  var chandelier=Object.Instantiate(catalog[2]);var chandelierOrigin=new Vector3(8,chandelier.BodyHalfSize.y,0);var armed=chandelierOrigin+chandelier.ArmedOffset;chandelier.Initialize(world,new GhostCubePlacement{Position=armed,Origin=chandelierOrigin,FamilyTag="chandelier"},2);
   check(!chandelier.AcceptInput(new TrapInput(TrapInputKind.Move,1),0) && !chandelier.AcceptInput(new TrapInput(TrapInputKind.Click,point:chandelier.Position),0),"Chandelier isolates Space from movement and click");
   yield return Capture(chandelier,"05-chandelier-armed");
-  check(chandelier.AcceptInput(new TrapInput(TrapInputKind.Activate),0),"Space starts authored chandelier fall");chandelier.Simulate(.35f,.35f);check(chandelier.Position.y<3.9f && chandelier.Position.y>.5f,"Chandelier falls progressively");
+  check(chandelier.AcceptInput(new TrapInput(TrapInputKind.Activate),0),"Space starts authored chandelier fall");chandelier.Simulate(.35f,.35f);check(chandelier.Position.y<armed.y && chandelier.Position.y>chandelierOrigin.y,"Chandelier falls progressively");
   yield return Capture(chandelier,"06-chandelier-falling");
-  chandelier.Simulate(.35f,.7f);check(chandelier.Phase==TrapPhase.Latched && Mathf.Abs(chandelier.Position.y-.5f)<.001f,"Chandelier lands and latches without invented damage");
+  chandelier.Simulate(.35f,.7f);check(chandelier.Phase==TrapPhase.Latched && Mathf.Abs(chandelier.Position.y-chandelierOrigin.y)<.001f,"Chandelier lands and latches without invented damage");
   yield return Capture(chandelier,"07-chandelier-landed");
-  check(chandelier.AcceptInput(new TrapInput(TrapInputKind.Reset),1) && Mathf.Abs(chandelier.Position.y-3.9f)<.001f && chandelier.Phase==TrapPhase.Armed,"Manual reset restores authored armed height");
+  check(chandelier.AcceptInput(new TrapInput(TrapInputKind.Reset),1) && Mathf.Abs(chandelier.Position.y-armed.y)<.001f && chandelier.Phase==TrapPhase.Armed,"Manual reset restores authored armed height");
   var replica=Object.Instantiate(catalog[2]);replica.ApplyState(chandelier.CaptureState());check(replica.Position==chandelier.Position,"Snapshot restores chandelier position and phase");
   var smoke=Object.Instantiate(Resources.Load<PossessionSmoke>("PossessionSmoke"));Set(smoke,"_DestroyOnComplete",false);smoke.PlayAt(Vector3.zero);yield return new WaitForSecondsRealtime(.1f);smoke.PlayAt(Vector3.one);yield return new WaitForSecondsRealtime(.6f);
   var ui=(Monologue.Dialogue.StoryUI)smoke.GetType().GetField("_UI",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(smoke);
@@ -96,7 +104,7 @@ public static class TrapValidation
  }
  static IEnumerator Capture(GhostTrap trap,string filename)
  {
-  var camera=new GameObject("Trap capture camera").AddComponent<Camera>();camera.tag="MainCamera";camera.orthographic=true;camera.orthographicSize=4;camera.transform.position=new Vector3(8,2.5f,-10);camera.backgroundColor=new Color(.11f,.12f,.13f);camera.clearFlags=CameraClearFlags.SolidColor;
+  var camera=new GameObject("Trap capture camera").AddComponent<Camera>();camera.tag="MainCamera";camera.gameObject.AddComponent<HotelViewCamera>();camera.orthographic=true;camera.orthographicSize=4;camera.transform.position=new Vector3(8,2.5f,-10);camera.backgroundColor=new Color(.11f,.12f,.13f);camera.clearFlags=CameraClearFlags.SolidColor;
   var texture=new RenderTexture(1280,720,24);camera.targetTexture=texture;
   yield return null;
   var presentation=trap.GetComponent<GhostTrapAreaPresentation>();presentation.enabled=false;

@@ -632,6 +632,12 @@ MonoBehaviour:
   _Left: {fileID: 31000114}
   _Right: {fileID: 31000118}
   _SceneArt: {fileID: 31000095}
+  _OpaqueArtBounds:
+    serializedVersion: 2
+    x: 0.08997955
+    y: 0.07901235
+    width: 0.84458077
+    height: 0.80987656
 --- !u!114 &31000999
 MonoBehaviour:
   m_ObjectHideFlags: 0

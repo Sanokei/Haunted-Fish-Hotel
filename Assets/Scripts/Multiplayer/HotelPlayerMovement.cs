@@ -9,13 +9,16 @@ namespace HauntedFish.Multiplayer
     public sealed class HotelPlayerMovement : MonoBehaviour
     {
         public InputActionAsset InputActions;
-        public float WalkingSpeed = 4.5f;
+        public float WalkingSpeed = 1.8f;
+        public float RunningSpeed = 4.5f;
+        public float LobbyWalkingSpeed = 6f;
         public float Gravity = 25f;
         public bool CanMove = true;
 
         InputActionAsset _OwnedActions;
-        InputActionMap _LobbyMap, _GameMap;
-        InputAction _LobbyMove, _GameMove, _GameJump;
+        InputActionMap _LobbyMap, _GameMap, _BossMap;
+        HotelPlayer _Actor;
+        InputAction _LobbyMove, _GameMove, _GameJump, _GameRun, _GameInteract, _BossMove;
         CharacterController _Controller;
         GameSideScrollMotor _GameMotor;
         readonly LobbyMovementMotor _LobbyMotor = new LobbyMovementMotor();
@@ -34,10 +37,14 @@ namespace HauntedFish.Multiplayer
         public bool ControlsReady { get; private set; }
         public bool SharedDialogueLocked { get; set; }
         public bool Walking { get; private set; }
+        public bool Running => GameActive && Mode == HotelControlMode.Fish && Motor.Running;
+        public bool InteractPressed => _GameInteract != null && _GameInteract.enabled && _GameInteract.WasPressedThisFrame();
+        public Vector2 BossAxis => _BossMove != null && _BossMove.enabled ? Vector2.ClampMagnitude(_BossMove.ReadValue<Vector2>(), 1) : Vector2.zero;
+        public bool RunHeld => Mode == HotelControlMode.Fish && ControlsReady && !_InputBlocked && _GameRun != null && _GameRun.enabled && _GameRun.IsPressed();
         public bool FacingLeft { get; private set; }
         public Vector3 LampPosition => Motor.LampPosition;
         public bool GameActive => Motor.Active;
-        public string ActiveInputMap => _GameMap != null && _GameMap.enabled ? "Game" :
+        public string ActiveInputMap => _BossMap != null && _BossMap.enabled ? "BossFight" : _GameMap != null && _GameMap.enabled ? "Game" :
             _LobbyMap != null && _LobbyMap.enabled ? "Lobby" : "";
 
         public CharacterController BodyController => Controller;
@@ -51,6 +58,7 @@ namespace HauntedFish.Multiplayer
 
         void Awake()
         {
+            _Actor = GetComponent<HotelPlayer>();
             _Controller = GetComponent<CharacterController>();
             _GameMotor = GetComponent<GameSideScrollMotor>();
             if (!InputActions) return;
@@ -61,6 +69,10 @@ namespace HauntedFish.Multiplayer
             _LobbyMove = _LobbyMap.FindAction("Move", true);
             _GameMove = _GameMap.FindAction("Move", true);
             _GameJump = _GameMap.FindAction("Jump", true);
+            _GameRun = _GameMap.FindAction("Run", true);
+            _GameInteract = _GameMap.FindAction("Interact", true);
+            _BossMap = _OwnedActions.FindActionMap("BossFight", true);
+            _BossMove = _BossMap.FindAction("Move", true);
 
         }
 
@@ -110,6 +122,8 @@ namespace HauntedFish.Multiplayer
             if ((wasReady && !ready) || (!wasBlocked && _InputBlocked)) ResetMotion();
         }
 
+        public void SetBossControlState(bool enabled) => SetMap(_BossMap, enabled);
+
         static void SetMap(InputActionMap map, bool enabled)
         {
             if (map == null || map.enabled == enabled) return;
@@ -136,10 +150,10 @@ namespace HauntedFish.Multiplayer
             mouse = GameActive ? Motor.ReadMouse() : Vector3.zero;
         }
 
-        public void AcceptInput(Vector2 move, bool jump, Vector3 mouse)
+        public void AcceptInput(Vector2 move, bool jump, Vector3 mouse, bool run = false)
         {
             if (!SimulationReady) return;
-            if (GameActive) Motor.Accept(move, jump, mouse);
+            if (GameActive) Motor.Accept(move, jump, mouse, run);
             else _LobbyMotor.Accept(move);
         }
 
@@ -184,6 +198,8 @@ namespace HauntedFish.Multiplayer
             if (Mathf.Abs(scale.x) < .0001f || Mathf.Abs(scale.y) < .0001f || Mathf.Abs(scale.z) < .0001f) return false;
             var before = transform.position;
             Controller.Move(displacement);
+            if (GameActive && (!_Actor || !_Actor.InBossFight) && GameSceneController.Current)
+                transform.position = GameSceneController.Current.ClampFish(this, transform.position);
             applied = transform.position - before;
             // Keep the original return contract (valid controller), while callers
             // that push bodies can inspect the displacement collisions allowed.
@@ -201,7 +217,7 @@ namespace HauntedFish.Multiplayer
         {
             bool wasEnabled = Controller.enabled;
             Controller.enabled = false;
-            transform.position = point;
+            transform.position = GameActive && (!_Actor || !_Actor.InBossFight) && GameSceneController.Current ? GameSceneController.Current.ClampFish(this, point) : point;
             Controller.enabled = wasEnabled;
             ResetMotion();
             SettleController();

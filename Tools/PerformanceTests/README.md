@@ -21,19 +21,20 @@ Evidence: [Evidence/2026-10-07](Evidence/2026-10-07), including logs, rendered f
 | --- | --- |
 | Full production Unity compile and Mirage weaving | Passed in final isolated runs |
 | Actual solo-host Helper to Lobby to Game flow | 74 gameplay checks passed |
-| Final host camera/UI/authority/catalog/reset/grid guardrails | 37 checks passed |
+| Final host camera/UI/authority/catalog/reset/grid guardrails | 41 checks passed |
 | Direct authored Game entry, earlier audit checkpoint | 77 gameplay / 27 audit checks passed |
 | Actual preview unload/reload/unload, real CharacterControllers, occupied reset and registry teardown | 14 checks passed |
-| Actual authored Lobby loading/Ink skip, normal completion, connection ordering, retry, interruption and raycasts | 65 checks passed |
+| Actual authored Lobby loading/Ink skip, normal completion, connection ordering, retry, interruption and raycasts | 76 checks passed |
 | Standalone round barrier / compiled Ink | 2,098 checks passed |
+| Maintained standalone trap/Ink/UI fixtures with networking endpoints stubbed | 115 checks passed |
 | Existing multiplayer rules | 127 checks passed |
 | Visual review | Actual Game attic ghost, downward-return blur and two independent carts rendered and inspected |
 
-The direct checkpoint predates the final disabled-world request guard. Final host/lifecycle logs compile current production source. No failing production test remains in recorded final runs. Fresh independent review is pending parent relay.
+The direct checkpoint predates the final disabled-world request guard. Final host/lifecycle logs compile current production source. No failing production test remains in recorded final runs. Fresh independent review completed; confirmed findings were corrected and reproduced in runtime fixtures.
 
 Allocation measurement is INCONCLUSIVE. GC.GetAllocatedBytesForCurrentThread returned zero even for a known-allocation positive control with 1,000 retained 1 KiB byte arrays. Profiler.GetMonoUsedSizeLong was noisy, including negative deltas across collections. These zero/heap readings do not establish allocation-free behavior. No allocation savings, GC reduction or speedup is claimed. A target-build Profiler capture remains necessary to quantify effect.
 
-Remote authority was tested with a real Mirage server-spawned nonlocal ghost: finite/scoped axes, clamping, bounded integration, forged package coordinates, and unspawn of a still-active avatar. This is not a second admitted client. Two admitted clients, remote reconnect and latency reconciliation remain unverified after an earlier real second-client admission timeout. Server settings/deployment were untouched. Native Lobby visual confirmation remains unverified: batch native screenshots did not appear and a hidden GUI attempt stalled; converted-canvas images are not presented as native proof. Lobby lifecycle/raycast tests passed.
+Remote authority was tested with a real Mirage server-spawned nonlocal ghost: finite/scoped axes, clamping, bounded integration, forged package coordinates, and unspawn of a still-active avatar. This is not a second admitted client. Two admitted clients, remote reconnect and reliable 200 ms one-way sustained-movement/pickup/possession reconciliation remain unverified after an earlier real second-client admission timeout. Server settings/deployment were untouched. Native Lobby visual confirmation remains unverified: batch native screenshots did not appear and a hidden GUI attempt stalled; converted-canvas images are not presented as native proof. Lobby lifecycle/raycast tests passed.
 
 The requested unslop skill was absent from checkout/user locations and the skill catalog; the audit continued with current source inspection and independent read-only reviews. Intermittent desktop execution disconnects recovered and files were inspected before mutations were retried.
 
@@ -52,6 +53,16 @@ The requested unslop skill was absent from checkout/user locations and the skill
 The chandelier armed height/fall distance changed from 3.4 to 2.5 units after a randomized real conveyor run exposed intersection with the actual hallway ceiling. The wheel still uses Unity Random.Range; the old static source assertion was updated to the list roster's Count property.
 
 Feature paths retained: Assets/Resources/AtticRoundCutscene.prefab; Assets/Dialogue/GhostRoundIntroduction.ink and .json; actual art Assets/Art/attic.png and Assets/Art/ghost.png. Output bindings are authored on existing camera objects in Assets/Scenes/Game.unity and Assets/Scenes/Lobby.unity. Existing automatic scene flow exercises these hookups; no extra Inspector hookup is outstanding.
+
+Fresh-review dispositions:
+
+- Observer ResetRound clears local visuals without minting an authority deletion revision. Server snapshot N remains applicable after disable/re-enable in the same round; stationary inventory reconstructs and authority unpossess remains available. Maintained runtime fixture reproduces this explicitly.
+- Conveyor OnDisable publishes a higher empty snapshot using valid room/round-scoped authority metadata, even while gameplay readiness is closing. Ordinary disabled-component authoring remains blocked. Runtime fixture confirms the observer accepts the empty snapshot.
+- Pre-existing LobbyTrigger membership relied on OnTriggerExit after deactivation. Player lifecycle removal, geometric membership validation, pruning and current desk occupancy now prevent stale readiness/focus. Actual authored stairs/desk tests cover deactivation, re-enable elsewhere and teleport without exit callbacks.
+- Old disabled-authoring fixtures now use active components, client-scoped observer setup and current-round catalogs. They retain explicit disabled-authoring rejection checks, and chandelier expectations follow its editable prefab pose. All 115 maintained checks pass.
+- Untimestamped remote flight reconciliation at latency remains unverified. No speculative threshold change was retained. Confirmed owned-input cancellation now sends an immediate zero axis; actual controller disable stops authoritative cart input in host guardrails.
+
+The small cached fixture project logs an unrelated UnityEditor.Search.SearchDatabase startup ArgumentOutOfRangeException; its 115 runtime assertions pass. Final production host/Lobby logs do not contain this exception. Allocation/heap measurement remains inconclusive as stated above.
 
 Exact audit changes, excluding unrelated user changes and earlier feature work:
 
@@ -86,3 +97,19 @@ Exact audit changes, excluding unrelated user changes and earlier feature work:
 - Tools/PerformanceTests/Run.ps1
 - Tools/PerformanceTests/README.md
 - Tools/PerformanceTests/Evidence/2026-10-07/*
+- Assets/Scripts/Multiplayer/Lobby/LobbyTrigger.cs
+- Assets/Scripts/Multiplayer/Lobby/LobbyManager.cs
+- Tools/PlayerTests/SceneTestDependencies.cs
+- Tools/RoundIntroductionTests/ValidateTraps.cs
+- Tools/RoundIntroductionTests/ValidateTrapManager.cs
+- Tools/RoundIntroductionTests/RoundValidationRunner.cs
+- Tools/RoundIntroductionTests/RunUnity.ps1
+- Tools/IntroductionTests/LobbyLoadingValidationRunner.cs
+
+## Final shared-view, grace and stairs regression
+
+`Evidence/2026-10-08-final` records current production native compile/Mirage weaving and PASS 74 Game checks, 41 audit guardrails, 14 lifecycle checks and 76 Lobby loading/Ink checks. Final gameplay (48), shared BossFight (37), and placement/stairs (42) evidence lives in their respective test folders. Earlier evidence is preserved. Original Editor PID13188 remained open. No measured performance or two-admitted-client success is claimed. Blender replacement remains awaiting an authorized local ZIP after supported Library downloads returned HTTP403.
+
+## Final imported model and Ink Spin regression
+
+`Evidence/2026-10-08-imported-reactions` preserves PASS 76 native Lobby loading/Ink checks on the final shared animation integration, full compile/weave log and source hashes. Latest independent folders record PASS 48 gameplay/Lobby, PASS 40 shared Boss coordinator, PASS 49 native arena physics/reactions and PASS 15 imported model/material/geometry inspection. The previous 74/41 host, 14 lifecycle and 42 placement/stairs checkpoints remain historical; no new performance measurement is claimed. The local downloaded FBX is now integrated, and original Editor PID13188 remains open.

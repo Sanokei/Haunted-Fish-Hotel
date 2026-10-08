@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 using UnityEngine;
 using UnityEngine.UI;
 
-using Lean.Pool;
 using TMPro;
-using Ink.Runtime;
-using System;
 
 namespace Monologue.Dialogue
 {
@@ -21,10 +17,10 @@ namespace Monologue.Dialogue
         [SerializeField] OptionPrefab _DialogueOptionPrefab;
         [SerializeField] GroupPanelPrefab _DialogueChoicePanel;
 
-        List<OptionPrefab> _DialogueOptions = new();
+        readonly List<OptionPrefab> _DialogueOptions = new();
         
         bool _isProfileIncluded = false;
-        bool worldLayout;
+        bool dialogueOpen;
 
         public delegate void OnChoiceSelected(OptionPrefab choiceIndex);
         public static event OnChoiceSelected OnChoiceSelectedEvent;
@@ -35,15 +31,20 @@ namespace Monologue.Dialogue
         }
         public void EnterDialogueMode()
         {
-            
+            dialogueOpen = true;
             ProfileIncluded = _isProfileIncluded;
-            OptionPrefab.OnChoiceSelectedEvent += OnMakeChoice;
         }
 
         public void ExitDialogueMode()
         {
+            dialogueOpen = false;
             ProfileIncluded = false;
-            OptionPrefab.OnChoiceSelectedEvent -= OnMakeChoice;
+        }
+
+        void OnDestroy()
+        {
+            foreach (var option in _DialogueOptions)
+                if (option) option.ChoiceSelected -= OnMakeChoice;
         }
 
         public string this[int idx]
@@ -108,18 +109,14 @@ namespace Monologue.Dialogue
         {
             get
             {
-                var t = _DialogueOptions.Select(ctx => ctx.OptionText).ToList();
-                return t;
+                var choices = new List<string>(_DialogueOptions.Count);
+                foreach (var option in _DialogueOptions) choices.Add(option.OptionText);
+                return choices;
             }
             set
             {
                 _DialogueChoicePanel.gameObject.SetActive(false);
-                if(_DialogueOptions.Count > 0)
-                    foreach(var v in _DialogueOptions)
-                    {
-                        Destroy(v.gameObject);
-                    }
-                _DialogueOptions = new();
+                ClearOptions();
                 if(value.Count > 0)
                     _DialogueChoicePanel.gameObject.SetActive(true);
 
@@ -129,6 +126,7 @@ namespace Monologue.Dialogue
                     OptionPrefab option = _DialogueChoicePanel.Create(_DialogueOptionPrefab);
                     option.OptionText = optionText;
                     option.index = index;
+                    option.ChoiceSelected += OnMakeChoice;
 
                     _DialogueOptions.Add(option);
 
@@ -144,7 +142,29 @@ namespace Monologue.Dialogue
 
         public void OnMakeChoice(OptionPrefab option)
         {
+            if (!OwnsChoice(option)) return;
             OnChoiceSelectedEvent?.Invoke(option);
+        }
+
+        public bool OwnsChoice(OptionPrefab option)
+        {
+            return dialogueOpen && gameObject.activeInHierarchy && option &&
+                option.gameObject.activeInHierarchy && _DialogueOptions.Contains(option);
+        }
+
+        void ClearOptions()
+        {
+            foreach (var option in _DialogueOptions)
+            {
+                if (!option) continue;
+                option.ChoiceSelected -= OnMakeChoice;
+                _DialogueChoicePanel.Children.Remove(option.gameObject);
+                // Destroy is deferred until the end of the frame; stale choices must
+                // stop receiving pointer events as soon as new choices are displayed.
+                option.gameObject.SetActive(false);
+                Destroy(option.gameObject);
+            }
+            _DialogueOptions.Clear();
         }
     }
 }

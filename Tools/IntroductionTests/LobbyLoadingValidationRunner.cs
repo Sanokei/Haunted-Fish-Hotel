@@ -55,6 +55,27 @@ public sealed class LobbyLoadingValidationRunner:MonoBehaviour {
   State(HotelSessionState.Connected,"Connected");Verify(false,"Connected");Check(!session.Session.InputFocused,"Normal completion then connection leaves no orphaned focus");
   Replay();State(HotelSessionState.Connecting,"Connecting...");manager.enabled=false;Verify(true,"Connecting...");Check(!intro.UI&&!session.IntroductionPlaying,"Interrupted intro leaves pending loading visible");State(HotelSessionState.Connected,"Connected");Verify(false,"Connected");manager.enabled=true;Check(!manager.IntroductionPlaying,"Re-enable after interruption does not restart completed local intro");
   screen.enabled=false;State(HotelSessionState.Connecting,"Reconnecting...");screen.enabled=true;Verify(true,"Reconnecting...");State(HotelSessionState.Connected,"Connected");Verify(false,"Connected");
+  yield return ZoneLifecycle();
+ }
+ IEnumerator ZoneLifecycle(){
+  var actor=new GameObject("Disposable Lobby occupancy actor");actor.SetActive(false);actor.tag="Player";
+  var movement=actor.AddComponent<HotelPlayerMovement>();movement.InputActions=Resources.Load<UnityEngine.InputSystem.InputActionAsset>("HotelMultiplayerActions");
+  var player=actor.AddComponent<HotelPlayer>();player.Networked=false;actor.SetActive(true);yield return null;yield return null;
+  foreach(var field in new[]{"_StairZone","_DeskZone"}){
+   var zone=Get<LobbyTrigger>(manager,field);var collider=zone.GetComponent<Collider>();
+   movement.Teleport(collider.bounds.center-player.BodyController.center);Physics.SyncTransforms();Call(zone,"OnTriggerEnter",player.BodyController);
+   Check(zone.Contains(player)&&zone.ContainsPosition(player),"Actual authored "+field+" accepts current occupancy");
+   if(field=="_StairZone")Check((bool)manager.GetType().GetMethod("IsInReadyZone",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(manager,new object[]{player}),"Actual Lobby readiness accepts stair occupant before deactivation");
+   actor.SetActive(false);Check(!zone.Contains(player)&&!zone.ContainsPosition(player),"Actual "+field+" removes deactivated actor without OnTriggerExit");
+   movement.Teleport(collider.bounds.center+Vector3.one*30);actor.SetActive(true);Physics.SyncTransforms();
+   Check(!zone.Contains(player)&&!zone.ContainsPosition(player),"Actual "+field+" cannot retain occupancy after re-enable elsewhere");
+   if(field=="_StairZone")Check(!(bool)manager.GetType().GetMethod("IsInReadyZone",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(manager,new object[]{player}),"Lobby readiness does not revive stale stair membership");
+   else Check(!Get<HashSet<HotelPlayer>>(manager,"_DeskPlayers").Contains(player),"Desk membership is cleared through avatar lifecycle event");
+   movement.Teleport(collider.bounds.center-player.BodyController.center);Physics.SyncTransforms();Call(zone,"OnTriggerEnter",player.BodyController);
+   movement.Teleport(collider.bounds.center+Vector3.one*30);Physics.SyncTransforms();Call(zone,"LateUpdate");
+   Check(!zone.Contains(player),"Actual "+field+" also prunes teleported occupancy without an exit callback");
+  }
+  Destroy(actor);yield return null;
  }
  void VerifyPendingFrame(){if(overlay.alpha!=1||!overlay.blocksRaycasts||session.ReadyToPlay)throw new Exception("Unready Lobby flash during normal intro");}
  IEnumerator Capture(string name){

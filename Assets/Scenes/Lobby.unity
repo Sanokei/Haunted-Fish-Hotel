@@ -5275,6 +5275,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 540001}
   - component: {fileID: 672612689}
   - component: {fileID: 672612690}
   - component: {fileID: 672612691}
@@ -5315,6 +5316,7 @@ MonoBehaviour:
   _Panel: {fileID: 28000006}
   _DeskZone: {fileID: 852994143}
   _StairZone: {fileID: 627981064}
+  _CursorManager: {fileID: 540001}
   _DeskCursor: {fileID: 2800000, guid: 3b3f513260468ef459418032968f8b9c, type: 3}
   _Lobby: {fileID: 898699695}
   _IntroductionInk: {fileID: 4900000, guid: 82a34c00dbfe437bb1f95818afcc3d95, type: 3}
@@ -6102,6 +6104,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 540002}
+  - component: {fileID: 540003}
   - component: {fileID: 1157303207}
   - component: {fileID: 1157303208}
   m_Layer: 0
@@ -7686,3 +7690,61 @@ SceneRoots:
   - {fileID: 1728240220}
   - {fileID: 746714495}
   - {fileID: 131549523}
+--- !u!114 &540001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672612688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02650312e68245a283dfda843c7553c6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _Lobby: {fileID: 672612690}
+  _InteractionOrigin: {fileID: 144553801}
+  _Facing: {fileID: 1157303207}
+  _FrontDirectionLocal: {x: 0, y: 0, z: -1}
+  _Target: {fileID: 540002}
+  _Dialogue: {fileID: 540003}
+  _InspectCursor: {fileID: 2800000, guid: 7cd4fbe34b6f349459307c89c5e260fc, type: 3}
+  _Hotspot: {x: 0, y: 0}
+  _Range: 3
+  _MinimumFrontDot: 0.25
+  _HeightTolerance: 1.5
+--- !u!65 &540002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157303206}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.89, y: 3.23, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &540003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157303206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f21a48bbf42a439f62d23d96f56ae, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _InkJSON: {fileID: 4900000, guid: bf564ff9749c4d0f8426ac62a43617d4, type: 3}
+  Audience: 0

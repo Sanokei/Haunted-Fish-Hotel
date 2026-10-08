@@ -1,0 +1,3 @@
+Approved model and preview: supported Library preparation succeeded; authenticated download returned HTTP 403 for both on initial and single refreshed consumer-local retry. No readable bytes, import, preview inspection or model-replacement claim. Await authorized user-provided local ZIP.
+
+Resolved via user-confirmed local Downloads/BossFight_FeltHockey.fbx (3,927,196 bytes). Imported file SHA256 d578b31905d8a49b695ca8d970fff7f06118f83012673c1700d1d617efae6784; 69 serialized visual meshes, extracted embedded textures/URP remaps, PASS15 model inspection, PASS49 live arena reactions and PASS40 shared coordinator flow. Earlier Library failures remain historical evidence.

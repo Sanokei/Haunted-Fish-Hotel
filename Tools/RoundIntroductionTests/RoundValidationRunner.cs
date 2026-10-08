@@ -25,6 +25,7 @@ public sealed class RoundValidationRunner:MonoBehaviour {
   Debug.Log("ROUND_PASS "+checks);EditorApplication.Exit(0);
  }
  IEnumerator Tests() {
+  Time.timeScale=0;
   yield return TrapValidation.Tests(Check);
   yield return TrapManagerValidation.Tests(Check);
   Time.timeScale=0;

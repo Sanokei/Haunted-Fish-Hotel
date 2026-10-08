@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\bin\Debug\net9.0\BossFightTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\bin\Debug\net9.0\BossFightTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\bin\Debug\net9.0\BossFightTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\bin\Debug\net9.0\BossFightTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\bin\Debug\net9.0\BossFightTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\refint\BossFightTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\BossFightTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\obj\Debug\net9.0\ref\BossFightTests.dll

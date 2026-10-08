@@ -5,13 +5,6 @@ using UnityEngine;
 
 namespace HauntedFish.Multiplayer
 {
-    public enum ConveyorRunPolicy
-    {
-        AfterRoundRelease,
-        Periodic,
-        Manual
-    }
-
     [Serializable]
     public struct ConveyorPackageState
     {
@@ -60,6 +53,8 @@ namespace HauntedFish.Multiplayer
         [SerializeField, Range(1, 64)]
         int _MaxPackages = 8;
         [SerializeField]
+        BoxCollider _HallwayFloor;
+        [SerializeField]
         Vector3 _PathStart = new Vector3(-15, 6.5f, 0), _PathEnd = new Vector3(15, 6.5f, 0);
         [SerializeField, Min(.1f)]
         float _PickupRadius = 2;
@@ -69,12 +64,15 @@ namespace HauntedFish.Multiplayer
         HotelPlayer _Authority;
         int _NextId, _Revision;
         string _CounterKey, _CounterScope;
-        bool _Seeded, _Started, _Suppressed, _Dirty;
-        float _RoundAge, _BurstAge, _GapAge, _SpawnDue, _PublishDue, _ReceivedAt;
+        readonly ConveyorSchedule _Schedule = new ConveyorSchedule();
+        bool _Dirty;
+        float _PublishDue, _ReceivedAt;
         string _Applied;
         GhostTrapSupply _Highlighted;
         bool _RefreshCatalog;
         void OnValidate() => _RefreshCatalog = true;
+        Vector3 EffectiveStart => _HallwayFloor ? new Vector3(_HallwayFloor.bounds.min.x, _PathStart.y, 0) : _PathStart;
+        Vector3 EffectiveEnd => _HallwayFloor ? new Vector3(_HallwayFloor.bounds.max.x, _PathEnd.y, 0) : _PathEnd;
         public bool Running => _State.Running;
         public bool Paused => _State.Paused;
         public int PackageCount => _Packages.Count;
@@ -87,7 +85,7 @@ namespace HauntedFish.Multiplayer
             set
             {
                 _SpawnInterval = SafeInterval(value);
-                _SpawnDue = Mathf.Min(_SpawnDue, _SpawnInterval);
+                _Schedule.ClampSpawnDue(_SpawnInterval);
             }
         }
 
@@ -147,37 +145,14 @@ namespace HauntedFish.Multiplayer
             Publish(true);
         }
 
-        // A unit sample is supplied by Unity Random only on the authority. Double sums avoid float overflow.
-        public TrapDefinition SelectWeighted(double sample)
-        {
-            if (double.IsNaN(sample) || double.IsInfinity(sample))
-                return null;
-            double total = 0;
-            foreach (var entry in _Catalog.Values)
-                if (Finite(entry.Weight) && entry.Weight > 0)
-                    total += entry.Weight;
-            if (total <= 0)
-                return null;
-            double cursor = Math.Max(0, Math.Min(.9999999999999999, sample)) * total;
-            TrapDefinition last = null;
-            foreach (var entry in _Catalog.Values)
-            {
-                if (!Finite(entry.Weight) || entry.Weight <= 0)
-                    continue;
-                last = entry;
-                if (cursor < entry.Weight)
-                    return entry;
-                cursor -= entry.Weight;
-            }
+        // Unity supplies randomness only on the authority; selection is independent of scene objects.
+        public TrapDefinition SelectWeighted(double sample) => WeightedSelection.Select(_Catalog.Values, entry => entry.Weight, sample);
 
-            return last;
-        }
-
-        bool ScopedAuthority(HotelPlayer player) => _World && player && player.ControlsReady &&
+        bool ScopedAuthority(HotelPlayer player) => _World && player &&
             (!player.Networked || player.IsServer) && player.InventoryScope == _World.RoomScope &&
             player.RoundStateKey == _World.RoundKey && player.RoundVersion == _World.RoundVersion &&
             !string.IsNullOrEmpty(_World.RoundKey);
-        bool CanAuthor(HotelPlayer player) => isActiveAndEnabled && _World && _World.isActiveAndEnabled && ScopedAuthority(player);
+        bool CanAuthor(HotelPlayer player) => isActiveAndEnabled && _World && _World.isActiveAndEnabled && player && player.ControlsReady && ScopedAuthority(player);
         public void BeginRound(string scope, string key, int version)
         {
             if (_State.RoomScope == scope && _State.RoundKey == key && _State.RoundVersion == version)
@@ -195,8 +170,8 @@ namespace HauntedFish.Multiplayer
             _State.RoundKey = key;
             _State.RoundVersion = version;
             _State.Revision = _Revision;
-            _State.PathStart = Finite(_PathStart) ? _PathStart : new Vector3(-15, 6.5f, 0);
-            _State.PathEnd = Finite(_PathEnd) ? _PathEnd : new Vector3(15, 6.5f, 0);
+            _State.PathStart = Finite(EffectiveStart) ? EffectiveStart : new Vector3(-15, 6.5f, 0);
+            _State.PathEnd = Finite(EffectiveEnd) ? EffectiveEnd : new Vector3(15, 6.5f, 0);
             _State.Speed = SafeNonnegative(_Speed);
             InjectCatalog();
         }
@@ -214,18 +189,19 @@ namespace HauntedFish.Multiplayer
             _Packages.Clear();
             _State = new ConveyorSnapshot();
             _Authority = null;
-            _Seeded = _Started = _Suppressed = _Dirty = false;
-            _RoundAge = _BurstAge = _GapAge = _SpawnDue = _PublishDue = 0;
+            _Schedule.Reset();
+            _Dirty = false;
+            _PublishDue = 0;
             _Applied = null;
         }
 
         public bool StartConveyor()
         {
-            if (!CanAuthor(_Authority) || !_Authority.RoundReleased)
+            if (!CanAuthor(_Authority) || !_Authority.GhostSetupReady)
                 return false;
             if (_State.Running && !_State.Paused)
                 return true;
-            _Suppressed = false;
+            _Schedule.AllowAutomaticStarts();
             StartRun();
             Publish(true);
             return true;
@@ -235,7 +211,7 @@ namespace HauntedFish.Multiplayer
         {
             if (!CanAuthor(_Authority))
                 return false;
-            _Suppressed = true;
+            _Schedule.SuppressAutomaticStarts();
             _State.Running = false;
             _State.Paused = false;
             _Dirty = true;
@@ -271,20 +247,17 @@ namespace HauntedFish.Multiplayer
         void PauseFromInspector() => PauseConveyor();
         [ContextMenu("Conveyor/Resume")]
         void ResumeFromInspector() => ResumeConveyor();
-        void StartRun()
+        void StartRun() => ApplyRunStart(_Schedule.Start(_State.Running, _State.Paused, _SpawnInterval));
+
+        void ApplyRunStart(ConveyorRunStart start)
         {
-            if (_State.Running && !_State.Paused)
+            if (!start.Started)
                 return;
             _State.Running = true;
             _State.Paused = false;
-            _Started = true;
-            _BurstAge = 0;
-            _GapAge = 0;
-            _SpawnDue = SafeInterval(_SpawnInterval);
             _Dirty = true;
-            if (!_Seeded)
+            if (start.SeedInitialPackages)
             {
-                _Seeded = true;
                 int count = Mathf.Clamp(_InitialPackages, 0, Mathf.Clamp(_MaxPackages, 1, 64));
                 for (int i = 0; i < count; i++)
                     Spawn(i * PathLength / count);
@@ -329,18 +302,18 @@ namespace HauntedFish.Multiplayer
                 return;
             BeginRound(_World.RoomScope, _World.RoundKey, _World.RoundVersion);
             _Authority = authority;
-            if (!authority.RoundReleased)
+            if (!authority.GhostSetupReady)
             {
                 Publish();
                 return;
             }
 
-            if (!Finite(_PathStart) || !Finite(_PathEnd))
+            if (!Finite(EffectiveStart) || !Finite(EffectiveEnd))
                 return;
-            _Dirty |= _State.Speed != SafeNonnegative(_Speed) || _State.PathStart != _PathStart || _State.PathEnd != _PathEnd;
+            _Dirty |= _State.Speed != SafeNonnegative(_Speed) || _State.PathStart != EffectiveStart || _State.PathEnd != EffectiveEnd;
             _State.Speed = SafeNonnegative(_Speed);
-            _State.PathStart = _PathStart;
-            _State.PathEnd = _PathEnd;
+            _State.PathStart = EffectiveStart;
+            _State.PathEnd = EffectiveEnd;
             // Path edits apply while paused/stopped too; publish only distances
             // inside the edited path, so observers can accept the next snapshot.
             for (int i = _State.Packages.Count - 1; i >= 0; i--)
@@ -350,65 +323,35 @@ namespace HauntedFish.Multiplayer
                     _State.Packages.RemoveAt(i);
                 }
 
-            if (!_State.Paused)
+            var step = _Schedule.Advance(_State.Running, _State.Paused, seconds,
+                new ConveyorTiming(_RunPolicy, _StartDelay, _SpawnInterval, _RunDuration, _PauseBetweenRuns));
+            ApplyRunStart(step.Start);
+            if (step.AdvancePackages)
             {
-                float available = seconds;
-                _RoundAge += seconds;
-                if (!_State.Running && !_Suppressed && _RunPolicy != ConveyorRunPolicy.Manual)
+                for (int i = _State.Packages.Count - 1; i >= 0; i--)
                 {
-                    if (!_Started && _RoundAge >= SafeNonnegative(_StartDelay))
+                    var record = _State.Packages[i];
+                    record.Distance += _State.Speed * step.ActiveSeconds;
+                    if (record.Distance >= PathLength)
                     {
-                        available = Mathf.Min(seconds, _RoundAge - SafeNonnegative(_StartDelay));
-                        StartRun();
+                        RemovePackage(record.Id);
+                        _State.Packages.RemoveAt(i);
                     }
-                    else if (_Started && _RunPolicy == ConveyorRunPolicy.Periodic)
-                    {
-                        _GapAge += seconds;
-                        if (_GapAge >= SafeNonnegative(_PauseBetweenRuns))
-                        {
-                            available = Mathf.Min(seconds, _GapAge - SafeNonnegative(_PauseBetweenRuns));
-                            StartRun();
-                        }
-                    }
+                    else
+                        _State.Packages[i] = record;
                 }
 
-                if (_State.Running)
+                foreach (float elapsed in step.Spawns)
                 {
-                    float active = available;
-                    if (_RunPolicy == ConveyorRunPolicy.Periodic)
-                        active = Mathf.Min(active, Mathf.Max(0, SafeInterval(_RunDuration) - _BurstAge));
-                    _BurstAge += active;
-                    for (int i = _State.Packages.Count - 1; i >= 0; i--)
-                    {
-                        var record = _State.Packages[i];
-                        record.Distance += _State.Speed * active;
-                        if (record.Distance >= PathLength)
-                        {
-                            RemovePackage(record.Id);
-                            _State.Packages.RemoveAt(i);
-                        }
-                        else
-                            _State.Packages[i] = record;
-                    }
-
-                    _SpawnDue -= active;
-                    for (int attempts = 0; _SpawnDue <= 0 && attempts < 64; attempts++)
-                    {
-                        float distance = Mathf.Max(0, -_SpawnDue) * _State.Speed;
-                        if (distance < PathLength)
-                            Spawn(distance);
-                        _SpawnDue += SafeInterval(_SpawnInterval);
-                    }
-
-                    if (_RunPolicy == ConveyorRunPolicy.Periodic && _BurstAge >= SafeInterval(_RunDuration))
-                    {
-                        _State.Running = false;
-                        _GapAge = 0;
-                    }
-
-                    _Dirty = true;
+                    float distance = elapsed * _State.Speed;
+                    if (distance < PathLength)
+                        Spawn(distance);
                 }
+
+                _Dirty = true;
             }
+
+            _State.Running = step.Running;
 
             RenderPackages(false);
             Publish();
@@ -597,7 +540,7 @@ namespace HauntedFish.Multiplayer
 
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
         static bool Finite(Vector3 value) => Finite(value.x) && Finite(value.y) && Finite(value.z);
-        static float SafeNonnegative(float value) => Finite(value) ? Mathf.Max(0, value) : 0;
-        static float SafeInterval(float value) => Finite(value) ? Mathf.Max(.05f, value) : .05f;
+        static float SafeNonnegative(float value) => ConveyorSchedule.SafeNonnegative(value);
+        static float SafeInterval(float value) => ConveyorSchedule.SafeInterval(value);
     }
 }

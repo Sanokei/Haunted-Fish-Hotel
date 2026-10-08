@@ -161,6 +161,12 @@ namespace Monologue.Dialogue
                         }
                     });
                     break;
+                case StorySequenceStepKind.Spin:
+                    var spun = _Objects[step.Target].Target;
+                    var rotation = spun.localRotation;
+                    yield return Tween(step.Seconds, t => spun.localRotation = rotation * Quaternion.Euler(0, 0, step.X * 360 * t));
+                    spun.localRotation = rotation;
+                    break;
                 case StorySequenceStepKind.Knock:
                     var knocked = _Objects[step.Target];
                     var rest = knocked.Target.anchoredPosition;
@@ -211,6 +217,7 @@ namespace Monologue.Dialogue
         void Push(string tag, float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.PushTo, tag, seconds: seconds));
         void Move(string tag, float x, float y, float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.MoveUI, tag, seconds: seconds, x: x, y: y));
         void Knock(string tag, int count, float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.Knock, tag, seconds: seconds, count: count));
+        void Spin(string tag, float turns, float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.Spin, tag, seconds: seconds, x: turns));
         void Wait(float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.Wait, seconds: seconds));
         void Expand(string tag, float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.ExpandPanel, tag, seconds: seconds));
         void Flash(int count) => Queue(new StorySequenceStep(StorySequenceStepKind.FlashFrames, count: count));
@@ -221,6 +228,7 @@ namespace Monologue.Dialogue
             if (!_ListenToStoryEvents) return;
             StoryFunctions.OnSetVisibleEvent += Visible; StoryFunctions.OnSetVariantEvent += VariantChanged;
             StoryFunctions.OnPushToEvent += Push; StoryFunctions.OnMoveUIEvent += Move;
+            StoryFunctions.OnSpinEvent += Spin;
             StoryFunctions.OnKnockEvent += Knock; StoryFunctions.OnWaitEvent += Wait;
             StoryFunctions.OnExpandPanelEvent += Expand; StoryFunctions.OnFlashFramesEvent += Flash;
             StoryFunctions.OnDollyToEvent += Dolly; StoryFunctions.OnCreateUIEvent += Create;
@@ -229,6 +237,7 @@ namespace Monologue.Dialogue
         {
             StoryFunctions.OnSetVisibleEvent -= Visible; StoryFunctions.OnSetVariantEvent -= VariantChanged;
             StoryFunctions.OnPushToEvent -= Push; StoryFunctions.OnMoveUIEvent -= Move;
+            StoryFunctions.OnSpinEvent -= Spin;
             StoryFunctions.OnKnockEvent -= Knock; StoryFunctions.OnWaitEvent -= Wait;
             StoryFunctions.OnExpandPanelEvent -= Expand; StoryFunctions.OnFlashFramesEvent -= Flash;
             StoryFunctions.OnDollyToEvent -= Dolly; StoryFunctions.OnCreateUIEvent -= Create;

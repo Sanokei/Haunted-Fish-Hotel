@@ -15,7 +15,8 @@ namespace HauntedFish.Multiplayer
         [SerializeField] float _IdleFinFrequency = .65f;
         [SerializeField] float _MovingFinFrequency = 1.8f;
 
-        bool _FacingLeft, _Walking, _Talking;
+        [SerializeField] float _RunningFinFrequency = 2.8f;
+        bool _FacingLeft, _Walking, _Talking, _Running;
         bool _FacingInitialized;
         Vector3 _RightFinPosition;
         Vector3 _FinRestScale;
@@ -41,11 +42,12 @@ namespace HauntedFish.Multiplayer
             ApplyFacing();
         }
 
-        public void Present(bool facingLeft, bool walking, bool talking)
+        public void Present(bool facingLeft, bool walking, bool talking, bool running = false)
         {
             var facingChanged = !_FacingInitialized || _FacingLeft != facingLeft;
             _FacingLeft = facingLeft;
             _Walking = walking;
+            _Running = walking && running;
             _Talking = talking;
             if (facingChanged && _Body && _FinPivot) ApplyFacing();
         }
@@ -69,7 +71,7 @@ namespace HauntedFish.Multiplayer
             _Activity = Mathf.Lerp(_Activity, _Walking ? 1 : (_Talking ? .25f : 0), blend);
             _FinAngle = Mathf.Lerp(_IdleFinAngle, _MovingFinAngle, _Activity);
             _FinFrequency = Mathf.Lerp(_FinFrequency,
-                Mathf.Lerp(_IdleFinFrequency, _MovingFinFrequency, _Activity), blend);
+                Mathf.Lerp(_IdleFinFrequency, _Running ? _RunningFinFrequency : _MovingFinFrequency, _Activity), blend);
             _Phase = Mathf.Repeat(_Phase + Time.deltaTime * _FinFrequency, 1);
             float cycle = _Phase * Mathf.PI * 2;
             // A quicker push and softer recovery give the tail a paddling rhythm.

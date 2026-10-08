@@ -1,0 +1,17 @@
+{
+  "Assets\\Art\\BossFight\\BossFight_FeltHockey.fbx": "d578b31905d8a49b695ca8d970fff7f06118f83012673c1700d1d617efae6784",
+  "Assets\\BossArenaValidation.cs": "4d937320b4a240bdf5b2f256131f1ef342f1f446d67d4eb531e77e7495b82341",
+  "Assets\\Dialogue\\BossFrustrated.json": "16f6c97aa231011b6ff866d881ac6a71eebb9cc70ccb1f551184775ec9eb8abd",
+  "Assets\\Dialogue\\BossHappy.json": "875ec022fa5689087575c955251108fe113f708a8b6876febc45f5509b523c1d",
+  "Assets\\Dialogue\\BossLose.json": "1a7acf88497323b70fbdce724332f27f5c4063e752944ac45b6312ec963c86b2",
+  "Assets\\Dialogue\\BossWin.json": "5548789f84d6c727bfd7e6a00fac5a8c76e8c7795ef066b1a4cd3f3fbdcc2537",
+  "Assets\\Resources\\BossFight\\FeltHockeyTable.prefab": "c89177112565fd7207a0965a4d44d99fd44d475387a513b6879ff6614a2959c3",
+  "Assets\\Scenes\\BossFight.unity": "2d5df265f2f38bb16f965a77813ff4fd68e2501fc6f67c8df445c5c3dc20c59d",
+  "Assets\\Scripts\\BossFight\\BossArenaManager.cs": "bf92a6eea61899371bbea90f3804e6b60f8eb9b4705a7350c1fd250a00460e68",
+  "Assets\\Scripts\\BossFight\\BossCharacterPresentation.cs": "7b495a3d995c930faa3c6fdea39428c7a9996fd5a2fa303cbfef0801de812fad",
+  "Assets\\Scripts\\BossFight\\BossGoal.cs": "dfe80fca8a9da752010509831b3b75ed64da6277b22148ff543da12a91f453e6",
+  "Assets\\Scripts\\BossFight\\BossMatch.cs": "d961e5057baba6e3bb37bd572611d6c88db2dc5f9be744747cffead56ec288a3",
+  "Assets\\Scripts\\BossFight\\BossScorePresentation.cs": "14ad5c3ea93ec2d5178dd78b659b867c1ca1b7f0ba9e0210e4a8afb5a0f978c5",
+  "Assets\\Scripts\\DialogueSystem\\StoryInput\\StoryFunctions.Sequences.cs": "95a9af5ae4e41bcf4c7527859dcfc2f5bf2e3b4b45382f51181af0dae3cf4d38",
+  "Assets\\Scripts\\DialogueSystem\\StoryInput\\StoryUI.cs": "b9c0f9fc23fa35e5a6e29b3c303a4ef152b91265ca7d4a9e2724b625be2b7d15"
+}

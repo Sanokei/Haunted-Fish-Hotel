@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
@@ -9,22 +10,14 @@ namespace Monologue.Dialogue
     {
         public delegate void OnGlobalsChange(string key, Ink.Runtime.Object value, Ink.Runtime.Object previousValue);
         public static event OnGlobalsChange OnGlobalsChangeEvent;
-        Story m_GlobalVarsStory;
+        readonly Story m_GlobalVarsStory;
+        readonly HashSet<Story> listeningStories = new();
 
         public VariablesState Globals
         {
             get
             {
                 return m_GlobalVarsStory.variablesState;
-            }
-            private set
-            {
-                // .NET collections doesnt support being enumerated and modified at the same time
-                    // dictonaries can via .Remove() and .Clear()
-                // VariableState has IEnumable<string> that returns KEY values
-                List<string> keys = new(Globals);
-                foreach(string key in keys)
-                    Globals[key] = value[key];
             }
         }
 
@@ -47,19 +40,27 @@ namespace Monologue.Dialogue
                 SetGlobalVariable(key,value);
             }
         }
-        public Variables(TextAsset globalsJSON)
+        public Variables(TextAsset globalsJSON) : this(globalsJSON.text)
         {
-            m_GlobalVarsStory = new(globalsJSON.text);
+        }
+
+        public Variables(string globalsJSON)
+        {
+            m_GlobalVarsStory = new(globalsJSON);
         }
         // enable and disable event listeners for the ink story that is currently loaded
         public void StartListening(Story story)
         {
+            if (story == null) throw new ArgumentNullException(nameof(story));
+            if (listeningStories.Contains(story)) return;
             SetVariableState(story);
-            story.variablesState.variableChangedEvent += SetGlobalVariable;
+            story.variablesState.variableChangedEvent += OnStoryVariableChanged;
+            listeningStories.Add(story);
         }
         public void StopListening(Story story)
         {
-            story.variablesState.variableChangedEvent -= SetGlobalVariable;
+            if (story == null || !listeningStories.Remove(story)) return;
+            story.variablesState.variableChangedEvent -= OnStoryVariableChanged;
         }
         
         // Set the story to the global
@@ -72,7 +73,14 @@ namespace Monologue.Dialogue
         {
             List<string> keys = new(value);
             foreach(string key in keys)
-                value[key] = Globals[key];
+                if (Globals.Contains(key)) value[key] = Globals[key];
+        }
+
+        void OnStoryVariableChanged(string key, Ink.Runtime.Object value)
+        {
+            // Ink also reports variables declared only in this story. They are not
+            // persistent globals and must neither overwrite nor extend the global store.
+            if (Globals.Contains(key)) SetGlobalVariable(key, value);
         }
 
         // Set global to the story

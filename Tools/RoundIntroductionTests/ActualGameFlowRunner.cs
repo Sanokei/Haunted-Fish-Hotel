@@ -83,7 +83,7 @@ public sealed class ActualGameFlowRunner:MonoBehaviour {
    var box=manager.ClosestPackage(controls.FlightPosition);Check(box&&box.FamilyTag=="cart","Multi-cart fixture obtains a real cart from the current conveyor");
    Set(controls,"_Position",box.transform.position);yield return null;PressGhostKey(controls,Key.E);yield return null;yield return null;
    Check(local.HeldTrapFamily=="cart","Each conveyor cart opens through actual E input");
-   Set(controls,"_Position",new Vector3(i==0?-6:4,1,0));yield return null;PressGhostKey(controls,Key.E);yield return null;yield return new WaitForSecondsRealtime(.22f);
+   Set(controls,"_Position",new Vector3(i==0?1:8,1,0));yield return null;PressGhostKey(controls,Key.E);yield return null;yield return new WaitForSecondsRealtime(.22f);
    var all=JsonUtility.FromJson<GhostCubeSnapshot>(world.Snapshot).Cubes;cartIds[i]=all[all.Count-1].Id;
    Check(world.Trap(cartIds[i])&&world.Trap(cartIds[i]).FamilyTag=="cart","Each opened cart registers its own stable instance ID");
   }
@@ -93,7 +93,7 @@ public sealed class ActualGameFlowRunner:MonoBehaviour {
    Set(controls,"_Position",currentCart.Position);yield return null;PressGhostKey(controls,Key.E);yield return null;yield return null;
    Check(local.ControlledCube==id,"Actual E independently possesses shopping cart "+id);
    float before=currentCart.Position.x,otherBefore=otherCart.Position.x;
-   InputSystem.QueueStateEvent(keyboard,new KeyboardState(pass<2?(pass%2==0?Key.D:Key.A):(pass%2==0?Key.A:Key.D)));yield return new WaitForSecondsRealtime(.2f);InputSystem.QueueStateEvent(keyboard,new KeyboardState());yield return null;
+   InputSystem.QueueStateEvent(keyboard,new KeyboardState(pass<2?(pass%2==0?Key.A:Key.D):(pass%2==0?Key.D:Key.A)));yield return new WaitForSecondsRealtime(.2f);InputSystem.QueueStateEvent(keyboard,new KeyboardState());yield return null;
    if(Mathf.Abs(currentCart.Position.x-before)<=.05f){Debug.Log("CART_STUCK pass="+pass+" point="+currentCart.Position+" origin="+currentCart.CaptureState().Origin+" axis="+Get<float>(currentCart,"_Axis")+" limits="+currentCart.Limits);foreach(var hit in Physics.BoxCastAll(currentCart.Position,currentCart.HalfExtents,pass%2==0?Vector3.right:Vector3.left,currentCart.transform.rotation,.5f,~0,QueryTriggerInteraction.Ignore))Debug.Log("CART_HIT "+hit.collider.name+" distance="+hit.distance+" bounds="+hit.collider.bounds);}
    Check(Mathf.Abs(currentCart.Position.x-before)>.05f,"Actual movement input moves cart "+id);
    Check(Mathf.Abs(otherCart.Position.x-otherBefore)<.001f,"Unpossessed cart receives no other instance's input");

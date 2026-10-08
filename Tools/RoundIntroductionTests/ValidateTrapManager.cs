@@ -11,7 +11,7 @@ public static class TrapManagerValidation
  {
   var cart=Resources.Load<GhostTrap>("Traps/ShoppingCartTrap");var click=Resources.Load<GhostTrap>("Traps/ClickTrap");var chandelier=Resources.Load<GhostTrap>("Traps/FallingChandelierTrap");
   var package=Resources.Load<GhostTrapSupply>("Traps/ConveyorPackage");check(package&&package.BoxArt&&package.BoxArt.name=="cardboardbox","Authored reusable package references actual cardboard box art");
-  var host=new GameObject("Conveyor validation");host.SetActive(false);var world=host.AddComponent<GhostPlacementWorld>();var manager=host.AddComponent<TrapManager>();manager.enabled=false;host.SetActive(true);world.enabled=false;
+  var host=new GameObject("Conveyor validation");host.SetActive(false);var world=host.AddComponent<GhostPlacementWorld>();var manager=host.AddComponent<TrapManager>();host.SetActive(true);
   manager.Inject(world,null,package,Array.Empty<TrapDefinition>());check(manager.SelectWeighted(.5)==null&&world.Definition("cart")==null,"Empty catalog injects no traps and selects no packages");
   manager.ConfigureDefinitions(new[]{new TrapDefinition{Prefab=cart,Weight=0},new TrapDefinition{Prefab=click,Weight=-1},new TrapDefinition{Prefab=chandelier,Weight=float.NaN},new TrapDefinition{Weight=5}});
   check(manager.SelectWeighted(0)==null,"Zero, negative, NaN and missing-prefab weights are excluded");
@@ -31,6 +31,7 @@ public static class TrapManagerValidation
   check(world.Definition("injected-designer-trap")==custom,"Runtime injection accepts designer display art without requiring a prefab icon or conveyor type switches");
   var actor=new GameObject("Authority").AddComponent<HotelPlayer>();actor.gameObject.AddComponent<HotelPlayerMovement>().SetMode(HotelControlMode.Ghost);actor.ControlsReady=actor.RoundReleased=true;actor.RoundStateKey="conveyor-A";actor.RoundVersion=1;actor.NetId=42;
   world.BeginRound("editor-preview","conveyor-A",1);manager.RunPolicy=ConveyorRunPolicy.Manual;Set(manager,"_InitialPackages",1);manager.SpawnInterval=.5f;manager.Speed=2;
+  manager.enabled=false;manager.Simulate(actor,1);check(manager.PackageCount==0&&!manager.StartConveyor(),"Disabled manager rejects authoring and conveyor start");manager.enabled=true;
   manager.Simulate(actor,1);check(!manager.Running&&manager.PackageCount==0,"Manual policy remains stopped after release");
   check(manager.StartConveyor()&&manager.PackageCount==1,"Authority can start and seed authored packages");
   var first=manager.Package(0);check(first.FamilyTag==custom.FamilyTag&&first.DisplayArt==artwork,"Package art and family identity come from the same injected definition");
@@ -67,7 +68,11 @@ public static class TrapManagerValidation
   check(!manager.TryTake(actor,beforeReset.Packages[0].Id,Vector3.zero,actor.RoundStateKey,actor.RoundVersion),"Delayed pre-interruption pickup cannot consume a replacement package");
   manager.Speed=0;manager.SpawnInterval=float.NaN;Set(manager,"_MaxPackages",2);manager.Simulate(actor,1);
   check(manager.SpawnInterval==.05f&&manager.PackageCount==2,"Invalid cadence is safely bounded and maximum package count is enforced");
-  manager.ResetRound();check(manager.PackageCount==0&&!manager.Running,"Reset disposes all packages and run state");
+  replica.ConfigureDefinitions(new[]{new TrapDefinition{Prefab=chandelier,Weight=1}});replica.BeginRound(world.RoomScope,world.RoundKey,world.RoundVersion);check(replica.ApplySnapshot(manager.Snapshot),"Teardown observer starts in current authoritative round");
+  var priorTeardown=JsonUtility.FromJson<ConveyorSnapshot>(manager.Snapshot);actor.ControlsReady=false;manager.enabled=false;
+  var finalTeardown=JsonUtility.FromJson<ConveyorSnapshot>(actor.ConveyorJson);
+  check(finalTeardown.Packages.Count==0&&!finalTeardown.Running&&finalTeardown.Revision>priorTeardown.Revision&&replica.ApplySnapshot(actor.ConveyorJson)&&replica.PackageCount==0,"Scoped authority disable publishes a higher empty conveyor snapshot to observer");
+  actor.ControlsReady=true;manager.ResetRound();check(manager.PackageCount==0&&!manager.Running,"Reset disposes all packages and run state");
   Object.Destroy(custom.gameObject);Object.Destroy(actor.gameObject);Object.Destroy(host);Object.Destroy(replicaHost);yield return null;
  }
 }

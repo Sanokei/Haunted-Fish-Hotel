@@ -7,20 +7,23 @@
   },
   "passed": {
     "final_host_game_checks": 74,
-    "final_host_audit_checks": 37,
+    "final_host_audit_checks": 41,
     "direct_game_checkpoint_checks": 77,
     "direct_audit_checkpoint_checks": 27,
     "final_lifecycle_checks": 14,
-    "lobby_loading_checks": 65,
+    "lobby_loading_checks": 76,
     "round_ink_checks": 2098,
-    "multiplayer_rule_checks": 127
+    "multiplayer_rule_checks": 127,
+    "maintained_trap_ink_fixture_checks": 115
   },
   "allocation_measurement": "INCONCLUSIVE: known-allocation positive control returned zero; used-heap deltas noisy/negative",
   "unverified": [
     "two admitted clients and reconnect/latency reconciliation",
     "native Lobby visual confirmation",
-    "target-build performance capture"
+    "target-build performance capture",
+    "200 ms one-way sustained remote movement/reconciliation and pickup/possession"
   ],
-  "fresh_independent_review": "pending parent relay",
-  "original_editor_pid": 13188
+  "fresh_independent_review": "completed; confirmed observer revision, final conveyor publication, pre-existing Lobby occupancy and stale fixtures corrected and reproduced",
+  "original_editor_pid": 13188,
+  "fixture_editor_warning": "UnityEditor.Search.SearchDatabase startup ArgumentOutOfRangeException in small cached fixture project; 115 runtime fixture assertions passed; production host/Lobby logs have no corresponding exception"
 }

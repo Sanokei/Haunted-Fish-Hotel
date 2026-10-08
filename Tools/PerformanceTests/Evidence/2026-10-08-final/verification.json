@@ -1,0 +1,19 @@
+{
+  "passed": {
+    "host_game": 74,
+    "host_audit": 41,
+    "lifecycle": 14,
+    "lobby_loading": 76,
+    "boss_shared_native": 37,
+    "gameplay_lobby": 48,
+    "placement_stairs": 42
+  },
+  "original_editor_pid": 13188,
+  "unverified": [
+    "two admitted clients, remote readiness/transport delivery",
+    "reconnect and latency reconciliation",
+    "Blender model import: authenticated HTTP403; awaiting authorized local ZIP"
+  ],
+  "measurement": "No measured performance claim; allocation positive control was inconclusive",
+  "evidence": "Boss shared-flow and placement/gameplay results have their own dated evidence folders"
+}

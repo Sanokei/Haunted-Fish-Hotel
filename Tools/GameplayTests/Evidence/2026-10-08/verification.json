@@ -1,0 +1,10 @@
+{
+  "passed": 48,
+  "environment": "Unity6000.3.6f1 isolated cached full project, native Helper/Lobby/Game/Lobby host",
+  "limitations": [
+    "extra actor is Mirage server-spawned; no second admitted client",
+    "interactive Editor preview not used; Camera.Render inspected",
+    "reference/Blender visual replacement pending cloud model"
+  ],
+  "original_editor_pid": 13188
+}

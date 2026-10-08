@@ -3,7 +3,7 @@ $ErrorActionPreference='Stop'
 $repoRoot=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $validationRoot=Join-Path $env:TEMP ('HotelRoundValidation-'+[guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path "$validationRoot/Assets/Resources","$validationRoot/Packages","$validationRoot/ProjectSettings" | Out-Null
-foreach($source in @('Assets/Scripts/Multiplayer/TrapDefinition.cs','Assets/Scripts/Multiplayer/TrapManager.cs','Assets/Scripts/Multiplayer/PossessionSmoke.cs','Assets/Scripts/Multiplayer/GhostPossessionEffects.cs','Assets/Scripts/Multiplayer/GhostTentaclePresentation.cs','Assets/Scripts/Multiplayer/RoundIntroductionSettings.cs','Assets/Scripts/Multiplayer/GhostSelectionPresentation.cs','Assets/Scripts/Multiplayer/GhostSelectionWheel.cs','Assets/Scripts/Multiplayer/AtticReturnBlur.cs','Assets/Scripts/Multiplayer/HotelPalette.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionPanelShape.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionSkipCircle.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs')) {
+foreach($source in @('Assets/Scripts/Multiplayer/TrapDefinition.cs','Assets/Scripts/Multiplayer/TrapManager.cs','Assets/Scripts/Multiplayer/ConveyorSchedule.cs','Assets/Scripts/Multiplayer/WeightedSelection.cs','Assets/Scripts/Multiplayer/PossessionSmoke.cs','Assets/Scripts/Multiplayer/GhostPossessionEffects.cs','Assets/Scripts/Multiplayer/GhostTentaclePresentation.cs','Assets/Scripts/Multiplayer/RoundIntroductionSettings.cs','Assets/Scripts/Multiplayer/GhostSelectionPresentation.cs','Assets/Scripts/Multiplayer/GhostSelectionWheel.cs','Assets/Scripts/Multiplayer/AtticReturnBlur.cs','Assets/Scripts/Multiplayer/HotelPalette.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionPanelShape.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionSkipCircle.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs')) {
  Copy-Item -LiteralPath "$repoRoot/$source" -Destination "$validationRoot/Assets"
  Copy-Item -LiteralPath "$repoRoot/$source.meta" -Destination "$validationRoot/Assets"
 }
@@ -17,7 +17,7 @@ Copy-Item -LiteralPath "$repoRoot/Library/ScriptAssemblies/Ink-Libraries.dll" -D
 Copy-Item -LiteralPath "$repoRoot/ProjectSettings/ProjectVersion.txt" -Destination "$validationRoot/ProjectSettings"
 Copy-Item -LiteralPath "$repoRoot/Assets/TextMesh Pro/Fonts/LiberationSans.ttf" -Destination "$validationRoot/Assets"
 Copy-Item -LiteralPath "$repoRoot/Assets/TextMesh Pro/Fonts/LiberationSans.ttf.meta" -Destination "$validationRoot/Assets"
-foreach($name in @('HotelPlayerMovement','GameSideScrollMotor','HotelFishSprite','GameSceneController','IHotelScene','GhostPlacementController','GhostPlacementWorld','GhostPlacementGrid','GameRoundGate','GhostTrapAreaPresentation','GameEditorRoleSwitch','IGhostTrap','GhostTrap','GhostTrapSupply')) {
+foreach($name in @('HotelViewCamera','HotelPlayerMovement','GameSideScrollMotor','HotelFishSprite','GameSceneController','GameHauntingController','IHotelScene','GhostPlacementController','GhostPlacementWorld','GhostPlacementGrid','GameRoundGate','GhostTrapAreaPresentation','GameEditorRoleSwitch','IGhostTrap','GhostTrap','GhostTrapSupply')) {
  Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs" -Destination "$validationRoot/Assets"
  Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs.meta" -Destination "$validationRoot/Assets"
 }

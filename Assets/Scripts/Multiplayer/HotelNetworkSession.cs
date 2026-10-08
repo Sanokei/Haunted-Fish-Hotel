@@ -8,7 +8,7 @@ namespace HauntedFish.Multiplayer
 {
     // Composes connection and lobby services, and owns network prefab lifetime.
     // The composition root supplies every dependency before a peer is started.
-    internal sealed class HotelNetworkSession : IDisposable
+    internal sealed class HotelNetworkSession : IDisposable, IHotelSessionNetwork
     {
         readonly NetworkServer _Server;
         readonly NetworkClient _Client;
@@ -31,6 +31,8 @@ namespace HauntedFish.Multiplayer
         public bool IsRunning => _Server.Active || _Client.Active;
         public bool IsAdmitted => _Connection.IsAdmitted;
         public int PlayerCount => _Connection.Players.Count;
+        public bool AllReady => _LobbyPlayers.AllReady;
+        public bool Quickplay => _LobbyPlayers.Roster.Quickplay;
         public bool HasLocalCharacter => _Client.Player != null && _Client.Player.HasCharacter &&
             _Client.Player.Identity.IsSpawned && _Client.Player.Identity.gameObject.activeInHierarchy;
 

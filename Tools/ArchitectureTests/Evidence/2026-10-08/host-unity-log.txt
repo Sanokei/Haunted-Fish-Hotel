@@ -1,0 +1,2411 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/respin/6000.3.6f1-732c1ec89f18' branch; Version is '6000.3.6f1 (bbb010bdb8a3) revision 12300304'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Channel LicenseClient-wkeif doesn't exist
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'en' Physical Memory: 10101 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-10-08T17:28:44Z
+[Licensing::Module] Successfully launched the LicensingClient (PId: 20936)
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.3.6f1\Editor\Unity.exe
+-batchmode
+-job-worker-count
+2
+-projectPath
+C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d
+-executeMethod
+ActualGameSceneValidation.RunLobby
+-logFile
+C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\audit-host.log
+--actual-game-validation
+--actual-lobby-validation
+Successfully changed project path to: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d
+C:/Users/wkeif/AppData/Local/Temp/HotelLiveRound-b48fe06639a642d4b20f95b517fc654d
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+Player connection [3128]  Target information:
+
+Player connection [3128]  * "[IP] 192.168.137.136 [Port] 55504 [Flags] 2 [Guid] 203473927 [EditorId] 203473927 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-3J9KP4H) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [3128] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [3128] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 2
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-wkeif" at "2026-10-08T17:28:45.6617233Z"
+[Package Manager] Connected to IPC stream "Upm-12952" after 1.6 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              50134a3b761644958678b3959532ad3b
+  Correlation Id:          8a35ec9246039c8e4d3dce93db2c4e20
+  External correlation Id: 6183697731529666406
+  Machine Id:              xzr4IeDmIgokafl3ilLQFZ5AKDc=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-wkeif" (connect: 1.29s, validation: 0.19s, handshake: 11.53s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-wkeif-notifications" at "2026-10-08T17:28:57.3822746Z"
+[Licensing::Module] Connected to LicensingClient (PId: 20936, launch time: 0.01, total connection time: 13.01s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.03
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Module] Licensing Background thread has ended after 13.14s
+[Licensing::Module] Licensing is initialized (took 11.02s).
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 1.07 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.6f1 (bbb010bdb8a3)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/wkeif/AppData/Local/Temp/HotelLiveRound-b48fe06639a642d4b20f95b517fc654d/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon(TM) Graphics (ID=0x164c)
+    Vendor:   ATI
+    VRAM:     5050 MB
+    Driver:   31.0.21905.1001
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56952
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.6f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 1.749561 seconds.
+- Loaded All Assemblies, in 27.356 seconds
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 2716 ms
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  4.265 seconds
+Domain Reload Profiling: 31612ms
+	BeginReloadAssembly (19857ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (21ms)
+	RebuildCommonClasses (1217ms)
+	RebuildNativeTypeToScriptingClass (25ms)
+	initialDomainReloadingComplete (1924ms)
+	LoadAllAssembliesAndSetupDomain (4321ms)
+		LoadAssemblies (19888ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (4248ms)
+			TypeCache.Refresh (4242ms)
+				TypeCache.ScanAssembly (3538ms)
+			BuildScriptInfoCaches (1ms)
+			ResolveRequiredComponents (2ms)
+	FinalizeReload (4267ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (4141ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3289ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (207ms)
+			ProcessInitializeOnLoadAttributes (378ms)
+			ProcessInitializeOnLoadMethodAttributes (261ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Application.AssetDatabase Initial Refresh Start
+Package Manager log level set to [2]
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 59 packages:
+  Built-in packages:
+    com.unity.modules.accessibility@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.physics2d)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.video)
+    com.unity.modules.vr@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.vr)
+    com.unity.modules.wind@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.xr)
+    com.unity.modules.subsystems@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: C:\Users\wkeif\AppData\Local\Temp\HotelLiveRound-b48fe06639a642d4b20f95b517fc654d\Library\PackageCache\com.unity.modules.hierarchycore)
+  Local packages:
+    com.unity.visualscripting@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.visualscripting@191c0d7e3b69 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.visualscripting@191c0d7e3b69)
+    com.unity.ugui@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.ugui@b9d1dd437cb9 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.ugui@b9d1dd437cb9)
+    com.unity.timeline@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.timeline@7f8b2fb101b6 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.timeline@7f8b2fb101b6)
+    com.unity.test-framework@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.test-framework@0b7a23ab2e1d (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.test-framework@0b7a23ab2e1d)
+    com.unity.ext.nunit@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.ext.nunit@d8c07649098d (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.ext.nunit@d8c07649098d)
+    com.unity.render-pipelines.universal@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.render-pipelines.universal@1e87cf1dccb8 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.render-pipelines.universal@1e87cf1dccb8)
+    com.unity.render-pipelines.universal-config@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.render-pipelines.universal-config@8dc1aab4af1d (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.render-pipelines.universal-config@8dc1aab4af1d)
+    com.unity.render-pipelines.core@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.render-pipelines.core@9a9c0155552c (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.render-pipelines.core@9a9c0155552c)
+    com.unity.collections@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.collections@aea9d3bd5e19 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.collections@aea9d3bd5e19)
+    com.unity.test-framework.performance@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.test-framework.performance@0840f58e4562 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.test-framework.performance@0840f58e4562)
+    com.unity.nuget.mono-cecil@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.mathematics@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.mathematics@19a9377c4ffa (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.mathematics@19a9377c4ffa)
+    com.unity.burst@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.burst@973857688024 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.burst@973857688024)
+    com.unity.shadergraph@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.shadergraph@3e48e962d639 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.shadergraph@3e48e962d639)
+    com.unity.searcher@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.searcher@d45a78918735 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.searcher@d45a78918735)
+    com.unity.inputsystem@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.inputsystem@57d0e36f6123 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.inputsystem@57d0e36f6123)
+    com.unity.cinemachine@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.cinemachine@f3f96bcb59af (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.cinemachine@f3f96bcb59af)
+    com.unity.splines@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.splines@1cb7d86fc7ff (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.splines@1cb7d86fc7ff)
+    com.unity.settings-manager@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.settings-manager@0b8638c5ce86 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.settings-manager@0b8638c5ce86)
+    com.unity.ai.navigation@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.ai.navigation@5218e4bf7edc (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.ai.navigation@5218e4bf7edc)
+    com.unity.2d.sprite@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca)
+    com.miragenet.mirage@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.miragenet.mirage@3b3676a7c5c7 (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.miragenet.mirage@3b3676a7c5c7)
+    com.cysharp.unitask@file:C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.cysharp.unitask@0c80789eeafa (location: C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Library\PackageCache\com.cysharp.unitask@0c80789eeafa)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.06 seconds
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.accessibility/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.accessibility/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.adaptiveperformance/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.adaptiveperformance/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.ai/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.ai/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.androidjni/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.androidjni/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.animation/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.animation/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.assetbundle/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.assetbundle/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.audio/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.audio/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.cloth/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.cloth/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.director/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.director/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.hierarchycore/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.hierarchycore/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.imageconversion/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.imageconversion/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.imgui/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.imgui/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.jsonserialize/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.jsonserialize/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.particlesystem/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.particlesystem/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.physics/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.physics/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.physics2d/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.physics2d/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.screencapture/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.screencapture/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.subsystems/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.subsystems/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.terrain/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.terrain/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.terrainphysics/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.terrainphysics/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.tilemap/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.tilemap/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.ui/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.ui/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.uielements/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.uielements/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.umbra/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.umbra/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.unityanalytics/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.unityanalytics/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.unitywebrequest/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.unitywebrequest/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.unitywebrequestassetbundle/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.unitywebrequestassetbundle/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.unitywebrequestaudio/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.unitywebrequestaudio/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.unitywebrequesttexture/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.unitywebrequesttexture/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.unitywebrequestwww/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.unitywebrequestwww/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.vectorgraphics/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.vectorgraphics/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.vehicles/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.vehicles/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.video/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.video/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.vr/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.vr/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.wind/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.wind/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+A meta data file (.meta) exists but its asset 'Packages/com.unity.modules.xr/package.ModuleCompilationTrigger' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+Couldn't delete Packages/com.unity.modules.xr/package.ModuleCompilationTrigger.meta because it's in an immutable folder.
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.6f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/wkeif/AppData/Local/Temp/HotelLiveRound-b48fe06639a642d4b20f95b517fc654d
+DisplayProgressbar: Compiling Scripts
+ExitCode: 4 Duration: 0s667ms
+Rebuilding DAG because FileSignature timestamp changed: Library/Bee/1900b0aE-inputdata.json
+*** Tundra requires additional run (0.59 seconds), 0 items updated, 621 evaluated
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.6f1\Editor\Data\netcorerun\netcorerun.exe "C:\Program Files\Unity\Hub\Editor\6000.3.6f1\Editor\Data\Tools\BuildPipeline\ScriptCompilationBuildProgram.exe" "Library/Bee/1900b0aE.dag.json" "Library/Bee/1900b0aE-inputdata.json" "Library\Bee\buildprogram0.traceevents"
+WorkingDir: C:/Users/wkeif/AppData/Local/Temp/HotelLiveRound-b48fe06639a642d4b20f95b517fc654d
+ExitCode: 0 Duration: 4s987ms
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.6f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --dagfilejson="Library\Bee\1900b0aE.dag.json" --profile="Library/Bee/backend2.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/wkeif/AppData/Local/Temp/HotelLiveRound-b48fe06639a642d4b20f95b517fc654d
+ExitCode: 0 Duration: 26s
+Finished compiling graph: 1119 nodes, 24214 flattened edges (18982 ToBuild, 182 ToUse), maximum node priority 1209
+[ 590/1115  0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp
+[BUSY       6s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[ 857/1115  6s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[BUSY      12s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
+[1107/1115 13s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
+[BUSY       6s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[1108/1115  7s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[1109/1115  3s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+Processing assembly Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll, with 137 defines and 359 references
+
+processors: Mirage.Weaver.MirageILPostProcessor, Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+
+running Mirage.Weaver.MirageILPostProcessor
+
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1110/1115  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[1111/1115  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+[1112/1115 10s] ILPostProcess Library/Bee/artifacts/1900b0aE.dag/post-processed/Assembly-CSharp.dll (+pdb)
+Processing assembly Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll, with 139 defines and 340 references
+
+processors: Mirage.Weaver.MirageILPostProcessor, Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+
+running Mirage.Weaver.MirageILPostProcessor
+
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1113/1115  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
+[1114/1115  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
+*** Tundra build success (26.91 seconds), 10 items updated, 1115 evaluated
+AssetDatabase: script compilation time: 34.287990s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in 20.725 seconds
+'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 97.52 ms, found 2 plugins.
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in 10.805 seconds
+Domain Reload Profiling: 31520ms
+	BeginReloadAssembly (562ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (36ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (101ms)
+	RebuildCommonClasses (81ms)
+	RebuildNativeTypeToScriptingClass (30ms)
+	initialDomainReloadingComplete (56ms)
+	LoadAllAssembliesAndSetupDomain (19986ms)
+		LoadAssemblies (19251ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (1043ms)
+			TypeCache.Refresh (813ms)
+				TypeCache.ScanAssembly (784ms)
+			BuildScriptInfoCaches (143ms)
+			ResolveRequiredComponents (80ms)
+	FinalizeReload (10806ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (8641ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (76ms)
+			SetLoadedEditorAssemblies (13ms)
+			BeforeProcessingInitializeOnLoad (423ms)
+			ProcessInitializeOnLoadAttributes (7290ms)
+			ProcessInitializeOnLoadMethodAttributes (796ms)
+			AfterProcessingInitializeOnLoad (41ms)
+			EditorAssembliesLoaded (2ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (32ms)
+Refreshing native plugins compatible for Editor in 2.78 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=9993949f8ecd4b647b78f2ce54d058eb): Total: 75.360 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=18916 ms
+		Asset DB Callback time: managed=660 ms, native=554 ms
+		Scripting: domain reloads=1, domain reload time=20727 ms, compile time=34294 ms, other=206 ms
+		Project Asset Count: scripts=1994, non-scripts=2294
+		Asset File Changes: new=7, changed=14, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.003ms
+	InvokePackagesCallback: 551.813ms
+	ApplyChangesToAssetFolders: 6.442ms
+	Scan: 2320.870ms
+	OnSourceAssetsModified: 3.707ms
+	CategorizeAssetsWithTransientArtifact: 2307.478ms
+	ProcessAssetsWithTransientArtifactChanges: 211.104ms
+	CategorizeAssets: 240.486ms
+	ImportOutOfDateAssets: 10952.436ms (-23347.295ms without children)
+		CompileScripts: 34293.539ms
+		ReloadNativeAssets: 0.210ms
+		UnloadImportedAssets: 2.485ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.873ms
+		InitializingProgressBar: 0.001ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 1.620ms
+	PostProcessAllAssets: 666.338ms
+	Hotreload: 18.678ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.005ms
+	UnloadStreamsBegin: 5.282ms
+	PersistCurrentRevisions: 0.276ms
+	UnloadStreamsEnd: 0.004ms
+	GenerateScriptTypeHashes: 8.784ms
+	Untracked: 58074.747ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Scanning for USB devices : 5.602ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-HotelLiveRoundValidation
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6869 unused Assets / (6.1 MB). Loaded Objects now: 7753.
+Memory consumption went from 211.3 MB to 205.3 MB.
+Total: 36.263300 ms (FindLiveObjects: 1.852600 ms CreateObjectMapping: 3.599000 ms MarkObjects: 20.196600 ms  DeleteObjects: 10.610500 ms)
+
+Opening scene 'Assets/Scenes/Helper.unity'
+Unloading 8 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/Scenes/Helper.unity'
+	Deserialize:            200.960 ms
+	Integration:            694.831 ms
+	Integration of assets:  12.693 ms
+	Thread Wait Time:       -0.615 ms
+	Total Operation Time:   907.869 ms
+Unloading 2 unused Assets / (6.2 MB). Loaded Objects now: 7944.
+Memory consumption went from 199.8 MB to 193.6 MB.
+Total: 22.406900 ms (FindLiveObjects: 1.122800 ms CreateObjectMapping: 1.382800 ms MarkObjects: 19.700100 ms  DeleteObjects: 0.197700 ms)
+
+D3D11 device created for Microsoft Media Foundation video decoding.
+[Project] Loading completed in 136.499 seconds
+	Project init time: 				132.664 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		12.637 seconds
+		Asset Database init time: 		1.237 seconds
+		Global illumination init time: 	0.025 seconds
+		Assemblies load time: 			31.814 seconds
+		Unity extensions init time: 	0.019 seconds
+		Asset Database refresh time: 	75.361 seconds
+	Scene opening time: 			3.350 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1791480660680,"processId":12952,"projectLoad":136.4990867,"projectInit":132.6643546,"templateInit":0.0,"packageManagerInit":12.6368172,"assetDatabaseInit":1.2369925,"globalIlluminationInit":0.0254345,"assembliesLoad":31.8136469,"unityExtensionsInit":0.0193525,"assetDatabaseRefresh":75.361109,"sceneOpening":3.3496632}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1791480660681,"processId":12952,"editorVersion":"6000.3.6f1 (bbb010bdb8a3)","branch":"6000.3/respin/6000.3.6f1-732c1ec89f18","buildType":"Release","platform":"Windows"}
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.903 seconds
+Refreshing native plugins compatible for Editor in 3.60 ms, found 2 plugins.
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.368 seconds
+Domain Reload Profiling: 4268ms
+	BeginReloadAssembly (1200ms)
+		ExecutionOrderSort (1ms)
+		DisableScriptedObjects (86ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (771ms)
+	RebuildCommonClasses (86ms)
+	RebuildNativeTypeToScriptingClass (28ms)
+	initialDomainReloadingComplete (68ms)
+	LoadAllAssembliesAndSetupDomain (517ms)
+		LoadAssemblies (409ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (358ms)
+			TypeCache.Refresh (10ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (294ms)
+			ResolveRequiredComponents (45ms)
+	FinalizeReload (2369ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1466ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (125ms)
+			SetLoadedEditorAssemblies (13ms)
+			BeforeProcessingInitializeOnLoad (447ms)
+			ProcessInitializeOnLoadAttributes (493ms)
+			ProcessInitializeOnLoadMethodAttributes (372ms)
+			AfterProcessingInitializeOnLoad (15ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (109ms)
+Asset Pipeline Refresh (id=d71a0cec692f9284985a2dbd24424543): Total: 4.719 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=2686 ms
+		Asset DB Callback time: managed=73 ms, native=6 ms
+		Scripting: domain reloads=1, domain reload time=1948 ms, compile time=4 ms, other=0 ms
+		Project Asset Count: scripts=1994, non-scripts=2294
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.003ms
+	InvokePackagesCallback: 34.378ms
+	ApplyChangesToAssetFolders: 0.923ms
+	Scan: 0.004ms
+	OnSourceAssetsModified: 0.006ms
+	CategorizeAssetsWithTransientArtifact: 0.017ms
+	ProcessAssetsWithTransientArtifactChanges: 15.712ms
+	CategorizeAssets: 157.437ms
+	ImportOutOfDateAssets: 2394.035ms (2380.433ms without children)
+		CompileScripts: 3.740ms
+		CollectScriptTypesHashes: 3.453ms
+		ReloadNativeAssets: 3.273ms
+		UnloadImportedAssets: 0.174ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.899ms
+		InitializingProgressBar: 0.002ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.003ms
+		OnDemandSchedulerStart: 1.057ms
+	PostProcessAllAssets: 73.360ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.339ms
+	UnloadStreamsBegin: 0.129ms
+	PersistCurrentRevisions: 0.236ms
+	UnloadStreamsEnd: 0.005ms
+	GenerateScriptTypeHashes: 14.517ms
+	Untracked: 2042.198ms
+
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-2AGP-P988-G4G4-P24V-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 6084317-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            14.489 ms
+	Integration:            1120.481 ms
+	Integration of assets:  0.030 ms
+	Thread Wait Time:       0.014 ms
+	Total Operation Time:   1135.014 ms
+Asset Pipeline Refresh (id=ea307a6a9b85c9742a038a48b9a8c4f9): Total: 0.142 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Couldn't find a readme
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ReadmeEditor:SelectReadme () (at Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs:90)
+ReadmeEditor:SelectReadmeAutomatically () (at Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs:58)
+UnityEditor.EditorApplication:Internal_CallDelayFunctions ()
+
+(Filename: Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs Line: 90)
+
+Start Indexing on Editor startup
+[Indexing] Starting Initial Indexing for Assets
+Created GICache directory at C:/Users/wkeif/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.089s, timestamps: [142.578 - 142.667]
+[Licensing::Client] Successfully resolved entitlement details
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.087700 ms
+Loaded scene 'Assets/Scenes/Lobby.unity'
+	Deserialize:            809.441 ms
+	Integration:            1075.608 ms
+	Integration of assets:  67.084 ms
+	Thread Wait Time:       25.246 ms
+	Total Operation Time:   1977.379 ms
+Unloading 264 unused Assets / (21.7 KB). Loaded Objects now: 9137.
+Memory consumption went from 231.4 MB to 231.4 MB.
+Total: 32.740500 ms (FindLiveObjects: 1.986200 ms CreateObjectMapping: 1.222500 ms MarkObjects: 28.873600 ms  DeleteObjects: 0.655200 ms)
+
+Unloading 53 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 30.566700 ms
+There can be only one active Event System.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogWarning (object)
+UnityEngine.UIElements.UIElementsRuntimeUtility:RegisterEventSystem (UnityEngine.Object)
+UnityEngine.UIElements.UIToolkitInteroperabilityBridge:OnEnable () (at C:/Users/wkeif/Documents/GitHub/Haunted Fish Hotel/Library/PackageCache/com.unity.ugui@b9d1dd437cb9/Runtime/UGUI/EventSystem/UIElements/UIToolkitInteroperabilityBridge.cs:216)
+UnityEngine.EventSystems.EventSystem:OnEnable () (at C:/Users/wkeif/Documents/GitHub/Haunted Fish Hotel/Library/PackageCache/com.unity.ugui@b9d1dd437cb9/Runtime/UGUI/EventSystem/EventSystem.cs:424)
+
+(Filename: C:/Users/wkeif/Documents/GitHub/Haunted Fish Hotel/Library/PackageCache/com.unity.ugui@b9d1dd437cb9/Runtime/UGUI/EventSystem/UIElements/UIToolkitInteroperabilityBridge.cs Line: 216)
+
+Loaded scene 'Assets/Scenes/Game.unity'
+	Deserialize:            461.300 ms
+	Integration:            538.630 ms
+	Integration of assets:  37.826 ms
+	Thread Wait Time:       22.915 ms
+	Total Operation Time:   1060.671 ms
+GAME_CHECK: Authored Game entry starts its authoritative round automatically
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:28)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+Unloading 259 unused Assets / (83.2 KB). Loaded Objects now: 8844.
+Memory consumption went from 236.8 MB to 236.8 MB.
+Total: 27.200600 ms (FindLiveObjects: 1.357200 ms CreateObjectMapping: 1.239100 ms MarkObjects: 23.590400 ms  DeleteObjects: 1.012000 ms)
+
+GAME_CHECK: Ordinary Game wheel lands and pulses
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:29)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Scene starts authored attic prefab after landed slice
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:30)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+TrimDiskCacheJob: Current cache size 384mb
+GAME_CHECK: Ordinary Game entry completes wheel, wall/attic reveal and blurred return before releasing gameplay
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:33)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Existing Editor ghost-team switch becomes visible and interactable after the round
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:36)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Exactly one New Input System UI provider processes the role button
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:186)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:36)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Authored UI submit action is bound and enabled
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:188)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:36)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Virtual keyboard submit reaches the actual UI action
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:191)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:36)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Existing button switches ghost to player
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:37)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Existing Switch to Ghost label is visible in player mode
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:37)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Exactly one New Input System UI provider processes the role button
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:186)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:37)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Authored UI submit action is bound and enabled
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:188)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:37)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Virtual keyboard submit reaches the actual UI action
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:191)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:37)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Existing button switches player to ghost without changing team rules
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Update () (at Assets/ActualGameFlowRunner.cs:38)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Ordinary Game round starts with empty runtime inventory and no preplaced traps
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:48)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Authored Trap Manager starts weighted packages after actual round release
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:50)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual Game box prints its configured contained trap artwork
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:52)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual conveyor moves packages at configured speed
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:54)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual E input consumes shared package ID and grants its contained trap
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:58)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual authored hallway contains a clear position for package family cart
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:63)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_PLACEMENT family=cart accepted=True reply=2 held= pending=False point=(8.00, 1.00, 0.00)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:66)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 66)
+
+GAME_CHECK: Actual E places the prefab contained in the consumed package
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:67)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual E possesses the configured placed trap
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:70)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual Q disposes the configured package's placed trap
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:72)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual runtime injection shows chandelier artwork on weighted boxes
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:77)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Multi-cart fixture obtains a real cart from the current conveyor
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:83)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Each conveyor cart opens through actual E input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:85)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Each opened cart registers its own stable instance ID
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:88)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Multi-cart fixture obtains a real cart from the current conveyor
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:83)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Each conveyor cart opens through actual E input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:85)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Each opened cart registers its own stable instance ID
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:88)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Multiple shopping carts have distinct stable IDs
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:90)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual E independently possesses shopping cart 1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:94)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual movement input moves cart 1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:98)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart receives no other instance's input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:99)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Repeated E exits cart possession cleanly
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:100)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:101)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual E independently possesses shopping cart 2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:94)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual movement input moves cart 2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:98)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart receives no other instance's input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:99)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Repeated E exits cart possession cleanly
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:100)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:101)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual E independently possesses shopping cart 1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:94)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual movement input moves cart 1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:98)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart receives no other instance's input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:99)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Repeated E exits cart possession cleanly
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:100)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:101)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual E independently possesses shopping cart 2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:94)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual movement input moves cart 2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:98)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart receives no other instance's input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:99)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Repeated E exits cart possession cleanly
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:100)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:101)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Nearest foreign cart cannot mask an eligible owned cart
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:106)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Foreign cart possession remains rejected by authority
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:107)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Foreign ownership rejects both cart input and disposal
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:108)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Adjacent owned cart accepts its own input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:110)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Cart respects another cart's collider without passing through
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:111)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Cart can move away from a neighboring cart without stale blocking
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:112)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Delayed cart commands cannot target another round
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:114)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual Q clears independent cart and stale targeting 1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:119)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual Q clears independent cart and stale targeting 2
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:119)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Ordinary Game round starts with empty runtime inventory and no preplaced traps
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:122)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Real local ghost acquires authoritative held inventory
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:123)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual Q input discards held item through ordinary ghost controller
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:126)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Real Game places enlarged authored cart on the floor
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:127)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Real Game ghost possesses its owned cart
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:130)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Authored tentacle Canvas sorts in front of cart and aisle
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:132)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Actual Q input removes possessed cart and exits possession
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:137)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: All completed possession puffs dispose their runtime instances
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:139)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Exactly one New Input System UI provider processes the role button
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:186)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:140)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Authored UI submit action is bound and enabled
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:188)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:140)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Virtual keyboard submit reaches the actual UI action
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner:Submit (UnityEngine.UI.Button) (at Assets/ActualGameFlowRunner.cs:191)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:140)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Jump verification uses existing fish role
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:141)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Fish is grounded before jump
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:143)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+GAME_CHECK: Short grounded jump lands: peak 0.97 units, 0.56 seconds
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner:Check (bool,string) (at Assets/ActualGameFlowRunner.cs:21)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:150)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 21)
+
+AUDIT_CHECK: Explicit untagged output replaces the cached scene camera
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:28)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Disabled output is not returned as an active view
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:31)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Re-enabled output becomes available without global discovery
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:34)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Active additive scene owns camera selection
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:42)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Disabling additive binding restores surviving output
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:44)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Camera replacement restores authored output
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:49)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Persistent UI provider suppresses the authored scene provider after transition
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:60)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Removing temporary persistent provider restores prior scene input ownership
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:62)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_ALLOC: Editor thread counter positive control=0 bytes; 1000 global actor array queries=0; cached actors/definition/weighted/camera/UI=0; retained global result arrays grow Mono used heap=-32768 bytes; observable=2000
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:95)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 95)
+
+AUDIT_ALLOC_LIMIT: Thread counter did not observe known allocations; zero is not evidence of allocation-free behavior. Retained heap delta is a separate limited measurement.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:98)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 98)
+
+AUDIT_CHECK: Audit returns actual owned player to ghost role
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:101)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Paused shortened conveyor removes out-of-range package distances
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:108)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Shortened paused path publishes a valid replica snapshot
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:109)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Actual authority manager disable publishes higher empty shared conveyor state
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:113)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Disabled manager continues rejecting fresh authoring after final publication
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:115)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Grid generates bounded geometry for spacing 0
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:136)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Grid generates bounded geometry for spacing -1
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:136)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Grid generates bounded geometry for spacing NaN
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:136)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Grid generates bounded geometry for spacing Infinity
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:136)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Grid generates bounded geometry for spacing 1E-09
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:136)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Audit acquires held family before catalog replacement
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:146)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Same-family replacement preserves held prefab identity and supply definition through round
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:148)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Audit places retained family using authored prefab
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:159)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Observer reconstructs placed instance from round-scoped authored prefab snapshot
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:163)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Placed observer instances preserve family prefab identity on replacement
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:165)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Audit controls placed item before reset
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:171)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Owned trap accepts motion before controller cancellation
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:172)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Disabling actual owned ghost controller immediately stops authoritative trap input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:175)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Disabled world rejects fresh requests and cannot reacquire held inventory
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:181)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: World disable releases owner and publishes higher empty revision
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:184)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Delayed old snapshot and input cannot resurrect deleted same-round item
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:186)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Same round re-enabled world accepts fresh inventory
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:188)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Same-round IDs and revisions remain monotonic after disable
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:190)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Interaction rejects forged coordinates distant from authority's actual flight
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:191)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Authority rejects nonfinite ghost flight input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:192)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Installed Mirage spawns a real nonlocal server ghost for authority validation
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:203)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Server accepts finite scoped flight input
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:205)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Server clamps oversized flight axes before movement
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:209)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Remote ghost authority integrates no faster than configured flight speed
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:212)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Remote authority rejects stale movement scope and forged proximity coordinates
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:213)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Remote cannot pick up a distant package by claiming its coordinate
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:217)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Mirage unspawn removes an active actor from the registry without requiring GameObject disable
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:219)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+AUDIT_CHECK: Deferred same-family replacement becomes available in the next round
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+AuditGuardrails:Check (bool,string) (at Assets/AuditGuardrails.cs:15)
+AuditGuardrails:Run (HauntedFish.Multiplayer.HotelPlayer,HauntedFish.Multiplayer.GhostPlacementWorld,HauntedFish.Multiplayer.TrapManager) (at Assets/AuditGuardrails.cs:223)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:152)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/AuditGuardrails.cs Line: 15)
+
+ACTUAL_GAME_PASS
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ActualGameFlowRunner/<InventoryTests>d__18:MoveNext () (at Assets/ActualGameFlowRunner.cs:154)
+ActualGameFlowRunner/<RunInventoryValidation>d__17:MoveNext () (at Assets/ActualGameFlowRunner.cs:42)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+(Filename: Assets/ActualGameFlowRunner.cs Line: 154)
+
+Killing ADB server in 0.1148669 seconds.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-wkeif-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-wkeif channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+[Package Manager] Server process was shutdown
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1791480714581,"processId":12952,"allocatedMemory":15425568,"memoryLabels":[{"Default":29313},{"Permanent":15524},{"NewDelete":69235},{"Thread":4230344},{"Manager":808189},{"VertexData":1064},{"Geometry":816},{"Texture":296},{"Shader":88595},{"Material":24},{"GfxDevice":55905},{"Animation":392},{"Audio":3040},{"FreeType":8},{"FontEngine":736},{"Physics":2090},{"Physics2D":16},{"Serialization":400},{"Input":14984},{"JobScheduler":33024},{"TextLib":216},{"Mono":32},{"MonoCode":128},{"ScriptingNativeRuntime":155060},{"BaseObject":1620400},{"Resource":1336},{"Renderer":3000},{"Transform":4685},{"File":24404},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":19631},{"DynamicArray":155241},{"HashMap":83959},{"Utility":2660134},{"Curl":2559},{"PoolAlloc":2248},{"AI":40},{"TypeTree":5341},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7792},{"Director":8240},{"CloudService":8784},{"WebRequest":6883},{"VR":47994},{"SceneManager":504},{"Video":208},{"LazyScriptCache":32},{"NativeArray":144},{"Camera":17},{"Secure":2113},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":384},{"Hierarchy":608},{"CoreStats":13032},{"Identifiers":12960},{"Gui":96},{"EditorUtility":118718},{"VersionControl":4},{"Undo":947},{"AssetDatabase":4696650},{"EditorGi":328},{"UnityConnect":29232},{"Upm":1896},{"AssetCompliance":64},{"DrivenProperties":72},{"LocalIPC":211},{"ProfilerEditor":9746},{"CoreBusinessMetrics":2866},{"Licensing":1232},{"AssetReference":32},{"IPCStream":32}]}

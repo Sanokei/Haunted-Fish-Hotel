@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/HotelSessionLifecycle.cs" Link="HotelSessionLifecycle.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/HotelSessionPorts.cs" Link="HotelSessionPorts.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/HotelSessionState.cs" Link="HotelSessionState.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/LobbyContracts.cs" Link="LobbyContracts.cs" />
+  </ItemGroup>
+</Project>

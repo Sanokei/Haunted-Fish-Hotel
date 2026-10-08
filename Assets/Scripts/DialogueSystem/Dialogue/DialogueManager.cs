@@ -8,7 +8,6 @@ using Ink.Runtime;
 using UnityEngine.InputSystem;
 using HauntedFish.Multiplayer;
 using Monologue.StoryInput;
-using SimpleMan.CoroutineExtensions;
 
 namespace Monologue.Dialogue
 {
@@ -17,6 +16,9 @@ namespace Monologue.Dialogue
         public static DialogueManager Instance {get; private set;}
         public bool IsWaiting;
         bool remoteView, closingDialogue;
+        bool dialogueOpen;
+        DialogueStorySession storySession;
+        Story boundFunctionsStory;
         public void Configure(TextAsset globals, Panel panel) { m_GlobalsJSON=globals; _DialoguePanel=panel; }
         public void ConfigureMissing(TextAsset globals, Panel panel)
         {
@@ -61,13 +63,16 @@ namespace Monologue.Dialogue
             if (!Instance)
                 Instance = this;
             else
+            {
                 Destroy(gameObject);
+                return;
+            }
             if (m_GlobalsJSON) GlobalVars = new(m_GlobalsJSON);
             if (_DialoguePanel) ActiveDialoguePanel=false;
         }
         void OnEnable()
         {
-            // FIXME: Passes up the Event, because I cannot invoke an event that isnt in the file. (in DialoguePrefab)
+            if (Instance != this) return;
             Panel.OnChoiceSelectedEvent += ChoiceSelected;
 
             StoryInputTextFieldManager.OnStoryInputStartEvent += OnEnterInputMode;
@@ -81,12 +86,23 @@ namespace Monologue.Dialogue
         }
         void OnDisable()
         {
-            IsSharedDialogue = false;
             Panel.OnChoiceSelectedEvent -= ChoiceSelected;
             
             StoryInputTextFieldManager.OnStoryInputStartEvent -= OnEnterInputMode;
             StoryInputTextFieldManager.OnStoryInputEndEvent -= OnExitInputMode;
             DontDestroyHelper.NotDestroyedHelperEvent -= DeactivatePanel;
+            if (Instance == this) CloseDialogueLocally();
+            else ReleaseStorySession();
+        }
+
+        void OnDestroy()
+        {
+            if (Instance == this)
+            {
+                CloseDialogueLocally();
+                Instance = null;
+            }
+            else ReleaseStorySession();
         }
         void OnEnterInputMode()
         {
@@ -112,50 +128,33 @@ namespace Monologue.Dialogue
                 (mouse != null && mouse.leftButton.wasPressedThisFrame && CurrentStory.currentChoices.Count == 0);
             if (advance) ContinueStory();
         }
-        // FIXME: stupid flag variable
-        bool _isAlreadyContinued;
         public void ContinueStory()
         {
             if (SharedDialogue.Instance && SharedDialogue.Instance.Route(1)) return;
             if (IsSharedDialogue && !SharedDialogue.Applying) return;
             OnDialogueTryingToContinueEvent?.Invoke();
-            if (!ActiveDialoguePanel)
-                return;
-            
-            if(CurrentStory.canContinue || _isAlreadyContinued)
-            {
-                //FIXME: this is awful.
-                if(!_isAlreadyContinued)
-                {
-                    CurrentStory.Continue();
-                    
-                    _isAlreadyContinued = true;
-                }
-                if(_isAlreadyContinued && StoryInputTextFieldManager.Instance.ActiveInputPanel)
-                {
-                    return;   
-                }
-                _isAlreadyContinued = false;
-                
-                if(CurrentStory.currentText == "" && !CurrentStory.canContinue)
-                    ExitDialogMode();
-                
-                OnDialogueContinuedEvent?.Invoke();
+            if (!ActiveDialoguePanel || storySession == null) return;
 
-                // Strange bug with LINQ where it tries to send every Selected thing first before it tolists and sets.
-                // tried it with a parentetical and it didnt work either. 
-                var t = CurrentStory.currentChoices.Select(ctx => ctx.text).ToList();
-                _DialoguePanel.DialogueOptions = t;
-                if(t.Count > 0)
-                    OnChoiceEvent?.Invoke(t);
-
-                _DialoguePanel.DialogueText = CurrentStory.currentText;
-                StoryFunctions.HandleTags(CurrentStory);
-            }
-            else
+            var session = storySession;
+            var result = session.Advance(() => StoryInputTextFieldManager.Instance &&
+                StoryInputTextFieldManager.Instance.ActiveInputPanel);
+            if (session != storySession || result == DialogueAdvanceResult.WaitingForInput ||
+                result == DialogueAdvanceResult.WaitingForChoice) return;
+            if (result == DialogueAdvanceResult.Ended)
             {
                 ExitDialogMode();
+                return;
             }
+
+            OnDialogueContinuedEvent?.Invoke();
+            if (session != storySession) return;
+            var choices = session.Story.currentChoices.Select(choice => choice.text).ToList();
+            _DialoguePanel.DialogueOptions = choices;
+            if (choices.Count > 0) OnChoiceEvent?.Invoke(choices);
+            if (session != storySession) return;
+
+            _DialoguePanel.DialogueText = session.Story.currentText;
+            StoryFunctions.HandleTags(session.Story);
         }
         public void EnterDialogMode(TextAsset inkAsset, DialogueAudience audience, Vector3 anchor)
         {
@@ -179,6 +178,7 @@ namespace Monologue.Dialogue
             }
             bool starting = !IsSharedDialogue || CurrentAsset != asset;
             if (starting && ActiveDialoguePanel) ExitDialogMode();
+            if (starting) ReleaseStorySession();
             IsSharedDialogue = true;
             CurrentAsset = asset;
             remoteView = true;
@@ -186,12 +186,15 @@ namespace Monologue.Dialogue
             WorldDialogueCanvas.Place(_DialoguePanel, DialogueAnchor);
             if (starting)
             {
+                dialogueOpen = true;
                 CurrentStory = new Story(asset.text);
                 _DialoguePanel.EnterDialogueMode();
                 OnDialogueStartEvent?.Invoke();
             }
             CurrentStory.state.LoadJson(data.storyState);
-            foreach (var variable in CurrentStory.variablesState) if (GlobalVars.Globals.Contains(variable)) GlobalVars[variable]=CurrentStory.variablesState[variable];
+            if (GlobalVars != null)
+                foreach (var variable in CurrentStory.variablesState)
+                    if (GlobalVars.Globals.Contains(variable)) GlobalVars[variable]=CurrentStory.variablesState[variable];
             _DialoguePanel.DialogueText = data.text;
             _DialoguePanel.DialogueDisplayName = data.speaker;
             StoryFunctions.ApplyNetworkCue(new SharedWorldCue { Type=0, First=data.speaker });
@@ -204,15 +207,17 @@ namespace Monologue.Dialogue
         public void EnterDialogMode(TextAsset inkAsset)
         {
             if (!inkAsset || (IsSharedDialogue && !SharedDialogue.Applying)) return;
+            ReleaseStorySession();
             CurrentAsset = inkAsset;
-            _isAlreadyContinued = false;
             remoteView = false;
+            dialogueOpen = true;
             WorldDialogueCanvas.Place(_DialoguePanel, DialogueAnchor);
             OnDialogueStartEvent?.Invoke();
 
             CurrentStory = new Story(inkAsset.text);
             StoryFunctions.BindFunctions(CurrentStory);
-            GlobalVars.StartListening(CurrentStory);
+            boundFunctionsStory = CurrentStory;
+            storySession = new DialogueStorySession(CurrentStory, GlobalVars);
             _DialoguePanel.EnterDialogueMode();
             ActiveDialoguePanel = true;
             // Starts the story
@@ -223,39 +228,69 @@ namespace Monologue.Dialogue
         {
             if (SharedDialogue.Instance && SharedDialogue.Instance.Route(3)) return;
             if (IsSharedDialogue && !SharedDialogue.Applying) return;
-            if (CurrentStory == null) { IsSharedDialogue = false; return; }
-            closingDialogue=true;
+            CloseDialogueLocally();
+        }
+
+        void CloseDialogueLocally()
+        {
+            bool wasOpen = dialogueOpen;
+            dialogueOpen = false;
+            try
+            {
+                if (wasOpen) CloseInputPanel();
+            }
+            finally
+            {
+                IsSharedDialogue = false;
+                try { ReleaseStorySession(); }
+                finally
+                {
+                    remoteView = false;
+                    if (_DialoguePanel) _DialoguePanel.ExitDialogueMode();
+                    ActiveDialoguePanel = false;
+                    if (wasOpen) OnDialogueEndEvent?.Invoke();
+                }
+            }
+        }
+
+        void CloseInputPanel()
+        {
+            closingDialogue = true;
             try
             {
                 if (StoryInputTextFieldManager.Instance && StoryInputTextFieldManager.Instance.ActiveInputPanel)
                     StoryInputTextFieldManager.Instance.ExitInputMode();
             }
-            finally { closingDialogue=false; }
-            IsSharedDialogue = false;
-            if (!remoteView)
-            {
-                StoryFunctions.UnbindFunctions(CurrentStory);
-                GlobalVars.StopListening(CurrentStory);
-            }
-            remoteView=false;
-            _DialoguePanel.ExitDialogueMode();
-            ActiveDialoguePanel = false;
-            
-            OnDialogueEndEvent?.Invoke();
+            finally { closingDialogue = false; }
         }
 
         public void ChoiceSelected(OptionPrefab option)
         {
-            if (option) ChoiceSelected(option.index);
+            if (_DialoguePanel && _DialoguePanel.OwnsChoice(option)) ChoiceSelected(option.index);
         }
 
         public void ChoiceSelected(int idx)
         {
             if (SharedDialogue.Instance && SharedDialogue.Instance.Route(2, idx)) return;
             if (IsSharedDialogue && !SharedDialogue.Applying) return;
-            if (CurrentStory == null || idx < 0 || idx >= CurrentStory.currentChoices.Count) return;
-            CurrentStory.ChooseChoiceIndex(idx);
+            if (IsWaiting || storySession == null || !storySession.TryChoose(idx)) return;
             ContinueStory();
+        }
+
+        void ReleaseStorySession()
+        {
+            var session = storySession;
+            var functionsStory = boundFunctionsStory;
+            storySession = null;
+            boundFunctionsStory = null;
+            try
+            {
+                if (functionsStory != null) StoryFunctions.UnbindFunctions(functionsStory);
+            }
+            finally
+            {
+                session?.Dispose();
+            }
         }
 
     }

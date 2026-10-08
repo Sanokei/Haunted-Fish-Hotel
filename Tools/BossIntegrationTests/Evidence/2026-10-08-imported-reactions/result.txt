@@ -1,0 +1,1 @@
+PASS 40 real host/participant/physics BossFight checks

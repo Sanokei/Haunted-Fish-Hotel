@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HauntedFish.Multiplayer
 {
@@ -11,6 +12,32 @@ namespace HauntedFish.Multiplayer
         Vector3 _SpawnOrigin = new Vector3(-10, 1.2f, 0);
         [SerializeField]
         float _SpawnSpacing = 2;
+        [SerializeField, Min(0)] float _GhostSetupSeconds = 10;
+        [SerializeField, Min(.1f)] float _GhostFlightSpeed = 8;
+        [SerializeField] BoxCollider _HallwayFloor, _HallwayCeiling;
+        [SerializeField] Text _SetupCaption;
+        bool _SetupStarted;
+        float _SetupDeadline;
+        int _DisplayedSetupSecond = -1;
+        public float GhostFlightSpeed => float.IsNaN(_GhostFlightSpeed) || float.IsInfinity(_GhostFlightSpeed) ? 8 : Mathf.Max(.1f, _GhostFlightSpeed);
+        float GhostSetupSeconds => float.IsNaN(_GhostSetupSeconds) || float.IsInfinity(_GhostSetupSeconds) ? 10 : Mathf.Max(0, _GhostSetupSeconds);
+        public float HallwayCeilingY => _HallwayCeiling ? _HallwayCeiling.bounds.min.y : 4.11f;
+        public Bounds HallwayBounds => _HallwayFloor ? _HallwayFloor.bounds : new Bounds(new Vector3(0, -.5f, 0), new Vector3(30, 1, 2));
+        public Vector3 ClampGhost(Vector3 point) => new Vector3(Mathf.Clamp(point.x, HallwayBounds.min.x, HallwayBounds.max.x), Mathf.Clamp(point.y, HallwayBounds.max.y + .5f, _MouseBounds.yMax), 0);
+        public Vector3 ClampFish(HotelPlayerMovement movement, Vector3 point)
+        {
+            var body = movement.BodyController;
+            var scale = body.transform.lossyScale;
+            var center = Vector3.Scale(body.center, scale);
+            float radius = body.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.z));
+            float halfHeight = Mathf.Max(radius, body.height * Mathf.Abs(scale.y) * .5f);
+            var floor = HallwayBounds;
+            float top = HallwayCeilingY;
+            point.x = Mathf.Clamp(point.x, floor.min.x + radius - center.x, floor.max.x - radius - center.x);
+            point.y = Mathf.Clamp(point.y, floor.max.y + halfHeight - center.y, top - halfHeight - center.y);
+            point.z = -center.z;
+            return point;
+        }
         [SerializeField]
         Rect _MouseBounds = new Rect(-15, -2, 30, 18);
         [SerializeField]
@@ -40,6 +67,8 @@ namespace HauntedFish.Multiplayer
         public static GameSceneController Current { get; private set; }
         public GhostPlacementWorld PlacementWorld => _PlacementWorld;
         public TrapManager Traps => _Traps;
+        [SerializeField] GameHauntingController _Haunting;
+        public GameHauntingController Haunting => _Haunting;
         public HauntedHotelMultiplayer Session => _Session;
 
         readonly List<HotelPlayer> _OrderedPlayers = new List<HotelPlayer>();
@@ -85,7 +114,7 @@ namespace HauntedFish.Multiplayer
 
             if (_Chosen && authority && missingRoster)
             {
-                if (_Released)
+                if (_Released || _SetupStarted)
                 {
                     if (current)
                     {
@@ -99,6 +128,7 @@ namespace HauntedFish.Multiplayer
                                 member.RoundStateKey = current.RoundStateKey;
                                 member.RoundVersion = current.RoundVersion;
                                 member.RoundReleased = false;
+                                member.GhostSetupRemaining = Mathf.Max(0, _SetupDeadline - Time.unscaledTime);
                                 _Gate.Join(member.NetId, current.RoundVersion, Time.unscaledTime);
                             }
 
@@ -120,7 +150,7 @@ namespace HauntedFish.Multiplayer
             if (!_Chosen && authority && (_Session == null || players.Count == _Session.PlayerCount) && ready)
             {
                 _Chosen = true;
-                _Released = false;
+                _Released = _SetupStarted = false;
                 var ghost = players[Random.Range(0, players.Count)].NetId;
                 var roster = string.Join(",", players.Select(p => p.NetId.ToString()));
                 int version = maximumVersion + 1;
@@ -169,11 +199,33 @@ namespace HauntedFish.Multiplayer
                 });
             }
 
-            if (local && local.RoundReleased && _Watching)
+            if (local && local.GhostSetupReady && _Watching)
             {
                 if (_Selection)
                     _Selection.Close();
                 _Watching = false;
+            }
+            if (authority && _SetupStarted && !_Released)
+            {
+                float remaining = Mathf.Max(0, _SetupDeadline - Time.unscaledTime);
+                foreach (var member in players) member.GhostSetupRemaining = remaining;
+                if (remaining <= 0)
+                {
+                    _Released = true;
+                    foreach (var member in players)
+                        if (member.RoundIntroComplete) member.RoundReleased = true;
+                }
+            }
+            if (_SetupCaption)
+            {
+                bool show = local && local.RoundIntroComplete && !local.RoundReleased;
+                _SetupCaption.gameObject.SetActive(show);
+                int seconds = show ? Mathf.CeilToInt(local.GhostSetupRemaining) : -1;
+                if (seconds != _DisplayedSetupSecond)
+                {
+                    _DisplayedSetupSecond = seconds;
+                    _SetupCaption.text = "GHOST SETUP  " + seconds + "s  -  Fish wait for the haunting";
+                }
             }
         }
 
@@ -181,20 +233,28 @@ namespace HauntedFish.Multiplayer
         {
             if (!_Chosen || !_Players.Contains(player) || !_Gate.Finish(player.NetId, version, Time.unscaledTime))
                 return;
-            if (_Released)
-                player.RoundReleased = true;
+            if (_Released || _SetupStarted)
+            {
+                player.RoundIntroComplete = true;
+                player.RoundReleased = _Released;
+                player.GhostSetupRemaining = Mathf.Max(0, _SetupDeadline - Time.unscaledTime);
+            }
             else
                 ReleaseIfFinished();
         }
 
         void ReleaseIfFinished()
         {
-            if (!_Chosen || _Released || _Players.Count == 0 || !_Gate.Complete)
+            if (!_Chosen || _Released || _SetupStarted || _Players.Count == 0 || !_Gate.Complete)
                 return;
-            _Released = true;
+            _SetupStarted = true;
+            _SetupDeadline = Time.unscaledTime + GhostSetupSeconds;
             foreach (var player in _Players)
                 if (player)
-                    player.RoundReleased = true;
+                {
+                    player.RoundIntroComplete = true;
+                    player.GhostSetupRemaining = GhostSetupSeconds;
+                }
         }
 
         void OnEnable() => Activate();
@@ -251,7 +311,8 @@ namespace HauntedFish.Multiplayer
             _Players.Clear();
             _OrderedPlayers.Clear();
             _RosterDirty = true;
-            _Chosen = _Watching = _Watched = _Released = false;
+            _Chosen = _Watching = _Watched = _Released = _SetupStarted = false;
+            if (_SetupCaption) _SetupCaption.gameObject.SetActive(false);
             if (_Selection)
                 _Selection.Close();
             if (_GhostControls)
@@ -280,7 +341,7 @@ namespace HauntedFish.Multiplayer
                 player.ClearRoundInventory();
             }
 
-            if (_Chosen && !_Released && (!player.Networked || player.IsServer))
+            if (_Chosen && !_Released && !_SetupStarted && (!player.Networked || player.IsServer))
             {
                 // New participants join through the same mandatory round presentation.
                 _Chosen = false;

@@ -1,0 +1,1 @@
+{"inkVersion":21,"root":[["ev","str","^soul_appear","/str",1.0,0.12,{"x()":"DollyTo","exArgs":3},"pop","/ev","\n","ev","str","^soul_rise","/str",1.0,0.45,{"x()":"DollyTo","exArgs":3},"pop","/ev","\n","ev","str","^soul_clear","/str",1.0,0.18,{"x()":"DollyTo","exArgs":3},"pop","/ev","\n","end",["done",{"#n":"g-0"}],null],"done",null],"listDefs":{}}

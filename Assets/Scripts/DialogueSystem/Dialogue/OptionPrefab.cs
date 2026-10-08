@@ -15,6 +15,7 @@ namespace Monologue.Dialogue
         UnityEngine.Color m_OriginalColor = new Color32(0,0,0,0);
         [HideInInspector] public int index;
         public TMP_Text OptionTextGO;
+        internal event Panel.OnChoiceSelected ChoiceSelected;
         public static event Panel.OnChoiceSelected OnChoiceSelectedEvent;
         public string OptionText
         {
@@ -31,6 +32,7 @@ namespace Monologue.Dialogue
         {
             if (eventData.button != PointerEventData.InputButton.Left) return;
             if (DialogueManager.Instance && DialogueManager.Instance.IsWaiting) return;
+            ChoiceSelected?.Invoke(this);
             OnChoiceSelectedEvent?.Invoke(this);
         }
         public void OnPointerEnter(PointerEventData eventData)

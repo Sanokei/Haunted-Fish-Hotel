@@ -15,7 +15,7 @@ namespace HauntedFish.Multiplayer
             if (controller.isGrounded && _VerticalSpeed < 0) _VerticalSpeed = -2;
             _VerticalSpeed -= movement.Gravity * delta;
             var direction = Vector3.right * _Input.x + Vector3.forward * _Input.y;
-            if (!movement.TryMove((direction * (movement.CanMove ? movement.WalkingSpeed : 0) + Vector3.up * _VerticalSpeed) * delta))
+            if (!movement.TryMove((direction * (movement.CanMove ? movement.LobbyWalkingSpeed : 0) + Vector3.up * _VerticalSpeed) * delta))
             { Reset(); return false; }
             bool walking = direction.sqrMagnitude > .001f && movement.CanMove;
             if (walking) movement.FaceDirection(direction);

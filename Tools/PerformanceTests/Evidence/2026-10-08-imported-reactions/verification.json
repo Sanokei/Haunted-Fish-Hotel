@@ -1,0 +1,18 @@
+{
+  "passed": {
+    "lobby_loading_ink": 76,
+    "gameplay_lobby": 48,
+    "boss_shared_native": 40,
+    "boss_arena_physics_reactions": 49,
+    "model_geometry_materials": 15
+  },
+  "original_editor_pid": 13188,
+  "unverified": [
+    "two admitted clients and remote readiness/transport delivery",
+    "reconnect and latency reconciliation",
+    "original Library visual reference matching"
+  ],
+  "measurement": "No measured performance claim",
+  "model": "User-confirmed local FBX integrated; Library download issue resolved by local file",
+  "library_render": "libfile_b793d3d802f08191b7f8e8456ea83e35"
+}

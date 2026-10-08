@@ -11,6 +11,8 @@ namespace HauntedFish.Multiplayer
         TrapInputMode _InputMode;
         [SerializeField]
         TrapBehaviour _Behaviour;
+        [Tooltip("Floor preserves ordinary placement. HallwayCeiling aligns its body to the authored ceiling and its landing to the floor.")]
+        [SerializeField] TrapPlacementMode _PlacementMode;
         [SerializeField]
         Sprite _Icon;
         [SerializeField]
@@ -46,15 +48,20 @@ namespace HauntedFish.Multiplayer
         public string DisplayName => _DisplayName;
         public TrapInputMode InputMode => _InputMode;
         public Sprite Icon => _Icon;
-        public Vector3 ArmedOffset => _ArmedOffset;
+        public TrapPlacementMode PlacementMode => _PlacementMode;
+        public Vector3 ColliderOffset => _Collider ? Vector3.Scale(_Collider.center, transform.lossyScale) : Vector3.zero;
+        public Vector3 ArmedOffset => _PlacementMode == TrapPlacementMode.HallwayCeiling && GameSceneController.Current
+            ? new Vector3(0, Mathf.Max(0, GameSceneController.Current.HallwayCeilingY - GameSceneController.Current.HallwayBounds.max.y - BodyHalfSize.y * 2), 0) : _ArmedOffset;
+        float FallDistance => _PlacementMode == TrapPlacementMode.HallwayCeiling && GameSceneController.Current ? ArmedOffset.y : _FallDistance;
         public Vector3 Position => transform.position;
         public Vector2 BackgroundSize => _BackgroundSize;
         public Vector2 BackgroundOffset => _BackgroundOffset;
         public Vector2 ObjectSize => _ObjectSize;
+        public Bounds CollisionBounds => _Collider ? _Collider.bounds : new Bounds(Position, ObjectSize);
         public Vector3 BodyHalfSize => _Collider ? Vector3.Scale(_Collider.size, transform.lossyScale) * .5f : Vector3.one * .5f;
         public Vector3 HalfExtents => BodyHalfSize * .96f;
         public TrapPhase Phase => (TrapPhase)_State.Phase;
-        public Vector2 Limits => new Vector2(Mathf.Max(-15 + BodyHalfSize.x, _State.Origin.x - _TravelHalfWidth), Mathf.Min(15 - BodyHalfSize.x, _State.Origin.x + _TravelHalfWidth));
+        public Vector2 Limits => World ? World.TravelLimits(_State.Origin, BodyHalfSize, ColliderOffset, _TravelHalfWidth) : new Vector2(Mathf.Max(-15 + BodyHalfSize.x, _State.Origin.x - _TravelHalfWidth), Mathf.Min(15 - BodyHalfSize.x, _State.Origin.x + _TravelHalfWidth));
         public string ControlHint => _InputMode == TrapInputMode.Movement ? "A/D / stick: move" : _InputMode == TrapInputMode.MouseClick ? "Mouse click: activate - R: reset" : "Space / A: activate - R: reset";
 
         public void Initialize(GhostPlacementWorld world, GhostCubePlacement state, int index)
@@ -90,7 +97,7 @@ namespace HauntedFish.Multiplayer
                 _Elapsed = 0;
                 _State.Phase = (int)TrapPhase.Armed;
                 _State.Progress = 0;
-                _State.Position = _State.Origin + _ArmedOffset;
+                _State.Position = _State.Origin + ArmedOffset;
                 ApplyState(_State);
                 Physics.SyncTransforms();
                 return true;
@@ -138,7 +145,7 @@ namespace HauntedFish.Multiplayer
                 _State.Progress = Mathf.Clamp01(_Elapsed / Mathf.Max(.01f, duration));
                 if (_Behaviour == TrapBehaviour.Fall)
                 {
-                    var target = _State.Origin + _ArmedOffset + Vector3.down * (_FallDistance * _State.Progress * _State.Progress);
+                    var target = _State.Origin + ArmedOffset + Vector3.down * (FallDistance * _State.Progress * _State.Progress);
                     bool blocked = !MovePhysical(target - Position, false) && (target - Position).sqrMagnitude > .00001f;
                     if (_State.Progress >= 1 || blocked)
                     {
@@ -170,7 +177,8 @@ namespace HauntedFish.Multiplayer
         {
             Physics.SyncTransforms();
             int count;
-            var target = _State.Origin + _ArmedOffset;
+            var target = _State.Origin + ArmedOffset;
+            if (World && !World.FootprintAllowed(target + ColliderOffset, BodyHalfSize)) return false;
             var rotation = Matrix4x4.Rotate(transform.rotation);
             var half = HalfExtents;
             var extent = new Vector3(Mathf.Abs(rotation.m00)*half.x+Mathf.Abs(rotation.m01)*half.y+Mathf.Abs(rotation.m02)*half.z,
@@ -205,6 +213,13 @@ namespace HauntedFish.Multiplayer
                 var hit = _Hits[i];
                 if (hit.collider.transform.IsChildOf(transform))
                     continue;
+                // A ceiling-aligned body starts touching its supporting ceiling.
+                // BoxCast may report that initial touch even while moving away.
+                var contact = hit.collider.bounds;
+                var body = CollisionBounds;
+                if (hit.distance <= ContactMargin &&
+                    (direction.y < -.5f && contact.min.y >= body.max.y - .001f ||
+                     direction.y > .5f && contact.max.y <= body.min.y + .001f)) continue;
                 var fish = hit.collider.GetComponentInParent<HotelPlayer>();
                 if (pushFish && fish && fish.ControlsReady && fish.ControlMode == HotelControlMode.Fish && fish.Movement && fish.Movement.SimulationReady)
                     continue;

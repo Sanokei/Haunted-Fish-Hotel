@@ -32,6 +32,30 @@ namespace HauntedFish.Multiplayer
         GhostTrap[] _TrapPrefabs = Array.Empty<GhostTrap>();
         [SerializeField]
         Transform _TrapContainer;
+        [Tooltip("Authored trigger marking the starting area. Trap footprints and cart travel cannot enter it.")]
+        [SerializeField] BoxCollider _GraceZone;
+        [Tooltip("Maximum horizontal placement reach for a hallway ceiling trap; vertical flight within the hallway does not require floor alignment.")]
+        [SerializeField, Min(.1f)] float _HallwayPlacementReach = 4;
+        public Bounds GraceBounds => _GraceZone ? _GraceZone.bounds : default;
+        public bool HasGraceZone => _GraceZone && _GraceZone.enabled && _GraceZone.gameObject.activeInHierarchy;
+        public bool FootprintAllowed(Vector3 center, Vector3 half)
+        {
+            if (!HasGraceZone) return true;
+            var safe = GraceBounds;
+            return center.x - half.x >= safe.max.x - .0001f || center.x + half.x <= safe.min.x + .0001f ||
+                center.z - half.z >= safe.max.z || center.z + half.z <= safe.min.z;
+        }
+        public Vector2 TravelLimits(Vector3 origin, Vector3 half, Vector3 offset, float travel)
+        {
+            var hallway = GameSceneController.Current ? GameSceneController.Current.HallwayBounds : new Bounds(new Vector3(0, -.5f, 0), new Vector3(30, 1, 2));
+            float left = hallway.min.x + half.x - offset.x, right = hallway.max.x - half.x - offset.x;
+            if (HasGraceZone && origin.z + offset.z + half.z > GraceBounds.min.z && origin.z + offset.z - half.z < GraceBounds.max.z)
+            {
+                if (origin.x + offset.x >= GraceBounds.max.x) left = Mathf.Max(left, GraceBounds.max.x + half.x - offset.x);
+                else right = Mathf.Min(right, GraceBounds.min.x - half.x - offset.x);
+            }
+            return new Vector2(Mathf.Max(left, origin.x - travel), Mathf.Min(right, origin.x + travel));
+        }
         GhostCubeSnapshot _State = new GhostCubeSnapshot();
         readonly Dictionary<int, GhostTrap> _Objects = new Dictionary<int, GhostTrap>();
         string _Applied = "";
@@ -174,9 +198,17 @@ namespace HauntedFish.Multiplayer
         {
             var prefab = Definition(family);
             float height = prefab ? prefab.BodyHalfSize.y : .5f;
-            grounded = new Vector3(requested.x, height, 0);
-            return prefab && Finite(requested.x) && Finite(requested.y) && Finite(requested.z) && requested.x >= -15 + prefab.BodyHalfSize.x && requested.x <= 15 - prefab.BodyHalfSize.x && !FishOccupies(grounded + prefab.ArmedOffset, prefab.HalfExtents) &&
-                !Physics.CheckBox(grounded + prefab.ArmedOffset, prefab.HalfExtents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            var hallway = GameSceneController.Current ? GameSceneController.Current.HallwayBounds : new Bounds(new Vector3(0, -.5f, 0), new Vector3(30, 1, 2));
+            var offset = prefab ? prefab.ColliderOffset : Vector3.zero;
+            grounded = new Vector3(requested.x, hallway.max.y + height - offset.y, -offset.z);
+            if (!prefab || !Finite(requested.x) || !Finite(requested.y) || !Finite(requested.z)) return false;
+            var center = grounded + prefab.ArmedOffset + offset;
+            var half = prefab.BodyHalfSize;
+            float ceiling = GameSceneController.Current ? GameSceneController.Current.HallwayCeilingY : 4.11f;
+            return center.x - half.x >= hallway.min.x && center.x + half.x <= hallway.max.x &&
+                center.y + half.y <= ceiling + .0001f && FootprintAllowed(center, half) &&
+                !FishOccupies(center, prefab.HalfExtents) &&
+                !Physics.CheckBox(center, prefab.HalfExtents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
         }
 
         public static bool FishOccupies(Vector3 center, Vector3 halfExtents)
@@ -271,7 +303,16 @@ namespace HauntedFish.Multiplayer
             if (!definition)
                 return false;
             Vector3 position = (!player.Networked || player.IsRelevantPlayer) && Controls ? Controls.FlightPosition : Flight(player).Position;
-            return Finite(grounded.x) && Finite(grounded.y) && Finite(grounded.z) && Mathf.Abs(grounded.x - position.x) <= InteractionTolerance && Mathf.Abs(grounded.z - position.z) <= .01f && Mathf.Abs(position.y - definition.BodyHalfSize.y) <= InteractionTolerance;
+            if (!Finite(grounded.x) || !Finite(grounded.y) || !Finite(grounded.z)) return false;
+            if (definition.PlacementMode == TrapPlacementMode.HallwayCeiling)
+            {
+                var scene = GameSceneController.Current;
+                float floor = scene ? scene.HallwayBounds.max.y : 0, ceiling = scene ? scene.HallwayCeilingY : 4.11f;
+                return Mathf.Abs(grounded.x - position.x) <= Mathf.Max(.1f, _HallwayPlacementReach) &&
+                    Mathf.Abs(position.z) <= InteractionTolerance && position.y >= floor - InteractionTolerance && position.y <= ceiling + InteractionTolerance;
+            }
+            return Mathf.Abs(grounded.x - position.x) <= InteractionTolerance && Mathf.Abs(grounded.z - position.z) <= .01f &&
+                Mathf.Abs(position.y - (grounded.y + definition.ColliderOffset.y)) <= InteractionTolerance;
         }
 
         void SimulateFlight(HotelPlayer player)
@@ -283,13 +324,13 @@ namespace HauntedFish.Multiplayer
             if (trap)
                 motion.Position = trap.Position;
             else if (Time.unscaledTime - motion.LastInput <= .3f)
-                motion.Position += new Vector3(motion.Axis.x, motion.Axis.y, 0) * (6 * Time.unscaledDeltaTime);
-            motion.Position = new Vector3(Mathf.Clamp(motion.Position.x, -15, 15), Mathf.Clamp(motion.Position.y, .5f, 16), 0);
+                motion.Position += new Vector3(motion.Axis.x, motion.Axis.y, 0) * ((GameSceneController.Current ? GameSceneController.Current.GhostFlightSpeed : 8) * Time.unscaledDeltaTime);
+            motion.Position = GameSceneController.Current ? GameSceneController.Current.ClampGhost(motion.Position) : new Vector3(Mathf.Clamp(motion.Position.x, -15, 15), Mathf.Clamp(motion.Position.y, .5f, 16), 0);
             player.GhostFlightPosition = motion.Position;
             player.GhostFlightReady = true;
         }
 
-        static bool Authority(HotelPlayer player) => player && (!player.Networked || player.IsServer) && player.ControlsReady && player.RoundReleased && player.ControlMode == HotelControlMode.Ghost;
+        static bool Authority(HotelPlayer player) => player && (!player.Networked || player.IsServer) && player.ControlsReady && !player.InBossFight && !player.BossHallwayLocked && player.GhostSetupReady && player.ControlMode == HotelControlMode.Ghost;
         bool CanControl(HotelPlayer player) => isActiveAndEnabled && Authority(player) && player.InventoryScope == _State.RoomScope && player.RoundStateKey == _State.RoundKey && player.RoundVersion == _State.RoundVersion && !string.IsNullOrEmpty(_State.RoundKey);
         public bool RequestMatches(HotelPlayer player, string key, int version) => CanControl(player) && key == _State.RoundKey && version == _State.RoundVersion;
         public bool Hold(HotelPlayer player, string family, Vector3 position)
@@ -318,6 +359,7 @@ namespace HauntedFish.Multiplayer
             var trap = Trap(id);
             if (player.ControlledCube != id || !trap || trap.CaptureState().OwnerId != player.NetId)
                 return false;
+            EmitPossession(player, trap.Position);
             trap.StopInput();
             trap.gameObject.SetActive(false);
             Destroy(trap.gameObject);
@@ -412,6 +454,41 @@ namespace HauntedFish.Multiplayer
             return true;
         }
 
+        internal void SuspendGhost(HotelPlayer player)
+        {
+            if (!CanControl(player)) return;
+            if (Trap(player.ControlledCube)) Trap(player.ControlledCube).StopInput();
+            player.ControlledCube = -1;
+            if (_Flights.TryGetValue(player, out var motion)) motion.Axis = Vector2.zero;
+        }
+        internal void RestoreFlight(HotelPlayer player, Vector3 position)
+        {
+            if (!player || player.Networked && !player.IsServer) return;
+            _Flights[player] = new FlightMotion { Position = position, Axis = Vector2.zero, LastInput = Time.unscaledTime };
+            player.GhostFlightPosition = position;
+            player.GhostFlightReady = true;
+        }
+        internal void TransferGhost(HotelPlayer previous, HotelPlayer next, Vector3 flightPosition)
+        {
+            previous.ControlledCube = next.ControlledCube = -1;
+            previous.HeldTrapFamily = next.HeldTrapFamily = "";
+            foreach (var trap in _Objects.Values)
+            {
+                trap.StopInput();
+                var state = trap.CaptureState();
+                if (state.OwnerId != previous.NetId) continue;
+                state.OwnerId = next.NetId;
+                trap.ApplyState(state);
+                int index = _State.Cubes.FindIndex(item => item.Id == state.Id);
+                _State.Cubes[index] = state;
+            }
+            _Flights.Remove(previous);
+            _Flights[next] = new FlightMotion { Position = flightPosition, Axis = Vector2.zero, LastInput = Time.unscaledTime };
+            previous.GhostFlightReady = false;
+            next.GhostFlightPosition = flightPosition;
+            next.GhostFlightReady = true;
+            Changed(next);
+        }
         void Changed(HotelPlayer player)
         {
             _Dirty = true;
@@ -455,12 +532,18 @@ namespace HauntedFish.Multiplayer
                     if (CanControl(players[i]))
                         SimulateFlight(players[i]);
                 foreach (var item in _Objects)
-                    if (item.Value.Simulate(Time.deltaTime, Time.unscaledTime))
+                {
+                    var trap = item.Value;
+                    var before = trap.Position;
+                    if (trap.Simulate(Time.deltaTime, Time.unscaledTime))
                     {
                         int index = _State.Cubes.FindIndex(p => p.Id == item.Key);
-                        _State.Cubes[index] = item.Value.CaptureState();
+                        _State.Cubes[index] = trap.CaptureState();
                         _Dirty = true;
                     }
+                    if (GameSceneController.Current && GameSceneController.Current.Haunting)
+                        GameSceneController.Current.Haunting.ApplyTrapSpook(trap, before, Time.deltaTime);
+                }
 
                 Publish(authority);
             }

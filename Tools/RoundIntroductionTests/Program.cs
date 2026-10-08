@@ -40,6 +40,17 @@ static class Program {
   var smokeSteps=StoryFunctions.ReadAnimationSequence(smoke.ToJson());Check(smokeSteps.Count==2&&smokeSteps[0].Target=="puff_burst"&&smokeSteps[1].Target=="puff_clear","Cloud burst and cleanup use the existing Ink animation bindings");
   if(args.Contains("--compile"))File.WriteAllText(Path.ChangeExtension(smokePath,".json"),smoke.ToJson());
   else Check(StoryFunctions.ReadAnimationSequence(File.ReadAllText(Path.ChangeExtension(smokePath,".json"))).SequenceEqual(smokeSteps),"Compiled smoke Ink matches source");
+  var emergencePath=Path.Combine(root,"Assets/Dialogue/GhostEmergence.ink");
+  var emergence=new Ink.Compiler(File.ReadAllText(emergencePath)).Compile();
+  Check(emergence!=null,"Fish soul emergence Ink compiles");
+  var emergenceSteps=StoryFunctions.ReadAnimationSequence(emergence.ToJson());
+  Check(emergenceSteps.Select(step=>step.Target).SequenceEqual(new[]{"soul_appear","soul_rise","soul_clear"}),"Reusable emergence uses existing Ink layouts in order");
+  if(args.Contains("--compile"))File.WriteAllText(Path.ChangeExtension(emergencePath,".json"),emergence.ToJson());
+  else Check(StoryFunctions.ReadAnimationSequence(File.ReadAllText(Path.ChangeExtension(emergencePath,".json"))).SequenceEqual(emergenceSteps),"Compiled emergence Ink matches source");
+  var grandmaPath=Path.Combine(root,"Assets/Dialogue/GrandmafishInspect.ink");
+  var grandma=new Ink.Compiler(File.ReadAllText(grandmaPath)).Compile();
+  Check(grandma!=null,"Grandmafish inspect dialogue compiles");
+  if(args.Contains("--compile"))File.WriteAllText(Path.ChangeExtension(grandmaPath,".json"),grandma.ToJson());
   Console.WriteLine("Passed "+checks+" round introduction checks.");
  }
 }

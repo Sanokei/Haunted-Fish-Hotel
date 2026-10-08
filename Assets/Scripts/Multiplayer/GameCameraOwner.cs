@@ -33,6 +33,8 @@ namespace HauntedFish.Multiplayer
             _Player = null;
             _Movement = null;
         }
+        public void ResetFollow() => BindPlayer(HotelPlayer.LocalPlayer);
+
         void BindPlayer(HotelPlayer player)
         {
             if (_BoundCamera != Camera)
@@ -70,7 +72,7 @@ namespace HauntedFish.Multiplayer
             _PreviousPosition = position;
             // Ignore teleports, and measure horizontal motion on both hosts and interpolated clients.
             var speed = delta.sqrMagnitude < 16f ? Mathf.Abs(delta.x) / Mathf.Max(Time.deltaTime, .0001f) : 0;
-            var movement = Mathf.Clamp01(speed / (_Movement ? Mathf.Max(.1f, _Movement.WalkingSpeed) : 4.5f));
+            var movement = Mathf.Clamp01(speed / (_Movement ? Mathf.Max(.1f, _Movement.RunningSpeed) : 4.5f));
             var targetSize = RestingSize * (1 + MovingExpansion * movement);
             Camera.Lens.OrthographicSize = Mathf.SmoothDamp(Camera.Lens.OrthographicSize, targetSize,
                 ref _ZoomVelocity, ZoomSmoothTime);

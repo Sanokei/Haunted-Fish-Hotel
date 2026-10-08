@@ -4,7 +4,7 @@ using Ink.Runtime;
 
 namespace Monologue.Dialogue
 {
-    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI }
+    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI, Spin }
 
     public readonly struct StorySequenceStep
     {
@@ -34,6 +34,8 @@ namespace Monologue.Dialogue
         public static event OnMoveUI OnMoveUIEvent;
         public delegate void OnKnock(string objectTag, int count, float interval);
         public static event OnKnock OnKnockEvent;
+        public delegate void OnSpin(string tag, float turns, float seconds);
+        public static event OnSpin OnSpinEvent;
         public delegate void OnWait(float seconds);
         public static event OnWait OnWaitEvent;
         public delegate void OnExpandPanel(string panelTag, float seconds);
@@ -94,6 +96,11 @@ namespace Monologue.Dialogue
                 if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.Knock, objectTag, seconds: interval, count: count));
                 else OnKnockEvent?.Invoke(objectTag, count, interval);
             });
+            story.BindExternalFunction("Spin", (string tag, float turns, float seconds) =>
+            {
+                if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.Spin, tag, seconds: seconds, x: turns));
+                else OnSpinEvent?.Invoke(tag, turns, seconds);
+            });
             story.BindExternalFunction("Wait", (float seconds) =>
             {
                 if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.Wait, seconds: seconds));
@@ -112,6 +119,7 @@ namespace Monologue.Dialogue
             story.UnbindExternalFunction("MoveUI");
             story.UnbindExternalFunction("Knock");
             story.UnbindExternalFunction("Wait");
+            story.UnbindExternalFunction("Spin");
         }
 
         public static IReadOnlyList<StorySequenceStep> ReadAnimationSequence(string compiledInk)

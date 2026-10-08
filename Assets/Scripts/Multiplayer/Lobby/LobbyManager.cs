@@ -20,6 +20,8 @@ namespace HauntedFish.Multiplayer
         [SerializeField] LobbyTrigger _DeskZone;
         [SerializeField] LobbyTrigger _StairZone;
         [SerializeField] Texture2D _DeskCursor;
+        [SerializeField] LobbyCursorManager _CursorManager;
+        public bool InspectionAllowed => isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && !MenuOpen && !IntroductionPlaying;
         [SerializeField] HauntedHotelMultiplayer _Lobby;
         [Header("Introduction (compiled Ink JSON)")]
         [SerializeField] TextAsset _IntroductionInk;
@@ -153,12 +155,20 @@ namespace HauntedFish.Multiplayer
             var cursor = active && (_AtDesk || MenuOpen);
             if (MenuOpen)
             {
+                if (_CursorManager) _CursorManager.SetDesk(active, _AtDesk, true, _DeskCursor);
                 if (_Lobby) _Lobby.SetInputFocused(false);
                 return;
             }
+            if (_CursorManager)
+            {
+                _CursorManager.SetDesk(active, _AtDesk, MenuOpen, _DeskCursor);
+            }
+            else
+            {
             Cursor.visible = cursor;
             Cursor.lockState = cursor ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.SetCursor(active && _AtDesk ? _DeskCursor : null, Vector2.zero, CursorMode.Auto);
+            }
             if (_Lobby) _Lobby.SetInputFocused(active && CanUseDesk && _Panel.InputFocused);
         }
         bool CanUseDesk => isActiveAndEnabled && _AtDesk && !MenuOpen && !IntroductionPlaying && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning;

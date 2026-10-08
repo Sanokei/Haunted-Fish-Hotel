@@ -1,0 +1,20 @@
+{
+  "passed": {
+    "host_game": 74,
+    "host_audit": 41,
+    "lifecycle": 14,
+    "lobby_loading": 76,
+    "boss_native_integration": 22,
+    "gameplay_lobby": 48,
+    "boss_native_arena": 24,
+    "boss_rules": 1502,
+    "round_ink_rules": 2102
+  },
+  "original_editor_pid": 13188,
+  "unverified": [
+    "two admitted clients, remote scene readiness and transport delivery",
+    "reconnect and latency reconciliation",
+    "reference matched Blender replacement pending cloud delivery"
+  ],
+  "measurement": "No new measured performance claim"
+}

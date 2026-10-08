@@ -53,7 +53,7 @@ namespace HauntedFish.Multiplayer
                 }
 
                 _Seen[player] = player.PossessionEffectVersion;
-                if (local.RoundReleased && player.PossessionEffectVersion > seen && _Prefab)
+                if (local.GhostSetupReady && player.PossessionEffectVersion > seen && _Prefab)
                 {
                     var puff = Instantiate(_Prefab);
                     puff.PlayAt(player.PossessionEffectPosition);

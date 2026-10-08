@@ -26,6 +26,15 @@ namespace HauntedFish.Multiplayer
         string _Family = "";
         Vector3 _Position;
         public Vector3 FlightPosition => _Position;
+        public static bool HallwayPointer(Camera camera, Vector2 screen, out Vector3 point)
+        {
+            point = Vector3.zero;
+            if (!camera) return false;
+            var ray = camera.ScreenPointToRay(screen);
+            if (!new Plane(Vector3.forward, Vector3.zero).Raycast(ray, out float distance)) return false;
+            point = ray.GetPoint(distance); point.z = 0;
+            return !float.IsNaN(point.x) && !float.IsInfinity(point.x) && !float.IsNaN(point.y) && !float.IsInfinity(point.y);
+        }
         public int NearbyTrapId { get; private set; } = -1;
 
         int _HudMode = -1;
@@ -64,7 +73,7 @@ namespace HauntedFish.Multiplayer
         void Update()
         {
             var player = HotelPlayer.LocalPlayer;
-            bool active = player && player.ControlsReady && player.ControlMode == HotelControlMode.Ghost && !player.InputBlocked;
+            bool active = player && player.ControlsReady && !player.InBossFight && !player.BossHallwayLocked && player.ControlMode == HotelControlMode.Ghost && !player.InputBlocked;
             if (!active)
             {
                 if (_Map.enabled) StopOwnedMotion(player);
@@ -73,8 +82,8 @@ namespace HauntedFish.Multiplayer
                 _HudMode = -1;
                 if (_TrapManager)
                     _TrapManager.HighlightPackage(null);
-                if (player && player.ControlMode != HotelControlMode.Ghost)
-                    _Possessed = _Pending = false;
+                if (player && (player.ControlMode != HotelControlMode.Ghost || player.InBossFight || player.BossHallwayLocked))
+                    { _Possessed = _Pending = _Prepared = false; }
                 if (_Preview)
                     _Preview.SetActive(false);
                 if (_Grid)
@@ -92,7 +101,7 @@ namespace HauntedFish.Multiplayer
             {
                 _PreparedRoundKey = player.RoundStateKey;
                 _Pending = _Possessed = false;
-                Prepare(_Scene.SpawnPosition(0) + Vector3.up * 1.5f);
+                Prepare(player.GhostFlightReady ? player.GhostFlightPosition : _Scene.SpawnPosition(0) + Vector3.up * 1.5f);
             }
 
             _Map.Enable();
@@ -116,7 +125,17 @@ namespace HauntedFish.Multiplayer
                     if (artwork)
                         _PreviewSprite.sprite = artwork;
                     var size = _PreviewSprite.sprite ? _PreviewSprite.sprite.bounds.size : Vector3.one;
-                    _PreviewSprite.transform.localScale = new Vector3(definition.ObjectSize.x / Mathf.Max(.001f, size.x), definition.ObjectSize.y / Mathf.Max(.001f, size.y), 1);
+                    if (definition.PlacementMode == TrapPlacementMode.HallwayCeiling)
+                    {
+                        float scale = Mathf.Min(definition.ObjectSize.x / Mathf.Max(.001f, size.x), Mathf.Min(definition.ObjectSize.y, definition.BodyHalfSize.y * 2) / Mathf.Max(.001f, size.y));
+                        _PreviewSprite.transform.localScale = new Vector3(scale, scale, 1);
+                        _PreviewSprite.transform.localPosition = new Vector3(0, definition.BodyHalfSize.y - _PreviewSprite.sprite.bounds.max.y * scale, 0);
+                    }
+                    else
+                    {
+                        _PreviewSprite.transform.localScale = new Vector3(definition.ObjectSize.x / Mathf.Max(.001f, size.x), definition.ObjectSize.y / Mathf.Max(.001f, size.y), 1);
+                        _PreviewSprite.transform.localPosition = Vector3.zero;
+                    }
                 }
             }
 
@@ -199,13 +218,26 @@ namespace HauntedFish.Multiplayer
             }
 
             if (!_Pending)
-                _Position += new Vector3(move.x, move.y, 0) * (6 * Time.unscaledDeltaTime);
-            var clamped = new Vector3(Mathf.Clamp(_Position.x, -15, 15), Mathf.Clamp(_Position.y, .5f, 16), 0);
+                _Position += new Vector3(move.x, move.y, 0) * (_Scene.GhostFlightSpeed * Time.unscaledDeltaTime);
+            var clamped = _Scene.ClampGhost(_Position);
             _Position = new Vector3(clamped.x, clamped.y, 0);
             _Flight.position = _Position;
-            bool clear = _World.PlacementPoint(_Position, _Family, out var placement);
-            _Preview.transform.SetPositionAndRotation(_Position, Quaternion.identity);
-            clear = clear && Mathf.Abs(_Position.y - placement.y) <= .6f;
+            var heldDefinition = _World.Definition(_Family);
+            bool ceilingPlacement = _Possessed && heldDefinition && heldDefinition.PlacementMode == TrapPlacementMode.HallwayCeiling;
+            var target = _Position;
+            if (ceilingPlacement && Mouse.current != null && HallwayPointer(HotelViewCamera.Current, _Point.ReadValue<Vector2>(), out var pointed)) target = pointed;
+            bool clear = _World.PlacementPoint(target, _Family, out var placement);
+            if (ceilingPlacement)
+            {
+                float floor = _Scene.HallwayBounds.max.y, top = _Scene.HallwayCeilingY;
+                clear = clear && target.y >= floor - GhostPlacementWorld.InteractionTolerance && target.y <= top + GhostPlacementWorld.InteractionTolerance && _World.PlacementNearFlight(player, placement, _Family);
+                _Preview.transform.SetPositionAndRotation(placement + heldDefinition.ArmedOffset, Quaternion.identity);
+            }
+            else
+            {
+                _Preview.transform.SetPositionAndRotation(_Position, Quaternion.identity);
+                clear = clear && Mathf.Abs(_Position.y - placement.y) <= .6f;
+            }
             if (_PreviewSprite)
                 _PreviewSprite.color = clear ? HotelPalette.Light : HotelPalette.Rust;
             int nearbyTrap = NearbyTrapId = _World.NearbyCube(_Position, player);
@@ -300,7 +332,7 @@ namespace HauntedFish.Multiplayer
         void StopOwnedMotion(HotelPlayer player)
         {
             if (!player || !player.IsRelevantPlayer || !player.ControlsReady ||
-                player.ControlMode != HotelControlMode.Ghost || !player.RoundReleased) return;
+                player.ControlMode != HotelControlMode.Ghost || !player.GhostSetupReady) return;
             if (player.Networked)
             {
                 player.SendGhostFlightInput(Vector2.zero, player.RoundStateKey, player.RoundVersion);

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RoundIntroductionTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d32fbe9ffd40e487a90d6a81a30957f78d2f5a03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b2e9f41ea7e3f4165b0f76ec9052f164cabf84a")]
 [assembly: System.Reflection.AssemblyProductAttribute("RoundIntroductionTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RoundIntroductionTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

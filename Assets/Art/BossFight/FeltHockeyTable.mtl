@@ -1,0 +1,27 @@
+newmtl Felt
+Kd 0.035 0.21 0.15
+Ns 10
+newmtl Walnut
+Kd 0.18 0.075 0.04
+Ns 10
+newmtl Brass
+Kd 0.75 0.48 0.17
+Ns 10
+newmtl Ghost
+Kd 0.76 0.24 0.35
+Ns 10
+newmtl Fish
+Kd 0.25 0.68 0.72
+Ns 10
+newmtl CueBall
+Kd 0.94 0.93 0.82
+Ns 10
+newmtl Floor
+Kd 0.095 0.09 0.12
+Ns 10
+newmtl Walls
+Kd 0.2 0.12 0.17
+Ns 10
+newmtl Lines
+Kd 0.45 0.63 0.51
+Ns 10

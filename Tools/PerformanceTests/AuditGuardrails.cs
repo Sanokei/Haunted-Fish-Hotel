@@ -107,6 +107,14 @@ public static class AuditGuardrails
         var shorter = JsonUtility.FromJson<ConveyorSnapshot>(manager.Snapshot);
         Check(shorter.Packages.TrueForAll(p => p.Distance <= 5), "Paused shortened conveyor removes out-of-range package distances");
         Check(manager.ApplySnapshot(manager.Snapshot), "Shortened paused path publishes a valid replica snapshot");
+        int conveyorRevision=JsonUtility.FromJson<ConveyorSnapshot>(manager.Snapshot).Revision;
+        manager.enabled=false;
+        var stoppedConveyor=JsonUtility.FromJson<ConveyorSnapshot>(player.ConveyorJson);
+        Check(stoppedConveyor.Revision>conveyorRevision&&!stoppedConveyor.Running&&stoppedConveyor.Packages.Count==0,
+            "Actual authority manager disable publishes higher empty shared conveyor state");
+        Check(!manager.StartConveyor(),"Disabled manager continues rejecting fresh authoring after final publication");
+        manager.enabled=true;manager.Simulate(player,0);
+
         // Invalid editable grid spacing is finite and bounded, including tiny values.
         var gridObject = new GameObject("Audit invalid spacing");
         gridObject.SetActive(false);
@@ -201,7 +209,7 @@ public static class AuditGuardrails
             Check(axis.magnitude<=1.00001f,"Server clamps oversized flight axes before movement");
             var before=(Vector3)motion.GetType().GetField("Position").GetValue(motion);
             world.GetType().GetMethod("SimulateFlight",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(world,new object[]{remote});
-            Check(Vector3.Distance(before,remote.GhostFlightPosition)<=6*Time.unscaledDeltaTime+.0001f,"Remote ghost authority integrates no faster than configured flight speed");
+            Check(Vector3.Distance(before,remote.GhostFlightPosition)<=(GameSceneController.Current ? GameSceneController.Current.GhostFlightSpeed : 8)*Time.unscaledDeltaTime+.0001f,"Remote ghost authority integrates no faster than configured flight speed");
             Check(!world.AcceptFlightInput(remote,Vector2.one,"stale",world.RoundVersion)&&
                 !world.InteractionPosition(remote,new Vector3(100,6.5f,0),out _),"Remote authority rejects stale movement scope and forged proximity coordinates");
             var package=manager.ClosestPackage(remote.GhostFlightPosition);

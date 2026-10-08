@@ -132,7 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputActions: {fileID: -944628639613478452, guid: 6b1b59be39e74c7fb572115019637e61, type: 3}
-  WalkingSpeed: 4.5
+  WalkingSpeed: 1.8
+  RunningSpeed: 4.5
+  LobbyWalkingSpeed: 6
   Gravity: 25
   CanMove: 1
 --- !u!1 &21000009

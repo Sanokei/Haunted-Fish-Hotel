@@ -17,6 +17,15 @@ namespace HauntedFish.Multiplayer
         [SerializeField] TextAsset _RoundInk;
         [SerializeField] StoryUI _AtticPrefab;
         StoryUI _Attic;
+        Canvas _WheelCanvas, _AtticCanvas;
+        void Awake() { if (_Root) _WheelCanvas = _Root.GetComponent<Canvas>(); }
+        void LateUpdate()
+        {
+            bool watching = HotelPlayer.LocalPlayer && HotelPlayer.LocalPlayer.BossWatching;
+            if (_WheelCanvas) _WheelCanvas.enabled = !watching;
+            if (_Attic && (!_AtticCanvas || _AtticCanvas.gameObject != _Attic.gameObject)) _AtticCanvas = _Attic.GetComponent<Canvas>();
+            if (_AtticCanvas) _AtticCanvas.enabled = !watching;
+        }
         readonly System.Collections.Generic.List<Text> _Labels = new System.Collections.Generic.List<Text>();
         public void Play(Texture2D arrow, uint[] roster, uint ghost, uint local, Action finished)
         {

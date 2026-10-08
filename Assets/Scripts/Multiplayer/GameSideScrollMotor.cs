@@ -17,7 +17,7 @@ namespace HauntedFish.Multiplayer
         HotelPlayerMovement _Movement;
         CharacterController _Controller;
         float _Axis, _Vertical, _LastCommand;
-        bool _PendingJump;
+        bool _PendingJump, _Run;
         Vector3 _LocalMouse;
 
         IGameMovementEnvironment _Environment;
@@ -36,6 +36,7 @@ namespace HauntedFish.Multiplayer
             if (ReferenceEquals(_Environment, environment)) Bind(null);
         }
         public Vector3 LampPosition { get; private set; }
+        public bool Running => Walking && _Run;
         public bool Walking => _Movement.SimulationReady && Mathf.Abs(_Axis) > .01f &&
             _Movement.CanMove && !_Movement.SharedDialogueLocked;
 
@@ -50,7 +51,7 @@ namespace HauntedFish.Multiplayer
         public void ResetMotion()
         {
             _Axis = _Vertical = 0;
-            _PendingJump = false;
+            _PendingJump = _Run = false;
             _LastCommand = Time.unscaledTime;
             _LocalMouse = transform.position + Vector3.right;
         }
@@ -68,11 +69,12 @@ namespace HauntedFish.Multiplayer
             return _Environment.ClampMouse(_LocalMouse);
         }
 
-        public void Accept(Vector2 move, bool jump, Vector3 mouse)
+        public void Accept(Vector2 move, bool jump, Vector3 mouse, bool run = false)
         {
             if (!Active || !_Movement.SimulationReady) return;
             _Axis = Mathf.Clamp(move.x, -1, 1);
             _PendingJump |= jump;
+            _Run = run && _Movement.Mode == HotelControlMode.Fish;
             _LastCommand = Time.unscaledTime;
             LampPosition = _Environment.ClampMouse(mouse);
         }
@@ -87,7 +89,7 @@ namespace HauntedFish.Multiplayer
             if (Time.unscaledTime - _LastCommand > .3f || _Movement.SharedDialogueLocked)
             {
                 _Axis = 0;
-                _PendingJump = false;
+                _PendingJump = _Run = false;
             }
             if (_Controller.isGrounded)
             {
@@ -96,14 +98,15 @@ namespace HauntedFish.Multiplayer
             }
             _PendingJump = false;
             _Vertical -= _Movement.Gravity * delta;
-            float horizontal = _Movement.CanMove ? _Axis * _Movement.WalkingSpeed : 0;
+            float horizontal = _Movement.CanMove ? _Axis * (_Run ? _Movement.RunningSpeed : _Movement.WalkingSpeed) : 0;
             if (!_Movement.TryMove(new Vector3(horizontal, _Vertical, 0) * delta))
             {
                 ResetMotion();
                 return;
             }
             var point = transform.position;
-            point.z = 0;
+            if (_Environment is GameSceneController scene) point = scene.ClampFish(_Movement, point);
+            else point.z = 0;
             transform.position = point;
             if (Walking) _Movement.FaceDirection(Vector3.right * _Axis);
         }

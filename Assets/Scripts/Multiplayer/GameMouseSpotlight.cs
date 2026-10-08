@@ -28,7 +28,8 @@ namespace HauntedFish.Multiplayer
         void LateUpdate()
         {
             var player = HotelPlayer.LocalPlayer;
-            if (_Canvas) _Canvas.enabled = player && player.ControlMode == HotelControlMode.Fish;
+            if (_Canvas) _Canvas.enabled = player && player.ControlMode == HotelControlMode.Fish && !player.InBossFight && !player.BossWatching;
+            if (player && (player.InBossFight || player.BossWatching)) return;
             if (player && player.ControlMode == HotelControlMode.Ghost) return;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

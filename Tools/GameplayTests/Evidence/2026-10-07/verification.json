@@ -1,0 +1,25 @@
+{
+  "unity": "6000.3.6f1",
+  "result": "PASS 48 real gameplay and Lobby checks",
+  "checks": 48,
+  "production_compile": "passed including installed Mirage weaving",
+  "actual_host_flow": "Helper\u2192Lobby\u2192Game\u2192Lobby",
+  "native_editor_preserved": 13188,
+  "coverage": [
+    "native question cursor and local Ink dialogue",
+    "setup deadline/late server actor/no double release",
+    "native Shift run/release and W/S exclusion",
+    "extent-aware teleport bounds",
+    "conveyor bounds",
+    "Q disposal puff and cleanup",
+    "moving cart contact spook",
+    "authoritative role/body/ownership transfer and emergence",
+    "real return travel input maps"
+  ],
+  "limits": [
+    "temporary real server actor has no second admitted network client",
+    "network latency/reconnect not reproduced",
+    "grounding/poof are portable Unity Camera.Render captures, not interactive Editor preview",
+    "Lobby cursor verified with native rays/device input; native Lobby screenshot not captured"
+  ]
+}

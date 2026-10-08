@@ -53,6 +53,10 @@ ExportedObj/
 .consulo/
 *.csproj
 !Tools/IntroductionTests/IntroductionTests.csproj
+!Tools/MultiplayerTests/MultiplayerTests.csproj
+!Tools/DialogueTests/DialogueTests.csproj
+!Tools/SessionLifecycleTests/SessionLifecycleTests.csproj
+!Tools/TrapSupplyTests/TrapSupplyTests.csproj
 *.unityproj
 *.sln
 *.slnx

@@ -8,6 +8,7 @@
     <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/HotelLobbyPlayer.cs" Link="HotelLobbyPlayer.cs" />
 
     <Compile Include="../../Assets/Scripts/Multiplayer/HotelNetworkSession.cs" Link="HotelNetworkSession.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/HotelSessionPorts.cs" />
     <Compile Include="../../Assets/Scripts/Multiplayer/HauntedHotelMessageTravel.cs" Link="HauntedHotelMessageTravel.cs" />
     <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/LobbyContracts.cs" Link="LobbyContracts.cs" />
   </ItemGroup>

@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-08",
+  "unityVersion": "6000.3.6f1",
+  "changes": [
+    "Session lifecycle policy behind Unity-free typed ports",
+    "Prepared host transport and handoff ownership in HotelHostMigration",
+    "Ink progression, pending input and observer lifetime in DialogueStorySession",
+    "Owned choice routing and idempotent local dialogue interruption cleanup",
+    "Deterministic conveyor schedule and weighted selection helpers"
+  ],
+  "dotnetChecks": {
+    "SessionLifecycleTests": 131,
+    "DialogueTests": 62,
+    "TrapSupplyTests": 97,
+    "MultiplayerTests": 127,
+    "RoundIntroductionTests": 2102,
+    "BossFightTests": 1502,
+    "total": 4021,
+    "result": "PASS"
+  },
+  "nativeChecks": {
+    "authoredHostGameplay": {
+      "result": "PASS",
+      "gameplayChecks": 74,
+      "guardrailChecks": 41,
+      "log": "host-unity-log.txt",
+      "sourceHashes": "host-source-hashes.json",
+      "scope": "Full production compilation and Mirage weaving; authored Helper/Lobby/Game solo-host flow, traps, physics, authority and teardown",
+      "checkpoint": "After lifecycle/migration/conveyor extraction; before the final dialogue ownership/interruption fixes and reentrant lifecycle notification guards"
+    },
+    "trapAndRoundFixtures": {
+      "result": "PASS",
+      "checks": 115,
+      "log": "trap-unity-log.txt",
+      "scope": "Production trap/movement/presentation code and authored assets with network/boss endpoints stubbed",
+      "notes": "Stale fixture members were updated before the passing rerun. The isolated cache logs an unrelated UnityEditor.Search.SearchDatabase startup ArgumentOutOfRangeException; all 115 runtime assertions passed and Unity exited successfully."
+    },
+    "dialogueFixtures": {
+      "result": "PASS",
+      "checks": 23,
+      "log": "dialogue-unity-log.txt",
+      "sourceHashes": "dialogue-source-hashes.json",
+      "scope": "Final full production compilation/Mirage weaving, actual dialogue/input/option prefabs, actual Ink submission, choice-only branches and Unity disable/destroy callbacks",
+      "finalSourceMatch": true
+    },
+    "total": 253
+  },
+  "preserved": [
+    "Existing uncommitted feature and asset work",
+    "Serialized component dependency names and script GUIDs",
+    "Public scene/UI entry points and trusted integer dialogue choice routing",
+    "Trap authority scopes, package IDs/revisions and snapshot rules"
+  ],
+  "limits": [
+    "No two-client delivery, latency, reconnect or real host-migration claim",
+    "No rendered layout or measured performance claim",
+    "Gameplay command gateways and world snapshot publication still have static/avatar coupling; next boundaries are documented in ARCHITECTURE.md"
+  ]
+}

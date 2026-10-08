@@ -1,0 +1,1 @@
+PASS 42 native authoritative placement/preview checks

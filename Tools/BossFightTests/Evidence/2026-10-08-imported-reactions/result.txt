@@ -1,0 +1,1 @@
+PASS 15 native FBX/material/geometry/authored presentation checks
