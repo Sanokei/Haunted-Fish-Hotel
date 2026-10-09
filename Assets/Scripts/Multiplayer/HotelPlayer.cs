@@ -96,33 +96,45 @@ namespace HauntedFish.Multiplayer
         {
             ControlledCube = -1;
             _EditorRole = ghost ? 1 : 0;
-            var world = GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;
-            if (world && ghost) PlacedObjectsJson = world.Snapshot;
+            if (ghost) _GameCommands?.RefreshPlacement(this);
             ResetSceneMotion();
         }
         public void ResetEditorRole() => _EditorRole = -1;
 
+        IHotelGameCommands _GameCommands;
+        IHotelBossCommands _BossCommands;
+
+        public void BindGameCommands(IHotelGameCommands commands) => _GameCommands = commands;
+        public void UnbindGameCommands(IHotelGameCommands commands)
+        {
+            if (ReferenceEquals(_GameCommands, commands)) _GameCommands = null;
+        }
+        public void BindBossCommands(IHotelBossCommands commands) => _BossCommands = commands;
+        public void UnbindBossCommands(IHotelBossCommands commands)
+        {
+            if (ReferenceEquals(_BossCommands, commands)) _BossCommands = null;
+        }
+
         [ServerRpc]
         public void RequestBossFight(string key, int version)
         {
-            if (BossArenaCoordinator.Current) BossArenaCoordinator.Current.TryEnter(this, key, version);
+            _BossCommands?.TryEnter(this, key, version);
         }
         [ServerRpc]
         public void ReadyBossScene(string key, int version, uint epoch)
         {
-            if (BossArenaCoordinator.Current) BossArenaCoordinator.Current.AcceptReady(this, key, version, epoch);
+            _BossCommands?.AcceptReady(this, key, version, epoch);
         }
         [ServerRpc]
         public void SendBossInput(Vector2 axis, string key, int version, uint epoch)
         {
-            if (BossArenaCoordinator.Current) BossArenaCoordinator.Current.AcceptInput(this, axis, key, version, epoch);
+            _BossCommands?.AcceptInput(this, axis, key, version, epoch);
         }
 
         [ServerRpc]
         public void FinishGhostSelection(int version)
         {
-            var scene = GameSceneController.Current;
-            if (scene) scene.Acknowledge(this, version);
+            _GameCommands?.Acknowledge(this, version);
         }
 
         [SyncVar] public string HeldTrapFamily = "", RoundStateKey = "";
@@ -132,38 +144,49 @@ namespace HauntedFish.Multiplayer
         string _InventoryScope = "";
         int _InventoryGeneration;
         public string InventoryScope => Networked ? _InventoryScope : "editor-preview";
-        public void ClearRoundInventory() { HeldTrapFamily="";ConveyorJson="";PlacedObjectsJson="";ControlledCube=-1;RoundStateKey="";RoundRoster="";InBossFight=false;BossWatching=false;BossReturnLocked=false;BossReturnSetupRemaining=0;BossMatchEpoch=0;BossArenaJson="";BossResultVersion=0;RoundReleased=false;RoundIntroComplete=false;GhostSetupRemaining=0;Spook=0;GhostEmergenceVersion=0;GhostFlightReady=false;PossessionEffectVersion=0; }
+        public void ClearRoundInventory()
+        {
+            HeldTrapFamily = ConveyorJson = PlacedObjectsJson = RoundStateKey = RoundRoster = "";
+            ControlledCube = -1;
+            InBossFight = BossWatching = BossReturnLocked = false;
+            BossReturnSetupRemaining = 0;
+            BossMatchEpoch = 0;
+            BossArenaJson = "";
+            BossResultVersion = 0;
+            RoundReleased = RoundIntroComplete = false;
+            GhostSetupRemaining = Spook = 0;
+            GhostEmergenceVersion = PossessionEffectVersion = 0;
+            GhostFlightReady = false;
+        }
+
         [ServerRpc]
         public void SendGhostFlightInput(Vector2 axis, string key, int version)
-        {
-            var world = GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;
-            if (world) world.AcceptFlightInput(this, axis, key, version);
-        }
+            => _GameCommands?.AcceptFlightInput(this, axis, key, version);
+
         [ServerRpc]
-        public void RequestConveyorPackage(int id,Vector3 position,string key,int version)
-        {
-            var manager=GameSceneController.Current ? GameSceneController.Current.Traps : null;
-            GhostPlacementAccepted=manager&&manager.TryTake(this,id,position,key,version);GhostPlacementReply++;
-        }
+        public void RequestConveyorPackage(int id, Vector3 position, string key, int version)
+            => ReplyToPlacement(_GameCommands?.TakePackage(this, id, position, key, version) ?? false);
+
         [ServerRpc]
-        public void RequestPlaceHeldTrap(Vector3 position,string family,string key,int version)
-        {
-            var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;GhostPlacementAccepted=world&&world.RequestMatches(this,key,version)&&world.PlacementNearFlight(this,position,family)&&world.TryPlace(this,position,family);GhostPlacementReply++;
-        }
+        public void RequestPlaceHeldTrap(Vector3 position, string family, string key, int version)
+            => ReplyToPlacement(_GameCommands?.PlaceTrap(this, position, family, key, version) ?? false);
+
         [ServerRpc]
-        public void RequestDisposeTrap(int id,string key,int version)
-        {
-            var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;GhostPlacementAccepted=world&&world.RequestMatches(this,key,version)&&world.Dispose(this,id);GhostPlacementReply++;
-        }
+        public void RequestDisposeTrap(int id, string key, int version)
+            => ReplyToPlacement(_GameCommands?.DisposeTrap(this, id, key, version) ?? false);
+
         [ServerRpc]
-        public void RequestScopedTrapPossession(int id,Vector3 position,string key,int version)
-        {
-            var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;if(world&&world.RequestMatches(this,key,version))world.Possess(this,id,position);
-        }
+        public void RequestScopedTrapPossession(int id, Vector3 position, string key, int version)
+            => _GameCommands?.PossessTrap(this, id, position, key, version);
+
         [ServerRpc]
-        public void SendScopedTrapAction(int id,int kind,float axis,Vector3 point,string key,int version)
+        public void SendScopedTrapAction(int id, int kind, float axis, Vector3 point, string key, int version)
+            => _GameCommands?.ActOnTrap(this, id, kind, axis, point, key, version);
+
+        void ReplyToPlacement(bool accepted)
         {
-            if(kind<0||kind>(int)TrapInputKind.Reset)return;var world=GameSceneController.Current ? GameSceneController.Current.PlacementWorld : null;if(world&&world.RequestMatches(this,key,version))world.AcceptTrapAction(this,id,new TrapInput((TrapInputKind)kind,axis,point));
+            GhostPlacementAccepted = accepted;
+            GhostPlacementReply++;
         }
 
         [SyncVar] Vector3 _Position;
@@ -284,6 +307,8 @@ namespace HauntedFish.Multiplayer
         {
             if (!_ActivePlayers.Remove(this)) return;
             PlayerDisabled?.Invoke(this);
+            _GameCommands = null;
+            _BossCommands = null;
         }
         void StopSimulation()
         {

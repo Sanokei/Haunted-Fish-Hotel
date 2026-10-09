@@ -52,6 +52,7 @@ namespace HauntedFish.Multiplayer
         HauntedHotelMultiplayer _Session;
         readonly HashSet<HotelPlayer> _Players = new HashSet<HotelPlayer>();
         readonly GameRoundGate _Gate = new GameRoundGate();
+        IHotelGameCommands _PlayerCommands;
         [SerializeField]
         Texture2D _SelectionArrow;
         [SerializeField]
@@ -285,6 +286,7 @@ namespace HauntedFish.Multiplayer
                 _GhostControls.Configure(_Camera, this);
             }
 
+            _PlayerCommands = new GamePlayerCommands(_PlacementWorld, _Traps, Acknowledge);
             HotelPlayer.PlayerEnabled += AttachPlayer;
             HotelPlayer.PlayerDisabled += DetachPlayer;
             for (int i = 0; i < HotelPlayer.ActivePlayers.Count; i++)
@@ -308,6 +310,9 @@ namespace HauntedFish.Multiplayer
                 if (motor)
                     motor.Unbind(this);
             _Motors.Clear();
+            foreach (var player in _Players)
+                if (player) player.UnbindGameCommands(_PlayerCommands);
+            _PlayerCommands = null;
             _Players.Clear();
             _OrderedPlayers.Clear();
             _RosterDirty = true;
@@ -333,6 +338,7 @@ namespace HauntedFish.Multiplayer
                 return;
             if (!_Players.Add(player))
                 return;
+            player.BindGameCommands(_PlayerCommands);
             _RosterDirty = true;
             if (!player.Networked || player.IsServer)
             {
@@ -359,6 +365,7 @@ namespace HauntedFish.Multiplayer
 
         void DetachPlayer(HotelPlayer player)
         {
+            player.UnbindGameCommands(_PlayerCommands);
             if (player == HotelPlayer.LocalPlayer)
             {
                 if (_Selection)

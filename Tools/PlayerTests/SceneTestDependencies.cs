@@ -57,6 +57,12 @@ namespace HauntedFish.Multiplayer
         public void ResetSceneMotion() { if (Movement) Movement.ResetMotion(); }
         internal void TakeFishBody(HotelPlayer fish) { if(Movement) Movement.Teleport(fish.transform.position); }
         public void FinishGhostSelection(int version) { }
+        IHotelGameCommands _GameCommands;
+        public void BindGameCommands(IHotelGameCommands commands) => _GameCommands = commands;
+        public void UnbindGameCommands(IHotelGameCommands commands)
+        {
+            if (ReferenceEquals(_GameCommands, commands)) _GameCommands = null;
+        }
         void OnEnable() {if(!_Active.Contains(this))_Active.Add(this);PlayerEnabled?.Invoke(this); }
         void OnDisable() {_Active.Remove(this);PlayerDisabled?.Invoke(this); }
     }

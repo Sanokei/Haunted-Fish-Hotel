@@ -39,6 +39,14 @@ The manager checks that a clicked row belongs to its current open panel before r
 
 `TrapManager` owns authority/scope checks, catalogs, package identities and revisions, package objects, path updates and snapshot publication. It applies the schedule's decisions to the existing Unity objects. Unity supplies randomness only on the authority. Preserve move-before-spawn ordering, the 64-attempt backlog cap and monotonic IDs/revisions when changing this path.
 
+## Player command ownership
+
+`HotelPlayer` retains Mirage RPC signatures, ownership enforcement, SyncVars and placement replies. It forwards game requests through `IHotelGameCommands` and boss requests through `IHotelBossCommands`. It does not discover a scene singleton to execute those commands.
+
+`GameSceneController` creates one `GamePlayerCommands` adapter per activation from its authored world and trap manager. It binds both existing and newly registered players and releases them on departure or scene exit. The adapter retains round/version validation, placement proximity checks and trap-input range checks; the world and supply manager retain authoritative simulation checks. Missing bindings reject placement with one negative reply and ignore commands without replies.
+
+`BossArenaCoordinator` implements the boss endpoint and binds/unbinds it with its own enable/disable lifecycle. Player removal clears both endpoints. Unbind operations compare endpoint identity so an old owner cannot detach a newer binding. These are ordinary per-player references, not a service locator or global event bus. Existing `Current` properties remain for presentation/editor consumers; this change removes their use from player commands.
+
 ## Extending the project
 
 For a new behavior, identify the state owner first. Put deterministic rules in a plain C# collaborator and inject the inputs and effects it actually needs. Keep physics queries and rendering in Unity adapters. Keep owned RPC signatures and authorization checks at the network boundary, then call a scoped gameplay operation. Subscribe and unsubscribe in the same owner; release a previous collaborator before replacing it.
@@ -47,7 +55,7 @@ Preserve MonoBehaviour class/file identities, script metadata GUIDs, serialized 
 
 The next useful boundaries are:
 
-1. Bind gameplay command interfaces to `HotelPlayer` on scene entry/exit. Its RPC wrappers still resolve `GameSceneController.Current` and `BossArenaCoordinator.Current`.
+1. Separate round orchestration from `GameSceneController` presentation and movement constraints. Keep the new player command binding at scene entry/exit.
 2. Extract placement snapshot validation and identity/revision rules from `GhostPlacementWorld`; retain actual colliders, sweep simulation and trap objects in the Unity adapter.
 3. Inject actor/snapshot publication into trap systems. They still read `HotelPlayer.ActivePlayers` and write replicated avatar strings directly.
 4. Narrow scene interfaces after those command and publication boundaries exist. Add assembly definitions only when dependencies are acyclic and serialized/build references can be validated.
@@ -70,3 +78,5 @@ dotnet run --project Tools/BossFightTests/BossFightTests.csproj
 The first three suites cover lifecycle/cancellation policy, actual vendored Ink progression and UI ownership, and conveyor timing/selection. `Tools/DialogueTests/RunUnity.ps1 -ValidationProject '<existing Temp project>'` exercises actual prefab options, text-input submission and Unity disable/destroy scheduling. Native compilation, Mirage weaving, authored gameplay references and real physics use the existing isolated Unity runners under `Tools/PerformanceTests` and `Tools/RoundIntroductionTests`. Their README files explain the disposable project requirements. Recorded results and the corresponding source hashes are under `Tools/ArchitectureTests/Evidence/2026-10-08`.
 
 Deterministic endpoints and a solo host do not establish two-client delivery, latency behavior or reconnect/host handoff across real peers. Those remain separate integration checks.
+
+The player-command refactor adds native host RPC routing assertions to `AuditGuardrails` and scene/player disable/re-enable and stale-owner assertions to `AuditLifecycleRunner`. Run the existing PerformanceTests runner in Host and Lifecycle modes against an idle disposable full project. Standalone suites do not compile `HotelPlayer` or prove Mirage weaving; native results are required for that boundary.

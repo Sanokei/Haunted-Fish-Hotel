@@ -1,0 +1,32 @@
+{
+  "limitations": [
+    "Solo-host RPC routing and offline lifecycle validation; no second admitted client or latency/host-handoff validation."
+  ],
+  "nativeLifecycle": {
+    "exitCode": 0,
+    "checks": 22
+  },
+  "nativeHost": {
+    "auditChecks": 47,
+    "exitCode": 0,
+    "gameplayChecks": 74
+  },
+  "sourceHashes": {
+    "Tools/PerformanceTests/AuditLifecycleRunner.cs": "E75C07D3BFF74FAE17BAEE9F6AA6A91619C29B59A06691016F023F1E4524F184",
+    "Assets/Scripts/Multiplayer/GameSceneController.cs": "11BA492D23CC1808F5A392D551AE982F1083F75BAEC48BB61A8F482A31C6F232",
+    "Assets/Scripts/Multiplayer/IHotelPlayerCommands.cs": "9650DC5E81EDB3B3370DF6DEC0D79718C9598709666FC2AF51A5C08057AA7815",
+    "Assets/Scripts/Multiplayer/HotelPlayer.cs": "3C4A676A54B51AA73A3A392350A370DF9073A3C3B58936DDC7B8CBCED8037C97",
+    "Assets/Scripts/Multiplayer/GamePlayerCommands.cs": "C7F8F8B4717E3C6A42E52ACD8A8C4EF5A15E0A784106C435C5BED9255E0CC26E",
+    "Tools/PerformanceTests/AuditGuardrails.cs": "2B7B81BA8E5E0B0C951E56A7CCE1261DE27E41FF819ECF00E428FBB891BCA2C3",
+    "Assets/Scripts/Multiplayer/BossArenaCoordinator.cs": "8862E23E2675478931363A70D4F3614E1FD2A9F7E9352B0ABB9780ED5EF73608"
+  },
+  "standalone": {
+    "session": 131,
+    "multiplayer": 127,
+    "dialogue": 62,
+    "bossFight": 1502,
+    "trapSupply": 97,
+    "roundIntroduction": 2102
+  },
+  "unity": "6000.3.6f1"
+}

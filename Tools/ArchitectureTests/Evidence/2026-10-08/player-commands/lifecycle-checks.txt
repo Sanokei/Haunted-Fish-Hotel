@@ -1,0 +1,23 @@
+AUDIT_CHECK: Authored offline preview stays scene-local instead of DontDestroyOnLoad
+AUDIT_CHECK: Scene entry binds gameplay commands to the existing preview
+AUDIT_CHECK: Boss owner binds commands to existing players
+AUDIT_CHECK: Scene exit releases commands on a surviving player
+AUDIT_CHECK: Old scene binding cannot clear its replacement
+AUDIT_CHECK: Disabled boss owner releases player commands
+AUDIT_CHECK: Re-enabled boss owner rebinds surviving players
+AUDIT_CHECK: Disabled player retains no scene command owners
+AUDIT_CHECK: Re-enabled player receives both command owners
+AUDIT_CHECK: Scene unload destroys offline preview and its owned cloned input maps
+AUDIT_CHECK: Travel leaves no inactive persistent preview or stale registry entry
+AUDIT_CHECK: Repeated Game load creates exactly one scene-local preview
+AUDIT_CHECK: Repeated Game unload releases registry membership again
+AUDIT_CHECK: Physics fixture uses actual ready authority fish and CharacterController
+AUDIT_CHECK: Large cart step cannot penetrate a fish pinned against a wall
+AUDIT_CHECK: Swept large cart move pushes a real two-fish chain without penetrating the trailing body
+AUDIT_CHECK: Leading-first fish push preserves separation between controllers
+AUDIT_CHECK: Reset rejects an occupied origin without teleporting into a fish
+AUDIT_CHECK: Reset rejects an origin occupied by another physical object
+AUDIT_CHECK: Actor registry removes disabled bodies synchronously
+AUDIT_CHECK: Re-enabled actor registers exactly once
+AUDIT_CHECK: Physics teardown leaves no stale actor or owned input lifecycle
+AUDIT_LIFECYCLE_PASS

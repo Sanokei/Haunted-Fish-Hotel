@@ -6,7 +6,7 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $validationRoot = Join-Path $env:TEMP ('HotelPlayerValidation-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path "$validationRoot/Assets/Resources", "$validationRoot/Packages", "$validationRoot/ProjectSettings" | Out-Null
 
-foreach ($name in @('HotelPlayerMovement', 'GameSideScrollMotor', 'HotelFishSprite', 'GameSceneController', 'IHotelScene', 'GhostSelectionPresentation', 'GhostSelectionWheel', 'GhostPlacementController', 'GhostPlacementWorld', 'GhostPlacementGrid', 'GameRoundGate', 'GhostTrapAreaPresentation', 'GameEditorRoleSwitch', 'HotelPalette', 'IGhostTrap', 'GhostTrap', 'GhostTrapSupply','TrapDefinition','TrapManager', 'RoundIntroductionSettings', 'AtticReturnBlur')) {
+foreach ($name in @('HotelPlayerMovement', 'GameSideScrollMotor', 'HotelFishSprite', 'GameSceneController','IHotelPlayerCommands','GamePlayerCommands', 'IHotelScene', 'GhostSelectionPresentation', 'GhostSelectionWheel', 'GhostPlacementController', 'GhostPlacementWorld', 'GhostPlacementGrid', 'GameRoundGate', 'GhostTrapAreaPresentation', 'GameEditorRoleSwitch', 'HotelPalette', 'IGhostTrap', 'GhostTrap', 'GhostTrapSupply','TrapDefinition','TrapManager', 'RoundIntroductionSettings', 'AtticReturnBlur')) {
     Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs" -Destination "$validationRoot/Assets"
     Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs.meta" -Destination "$validationRoot/Assets"
 }

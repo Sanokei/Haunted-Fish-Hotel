@@ -17,7 +17,7 @@ namespace HauntedFish.Multiplayer
 
     // Participant-only additive arena transport. The arena owns physics/scoring;
     // persistent hotel actors retain their network identity, room, round and inventory.
-    public sealed class BossArenaCoordinator : MonoBehaviour
+    public sealed class BossArenaCoordinator : MonoBehaviour, IHotelBossCommands
     {
         [SerializeField] BoxCollider _Entrance;
         [SerializeField] Text _Prompt;
@@ -70,7 +70,9 @@ namespace HauntedFish.Multiplayer
                 _Arena.SnapshotChanged -= Publish; _Arena.SnapshotChanged += Publish;
             }
             SceneManager.sceneLoaded += Loaded;
+            HotelPlayer.PlayerEnabled += AttachPlayer;
             HotelPlayer.PlayerDisabled += Departed;
+            foreach (var player in HotelPlayer.ActivePlayers) AttachPlayer(player);
             var scene = SceneManager.GetSceneByName(_SceneName);
             if (scene.isLoaded) BindArena(scene);
         }
@@ -266,8 +268,11 @@ namespace HauntedFish.Multiplayer
             player.Teleport(player.BossReturnPosition);
             if (ghost && _World) _World.RestoreFlight(player, player.BossReturnPosition);
         }
+        void AttachPlayer(HotelPlayer player) => player.BindBossCommands(this);
+
         void Departed(HotelPlayer player)
         {
+            player.UnbindBossCommands(this);
             if (_PendingFish == player) _PendingFish = null;
             _Watchers.Remove(player);
             if (_Arena && _AuthorityOwned && _Arena.Active) _Arena.Cancel(player.NetId);
@@ -347,7 +352,9 @@ namespace HauntedFish.Multiplayer
         void OnDisable()
         {
             SceneManager.sceneLoaded -= Loaded;
+            HotelPlayer.PlayerEnabled -= AttachPlayer;
             HotelPlayer.PlayerDisabled -= Departed;
+            foreach (var player in HotelPlayer.ActivePlayers) player.UnbindBossCommands(this);
             if (_Arena)
             {
                 if (_AuthorityOwned && _Arena.Active) _Arena.Cancel(_Arena.FishId);

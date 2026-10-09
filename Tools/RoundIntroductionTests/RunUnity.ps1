@@ -17,7 +17,7 @@ Copy-Item -LiteralPath "$repoRoot/Library/ScriptAssemblies/Ink-Libraries.dll" -D
 Copy-Item -LiteralPath "$repoRoot/ProjectSettings/ProjectVersion.txt" -Destination "$validationRoot/ProjectSettings"
 Copy-Item -LiteralPath "$repoRoot/Assets/TextMesh Pro/Fonts/LiberationSans.ttf" -Destination "$validationRoot/Assets"
 Copy-Item -LiteralPath "$repoRoot/Assets/TextMesh Pro/Fonts/LiberationSans.ttf.meta" -Destination "$validationRoot/Assets"
-foreach($name in @('HotelViewCamera','HotelPlayerMovement','GameSideScrollMotor','HotelFishSprite','GameSceneController','GameHauntingController','IHotelScene','GhostPlacementController','GhostPlacementWorld','GhostPlacementGrid','GameRoundGate','GhostTrapAreaPresentation','GameEditorRoleSwitch','IGhostTrap','GhostTrap','GhostTrapSupply')) {
+foreach($name in @('HotelViewCamera','HotelPlayerMovement','GameSideScrollMotor','HotelFishSprite','GameSceneController','IHotelPlayerCommands','GamePlayerCommands','GameHauntingController','IHotelScene','GhostPlacementController','GhostPlacementWorld','GhostPlacementGrid','GameRoundGate','GhostTrapAreaPresentation','GameEditorRoleSwitch','IGhostTrap','GhostTrap','GhostTrapSupply')) {
  Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs" -Destination "$validationRoot/Assets"
  Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs.meta" -Destination "$validationRoot/Assets"
 }

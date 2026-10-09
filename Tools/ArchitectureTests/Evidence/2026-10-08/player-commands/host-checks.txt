@@ -1,0 +1,122 @@
+GAME_CHECK: Authored Game entry starts its authoritative round automatically
+GAME_CHECK: Ordinary Game wheel lands and pulses
+GAME_CHECK: Scene starts authored attic prefab after landed slice
+GAME_CHECK: Ordinary Game entry completes wheel, wall/attic reveal and blurred return before releasing gameplay
+GAME_CHECK: Existing Editor ghost-team switch becomes visible and interactable after the round
+GAME_CHECK: Exactly one New Input System UI provider processes the role button
+GAME_CHECK: Authored UI submit action is bound and enabled
+GAME_CHECK: Virtual keyboard submit reaches the actual UI action
+GAME_CHECK: Existing button switches ghost to player
+GAME_CHECK: Existing Switch to Ghost label is visible in player mode
+GAME_CHECK: Exactly one New Input System UI provider processes the role button
+GAME_CHECK: Authored UI submit action is bound and enabled
+GAME_CHECK: Virtual keyboard submit reaches the actual UI action
+GAME_CHECK: Existing button switches player to ghost without changing team rules
+GAME_CHECK: Ordinary Game round starts with empty runtime inventory and no preplaced traps
+GAME_CHECK: Authored Trap Manager starts weighted packages after actual round release
+GAME_CHECK: Actual Game box prints its configured contained trap artwork
+GAME_CHECK: Actual conveyor moves packages at configured speed
+GAME_CHECK: Actual E input consumes shared package ID and grants its contained trap
+GAME_CHECK: Actual authored hallway contains a clear position for package family cart
+GAME_CHECK: Actual E places the prefab contained in the consumed package
+GAME_CHECK: Actual E possesses the configured placed trap
+GAME_CHECK: Actual Q disposes the configured package's placed trap
+GAME_CHECK: Actual runtime injection shows chandelier artwork on weighted boxes
+GAME_CHECK: Multi-cart fixture obtains a real cart from the current conveyor
+GAME_CHECK: Each conveyor cart opens through actual E input
+GAME_CHECK: Each opened cart registers its own stable instance ID
+GAME_CHECK: Multi-cart fixture obtains a real cart from the current conveyor
+GAME_CHECK: Each conveyor cart opens through actual E input
+GAME_CHECK: Each opened cart registers its own stable instance ID
+GAME_CHECK: Multiple shopping carts have distinct stable IDs
+GAME_CHECK: Actual E independently possesses shopping cart 1
+GAME_CHECK: Actual movement input moves cart 1
+GAME_CHECK: Unpossessed cart receives no other instance's input
+GAME_CHECK: Repeated E exits cart possession cleanly
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+GAME_CHECK: Actual E independently possesses shopping cart 2
+GAME_CHECK: Actual movement input moves cart 2
+GAME_CHECK: Unpossessed cart receives no other instance's input
+GAME_CHECK: Repeated E exits cart possession cleanly
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+GAME_CHECK: Actual E independently possesses shopping cart 1
+GAME_CHECK: Actual movement input moves cart 1
+GAME_CHECK: Unpossessed cart receives no other instance's input
+GAME_CHECK: Repeated E exits cart possession cleanly
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+GAME_CHECK: Actual E independently possesses shopping cart 2
+GAME_CHECK: Actual movement input moves cart 2
+GAME_CHECK: Unpossessed cart receives no other instance's input
+GAME_CHECK: Repeated E exits cart possession cleanly
+GAME_CHECK: Unpossessed cart stops previous movement immediately
+GAME_CHECK: Nearest foreign cart cannot mask an eligible owned cart
+GAME_CHECK: Foreign cart possession remains rejected by authority
+GAME_CHECK: Foreign ownership rejects both cart input and disposal
+GAME_CHECK: Adjacent owned cart accepts its own input
+GAME_CHECK: Cart respects another cart's collider without passing through
+GAME_CHECK: Cart can move away from a neighboring cart without stale blocking
+GAME_CHECK: Delayed cart commands cannot target another round
+GAME_CHECK: Actual Q clears independent cart and stale targeting 1
+GAME_CHECK: Actual Q clears independent cart and stale targeting 2
+GAME_CHECK: Ordinary Game round starts with empty runtime inventory and no preplaced traps
+GAME_CHECK: Real local ghost acquires authoritative held inventory
+GAME_CHECK: Actual Q input discards held item through ordinary ghost controller
+GAME_CHECK: Real Game places enlarged authored cart on the floor
+GAME_CHECK: Real Game ghost possesses its owned cart
+GAME_CHECK: Authored tentacle Canvas sorts in front of cart and aisle
+GAME_CHECK: Actual Q input removes possessed cart and exits possession
+GAME_CHECK: All completed possession puffs dispose their runtime instances
+GAME_CHECK: Exactly one New Input System UI provider processes the role button
+GAME_CHECK: Authored UI submit action is bound and enabled
+GAME_CHECK: Virtual keyboard submit reaches the actual UI action
+GAME_CHECK: Jump verification uses existing fish role
+GAME_CHECK: Fish is grounded before jump
+GAME_CHECK: Short grounded jump lands: peak 0.97 units, 0.56 seconds
+AUDIT_CHECK: Woven host pickup RPC uses bound endpoint and publishes one accepted reply
+AUDIT_CHECK: Rejected placement publishes exactly one negative reply
+AUDIT_CHECK: All gameplay RPCs route once through their bound endpoint
+AUDIT_CHECK: All boss RPCs route once through their bound endpoint
+AUDIT_CHECK: Old boss owner cannot detach a replacement
+AUDIT_CHECK: Unbound RPCs reject pickup and do not call stale owners
+AUDIT_CHECK: Explicit untagged output replaces the cached scene camera
+AUDIT_CHECK: Disabled output is not returned as an active view
+AUDIT_CHECK: Re-enabled output becomes available without global discovery
+AUDIT_CHECK: Active additive scene owns camera selection
+AUDIT_CHECK: Disabling additive binding restores surviving output
+AUDIT_CHECK: Camera replacement restores authored output
+AUDIT_CHECK: Persistent UI provider suppresses the authored scene provider after transition
+AUDIT_CHECK: Removing temporary persistent provider restores prior scene input ownership
+AUDIT_CHECK: Audit returns actual owned player to ghost role
+AUDIT_CHECK: Paused shortened conveyor removes out-of-range package distances
+AUDIT_CHECK: Shortened paused path publishes a valid replica snapshot
+AUDIT_CHECK: Actual authority manager disable publishes higher empty shared conveyor state
+AUDIT_CHECK: Disabled manager continues rejecting fresh authoring after final publication
+AUDIT_CHECK: Grid generates bounded geometry for spacing 0
+AUDIT_CHECK: Grid generates bounded geometry for spacing -1
+AUDIT_CHECK: Grid generates bounded geometry for spacing NaN
+AUDIT_CHECK: Grid generates bounded geometry for spacing Infinity
+AUDIT_CHECK: Grid generates bounded geometry for spacing 1E-09
+AUDIT_CHECK: Audit acquires held family before catalog replacement
+AUDIT_CHECK: Same-family replacement preserves held prefab identity and supply definition through round
+AUDIT_CHECK: Audit places retained family using authored prefab
+AUDIT_CHECK: Observer reconstructs placed instance from round-scoped authored prefab snapshot
+AUDIT_CHECK: Placed observer instances preserve family prefab identity on replacement
+AUDIT_CHECK: Audit controls placed item before reset
+AUDIT_CHECK: Owned trap accepts motion before controller cancellation
+AUDIT_CHECK: Disabling actual owned ghost controller immediately stops authoritative trap input
+AUDIT_CHECK: Disabled world rejects fresh requests and cannot reacquire held inventory
+AUDIT_CHECK: World disable releases owner and publishes higher empty revision
+AUDIT_CHECK: Delayed old snapshot and input cannot resurrect deleted same-round item
+AUDIT_CHECK: Same round re-enabled world accepts fresh inventory
+AUDIT_CHECK: Same-round IDs and revisions remain monotonic after disable
+AUDIT_CHECK: Interaction rejects forged coordinates distant from authority's actual flight
+AUDIT_CHECK: Authority rejects nonfinite ghost flight input
+AUDIT_CHECK: Installed Mirage spawns a real nonlocal server ghost for authority validation
+AUDIT_CHECK: Server accepts finite scoped flight input
+AUDIT_CHECK: Server clamps oversized flight axes before movement
+AUDIT_CHECK: Remote ghost authority integrates no faster than configured flight speed
+AUDIT_CHECK: Remote authority rejects stale movement scope and forged proximity coordinates
+AUDIT_CHECK: Remote cannot pick up a distant package by claiming its coordinate
+AUDIT_CHECK: Mirage unspawn removes an active actor from the registry without requiring GameObject disable
+AUDIT_CHECK: Deferred same-family replacement becomes available in the next round
+ACTUAL_GAME_PASS

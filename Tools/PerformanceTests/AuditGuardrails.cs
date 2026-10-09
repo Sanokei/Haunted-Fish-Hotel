@@ -8,6 +8,72 @@ using UnityEngine.SceneManagement;
 // Runtime behavioral checks in a disposable copy of the actual production project.
 public static class AuditGuardrails
 {
+    sealed class Commands : IHotelGameCommands, IHotelBossCommands
+    {
+        public int Calls;
+        public HotelPlayer Actor;
+        public string Key;
+        public int Version;
+        void Record(HotelPlayer actor, string key, int version) { Calls++; Actor = actor; Key = key; Version = version; }
+        public void Acknowledge(HotelPlayer p, int version) => Record(p, null, version);
+        public void RefreshPlacement(HotelPlayer p) => Record(p, null, 0);
+        public void AcceptFlightInput(HotelPlayer p, Vector2 axis, string key, int version) => Record(p, key, version);
+        public bool TakePackage(HotelPlayer p, int id, Vector3 point, string key, int version) { Record(p,key,version); return true; }
+        public bool PlaceTrap(HotelPlayer p, Vector3 point, string family, string key, int version) { Record(p,key,version); return false; }
+        public bool DisposeTrap(HotelPlayer p, int id, string key, int version) { Record(p,key,version); return true; }
+        public void PossessTrap(HotelPlayer p, int id, Vector3 point, string key, int version) => Record(p,key,version);
+        public void ActOnTrap(HotelPlayer p, int id, int kind, float axis, Vector3 point, string key, int version) => Record(p,key,version);
+        public bool TryEnter(HotelPlayer p, string key, int version) { Record(p,key,version); return true; }
+        public bool AcceptReady(HotelPlayer p, string key, int version, uint epoch) { Record(p,key,version); return true; }
+        public bool AcceptInput(HotelPlayer p, Vector2 axis, string key, int version, uint epoch) { Record(p,key,version); return true; }
+    }
+
+    static void CheckCommandRouting(HotelPlayer player)
+    {
+        const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+        var game = (IHotelGameCommands)typeof(HotelPlayer).GetField("_GameCommands", flags).GetValue(player);
+        var boss = (IHotelBossCommands)typeof(HotelPlayer).GetField("_BossCommands", flags).GetValue(player);
+        int reply = player.GhostPlacementReply;
+        bool accepted = player.GhostPlacementAccepted;
+        var commands = new Commands();
+        try
+        {
+            player.BindGameCommands(commands);
+            player.BindBossCommands(commands);
+            player.RequestConveyorPackage(123, Vector3.one, "routing", 42);
+            Check(commands.Calls == 1 && commands.Actor == player && commands.Key == "routing" && commands.Version == 42 && player.GhostPlacementAccepted && player.GhostPlacementReply == reply + 1, "Woven host pickup RPC uses bound endpoint and publishes one accepted reply");
+            player.RequestPlaceHeldTrap(Vector3.one, "family", "routing", 42);
+            Check(!player.GhostPlacementAccepted && player.GhostPlacementReply == reply + 2, "Rejected placement publishes exactly one negative reply");
+            player.RequestDisposeTrap(123, "routing", 42);
+            player.SendGhostFlightInput(Vector2.one, "routing", 42);
+            player.RequestScopedTrapPossession(123, Vector3.one, "routing", 42);
+            player.SendScopedTrapAction(123, 0, 1, Vector3.one, "routing", 42);
+            player.FinishGhostSelection(42);
+            Check(commands.Calls == 7, "All gameplay RPCs route once through their bound endpoint");
+            player.RequestBossFight("routing", 42);
+            player.ReadyBossScene("routing", 42, 5);
+            player.SendBossInput(Vector2.one, "routing", 42, 5);
+            Check(commands.Calls == 10, "All boss RPCs route once through their bound endpoint");
+            var replacement = new Commands();
+            player.BindBossCommands(replacement);
+            player.UnbindBossCommands(commands);
+            player.RequestBossFight("replacement", 43);
+            Check(replacement.Calls == 1 && commands.Calls == 10, "Old boss owner cannot detach a replacement");
+            player.UnbindBossCommands(replacement);
+            player.UnbindGameCommands(commands);
+            player.RequestConveyorPackage(123, Vector3.one, "routing", 42);
+            player.RequestBossFight("routing", 42);
+            Check(commands.Calls == 10 && replacement.Calls == 1 && !player.GhostPlacementAccepted && player.GhostPlacementReply == reply + 4, "Unbound RPCs reject pickup and do not call stale owners");
+        }
+        finally
+        {
+            player.BindGameCommands(game);
+            player.BindBossCommands(boss);
+            player.GhostPlacementReply = reply;
+            player.GhostPlacementAccepted = accepted;
+        }
+    }
+
     static void Check(bool value, string message)
     {
         if (!value)
@@ -19,6 +85,7 @@ public static class AuditGuardrails
     static void Call(object owner, string method) => owner.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(owner, null);
     public static void Run(HotelPlayer player, GhostPlacementWorld world, TrapManager manager)
     {
+        if (player.Networked && player.IsServer) CheckCommandRouting(player);
         // Camera replacement and additive scene ownership do not depend on tags.
         var binding = UnityEngine.Object.FindFirstObjectByType<HotelViewCamera>();
         var original = binding.Output;
