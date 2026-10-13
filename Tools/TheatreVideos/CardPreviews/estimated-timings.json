@@ -1,0 +1,163 @@
+{
+  "status": "source_estimates_and_static_cards_only",
+  "font": "Assets/Art/Fonts/Smythe-Regular.ttf",
+  "font_sha256": "51207abbe4ef2d576b3033e95fc5bd30282c0db766807e1b8ae3f19d2540e11c",
+  "reading_words_per_second": 2.7,
+  "minimum_card_seconds": 3.5,
+  "camera_travel_and_setup_cut": true,
+  "native_import_and_capture": "pending",
+  "roles": {
+    "Fish": {
+      "card_count": 11,
+      "body_words": 101,
+      "card_seconds": 51.067,
+      "gameplay_seconds": 34.6,
+      "estimated_finished_seconds": 85.667,
+      "minimum_source_seconds": 60.3,
+      "cards": [
+        {
+          "heading": "Guide to all Fish",
+          "body_words": 0,
+          "seconds": 3.5
+        },
+        {
+          "heading": "Move",
+          "body_words": 13,
+          "seconds": 5.833333333333333
+        },
+        {
+          "heading": "Jump",
+          "body_words": 13,
+          "seconds": 5.833333333333333
+        },
+        {
+          "heading": "Tablecart",
+          "body_words": 8,
+          "seconds": 3.966666666666667
+        },
+        {
+          "heading": "Read The Danger Bands",
+          "body_words": 8,
+          "seconds": 3.966666666666667
+        },
+        {
+          "heading": "Look Into The Dark",
+          "body_words": 8,
+          "seconds": 3.966666666666667
+        },
+        {
+          "heading": "The Stairwell",
+          "body_words": 10,
+          "seconds": 4.733333333333333
+        },
+        {
+          "heading": "Swinging Chandelier",
+          "body_words": 8,
+          "seconds": 3.966666666666667
+        },
+        {
+          "heading": "Angler",
+          "body_words": 12,
+          "seconds": 5.466666666666667
+        },
+        {
+          "heading": "Wowza",
+          "body_words": 11,
+          "seconds": 5.1
+        },
+        {
+          "heading": "Ready For The Round",
+          "body_words": 10,
+          "seconds": 4.733333333333333
+        }
+      ],
+      "ink_sha256": "be2e1f7a09f1342dd65eb64894074c58d83a7a57dccd93ba2a42efc2c544bc3c"
+    },
+    "Ghost": {
+      "card_count": 15,
+      "body_words": 136,
+      "card_seconds": 68.667,
+      "gameplay_seconds": 51.0,
+      "estimated_finished_seconds": 119.667,
+      "minimum_source_seconds": 71.5,
+      "cards": [
+        {
+          "heading": "Guide to the Ghost",
+          "body_words": 0,
+          "seconds": 3.5
+        },
+        {
+          "heading": "Open A Package",
+          "body_words": 12,
+          "seconds": 5.466666666666667
+        },
+        {
+          "heading": "Place",
+          "body_words": 17,
+          "seconds": 7.3
+        },
+        {
+          "heading": "Possess",
+          "body_words": 8,
+          "seconds": 3.966666666666667
+        },
+        {
+          "heading": "Read The Danger Bands",
+          "body_words": 8,
+          "seconds": 3.966666666666667
+        },
+        {
+          "heading": "Tablecart",
+          "body_words": 13,
+          "seconds": 5.833333333333333
+        },
+        {
+          "heading": "Swinging Chandelier",
+          "body_words": 12,
+          "seconds": 5.466666666666667
+        },
+        {
+          "heading": "Drop It",
+          "body_words": 5,
+          "seconds": 3.5
+        },
+        {
+          "heading": "Reset",
+          "body_words": 7,
+          "seconds": 3.6
+        },
+        {
+          "heading": "Click Trap",
+          "body_words": 7,
+          "seconds": 3.6
+        },
+        {
+          "heading": "Dispose",
+          "body_words": 7,
+          "seconds": 3.6
+        },
+        {
+          "heading": "Angler",
+          "body_words": 9,
+          "seconds": 4.333333333333333
+        },
+        {
+          "heading": "Possess The Angler",
+          "body_words": 11,
+          "seconds": 5.1
+        },
+        {
+          "heading": "Wowza",
+          "body_words": 11,
+          "seconds": 5.1
+        },
+        {
+          "heading": "Ready And Setup",
+          "body_words": 9,
+          "seconds": 4.333333333333333
+        }
+      ],
+      "ink_sha256": "97ab9276fb60dba9fbc42f055a527e46c4ffbc83ba140a71d3bc992e2f149df9"
+    }
+  }
+}

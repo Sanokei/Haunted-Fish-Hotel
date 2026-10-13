@@ -1,70 +1,53 @@
-"""Rebuild silent guides from archived Unity footage and complete mechanics Ink.
+"""Rebuild silent guides only from verified current Unity footage and mechanics Ink.
 
 Requires Pillow and ffmpeg. Output preserves existing Unity asset GUIDs.
 """
 from pathlib import Path
-import argparse, json, math, re, subprocess, textwrap
-from PIL import Image, ImageDraw, ImageFont
+import argparse, json, shutil, subprocess
+from capture_contract import validated_captures
+from intertitle_cards import card_seconds, render_card, duration_report
 
 ROOT = Path(__file__).resolve().parents[2]
 parser = argparse.ArgumentParser()
-parser.add_argument('--sources', type=Path, default=Path('C:/Users/wkeif/Documents/Codex/2026-10-11/task-4/TutorialEvidence'))
-parser.add_argument('--ffmpeg', default='C:/ffmpeg/bin/ffmpeg.exe')
+parser.add_argument('--capture-manifest', type=Path, required=True, help='Hashed current native recordings and observations; see README.md')
+parser.add_argument('--plan', type=Path, default=ROOT / 'Tools/TheatreVideos/recording-plan.json')
+parser.add_argument('--ffmpeg', default=shutil.which('ffmpeg') or 'ffmpeg')
+parser.add_argument('--ffprobe', default=None)
 args = parser.parse_args()
+try:
+    captures = validated_captures(ROOT, args.capture_manifest, args.plan)
+except (ValueError, OSError, KeyError) as error:
+    parser.error(str(error))
 WORK = ROOT / 'Tools/TheatreVideos/Evidence'
 WORK.mkdir(parents=True, exist_ok=True)
-CREAM = (248, 234, 205)
-heading_font = ImageFont.truetype(str(ROOT / 'Assets/Art/Fonts/Modak-Regular.ttf'), 54)
-body_font = ImageFont.truetype('C:/Windows/Fonts/georgia.ttf', 37)
+
 
 def run(arguments):
     subprocess.run([args.ffmpeg, '-hide_banner', '-loglevel', 'error', '-y', *arguments], check=True)
 
+
 def card(role, index, heading, body):
-    im = Image.new('RGB', (1280, 720), (19, 19, 22))
-    d = ImageDraw.Draw(im)
-    for inset, width in [(34, 2), (45, 1)]:
-        d.rectangle((inset, inset, 1279-inset, 719-inset), outline=CREAM, width=width)
-    for x, sx in [(66, 1), (1214, -1)]:
-        for y, sy in [(66, 1), (654, -1)]:
-            d.line([(x, y+sy*35), (x, y), (x+sx*35, y)], fill=CREAM, width=3)
-            d.ellipse((x-4, y-4, x+4, y+4), outline=CREAM, width=2)
-    lines = textwrap.wrap(body, width=49)
-    assert len(lines) <= 7, body
-    # Measure every line to guarantee it stays inside the frame.
-    assert max(d.textlength(line, font=body_font) for line in lines) < 1100
-    title_lines = textwrap.wrap(heading.upper(), width=29)
-    y = 170 if len(title_lines) == 1 else 130
-    for line in title_lines:
-        d.text((640, y), line, font=heading_font, fill=CREAM, anchor='mt')
-        y += 68
-    d.line((480, y+22, 800, y+22), fill=CREAM, width=2)
-    y += 62
-    for line in lines:
-        d.text((640, y), line, font=body_font, fill=CREAM, anchor='mt')
-        y += 47
-    assert y < 645, (heading, y)
+    picture, _ = render_card(role, index, heading, body)
     path = WORK / f'{role}-card-{index:02}.png'
-    im.save(path)
+    picture.save(path)
     return path
 
-manifest = {}
-for role, filename in [('Fish', 'FishTutorial-20261011-195827.mp4'), ('Ghost', 'GhostTutorial-20261011-195910.mp4')]:
-    source = args.sources / filename
-    assert source.exists(), source
-    source_duration = float(subprocess.check_output([str(Path(args.ffmpeg).with_name('ffprobe.exe')), '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(source)]))
-    ink = (ROOT / f'Assets/Dialogue/TutorialRecording/{role}Recording.ink').read_text(encoding='utf-8-sig')
-    instructions = []
-    for line in ink.splitlines():
-        match = re.match(r'~ (\w+)\((.*)\)', line)
-        if match:
-            instructions.append((match[1], json.loads('['+match[2]+']')))
+
+manifest, replacements = {}, []
+for role, capture in captures.items():
+    source = capture['source']
+    suffix = '.exe' if Path(args.ffmpeg).suffix.lower() == '.exe' else ''
+    ffprobe = args.ffprobe or str(Path(args.ffmpeg).with_name('ffprobe' + suffix))
+    source_duration = float(subprocess.check_output([ffprobe, '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(source)]))
+    instructions = capture['steps']
+    required_duration = sum(float(values[-1]) for kind, values in instructions if kind != 'TutorialCaption')
+    if source_duration + 1 / 30 < required_duration:
+        raise ValueError(f'{role}: source ends at {source_duration}s before the complete {required_duration}s Ink sequence. Record the missing gameplay; do not replace it with cards.')
     timeline, pieces, chapters = 0.0, [], []
     for kind, values in instructions:
         if kind == 'TutorialCaption':
             heading, body = values
-            seconds = max(3.5, len(body.split()) / 2.7 + 1.0)
-            seconds = math.ceil(seconds * 30) / 30
+            seconds = card_seconds(heading, body)
             picture = card(role, len(chapters), heading, body)
             segment = WORK / f'{role}-segment-{len(pieces):02}.mp4'
             run(['-loop', '1', '-i', str(picture), '-t', str(seconds), '-r', '30', '-an', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p', str(segment)])
@@ -72,8 +55,9 @@ for role, filename in [('Fish', 'FishTutorial-20261011-195827.mp4'), ('Ghost', '
             pieces.append(segment)
         else:
             seconds = float(values[-1])
-            # Waits previously held explanatory overlays. Their replacement is the card.
-            if kind != 'Wait' and seconds > 0 and timeline + seconds <= source_duration - .02:
+            # Cards replace waits. Setup and camera travel remain in source offsets,
+            # but only actual demonstrations are emitted as gameplay.
+            if kind == 'TutorialDemo' and seconds > 0:
                 segment = WORK / f'{role}-segment-{len(pieces):02}.mp4'
                 # Strip the baked lower captions and upper role label. Retain the
                 # complete gameplay viewport, letterboxed without stretching it.
@@ -87,7 +71,10 @@ for role, filename in [('Fish', 'FishTutorial-20261011-195827.mp4'), ('Ghost', '
     output = WORK / f'{role}Intertitles.mp4'
     run(['-f', 'concat', '-safe', '0', '-i', str(listing), '-c', 'copy', '-movflags', '+faststart', str(output)])
     run(['-i', str(output), '-f', 'null', '-'])
+    replacements.append((target, output))
+    manifest[role] = {'source': str(source), 'source_seconds': source_duration, 'chapters': chapters, 'duration_estimate': duration_report(instructions), 'segments': len(pieces), 'output': str(target), 'capture_manifest': str(args.capture_manifest), 'note': 'Current hashed native capture; full Ink sequence present.'}
+# Do not replace either shipped asset until both complete outputs have decoded.
+for target, output in replacements:
     target.write_bytes(output.read_bytes())
-    manifest[role] = {'source': str(source), 'source_seconds': source_duration, 'chapters': chapters, 'segments': len(pieces), 'output': str(target), 'note': 'Archived Ghost footage ends during drop; later mechanics are explained by cards.' if role == 'Ghost' else ''}
 (WORK / 'manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
-print('Built and fully decoded both silent intertitle guides.')
+print('Built and fully decoded both silent intertitle guides. Native theatre playback review is still required.')

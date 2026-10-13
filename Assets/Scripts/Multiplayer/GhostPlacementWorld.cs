@@ -76,6 +76,13 @@ namespace HauntedFish.Multiplayer
         GhostTrap[] _BoundPrefabs;
         public GhostPlacementController Controls { get; private set; }
 
+        GameHauntingController _Haunting;
+        public void BindHaunting(GameHauntingController haunting) => _Haunting = haunting;
+        public void UnbindHaunting(GameHauntingController haunting)
+        {
+            if (_Haunting == haunting) _Haunting = null;
+        }
+
         public void BindControls(GhostPlacementController controls) => Controls = controls;
         void OnValidate() => _BoundPrefabs = null;
         public GhostTrap Definition(string family)
@@ -543,8 +550,8 @@ namespace HauntedFish.Multiplayer
                         _State.Cubes[index] = trap.CaptureState();
                         _Dirty = true;
                     }
-                    if (GameSceneController.Current && GameSceneController.Current.Haunting)
-                        GameSceneController.Current.Haunting.ApplyTrapDamage(trap, before, Time.deltaTime);
+                    var haunting = _Haunting ? _Haunting : GameSceneController.Current ? GameSceneController.Current.Haunting : null;
+                    if (haunting) haunting.ApplyTrapDamage(trap, before, Time.deltaTime);
                 }
 
                 Publish(authority);

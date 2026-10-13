@@ -73,6 +73,37 @@ static class DoorPushTests
         if (pushStart < 0) pushStart = prefab.IndexOf("  - Tag: letter_under_door\r\n    Poses:");
         int reading = prefab.IndexOf("  - Tag: letter_read", pushStart);
         Check(prefab.Substring(pushStart, reading - pushStart).Contains("Slant: 120"), "Production push still targets its rhombus.");
+
+        var letterUI = new StoryUI();
+        var letter = new RectTransform { anchoredPosition = new Vector2(-70,289) };
+        var shadow = new RectTransform { anchoredPosition = new Vector2(-62,277) };
+        typeof(StoryUI).GetField("_Content",flags).SetValue(letterUI,new GameObject());
+        typeof(StoryUI).GetField("_Elements",flags).SetValue(letterUI,new[] {
+            new StoryUI.Element { Tag="letter",Target=letter,ContactShadow=shadow,ShadowOffset=new Vector2(8,-12) }
+        });
+        var slide = new StorySequenceStep(StorySequenceStepKind.MoveUI,"letter",seconds:1.8f,x:40,y:50);
+        letterUI.Prepare();
+        var slidePlay=letterUI.Play(slide);
+        Check(slidePlay.MoveNext() && slidePlay.Current is IEnumerator,"Letter plays its production slide tween.");
+        var slideTween=(IEnumerator)slidePlay.Current;
+        while(slideTween.MoveNext()) { }
+        slidePlay.MoveNext();
+        Near(shadow.anchoredPosition.x,48,"Contact shadow follows the completed slide horizontally.");
+        Near(shadow.anchoredPosition.y,38,"Contact shadow follows the completed slide vertically.");
+        letterUI.Close();
+        Near(shadow.anchoredPosition.x,-62,"Close restores the shadow's original horizontal pose.");
+        Near(shadow.anchoredPosition.y,277,"Close restores the shadow's original vertical pose.");
+        letterUI.Prepare();
+        Near(shadow.anchoredPosition.y,277,"Replay starts with the shadow under the original envelope.");
+        slidePlay=letterUI.Play(slide);slidePlay.MoveNext();slideTween=(IEnumerator)slidePlay.Current;
+        slideTween.MoveNext();slideTween.MoveNext();slideTween.MoveNext();
+        Check(shadow.anchoredPosition.y<277,"Partial replay moves the shadow before cancellation.");
+        (slideTween as IDisposable)?.Dispose();(slidePlay as IDisposable)?.Dispose();
+        typeof(StoryUI).GetMethod("OnDisable",flags).Invoke(letterUI,null);
+        Near(letter.anchoredPosition.y,289,"Disable restores the partially moved letter.");
+        Near(shadow.anchoredPosition.y,277,"Disable restores the partially moved contact shadow.");
+        letterUI.Close();
+        Near(shadow.anchoredPosition.x,-62,"Repeated close cannot accumulate a shadow offset.");
         return checks;
     }
 }
@@ -99,7 +130,8 @@ namespace UnityEngine
     public class RectTransform : Object
     {
         public readonly GameObject gameObject;
-        public Vector2 anchoredPosition, sizeDelta, pivot;
+        public Vector2 anchoredPosition, sizeDelta, pivot, anchorMin, anchorMax;
+        public RectTransform parent;
         public Vector3 localScale = Vector3.one;
         public Quaternion localRotation = Quaternion.identity;
         public HauntedFish.Multiplayer.IntroductionPanelShape Shape;
@@ -110,6 +142,10 @@ namespace UnityEngine
     {
         public float x, y;
         public Vector2(float a, float b) { x = a; y = b; }
+        public static bool operator ==(Vector2 a, Vector2 b) => a.x == b.x && a.y == b.y;
+        public static bool operator !=(Vector2 a, Vector2 b) => !(a == b);
+        public override bool Equals(object obj) => obj is Vector2 v && this == v;
+        public override int GetHashCode() => x.GetHashCode() ^ y.GetHashCode();
         public static Vector2 zero => new Vector2(0, 0);
         public static Vector2 one => new Vector2(1, 1);
         public static Vector2 operator +(Vector2 a, Vector2 b) => new Vector2(a.x + b.x, a.y + b.y);

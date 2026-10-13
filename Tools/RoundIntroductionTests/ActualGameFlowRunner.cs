@@ -124,7 +124,7 @@ public sealed class ActualGameFlowRunner:MonoBehaviour {
   yield return null;
   PressGhostKey(controls,Key.Q);yield return null;
   Check(local.HeldTrapFamily==""&&world.Count==0,"Actual Q input discards held item through ordinary ghost controller");
-  world.Hold(local,"cart",new Vector3(0,1,0));Check(world.TryPlace(local,new Vector3(0,1,0),"cart"),"Real Game places enlarged authored cart on the floor");
+  Check(world.PlacementPoint(Vector3.zero,"cart",out var cartPoint),"Real Game derives current tablecart floor anchor");world.Hold(local,"cart",cartPoint);Check(world.TryPlace(local,cartPoint,"cart"),"Real Game places current authored tablecart on the floor");
   var records=JsonUtility.FromJson<GhostCubeSnapshot>(world.Snapshot);var trap=world.Trap(records.Cubes[0].Id);Set(controls,"_Position",trap.Position);world.Possess(local,trap.Index,trap.Position);
   yield return null;yield return null;
   Check(local.ControlledCube==trap.Index,"Real Game ghost possesses its owned cart");

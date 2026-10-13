@@ -16,7 +16,7 @@ public static class ActualGameSceneValidation {
   if(UnityEngine.Object.FindObjectsByType<GhostTrapSupply>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=0)throw new Exception("No fixed supply instances should remain");
   var manager=UnityEngine.Object.FindFirstObjectByType<TrapManager>();var catalog=new SerializedObject(manager);
   if(!manager||manager.transform.childCount!=0||!catalog.FindProperty("_World").objectReferenceValue||!catalog.FindProperty("_GhostControls").objectReferenceValue||!catalog.FindProperty("_PackagePrefab").objectReferenceValue)throw new Exception("Authored empty Trap Manager dependency reference lost");
-  var definitions=catalog.FindProperty("_Traps");if(definitions.arraySize!=3)throw new Exception("Authored trap definition list lost");
+  var definitions=catalog.FindProperty("_Traps");if(definitions.arraySize!=4)throw new Exception("Authored trap definition list lost");
   for(int i=0;i<definitions.arraySize;i++)if(!definitions.GetArrayElementAtIndex(i).FindPropertyRelative("Prefab").objectReferenceValue||!definitions.GetArrayElementAtIndex(i).FindPropertyRelative("DisplayArt").objectReferenceValue)throw new Exception("Injected definition art/prefab lost");
   for(int i=0;i<definitions.arraySize;i++) {
    var entry=definitions.GetArrayElementAtIndex(i);var trap=(GhostTrap)entry.FindPropertyRelative("Prefab").objectReferenceValue;

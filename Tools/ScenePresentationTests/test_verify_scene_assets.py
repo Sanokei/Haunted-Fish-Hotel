@@ -1,9 +1,91 @@
 """Small parser regressions; run with Python's standard unittest discovery."""
 import math
+import contextlib
+import io
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 import tempfile
-from verify_scene_assets import reference_issues, records, fit_distance, rotate, mesh_issues, AssetGraph
+import verify_scene_assets as validator
+from verify_scene_assets import reference_issues, records, fit_distance, rotate, mesh_issues, AssetGraph, in_unity_ignored_directory
+
+
+class UnityIgnoredDirectoryTests(unittest.TestCase):
+    def test_only_tilde_suffixed_directory_contents_are_ignored(self):
+        for path in ('Assets/Art/Source~/PiranhaStun.blend',
+                     'Assets/Art/Source~/nested/mesh_report.json',
+                     'Assets/Art/Source~/nested/mesh.asset.meta',
+                     'Packages/example/Samples~/sample.prefab'):
+            with self.subTest(path=path):
+                self.assertTrue(in_unity_ignored_directory(path))
+        for path in ('Assets/Art/Source/PiranhaStun.blend',
+                     'Assets/Art/Source~copy/mesh.asset',
+                     'Assets/Art/Piranha~Stun.asset',
+                     'Assets/Art/PiranhaStun.asset~',
+                     'Assets/Art/mesh_report.json'):
+            with self.subTest(path=path):
+                self.assertFalse(in_unity_ignored_directory(path))
+
+    def run_validation(self, files, changed, explicit=()):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for path, text in files.items():
+                target = root / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(text)
+            def fake_git(*args):
+                return ('\0'.join(changed) + '\0').encode() if args[0] == 'diff' else b''
+            argv = ['verify_scene_assets.py']
+            for path in explicit:
+                argv.extend(('--asset', path))
+            output = io.StringIO()
+            with patch.object(validator, 'ROOT', root), patch.object(validator, 'DEFAULT_ASSETS', ()), \
+                    patch.object(validator, 'git', side_effect=fake_git), \
+                    patch.object(validator, 'baseline', return_value=''), \
+                    patch.object(validator, 'existed_meta', return_value=False), \
+                    patch.object(validator, 'existed_reference', return_value=False), \
+                    patch.object(validator, 'check_preserved_records'), \
+                    patch.object(validator, 'check_presentation_contracts'), \
+                    patch.object(validator, 'check_lobby_finishes'), \
+                    patch.object(validator, 'check_cameras'), \
+                    patch('sys.argv', argv), contextlib.redirect_stdout(output):
+                result = validator.main()
+            return result, output.getvalue()
+
+    def test_ignored_sources_need_no_metadata_even_when_explicitly_selected(self):
+        source = 'Assets/Art/Source~/PiranhaStun.blend'
+        result, output = self.run_validation({source: 'source-only'}, [source], [source])
+        self.assertEqual(result, 0, output)
+        self.assertNotIn('metadata is paired', output)
+
+    def test_imported_assets_still_require_metadata(self):
+        for source in ('Assets/Art/PiranhaStun.blend', 'Assets/Art/Source~copy/mesh_report.json'):
+            with self.subTest(source=source):
+                result, output = self.run_validation({source: 'imported asset'}, [source])
+                self.assertEqual(result, 1)
+                self.assertIn(source + ': metadata is paired', output)
+
+    def test_ignored_metadata_is_not_a_duplicate_imported_guid(self):
+        guid = 'a' * 32
+        source = 'Assets/Art/mesh.asset'
+        files = {source: 'imported asset', source + '.meta': f'guid: {guid}\n',
+                 'Assets/Art/Source~/mesh.asset': 'ignored source',
+                 'Assets/Art/Source~/mesh.asset.meta': f'guid: {guid}\n'}
+        result, output = self.run_validation(files, list(files))
+        self.assertEqual(result, 0, output)
+
+    def test_ignored_metadata_cannot_resolve_an_imported_asset_reference(self):
+        source, target_guid = 'Assets/Art/use.asset', 'b' * 32
+        files = {
+            source: '%YAML 1.1\n--- !u!114 &1\nMonoBehaviour:\n'
+                    f'  target: {{fileID: 2, guid: {target_guid}, type: 2}}\n',
+            source + '.meta': 'guid: ' + 'a' * 32 + '\n',
+            'Assets/Art/Source~/target.asset': 'ignored source',
+            'Assets/Art/Source~/target.asset.meta': f'guid: {target_guid}\n',
+        }
+        result, output = self.run_validation(files, list(files))
+        self.assertEqual(result, 1)
+        self.assertIn('newly unresolved GUID ' + target_guid, output)
 
 
 class SerializedReferenceTests(unittest.TestCase):

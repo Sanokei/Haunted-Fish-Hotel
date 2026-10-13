@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98f0e0687fca42a0b0eb03d19e045cf3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HauntedFish.Multiplayer.HotelViewCamera
   _Output: {fileID: 420571060765889963}
 --- !u!1 &882492424434348332
@@ -241,6 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8338375555291145211}
   - component: {fileID: 7555351392353907708}
+  - component: {fileID: 95001020}
   m_Layer: 0
   m_Name: Production scoped trap inventory
   m_TagString: Untagged
@@ -273,9 +274,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f09284e714004f24bc063a9391c432b5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HauntedFish.Multiplayer.GhostPlacementWorld
-  _TrapPrefabs: []
+  _TrapPrefabs:
+  - {fileID: 31000999, guid: 6e97424c56fac634083188ab7c2d7dc7, type: 3}
+  - {fileID: 31000999, guid: 8658676a703f16740920051653454777, type: 3}
+  - {fileID: 31000999, guid: 90da934f47d0a08468075a8b483323b7, type: 3}
+  - {fileID: 31000999, guid: e8bf6c9e3bf65600b18d27293a1649f2, type: 3}
   _TrapContainer: {fileID: 8338375555291145211}
   _GraceZone: {fileID: 6857741719069122800}
   _HallwayPlacementReach: 4
@@ -334,7 +339,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
   m_Color: {r: 0.97255, g: 0.91765, b: 0.80392, a: 1}
@@ -345,7 +350,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: c36f36ab1733544a8cde4a7ae27f0672, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -357,7 +362,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text:
 --- !u!1 &1316924077974090527
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +413,8 @@ Transform:
   - {fileID: 412474594008022525}
   - {fileID: 1043834862474389595}
   - {fileID: 7009590836475034362}
+  - {fileID: 95001002}
+  - {fileID: 95001031}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &242606801975031782
@@ -420,7 +427,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7ece867304041be8b4b082d636f5a86, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HauntedFish.Tutorials.TutorialRecordingDirector
   Output: {fileID: 420571060765889963}
   Review: {fileID: 5178358367868155425}
@@ -432,6 +439,10 @@ MonoBehaviour:
   Progress: {fileID: 1414917069686389453}
   Spotlight: {fileID: 2364455850021812295}
   Fish: {fileID: 1082790918383741712}
+  OtherFish: {fileID: 95001003}
+  Haunting: {fileID: 95001020}
+  FishStunEffect: {fileID: 95001011}
+  FishStunAnimation: {fileID: 95001012}
   Ghost: {fileID: 8615869596180749310}
   GhostFlight: {fileID: 3794345334002369912}
   CarriedPreview: {fileID: 6519310612821739894}
@@ -439,9 +450,10 @@ MonoBehaviour:
   CarryArt: {fileID: 8875602990512424987}
   World: {fileID: 7555351392353907708}
   Supplies: {fileID: 4421552560376769232}
-  CartDefinition: {fileID: 4974563628129511837, guid: 6e97424c56fac634083188ab7c2d7dc7, type: 3}
-  ChandelierDefinition: {fileID: 4693212503580180377, guid: 8658676a703f16740920051653454777, type: 3}
-  ClickDefinition: {fileID: 4692012465559350567, guid: 90da934f47d0a08468075a8b483323b7, type: 3}
+  CartDefinition: {fileID: 31000999, guid: 6e97424c56fac634083188ab7c2d7dc7, type: 3}
+  ChandelierDefinition: {fileID: 31000999, guid: 8658676a703f16740920051653454777, type: 3}
+  ClickDefinition: {fileID: 31000999, guid: 90da934f47d0a08468075a8b483323b7, type: 3}
+  AnglerDefinition: {fileID: 31000999, guid: e8bf6c9e3bf65600b18d27293a1649f2, type: 3}
   Hallway: {fileID: 6144801475636508508}
   ArenaRoot: {fileID: 6285059137483101659}
   Arena: {fileID: 7815725352820511374}
@@ -477,7 +489,7 @@ MonoBehaviour:
     Pose: {fileID: 8031563395553559473}
     FieldOfView: 46
     Orthographic: 1
-    Size: 3.2
+    Size: 3.5
   - Name: click
     Pose: {fileID: 7849644412481896870}
     FieldOfView: 46
@@ -488,6 +500,11 @@ MonoBehaviour:
     FieldOfView: 46
     Orthographic: 1
     Size: 3.2
+  - Name: trap-wide
+    Pose: {fileID: 95001031}
+    FieldOfView: 46
+    Orthographic: 1
+    Size: 4
   CameraEase:
     serializedVersion: 2
     m_Curve:
@@ -567,7 +584,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
   m_Color: {r: 0.97255, g: 0.91765, b: 0.80392, a: 1}
@@ -578,7 +595,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d4e80c7736f5472abd2cace956a4fda6, type: 3}
+    m_Font: {fileID: 12800000, guid: c36f36ab1733544a8cde4a7ae27f0672, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -590,7 +607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text:
 --- !u!1 &2471740604017872479
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +855,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
@@ -877,7 +894,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -1035,7 +1052,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
   m_Color: {r: 0.97255, g: 0.91765, b: 0.80392, a: 1}
@@ -1046,7 +1063,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: c36f36ab1733544a8cde4a7ae27f0672, type: 3}
     m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
@@ -1058,7 +1075,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text:
 --- !u!1 &5244800712743915027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,7 +1284,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.015, g: 0.022, b: 0.025, a: 0.92}
@@ -1416,7 +1433,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
@@ -1650,7 +1667,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 2100000, guid: 29ce0bad336b34f4e84856ab6db84866, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1712,13 +1729,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 412e2d0873df4757b74dd7c9d6dd15c0, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HauntedFish.Multiplayer.TrapManager
   _World: {fileID: 7555351392353907708}
   _GhostControls: {fileID: 0}
   _PackagePrefab: {fileID: 31000998, guid: 8d26e9e32f3847e181d70f5e7b88396a, type: 3}
   _Traps:
-  - Prefab: {fileID: 4974563628129511837, guid: 6e97424c56fac634083188ab7c2d7dc7, type: 3}
+  - Prefab: {fileID: 31000999, guid: 6e97424c56fac634083188ab7c2d7dc7, type: 3}
     DisplayArt: {fileID: 0}
     Weight: 1
   _RunPolicy: 2
@@ -1791,7 +1808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338137809651771033, guid: 8e2be6cb079353643a9da74000446617, type: 3}
       propertyPath: m_Camera
-      value: 
+      value:
       objectReference: {fileID: 420571060765889963}
     - target: {fileID: 6338137809651771033, guid: 8e2be6cb079353643a9da74000446617, type: 3}
       propertyPath: m_RenderMode
@@ -1819,7 +1836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8269776732231877087, guid: 8e2be6cb079353643a9da74000446617, type: 3}
       propertyPath: m_Camera
-      value: 
+      value:
       objectReference: {fileID: 420571060765889963}
     - target: {fileID: 8269776732231877087, guid: 8e2be6cb079353643a9da74000446617, type: 3}
       propertyPath: m_RenderMode
@@ -1857,8 +1874,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65771315b3b94aa8aa49d4e146b6d1a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1001 &1082790918396331093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1921,7 +1938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 21000024, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: m_SortingOrder
@@ -1945,8 +1962,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71b188f437b64a23829c11a5a1821e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!4 &1082790918383741719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
@@ -2173,5 +2190,152 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71b188f437b64a23829c11a5a1821e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!1001 &95001001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4173343303930472214}
+    m_Modifications:
+    - target: {fileID: 21000001, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_Name
+      value: Authored second fish - production impact target
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: GhostId
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: Networked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21000024, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647969585365710181, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+--- !u!4 &95001002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+  m_PrefabInstance: {fileID: 95001001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &95001003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+  m_PrefabInstance: {fileID: 95001001}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b188f437b64a23829c11a5a1821e5f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!1 &95001011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 883400003, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+  m_PrefabInstance: {fileID: 1082790918396331093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &95001012 stripped
+Animation:
+  m_CorrespondingSourceObject: {fileID: 883400004, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+  m_PrefabInstance: {fileID: 1082790918396331093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &95001020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188112850407518979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce48085e788c4cd8bcf347c6060938ea, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HauntedFish.Multiplayer.GameHauntingController
+  _ContactDamagePerSecond: 50
+--- !u!1 &95001030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 95001031}
+  m_Layer: 0
+  m_Name: Camera shot - trap-wide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &95001031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95001030}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1, y: 1.8, z: -18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4173343303930472214}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

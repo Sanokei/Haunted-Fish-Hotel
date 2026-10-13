@@ -4,21 +4,21 @@ using Ink.Runtime;
 
 namespace Monologue.Dialogue
 {
-    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI, Spin, LobbyShot, LobbyLine }
+    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI, Spin, LobbyShot, LobbyLine, ParallaxTo }
 
     public readonly struct StorySequenceStep
     {
         public readonly StorySequenceStepKind Kind;
-        public readonly string Target, Variant, Parent;
+        public readonly string Target, Variant, Parent, Easing;
         public readonly float X, Y, Seconds;
         public readonly int Count;
         public readonly bool Visible;
 
         public StorySequenceStep(StorySequenceStepKind kind, string target = "", string variant = "",
-            float seconds = 0, float x = 0, float y = 0, int count = 0, bool visible = false, string parent = "")
+            float seconds = 0, float x = 0, float y = 0, int count = 0, bool visible = false, string parent = "", string easing = "smooth")
         {
             Kind = kind; Target = target; Variant = variant; Parent = parent; Seconds = seconds;
-            X = x; Y = y; Count = count; Visible = visible;
+            X = x; Y = y; Count = count; Visible = visible; Easing = easing;
         }
     }
 
@@ -47,10 +47,20 @@ namespace Monologue.Dialogue
         public delegate void OnCreateUI(string prefabTag, string instanceTag, string parentTag);
         public static event OnCreateUI OnCreateUIEvent;
 
+        public delegate void OnParallaxTo(string rigTag, string poseTag, float seconds, string easing);
+        public static event OnParallaxTo OnParallaxToEvent;
+
         // Ordinary stories emit the same typed events as the other StoryFunctions.
         // An automatic local sequence supplies a queue so operations run in Ink order.
         public static void BindAnimationFunctions(Story story, Action<StorySequenceStep> queue = null)
         {
+            story.BindExternalFunction("ParallaxTo", (string rig, string pose, float seconds, string easing) =>
+            {
+                var step = new StorySequenceStep(StorySequenceStepKind.ParallaxTo, rig, pose, seconds: seconds, easing: easing);
+                ValidateAnimationStep(step);
+                if (queue != null) queue(step);
+                else OnParallaxToEvent?.Invoke(rig, pose, seconds, easing);
+            });
             story.BindExternalFunction("LobbyShot", (string tag, float seconds) =>
             {
                 if (queue == null) throw new InvalidOperationException("LobbyShot requires a local introduction sequence.");
@@ -119,6 +129,7 @@ namespace Monologue.Dialogue
         }
         public static void UnbindAnimationFunctions(Story story)
         {
+            story.UnbindExternalFunction("ParallaxTo");
             story.UnbindExternalFunction("LobbyShot");
             story.UnbindExternalFunction("LobbyLine");
             story.UnbindExternalFunction("CreateUI");
@@ -134,6 +145,32 @@ namespace Monologue.Dialogue
             story.UnbindExternalFunction("Spin");
         }
 
+        // Shared by compiled sequences and immediate animation events.
+        public static void ValidateAnimationStep(StorySequenceStep step)
+        {
+            if (float.IsNaN(step.Seconds) || float.IsInfinity(step.Seconds) || step.Seconds < 0)
+                throw new ArgumentException("Introduction durations must be finite and nonnegative.");
+            if (step.Kind != StorySequenceStepKind.Wait && step.Kind != StorySequenceStepKind.FlashFrames && string.IsNullOrWhiteSpace(step.Target))
+                throw new ArgumentException("Introduction object tags must not be empty.");
+            if (step.Kind == StorySequenceStepKind.SetVariant && string.IsNullOrWhiteSpace(step.Variant))
+                throw new ArgumentException("Variant tags must not be empty.");
+            if (step.Kind == StorySequenceStepKind.CreateUI && (string.IsNullOrWhiteSpace(step.Variant) || string.IsNullOrWhiteSpace(step.Parent)))
+                throw new ArgumentException("UI prefab and parent tags must not be empty.");
+            if (step.Kind == StorySequenceStepKind.Knock && (step.Count < 1 || step.Count > 32))
+                throw new ArgumentException("Knock count must be between 1 and 32.");
+            if (step.Kind == StorySequenceStepKind.FlashFrames && (step.Count < 1 || step.Count > 120))
+                throw new ArgumentException("Flash duration must be between 1 and 120 rendered frames.");
+            if (step.Kind == StorySequenceStepKind.DollyTo && (step.X < 0 || step.X > 1))
+                throw new ArgumentException("Dolly amount must be between 0 and 1.");
+            if (float.IsNaN(step.X) || float.IsInfinity(step.X) || float.IsNaN(step.Y) || float.IsInfinity(step.Y))
+                throw new ArgumentException("UI coordinates must be finite.");
+            if (step.Kind == StorySequenceStepKind.ParallaxTo)
+            {
+                if (string.IsNullOrWhiteSpace(step.Variant)) throw new ArgumentException("Parallax pose tags must not be empty.");
+                StoryAnimationMath.ParseEase(step.Easing);
+            }
+        }
+
         public static IReadOnlyList<StorySequenceStep> ReadAnimationSequence(string compiledInk)
         {
             var story = new Story(compiledInk);
@@ -141,22 +178,7 @@ namespace Monologue.Dialogue
             BindAnimationFunctions(story, step =>
             {
                 if (steps.Count >= 1024) throw new InvalidOperationException("Introduction exceeds 1024 steps.");
-                if (float.IsNaN(step.Seconds) || float.IsInfinity(step.Seconds) || step.Seconds < 0)
-                    throw new ArgumentException("Introduction durations must be finite and nonnegative.");
-                if (step.Kind != StorySequenceStepKind.Wait && step.Kind != StorySequenceStepKind.FlashFrames && string.IsNullOrWhiteSpace(step.Target))
-                    throw new ArgumentException("Introduction object tags must not be empty.");
-                if (step.Kind == StorySequenceStepKind.SetVariant && string.IsNullOrWhiteSpace(step.Variant))
-                    throw new ArgumentException("Variant tags must not be empty.");
-                if (step.Kind == StorySequenceStepKind.CreateUI && (string.IsNullOrWhiteSpace(step.Variant) || string.IsNullOrWhiteSpace(step.Parent)))
-                    throw new ArgumentException("UI prefab and parent tags must not be empty.");
-                if (step.Kind == StorySequenceStepKind.Knock && (step.Count < 1 || step.Count > 32))
-                    throw new ArgumentException("Knock count must be between 1 and 32.");
-                if (step.Kind == StorySequenceStepKind.FlashFrames && (step.Count < 1 || step.Count > 120))
-                    throw new ArgumentException("Flash duration must be between 1 and 120 rendered frames.");
-                if (step.Kind == StorySequenceStepKind.DollyTo && (step.X < 0 || step.X > 1))
-                    throw new ArgumentException("Dolly amount must be between 0 and 1.");
-                if (float.IsNaN(step.X) || float.IsInfinity(step.X) || float.IsNaN(step.Y) || float.IsInfinity(step.Y))
-                    throw new ArgumentException("UI coordinates must be finite.");
+                ValidateAnimationStep(step);
                 steps.Add(step);
             });
             try

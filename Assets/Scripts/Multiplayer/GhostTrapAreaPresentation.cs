@@ -23,6 +23,26 @@ namespace HauntedFish.Multiplayer
         [SerializeField] Image[] _WorldImages;
         [SerializeField] SpriteRenderer[] _WorldArt;
         [SerializeField] Sprite _DangerPattern, _RangeMarker;
+        [Tooltip("Optional authored angler light/glow, enabled only while this trap is possessed.")]
+        [SerializeField] Light _PossessedLight;
+        [SerializeField] GameObject _PossessedGlow;
+        [Tooltip("Enable when the supplied glow is a complete alternate image, so the base body is not drawn beneath it.")]
+        [SerializeField] bool _PossessedGlowReplacesBody;
+        [Tooltip("Authored pivot at the separated hanging line's top. Only its suspended children sway; the ceiling base stays fixed.")]
+        [SerializeField] Transform _SuspendedPivot;
+        [Tooltip("Optional authored full-art layout for the stationary ceiling canopy, separate from the falling suspended layout.")]
+        [SerializeField] RectTransform _FixedCeilingLayout;
+        [SerializeField] float _SwayDegrees = 3, _SwayFrequency = 2.2f;
+        Quaternion _SuspendedRestRotation = Quaternion.identity;
+        public bool IsPossessed { get; private set; }
+        // Read-only authored presentation observations used by native recording/QA.
+        public bool PossessionLightVisible => _PossessedLight && _PossessedLight.enabled || _PossessedGlow && _PossessedGlow.activeInHierarchy;
+        public bool DangerBandVisible => _PatternRenderer && _PatternRenderer.enabled && _PatternRenderer.gameObject.activeInHierarchy;
+        public float DangerPatternTime => _PatternBlock == null ? 0 : _PatternBlock.GetFloat("_SharedTime");
+        public Sprite DangerPattern => _DangerPattern;
+        public Sprite RangeMarker => _RangeMarker;
+        public Transform SuspendedPivot => _SuspendedPivot;
+        public RectTransform FixedCeilingLayout => _FixedCeilingLayout;
         [SerializeField] MeshRenderer _PatternRenderer;
         MaterialPropertyBlock _PatternBlock;
         void PresentPattern(Camera camera)
@@ -54,6 +74,8 @@ namespace HauntedFish.Multiplayer
             if (_WorldImages == null || _WorldArt == null || _WorldImages.Length != _WorldArt.Length)
                 throw new System.InvalidOperationException("Bind authored trap presentation renderers.");
             foreach (var image in _WorldImages) { image.enabled = false; image.raycastTarget = false; }
+            // Split chandelier uses this image only as a sizing reference, never a duplicate full-art layer.
+            if (_CartImage) { _CartImage.enabled = false; _CartImage.raycastTarget = false; }
         }
         void UpdateWorldArt(Camera camera)
         {
@@ -63,7 +85,9 @@ namespace HauntedFish.Multiplayer
             {
                 var image = _WorldImages[i];
                 var art = _WorldArt[i];
-                art.enabled = image != _AreaImage && _Root.activeInHierarchy && image.gameObject.activeInHierarchy && depth > camera.nearClipPlane;
+                bool replacedBody = _PossessedGlowReplacesBody && IsPossessed && _PossessedGlow &&
+                    _PossessedGlow.activeInHierarchy && image == _CartImage;
+                art.enabled = image != _AreaImage && !replacedBody && _Root.activeInHierarchy && image.gameObject.activeInHierarchy && depth > camera.nearClipPlane;
                 art.flipX = image == _Right;
                 if (!art.enabled) continue;
                 var sprite = image.sprite;
@@ -86,15 +110,31 @@ namespace HauntedFish.Multiplayer
         }
         void OnDisable()
         {
+            PresentPossession(false);
             if (_PatternRenderer) _PatternRenderer.enabled = false;
             if (_WorldArt != null) foreach (var art in _WorldArt) if (art) art.enabled = false;
         }
         void Awake()
         {
+            if (_SuspendedPivot) _SuspendedRestRotation = _SuspendedPivot.localRotation;
+            PresentPossession(false);
             if (_Area)
                 _AreaImage = _Area.GetComponent<Image>();
             if (_Cart) _CartImage = _Cart.GetComponent<Image>();
             if (_RangeMarker) { _Left.sprite = _Right.sprite = _RangeMarker; }
+        }
+
+        void PresentPossession(bool possessed)
+        {
+            IsPossessed = possessed;
+            if (_PossessedLight) _PossessedLight.enabled = possessed;
+            if (_PossessedGlow && _PossessedGlow.activeSelf != possessed) _PossessedGlow.SetActive(possessed);
+            if (_SuspendedPivot)
+            {
+                bool sway = possessed && _Trap && _Trap.Phase == TrapPhase.Armed;
+                _SuspendedPivot.localRotation = _SuspendedRestRotation * Quaternion.Euler(0, 0,
+                    sway ? _SwayDegrees * Mathf.Sin(Time.unscaledTime * _SwayFrequency) : 0);
+            }
         }
 
         public void ConfigureTrap(GhostTrap trap)
@@ -173,6 +213,17 @@ namespace HauntedFish.Multiplayer
                     _Cart.pivot = new Vector2(bounds.center.x, bounds.yMax);
                     _Cart.position = camera.WorldToScreenPoint(transform.position + _Trap.ColliderOffset + Vector3.up * _Trap.BodyHalfSize.y);
                     _Cart.sizeDelta = new Vector2(artHeight * aspect * projectedRight.magnitude / widthFraction, artHeight * height / heightFraction);
+                    if (_FixedCeilingLayout)
+                    {
+                        // Origin + ArmedOffset is stable while the trap falls. Both layouts use
+                        // the same original-art coordinates so the black cord meets the canopy.
+                        _FixedCeilingLayout.pivot = _Cart.pivot;
+                        _FixedCeilingLayout.sizeDelta = _Cart.sizeDelta;
+                        _FixedCeilingLayout.rotation = _Cart.rotation;
+                        _FixedCeilingLayout.localScale = Vector3.one;
+                        _FixedCeilingLayout.position = camera.WorldToScreenPoint(_Origin + _Trap.ArmedOffset +
+                            _Trap.ColliderOffset + Vector3.up * _Trap.BodyHalfSize.y);
+                    }
                 }
                 float markerHeight = _Area.sizeDelta.y;
                 _Left.rectTransform.sizeDelta = _Right.rectTransform.sizeDelta = new Vector2(markerHeight * (1176f / 1400f), markerHeight);
@@ -185,7 +236,8 @@ namespace HauntedFish.Multiplayer
             for (int i = 0; i < players.Count; i++)
             {
                 var player = players[i];
-                if (player.ControlsReady && player.ControlMode == HotelControlMode.Ghost && player.ControlledCube == _Index && (!_Trap || player.RoundStateKey == _Trap.World.RoundKey))
+                if (player.ControlsReady && player.ControlMode == HotelControlMode.Ghost && player.ControlledCube == _Index &&
+                    (!_Trap || _Trap.World && player.RoundStateKey == _Trap.World.RoundKey && player.InventoryScope == _Trap.World.RoomScope))
                 {
                     possessed = true;
                     break;
@@ -200,8 +252,7 @@ namespace HauntedFish.Multiplayer
             if (!_Trap || _Trap.InputMode != TrapInputMode.MouseClick || _Trap.Phase != TrapPhase.Active)
                 _Cart.localScale = Vector3.one * (nearby && (!_Trap || _Trap.PlacementMode != TrapPlacementMode.HallwayCeiling) ? 1.12f : 1);
             _Left.color = _Right.color = possessed ? HotelPalette.Peach : HotelPalette.Moss;
-            if (possessed && _Trap && _Trap.PlacementMode == TrapPlacementMode.HallwayCeiling)
-                _Cart.rotation = Quaternion.Euler(0, 0, angle + 3 * Mathf.Sin(Time.unscaledTime * 2.2f));
+            PresentPossession(possessed);
             PresentPattern(camera);
             UpdateWorldArt(camera);
         }

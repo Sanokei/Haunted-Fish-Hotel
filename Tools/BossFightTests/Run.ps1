@@ -13,7 +13,7 @@ foreach($kind in @('Scripts','Art','Resources')){
 }
 Copy-Item -LiteralPath (Join-Path $repo 'Assets/Scenes/BossFight.unity'),(Join-Path $repo 'Assets/Scenes/BossFight.unity.meta') -Destination (Join-Path $copy 'Assets/Scenes') -Force
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'BossArenaValidation.cs') -Destination (Join-Path $copy 'Assets/BossArenaValidation.cs') -Force
-foreach($asset in @('Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs','Assets/Dialogue/BossHappy.json','Assets/Dialogue/BossFrustrated.json','Assets/Dialogue/BossWin.json','Assets/Dialogue/BossLose.json')) {
+foreach($asset in @('Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryAnimationMath.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxRig.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxPlayer.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs','Assets/Dialogue/BossHappy.json','Assets/Dialogue/BossFrustrated.json','Assets/Dialogue/BossWin.json','Assets/Dialogue/BossLose.json')) {
  $sourceRoot=$repo; $targetRoot=$copy
  Copy-Item -LiteralPath (Join-Path $sourceRoot $asset) -Destination (Join-Path $targetRoot $asset) -Force
  if(Test-Path -LiteralPath (Join-Path $sourceRoot ($asset+'.meta'))) {Copy-Item -LiteralPath (Join-Path $sourceRoot ($asset+'.meta')) -Destination (Join-Path $targetRoot ($asset+'.meta')) -Force}

@@ -7,7 +7,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="DoorPushTests.cs" />
+    <Compile Include="ParallaxTests.cs" />
     <Compile Include="../../Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs" />
+    <Compile Include="../../Assets/Scripts/DialogueSystem/StoryInput/StoryAnimationMath.cs" />
+    <Compile Include="../../Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxRig.cs" />
+    <Compile Include="../../Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxPlayer.cs" />
     <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/LobbyIntroductionSequenceValidation.cs" />
     <Compile Include="PunchlineAudioTests.cs" />
     <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/GrandmaFishPunchlineAudio.cs" />

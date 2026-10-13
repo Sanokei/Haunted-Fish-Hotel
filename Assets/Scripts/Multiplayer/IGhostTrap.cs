@@ -3,7 +3,7 @@ namespace HauntedFish.Multiplayer
 {
     public enum TrapInputMode { Movement, MouseClick, Space }
     public enum TrapInputKind { Move, Click, Activate, Reset }
-    public enum TrapBehaviour { Slide, Pulse, Fall }
+    public enum TrapBehaviour { Slide, Pulse, Fall, PiercingSlide }
     public enum TrapPhase { Armed, Active, Latched }
     public readonly struct TrapInput
     {

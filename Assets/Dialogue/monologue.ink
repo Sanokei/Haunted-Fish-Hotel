@@ -23,4 +23,6 @@ EXTERNAL Wait(seconds)
 EXTERNAL ExpandPanel(panelTag, seconds)
 EXTERNAL FlashFrames(frames)
 EXTERNAL DollyTo(sceneTag, amount, seconds)
+// Named authored parallax camera poses; easing: linear, smooth, smoother, ease_in, ease_out.
+EXTERNAL ParallaxTo(rigTag, poseTag, seconds, easing)
 EXTERNAL CreateUI(prefabTag, instanceTag, parentTag)

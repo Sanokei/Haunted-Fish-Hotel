@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "revision": "trap-refresh-original-intertitle-2026-10-13",
+  "status": "pending_native_import_and_capture",
+  "blockers": [
+    "Supplied artwork and authored production/recording prefabs are present and source-validated. Native Unity import, physics, animation and rendering remain unverified.",
+    "Unity licensing and UPM socket IPC still block real capture in this cloud environment. No new recording has been produced."
+  ],
+  "presentation": {
+    "silent": true,
+    "opening_titles": {
+      "Fish": "Guide to all Fish",
+      "Ghost": "Guide to the Ghost"
+    },
+    "opening_title_count_per_role": 1,
+    "repeated_corner_labels": false,
+    "death_card": "Wowza",
+    "cards": "Full-screen original Haunted Intertitle silent-film cards: connected botanical/fan corners, engraved double rules, matching lighter instruction flourishes, warm ivory on textured charcoal. Follow with real gameplay without overlaid captions.",
+    "danger_band": "Record the production GhostTrapAreaPresentation: BOSS-cursor boundary markers and animated repeating Fish-ver-ghost fill. Do not substitute old drawn backgrounds or a flat trap icon.",
+    "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+    "style_provenance": "Original authored Haunted Intertitle outlines and vector ornaments follow the approved reference image. No existing font outlines or image pixels are reused. Static proof is separate from native rendering/capture verification.",
+    "tmp_font_asset": "Assets/Art/Fonts/HauntedIntertitle SDF.asset"
+  },
+  "runtime_contracts": {
+    "tablecart": {
+      "family": "cart",
+      "prefab": "Assets/Resources/Traps/ShoppingCartTrap.prefab",
+      "rule": "Preserve the family/GUID. Moving impact knocks fish back and stuns them without killing them; record the configured production tuning rather than an independently simulated effect."
+    },
+    "angler": {
+      "family": "angler",
+      "prefab": "Assets/Resources/Traps/AnglerFishTrap.prefab",
+      "rule": "A fast horizontally moving possessed trap crosses all players in its sweep, killing each crossed fish and slowing while within bodies. The authored light is on while possessed and off when released."
+    },
+    "chandelier": {
+      "family": "chandelier",
+      "prefab": "Assets/Resources/Traps/FallingChandelierTrap.prefab",
+      "rule": "Record the production swinging suspended-art pivot with distinct base and suspension artwork; do not rotate the combined old image."
+    },
+    "stun_effect": {
+      "prefab": "Assets/Resources/HotelNetworkPlayer.prefab",
+      "binding": "HotelFishSprite._StunEffect and _StunAnimation",
+      "rule": "Observe actual authoritative stun activation and clearing of the authored piranha effect. The recorder never plays it directly."
+    },
+    "death_effect": {
+      "prefab": "Assets/Prefabs/Effects/DeathEmergence.prefab",
+      "binding": "HotelPlayer._DeathEmergence",
+      "rule": "Observe actual production lethal contact, spectator transition, incremented death version and authored soul appear/rise/clear. The recorder never writes Health/IsDead or plays the effect directly."
+    },
+    "running_jump": {
+      "binding": "GameSideScrollMotor.RunningJumpSpeed inherited from production HotelNetworkPlayer",
+      "rule": "An intentionally launched running jump keeps its production horizontal air reach while run and direction remain held. Vertical jump/gravity and normal ground speed are unchanged. The recording plans against actual solid collider parts and requires a complete contact-free stationary-tablecart crossing."
+    }
+  },
+  "required_capture_checks": {
+    "Fish": [
+      "production-danger-band-animation",
+      "tablecart-nonlethal-knockback-stun",
+      "angler-crosses-multiple-fish",
+      "angler-body-slowdown",
+      "chandelier-separated-swing",
+      "authored-piranha-stun-and-clear",
+      "authored-death-soul-and-clear",
+      "running-jump-clears-stationary-tablecart"
+    ],
+    "Ghost": [
+      "production-danger-band-animation",
+      "tablecart-nonlethal-knockback-stun",
+      "angler-crosses-multiple-fish",
+      "angler-body-slowdown",
+      "angler-possession-light",
+      "chandelier-separated-swing",
+      "authored-piranha-stun-and-clear",
+      "authored-death-soul-and-clear"
+    ]
+  },
+  "required_headings_before_publish": {
+    "Fish": [
+      "Guide to all Fish",
+      "Tablecart",
+      "Read The Danger Bands",
+      "Angler",
+      "Swinging Chandelier",
+      "Wowza"
+    ],
+    "Ghost": [
+      "Guide to the Ghost",
+      "Tablecart",
+      "Read The Danger Bands",
+      "Angler",
+      "Swinging Chandelier",
+      "Wowza"
+    ]
+  },
+  "acceptance": [
+    "All planned calls have director implementations, compiled Ink and authored serialized stage/trap references. Validate native import and playback before marking any native observation as passed.",
+    "The tablecart shot must show a real knockback, the stunned interval and resumed movement, while asserting that no life/death or role-swap event occurred.",
+    "Show danger-band animation over multiple decoded frames; a single screenshot cannot establish repeating motion.",
+    "Use both fish and ghost views. Keep trap limits and bodies readable in the actual camera output.",
+    "Record only real Unity gameplay frames. Capture all timed Ink steps without the old truncated Ghost tail.",
+    "Supply per-role source and Ink SHA-256 hashes plus a hashed observation log with every required check passing. Inspect the resulting silent-film layout, spelling, aspect, decode, theatre playback and loop before publishing.",
+    "Preserve both existing MP4 paths and .meta GUIDs. Existing clips and metadata remain unchanged until verified replacements exist."
+  ],
+  "authored_demonstrations": {
+    "tablecart-hit": "Five seconds: place the production tablecart, approach a live fish, observe knockback, unchanged health/death version, actual piranha playback, recovery and resumed walking.",
+    "danger-band": "Observe the actual bound BOSS-cursor endpoints, Fish-ver-ghost texture and advancing production pattern time; visual frame review remains required.",
+    "chandelier-sway": "Possess the production separated chandelier. Verify changing suspended-pivot rotation and stable fixed canopy layout, then use normal activation/reset operations.",
+    "angler-place": "Use an authored angler and two authored production fish. Position them from actual collider dimensions; reject insufficient travel clearance.",
+    "angler-light": "Use real unpossess/possess/unpossess/possess operations and observe actual bound light/glow states.",
+    "angler-sweep": "One production world sweep crosses both live fish. Observe distinct death events, spectator state, geometric slowdown then body exit, and both authored souls appearing and clearing.",
+    "jump-setup": "Cut setup interval: create the real stationary tablecart and select a launch position from actual enabled collider parts, capsule radius/height, production grounded run-jump speed, vertical speed and gravity. Settle the authored actor without changing those parameters.",
+    "fish-obstacle": "Actual run-up and jump over the whole stationary cart. Reject any motion contact, stun, health/death change or failure to clear the far collider edge. The native run is required even when the geometric plan passes."
+  },
+  "chapters_awaiting_native_capture": [
+    {
+      "roles": [
+        "Fish",
+        "Ghost"
+      ],
+      "heading": "Angler",
+      "capture": "Frame at least two separated fish in one sweep. Record production life/death and crossing events, motion while inside each body, and recovered speed after the last body. No fabricated deaths or duplicate damage."
+    },
+    {
+      "roles": [
+        "Ghost"
+      ],
+      "heading": "Possess The Angler",
+      "capture": "Use real possession/release and movement commands; verify light transitions in both directions and observer presentation."
+    },
+    {
+      "roles": [
+        "Fish",
+        "Ghost"
+      ],
+      "heading": "Swinging Chandelier",
+      "capture": "Show the separated base, line and suspended artwork before, during and after movement, then the production activation/reset behavior. Ensure collision remains aligned to the visible body."
+    },
+    {
+      "roles": [
+        "Fish",
+        "Ghost"
+      ],
+      "heading": "Wowza",
+      "capture": "Use this exact silent-film death card immediately after an actual lethal demonstration. Never put it after the nonlethal tablecart demonstration."
+    }
+  ],
+  "authored_assets": [
+    "Assets/Scenes/TutorialRecording.unity (existing linked instance)",
+    "Assets/Resources/Tutorials/TutorialRecordingStage.prefab",
+    "Assets/Resources/Tutorials/TutorialCart.prefab",
+    "Assets/Resources/Tutorials/TutorialChandelier.prefab",
+    "Assets/Resources/Tutorials/TutorialClickTrap.prefab",
+    "Assets/Resources/Tutorials/TutorialAngler.prefab"
+  ]
+}

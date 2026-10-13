@@ -29,12 +29,13 @@ public static class TutorialRecordingAuthoring
         {
             Directory.CreateDirectory(IOPath.Combine(Application.dataPath, "Resources/Tutorials"));
             AssetDatabase.Refresh();
-            headingFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/Art/Fonts/Modak-Regular.ttf");
-            bodyFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/TextMesh Pro/Fonts/LiberationSans.ttf");
-            if (!headingFont || !bodyFont) throw new InvalidOperationException("Shared licensed Modak/Liberation caption fonts missing.");
+            headingFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/Art/Fonts/HauntedIntertitle-Regular.ttf");
+            bodyFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/Art/Fonts/HauntedIntertitle-Regular.ttf");
+            if (!headingFont || !bodyFont) throw new InvalidOperationException("Original Haunted Intertitle recording caption font missing.");
             var cart = Trap("ShoppingCartTrap", "TutorialCart");
             var chandelier = Trap("FallingChandelierTrap", "TutorialChandelier");
             var click = Trap("ClickTrap", "TutorialClickTrap");
+            var angler = Trap("AnglerFishTrap", "TutorialAngler");
             var fishContent = Content(false);
             var ghostContent = Content(true);
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -59,14 +60,16 @@ public static class TutorialRecordingAuthoring
             door.transform.position = new Vector3(12, 2.055f, 1.9f);
             var worldObject = new GameObject("Production scoped trap inventory"); worldObject.transform.SetParent(root.transform);
             director.World = worldObject.AddComponent<GhostPlacementWorld>();
+            director.Haunting = worldObject.AddComponent<GameHauntingController>();
             var fields = new SerializedObject(director.World);
-            fields.FindProperty("_TrapPrefabs").arraySize = 3;
+            fields.FindProperty("_TrapPrefabs").arraySize = 4;
             fields.FindProperty("_TrapPrefabs").GetArrayElementAtIndex(0).objectReferenceValue = cart;
             fields.FindProperty("_TrapPrefabs").GetArrayElementAtIndex(1).objectReferenceValue = chandelier;
             fields.FindProperty("_TrapPrefabs").GetArrayElementAtIndex(2).objectReferenceValue = click;
+            fields.FindProperty("_TrapPrefabs").GetArrayElementAtIndex(3).objectReferenceValue = angler;
             fields.FindProperty("_TrapContainer").objectReferenceValue = worldObject.transform;
             fields.FindProperty("_GraceZone").objectReferenceValue = safeCollider; fields.ApplyModifiedPropertiesWithoutUndo();
-            director.CartDefinition = cart; director.ChandelierDefinition = chandelier; director.ClickDefinition = click;
+            director.CartDefinition = cart; director.ChandelierDefinition = chandelier; director.ClickDefinition = click; director.AnglerDefinition = angler;
             var supplies = new GameObject("Production conveyor"); supplies.transform.SetParent(root.transform);
             director.Supplies = supplies.AddComponent<TrapManager>();
             director.Supplies.Inject(director.World, null, AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Traps/ConveyorPackage.prefab").GetComponent<GhostTrapSupply>(),
@@ -78,6 +81,12 @@ public static class TutorialRecordingAuthoring
             supplyFields.FindProperty("_InitialPackages").intValue = 2;
             supplyFields.FindProperty("_SpawnInterval").floatValue = 12; supplyFields.ApplyModifiedPropertiesWithoutUndo();
             director.Fish = Actor(root.transform, false); director.Ghost = Actor(root.transform, true);
+            director.OtherFish = Actor(root.transform, false); director.OtherFish.name = "Authored second fish - production impact target";
+            var fishPresentation = new SerializedObject(director.Fish.GetComponentInChildren<HotelFishSprite>(true));
+            director.FishStunEffect = (GameObject)fishPresentation.FindProperty("_StunEffect").objectReferenceValue;
+            director.FishStunAnimation = (Animation)fishPresentation.FindProperty("_StunAnimation").objectReferenceValue;
+            if (!director.FishStunEffect || !director.FishStunAnimation || !director.Fish.DeathEmergence || !director.OtherFish.DeathEmergence)
+                throw new InvalidOperationException("Production player prefab must bind authored piranha and death effects before recording.");
             var flight = new GameObject("Authored ghost flight"); flight.transform.SetParent(root.transform);
             director.GhostFlight = flight.transform; director.GhostArt = flight.AddComponent<SpriteRenderer>();
             director.GhostArt.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/BOSS-cursor.png");
@@ -97,8 +106,9 @@ public static class TutorialRecordingAuthoring
             director.Shots = new[] {
                 Shot(root.transform, "fish-wide", -3, 1.5f, 3.2f), Shot(root.transform, "fish-run", 5, 1.5f, 3.2f),
                 Shot(root.transform, "conveyor", -3, 4.8f, 5.9f), Shot(root.transform, "floor", -1, 1.5f, 3.2f),
-                Shot(root.transform, "safe", -10, 1.5f, 3.2f), Shot(root.transform, "ceiling", 5, 1.5f, 3.2f),
-                Shot(root.transform, "click", 10, 1.5f, 3.2f), Shot(root.transform, "door", 12, 1.5f, 3.2f) };
+                Shot(root.transform, "safe", -10, 1.5f, 3.2f), Shot(root.transform, "ceiling", 5, 1.5f, 3.5f),
+                Shot(root.transform, "click", 10, 1.5f, 3.2f), Shot(root.transform, "door", 12, 1.5f, 3.2f),
+                Shot(root.transform, "trap-wide", -1, 1.8f, 4.0f) };
             var canvasRoot = new GameObject("Authored tutorial captions", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler));
             canvasRoot.transform.SetParent(root.transform);
             var canvas = canvasRoot.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceCamera; canvas.worldCamera = director.Output; canvas.planeDistance = .5f; canvas.sortingOrder = 100;
@@ -154,36 +164,32 @@ public static class TutorialRecordingAuthoring
     {
         var root = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/HotelNetworkPlayer.prefab"), parent);
         root.name = ghost ? "Authored offline ghost command owner" : "Authored fish - production motor";
-        var player = root.GetComponent<HotelPlayer>(); player.Networked = false; player.enabled = ghost;
+        var player = root.GetComponent<HotelPlayer>(); player.Networked = false; player.enabled = true;
         player.GhostId = ghost ? 0u : uint.MaxValue;
-        foreach (var renderer in root.GetComponentsInChildren<SpriteRenderer>(true)) renderer.sortingOrder = renderer.name == "Fish Body" ? 6 : 5;
+        foreach (var renderer in root.GetComponentsInChildren<SpriteRenderer>(true))
+            { if (renderer.name == "Fish Body") renderer.sortingOrder = 6; else if (renderer.name == "Fish Fin") renderer.sortingOrder = 5; }
         root.transform.position = new Vector3(-8, 1, 0);
         return player;
     }
     static GhostTrap Trap(string source, string name)
     {
         string target = Folder + "/" + name + ".prefab";
-        var root = PrefabUtility.LoadPrefabContents("Assets/Resources/Traps/" + source + ".prefab");
+        string sourcePath = "Assets/Resources/Traps/" + source + ".prefab";
+        if (!AssetDatabase.LoadAssetAtPath<GameObject>(sourcePath)) throw new InvalidOperationException("Missing production trap prefab: " + sourcePath);
+        var root = PrefabUtility.LoadPrefabContents(sourcePath);
         try
         {
             var trap = root.GetComponent<GhostTrap>();
-            var presentation = root.GetComponentInChildren<GhostTrapAreaPresentation>(true);
-            var bounds = presentation ? presentation.OpaqueArtBounds : new Rect(0, 0, 1, 1);
-            var fields = new SerializedObject(trap); fields.FindProperty("_Presentation").objectReferenceValue = null; fields.ApplyModifiedPropertiesWithoutUndo();
-            foreach (var canvas in root.GetComponentsInChildren<Canvas>(true)) canvas.gameObject.SetActive(false);
-            foreach (var renderer in root.GetComponentsInChildren<SpriteRenderer>(true)) renderer.enabled = false;
-            if (presentation) Object.DestroyImmediate(presentation);
-            var art = new GameObject("Authored tutorial trap artwork"); art.transform.SetParent(root.transform, false);
-            var sprite = art.AddComponent<SpriteRenderer>(); sprite.sprite = trap.Icon; sprite.sortingOrder = 3;
-            float width = Mathf.Max(.01f, bounds.width), height = Mathf.Max(.01f, bounds.height);
-            float aspect = trap.Icon.rect.width * width / (trap.Icon.rect.height * height);
-            float artHeight = Mathf.Min(trap.BodyHalfSize.y * 2, Mathf.Min(trap.ObjectSize.y, trap.ObjectSize.x / aspect));
-            var size = trap.Icon.bounds.size;
-            float x = artHeight * aspect / (width * size.x), y = artHeight / (height * size.y);
-            sprite.transform.localScale = new Vector3(x, y, 1);
-            if (trap.PlacementMode == TrapPlacementMode.HallwayCeiling) { fields.FindProperty("_ArmedOffset").vector3Value = Vector3.up * (4.11f - trap.BodyHalfSize.y * 2); fields.FindProperty("_FallDistance").floatValue = 4.11f - trap.BodyHalfSize.y * 2; fields.ApplyModifiedPropertiesWithoutUndo(); }
-            var animated = root.AddComponent<TutorialTrapArt>(); animated.Trap = trap; animated.Art = sprite;
-            sprite.transform.localPosition = new Vector3(-(trap.Icon.bounds.min.x + size.x * bounds.center.x) * x, trap.BodyHalfSize.y - (trap.Icon.bounds.min.y + size.y * bounds.yMax) * y, -.05f);
+            // Film the production presentation intact: authored BOSS-cursor boundaries,
+            // animated Fish-ver-ghost fill, possession light and separated trap artwork.
+            // A single icon replacement loses the live danger band and moving-part bindings.
+            var fields = new SerializedObject(trap);
+            if (trap.PlacementMode == TrapPlacementMode.HallwayCeiling)
+            {
+                fields.FindProperty("_ArmedOffset").vector3Value = Vector3.up * (4.11f - trap.BodyHalfSize.y * 2);
+                fields.FindProperty("_FallDistance").floatValue = 4.11f - trap.BodyHalfSize.y * 2;
+                fields.ApplyModifiedPropertiesWithoutUndo();
+            }
             return PrefabUtility.SaveAsPrefabAsset(root, target).GetComponent<GhostTrap>();
         }
         finally { PrefabUtility.UnloadPrefabContents(root); }
@@ -199,20 +205,21 @@ public static class TutorialRecordingAuthoring
         content.Loop = true; content.HasAudio = false;
         if (content.Recording) { content.RecordedWidth = (int)content.Recording.width; content.RecordedHeight = (int)content.Recording.height; content.RecordedSeconds = content.Recording.length; content.RecordedFrameRate = content.Recording.frameRate; content.RecordedFrames = content.Recording.frameCount; }
         content.Summary = ghost ?
-            "WASD / arrows: fly. E / X: open a nearby conveyor package, place in a clear space, possess your placed trap or unpossess. Cart: A / D or stick moves it. Chandelier: aim ceiling placement with mouse; Space / A drops it. Stationary click trap: click its body. F / B resets when clear; Q disposes held or possessed traps. Starting safe hallway forbids traps. Contact from moving or active traps raises spook; at 100 the fish becomes ghost and you take its body. Choose Ready; after everyone is ready you have 10 seconds to set up." :
-            "A / D or arrows: walk. Shift: run. Space: jump. Gamepad: left stick, stick click, A. Mouse aims the spotlight. Avoid carts and falling chandeliers; reach the stairwell and press E / X to challenge the ghost. Moving or active trap contact raises spook; at 100 you become ghost and the old ghost takes your body. Fish wins at 3 goals; ghost at 1. Others spectate. Choose Ready, wait for everyone, then the 10-second ghost setup before moving. Hallway return includes another ghost head start.";
+            "WASD / arrows: fly. E / X: open a nearby conveyor package, place in a clear space, possess your placed trap or unpossess. Tablecart: A / D or stick moves it; hits knock back and briefly show the piranha stun effect without draining health. Angler: A / D drives through every fish, kills each crossed fish, and slows inside bodies; its light is on while possessed. Chandelier: aim ceiling placement with mouse; Space / A drops it. Stationary click trap: click its body. F / B resets when clear; Q disposes held or possessed traps. Starting safe hallway forbids traps. Damaging traps drain health; dead fish spectate. Tablecart hits do not drain health. Choose Ready; after everyone is ready you have 10 seconds to set up." :
+            "A / D or arrows: walk. Shift: run. Space: jump. Gamepad: left stick, stick click, A. Mouse aims the spotlight. Hold run when jumping to clear the tablecart. Tablecart hits knock back and stun without draining health. Avoid the angler's lethal horizontal path and the swinging/falling chandelier; reach the stairwell and press E / X to challenge the ghost. Damaging traps drain health; dead fish spectate. Tablecart hits do not drain health. Fish wins at 3 goals; ghost at 1. Others spectate. Choose Ready, wait for everyone, then the 10-second ghost setup before moving. Hallway return includes another ghost head start.";
         content.Instructions = ghost ? new[] {
             Instruction("Fly and collect", "WASD / arrows / left stick flies. E / gamepad X opens a nearby package from the conveyor above the hallway."),
             Instruction("Place legally", "Carry to a clear floor position and E / X places. Keep trap footprints outside the safe starting hallway, fish and other traps. Chandelier placement aims at the ceiling with the mouse within reach."),
-            Instruction("Possess and use", "E / X near your placed trap possesses it. Cart: A / D / stick moves. Chandelier: Space / gamepad A drops. Stationary click trap: click its body."),
+            Instruction("Possess and use", "E / X near your placed trap possesses it. Tablecart: A / D / stick moves; hits knock back and stun without killing. Chandelier: Space / gamepad A drops. Stationary click trap: click its body."),
+            Instruction("Angler", "A / D or stick drives the angler horizontally through every fish. Each crossed fish dies; the angler slows while inside bodies. Its light is on only while possessed."),
             Instruction("Release, reset, dispose", "E / X unpossesses. F / gamepad B resets when the reset position is clear. Q discards a held trap or removes a possessed one."),
-            Instruction("Spook and role swap", "Contact from moving or active traps raises spook. At 100 the fish becomes the ghost and the old ghost takes its fish body."),
+            Instruction("Health and spectating", "Damaging traps drain health. Dead fish spectate as their soul rises away. Tablecart hits only knock back and stun; the piranha effect clears on recovery."),
             Instruction("Ghost challenge", "Click and drag your striker across both axes of your own half to hit the cue ball. Drag sideline defenses onto your half; they bounce the ball and break after 1-3 hits. Ghost wins at 1 goal; fish at 3. Other participants spectate; hallway return includes a ghost head start."),
             Instruction("Round start", "Read the role page and deliberately choose Ready. Everyone must be ready before the 10-second ghost setup and fish release.")
         } : new[] {
             Instruction("Move and jump", "A / D or arrows walks; Shift runs; Space jumps from the ground. Gamepad: left stick, stick click to run, A to jump."),
-            Instruction("See and avoid traps", "Mouse aims the spotlight. Watch the floor and ceiling, run and jump past moving carts and falling chandeliers."),
-            Instruction("Spook and role swap", "Contact from moving or active traps raises spook. At 100 you become ghost and the old ghost takes your fish body."),
+            Instruction("See and avoid traps", "Mouse aims the spotlight. Hold run when launching a jump to clear the tablecart. Watch for the angler's lethal horizontal rush and the swinging chandelier above."),
+            Instruction("Health and spectating", "Damaging traps drain health. Dead fish spectate as their soul rises away. Tablecart hits only knock back and stun; the piranha effect clears on recovery."),
             Instruction("Stairwell challenge", "Reach the stairwell door and press E / gamepad X. Click and drag your striker across both axes of your own half to hit the cue ball. Drag sideline defenses onto your half; they bounce the ball and break after 1-3 hits."),
             Instruction("Win and return", "Fish wins at 3 goals; ghost wins at 1. Other participants spectate. The hallway return includes another ghost head start."),
             Instruction("Round start", "Read the role page and deliberately choose Ready. Everyone must be ready; wait through the 10-second ghost setup before moving.")

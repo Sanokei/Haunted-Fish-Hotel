@@ -1,0 +1,32 @@
+{
+  "family": "Haunted Intertitle",
+  "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+  "sha256": "2c81fe7c3860de7130a677c94b62666a71546c296f58be6c7d30d6d3e4645010",
+  "glyph_count": 116,
+  "unicode_count": 115,
+  "guide_caption_strings": 52,
+  "missing_guide_characters": [],
+  "units_per_em": 1000,
+  "cap_height": 760,
+  "x_height": 520,
+  "ascender": 850,
+  "descender": -250,
+  "line_gap": 40,
+  "kern_pairs": 67,
+  "contour_count": 168,
+  "bounds": [
+    -48,
+    -227,
+    704,
+    839
+  ],
+  "validation": [
+    "Complete printable ASCII",
+    "All current guide caption characters",
+    "All contours serialize and reload",
+    "All glyphs within vertical metrics",
+    "FreeType renders at 24/36/48/96/240 px",
+    "Boolean-unioned overlaps; normalized winding"
+  ],
+  "provenance": "Original parametric outlines, no source font input. Inspired by approved generated reference; not an exact traced reconstruction."
+}

@@ -16,7 +16,7 @@ using Object = UnityEngine.Object;
 public static class TutorialRecordingBatch
 {
     const string Key = "HauntedFish.AuthoredTutorialRecording";
-    const string Evidence = "C:/Users/wkeif/Documents/Codex/2026-10-11/task-4/TutorialEvidence";
+    static string Evidence => IOPath.GetFullPath(IOPath.Combine(Application.dataPath, "../Recordings/TutorialEvidence"));
     [Serializable] sealed class SceneRecord { public string Path; public bool Loaded, Active; }
     [Serializable] sealed class Journal { public SceneRecord[] Scenes; public bool Background; }
     static RecorderController recorder;
@@ -27,7 +27,17 @@ public static class TutorialRecordingBatch
     static double deadline, playbackStarted;
     static bool captureStarted, playbackStartedRole, sought, wrapped, playbackError;
     static long beforeWrap;
-    static string output;
+    static string output, recordedInkHash;
+    [Serializable] sealed class CheckGroups { public string[] Fish, Ghost; }
+    [Serializable] sealed class CapturePlan { public string revision; public CheckGroups required_capture_checks; }
+    [Serializable] sealed class CaptureRecord
+    {
+        public bool completed;
+        public string native_scene, source, source_sha256, ink_sha256, observations, observations_sha256;
+    }
+    [Serializable] sealed class CaptureRoles { public CaptureRecord Fish, Ghost; }
+    [Serializable] sealed class CaptureManifest { public int schema_version = 1; public string plan_revision; public CaptureRoles captures; }
+    static CapturePlan Plan => JsonUtility.FromJson<CapturePlan>(File.ReadAllText(IOPath.Combine(Application.dataPath, "../Tools/TheatreVideos/recording-plan.json")));
     static readonly string[] protectedPaths = { "Assets/Scenes/Game.unity", "Assets/Scenes/Lobby.unity", "Assets/Scenes/BossFight.unity", "Assets/Resources/FishRoundHowTo.prefab", "Assets/Resources/GhostRoundHowTo.prefab", "Assets/Resources/MemberMenu.prefab", "Assets/Scenes/theatre.unity", "Assets/Resources/HotelNetworkPlayer.prefab", "Assets/Resources/GameHallway.prefab", "Assets/Resources/HallwayDoor.prefab", "Assets/Prefabs/Radio/LobbyRadioPlayback.prefab" };
 
     [MenuItem("Tools/Haunted Fish/Authored tutorials/Record both role guides (owned scene)")]
@@ -83,7 +93,7 @@ public static class TutorialRecordingBatch
             Graphics.Blit(atlas, target); RenderTexture.active = target;
             pixels.ReadPixels(new Rect(0, 0, atlas.width, atlas.height), 0, 0); pixels.Apply();
             File.WriteAllBytes(Evidence + "/Modak-native-atlas.png", pixels.EncodeToPNG());
-            File.WriteAllText(Evidence + "/shared-font-bake.txt", "PASS HotelTypographyAuthoring.BakeSharedFont; " + font.faceInfo.familyName + "; actual native characters=" + font.characterTable.Count + "; atlas=" + atlas.width + "x" + atlas.height + "; preserved GUID=" + AssetDatabase.AssetPathToGUID("Assets/Resources/HalloweenUI/Modak-Headings.asset") + "; video captions use the same bundled Modak and Liberation source fonts.");
+            File.WriteAllText(Evidence + "/shared-font-bake.txt", "PASS HotelTypographyAuthoring.BakeSharedFont; " + font.faceInfo.familyName + "; actual native characters=" + font.characterTable.Count + "; atlas=" + atlas.width + "x" + atlas.height + "; preserved GUID=" + AssetDatabase.AssetPathToGUID("Assets/Resources/HalloweenUI/Modak-Headings.asset") + "; this is game UI typography evidence only. Silent guide cards use original Haunted Intertitle via the offline authoring renderer; validate its separate TMP asset with IntertitleTypographyValidation.Run.");
         }
         finally { RenderTexture.active = prior; RenderTexture.ReleaseTemporary(target); Object.DestroyImmediate(pixels); }
     }
@@ -107,10 +117,9 @@ public static class TutorialRecordingBatch
             if (phase == 1)
             {
                 if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-                Import();
-                role = 0; SessionState.SetInt(Key + ".Role", 0); SessionState.SetInt(Key + ".Phase", 2);
-                EditorSceneManager.OpenScene(TutorialRecordingAuthoring.ScenePath);
-                EditorApplication.EnterPlaymode(); return;
+                ExportCaptureManifest();
+                SessionState.SetInt(Key + ".Phase", 3);
+                Finish(); return;
             }
             if (phase == 3)
             {
@@ -162,6 +171,7 @@ public static class TutorialRecordingBatch
         controllerSettings.FrameRate = 30; controllerSettings.FrameRatePlayback = FrameRatePlayback.Constant;
         controllerSettings.CapFrameRate = true; controllerSettings.ExitPlayMode = false;
         recorder = new RecorderController(controllerSettings);
+        recordedInkHash = Hash("Assets/Dialogue/TutorialRecording/" + Name + "Recording.ink").ToLowerInvariant();
         director.Begin(role == 0 ? TutorialRole.Fish : TutorialRole.Ghost);
         recorder.PrepareRecording();
         if (!recorder.StartRecording()) throw new InvalidOperationException("Unity Recorder did not start.");
@@ -180,7 +190,16 @@ public static class TutorialRecordingBatch
             if (!director || !director.Completed || director.RenderedFrames < 300 || !File.Exists(output + ".mp4") || new FileInfo(output + ".mp4").Length < 1024)
                 throw new InvalidOperationException("No completed real role capture.");
             if (role == 0 && !director.Observations.Contains("OBSERVED actual grounded jump")) throw new InvalidOperationException("Recorded fish sequence never performed a real grounded jump.");
+            var checks = role == 0 ? Plan.required_capture_checks.Fish : Plan.required_capture_checks.Ghost;
+            foreach (var check in checks)
+                if (!director.Observations.Contains("PASS " + check)) throw new InvalidOperationException("Missing actual native observation: " + check);
+            if (recordedInkHash != Hash("Assets/Dialogue/TutorialRecording/" + Name + "Recording.ink").ToLowerInvariant())
+                throw new InvalidOperationException("Recording Ink changed during the capture.");
             File.WriteAllLines(output + "-observations.txt", director.Observations);
+            var capture = new CaptureRecord { completed = true, native_scene = TutorialRecordingAuthoring.ScenePath,
+                source = output + ".mp4", source_sha256 = Hash(output + ".mp4").ToLowerInvariant(), ink_sha256 = recordedInkHash,
+                observations = output + "-observations.txt", observations_sha256 = Hash(output + "-observations.txt").ToLowerInvariant() };
+            File.WriteAllText(Evidence + "/" + Name + "-capture.json", JsonUtility.ToJson(capture, true));
             File.WriteAllText(Evidence + "/" + Name + "-latest.txt", output + ".mp4");
             File.WriteAllText(Evidence + "/" + Name + "-capture.txt", "SOURCE=actual Unity Recorder MainCamera output from authored TutorialRecording scene\nROLE=" + Name +
                 "\nUNITY_RENDERED_FRAMES=" + director.RenderedFrames + "\nSIMULATION_SECONDS=" + director.Elapsed.ToString("F3") +
@@ -194,29 +213,14 @@ public static class TutorialRecordingBatch
             movieSettings = null; controllerSettings = null;
         }
     }
-    static void Import()
+    static void ExportCaptureManifest()
     {
-        foreach (string name in new[] { "Fish", "Ghost" })
-        {
-            string source = File.ReadAllText(Evidence + "/" + name + "-latest.txt").Trim();
-            string asset = "Assets/TutorialVideos/" + name + "TutorialProduction.mp4";
-            string target = IOPath.Combine(Application.dataPath, "TutorialVideos", name + "TutorialProduction.mp4");
-            string backup = Evidence + "/" + name + "TutorialProduction-before-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + ".mp4";
-            File.Copy(target, backup, false);
-            File.Copy(source, target, true);
-            AssetDatabase.ImportAsset(asset, ImportAssetOptions.ForceSynchronousImport);
-            var clip = AssetDatabase.LoadAssetAtPath<VideoClip>(asset);
-            if (!clip || clip.width != 1280 || clip.height != 720 || clip.frameCount < 1000 || clip.length < 35)
-                throw new InvalidOperationException("Recorded native " + name + " clip metadata invalid.");
-            var content = AssetDatabase.LoadAssetAtPath<TutorialRoleContent>("Assets/Resources/Tutorials/" + name + "TutorialContent.asset");
-            content.Recording = clip; content.RecordedWidth = (int)clip.width; content.RecordedHeight = (int)clip.height;
-            content.RecordedFrames = clip.frameCount; content.RecordedSeconds = clip.length; content.RecordedFrameRate = clip.frameRate;
-            content.CaptureProvenance = "Real Unity Recorder MainCamera capture, authored TutorialRecording.unity, Ink-directed production hallway gameplay APIs; boss segment pending revised drag/defense implementation; " + IOPath.GetFileName(source);
-            EditorUtility.SetDirty(content);
-            File.WriteAllText(Evidence + "/" + name + "-import.txt", "PASS native VideoClip " + clip.width + "x" + clip.height + " frames=" + clip.frameCount + " seconds=" + clip.length + " fps=" + clip.frameRate + " bytes=" + new FileInfo(target).Length + "\nSHA256=" + Hash(asset) + "\nBACKUP=" + backup);
-        }
-        AssetDatabase.SaveAssets();
+        var manifest = new CaptureManifest { plan_revision = Plan.revision, captures = new CaptureRoles {
+            Fish = JsonUtility.FromJson<CaptureRecord>(File.ReadAllText(Evidence + "/Fish-capture.json")),
+            Ghost = JsonUtility.FromJson<CaptureRecord>(File.ReadAllText(Evidence + "/Ghost-capture.json")) } };
+        File.WriteAllText(Evidence + "/native-captures.json", JsonUtility.ToJson(manifest, true));
     }
+
     static void VerifyPlayback()
     {
         var video = director.Review;
@@ -288,7 +292,7 @@ public static class TutorialRecordingBatch
                 else EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             }
             if (!string.IsNullOrEmpty(error)) throw new InvalidOperationException(error);
-            File.WriteAllText(Evidence + "/result.txt", "PASS real Unity Recorder capture for both authored role Ink sequences; production gameplay action observations; native 1280x720 clips imported preserving original GUIDs; authored native playback decoded nonblank frames and loop wrap; protected production scene/prefab hashes unchanged. Human UX and two-client network transport remain unverified.");
+            File.WriteAllText(Evidence + "/result.txt", "PASS real Unity Recorder capture and required production gameplay observations for both authored role Ink sequences. Hashed native-captures.json exported. Shipped guide MP4s and provenance were not changed. Silent-film assembly, native final playback, human visual review and two-client transport remain unverified.");
             Debug.Log("AUTHORED_TUTORIAL_RECORDING PASS");
         }
         catch (Exception failed) { error = failed.ToString(); File.WriteAllText(Evidence + "/result.txt", "FAIL " + error); Debug.LogException(failed); }

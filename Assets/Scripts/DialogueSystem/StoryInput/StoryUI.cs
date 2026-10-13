@@ -33,6 +33,8 @@ namespace Monologue.Dialogue
         [SerializeField] GameObject _Content;
         [SerializeField] Element[] _Elements = Array.Empty<Element>();
         [SerializeField] Layout[] _Layouts = Array.Empty<Layout>();
+        [SerializeField] StoryParallaxRig[] _ParallaxRigs = Array.Empty<StoryParallaxRig>();
+        readonly StoryParallaxPlayer _Parallax = new StoryParallaxPlayer();
         [SerializeField] Template[] _Prefabs = Array.Empty<Template>();
         [SerializeField] GameObject _WhiteFrame;
         [SerializeField] Visibility[] _FlashVisibility = Array.Empty<Visibility>();
@@ -96,6 +98,7 @@ namespace Monologue.Dialogue
                 {
                     _Objects[element.Tag] = element;
                     RememberRest(element.Target);
+                    RememberRest(element.ContactShadow);
                 }
             foreach (var layout in _Layouts)
                 foreach (var pose in layout.Poses) RememberRest(pose.Target);
@@ -108,6 +111,7 @@ namespace Monologue.Dialogue
             foreach (var step in steps)
             {
                 bool supported = Supports(step);
+                if (step.Kind == StorySequenceStepKind.ParallaxTo) _Parallax.Validate(_ParallaxRigs, step);
                 if (step.Kind == StorySequenceStepKind.CreateUI)
                 {
                     supported = Array.Exists(_Prefabs, p => p.Tag == step.Variant && p.Prefab) &&
@@ -125,6 +129,7 @@ namespace Monologue.Dialogue
             switch (step.Kind)
             {
                 case StorySequenceStepKind.Wait: return true;
+                case StorySequenceStepKind.ParallaxTo: return _Parallax.Supports(_ParallaxRigs, step);
                 case StorySequenceStepKind.FlashFrames: return _WhiteFrame;
                 case StorySequenceStepKind.PushTo:
                 case StorySequenceStepKind.ExpandPanel:
@@ -157,6 +162,7 @@ namespace Monologue.Dialogue
             foreach (var instance in _Spawned) if (instance) Destroy(instance);
             _Spawned.Clear();
             _Objects.Clear();
+            _Parallax.Close();
             RestoreRest();
             _Prepared = false;
             if (_WhiteFrame) _WhiteFrame.SetActive(false);
@@ -168,6 +174,9 @@ namespace Monologue.Dialogue
             if (!Supports(step)) throw new InvalidOperationException("Unbound story UI operation: " + step.Kind + "(" + step.Target + ")");
             switch (step.Kind)
             {
+                case StorySequenceStepKind.ParallaxTo:
+                    yield return _Parallax.Play(_ParallaxRigs, step);
+                    break;
                 case StorySequenceStepKind.CreateUI:
                     var template = Array.Find(_Prefabs, p => p.Tag == step.Variant);
                     if (_Objects.ContainsKey(step.Target)) throw new InvalidOperationException("UI tag already exists: " + step.Target);
@@ -287,6 +296,7 @@ namespace Monologue.Dialogue
         void Expand(string tag, float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.ExpandPanel, tag, seconds: seconds));
         void Flash(int count) => Queue(new StorySequenceStep(StorySequenceStepKind.FlashFrames, count: count));
         void Dolly(string tag, float amount, float seconds) => Queue(new StorySequenceStep(StorySequenceStepKind.DollyTo, tag, seconds: seconds, x: amount));
+        void Parallax(string rig, string pose, float seconds, string easing) => Queue(new StorySequenceStep(StorySequenceStepKind.ParallaxTo, rig, pose, seconds: seconds, easing: easing));
         void Create(string prefab, string instance, string parent) => Queue(new StorySequenceStep(StorySequenceStepKind.CreateUI, instance, prefab, parent: parent));
         void OnEnable()
         {
@@ -296,6 +306,7 @@ namespace Monologue.Dialogue
             StoryFunctions.OnSpinEvent += Spin;
             StoryFunctions.OnKnockEvent += Knock; StoryFunctions.OnWaitEvent += Wait;
             StoryFunctions.OnExpandPanelEvent += Expand; StoryFunctions.OnFlashFramesEvent += Flash;
+            StoryFunctions.OnParallaxToEvent += Parallax;
             StoryFunctions.OnDollyToEvent += Dolly; StoryFunctions.OnCreateUIEvent += Create;
         }
         void OnDisable()
@@ -305,6 +316,7 @@ namespace Monologue.Dialogue
             StoryFunctions.OnSpinEvent -= Spin;
             StoryFunctions.OnKnockEvent -= Knock; StoryFunctions.OnWaitEvent -= Wait;
             StoryFunctions.OnExpandPanelEvent -= Expand; StoryFunctions.OnFlashFramesEvent -= Flash;
+            StoryFunctions.OnParallaxToEvent -= Parallax;
             StoryFunctions.OnDollyToEvent -= Dolly; StoryFunctions.OnCreateUIEvent -= Create;
             Close();
         }

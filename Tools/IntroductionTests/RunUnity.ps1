@@ -11,7 +11,7 @@ foreach ($source in @(
     'Assets/Scripts/Multiplayer/Lobby/LobbyIntroductionPresentation.cs',
     'Assets/Scripts/Multiplayer/Lobby/LobbyContracts.cs',
     'Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs',
-    'Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs'
+    'Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryAnimationMath.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxRig.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxPlayer.cs'
 )) {
     Copy-Item -LiteralPath (Join-Path $repoRoot $source) -Destination "$validationRoot/Assets"
 }

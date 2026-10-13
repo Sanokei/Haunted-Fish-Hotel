@@ -49,7 +49,8 @@ public static class TrapManagerValidation
   check(replica.ApplySnapshot(live)&&replica.PackageCount==2&&replica.Package(0).FamilyTag==first.FamilyTag&&replica.Package(0).DisplayArt==first.DisplayArt&&replica.Package(0).transform.position==first.transform.position,"Replica reconstructs identical package IDs, contents, art, positions and run state");
   check(manager.TryTake(actor,0,position,actor.RoundStateKey,1)&&actor.HeldTrapFamily==custom.FamilyTag&&manager.PackageCount==1,"Authority consumes actual package into held inventory");
   check(!manager.TryTake(actor,0,position,actor.RoundStateKey,1),"Repeated pickup cannot duplicate a consumed package");
-  check(world.TryPlace(actor,new Vector3(8,1,0),custom.FamilyTag)&&world.Trap(0).FamilyTag==custom.FamilyTag,"Configured package contents place the injected trap prefab");
+  check(world.PlacementPoint(new Vector3(8,0,0),custom.FamilyTag,out var configuredPoint),"Custom prefab supplies its canonical floor height");
+  check(world.TryPlace(actor,configuredPoint,custom.FamilyTag)&&world.Trap(0).FamilyTag==custom.FamilyTag,"Configured package contents place the injected trap prefab");
   check(replica.ApplySnapshot(manager.Snapshot)&&!replica.Package(0)&&!replica.ApplySnapshot(live),"Shared deletion removes consumed package and rejects stale revision");
   manager.ConfigureDefinitions(Array.Empty<TrapDefinition>());check(manager.PackageCount==0&&world.Count==1&&world.Definition(custom.FamilyTag)==custom,"Catalog removal clears supplies while retaining placed dependencies");
   manager.ConfigureDefinitions(new[]{new TrapDefinition{Prefab=chandelier,Weight=1}});world.BeginRound("editor-preview","conveyor-B",2);actor.RoundStateKey="conveyor-B";actor.RoundVersion=2;

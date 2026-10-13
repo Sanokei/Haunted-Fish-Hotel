@@ -16,9 +16,29 @@ namespace HauntedFish.Multiplayer
         [SerializeField] float _MovingFinFrequency = 1.8f;
 
         [SerializeField] float _RunningFinFrequency = 2.8f;
+        [Tooltip("Authored looping piranha effect. The root starts disabled; no effect objects are built at runtime.")]
+        [SerializeField] GameObject _StunEffect;
+        [SerializeField] Animation _StunAnimation;
+        bool _Stunned;
         bool _FacingLeft, _Walking, _Talking, _Running;
         bool _FacingInitialized, _Corpse;
-        public void SetCorpse(bool corpse) => _Corpse = corpse;
+        public void SetCorpse(bool corpse) { _Corpse = corpse; if (corpse) SetStunned(false); }
+        public void SetStunned(bool stunned)
+        {
+            stunned &= !_Corpse;
+            if (_Stunned == stunned) return;
+            _Stunned = stunned;
+            if (stunned)
+            {
+                if (_StunEffect) _StunEffect.SetActive(true);
+                if (_StunAnimation) _StunAnimation.Play();
+            }
+            else
+            {
+                if (_StunAnimation) _StunAnimation.Stop();
+                if (_StunEffect) _StunEffect.SetActive(false);
+            }
+        }
         Vector3 _RightFinPosition;
         Vector3 _FinRestScale;
         Quaternion _FinRestRotation;
@@ -28,6 +48,7 @@ namespace HauntedFish.Multiplayer
 
         void Awake()
         {
+            if (_StunEffect) _StunEffect.SetActive(false);
             if (!_Body || !_FinPivot || !_Fin || !_LeftBody || !_RightBody)
             {
                 Debug.LogError("Assign both body sprites and the authored fin pivot/renderer.", this);
@@ -62,7 +83,7 @@ namespace HauntedFish.Multiplayer
         {
             var facingChanged = !_FacingInitialized || _FacingLeft != facingLeft;
             _FacingLeft = facingLeft;
-            _Walking = walking;
+            _Walking = walking && !_Stunned;
             _Running = walking && running;
             _Talking = talking;
             if (facingChanged && _Body && _FinPivot) ApplyFacing();
@@ -119,6 +140,7 @@ namespace HauntedFish.Multiplayer
         }
         void OnDisable()
         {
+            SetStunned(false);
             _InspectionOpacity = 1;
             if (_Body) _Body.color = _BodyColor;
             if (_Fin) _Fin.color = _FinColor;

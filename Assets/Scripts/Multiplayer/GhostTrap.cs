@@ -6,11 +6,16 @@ namespace HauntedFish.Multiplayer
     public sealed class GhostTrap : MonoBehaviour, IGhostTrap
     {
         [SerializeField]
-        string _FamilyTag = "cart", _DisplayName = "Shopping cart";
+        string _FamilyTag = "cart", _DisplayName = "Tablecart";
         [SerializeField]
         TrapInputMode _InputMode;
         [SerializeField]
         TrapBehaviour _Behaviour;
+        [SerializeField] TrapImpact _Impact;
+        [SerializeField, Min(.01f)] float _StunSeconds = 1, _KnockbackDistance = 1.2f, _KnockbackSeconds = .22f;
+        [Tooltip("PiercingSlide's fast horizontal speed. Body slowdown is geometric and persists through lethal contact.")]
+        [SerializeField, Min(.01f)] float _PiercingSpeed = 14;
+        [SerializeField, Range(.01f, 1)] float _BodySpeedFactor = .25f;
         [Tooltip("Floor preserves ordinary placement. HallwayCeiling aligns its body to the authored ceiling and its landing to the floor.")]
         [SerializeField] TrapPlacementMode _PlacementMode;
         [SerializeField]
@@ -43,7 +48,18 @@ namespace HauntedFish.Multiplayer
         RaycastHit[] _PushHits = new RaycastHit[8];
         readonly System.Collections.Generic.List<HotelPlayer> _PushPlayers = new System.Collections.Generic.List<HotelPlayer>(4);
         readonly System.Collections.Generic.HashSet<HotelPlayer> _MotionContacts = new System.Collections.Generic.HashSet<HotelPlayer>();
+        readonly TrapContactEpisodes<HotelPlayer> _Impacts = new TrapContactEpisodes<HotelPlayer>();
+        GhostTrapPassageSweep _PassageSweep;
         public bool HadMotionContact(HotelPlayer fish) => _MotionContacts.Contains(fish);
+        public bool HasMotionContacts => _MotionContacts.Count > 0;
+        public float MotionDirection { get; private set; }
+        public bool PiercesBodies => _Behaviour == TrapBehaviour.PiercingSlide;
+        public TrapImpact Impact => _Behaviour == TrapBehaviour.PiercingSlide ? TrapImpact.Lethal : _Impact;
+        public float StunSeconds => _StunSeconds;
+        public float KnockbackDistance => _KnockbackDistance;
+        public float KnockbackSeconds => _KnockbackSeconds;
+        public bool CanBeginImpact(HotelPlayer fish) => Impact == TrapImpact.DamageOverTime || !_Impacts.Contains(fish);
+        public void RecordImpact(HotelPlayer fish) { if (Impact != TrapImpact.DamageOverTime) _Impacts.TryStrike(fish); }
         const float PushSeparation = .12f;
         const float ContactMargin = .01f;
         const float MinimumMovement = .000001f;
@@ -109,6 +125,23 @@ namespace HauntedFish.Multiplayer
             float z = Mathf.Max(body.min.z - center.z, 0, center.z - body.max.z);
             return x * x + y * y + z * z <= radius * radius;
         }
+        internal void CollectHorizontalPassages(CharacterController target, System.Collections.Generic.List<TrapPassageInterval> passages)
+        {
+            if (!target || !target.enabled) return;
+            var scale = target.transform.lossyScale;
+            float radius = target.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.z));
+            float segment = Mathf.Max(0, target.height * Mathf.Abs(scale.y) * .5f - radius);
+            var center = target.transform.TransformPoint(target.center);
+            if (_SolidParts == null || _SolidParts.Length == 0) AddPassage(CollisionBounds, center, segment, radius, passages);
+            else foreach (var part in _SolidParts)
+                if (part && part.enabled) AddPassage(part.bounds, center, segment, radius, passages);
+        }
+        static void AddPassage(Bounds body, Vector3 center, float segment, float radius, System.Collections.Generic.List<TrapPassageInterval> passages)
+        {
+            float y = Mathf.Max(body.min.y - (center.y + segment), 0, (center.y - segment) - body.max.y);
+            float z = Mathf.Max(body.min.z - center.z, 0, center.z - body.max.z);
+            if (TrapPassageMotion.TryInterval(body.min.x, body.max.x, y, z, center.x, radius, out var interval)) passages.Add(interval);
+        }
         public Vector3 BodyHalfSize => _Collider ? Vector3.Scale(_Collider.size, transform.lossyScale) * .5f : Vector3.one * .5f;
         public Vector3 HalfExtents => BodyHalfSize * .96f;
         public TrapPhase Phase => (TrapPhase)_State.Phase;
@@ -121,6 +154,10 @@ namespace HauntedFish.Multiplayer
             Index = index;
             _Axis = 0;
             _Elapsed = 0;
+            _Impacts.Clear();
+            _PassageSweep?.Clear();
+            _MotionContacts.Clear();
+            MotionDirection = 0;
             ApplyState(state);
             if (_Presentation)
                 _Presentation.ConfigureTrap(this);
@@ -140,12 +177,17 @@ namespace HauntedFish.Multiplayer
 
         public bool AcceptInput(TrapInput input, float now)
         {
+            if (!Finite(now)) return false;
             if (input.Kind == TrapInputKind.Reset)
             {
                 if (!ResetPointClear())
                     return false;
                 _Axis = 0;
                 _Elapsed = 0;
+                _Impacts.Clear();
+                _PassageSweep?.Clear();
+                _MotionContacts.Clear();
+                MotionDirection = 0;
                 _State.Phase = (int)TrapPhase.Armed;
                 _State.Progress = 0;
                 _State.Position = _State.Origin + ArmedOffset;
@@ -179,12 +221,25 @@ namespace HauntedFish.Multiplayer
         public bool Simulate(float seconds, float now)
         {
             _MotionContacts.Clear();
-            if (seconds <= 0)
+            MotionDirection = 0;
+            if (!Finite(seconds) || !Finite(now) || seconds <= 0)
                 return false;
-            if (_Behaviour == TrapBehaviour.Slide)
+            _Impacts.RetainContacts(fish => fish && fish.BodyController && TouchesBody(fish.BodyController, .2f));
+            if (_Behaviour == TrapBehaviour.Slide || _Behaviour == TrapBehaviour.PiercingSlide)
             {
                 if (now - _LastInput > .3f)
                     _Axis = 0;
+                if (_Behaviour == TrapBehaviour.PiercingSlide)
+                {
+                    if (_PassageSweep == null) _PassageSweep = new GhostTrapPassageSweep(this);
+                    float delta = _PassageSweep.Advance(_Axis, _PiercingSpeed, _BodySpeedFactor, seconds, _MotionContacts);
+                    MotionDirection = Mathf.Sign(_Axis);
+                    if (Mathf.Abs(delta) <= MinimumMovement) return false;
+                    _State.Position += Vector3.right * delta;
+                    transform.position = _State.Position;
+                    Physics.SyncTransforms();
+                    return true;
+                }
                 var limits = Limits;
                 float next = Mathf.Clamp(Position.x + _Axis * _MoveSpeed * seconds, limits.x, limits.y);
                 return MovePhysical(Vector3.right * (next - Position.x), true);
@@ -251,6 +306,7 @@ namespace HauntedFish.Multiplayer
                 return false;
             float distance = delta.magnitude;
             var direction = delta / distance;
+            MotionDirection = direction.x;
             // Preserve the full leading face along motion. Shrinking every axis
             // allowed the visual/collision body to cross a neighboring cart.
             var sweepHalf = HalfExtents;
@@ -346,7 +402,13 @@ namespace HauntedFish.Multiplayer
             }
 
             if (distance <= MinimumMovement)
+            {
+                // A fish pinned against a wall is still struck, even when the
+                // solid cart cannot advance or apply its knockback displacement.
+                foreach (var fish in _PushPlayers)
+                    if (TouchesBody(fish.BodyController, .15f)) _MotionContacts.Add(fish);
                 return 0;
+            }
             // Record direct swept contacts before separation moves a standing
             // fish away. Contiguous fish pushed by another fish are not trap hits.
             foreach (var fish in _PushPlayers)

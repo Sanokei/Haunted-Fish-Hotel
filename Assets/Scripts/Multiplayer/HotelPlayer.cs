@@ -6,6 +6,13 @@ using UnityEngine;
 
 namespace HauntedFish.Multiplayer
 {
+    // Optional deterministic input for authored, offline scenes. It never supplies
+    // simulation authority or bypasses the normal readiness/status checks.
+    public interface IHotelOfflineInputSource
+    {
+        void ReadInput(HotelPlayer actor, out Vector2 move, out bool jump, out Vector3 mouse, out bool run);
+    }
+
     [RequireComponent(typeof(NetworkIdentity), typeof(HotelPlayerMovement))]
     public sealed class HotelPlayer : NetworkBehaviour
     {
@@ -64,8 +71,12 @@ namespace HauntedFish.Multiplayer
         [SyncVar] public bool BossWon;
         [SyncVar] public float Health = 100;
         [SyncVar] public bool IsDead;
+        [SyncVar] bool _Stunned;
+        public bool IsStunned => _Stunned && !IsDead && ControlMode == HotelControlMode.Fish && !InBossFight && !BossHallwayLocked;
         [SyncVar] public int GhostEmergenceVersion;
         [SyncVar] public Vector3 GhostEmergencePosition;
+        [SerializeField] AuthoredGhostEmergence _DeathEmergence;
+        public AuthoredGhostEmergence DeathEmergence => _DeathEmergence;
         public bool GhostSetupReady => RoundIntroComplete || RoundReleased;
         [SyncVar] public string PlacedObjectsJson = "";
         [SyncVar] public int ControlledCube = -1;
@@ -103,6 +114,17 @@ namespace HauntedFish.Multiplayer
             ResetSceneMotion();
         }
         public void ResetEditorRole() => _EditorRole = -1;
+
+        IHotelOfflineInputSource _OfflineInputSource;
+        public void BindOfflineInput(IHotelOfflineInputSource source)
+        {
+            if (Networked) throw new System.InvalidOperationException("Authored offline input cannot control a networked actor.");
+            _OfflineInputSource = source;
+        }
+        public void UnbindOfflineInput(IHotelOfflineInputSource source)
+        {
+            if (ReferenceEquals(_OfflineInputSource, source)) _OfflineInputSource = null;
+        }
 
         IHotelGameCommands _GameCommands;
         IHotelBossCommands _BossCommands;
@@ -167,7 +189,11 @@ namespace HauntedFish.Multiplayer
             GhostSetupRemaining = 0;
             Health = 100;
             IsDead = false;
+            _Stunned = false;
+            if (_Movement) _Movement.ClearTrapStun();
+            if (_Visual) _Visual.SetStunned(false);
             GhostEmergenceVersion = PossessionEffectVersion = 0;
+            if (_DeathEmergence) _DeathEmergence.Stop();
             GhostFlightReady = false;
         }
 
@@ -305,6 +331,8 @@ namespace HauntedFish.Multiplayer
 
         void OnDisable()
         {
+            _OfflineInputSource = null;
+            if (_DeathEmergence) _DeathEmergence.Stop();
             UnregisterActivePlayer();
             if (_Session != null) _Session.InputFocusChanged -= OnInputFocusChanged;
             StoryFunctions.OnSpeakerEvent -= Speaker;
@@ -362,6 +390,7 @@ namespace HauntedFish.Multiplayer
             if (!Networked || (Connected && IsServer))
             {
                 _Movement.Simulate(Time.deltaTime);
+                _Stunned = _Movement.IsStunned;
                 _Position = transform.position;
                 _FacingLeft = _Movement.FacingLeft;
                 _Walking = _Movement.Walking;
@@ -378,6 +407,7 @@ namespace HauntedFish.Multiplayer
             _Movement.ShowLamp(_MouseLight, NetId);
             if (_TriggerSensor) _TriggerSensor.SetActive(!IsDead && Connected && IsClient && !IsServer);
             if (_Visual) _Visual.SetCorpse(IsDead);
+            if (_Visual) _Visual.SetStunned(IsStunned && ControlsReady);
             if (_Visual) _Visual.Present(_FacingLeft, _Walking && ControlsReady, _Talking && ControlsReady, _Running && ControlsReady);
             if (_Audio) _Audio.Present(_Walking && ControlsReady && !InBossFight && ControlMode != HotelControlMode.Ghost, _Running);
             if (IsRelevantPlayer && ControlsReady && !InputBlocked && _Movement.InteractPressed) RequestInteractionSound();
@@ -396,21 +426,37 @@ namespace HauntedFish.Multiplayer
             _Movement.SetBossControlState(InBossFight && IsRelevantPlayer && ControlsReady && !inputBlocked);
             _Movement.SharedDialogueLocked = sharedDialogue;
             if (!ready || inputBlocked) _QueuedJump = false;
+            if (IsStunned) _QueuedJump = false;
         }
 
         void SendOwnedInput()
         {
-            _Movement.ReadOwnedInput(out var move, out var jump, out var mouse);
+            Vector2 move; bool jump, run; Vector3 mouse;
+            if (!Networked && _OfflineInputSource != null && !(_OfflineInputSource is Object owner && !owner) &&
+                !(_OfflineInputSource is Behaviour behaviour && !behaviour.isActiveAndEnabled) &&
+                !InputBlocked && _Movement.ControlsReady && _Movement.CanMove && !_Movement.SharedDialogueLocked &&
+                ControlMode == HotelControlMode.Fish && !IsStunned && !_Movement.IsStunned)
+            {
+                _OfflineInputSource.ReadInput(this, out move, out jump, out mouse, out run);
+                if (!Finite(move.x) || !Finite(move.y) || !Finite(mouse.x) || !Finite(mouse.y) || !Finite(mouse.z))
+                { move = Vector2.zero; jump = run = false; mouse = transform.position; }
+                else move = Vector2.ClampMagnitude(move, 1);
+            }
+            else
+            {
+                _Movement.ReadOwnedInput(out move, out jump, out mouse);
+                run = _Movement.RunHeld;
+            }
             // Retain a one-frame jump until the next network send.
             _QueuedJump |= jump;
             if (Connected && Time.unscaledTime < _NextSend) return;
 
             if (!Connected)
-                _Movement.AcceptInput(move, _QueuedJump, mouse, _Movement.RunHeld);
+                _Movement.AcceptInput(move, _QueuedJump, mouse, run);
             else
             {
                 _NextSend = Time.unscaledTime + .05f;
-                SetInput((int)ControlMode, move, _QueuedJump, mouse, _Movement.RunHeld);
+                SetInput((int)ControlMode, move, _QueuedJump, mouse, run);
             }
             _QueuedJump = false;
         }
@@ -430,7 +476,19 @@ namespace HauntedFish.Multiplayer
         public void ResetSceneMotion()
         {
             ResetOwnedInput();
+            _Movement.ClearTrapStun();
+            if (!Networked || IsServer) _Stunned = false;
+            if (_Visual) _Visual.SetStunned(false);
             _Movement.ResetMotion();
+        }
+
+        internal bool ApplyTrapStun(float direction, float distance, float impulseSeconds, float stunSeconds)
+        {
+            if (Networked && !IsServer || IsDead || !ControlsReady || !RoundReleased || InBossFight || BossHallwayLocked ||
+                ControlMode != HotelControlMode.Fish || !_Movement.ApplyTrapStun(direction, distance, impulseSeconds, stunSeconds)) return false;
+            _Stunned = true;
+            ResetOwnedInput();
+            return true;
         }
 
         void ResetOwnedInput()
@@ -443,6 +501,8 @@ namespace HauntedFish.Multiplayer
         public void Teleport(Vector3 point)
         {
             _Movement.Teleport(point);
+            if (!Networked || IsServer) _Stunned = false;
+            if (_Visual) _Visual.SetStunned(false);
             _Position = transform.position;
             ResetOwnedInput();
             _MouseLight = point + Vector3.right;

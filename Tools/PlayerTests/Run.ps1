@@ -10,7 +10,7 @@ foreach ($name in @('HotelPlayerMovement', 'GameSideScrollMotor', 'HotelFishSpri
     Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs" -Destination "$validationRoot/Assets"
     Copy-Item -LiteralPath "$repoRoot/Assets/Scripts/Multiplayer/$name.cs.meta" -Destination "$validationRoot/Assets"
 }
-foreach($source in @('Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionPanelShape.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionSkipCircle.cs')) {
+foreach($source in @('Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryAnimationMath.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxRig.cs', 'Assets/Scripts/DialogueSystem/StoryInput/StoryParallaxPlayer.cs','Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionPanelShape.cs','Assets/Scripts/Multiplayer/Lobby/IntroductionSkipCircle.cs')) {
  Copy-Item -LiteralPath "$repoRoot/$source" -Destination "$validationRoot/Assets"
  Copy-Item -LiteralPath "$repoRoot/$source.meta" -Destination "$validationRoot/Assets"
 }

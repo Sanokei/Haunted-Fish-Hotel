@@ -1,0 +1,12 @@
+{
+  "source": "CRC-verified uploaded traps archive, 2026-10-13",
+  "operation": "Original PNG bytes copied unchanged. Unity sprite rectangles split each chandelier at top-origin row 260; no raster edits.",
+  "files": {
+    "TRAP-Angler-fish-glow.png": "75197ef408fee482260f566cef2adb1f480621235cb02b0559900e5add0d98d3",
+    "TRAP-Angler-fish.png": "eb52083c098e3a6be154d72e3f7f38a9436e2fea153a7e0c75b74a85190fb6fb",
+    "TRAP-Chandelier-v1.png": "f8274c978596dbdb0baaad14e45c5b43376fbca774fe4041714b2ea110027c78",
+    "TRAP-Chandelier-v2.png": "560286efa682a2ba85b522b223fc89da9fe4440eb961b6bdc9ad8f9fed82e996",
+    "TRAP-Chandelier-v3.png": "9644d2b580b03cdb82ad8547fadb8ccfb76824981a996c0fe441c78f7a2d01f4",
+    "TRAP-Hotel-cart.png": "afa7a02142616a3d01f959c2aa8ca5cfeff89e42fa755a4c93d05f3c893b823a"
+  }
+}

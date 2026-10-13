@@ -10,7 +10,7 @@ public static class TrapValidation
  static void Set(object o,string name,object v)=>o.GetType().GetField(name,BindingFlags.NonPublic|BindingFlags.Instance).SetValue(o,v);
  public static IEnumerator Tests(Action<bool,string> check)
  {
-  var catalog=new[]{Resources.Load<GhostTrap>("Traps/ShoppingCartTrap"),Resources.Load<GhostTrap>("Traps/ClickTrap"),Resources.Load<GhostTrap>("Traps/FallingChandelierTrap")};
+  var catalog=new[]{Resources.Load<GhostTrap>("Traps/ShoppingCartTrap"),Resources.Load<GhostTrap>("Traps/ClickTrap"),Resources.Load<GhostTrap>("Traps/FallingChandelierTrap"),Resources.Load<GhostTrap>("Traps/AnglerFishTrap")};
   foreach(var prefab in catalog) check(prefab && prefab.GetComponent<BoxCollider>() && prefab.Icon,"Authored trap prefab imports with collider, interface and icon: "+(prefab?prefab.FamilyTag:"missing"));
   var supply=Resources.Load<GameObject>("Traps/TrapSupply");check(supply && supply.GetComponent<GhostTrapSupply>(),"Authored reusable conveyor supply imports");
   var actions=Resources.Load<InputActionAsset>("HotelMultiplayerActions");var map=actions.FindActionMap("Ghost",true);
@@ -20,13 +20,13 @@ public static class TrapValidation
   check(world.Count==0,"Fresh round contains no preplaced traps");
   var owner=new GameObject("Ghost authority").AddComponent<HotelPlayer>();owner.gameObject.AddComponent<HotelPlayerMovement>().SetMode(HotelControlMode.Ghost);owner.ControlsReady=true;owner.RoundReleased=true;owner.RoundStateKey="round-A";owner.RoundVersion=1;owner.NetId=12;
   world.enabled=false;check(!world.Hold(owner,"cart",Vector3.zero),"Disabled world rejects inventory authoring");world.enabled=true;
-  check(world.Hold(owner,"cart",new Vector3(-8,1,0))&&owner.PossessionEffectVersion==1,"Authority owns held inventory and emits one possession effect");
+  check(world.Hold(owner,"cart",new Vector3(-8,catalog[0].BodyHalfSize.y,0))&&owner.PossessionEffectVersion==1,"Authority owns held inventory and emits one possession effect");
   check(!world.Hold(owner,"cart",Vector3.zero),"Duplicate pickup does not duplicate inventory or effect");
   check(world.Dispose(owner,-1)&&!world.Dispose(owner,-1)&&owner.HeldTrapFamily=="","Q discards held inventory exactly once");
-  check(!world.TryPlace(owner,new Vector3(-8,1,0),"cart"),"Cannot place without authoritative held item");
-  world.Hold(owner,"cart",new Vector3(-8,1,0));check(world.TryPlace(owner,new Vector3(-8,1,0),"cart"),"Runtime placement instantiates the authored prefab");
-  var cart=world.Trap(0);check(cart is IGhostTrap && cart.ObjectSize==new Vector2(2.5f,2)&&cart.BackgroundSize==new Vector2(10,3),"Cart and aisle use enlarged authored dimensions");
-  check(cart.GetComponent<BoxCollider>().size==new Vector3(2.5f,2,1),"Enlarged collision matches cart dimensions");
+  check(!world.TryPlace(owner,new Vector3(-8,catalog[0].BodyHalfSize.y,0),"cart"),"Cannot place without authoritative held item");
+  world.Hold(owner,"cart",new Vector3(-8,catalog[0].BodyHalfSize.y,0));check(world.TryPlace(owner,new Vector3(-8,catalog[0].BodyHalfSize.y,0),"cart"),"Runtime placement instantiates the authored prefab");
+  var cart=world.Trap(0);check(cart is IGhostTrap && cart.ObjectSize==new Vector2(2.5f,1.64556962f)&&cart.BackgroundSize==new Vector2(10,3),"Tablecart and aisle use aspect-correct authored dimensions");
+  check(cart.GetComponent<BoxCollider>().size==new Vector3(2.5f,1.64556962f,1),"Collision matches tablecart dimensions");
   Physics.SyncTransforms();check(!world.PlacementPoint(cart.Position,"cart",out _)&&!world.PlacementPoint(new Vector3(13.78f,1,0),"cart",out _),"Placement rejects enlarged body overlaps and hallway edges");
   world.Possess(owner,0,cart.Position);check(owner.ControlledCube==0,"Owner possesses its placed trap");
   int effect=owner.PossessionEffectVersion;world.Possess(owner,0,cart.Position);check(owner.PossessionEffectVersion==effect,"Duplicate possession does not replay puff");
@@ -59,7 +59,7 @@ public static class TrapValidation
   owner.Networked=false;
   check(world.Dispose(owner,0)&&owner.ControlledCube==-1&&world.Count==0&&!world.Dispose(owner,0),"Q removes owned possessed trap once and exits possession cleanly");
   observer.BeginRound("editor-preview","round-A",1);check(observer.ApplySnapshot(world.Snapshot)&&!observer.ApplySnapshot(current),"Deleted inventory stays deleted when an older revision arrives");
-  yield return new WaitForSecondsRealtime(.21f);world.Hold(owner,"cart",Vector3.zero);check(world.TryPlace(owner,new Vector3(-4,1,0),"cart")&&world.Trap(1)&&!world.Trap(0),"Disposed IDs are never reused within a round");
+  yield return new WaitForSecondsRealtime(.21f);world.Hold(owner,"cart",Vector3.zero);check(world.TryPlace(owner,new Vector3(-4,catalog[0].BodyHalfSize.y,0),"cart")&&world.Trap(1)&&!world.Trap(0),"Disposed IDs are never reused within a round");
   world.BeginRound("editor-preview","round-C",2);check(world.Count==0&&!world.ApplySnapshot(current),"New round clears active traps and invalidates prior state");
   Object.Destroy(observer.gameObject);
   var click=Object.Instantiate(catalog[1]);click.Initialize(world,new GhostCubePlacement{Position=new Vector3(0,.5f,0),Origin=new Vector3(0,.5f,0),FamilyTag="click"},1);
@@ -90,7 +90,7 @@ public static class TrapValidation
   var scene=host.AddComponent<GameSceneController>();Set(scene,"_PlacementWorld",world);host.SetActive(true);
   var a=new GameObject("Existing ghost");a.SetActive(false);a.AddComponent<HotelPlayerMovement>().SetMode(HotelControlMode.Ghost);var owner=a.AddComponent<HotelPlayer>();owner.NetId=11;owner.GhostId=11;owner.ControlsReady=true;a.SetActive(true);
   owner.RoundStateKey="kept-round";owner.RoundVersion=4;owner.RoundRoster="11";owner.RoundReleased=true;
-  world.BeginRound("editor-preview","kept-round",4);world.Hold(owner,"cart",Vector3.zero);check(world.TryPlace(owner,new Vector3(-8,1,0),"cart"),"Late-join fixture uses actual authoritative runtime placement");
+  world.BeginRound("editor-preview","kept-round",4);world.Hold(owner,"cart",Vector3.zero);check(world.TryPlace(owner,new Vector3(-8,catalog[0].BodyHalfSize.y,0),"cart"),"Late-join fixture uses actual authoritative runtime placement");
   var gate=(GameRoundGate)scene.GetType().GetField("_Gate",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(scene);gate.Begin(new uint[]{11},4,Time.unscaledTime);gate.Remove(11);
   Set(scene,"_Chosen",true);Set(scene,"_Released",true);
   var b=new GameObject("Reconnected fish");b.SetActive(false);b.AddComponent<HotelPlayerMovement>().SetMode(HotelControlMode.Fish);var joining=b.AddComponent<HotelPlayer>();joining.NetId=12;joining.ControlsReady=true;b.SetActive(true);

@@ -8,11 +8,14 @@ EXTERNAL Knock(objectTag, count, interval)
 EXTERNAL Wait(seconds)
 EXTERNAL ExpandPanel(panelTag, seconds)
 EXTERNAL FlashFrames(frames)
-EXTERNAL DollyTo(sceneTag, amount, seconds)
+EXTERNAL ParallaxTo(rigTag, poseTag, seconds, easing)
 EXTERNAL LobbyShot(shotTag, seconds)
 EXTERNAL LobbyLine(text, seconds)
 
 // Still background with a cloud that changes to cloud_lightning.
+// Reset the previous flash/reading reveal before replaying the opening.
+~ SetVisible("exterior", false)
+~ SetVisible("letter_read", false)
 ~ SetVisible("background", true)
 ~ SetVisible("storm", true)
 ~ SetVisible("interior", false)
@@ -38,8 +41,11 @@ EXTERNAL LobbyLine(text, seconds)
 ~ Wait(5.0)
 ~ ExpandPanel("letter_fullscreen", 4.0)
 ~ Wait(2.0)
+// Reset the authored wide camera before the reveal, then crane down and push in together.
+// Negative camera Y lifts foreground layers faster than the distant hotel.
+~ ParallaxTo("exterior", "wide", 0.0, "linear")
 ~ FlashFrames(2)
-~ DollyTo("gate_close", 1.0, 5.0)
+~ ParallaxTo("exterior", "gate_arrival", 5.0, "smoother")
 ~ Wait(2.0)
 // Reveal the real lobby: fish in front of camera, walk away, then camera passes fish toward reception.
 ~ LobbyShot("entry", 1.5)

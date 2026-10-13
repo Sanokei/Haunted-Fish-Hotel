@@ -39,6 +39,16 @@ The manager checks that a clicked row belongs to its current open panel before r
 
 `TrapManager` owns authority/scope checks, catalogs, package identities and revisions, package objects, path updates and snapshot publication. It applies the schedule's decisions to the existing Unity objects. Unity supplies randomness only on the authority. Preserve move-before-spawn ordering, the 64-attempt backlog cap and monotonic IDs/revisions when changing this path.
 
+## Trap impact ownership
+
+`TrapImpactRules`, `TrapContactEpisodes<T>` and `TrapStunState` own effect selection, successful-contact deduplication, and timed stun/knockback integration without Unity dependencies. `HotelPlayer` retains the server-owned replicated stun bit; `HotelPlayerMovement` applies the rule's displacement through its existing collision motor. Global movement/shared-dialogue locks pause the status and impulse; local input focus does not cancel them. Death, teleport, role/scene reset and authority loss clear the status. `HotelFishSprite` presents it using an authored effect root and animation.
+
+`TrapPassageMotion` integrates fast travel through capsule/box contact intervals, using their union for non-stacking body slowdown. `TrapPassageMemory<T>` preserves a struck body's original interval until exit, even when lethal damage disables its collider. `GhostTrapPassageSweep` owns Unity queries and round-scoped actor discovery; it passes rule results to `GhostTrap`. `GhostPlacementWorld` remains the authority/snapshot owner, and `GameHauntingController` retains the established death-to-spectator flow. A failed effect must not consume a contact episode.
+
+Death presentation replays the disabled `DeathEmergence` child authored in each player prefab. `AuthoredGhostEmergence` animates the existing soul artwork and Ink layouts at the replicated death position, then hides itself. `GameHauntingController` observes new death versions, suppresses historical events on first observation, and stops authored effects on scope change or teardown; it never creates or destroys effect objects. The player remains a corpse/spectator throughout. The older standalone `GhostEmergence` prefab retains its original serialized identity for legacy consumers.
+
+Keep art and prefab authoring separate. The tablecart retains the existing `cart` family and prefab identity. The angler is an authored prefab in the production catalog, and the chandelier uses pixel-preserving Unity sprite rectangles for its fixed canopy and suspended cord/body. Optional possessed-light, suspended-pivot and fixed-ceiling-layout references never construct replacements at runtime. The UI pivot drives the existing projected world-art pass; the canopy uses the stable armed origin rather than the falling root. `Tools/TrapBehaviorTests/README.md` documents those contracts and the remaining native checks.
+
 ## Player command ownership
 
 `HotelPlayer` retains Mirage RPC signatures, ownership enforcement, SyncVars and placement replies. It forwards game requests through `IHotelGameCommands` and boss requests through `IHotelBossCommands`. It does not discover a scene singleton to execute those commands.
@@ -70,6 +80,7 @@ The independent suites compile production source directly and use no added packa
 dotnet run --project Tools/SessionLifecycleTests/SessionLifecycleTests.csproj
 dotnet run --project Tools/DialogueTests/DialogueTests.csproj
 dotnet run --project Tools/TrapSupplyTests/TrapSupplyTests.csproj
+dotnet run --project Tools/TrapBehaviorTests/TrapBehaviorTests.csproj
 dotnet run --project Tools/MultiplayerTests/MultiplayerTests.csproj
 dotnet run --project Tools/RoundIntroductionTests/RoundIntroductionTests.csproj
 dotnet run --project Tools/BossFightTests/BossFightTests.csproj
@@ -78,5 +89,7 @@ dotnet run --project Tools/BossFightTests/BossFightTests.csproj
 The first three suites cover lifecycle/cancellation policy, actual vendored Ink progression and UI ownership, and conveyor timing/selection. `Tools/DialogueTests/RunUnity.ps1 -ValidationProject '<existing Temp project>'` exercises actual prefab options, text-input submission and Unity disable/destroy scheduling. Native compilation, Mirage weaving, authored gameplay references and real physics use the existing isolated Unity runners under `Tools/PerformanceTests` and `Tools/RoundIntroductionTests`. Their README files explain the disposable project requirements. Recorded results and the corresponding source hashes are under `Tools/ArchitectureTests/Evidence/2026-10-08`.
 
 Deterministic endpoints and a solo host do not establish two-client delivery, latency behavior or reconnect/host handoff across real peers. Those remain separate integration checks.
+
+The trap-behavior suite compiles production deterministic rules only. Its optional `RunMono.sh` uses the compiler already included in an installed Unity Editor without launching that Editor. Neither these source checks nor adapter tests with doubles establish native physics, prefab/animation import, full-project compilation, or Mirage weaving and delivery.
 
 The player-command refactor adds native host RPC routing assertions to `AuditGuardrails` and scene/player disable/re-enable and stale-owner assertions to `AuditLifecycleRunner`. Run the existing PerformanceTests runner in Host and Lifecycle modes against an idle disposable full project. Standalone suites do not compile `HotelPlayer` or prove Mirage weaving; native results are required for that boundary.

@@ -22,6 +22,9 @@ namespace HauntedFish.Multiplayer
         CharacterController _Controller;
         GameSideScrollMotor _GameMotor;
         readonly LobbyMovementMotor _LobbyMotor = new LobbyMovementMotor();
+        readonly TrapStunState _TrapStun = new TrapStunState();
+        public bool IsStunned => _TrapStun.Active;
+        bool StunBlocksInput => IsStunned || _Actor && _Actor.IsStunned;
         int _ResumeAfterFrame;
         bool _AuthorityInitialized, _SimulationAuthority, _InputBlocked;
         bool _ControlStateInitialized, _LocalControl, _GameControl;
@@ -31,6 +34,7 @@ namespace HauntedFish.Multiplayer
         {
             if (Mode == mode) return;
             Mode = mode;
+            ClearTrapStun();
             ResetMotion();
             _ControlStateInitialized = false;
         }
@@ -40,7 +44,7 @@ namespace HauntedFish.Multiplayer
         public bool Running => GameActive && Mode == HotelControlMode.Fish && Motor.Running;
         public bool InteractPressed => _GameInteract != null && _GameInteract.enabled && _GameInteract.WasPressedThisFrame();
         public Vector2 BossAxis => _BossMove != null && _BossMove.enabled ? Vector2.ClampMagnitude(_BossMove.ReadValue<Vector2>(), 1) : Vector2.zero;
-        public bool RunHeld => Mode == HotelControlMode.Fish && ControlsReady && !_InputBlocked && _GameRun != null && _GameRun.enabled && _GameRun.IsPressed();
+        public bool RunHeld => Mode == HotelControlMode.Fish && ControlsReady && !_InputBlocked && !StunBlocksInput && _GameRun != null && _GameRun.enabled && _GameRun.IsPressed();
         public bool FacingLeft { get; private set; }
         public Vector3 LampPosition => Motor.LampPosition;
         public bool GameActive => Motor.Active;
@@ -87,6 +91,7 @@ namespace HauntedFish.Multiplayer
         {
             if (_OwnedActions) _OwnedActions.Disable();
             ControlsReady = false;
+            ClearTrapStun();
             _ControlStateInitialized = false;
             ResetMotion();
         }
@@ -101,6 +106,7 @@ namespace HauntedFish.Multiplayer
             if (_AuthorityInitialized && _SimulationAuthority == authority) return;
             _AuthorityInitialized = true;
             _SimulationAuthority = authority;
+            if (!authority) { ClearTrapStun(); ResetMotion(); }
             Controller.enabled = authority;
             if (authority) SettleController();
         }
@@ -117,6 +123,7 @@ namespace HauntedFish.Multiplayer
             var wasReady = ControlsReady;
             var wasBlocked = _InputBlocked;
             ControlsReady = ready;
+            if (!ready) ClearTrapStun();
             _InputBlocked = blocked;
             SetMap(_LobbyMap, ready && local && !blocked && !game);
             SetMap(_GameMap, ready && local && !blocked && Mode == HotelControlMode.Fish);
@@ -134,7 +141,7 @@ namespace HauntedFish.Multiplayer
 
         public void ReadOwnedInput(out Vector2 move, out bool jump, out Vector3 mouse)
         {
-            bool canMove = Mode != HotelControlMode.Ghost && Mode != HotelControlMode.Selection && Mode != HotelControlMode.Spectator && CanMove && ControlsReady && !_InputBlocked && !SharedDialogueLocked;
+            bool canMove = Mode != HotelControlMode.Ghost && Mode != HotelControlMode.Selection && Mode != HotelControlMode.Spectator && CanMove && ControlsReady && !_InputBlocked && !SharedDialogueLocked && !StunBlocksInput;
             var action = GameActive ? _GameMove : _LobbyMove;
             move = canMove && action != null ? Vector2.ClampMagnitude(action.ReadValue<Vector2>(), 1) : Vector2.zero;
             if (!GameActive && move != Vector2.zero)
@@ -154,6 +161,7 @@ namespace HauntedFish.Multiplayer
         public void AcceptInput(Vector2 move, bool jump, Vector3 mouse, bool run = false)
         {
             if (!SimulationReady) return;
+            if (StunBlocksInput) { move = Vector2.zero; jump = run = false; }
             if (GameActive) Motor.Accept(move, jump, mouse, run);
             else _LobbyMotor.Accept(move);
         }
@@ -172,7 +180,10 @@ namespace HauntedFish.Multiplayer
             }
             if (GameActive)
             {
-                Motor.Simulate(delta);
+                // Global gameplay/dialogue locks pause the authority's impulse and
+                // status clock. Local menus never pause or cancel a server stun.
+                var stun = _TrapStun.Advance(delta, !CanMove || SharedDialogueLocked);
+                Motor.Simulate(delta, stun.BlocksInput, stun.HorizontalDisplacement);
                 Walking = Motor.Walking;
                 return;
             }
@@ -217,8 +228,19 @@ namespace HauntedFish.Multiplayer
             Motor.ResetMotion();
         }
 
+        internal bool ApplyTrapStun(float direction, float distance, float impulseSeconds, float stunSeconds)
+        {
+            if (!SimulationReady || Mode != HotelControlMode.Fish || !_TrapStun.Apply(direction, distance, impulseSeconds, stunSeconds)) return false;
+            // Reject already queued movement/jumps, while preserving airborne gravity.
+            Motor.ClearInput();
+            Walking = false;
+            return true;
+        }
+        public void ClearTrapStun() => _TrapStun.Clear();
+
         public void Teleport(Vector3 point)
         {
+            ClearTrapStun();
             bool wasEnabled = Controller.enabled;
             Controller.enabled = false;
             transform.position = GameActive && (!_Actor || !_Actor.InBossFight) && GameSceneController.Current ? GameSceneController.Current.ClampFish(this, point) : point;

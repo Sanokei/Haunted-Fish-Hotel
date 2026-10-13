@@ -36,15 +36,19 @@ static class Program
         var json = Compile(File.ReadAllText(inkPath));
         var steps = StoryFunctions.ReadAnimationSequence(json);
         Check(steps.Select(step => step.Kind).SequenceEqual(new[] {
+            StorySequenceStepKind.SetVisible, StorySequenceStepKind.SetVisible,
             StorySequenceStepKind.SetVisible, StorySequenceStepKind.SetVisible, StorySequenceStepKind.SetVisible,
             StorySequenceStepKind.SetVariant, StorySequenceStepKind.Wait, StorySequenceStepKind.SetVariant,
             StorySequenceStepKind.Wait, StorySequenceStepKind.SetVisible, StorySequenceStepKind.SetVisible,
             StorySequenceStepKind.Knock, StorySequenceStepKind.Wait, StorySequenceStepKind.PushTo,
             StorySequenceStepKind.MoveUI, StorySequenceStepKind.Wait, StorySequenceStepKind.SetVisible,
             StorySequenceStepKind.PushTo, StorySequenceStepKind.Wait, StorySequenceStepKind.ExpandPanel,
-            StorySequenceStepKind.Wait, StorySequenceStepKind.FlashFrames, StorySequenceStepKind.DollyTo,
+            StorySequenceStepKind.Wait, StorySequenceStepKind.ParallaxTo, StorySequenceStepKind.FlashFrames, StorySequenceStepKind.ParallaxTo,
             StorySequenceStepKind.Wait, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.LobbyShot,
             StorySequenceStepKind.LobbyLine, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.Wait }), "Authored storyboard uses explicit typed story functions in the required order");
+        Check(steps[0].Target == "exterior" && !steps[0].Visible &&
+            steps[1].Target == "letter_read" && !steps[1].Visible,
+            "Replay hides the previous exterior and reading reveals before showing the storm");
         var variants = steps.Where(step => step.Kind == StorySequenceStepKind.SetVariant).ToArray();
         Check(variants[0].Target == "cloud" && variants[0].Variant == "cloud" && variants[1].Variant == "cloud_lightning",
             "The still cloud changes to its lightning variant");
@@ -54,15 +58,15 @@ static class Program
         Check(move.Target == "letter" && move.X == 40 && move.Y == 50 && move.Seconds == 1.8f, "Ink controls the diagonal ground slide and duration");
         Check(steps.Where(step => step.Kind == StorySequenceStepKind.PushTo).Select(step => step.Target)
             .SequenceEqual(new[] { "letter_under_door", "letter_read" }), "Both pushes address panels on the same strip");
-        Check(steps[14].Target == "letter_read" && steps[14].Visible && steps[15].Kind == StorySequenceStepKind.PushTo,
+        Check(steps[16].Target == "letter_read" && steps[16].Visible && steps[17].Kind == StorySequenceStepKind.PushTo,
             "The incoming reading panel is visible before the second push");
-        Check(steps[16].Kind == StorySequenceStepKind.Wait && steps[16].Seconds == 5, "Reading shot lingers before expansion");
-        Check(steps[17].Kind == StorySequenceStepKind.ExpandPanel && steps[17].Seconds == 4,
+        Check(steps[18].Kind == StorySequenceStepKind.Wait && steps[18].Seconds == 5, "Reading shot lingers before expansion");
+        Check(steps[19].Kind == StorySequenceStepKind.ExpandPanel && steps[19].Seconds == 4,
             "The reading rhombus slowly takes over the frame");
-        Check(steps[19].Kind == StorySequenceStepKind.FlashFrames && steps[19].Count == 2,
+        Check(steps[22].Kind == StorySequenceStepKind.FlashFrames && steps[22].Count == 2,
             "Ink requests exactly two white rendered frames");
-        Check(steps[20].Kind == StorySequenceStepKind.DollyTo && steps[20].Target == "gate_close" && steps[20].Seconds == 5,
-            "The flash is followed by an exterior dolly");
+        Check(steps[23].Kind == StorySequenceStepKind.ParallaxTo && steps[23].Target == "exterior" && steps[23].Variant == "gate_arrival" && steps[23].Seconds == 5 && steps[23].Easing == "smoother",
+            "The flash is followed by the reusable authored crane-down/push-in camera pose");
         Check(steps.Where(s => s.Kind == StorySequenceStepKind.LobbyShot).Select(s => s.Target)
             .SequenceEqual(new[] { "entry", "walk_away", "reception" }), "Fish enters before walking away and the reception dolly follows");
         Check(steps.Single(s => s.Kind == StorySequenceStepKind.LobbyLine).Variant ==
@@ -83,6 +87,7 @@ static class Program
         Check(cues == 1, "Grandma's story contains exactly one rimshot cue");
         checks += PunchlineAudioTests.Run();
         checks += DoorPushTests.Run(root);
+        checks += ParallaxTests.Run(root);
         bool missingWorldRejected = false;
         try { HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, null); }
         catch (InvalidOperationException error) { missingWorldRejected = error.Message.Contains("._World"); }
@@ -142,8 +147,8 @@ static class Program
             Console.WriteLine("Compiled lobby and Grandma Ink JSON from authored source.");
         }
         else
-            Check(StoryFunctions.ReadAnimationSequence(File.ReadAllText(Path.ChangeExtension(inkPath, ".json"))).Select(s => (s.Kind, s.Target, s.Variant, s.Visible, s.X, s.Y, s.Count, s.Seconds))
-                .SequenceEqual(steps.Select(s => (s.Kind, s.Target, s.Variant, s.Visible, s.X, s.Y, s.Count, s.Seconds))), "Committed compiled Ink matches the source");
+            Check(StoryFunctions.ReadAnimationSequence(File.ReadAllText(Path.ChangeExtension(inkPath, ".json"))).Select(s => (s.Kind, s.Target, s.Variant, s.Visible, s.X, s.Y, s.Count, s.Seconds, s.Easing))
+                .SequenceEqual(steps.Select(s => (s.Kind, s.Target, s.Variant, s.Visible, s.X, s.Y, s.Count, s.Seconds, s.Easing))), "Committed compiled Ink matches the source");
         Console.WriteLine($"Passed {checks} introduction checks.");
     }
 }

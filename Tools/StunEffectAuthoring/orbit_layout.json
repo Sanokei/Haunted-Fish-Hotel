@@ -1,0 +1,46 @@
+{
+  "fish_length_m": 0.25,
+  "orbit_lift_m": 0.22,
+  "bob_amplitude_m": 0.025,
+  "loop_seconds": 1.6,
+  "planes": [
+    {
+      "name": "Plane01",
+      "id": 2000,
+      "tilt_x": -12,
+      "tilt_z": -14,
+      "radius": 0.47,
+      "direction": 1,
+      "fish_angles": [
+        0,
+        216
+      ],
+      "mesh": "PiranhaCurvedTrails"
+    },
+    {
+      "name": "Plane02",
+      "id": 3000,
+      "tilt_x": 17,
+      "tilt_z": 8,
+      "radius": 0.47,
+      "direction": 1,
+      "fish_angles": [
+        72,
+        288
+      ],
+      "mesh": "PiranhaCrossingTrails02"
+    },
+    {
+      "name": "Plane03",
+      "id": 4000,
+      "tilt_x": 8,
+      "tilt_z": 20,
+      "radius": 0.445,
+      "direction": 1,
+      "fish_angles": [
+        144
+      ],
+      "mesh": "PiranhaCrossingTrails03"
+    }
+  ]
+}

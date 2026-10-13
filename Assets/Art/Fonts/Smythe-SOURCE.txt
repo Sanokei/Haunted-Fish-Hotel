@@ -1,0 +1,8 @@
+Smythe Regular by Vernon Adams. Unmodified font recovered from the user-provided Haunted-Fish-Hotel-Smythe font kit on 2026-10-13. The package attributes the binary to the official Google Fonts repository.
+
+Source: https://github.com/google/fonts/tree/main/ofl/smythe
+License: SIL Open Font License 1.1; see Smythe-OFL.txt.
+SHA-256: 51207abbe4ef2d576b3033e95fc5bd30282c0db766807e1b8ae3f19d2540e11c
+Bytes: 90652
+
+The recovered authored-card preview confirms the Smythe visual direction, not an exact mapping to the previously approved revision. The repository card renderer is a newly authored implementation of that direction. The user corrected the death title to Wowza.

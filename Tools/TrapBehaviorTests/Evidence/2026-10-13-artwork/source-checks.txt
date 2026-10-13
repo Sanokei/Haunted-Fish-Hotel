@@ -1,0 +1,3 @@
+PASS: 6 unchanged source PNG hashes; 3 valid prefab reference trees; 1071515 tablecart alpha pixels covered; aspect-correct cart; authored angler piercing/glow/light; split canopy/cord and fixed-anchor/reset source guards; original range art; 4-entry catalog. Not native Unity import/render/physics/network validation.
+PASS: 237 trap behavior checks (production rules; no Unity, physics or Mirage execution).
+PASS: 34 authored death-emergence source/serialization checks (not Unity import or playback).

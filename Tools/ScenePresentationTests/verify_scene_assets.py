@@ -36,6 +36,15 @@ def git(*args):
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout
 
 
+def in_unity_ignored_directory(path):
+    """Unity excludes contents beneath directories whose names end in '~'.
+
+    Check directory components only: a '~' elsewhere in an asset filename or
+    directory name must not suppress metadata/reference validation.
+    """
+    return any(part.endswith('~') for part in Path(path).parts[:-1])
+
+
 @lru_cache(maxsize=None)
 def baseline(path, base):
     result = subprocess.run(['git', '-C', str(ROOT), 'show', f'{base}:{path}'],
@@ -407,11 +416,15 @@ def main():
     changed = set(git('diff', '--name-only', '-z', args.base, '--', 'Assets').decode().split('\0'))
     changed.update(git('ls-files', '--others', '--exclude-standard', '-z', '--', 'Assets').decode().split('\0'))
     changed.discard('')
+    changed = {path for path in changed if not in_unity_ignored_directory(path)}
     paths = set(DEFAULT_ASSETS) | set(args.asset) | changed
+    paths = {path for path in paths if not in_unity_ignored_directory(path)}
     report = Report()
     guid_entries = defaultdict(list)
     for folder in ('Assets', 'Packages', 'Library/PackageCache'):
         for meta in (ROOT / folder).rglob('*.meta') if (ROOT / folder).exists() else ():
+            if in_unity_ignored_directory(meta.relative_to(ROOT)):
+                continue
             match = GUID.search(meta.read_text(encoding='utf-8-sig', errors='replace'))
             if match:
                 guid_entries[match[1]].append(meta.with_suffix(''))

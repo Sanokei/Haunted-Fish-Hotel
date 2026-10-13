@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 31000094}
   - component: {fileID: 31900001}
   - component: {fileID: 31900002}
+  - component: {fileID: 31900003}
   - component: {fileID: 31000123}
   - component: {fileID: 31000999}
   m_Layer: 0
@@ -54,7 +55,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_Material: {fileID: 0}
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 2, z: 1}
+  m_Size: {x: 2.5, y: 1.64556962, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &31000095
 GameObject:
@@ -96,7 +97,7 @@ GameObject:
   - component: {fileID: 31000098}
   - component: {fileID: 31000099}
   m_Layer: 0
-  m_Name: Shopping cart
+  m_Name: Tablecart scene artwork
   m_TagString: Untagged
   m_IsActive: 1
 --- !u!4 &31000098
@@ -107,8 +108,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31000097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -0.009795057, y: 0.366184448, z: 0}
+  m_LocalScale: {x: 0.150693189, y: 0.150693189, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000096}
@@ -162,8 +163,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: bccfec07ac53dd846bc79ebdedc0004a, type: 3}
-  m_Color: {r: 0.9254901960784314, g: 0.996078431372549, b: 0.792156862745098, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 683369b848f947b6a450d6d1ae3ab23f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -562,7 +563,7 @@ GameObject:
   - component: {fileID: 31000121}
   - component: {fileID: 31000122}
   m_Layer: 5
-  m_Name: Moving shopping cart
+  m_Name: Moving tablecart
   m_TagString: Untagged
   m_IsActive: 1
 --- !u!224 &31000120
@@ -605,13 +606,13 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9254901960784314, g: 0.996078431372549, b: 0.792156862745098, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bccfec07ac53dd846bc79ebdedc0004a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 683369b848f947b6a450d6d1ae3ab23f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -643,10 +644,10 @@ MonoBehaviour:
   _SceneArt: {fileID: 31000095}
   _OpaqueArtBounds:
     serializedVersion: 2
-    x: 0.08997955
-    y: 0.07901235
-    width: 0.84458077
-    height: 0.80987656
+    x: 0.0981445312
+    y: 0.1147460938
+    width: 0.8100585938
+    height: 0.5332031250
   _PatternRenderer: {fileID: 92000102}
   _WorldImages:
   - {fileID: 31000110}
@@ -672,19 +673,24 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   _FamilyTag: cart
-  _DisplayName: Shopping cart
+  _DisplayName: Tablecart
   _InputMode: 0
   _Behaviour: 0
-  _Icon: {fileID: 21300000, guid: bccfec07ac53dd846bc79ebdedc0004a, type: 3}
+  _Impact: 1
+  _StunSeconds: 1
+  _KnockbackDistance: 1.2
+  _KnockbackSeconds: 0.22
+  _Icon: {fileID: 21300002, guid: 683369b848f947b6a450d6d1ae3ab23f, type: 3}
   _Collider: {fileID: 31000094}
   _SolidParts:
   - {fileID: 31900001}
   - {fileID: 31900002}
+  - {fileID: 31900003}
   _Presentation: {fileID: 31000123}
   _ArmedOffset: {x: 0, y: 0, z: 0}
   _BackgroundSize: {x: 10, y: 3}
   _BackgroundOffset: {x: 0, y: .5}
-  _ObjectSize: {x: 2.5, y: 2}
+  _ObjectSize: {x: 2.5, y: 1.64556962}
   _MoveSpeed: 5
   _TravelHalfWidth: 3.5
   _ActivationSeconds: 0.35
@@ -713,8 +719,8 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_Material: {fileID: 0}
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 1.7, z: 1}
-  m_Center: {x: 0, y: -0.15, z: 0}
+  m_Size: {x: 2.50000000, y: 1.14225437, z: 1}
+  m_Center: {x: 0.00000000, y: -0.25165763, z: 0}
 --- !u!65 &31900002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -730,8 +736,8 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_Material: {fileID: 0}
   serializedVersion: 3
-  m_Size: {x: 0.96, y: 0.5, z: 1}
-  m_Center: {x: 0.77, y: 0.75, z: 0}
+  m_Size: {x: 1.35774563, y: 0.50331525, z: 1}
+  m_Center: {x: -0.30289331, y: 0.57112719, z: 0}
 --- !u!1 &92000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,8 +1080,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: bccfec07ac53dd846bc79ebdedc0004a, type: 3}
-  m_Color: {r: 0.9254902, g: 0.99607843, b: 0.7921569, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 683369b848f947b6a450d6d1ae3ab23f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1171,3 +1177,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92000100}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &31900003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31000092}
+  m_Enabled: 1
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
+  m_LayerOverridePriority: 0
+  m_Material: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.79566004, y: 0.49125980, z: 1}
+  m_Center: {x: 0.77380952, y: 0.56509946, z: 0}

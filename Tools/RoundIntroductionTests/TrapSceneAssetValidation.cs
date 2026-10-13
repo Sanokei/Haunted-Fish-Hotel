@@ -9,8 +9,8 @@ public static class TrapSceneAssetValidation {
  var world=UnityEngine.Object.FindFirstObjectByType<GhostPlacementWorld>();if(!world)throw new Exception("Missing scene world");
  var settings=new SerializedObject(world);
  var manager=UnityEngine.Object.FindFirstObjectByType<TrapManager>();if(!manager||manager.transform.childCount!=0)throw new Exception("Missing authored empty Trap Manager");
- var dependencies=new SerializedObject(manager);var catalog=dependencies.FindProperty("_Traps");if(catalog.arraySize!=3)throw new Exception("Trap definition catalog size");
- for(int i=0;i<3;i++)if(!catalog.GetArrayElementAtIndex(i).FindPropertyRelative("Prefab").objectReferenceValue||!catalog.GetArrayElementAtIndex(i).FindPropertyRelative("DisplayArt").objectReferenceValue)throw new Exception("Missing prefab/art reference");
+ var dependencies=new SerializedObject(manager);var catalog=dependencies.FindProperty("_Traps");if(catalog.arraySize!=4)throw new Exception("Trap definition catalog size");
+ for(int i=0;i<catalog.arraySize;i++)if(!catalog.GetArrayElementAtIndex(i).FindPropertyRelative("Prefab").objectReferenceValue||!catalog.GetArrayElementAtIndex(i).FindPropertyRelative("DisplayArt").objectReferenceValue)throw new Exception("Missing prefab/art reference");
  if(!dependencies.FindProperty("_World").objectReferenceValue||!dependencies.FindProperty("_GhostControls").objectReferenceValue||!dependencies.FindProperty("_PackagePrefab").objectReferenceValue)throw new Exception("Missing manager dependency");
  if(UnityEngine.Object.FindObjectsByType<GhostTrap>(FindObjectsInactive.Include,FindObjectsSortMode.None).Length!=0)throw new Exception("Unexpected preplaced traps");
  if(!settings.FindProperty("_TrapContainer").objectReferenceValue)throw new Exception("Missing trap group");

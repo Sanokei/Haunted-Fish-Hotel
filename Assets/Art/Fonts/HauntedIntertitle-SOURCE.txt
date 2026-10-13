@@ -1,0 +1,29 @@
+Haunted Intertitle Regular, version 1.000
+Original project-authored font asset, created 2026-10-13 for Haunted Fish Hotel.
+
+Design source: the user's approved generated silent-film title-card reference.
+Tall narrow serif proportions, tapered stems, diagonal e crossbar, irregular
+bracketed serifs and selected curled terminals were developed into a coherent
+original alphabet. The reference is inspiration, not a traced/extracted font.
+
+Editable and reproducible geometry:
+Tools/IntertitleFont/build_font.py
+Rebuild instructions and proof documentation:
+Tools/IntertitleFont/README.md
+
+No third-party font outlines were read, copied, transformed or renamed. The
+existing Smythe and Modak files are not inputs to this font. FontTools builds
+the TrueType tables; skia-pathops unions the authored geometric outlines.
+
+No fabricated human designer, copyright holder, or third-party font license is
+asserted. This is a newly authored project asset; the project owner may choose
+its distribution terms. Existing third-party font licenses apply only to their
+respective existing font assets, not this font.
+
+115 Unicode mappings / 116 glyphs; 67 kerning pairs in kern and GPOS.
+UPM 1000; cap height 760; x-height 520; ascent 850; descent -250; line gap 40.
+The full current Fish and Ghost tutorial captions are covered.
+
+Proof images are actual FreeType/Pillow renders from the checked-in TTF.
+The comparison proof includes an approved image crop solely for visual review.
+No native Unity runtime validation is claimed by these font-generation checks.
