@@ -16,11 +16,8 @@ namespace HauntedFish.Multiplayer
         [SerializeField] Text _Title, _Caption, _PlayerLabel;
         [SerializeField] TextAsset _RoundInk;
         [SerializeField] StoryUI _AtticPrefab;
-        [SerializeField] Vector2 _ReturnPosition = Vector2.zero;
-        readonly List<Image> _Streaks = new List<Image>();
         RoundHowToPage _HowTo;
         AtticTransitionAssets _Assets;
-        [SerializeField, Min(0)] float _HallwayLookSeconds = GameplayPresentationPolicy.DefaultHallwayLookSeconds;
         readonly HallwayFishStaging<HallwayFishVisual> _HallwayFish = new HallwayFishStaging<HallwayFishVisual>();
         RectTransform _HallwayFishRoot;
         float _HallwayFishStarted;
@@ -161,43 +158,8 @@ namespace HauntedFish.Multiplayer
         void CloseAttic()
         {
             EndHallwayFish();
-            _Streaks.Clear();
             if (_Attic) { _Attic.Close(); Destroy(_Attic.gameObject); _Attic = null; }
             _AtticCanvas = null;
-        }
-        IEnumerator Descend(StorySequenceStep step)
-        {
-            // The authored ghost and hotel artwork share the hotel's moving RectTransform.
-            var ghost = _Attic.Find("ghost");
-            var hotel = ghost ? ghost.parent as RectTransform : null;
-            if (!hotel) throw new InvalidOperationException("The attic ghost must belong to the authored hotel stack.");
-            var startPosition = hotel.anchoredPosition;
-            if (!_Assets || !_Assets.StreakRoot || _Assets.Streaks == null) throw new InvalidOperationException("Bind authored upward streaks.");
-            var effects = _Assets.StreakRoot;
-            effects.gameObject.SetActive(true);
-            _Streaks.Clear();
-            _Streaks.AddRange(_Assets.Streaks);
-            float elapsed = 0;
-            while (elapsed < step.Seconds)
-            {
-                float t = step.Seconds > 0 ? Mathf.Clamp01(elapsed / step.Seconds) : 1;
-                // Ease in, with maximum speed at the cut. Never ease out or hold the bottom pose.
-                hotel.anchoredPosition = Vector2.LerpUnclamped(startPosition, _ReturnPosition, GameplayPresentationPolicy.DescentProgress(elapsed, step.Seconds, step.X));
-                var size = effects.rect.size;
-                for (int i = 0; i < _Streaks.Count; i++)
-                {
-                    var streak = _Streaks[i];
-                    float phase = Mathf.Repeat(i * .381966f + t * 1.7f, 1);
-                    streak.rectTransform.anchoredPosition = new Vector2((i * .618034f % 1 - .5f) * size.x, (phase - .5f) * (size.y + 440));
-                    streak.rectTransform.sizeDelta = new Vector2(2 + i % 3, (80 + i % 5 * 35) * (.4f + t));
-                    var color = HotelPalette.Light; color.a = .08f + t * .2f;
-                    streak.color = color;
-                }
-                elapsed += Time.unscaledDeltaTime;
-                yield return null;
-            }
-            // Remove the transition on the same update that completes the accelerating travel.
-            CloseAttic();
         }
         StoryUI _Attic;
         Canvas _WheelCanvas, _AtticCanvas;
@@ -254,9 +216,8 @@ namespace HauntedFish.Multiplayer
             {
                 float seconds = step.Target == "wheel_spin" ? step.Seconds : step.Seconds * timingScale;
                 steps.Add(new StorySequenceStep(step.Kind, step.Target, step.Variant, seconds,
-                    step.X, step.Y, step.Count, step.Visible, step.Parent));
+                    step.X, step.Y, step.Count, step.Visible, step.Parent, step.Easing));
                 totalSeconds += seconds * (step.Kind == StorySequenceStepKind.Knock ? step.Count : 1);
-                if (step.Target == "hotel_bottom" && step.Kind == StorySequenceStepKind.DollyTo) break;
             }
             if (totalSeconds < GameRoundGate.MinimumDuration)
                 throw new InvalidOperationException("Round sequence must meet the server's minimum presentation duration.");
@@ -308,18 +269,13 @@ namespace HauntedFish.Multiplayer
                     _Attic.Prepare();
                     AddHallwayFish(roster);
                     _Root.SetActive(false);
-                    float hallwayLook = GameplayPresentationPolicy.Finite(_HallwayLookSeconds) ? Mathf.Max(0, _HallwayLookSeconds) : GameplayPresentationPolicy.DefaultHallwayLookSeconds;
-                    if (hallwayLook > 0) yield return new WaitForSecondsRealtime(hallwayLook);
-                }
-                else if (_Attic && step.Target == "hotel_bottom" && step.Kind == StorySequenceStepKind.DollyTo)
-                {
-                    yield return Descend(step);
-                    break;
                 }
                 else if (_Attic) yield return _Attic.Play(step);
                 else if (step.Kind == StorySequenceStepKind.Wait) yield return new WaitForSecondsRealtime(step.Seconds);
                 else throw new InvalidOperationException("Unbound round operation: " + step.Target);
             }
+            // Only the complete authored sequence can acknowledge the client intro.
+            CloseAttic();
             var assets = _AtticPrefab.GetComponent<AtticTransitionAssets>();
             var howToPrefab = assets ? (local == ghost ? assets.GhostHowToPrefab : assets.FishHowToPrefab) : null;
             if (!howToPrefab) throw new InvalidOperationException("Bind both authored role how-to pages.");

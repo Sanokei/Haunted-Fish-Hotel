@@ -119,3 +119,5 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
 .env
+
+!Tools/RoundIntroductionTests/RoundIntroductionTests.csproj

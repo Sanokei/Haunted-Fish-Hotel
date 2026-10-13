@@ -6,6 +6,7 @@ namespace HauntedFish.Multiplayer
     {
         public bool Showing { get; private set; }
         public bool GhostPage { get; private set; }
+        public bool Submitted { get; private set; }
         float _Elapsed;
         public float ReadSeconds => _Elapsed;
         Action _Finished;
@@ -20,8 +21,9 @@ namespace HauntedFish.Multiplayer
             _Elapsed += delta;
             minimum = GameplayPresentationPolicy.Finite(minimum) ? Math.Max(0, minimum) : 1.5f;
             if (!skip || _Elapsed < minimum) return false;
-            var finished = _Finished; Cancel(); finished?.Invoke(); return true;
+            var finished = _Finished;
+            Cancel(); Submitted = true; finished?.Invoke(); return true;
         }
-        public void Cancel() { Showing = false; _Elapsed = 0; _Finished = null; }
+        public void Cancel() { Showing = false; Submitted = false; _Elapsed = 0; _Finished = null; }
     }
 }

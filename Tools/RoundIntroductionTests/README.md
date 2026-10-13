@@ -1,3 +1,7 @@
+# Current hallway-pan extension (2026-10-13)
+
+The new end-door shot and horizontal return are described and tested in `Tools/HallwayPanTests/README.md`. The restored `RoundIntroductionTests.csproj` and `run-mono.sh` run the current Ink/gate checks; `--compile-round` updates only the round Ink JSON. Current playback/restore tests, serialized checks and real engine-assembly compilation passed. Native Unity execution/GPU rendering and live two-client readiness for this revision remain unverified because native launch is blocked by the established EPERM restriction. The older Unity fixtures and evidence below are historical and are not a pass for the new camera path. Use the new read-only native editor validation menu and the current actual Game flow for the pending native check.
+
 # Round introduction validation
 
 `dotnet run --project Tools/RoundIntroductionTests -- --compile` compiles `Assets/Dialogue/GhostRoundIntroduction.ink` and checks operation order, every wheel landing for roster sizes 1–64, round barrier replay/stale/duplicate/disconnect behavior, and the live random-selection call.

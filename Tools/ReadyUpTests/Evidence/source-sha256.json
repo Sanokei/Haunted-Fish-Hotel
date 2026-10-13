@@ -1,0 +1,18 @@
+{
+  "Assets/Resources/FishRoundHowTo.prefab": "8ad0a12b52373728cb27a2e5536e873118bb9007257dc21a206261abf312de06",
+  "Assets/Resources/GhostRoundHowTo.prefab": "6057a459d6bee7feb9bb4634bb6390c39ba5499ae169cfc8e3b28e963ce568e6",
+  "Assets/Scripts/Multiplayer/RoundHowToPage.cs": "c4bac13ec64d2ce12e97f3e247c2defdbc489bd5dc8042175ee101edf5fca9a1",
+  "Assets/Scripts/Multiplayer/RoundHowToGate.cs": "84e312365699aa86fe6ba989d9c07d57e7b1b154461a3c21c89a7ea0a3572c3d",
+  "Assets/Scripts/Multiplayer/RoundHowToState.cs": "689f5174b5407d65d02abb5b17b455ca62b1ce680d931f099a6687a623d5330a",
+  "Assets/Scripts/Multiplayer/RoundHowToSafeArea.cs": "1933d6b147cf38985507f10928a5e90f38ffcf8c54f2ed668789cb774296bcb4",
+  "Assets/Editor/GameIntroPrefabValidationTask.cs": "91403ee92cd01f857adf438804b33fae95a85c9471c5bc4673b389eab1d93540",
+  "Assets/Editor/GameTutorialPlaybackBatch.cs": "4aca718651e1efb6761c9ed60d580fe77dec99b8c127dee9fa18e0ba35ccaf8c",
+  "Tools/RoundIntroductionTests/ReadyUpChecks.cs": "0feea8010c2cb715ca36a6d469ba0806fccceee3f558b31f8324b32c36e696d1",
+  "Tools/ReadyUpTests/CheckUnityApi.sh": "edf7a3a58c568ba1805e16dde0ff80e662cf61396c8ba6c9eb347e1b0a3955d8",
+  "Tools/ReadyUpTests/PageAdapterTests.cs": "a767a6e1eec96f96d3fac9ec37635d009fbc297a0671db0102f53267d4ac35aa",
+  "Tools/ReadyUpTests/README.md": "1b543048933c874e501a6f68e231bf0078bc39c376077b522ec494ee553a059a",
+  "Tools/ReadyUpTests/RunMono.sh": "335b4032db1c9690f5854443e6e5dd0f8b71cc8247706f03b754a789e58b9cca",
+  "Tools/ReadyUpTests/SafeAreaTests.cs": "1d92bd5b92f65650a3397a162e5163915c046b7590216318d8e20bde1b9cac32",
+  "Tools/ReadyUpTests/render_source_previews.py": "9bb113ead9101e842ee9e8a5f464e0223eb6955770454da3d13e275b7fee74fc",
+  "Tools/ReadyUpTests/verify_layout.py": "861397d7f9bf924a8e675d970158fff79979e8362dd40fd312d87c3bdcb544d4"
+}

@@ -6,7 +6,6 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Video;
 using HauntedFish.Multiplayer;
 public static class GameIntroPrefabValidationTask
 {
@@ -45,17 +44,15 @@ public static class GameIntroPrefabValidationTask
             Require(assets.FishPrefab.GetComponentsInChildren<HotelPlayer>(true).Length==0 &&
                 assets.FishPrefab.GetComponentsInChildren<Mirage.NetworkIdentity>(true).Length==0,"Visual prefab contains duplicated network actor");
             Require(assets.FishHowToPrefab && assets.GhostHowToPrefab && assets.FishHowToPrefab!=assets.GhostHowToPrefab,"Role pages must be distinct authored prefabs");
-            bool clips=true;
             foreach(var page in new[]{assets.FishHowToPrefab,assets.GhostHowToPrefab})
             {
-                var fields=new SerializedObject(page);
-                Require(fields.FindProperty("_Continue").objectReferenceValue && fields.FindProperty("_Status").objectReferenceValue &&
-                    fields.FindProperty("_Canvas").objectReferenceValue && fields.FindProperty("_MissingRecording").objectReferenceValue,"Native ready/page bindings missing");
-                var video=page.GetComponent<VideoPlayer>(); var raw=page.GetComponentInChildren<RawImage>(true);
-                Require(video && raw && video.renderMode==VideoRenderMode.RenderTexture && video.targetTexture && raw.texture==video.targetTexture &&
-                    video.targetTexture.width==640 && video.targetTexture.height==360,"Native video box/target configuration invalid");
-                Require(!video.playOnAwake && video.isLooping,"Native video playback should start only when page begins and loop");
-                clips &= video.clip;
+                Require(page.ValidateAuthoredBindings(out string pageError), pageError);
+                Require(page.GetComponentsInChildren<Canvas>(true).Length == 1 &&
+                    page.GetComponentsInChildren<Button>(true).Length == 1, "Ready guide must be one authored page with one Ready action");
+                Require(page.GetComponentsInChildren<Text>(true).All(text => text.font && !string.IsNullOrWhiteSpace(text.text)),
+                    "Every authored guide field needs a real imported font and visible content");
+                Require(!page.GetComponent<UnityEngine.Video.VideoPlayer>() && !page.GetComponentInChildren<RawImage>(true),
+                    "Ready guide must not contain a cinema/video replacement");
             }
             var grace=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/GraceCountdown.prefab").GetComponent<GraceCountdownPresentation>();
             Require(grace && grace.Digit && grace.Digit.font && grace.Digit.font.name.Contains("Modak") && grace.Digit.fontSize==160 &&
@@ -66,7 +63,7 @@ public static class GameIntroPrefabValidationTask
             Require(lightning && lightning.ValidateAuthoredBindings(out _),"Shared native Game ValidateAuthoredBindings rejected serialized window passes/flash");
             var audio=storm.GetComponentInChildren<LobbyStormAudio>(true);
             Require(audio && new SerializedObject(audio).FindProperty("_Lightning").objectReferenceValue==lightning,"Native Game audio does not share the single lightning owner");
-            File.WriteAllText(Evidence+"/result.txt","PASS native asset import, serialized intro prefabs and shared Game storm ValidateAuthoredBindings; NO runtime/render/network pass. Genuine clips="+clips);
+            File.WriteAllText(Evidence+"/result.txt","PASS native asset import, serialized intro prefabs and shared Game storm ValidateAuthoredBindings; NO runtime/render/network pass. Single-page role guides validated.");
         }
         catch(Exception error) { File.WriteAllText(Evidence+"/result.txt","FAIL native prefab asset validation\n"+error); }
     }
