@@ -20,9 +20,9 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.24, g: 0.21, b: 0.29, a: 1}
+  m_AmbientEquatorColor: {r: 0.13, g: 0.10, b: 0.18, a: 1}
+  m_AmbientGroundColor: {r: 0.065, g: 0.05, b: 0.085, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
@@ -669,11 +669,20 @@ MonoBehaviour:
   _Focus: {fileID: 88821084}
   _GhostFraming: {fileID: 718528142}
   _DefenseFraming: {fileID: 2144419099}
-  _AuthoredFrameMarkers: []
+  _AuthoredFrameMarkers:
+  - {fileID: 910001001}
+  - {fileID: 910001002}
+  - {fileID: 910001003}
+  - {fileID: 910001004}
+  _FishViewFrameMarkers:
+  - {fileID: 910001005}
+  - {fileID: 910001006}
+  - {fileID: 910001007}
+  - {fileID: 910001008}
   _Characters: {fileID: 1956561986}
   _StormShadows: {fileID: 570031380}
   _Storm: {fileID: 2974563970311246823}
-  _FrameSize: {x: 7.3, y: 0.7, z: 11.6}
+  _FrameSize: {x: 7.3, y: 1.5, z: 12.65}
   _FrameCentreY: -0.05
   _SpectatorFrameSize: {x: 9, y: 6, z: 15.6}
   _SpectatorFrameCentreY: 1.6
@@ -1585,9 +1594,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 0.8, g: 0.12, b: 0.48, a: 1}
-  m_Intensity: 2
-  m_Range: 12
+  m_Color: {r: 0.56, g: 0.24, b: 0.68, a: 1}
+  m_Intensity: 18
+  m_Range: 13
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -2837,7 +2846,7 @@ GameObject:
   - component: {fileID: 672667458}
   - component: {fileID: 672667459}
   m_Layer: 0
-  m_Name: Authored green felt wash
+  m_Name: Authored cream table key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2852,7 +2861,7 @@ Transform:
   m_GameObject: {fileID: 672667457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 996.5, y: 5, z: -3}
+  m_LocalPosition: {x: 996.5, y: 7.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2868,19 +2877,19 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 0.25, g: 1, b: 0.45, a: 1}
-  m_Intensity: 2
-  m_Range: 12
+  m_Color: {r: 1, g: 0.91, b: 0.77, a: 1}
+  m_Intensity: 65
+  m_Range: 21
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_CustomResolution: 1024
+    m_Strength: 0.82
+    m_Bias: 0.025
+    m_NormalBias: 0.12
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -3041,7 +3050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3082759761523437680, guid: 3caeee79542de29448b695afa166c1ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.24543071
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3258082643472163728, guid: 3caeee79542de29448b695afa166c1ea, type: 3}
       propertyPath: m_Color.b
@@ -3418,6 +3427,10 @@ PrefabInstance:
     - target: {fileID: 9218345404427735556, guid: 3caeee79542de29448b695afa166c1ea, type: 3}
       propertyPath: m_Color.r
       value: 0.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082759761523437680, guid: 3caeee79542de29448b695afa166c1ea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8653782772486169695, guid: 3caeee79542de29448b695afa166c1ea, type: 3}
@@ -8754,6 +8767,9 @@ MonoBehaviour:
   _Audio: {fileID: 5191058871690246451}
   _LightningRoot: {fileID: 8769703081729458453}
   _AudioRoot: {fileID: 5191058871690246446}
+  _StageLights:
+  - {fileID: 672667457}
+  - {fileID: 291859801}
 --- !u!4 &3004049775079578832
 Transform:
   m_ObjectHideFlags: 0
@@ -9370,6 +9386,46 @@ MonoBehaviour:
   fontStyle: 1
   alignment: 4
   textDropShadow: 0
+--- !u!4 &910001001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001001, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &910001002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001011, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &910001003 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001021, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &910001004 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001031, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &910001005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001041, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &910001006 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001051, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &910001007 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001061, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &910001008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001071, guid: b701a8261dd1460479dad64fe7cdec7d, type: 3}
+  m_PrefabInstance: {fileID: 88821078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -15,14 +15,14 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.16, g: 0.17, b: 0.125, a: 1}
+  m_FogColor: {r: 0.22, g: 0.2, b: 0.16, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
-  m_LinearFogStart: 6
-  m_LinearFogEnd: 26
-  m_AmbientSkyColor: {r: 0.19, g: 0.2, b: 0.16, a: 1}
-  m_AmbientEquatorColor: {r: 0.14, g: 0.135, b: 0.1, a: 1}
-  m_AmbientGroundColor: {r: 0.065, g: 0.062, b: 0.048, a: 1}
+  m_LinearFogStart: 8
+  m_LinearFogEnd: 34
+  m_AmbientSkyColor: {r: 0.27, g: 0.245, b: 0.2, a: 1}
+  m_AmbientEquatorColor: {r: 0.205, g: 0.17, b: 0.125, a: 1}
+  m_AmbientGroundColor: {r: 0.12, g: 0.09, b: 0.065, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
@@ -3825,8 +3825,8 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 1, g: 0.78, b: 0.5, a: 1}
-  m_Intensity: 3
-  m_Range: 6
+  m_Intensity: 4
+  m_Range: 7
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -4270,8 +4270,8 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.75, g: 0.78, b: 0.6, a: 1}
-  m_Intensity: 1.4
-  m_Range: 3.4
+  m_Intensity: 2
+  m_Range: 4.25
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -4435,8 +4435,8 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.88, g: 0.8, b: 0.57, a: 1}
-  m_Intensity: 1.5
-  m_Range: 3.3
+  m_Intensity: 2.25
+  m_Range: 4.25
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -4892,9 +4892,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 0.78, g: 0.84, b: 0.66, a: 1}
-  m_Intensity: 2.4
-  m_Range: 10
+  m_Color: {r: 0.88, g: 0.81, b: 0.66, a: 1}
+  m_Intensity: 3.5
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -5639,6 +5639,10 @@ PrefabInstance:
     - target: {fileID: 5854951871566511272, guid: 9dd4686b28cec38429bcb4862e7e4074, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903414283844030693, guid: 9dd4686b28cec38429bcb4862e7e4074, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5903414283844030693, guid: 9dd4686b28cec38429bcb4862e7e4074, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -6812,8 +6816,8 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 1, g: 0.52, b: 0.22, a: 1}
-  m_Intensity: 14
-  m_Range: 11
+  m_Intensity: 22
+  m_Range: 13
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -8970,8 +8974,8 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 1, g: 0.72, b: 0.4, a: 1}
-  m_Intensity: 7
-  m_Range: 18
+  m_Intensity: 12
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -9200,8 +9204,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 0.7, g: 0.78, b: 0.59, a: 1}
-  m_Intensity: 1.5
+  m_Color: {r: 0.82, g: 0.77, b: 0.66, a: 1}
+  m_Intensity: 2.75
   m_Range: 19
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -10047,8 +10051,8 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 1, g: 0.77, b: 0.47, a: 1}
-  m_Intensity: 6.5
-  m_Range: 9
+  m_Intensity: 9.5
+  m_Range: 11
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -10504,9 +10508,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 0.85, g: 0.76, b: 0.57, a: 1}
-  m_Intensity: 2.5
-  m_Range: 6
+  m_Color: {r: 0.9, g: 0.79, b: 0.6, a: 1}
+  m_Intensity: 3.5
+  m_Range: 7
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -10983,9 +10987,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 0.68, g: 0.75, b: 0.61, a: 1}
-  m_Intensity: 2
-  m_Range: 7
+  m_Color: {r: 0.82, g: 0.78, b: 0.67, a: 1}
+  m_Intensity: 3
+  m_Range: 9
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -13240,6 +13244,19 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 9071942031802659171, guid: 6ac622f9aadb8a54ab5a5fe9bf10786e, type: 3}
   m_PrefabInstance: {fileID: 8965143804690368446}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8100131000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 59ab5dafcb904ca4966fc31295d3fcc6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13284,3 +13301,4 @@ SceneRoots:
   - {fileID: 1258015885}
   - {fileID: 474759005}
   - {fileID: 1994546682}
+  - {fileID: 8100131000}

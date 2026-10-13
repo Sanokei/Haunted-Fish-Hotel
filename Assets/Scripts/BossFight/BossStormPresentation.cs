@@ -8,8 +8,18 @@ namespace HauntedFish.BossFight
         [SerializeField] LightningEffectManager _Lightning;
         [SerializeField] LobbyStormAudio _Audio;
         [SerializeField] GameObject _LightningRoot,_AudioRoot;
+        [SerializeField] GameObject[] _StageLights;
         readonly List<LightningEffectManager> _SuspendedGameLights=new List<LightningEffectManager>();
         bool _Watching;
+        void Awake() => SetStageLights(false);
+        void SetStageLights(bool active)
+        {
+            if (_StageLights == null) return;
+            foreach (var light in _StageLights)
+            {
+                if (light) light.SetActive(active);
+            }
+        }
         public void SetWatching(bool watching)
         {
             if(!Application.isPlaying||_Watching==watching)return;
@@ -21,6 +31,7 @@ namespace HauntedFish.BossFight
                 {Debug.LogError("Boss attic storm binding validation failed: "+error,this);return;}
             }
             _Watching=watching;
+            SetStageLights(watching);
             if(watching)
             {
                 _SuspendedGameLights.Clear();
@@ -40,6 +51,10 @@ namespace HauntedFish.BossFight
                 _SuspendedGameLights.Clear();
             }
         }
-        void OnDisable(){if(_Watching)SetWatching(false);}
+        void OnDisable()
+        {
+            if (_Watching) SetWatching(false);
+            SetStageLights(false);
+        }
     }
 }

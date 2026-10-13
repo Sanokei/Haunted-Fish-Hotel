@@ -9,6 +9,7 @@ namespace HauntedFish.BossFight
         [SerializeField] BossSegmentedRig _GhostFraming;
         [SerializeField] Transform _DefenseFraming;
         [SerializeField] Transform[] _AuthoredFrameMarkers;
+        [SerializeField] Transform[] _FishViewFrameMarkers;
         [SerializeField] BossCharacterPresentation _Characters;
         [SerializeField] BossOpponentShadow _StormShadows;
         [SerializeField] BossStormPresentation _Storm;
@@ -47,13 +48,33 @@ namespace HauntedFish.BossFight
             {
                 // Fixed authored opaque-art/tray boundary markers. Preview objects and transparent sprite
                 // canvas bounds cannot pull the camera backward while the player drags defenses.
-                if(_AuthoredFrameMarkers!=null)foreach(var marker in _AuthoredFrameMarkers)
+                FitMarkers(camera, _AuthoredFrameMarkers, ref distance);
+                // The local ghost is hidden in its own view. Only its opponent and spectators
+                // reserve the raised silhouette's envelope, including the authored arm motion.
+                if (_Side != BossViewerSide.Ghost)
                 {
-                    if(!marker)continue;var p=marker.position-_Focus.position;
-                    if(BossPerspectiveFraming.ProjectedPointDistance(Vector3.Dot(p,camera.transform.right),Vector3.Dot(p,camera.transform.up),Vector3.Dot(p,camera.transform.forward),camera.fieldOfView,camera.aspect,camera.nearClipPlane,out float framedDistance))distance=Mathf.Max(distance,framedDistance);
+                    FitMarkers(camera, _FishViewFrameMarkers, ref distance);
                 }
                 camera.transform.position=_Focus.position-camera.transform.forward*distance;
                 camera.farClipPlane=Mathf.Max(100,distance+size.magnitude+5);
+            }
+        }
+        void FitMarkers(Camera camera, Transform[] markers, ref float distance)
+        {
+            if (markers == null) return;
+            foreach (var marker in markers)
+            {
+                if (!marker) continue;
+                var point = marker.position - _Focus.position;
+                if (BossPerspectiveFraming.ProjectedPointDistance(
+                    Vector3.Dot(point, camera.transform.right),
+                    Vector3.Dot(point, camera.transform.up),
+                    Vector3.Dot(point, camera.transform.forward),
+                    camera.fieldOfView, camera.aspect, camera.nearClipPlane,
+                    out float framedDistance))
+                {
+                    distance = Mathf.Max(distance, framedDistance);
+                }
             }
         }
     }
