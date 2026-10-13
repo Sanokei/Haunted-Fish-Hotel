@@ -1541,6 +1541,8 @@ MonoBehaviour:
   AdaptLegacyLayout: 0
   Follow: {fileID: 0}
   FaceCamera: 1
+  _BubbleVoice: {fileID: 8300000, guid: 825e95b276574b44a6ad6dbc6edf362a, type: 3}
+  LettersPerSecond: 32
 --- !u!1 &23000077
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,6 +3248,8 @@ MonoBehaviour:
   AdaptLegacyLayout: 0
   Follow: {fileID: 0}
   FaceCamera: 1
+  _BubbleVoice: {fileID: 8300000, guid: 825e95b276574b44a6ad6dbc6edf362a, type: 3}
+  LettersPerSecond: 32
 --- !u!1 &23000142
 GameObject:
   m_ObjectHideFlags: 0

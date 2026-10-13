@@ -1,0 +1,10 @@
+gravity=25.0 jump=10.6654 free_apex=2.275 airtime=0.853s discrete_apex=2.0995..2.2307 min_run_launch_window=0.000m (0.000s) max_window=0.130m normal_walk_cases=0/12
+gravity=20.0 jump= 9.5394 free_apex=2.275 airtime=0.954s discrete_apex=2.1184..2.2354 min_run_launch_window=0.000m (0.000s) max_window=0.510m normal_walk_cases=0/12
+gravity=16.0 jump= 8.5323 free_apex=2.275 airtime=1.067s discrete_apex=2.1328..2.2395 min_run_launch_window=0.000m (0.000s) max_window=0.940m normal_walk_cases=0/12
+gravity=12.0 jump= 7.3892 free_apex=2.275 airtime=1.232s discrete_apex=2.1535..2.2443 min_run_launch_window=0.000m (0.000s) max_window=1.110m normal_walk_cases=0/12
+gravity=10.0 jump= 6.7454 free_apex=2.275 airtime=1.349s discrete_apex=2.1636..2.2469 min_run_launch_window=0.000m (0.000s) max_window=1.170m normal_walk_cases=0/12
+gravity= 8.0 jump= 6.0332 free_apex=2.275 airtime=1.508s discrete_apex=2.1755..2.2499 min_run_launch_window=0.000m (0.000s) max_window=1.250m normal_walk_cases=0/12
+gravity= 6.0 jump= 5.2249 free_apex=2.275 airtime=1.742s discrete_apex=2.1883..2.2533 min_run_launch_window=0.000m (0.000s) max_window=1.360m normal_walk_cases=0/12
+gravity= 4.0 jump= 4.2661 free_apex=2.275 airtime=2.133s discrete_apex=2.2039..2.2572 min_run_launch_window=0.520m (0.116s) max_window=1.530m normal_walk_cases=0/12
+gravity= 2.5 jump= 3.3727 free_apex=2.275 airtime=2.698s discrete_apex=2.2191..2.2610 min_run_launch_window=1.520m (0.338s) max_window=1.850m normal_walk_cases=0/12
+Rounded capsule + skin Minkowski-distance simulation, four linear-motion sweep samples/frame. Not CharacterController/native acceptance.

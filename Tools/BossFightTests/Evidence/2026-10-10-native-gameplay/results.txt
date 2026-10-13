@@ -1,0 +1,2 @@
+FAIL System.Exception: Boss test timeout stage 1
+  at BossArenaValidation.Tick () [0x00016] in C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Assets\Editor\BossArenaValidation.cs:65 

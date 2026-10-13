@@ -5,6 +5,7 @@ using HauntedFish.BossFight;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
 {
@@ -17,7 +18,7 @@ namespace HauntedFish.Multiplayer
 
     // Participant-only additive arena transport. The arena owns physics/scoring;
     // persistent hotel actors retain their network identity, room, round and inventory.
-    public sealed class BossArenaCoordinator : MonoBehaviour, IHotelBossCommands
+    public sealed class BossArenaCoordinator : MonoBehaviour, IHotelBossCommands, IHotelBossDefenseCommands
     {
         [SerializeField] BoxCollider _Entrance;
         [SerializeField] Text _Prompt;
@@ -30,6 +31,8 @@ namespace HauntedFish.Multiplayer
         string _ReturnScope, _ReturnKey;
         int _ReturnVersion;
         bool _EditorPreview;
+        
+        
         AsyncOperation _LoadOperation;
         BossArenaManager _Arena;
         HotelPlayer _Fish, _Ghost, _PendingFish;
@@ -130,9 +133,13 @@ namespace HauntedFish.Multiplayer
             if (!_Arena) { Debug.LogError("Authored BossFight scene is missing its arena manager.", this); _PendingFish = null; return; }
             _AuthorityOwned = Authority;
             _Arena.SetAuthority(_AuthorityOwned);
+            if(_Arena.DragInput){_Arena.DragInput.DefenseMoveRequested-=OnDefenseMove;_Arena.DragInput.DefenseMoveRequested+=OnDefenseMove;}
             _Arena.Completed += Completed;
             _Arena.SnapshotChanged += Publish;
             if (_PendingFish) BeginPending();
+#if UNITY_EDITOR
+            // No player-facing editor preview fallback.
+#endif
         }
         void BeginPending()
         {
@@ -144,6 +151,10 @@ namespace HauntedFish.Multiplayer
             fish.BossReturnPosition = fish.transform.position;
             ghost.BossReturnPosition = _World.Controls && ghost.IsRelevantPlayer ? _World.Controls.FlightPosition : ghost.GhostFlightReady ? ghost.GhostFlightPosition : ghost.transform.position;
             _ScopeKey = fish.RoundStateKey;
+#if UNITY_EDITOR
+            // A real incoming challenge takes priority over a local training preview.
+            if (_EditorPreview) { _Arena.StopEditorPractice(); _EditorPreview = false; }
+#endif
             _AuthorityOwned = true; _MovedToArena = false; _Ready.Clear();
             _Arena.SetAuthority(true);
             if (!_Arena.TryBegin(fish.NetId, ghost.NetId)) { _Fish = _Ghost = null; return; }
@@ -178,6 +189,22 @@ namespace HauntedFish.Multiplayer
                 key == _ScopeKey && epoch == _Arena.MatchEpoch && float.IsFinite(axis.x) && float.IsFinite(axis.y) &&
                 _Arena.ApplyInput(player.NetId, Vector2.ClampMagnitude(axis, 1));
         }
+        void OnDefenseMove(int slot,uint sequence,Vector2 target)
+        {
+            var player=HotelPlayer.LocalPlayer;if(!player||!_Arena||!_Arena.Defenses||!player.ControlsReady||player.InputBlocked)return;
+#if UNITY_EDITOR
+            if(_EditorPreview&&_Arena.EditorPracticing){if(!_Arena.Defenses.Place(1,_Arena.Defenses.Epoch,slot,sequence,target))_Arena.DragInput.Reply(slot,sequence,_Arena.Defenses.Epoch,false);return;}
+#endif
+            if(!player.InBossFight)return;var request=player.GetComponent<BossDefenseRequest>();if(request)request.Submit(slot,sequence,target,player.RoundStateKey,player.RoundVersion,_Arena.MatchEpoch);
+        }
+        public bool AcceptDefense(HotelPlayer player,int slot,uint sequence,Vector2 target,string key,int version,uint epoch)
+        {
+            return _AuthorityOwned&&Authority&&_Arena&&_Arena.Defenses&&_Arena.Active&&_Arena.ParticipantsReady&&!_Arena.Serving&&player&&player.ControlsReady&&player.InBossFight&&(!player.Networked||player.IsServer)&&_Fish&&
+                (player==_Fish||player==_Ghost)&&player.InventoryScope==_Fish.InventoryScope&&player.RoundStateKey==key&&player.RoundVersion==version&&key==_ScopeKey&&epoch==_Arena.MatchEpoch&&player.BossMatchEpoch==epoch&&
+                float.IsFinite(target.x)&&float.IsFinite(target.y)&&_Arena.Defenses.Place(player.NetId,epoch,slot,sequence,target);
+        }
+        public void DefenseReply(HotelPlayer player,int slot,uint sequence,uint epoch,bool accepted)
+        {if(player&&player==HotelPlayer.LocalPlayer&&_Arena&&_Arena.DragInput)_Arena.DragInput.Reply(slot,sequence,epoch,accepted);}
         void Publish(string state)
         {
             if (!Authority || !_Fish) return;
@@ -238,27 +265,15 @@ namespace HauntedFish.Multiplayer
             TickReturnGate();
         }
 #if UNITY_EDITOR
+        // Editor shortcut enters the same scoped real match; no automatic solo preview or training fight.
         public void EditorGoToBoss()
         {
-            WatchPlayers(); TickReturnGate();
-            var local = HotelPlayer.LocalPlayer;
-            if (!local || !local.RoundReleased || local.BossReturnLocked) return;
-            if (_EditorPreview)
-            {
-                _EditorPreview = false; local.BossWatching = false; local.ResetSceneMotion(); SetCamera(0); return;
-            }
-            if (_Arena && _Arena.Active) return;
-            if (local.ControlMode == HotelControlMode.Fish && FindPlayer(local.GhostId) && FindPlayer(local.GhostId) != local)
-            {
-                var old = local.transform.position;
-                local.Teleport(_Entrance.bounds.center - local.BodyController.center);
-                if (TryEnter(local, local.RoundStateKey, local.RoundVersion)) return;
-                local.Teleport(old);
-            }
-            // A development preview never manufactures a ghost or a scored match.
-            // A normal two-player challenge still uses the production entrance/RPC.
-            _EditorPreview = true; local.BossWatching = true; local.ResetSceneMotion();
-            if (!_Arena && !_Loading) StartCoroutine(LoadArena());
+            WatchPlayers();TickReturnGate();var local=HotelPlayer.LocalPlayer;
+            if(!local||!local.RoundReleased||local.BossReturnLocked||local.ControlMode!=HotelControlMode.Fish||_Arena&&_Arena.Active)return;
+            var ghost=FindPlayer(local.GhostId);
+            if(!ghost||ghost==local){var session=FindFirstObjectByType<HauntedHotelMultiplayer>();if(session)session.SetStatus("The ghost challenge requires both contestants in this round.");return;}
+            var previous=local.transform.position;local.Teleport(_Entrance.bounds.center-local.BodyController.center);
+            if(!TryEnter(local,local.RoundStateKey,local.RoundVersion))local.Teleport(previous);
         }
 #endif
         void ReturnActor(HotelPlayer player, bool ghost)
@@ -268,11 +283,11 @@ namespace HauntedFish.Multiplayer
             player.Teleport(player.BossReturnPosition);
             if (ghost && _World) _World.RestoreFlight(player, player.BossReturnPosition);
         }
-        void AttachPlayer(HotelPlayer player) => player.BindBossCommands(this);
+        void AttachPlayer(HotelPlayer player){player.BindBossCommands(this);var defense=player.GetComponent<BossDefenseRequest>();if(defense)defense.Bind(this);}
 
         void Departed(HotelPlayer player)
         {
-            player.UnbindBossCommands(this);
+            player.UnbindBossCommands(this);var defense=player.GetComponent<BossDefenseRequest>();if(defense)defense.Unbind(this);
             if (_PendingFish == player) _PendingFish = null;
             _Watchers.Remove(player);
             if (_Arena && _AuthorityOwned && _Arena.Active) _Arena.Cancel(player.NetId);
@@ -281,7 +296,13 @@ namespace HauntedFish.Multiplayer
         {
             WatchPlayers(); TickReturnGate();
             var local = HotelPlayer.LocalPlayer;
-            if (!local || !local.ControlsReady) { SetCamera(0); if (_Prompt) _Prompt.gameObject.SetActive(false); return; }
+            if (!local || !local.ControlsReady)
+            {
+#if UNITY_EDITOR
+                if (_EditorPreview && _Arena) _Arena.SetEditorPracticeInput(Vector2.zero, true);
+#endif
+                if(_Arena&&_Arena.DragInput)_Arena.DragInput.Cancel();SetCamera(0); if (_Prompt) _Prompt.gameObject.SetActive(false); return;
+            }
             if (_PresentationRoundKey != local.RoundStateKey)
             {
                 _PresentationRoundKey = local.RoundStateKey;
@@ -305,10 +326,36 @@ namespace HauntedFish.Multiplayer
                 else AcceptReady(local, local.RoundStateKey, local.RoundVersion, _Arena.MatchEpoch);
             }
             SetCamera(local.BossWatching && _Arena ? (local.Networked ? local.NetId : 1u) : 0);
+            if (local.BossWatching && _Arena) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
+            Vector2 dragAxis=Vector2.zero;bool practiceDrag=false;
+#if UNITY_EDITOR
+            practiceDrag=_EditorPreview&&_Arena&&_Arena.EditorPracticing;
+#endif
+            if(_Arena&&_Arena.DragInput)
+            {
+                var mouse=Mouse.current;bool allowed=BossPaddleInputPolicy.InputAllowed(local.InputBlocked,Time.timeScale)&&(local.InBossFight||practiceDrag);
+                if(mouse!=null)dragAxis=_Arena.DragInput.Tick(practiceDrag?1:local.NetId,practiceDrag?_Arena.Defenses.Epoch:_Arena.MatchEpoch,practiceDrag,allowed,mouse.position.ReadValue(),mouse.leftButton.wasPressedThisFrame,mouse.leftButton.isPressed,mouse.leftButton.wasReleasedThisFrame,.05f);
+                else _Arena.DragInput.Cancel();
+            }
+#if UNITY_EDITOR
+            if (_EditorPreview && _Arena && _Arena.EditorPracticing)
+            {
+                bool blocked = !BossPaddleInputPolicy.InputAllowed(local.InputBlocked, Time.timeScale);
+                var keyboard = Keyboard.current;
+                var practiceAxis = Vector2.zero;
+                if (!blocked && keyboard != null)
+                    practiceAxis = new Vector2((keyboard.dKey.isPressed ? 1 : 0) - (keyboard.aKey.isPressed ? 1 : 0), (keyboard.wKey.isPressed ? 1 : 0) - (keyboard.sKey.isPressed ? 1 : 0));
+                if(_Arena.DragInput){if(_Arena.DragInput.DefenseCaptured)practiceAxis=Vector2.zero;else if(_Arena.DragInput.StrikerCaptured)practiceAxis=dragAxis;}
+                _Arena.SetEditorPracticeInput(practiceAxis, blocked);
+            }
+#endif
             if (local.InBossFight && _Arena && Time.unscaledTime >= _NextInput)
             {
                 _NextInput = Time.unscaledTime + .05f;
-                var axis = local.InputBlocked ? Vector2.zero : local.Movement.BossAxis;
+                bool blocked = !BossPaddleInputPolicy.InputAllowed(local.InputBlocked, Time.timeScale);
+                var axis = blocked ? Vector2.zero : local.Movement.BossAxis;
+                if(local.NetId==_Arena.GhostId) axis=-axis;
+                if(_Arena.DragInput){if(_Arena.DragInput.DefenseCaptured)axis=Vector2.zero;else if(_Arena.DragInput.StrikerCaptured)axis=dragAxis;}
                 if (local.Networked) local.SendBossInput(axis, local.RoundStateKey, local.RoundVersion, _Arena.MatchEpoch);
                 else AcceptInput(local, axis, local.RoundStateKey, local.RoundVersion, _Arena.MatchEpoch);
             }
@@ -323,8 +370,8 @@ namespace HauntedFish.Multiplayer
             {
                 bool result = Time.unscaledTime < _ResultUntil;
                 bool waiting = !_EditorPreview && local.BossWatching && (!_Arena || !_Arena.ParticipantsReady);
-                _Prompt.gameObject.SetActive(_EditorPreview || entrance || result || waiting || local.BossReturnSetupRemaining > 0);
-                _Prompt.text = _EditorPreview ? "Editor arena preview: two real players are required to score." : local.BossReturnSetupRemaining > 0 ? "Ghost head start: " + Mathf.CeilToInt(local.BossReturnSetupRemaining) + "s" : waiting ? "Entering the ghost challenge..." : result ? (local.BossWon ? "You won the ghost's challenge!" : "Returned to the hallway.") : "E / X: upstairs to the ghost challenge";
+                _Prompt.gameObject.SetActive(!local.BossWatching&&(entrance||result||local.BossReturnSetupRemaining>0));
+                _Prompt.text = _EditorPreview ? "EDITOR PRACTICE: drag your striker or sideline defenses; WASD also moves the striker." : local.BossReturnSetupRemaining > 0 ? "Ghost head start: " + Mathf.CeilToInt(local.BossReturnSetupRemaining) + "s" : waiting ? "Entering the ghost challenge..." : result ? (local.BossWon ? "You won the ghost's challenge!" : "Returned to the hallway.") : local.BossWatching ? (local.InBossFight ? "Drag your striker to hit the cue ball; drag sideline defenses onto your half" : "Watching the ghost challenge - participants control the paddles") : "E / X: upstairs to the ghost challenge";
             }
         }
         void SetCamera(uint localId)
@@ -354,11 +401,11 @@ namespace HauntedFish.Multiplayer
             SceneManager.sceneLoaded -= Loaded;
             HotelPlayer.PlayerEnabled -= AttachPlayer;
             HotelPlayer.PlayerDisabled -= Departed;
-            foreach (var player in HotelPlayer.ActivePlayers) player.UnbindBossCommands(this);
+            foreach (var player in HotelPlayer.ActivePlayers){player.UnbindBossCommands(this);var defense=player.GetComponent<BossDefenseRequest>();if(defense)defense.Unbind(this);}
             if (_Arena)
             {
                 if (_AuthorityOwned && _Arena.Active) _Arena.Cancel(_Arena.FishId);
-                _Arena.Completed -= Completed; _Arena.SnapshotChanged -= Publish;
+                _Arena.Completed -= Completed; _Arena.SnapshotChanged -= Publish;if(_Arena.DragInput){_Arena.DragInput.DefenseMoveRequested-=OnDefenseMove;_Arena.DragInput.Cancel();}
             }
             if (_AuthorityOwned)
             {
@@ -369,6 +416,9 @@ namespace HauntedFish.Multiplayer
             _Watchers.Clear();
             var actors = HotelPlayer.ActivePlayers;
             for (int i = 0; i < actors.Count; i++) if (SameRound(actors[i], _ReturnScope, _ReturnKey, _ReturnVersion) || _EditorPreview && actors[i] == HotelPlayer.LocalPlayer) { actors[i].BossWatching = false; actors[i].BossReturnLocked = false; actors[i].BossReturnSetupRemaining = 0; }
+#if UNITY_EDITOR
+            if (_Arena) _Arena.StopEditorPractice();
+#endif
             SetCamera(0); _PendingFish = null; _Fish = _Ghost = null; _ReturnKey = null; _ReturnDeadline = 0; _EditorPreview = false;
             StopAllCoroutines(); _Loading = false;
             if (Current == this) Current = null;

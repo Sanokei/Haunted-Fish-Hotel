@@ -21,6 +21,11 @@ namespace Monologue.Dialogue
         
         bool _isProfileIncluded = false;
         bool dialogueOpen;
+        public TMP_Text SpeechText => m_DialogueText;
+        public System.Action<string> TextChanged;
+        public System.Func<bool> RevealTyping;
+        public bool TryRevealTyping() => RevealTyping?.Invoke() ?? false;
+        public bool HasChoices => _DialogueOptions.Count > 0;
 
         public delegate void OnChoiceSelected(OptionPrefab choiceIndex);
         public static event OnChoiceSelected OnChoiceSelectedEvent;
@@ -67,6 +72,7 @@ namespace Monologue.Dialogue
             set
             {
                 m_DialogueText.text = value;
+                TextChanged?.Invoke(value);
             }
         }
 

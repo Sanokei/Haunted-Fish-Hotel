@@ -17,6 +17,8 @@ namespace HauntedFish.Multiplayer
         Sprite _Icon;
         [SerializeField]
         BoxCollider _Collider;
+        [Tooltip("Optional authored solid parts; the main collider retains the full placement footprint.")]
+        [SerializeField] BoxCollider[] _SolidParts;
         [SerializeField]
         GhostTrapAreaPresentation _Presentation;
         [SerializeField]
@@ -40,8 +42,11 @@ namespace HauntedFish.Multiplayer
         Collider[] _Overlaps = new Collider[8];
         RaycastHit[] _PushHits = new RaycastHit[8];
         readonly System.Collections.Generic.List<HotelPlayer> _PushPlayers = new System.Collections.Generic.List<HotelPlayer>(4);
+        readonly System.Collections.Generic.HashSet<HotelPlayer> _MotionContacts = new System.Collections.Generic.HashSet<HotelPlayer>();
+        public bool HadMotionContact(HotelPlayer fish) => _MotionContacts.Contains(fish);
         const float PushSeparation = .12f;
         const float ContactMargin = .01f;
+        const float MinimumMovement = .000001f;
         public GhostPlacementWorld World { get; private set; }
         public int Index { get; private set; }
         public string FamilyTag => _FamilyTag;
@@ -57,7 +62,53 @@ namespace HauntedFish.Multiplayer
         public Vector2 BackgroundSize => _BackgroundSize;
         public Vector2 BackgroundOffset => _BackgroundOffset;
         public Vector2 ObjectSize => _ObjectSize;
-        public Bounds CollisionBounds => _Collider ? _Collider.bounds : new Bounds(Position, ObjectSize);
+        public Bounds CollisionBounds {
+            get {
+                var half = BodyHalfSize; var rotation = Matrix4x4.Rotate(transform.rotation);
+                var extent = new Vector3(Mathf.Abs(rotation.m00)*half.x+Mathf.Abs(rotation.m01)*half.y+Mathf.Abs(rotation.m02)*half.z,
+                    Mathf.Abs(rotation.m10)*half.x+Mathf.Abs(rotation.m11)*half.y+Mathf.Abs(rotation.m12)*half.z,
+                    Mathf.Abs(rotation.m20)*half.x+Mathf.Abs(rotation.m21)*half.y+Mathf.Abs(rotation.m22)*half.z);
+                return new Bounds(Position + transform.rotation * ColliderOffset, extent * 2);
+            }
+        }
+        // Horizontal contact tolerance must not extend a solid upward into jump clearance.
+        public bool TouchesBody(Bounds target, float margin = 0, float sweepX = 0) {
+            if (_SolidParts == null || _SolidParts.Length == 0) {
+                var body = CollisionBounds; body.Expand(new Vector3(margin * 2, 0, margin * 2)); body.Encapsulate(new Bounds(body.center + Vector3.right * sweepX, body.size));
+                return body.Intersects(target);
+            }
+            foreach (var part in _SolidParts) {
+                if (!part || !part.enabled) continue;
+                var body = part.bounds; body.Expand(new Vector3(margin * 2, 0, margin * 2)); body.Encapsulate(new Bounds(body.center + Vector3.right * sweepX, body.size));
+                if (body.Intersects(target)) return true;
+            }
+            return false;
+        }
+        // Game fish are upright capsules. Their bounding-box corners are empty
+        // space and must not push or damage a fish whose rounded body clears a trap.
+        public bool TouchesBody(CharacterController target, float margin = 0, float sweepX = 0)
+        {
+            if (!target || !target.enabled) return false;
+            var scale = target.transform.lossyScale;
+            float radius = target.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.z));
+            float height = Mathf.Max(radius * 2, target.height * Mathf.Abs(scale.y));
+            var center = target.transform.TransformPoint(target.center);
+            float segment = height * .5f - radius;
+            if (_SolidParts == null || _SolidParts.Length == 0)
+                return CapsuleTouchesBounds(center, segment, radius, CollisionBounds, margin, sweepX);
+            foreach (var part in _SolidParts)
+                if (part && part.enabled && CapsuleTouchesBounds(center, segment, radius, part.bounds, margin, sweepX)) return true;
+            return false;
+        }
+        static bool CapsuleTouchesBounds(Vector3 center, float segment, float radius, Bounds body, float margin, float sweepX)
+        {
+            body.Expand(new Vector3(margin * 2, 0, margin * 2));
+            body.Encapsulate(new Bounds(body.center + Vector3.right * sweepX, body.size));
+            float x = Mathf.Max(body.min.x - center.x, 0, center.x - body.max.x);
+            float y = Mathf.Max(body.min.y - (center.y + segment), 0, (center.y - segment) - body.max.y);
+            float z = Mathf.Max(body.min.z - center.z, 0, center.z - body.max.z);
+            return x * x + y * y + z * z <= radius * radius;
+        }
         public Vector3 BodyHalfSize => _Collider ? Vector3.Scale(_Collider.size, transform.lossyScale) * .5f : Vector3.one * .5f;
         public Vector3 HalfExtents => BodyHalfSize * .96f;
         public TrapPhase Phase => (TrapPhase)_State.Phase;
@@ -115,7 +166,7 @@ namespace HauntedFish.Multiplayer
             var expected = _InputMode == TrapInputMode.MouseClick ? TrapInputKind.Click : TrapInputKind.Activate;
             if (input.Kind != expected || Phase != TrapPhase.Armed)
                 return false;
-            if (expected == TrapInputKind.Click && (!Finite(input.Point.x) || !Finite(input.Point.y) || !Finite(input.Point.z) || !_Collider || !_Collider.bounds.Contains(input.Point)))
+            if (expected == TrapInputKind.Click && (!Finite(input.Point.x) || !Finite(input.Point.y) || !Finite(input.Point.z) || !_Collider || !CollisionBounds.Contains(input.Point)))
                 return false;
             _State.Phase = (int)TrapPhase.Active;
             _State.Progress = 0;
@@ -127,6 +178,7 @@ namespace HauntedFish.Multiplayer
 
         public bool Simulate(float seconds, float now)
         {
+            _MotionContacts.Clear();
             if (seconds <= 0)
                 return false;
             if (_Behaviour == TrapBehaviour.Slide)
@@ -178,7 +230,7 @@ namespace HauntedFish.Multiplayer
             Physics.SyncTransforms();
             int count;
             var target = _State.Origin + ArmedOffset;
-            if (World && !World.FootprintAllowed(target + ColliderOffset, BodyHalfSize)) return false;
+            if (World && (!World.FootprintAllowed(target + ColliderOffset, BodyHalfSize) || !World.TrapFootprintClear(this, target, _State.Rotation, _State.Id))) return false;
             var rotation = Matrix4x4.Rotate(transform.rotation);
             var half = HalfExtents;
             var extent = new Vector3(Mathf.Abs(rotation.m00)*half.x+Mathf.Abs(rotation.m01)*half.y+Mathf.Abs(rotation.m02)*half.z,
@@ -195,7 +247,7 @@ namespace HauntedFish.Multiplayer
 
         bool MovePhysical(Vector3 delta, bool pushFish)
         {
-            if (delta.sqrMagnitude < .00000001f)
+            if (delta.sqrMagnitude < MinimumMovement * MinimumMovement)
                 return false;
             float distance = delta.magnitude;
             var direction = delta / distance;
@@ -226,11 +278,20 @@ namespace HauntedFish.Multiplayer
                 distance = Mathf.Min(distance, Mathf.Max(0, hit.distance - ContactMargin));
             }
 
-            if (distance <= ContactMargin)
+            // A falling solid stops just short of the body by ContactMargin.
+            // Retain that real cast contact for damage instead of requiring overlap.
+            if (!pushFish)
+                for (int i = 0; i < hitCount; i++)
+                    if (_Hits[i].collider && _Hits[i].distance <= distance + ContactMargin + .0001f)
+                    {
+                        var fish = _Hits[i].collider.GetComponentInParent<HotelPlayer>();
+                        if (fish) _MotionContacts.Add(fish);
+                    }
+            if (distance <= MinimumMovement)
                 return false;
             if (pushFish)
                 distance = PushFish(direction, distance);
-            if (distance <= ContactMargin)
+            if (distance <= MinimumMovement)
                 return false;
             _State.Position += direction * distance;
             transform.position = _State.Position;
@@ -242,7 +303,7 @@ namespace HauntedFish.Multiplayer
         {
             _PushPlayers.Clear();
             float sign = Mathf.Sign(direction.x);
-            var cartBounds = _Collider ? _Collider.bounds : new Bounds(Position, HalfExtents * 2);
+            var cartBounds = CollisionBounds;
             float back = sign > 0 ? cartBounds.min.x : -cartBounds.max.x;
             float front = (sign > 0 ? cartBounds.max.x : -cartBounds.min.x) + distance + PushSeparation;
             var players = HotelPlayer.ActivePlayers;
@@ -258,6 +319,13 @@ namespace HauntedFish.Multiplayer
                     if (!fish.ControlsReady || fish.ControlMode != HotelControlMode.Fish || !fish.Movement.SimulationReady || _PushPlayers.Contains(fish))
                         continue;
                     var bounds = fish.BodyController.bounds;
+                    bool touches = TouchesBody(fish.BodyController, PushSeparation, direction.x * distance);
+                    if (!touches) foreach (var pushed in _PushPlayers) {
+                        var chain = pushed.BodyController.bounds; chain.Expand(new Vector3(PushSeparation * 2, 0, PushSeparation * 2));
+                        chain.Encapsulate(new Bounds(chain.center + direction * distance, chain.size));
+                        if (chain.Intersects(bounds)) { touches = true; break; }
+                    }
+                    if (!touches) continue;
                     if (bounds.max.y < cartBounds.min.y || bounds.min.y > cartBounds.max.y || bounds.max.z < cartBounds.min.z || bounds.min.z > cartBounds.max.z)
                         continue;
                     float near = sign > 0 ? bounds.min.x : -bounds.max.x;
@@ -277,8 +345,12 @@ namespace HauntedFish.Multiplayer
                 distance = Mathf.Min(distance, Mathf.Max(0, allowed - PushSeparation));
             }
 
-            if (distance <= ContactMargin)
+            if (distance <= MinimumMovement)
                 return 0;
+            // Record direct swept contacts before separation moves a standing
+            // fish away. Contiguous fish pushed by another fish are not trap hits.
+            foreach (var fish in _PushPlayers)
+                if (TouchesBody(fish.BodyController, .15f, direction.x * distance)) _MotionContacts.Add(fish);
             // Move leading bodies first, so their controllers don't pin the fish
             // behind them. A small insertion sort needs no per-move comparator.
             for (int i = 1; i < _PushPlayers.Count; i++)

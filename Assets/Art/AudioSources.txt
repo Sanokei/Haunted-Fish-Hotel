@@ -1,0 +1,28 @@
+Audio sources added 2026-10-09
+
+FrontDeskClick.wav: LoafDV, Light Switch, 2014-05-21.
+https://freesound.org/people/LoafDV/sounds/238290/
+CC0. Public HQ MP3 preview. Lowered pitch, softened highs, filtered room reflections.
+
+FrontDeskDing.wav: FlashTrauma, Reception Bell, 2017-07-27.
+https://freesound.org/people/FlashTrauma/sounds/398281/
+CC0. Public HQ MP3 preview. Single bell strike, lowered pitch and filtered room reflections.
+
+FishWalk01.wav, FishWalk02.wav: Felix Blume, Underwater recording of aquatic
+movement, bubbles and drops, 2017-03-14.
+https://freesound.org/people/felix.blume/sounds/384218/
+CC0. Real hand-driven water movement recorded underwater with an Aquarian H2aXLR
+hydrophone in Brazil. Public HQ MP3 preview excerpt, mono 48 kHz PCM WAV.
+Excerpts 24.20-24.68s and 25.80-26.28s. Rumble removal, 2.2 kHz high-frequency
+softening, subtle dark diffuse reverb (0.42s tail), gain balancing and edge fades.
+Reproducible processing, original backups and peak verification: Tools/AudioMastering/.
+
+FishJump.wav, FishInteract.wav:
+Independent.nu / Johannes Pinter, 8 wet squish, slurp impacts, uploaded by qubodup, 2009-08-13.
+https://opengameart.org/content/8-wet-squish-slurp-impacts
+CC0. Original files: impactsplat04.mp3.flac, impactsplat07.mp3.flac, respectively.
+Trimmed, modestly lowered in pitch, filtered and faded for restrained wet fish movement.
+
+BubbleSpeech.wav: audio from the existing project asset Assets/Art/Video/BubbleTransition.mp4,
+trimmed from 0.35 to 1.85 seconds, mono conversion and short loop fades.
+Reused at the user's explicit request. Existing video's original license/ownership applies.

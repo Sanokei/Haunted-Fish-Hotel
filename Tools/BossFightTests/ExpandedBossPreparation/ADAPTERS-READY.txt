@@ -1,0 +1,30 @@
+STAGED IMPLEMENTATION READY - no publication, Unity launch, or native screenshot from this revision.
+Compiled 2026-10-11 using installed Unity6000.3.6f1 Roslyn + all live project runtime sources; zero errors.
+Managed checks: 3558 defense/framing; 3506 theatre visit/return/input.
+C drive last measured 2.58 GiB free. No clone or whole-project backups.
+
+Concrete original fault: BossFightArena.prefab authored Rigidbody constraints 82 on both strikers AND cue-ball. FreezePositionX is set. Native helper corrects strikers to116, cue-ball to84. This is the horizontal-motion fault actual physics tests must cover.
+
+Runtime staged files to publish after rebase/baseline check:
+BossArenaManager, BossArenaView, BossSegmentedRig, BossPerspectiveFraming, BossHudPresentation -> existing Assets/Scripts/BossFight, preserve metadata.
+BossDefenseState, BossDefensePiece, BossDefenseBoard, BossDragInput -> new Assets/Scripts/BossFight.
+BossArenaCoordinator -> existing Assets/Scripts/Multiplayer, preserve metadata. This is the one shared coordinator reserve; compare integration-baselines before publication.
+BossDefenseRequest, IHotelBossDefenseCommands -> Assets/Scripts/Multiplayer (interfaces actual namespace HauntedFish.BossFight; request HauntedFish.Multiplayer).
+No HotelPlayer, Movement, GhostSelectionPresentation, Game.unity, Lobby.unity source/scene edits.
+Additional BossDefenseRequest component append to HotelNetworkPlayer is reserved by parent; helper checks existing component JSON preserved. Do only in exclusive idle window, rebase against recorder/current prefab first.
+
+Native helper sequence in exclusively granted idle editor:
+Publish/compile runtime first. Publish Editor helpers BossDefenseAuthoring, BossVisualExpansionAuthoring, BossDefenseNativeRegression.
+Shared Modak/Varela font assets must already be published AND native-baked by recorder.
+BossDefenseAuthoring.Apply -> six authored slots, actual bottle/tuna/repaired Art radio models, initial sideline racks, physical/pickup colliders, authored healthy/crack/broken/valid/invalid states, authored bounce material, board/drag bindings, X/Z constraints. No runtime GameObject/material spawning.
+BossDefenseAuthoring.AppendOwnedPlayerAdapter -> appended reserved owned RPC adapter only.
+BossVisualExpansionAuthoring.Apply ->1.7x world rig,1.12 head, slow unequal reaches/sways, camera framing includes rig and sideline racks, instructions outside board, new24px Varela TMP instructions. Existing score typography preserved.
+Authored Ghost camera drag requires real participant/host regression beyond local practice. New native helper exercises physical two-axis fish dragging, hover/release, cue-ball rejection, ghost world direction, actual 1/2/3 contact damage/bounce, rack reset. It is staged/compiled, NOT RUN. RunInCurrentPlayScene requires exclusive authored standalone arena Play Mode and stops practice on finish/failure; no second editor launched.
+Owner RPC request carries slot, monotonic seq, position, round key/version, match epoch; server validates exact contestant and scope. Damage originates only real server cue-ball collision episodes. Reply carries epoch to reject previous-match responses. New-match reset restores all slots, serve retains damage. Replica pickups remain queryable, physical defense collider server-only. No peer-supplied health, and no cue-ball capture/teleport.
+
+Theatre correction runtime and helper in Tools/TheatrePreparation also compile; still staged:
+Return waits matching owner ack AND replicated position outside trigger, bounded failure/disconnect/stale replies; movement restored only after completion/timeout handling.
+Foreground artwork lift only, black colors/materials preserved, lane/exit untouched; selected tabs; shared Modak/Varela TMP migration.
+Next actual native decoded-frame screenshot must replace Library libfile_cd521014f3288191ab93998b25096239 version1. Current image predates corrections. Windows library metadata os.setxattr remains unsupported; prior upload itself confirmed successful.
+
+Scoring resolved by later explicit user instruction: ghost has3lives, player1. Keep FishGoalsToWin3/GhostGoalsToWin1. Earlier1/2 delegation is superseded; do not revert or ask again. Current Unity owner is Game active-trap fix. Boss/theatre exclusive publication window follows its release; no editor launch until grant.

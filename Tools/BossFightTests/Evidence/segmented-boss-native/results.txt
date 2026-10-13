@@ -1,0 +1,203 @@
+SEGMENTED BOSS NATIVE checks=189
+PASS complete authored segmented rig
+PASS one boss opponent rig
+PASS art does not add gameplay colliders or bodies
+PASS authoritative snapshot applies ghost life stage 0
+PASS snapshot life stage maps to v1
+PASS nine segments in selected variant; 27 authored once
+PASS correct supplied head source BOSS-v1-neutral-head
+PASS full-reference silhouette matches stage
+PASS native segmented reaction advances stage 0 fishScored=True
+PASS all eight arm pivots animate
+PASS head animates separately
+PASS reaction keeps segment plane behind goal
+PASS reaction resets authored segment poses
+PASS native segmented reaction advances stage 0 fishScored=False
+PASS all eight arm pivots animate
+PASS head animates separately
+PASS reaction keeps segment plane behind goal
+PASS reaction resets authored segment poses
+PASS every segment follows local ownership visibility 101
+PASS full-reference source never duplicates visible opponent
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v1-Fish-1280x720 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v1-Fish-1280x720
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v1-Fish-720x1280 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v1-Fish-720x1280
+PASS every segment follows local ownership visibility 202
+PASS full-reference source never duplicates visible opponent
+PASS every segment follows local ownership visibility 303
+PASS full-reference source never duplicates visible opponent
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v1-Spectator-1280x720 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v1-Spectator-1280x720
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v1-Spectator-720x1280 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v1-Spectator-720x1280
+PASS authoritative snapshot applies ghost life stage 1
+PASS snapshot life stage maps to v2
+PASS nine segments in selected variant; 27 authored once
+PASS correct supplied head source BOSS-v2-angry-head
+PASS full-reference silhouette matches stage
+PASS native segmented reaction advances stage 1 fishScored=True
+PASS all eight arm pivots animate
+PASS head animates separately
+PASS reaction keeps segment plane behind goal
+PASS reaction resets authored segment poses
+PASS native segmented reaction advances stage 1 fishScored=False
+PASS all eight arm pivots animate
+PASS head animates separately
+PASS reaction keeps segment plane behind goal
+PASS reaction resets authored segment poses
+PASS every segment follows local ownership visibility 101
+PASS full-reference source never duplicates visible opponent
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v2-Fish-1280x720 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v2-Fish-1280x720
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v2-Fish-720x1280 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v2-Fish-720x1280
+PASS every segment follows local ownership visibility 202
+PASS full-reference source never duplicates visible opponent
+PASS every segment follows local ownership visibility 303
+PASS full-reference source never duplicates visible opponent
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v2-Spectator-1280x720 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v2-Spectator-1280x720
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v2-Spectator-720x1280 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v2-Spectator-720x1280
+PASS authoritative snapshot applies ghost life stage 2
+PASS snapshot life stage maps to v3
+PASS nine segments in selected variant; 27 authored once
+PASS correct supplied head source BOSS-v3-god-head
+PASS full-reference silhouette matches stage
+PASS native segmented reaction advances stage 2 fishScored=True
+PASS all eight arm pivots animate
+PASS head animates separately
+PASS reaction keeps segment plane behind goal
+PASS reaction resets authored segment poses
+PASS native segmented reaction advances stage 2 fishScored=False
+PASS all eight arm pivots animate
+PASS head animates separately
+PASS reaction keeps segment plane behind goal
+PASS reaction resets authored segment poses
+PASS every segment follows local ownership visibility 101
+PASS full-reference source never duplicates visible opponent
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v3-Fish-1280x720 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v3-Fish-1280x720
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v3-Fish-720x1280 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v3-Fish-720x1280
+PASS every segment follows local ownership visibility 202
+PASS full-reference source never duplicates visible opponent
+PASS every segment follows local ownership visibility 303
+PASS full-reference source never duplicates visible opponent
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v3-Spectator-1280x720 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v3-Spectator-1280x720
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+PASS segment remains behind far goal plane
+OCCLUSION v3-Spectator-720x1280 boardChanged=0 sampled=3969
+PASS rendered playable board patches remain unobstructed v3-Spectator-720x1280
+PASS life/view changes construct no hierarchy
+LIMIT: isolated native snapshot/view/render checks; run physical and shared-storm regressions separately.
+PASS user scene setup preserved
+PASS user selection preserved

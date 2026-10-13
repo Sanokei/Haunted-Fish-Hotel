@@ -8,6 +8,76 @@ namespace HauntedFish.Multiplayer
     // Owns only the local ghost's preview, placement input, HUD and camera target.
     public sealed class GhostPlacementController : MonoBehaviour
     {
+        [SerializeField] Image _ForbiddenArea;
+        void HideForbiddenArea() { if (_ForbiddenArea) _ForbiddenArea.gameObject.SetActive(false); }
+        void ShowForbiddenArea(Camera view)
+        {
+            if (!view || !_World || !_World.HasGraceZone || !_Hud || !_ForbiddenArea) return;
+
+            var parent = _ForbiddenArea.transform.parent as RectTransform;
+            var canvas = _ForbiddenArea.GetComponentInParent<Canvas>();
+            if (!parent || !canvas) return;
+            var uiCamera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
+            var bounds = _World.GraceBounds;
+            Vector2 minimum = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
+            Vector2 maximum = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
+            // Project all eight authored corners, covering the whole hallway volume and floor.
+            for (int i = 0; i < 8; i++)
+            {
+                var corner = bounds.center + Vector3.Scale(bounds.extents,
+                    new Vector3((i & 1) == 0 ? -1 : 1, (i & 2) == 0 ? -1 : 1, (i & 4) == 0 ? -1 : 1));
+                var screen = view.WorldToScreenPoint(corner);
+                var viewport = view.pixelRect;
+                if (!GameplayPresentationPolicy.ClipProjection(screen.x, screen.y, screen.z, view.nearClipPlane,
+                    viewport.xMin, viewport.yMin, viewport.xMax, viewport.yMax, out float clippedX, out float clippedY)) return;
+                screen.x = clippedX; screen.y = clippedY;
+                if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, screen, uiCamera, out var point)) return;
+                if (!GameplayPresentationPolicy.Finite(point.x) || !GameplayPresentationPolicy.Finite(point.y)) return;
+                minimum = Vector2.Min(minimum, point); maximum = Vector2.Max(maximum, point);
+            }
+            if (maximum.x <= minimum.x || maximum.y <= minimum.y) return;
+            var areaRect = _ForbiddenArea.rectTransform;
+            areaRect.anchorMin = areaRect.anchorMax = parent.pivot;
+            areaRect.pivot = new Vector2(.5f, .5f);
+            areaRect.anchoredPosition = (minimum + maximum) * .5f;
+            areaRect.sizeDelta = maximum - minimum;
+            _ForbiddenArea.gameObject.SetActive(true);
+        }
+        [SerializeField] GameObject _PlacementPreview;
+        [SerializeField] SpriteRenderer _PlacementPreviewSprite;
+        void HidePlacementPreview() { if (_PlacementPreview) _PlacementPreview.SetActive(false); }
+        void PresentPlacementPreview(GhostTrap definition, Vector3 placement, bool clear)
+        {
+            if (!_PlacementPreview || !_PlacementPreviewSprite || !_PreviewSprite || !_PreviewSprite.sprite || !definition) return;
+
+            // The carried artwork follows flight. This separate destination uses
+            // exactly the final body center validated by PlacementPoint and RPCs.
+            _PlacementPreview.transform.SetPositionAndRotation(placement + definition.ArmedOffset + definition.ColliderOffset, Quaternion.identity);
+            _PlacementPreviewSprite.sprite = _PreviewSprite.sprite;
+            _PlacementPreviewSprite.sharedMaterial = _PreviewSprite.sharedMaterial;
+            _PlacementPreviewSprite.sortingLayerID = _PreviewSprite.sortingLayerID;
+            _PlacementPreviewSprite.sortingOrder = _PreviewSprite.sortingOrder;
+            var presentation = definition.GetComponentInChildren<GhostTrapAreaPresentation>(true);
+            var bounds = presentation ? presentation.OpaqueArtBounds : new Rect(0, 0, 1, 1);
+            float widthFraction = Mathf.Max(.01f, bounds.width), heightFraction = Mathf.Max(.01f, bounds.height);
+            var sprite = _PreviewSprite.sprite;
+            float aspect = sprite.rect.width * widthFraction / (sprite.rect.height * heightFraction);
+            float artHeight = Mathf.Min(definition.BodyHalfSize.y * 2, Mathf.Min(definition.ObjectSize.y, definition.ObjectSize.x / aspect));
+            var size = sprite.bounds.size;
+            float scaleX = artHeight * aspect / (widthFraction * Mathf.Max(.001f, size.x));
+            float scaleY = artHeight / (heightFraction * Mathf.Max(.001f, size.y));
+            float centerX = sprite.bounds.min.x + size.x * bounds.center.x;
+            float topY = sprite.bounds.min.y + size.y * bounds.yMax;
+            // Fit the opaque artwork exactly like the released trap, including
+            // transparent texture padding and authored sprite pivots.
+            _PlacementPreviewSprite.transform.localPosition = new Vector3(-centerX * scaleX, definition.BodyHalfSize.y - topY * scaleY, 0);
+            _PlacementPreviewSprite.transform.localRotation = Quaternion.identity;
+            _PlacementPreviewSprite.transform.localScale = new Vector3(scaleX, scaleY, 1);
+            var color = clear ? HotelPalette.Light : HotelPalette.Rust;
+            color.a *= .6f;
+            _PlacementPreviewSprite.color = color;
+            _PlacementPreview.SetActive(true);
+        }
         GameCameraOwner _Camera;
         GameSceneController _Scene;
         [SerializeField]
@@ -48,6 +118,14 @@ namespace HauntedFish.Multiplayer
         GhostPlacementWorld _World;
         bool _Possessed, _Pending, _Prepared;
         int _Reply;
+        float _FeedbackUntil;
+        string _Feedback;
+        void ExplainPlacement(string message)
+        {
+            _Feedback = message;
+            _FeedbackUntil = Time.unscaledTime + 3;
+            _HudMode = -1;
+        }
         string _PreparedRoundKey;
         public void Configure(GameCameraOwner camera, GameSceneController scene)
         {
@@ -72,6 +150,8 @@ namespace HauntedFish.Multiplayer
 
         void Update()
         {
+            HideForbiddenArea();
+            HidePlacementPreview();
             var player = HotelPlayer.LocalPlayer;
             bool active = player && player.ControlsReady && !player.InBossFight && !player.BossHallwayLocked && player.ControlMode == HotelControlMode.Ghost && !player.InputBlocked;
             if (!active)
@@ -111,6 +191,8 @@ namespace HauntedFish.Multiplayer
             if (_Pending && player.GhostPlacementReply != _Reply)
             {
                 _Pending = false;
+                if (!player.GhostPlacementAccepted)
+                    ExplainPlacement("Request rejected - keep the trap, move to a clear legal area and try again");
             }
 
             _Possessed = !string.IsNullOrEmpty(player.HeldTrapFamily);
@@ -231,15 +313,22 @@ namespace HauntedFish.Multiplayer
             {
                 float floor = _Scene.HallwayBounds.max.y, top = _Scene.HallwayCeilingY;
                 clear = clear && target.y >= floor - GhostPlacementWorld.InteractionTolerance && target.y <= top + GhostPlacementWorld.InteractionTolerance && _World.PlacementNearFlight(player, placement, _Family);
-                _Preview.transform.SetPositionAndRotation(placement + heldDefinition.ArmedOffset, Quaternion.identity);
+                // Carry the artwork with the ghost; ceiling alignment belongs to the placed trap.
+                _Preview.transform.SetPositionAndRotation(_Position, Quaternion.identity);
             }
             else
             {
                 _Preview.transform.SetPositionAndRotation(_Position, Quaternion.identity);
                 clear = clear && Mathf.Abs(_Position.y - placement.y) <= .6f;
             }
+            // Mirror the command adapter's reach gate for every family, including floor traps.
+            clear = clear && _World.PlacementNearFlight(player, placement, _Family);
+            bool forbidden = _Possessed && !_Pending && heldDefinition && _World.HasGraceZone &&
+                !_World.FootprintAllowed(placement + heldDefinition.ArmedOffset + heldDefinition.ColliderOffset, heldDefinition.BodyHalfSize);
+            if (forbidden) ShowForbiddenArea(HotelViewCamera.Current);
             if (_PreviewSprite)
                 _PreviewSprite.color = clear ? HotelPalette.Light : HotelPalette.Rust;
+            if (ceilingPlacement && !_Pending) PresentPlacementPreview(heldDefinition, placement, clear);
             int nearbyTrap = NearbyTrapId = _World.NearbyCube(_Position, player);
             bool nearby = _TrapManager && _TrapManager.InPickupRange(_Position, _Supply);
             if (_TrapManager)
@@ -247,7 +336,8 @@ namespace HauntedFish.Multiplayer
             int mode = _Pending ? 0 : _Possessed ? 2 : nearbyTrap >= 0 ? 3 : nearby ? 4 : 5;
             RefreshLabel(mode, nearbyTrap >= 0 ? _World.Trap(nearbyTrap) : null, nearby ? _Supply : null, clear);
             bool pointerOverUI = EventSystem.current && EventSystem.current.IsPointerOverGameObject();
-            if (!_Pending && _Confirm.WasPressedThisFrame() && !pointerOverUI)
+            bool placePressed = _Confirm.WasPressedThisFrame() || (_Possessed && _Click.WasPressedThisFrame());
+            if (!_Pending && placePressed && !pointerOverUI)
             {
                 if (!_Possessed && nearbyTrap >= 0)
                 {
@@ -275,14 +365,26 @@ namespace HauntedFish.Multiplayer
                         _Pending = true;
                         player.RequestPlaceHeldTrap(placement, _Family, player.RoundStateKey, player.RoundVersion);
                     }
-                    else if (_World.TryPlace(player, placement, _Family))
+                    else if (_World.PlacementNearFlight(player, placement, _Family) && _World.TryPlace(player, placement, _Family))
                         _Possessed = false;
+                    else
+                        ExplainPlacement("Placement rejected - keep the trap and try a clear legal area");
                 }
+                else if (_Possessed)
+                    ExplainPlacement(forbidden ? "No traps in the starting safe hallway" :
+                        !player.GhostSetupReady ? "Wait for ghost setup to finish" :
+                        "Move close to the trap destination and choose a clear hallway space");
             }
         }
 
         void RefreshLabel(int mode, GhostTrap trap, GhostTrapSupply supply, bool clear)
         {
+            if (mode != 0 && Time.unscaledTime < _FeedbackUntil)
+            {
+                _Label.text = _Feedback;
+                _HudMode = -1;
+                return;
+            }
             // Build captions when their meaning changes, not on every flight frame.
             if (_HudMode == mode && _HudTrap == trap && _HudSupply == supply && _HudFamily == _Family && _HudClear == clear)
                 return;
@@ -300,7 +402,7 @@ namespace HauntedFish.Multiplayer
                     _Label.text = trap.DisplayName + " - " + trap.ControlHint + " - E / X: unpossess - Q: dispose";
                     break;
                 case 2:
-                    _Label.text = "WASD / stick: fly - E / X: place - Q: dispose" + (clear ? "" : " - Place on the hallway floor in a clear space");
+                    _Label.text = "WASD / stick: fly - Click / E / X: place - Q: dispose" + (clear ? "" : " - Place on the hallway floor in a clear space");
                     break;
                 case 3:
                     _Label.text = "E / X: possess " + trap.DisplayName + " - " + trap.ControlHint;
@@ -324,6 +426,7 @@ namespace HauntedFish.Multiplayer
 
         void Prepare(Vector3 position)
         {
+            _FeedbackUntil = 0;
             _Prepared = true;
             _Position = position;
             _Flight.position = position;
@@ -345,6 +448,8 @@ namespace HauntedFish.Multiplayer
         }
         void OnDisable()
         {
+            HideForbiddenArea();
+            HidePlacementPreview();
             // Disable/cancellation is a command boundary, not a delayed timeout.
             StopOwnedMotion(HotelPlayer.LocalPlayer);
             _Map?.Disable();
@@ -353,6 +458,7 @@ namespace HauntedFish.Multiplayer
             if (_TrapManager)
                 _TrapManager.HighlightPackage(null);
             _Possessed = _Pending = false;
+            _FeedbackUntil = 0;
             if (_Camera)
                 _Camera.FollowOverride = null;
             if (_Preview) _Preview.SetActive(false);

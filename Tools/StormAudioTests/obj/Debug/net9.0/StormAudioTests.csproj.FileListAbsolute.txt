@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\bin\Debug\net9.0\StormAudioTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\bin\Debug\net9.0\StormAudioTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\bin\Debug\net9.0\StormAudioTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\bin\Debug\net9.0\StormAudioTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\bin\Debug\net9.0\StormAudioTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\refint\StormAudioTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\StormAudioTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\StormAudioTests\obj\Debug\net9.0\ref\StormAudioTests.dll

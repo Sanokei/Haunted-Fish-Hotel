@@ -1,0 +1,271 @@
+[
+  {
+    "stage": 1,
+    "remaining_lives": 3,
+    "head": "BOSS-v1-neutral-head.png",
+    "arms": [
+      {
+        "source": "BOSS-v1v2-arm-left-2.png",
+        "side": "left",
+        "number": 2,
+        "joint_pixel_x": 602.5,
+        "pivot_x": 0.294189453125,
+        "local_x": -2.8232421875,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-left-4.png",
+        "side": "left",
+        "number": 4,
+        "joint_pixel_x": 941.5,
+        "pivot_x": 0.459716796875,
+        "local_x": -2.1611328125,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-left-3.png",
+        "side": "left",
+        "number": 3,
+        "joint_pixel_x": 1267.49,
+        "pivot_x": 0.6188916015625,
+        "local_x": -1.52443359375,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-left-1.png",
+        "side": "left",
+        "number": 1,
+        "joint_pixel_x": 1166.61,
+        "pivot_x": 0.5696337890625,
+        "local_x": -1.7214648437500002,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-4.png",
+        "side": "right",
+        "number": 4,
+        "joint_pixel_x": 1073.5,
+        "pivot_x": 0.524169921875,
+        "local_x": 2.0966796875,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-3.png",
+        "side": "right",
+        "number": 3,
+        "joint_pixel_x": 1210.5,
+        "pivot_x": 0.591064453125,
+        "local_x": 2.3642578125,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-1.png",
+        "side": "right",
+        "number": 1,
+        "joint_pixel_x": 844.0,
+        "pivot_x": 0.412109375,
+        "local_x": 1.6484375,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-2.png",
+        "side": "right",
+        "number": 2,
+        "joint_pixel_x": 1378.99,
+        "pivot_x": 0.6733349609375,
+        "local_x": 2.6933398437499996,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      }
+    ],
+    "full_reference": null,
+    "shadow_reference": "BOSS-v2-angry-full.png"
+  },
+  {
+    "stage": 2,
+    "remaining_lives": 2,
+    "head": "BOSS-v2-angry-head.png",
+    "arms": [
+      {
+        "source": "BOSS-v1v2-arm-left-2.png",
+        "side": "left",
+        "number": 2,
+        "joint_pixel_x": 602.5,
+        "pivot_x": 0.294189453125,
+        "local_x": -2.8232421875,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-left-4.png",
+        "side": "left",
+        "number": 4,
+        "joint_pixel_x": 941.5,
+        "pivot_x": 0.459716796875,
+        "local_x": -2.1611328125,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-left-3.png",
+        "side": "left",
+        "number": 3,
+        "joint_pixel_x": 1267.49,
+        "pivot_x": 0.6188916015625,
+        "local_x": -1.52443359375,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-left-1.png",
+        "side": "left",
+        "number": 1,
+        "joint_pixel_x": 1166.61,
+        "pivot_x": 0.5696337890625,
+        "local_x": -1.7214648437500002,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-4.png",
+        "side": "right",
+        "number": 4,
+        "joint_pixel_x": 1073.5,
+        "pivot_x": 0.524169921875,
+        "local_x": 2.0966796875,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-3.png",
+        "side": "right",
+        "number": 3,
+        "joint_pixel_x": 1210.5,
+        "pivot_x": 0.591064453125,
+        "local_x": 2.3642578125,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-1.png",
+        "side": "right",
+        "number": 1,
+        "joint_pixel_x": 844.0,
+        "pivot_x": 0.412109375,
+        "local_x": 1.6484375,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v1v2-arm-right-2.png",
+        "side": "right",
+        "number": 2,
+        "joint_pixel_x": 1378.99,
+        "pivot_x": 0.6733349609375,
+        "local_x": 2.6933398437499996,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      }
+    ],
+    "full_reference": "BOSS-v2-angry-full.png",
+    "shadow_reference": "BOSS-v2-angry-full.png",
+    "alpha_iou_to_reference": 0.9890818121866901
+  },
+  {
+    "stage": 3,
+    "remaining_lives": 1,
+    "head": "BOSS-v3-god-head.png",
+    "arms": [
+      {
+        "source": "BOSS-v3-god-arm-left-2.png",
+        "side": "left",
+        "number": 2,
+        "joint_pixel_x": 598.7,
+        "pivot_x": 0.292333984375,
+        "local_x": -2.8306640625,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v3-god-arm-left-4.png",
+        "side": "left",
+        "number": 4,
+        "joint_pixel_x": 948.06,
+        "pivot_x": 0.462919921875,
+        "local_x": -2.1483203125,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v3-god-arm-left-3.png",
+        "side": "left",
+        "number": 3,
+        "joint_pixel_x": 1247.5,
+        "pivot_x": 0.609130859375,
+        "local_x": -1.5634765625,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v3-god-arm-left-1.png",
+        "side": "left",
+        "number": 1,
+        "joint_pixel_x": 1214.5,
+        "pivot_x": 0.593017578125,
+        "local_x": -1.6279296875,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v3-god-arm-right-4.png",
+        "side": "right",
+        "number": 4,
+        "joint_pixel_x": 1094.5,
+        "pivot_x": 0.534423828125,
+        "local_x": 2.1376953125,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v3-god-arm-right-3.png",
+        "side": "right",
+        "number": 3,
+        "joint_pixel_x": 1211.0,
+        "pivot_x": 0.59130859375,
+        "local_x": 2.365234375,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v3-god-arm-right-1.png",
+        "side": "right",
+        "number": 1,
+        "joint_pixel_x": 825.0,
+        "pivot_x": 0.40283203125,
+        "local_x": 1.611328125,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      },
+      {
+        "source": "BOSS-v3-god-arm-right-2.png",
+        "side": "right",
+        "number": 2,
+        "joint_pixel_x": 1397.0,
+        "pivot_x": 0.68212890625,
+        "local_x": 2.728515625,
+        "crop_height": 1714,
+        "pixels_per_unit": 512
+      }
+    ],
+    "full_reference": "BOSS-v3-god-full.png",
+    "shadow_reference": "BOSS-v3-god-full.png",
+    "alpha_iou_to_reference": 0.9862871987176739
+  }
+]

@@ -1,0 +1,29 @@
+SOURCE AND REUSE RECORD
+Verified 11 October 2026
+
+Original title: Fireplace #4
+Original author: Joseph SARDIN
+Publisher: BigSoundBank / LaSonotheque
+Sound number: 2856
+Source page: https://bigsoundbank.com/fireplace-4-s2856.html
+Downloaded source: https://bigsoundbank.com/UPLOAD/mp3/2856.mp3
+Publisher license page: https://bigsoundbank.com/licenses.html
+CC0 1.0 Universal: https://creativecommons.org/publicdomain/zero/1.0/
+CC0 legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+The source page explicitly labels this recording CC0 (public domain). The
+publisher's license page permits copying, adaptation, redistribution and
+commercial use without requiring permission or attribution. These permissions
+cover incorporating the recording, and this edited version, into a game.
+The source's CC0 status was verified on the publisher's own pages, not inferred
+from a search result or a generic royalty-free label.
+
+Optional courtesy credit:
+Fireplace sound: Joseph SARDIN / BigSoundBank.com (CC0), edited for Haunted Fish Hotel.
+
+The credit is optional. Do not imply that the author endorses the game.
+The processing adds no further restrictions to use of this supplied audio.
+No licence fee, paid subscription, account sign-in, or purchase was needed.
+
+The source recording itself was not made by the assistant. See README.txt
+for exact editing steps and limits of validation.

@@ -1,0 +1,13 @@
+
+JumpSpeed FPS ApexFeet ClearanceSeconds RunDistance RequiredDistance
+--------- --- -------- ---------------- ----------- ----------------
+        7  30     0.87             0.00        0.00             3.56
+        7  60     0.92             0.00        0.00             3.56
+        7 120     0.95             0.00        0.00             3.56
+    22.00  30     2.11             0.80        3.60             3.56
+    22.00  60     2.11             0.82        3.67             3.56
+    22.00 120     2.11             0.82        3.67             3.56
+
+PASS: baseline cannot clear; tuned conservative sprint envelope clears at 30/60/120 FPS.
+Simulation only: no CharacterController collision, Play Mode, moving-cart, or two-client acceptance performed.
+

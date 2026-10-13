@@ -9,16 +9,19 @@ namespace HauntedFish.Multiplayer
         readonly GhostPlacementWorld _World;
         readonly TrapManager _Traps;
         readonly Action<HotelPlayer, int> _Acknowledge;
+        readonly Action<HotelPlayer, string, int> _Ready;
 
         public GamePlayerCommands(GhostPlacementWorld world, TrapManager traps,
-            Action<HotelPlayer, int> acknowledge)
+            Action<HotelPlayer, int> acknowledge, Action<HotelPlayer, string, int> ready)
         {
             _World = world;
             _Traps = traps;
             _Acknowledge = acknowledge;
+            _Ready = ready;
         }
 
         public void Acknowledge(HotelPlayer player, int version) => _Acknowledge(player, version);
+        public void Ready(HotelPlayer player, string key, int version) => _Ready(player, key, version);
 
         public void RefreshPlacement(HotelPlayer player)
         {

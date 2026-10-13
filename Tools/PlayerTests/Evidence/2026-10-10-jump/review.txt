@@ -1,0 +1,9 @@
+Conservative crossing at relative speed 1.8: 1.978 seconds required
+Conservative crossing at relative speed 4.5: 0.791 seconds required
+Conservative crossing at relative speed 9.5: 0.375 seconds required
+22/25 capped model clearance .800-.817s: normal walk fails; sprint has only .040-.115 units margin; approaching cart at combined9.5 is easier geometrically but collision/spook still requires native acceptance.
+Ceiling-stop countermodel: zeroing upward velocity on impact leaves sqrt(2*.03/25)=.049 seconds before feet fall below2.08; sprint travel=.220, fails.
+Current production motor has no CollisionFlags.Above handling and retains positive _Vertical until gravity removes it; pure cap model relies on that behavior.
+Gravity25 falling from maximum2.11 feet to floor takes approximately .411s after upward velocity is gone; no new jump is accepted while isGrounded is false, pending flag consumed every frame.
+A robust normal-speed envelope needs1.978s above2.08; current hallway permits only .03 above conservative clearance. Making that work through jump speed alone requires extreme ceiling hang, not a conventional jump.
+Native fixture added but not yet imported/run in existing editor. No Play Mode acceptance.

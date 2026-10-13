@@ -1,0 +1,18 @@
+ISOLATED EDIT MODE checks=17; no Physics.Simulate or Play-mode runner executed.
+PASS practice has no network contestants or active match
+PASS practice goals award and publish nothing
+PASS native practice Rigidbody receives physical serve velocity
+PASS native camera ray projects practice pointer to bounded paddle axis
+PASS pointer projection leaves native puck position unchanged
+PASS blocked practice input freezes native puck
+PASS practice resume restores native puck velocity
+PASS practice exit has no authoritative result or snapshot
+PASS real match can begin after practice exits
+PASS native participant camera projection works
+PASS native spectator pointer denied
+PASS native invalid pointer denied
+PASS same menu focus gate blocks production and practice controls
+PASS active user scene preserved
+PASS loaded user scenes preserved
+PASS user scene dirty flags preserved
+PASS user selection preserved

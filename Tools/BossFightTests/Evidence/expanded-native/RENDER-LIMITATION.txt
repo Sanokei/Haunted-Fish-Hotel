@@ -1,0 +1,1 @@
+INVALID BOSS RENDER CAPTURES: These current PNGs were produced by the35native-check run, but an URP secondary camera cleared the arena. They are HUD-onlydiagnostics; do not use them as gameplay screenshots or upload them. Nativephysical35results.txt is valid. Capture helper corrected; rerun pending coordinated editor window. Theatre screenshot is separately valid.

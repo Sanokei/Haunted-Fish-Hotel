@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
 {
-    public enum HotelControlMode { Lobby, Selection, Fish, Ghost }
+    public enum HotelControlMode { Lobby, Selection, Fish, Ghost, Spectator }
     // fixme epsilon
     [RequireComponent(typeof(CharacterController), typeof(GameSideScrollMotor))]  
     public sealed class HotelPlayerMovement : MonoBehaviour
@@ -48,6 +48,7 @@ namespace HauntedFish.Multiplayer
             _LobbyMap != null && _LobbyMap.enabled ? "Lobby" : "";
 
         public CharacterController BodyController => Controller;
+        public void PlayJumpSound() { if (_Actor) _Actor.PlayJumpSound(); }
         CharacterController Controller => _Controller ? _Controller : (_Controller = GetComponent<CharacterController>());
         GameSideScrollMotor Motor => _GameMotor ? _GameMotor : (_GameMotor = GetComponent<GameSideScrollMotor>());
 
@@ -133,7 +134,7 @@ namespace HauntedFish.Multiplayer
 
         public void ReadOwnedInput(out Vector2 move, out bool jump, out Vector3 mouse)
         {
-            bool canMove = Mode != HotelControlMode.Ghost && Mode != HotelControlMode.Selection && CanMove && ControlsReady && !_InputBlocked && !SharedDialogueLocked;
+            bool canMove = Mode != HotelControlMode.Ghost && Mode != HotelControlMode.Selection && Mode != HotelControlMode.Spectator && CanMove && ControlsReady && !_InputBlocked && !SharedDialogueLocked;
             var action = GameActive ? _GameMove : _LobbyMove;
             move = canMove && action != null ? Vector2.ClampMagnitude(action.ReadValue<Vector2>(), 1) : Vector2.zero;
             if (!GameActive && move != Vector2.zero)
@@ -164,7 +165,7 @@ namespace HauntedFish.Multiplayer
                 ResetMotion();
                 return;
             }
-            if (Mode == HotelControlMode.Ghost || Mode == HotelControlMode.Selection)
+            if (Mode == HotelControlMode.Ghost || Mode == HotelControlMode.Selection || Mode == HotelControlMode.Spectator)
             {
                 ResetMotion();
                 return;
@@ -188,6 +189,8 @@ namespace HauntedFish.Multiplayer
             if (Mathf.Abs(horizontal) > .01f) FacingLeft = horizontal < 0;
         }
 
+        public CollisionFlags LastCollisionFlags { get; private set; }
+
         public bool TryMove(Vector3 displacement) => TryMove(displacement, out _);
 
         public bool TryMove(Vector3 displacement, out Vector3 applied)
@@ -197,7 +200,8 @@ namespace HauntedFish.Multiplayer
             var scale = Controller.transform.lossyScale;
             if (Mathf.Abs(scale.x) < .0001f || Mathf.Abs(scale.y) < .0001f || Mathf.Abs(scale.z) < .0001f) return false;
             var before = transform.position;
-            Controller.Move(displacement);
+            var flags = Controller.Move(displacement);
+            LastCollisionFlags = flags;
             if (GameActive && (!_Actor || !_Actor.InBossFight) && GameSceneController.Current)
                 transform.position = GameSceneController.Current.ClampFish(this, transform.position);
             applied = transform.position - before;

@@ -1,0 +1,1 @@
+Perspective camera local(0,4.5,-29),55deg,aim(0,10,-10); imported close row5 scale3; only authored chair tops foreground; fake audience removed;1owned actual player plus7empty authored slots bound only to spawned connected identities; lane/left exit unchanged. Native captures pending.

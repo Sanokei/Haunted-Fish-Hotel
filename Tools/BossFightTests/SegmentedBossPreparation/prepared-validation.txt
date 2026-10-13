@@ -1,0 +1,6 @@
+PASS prepared runtime compile against Unity6000.3.6f1
+PASS manual Sprite Editor native authoring helper compile
+PASS prepared native validators compile
+PASS1302 match/life-stage progression checks
+OFFLINE pixel assembly alpha IoU: v2=.9890818121866901;v3=.9862871987176739
+PENDING native prefab publication, scene renders, segmented storm/physics acceptance

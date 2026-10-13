@@ -1,0 +1,1 @@
+Native modular composition and six building/bottle/tuna slots authored; raised trays; full camera viewport; footer disabled. Render acceptance pending.

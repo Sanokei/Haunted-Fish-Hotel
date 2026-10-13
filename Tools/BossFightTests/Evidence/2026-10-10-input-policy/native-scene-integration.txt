@@ -1,0 +1,21 @@
+NATIVE PREFAB SCENE INTEGRATION checks=19
+PASS native prefab was authored from current saved boss scene and passed bindings
+PASS native prefab asset loaded
+PASS serialized manager/view/HUD present
+PASS authored perspective rig _Fish
+PASS authored perspective rig _Ghost
+PASS authored perspective rig _Spectator
+PASS additive saved-boss load preserves active user scene
+PASS native boss prefab instance connected
+PASS native scene instance binding _Puck
+PASS native scene instance binding _FishPaddle
+PASS native scene instance binding _GhostPaddle
+PASS native scene instance binding _Views
+PASS native scene instance binding _Hud
+PASS native scene instance binding _Reactions
+PASS native Unity scene serialization saved BossFight prefab instance
+SOURCE now contains one authored arena prefab instance; other user scene files not saved.
+PASS active user scene preserved after native integration
+PASS original loaded user scene setup preserved
+PASS other user scene dirty flags preserved
+PASS user selection preserved

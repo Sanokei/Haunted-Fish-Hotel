@@ -43,7 +43,8 @@ static class Program
             StorySequenceStepKind.MoveUI, StorySequenceStepKind.Wait, StorySequenceStepKind.SetVisible,
             StorySequenceStepKind.PushTo, StorySequenceStepKind.Wait, StorySequenceStepKind.ExpandPanel,
             StorySequenceStepKind.Wait, StorySequenceStepKind.FlashFrames, StorySequenceStepKind.DollyTo,
-            StorySequenceStepKind.Wait }), "Authored storyboard uses explicit typed story functions in the required order");
+            StorySequenceStepKind.Wait, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.LobbyShot,
+            StorySequenceStepKind.LobbyLine, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.Wait }), "Authored storyboard uses explicit typed story functions in the required order");
         var variants = steps.Where(step => step.Kind == StorySequenceStepKind.SetVariant).ToArray();
         Check(variants[0].Target == "cloud" && variants[0].Variant == "cloud" && variants[1].Variant == "cloud_lightning",
             "The still cloud changes to its lightning variant");
@@ -62,6 +63,46 @@ static class Program
             "Ink requests exactly two white rendered frames");
         Check(steps[20].Kind == StorySequenceStepKind.DollyTo && steps[20].Target == "gate_close" && steps[20].Seconds == 5,
             "The flash is followed by an exterior dolly");
+        Check(steps.Where(s => s.Kind == StorySequenceStepKind.LobbyShot).Select(s => s.Target)
+            .SequenceEqual(new[] { "entry", "walk_away", "reception" }), "Fish enters before walking away and the reception dolly follows");
+        Check(steps.Single(s => s.Kind == StorySequenceStepKind.LobbyLine).Variant ==
+            "Looks like nobody has checked into this place for years", "Fish caption exactly matches the requested dialogue");
+        var grandmaPath = Path.Combine(root, "Assets/Dialogue/GrandmafishInspect.ink");
+        var grandmaJson = Compile(File.ReadAllText(grandmaPath));
+        var grandma = new Ink.Runtime.Story(grandmaJson);
+        int cues = 0;
+        while (grandma.canContinue)
+        {
+            var line = grandma.Continue().Trim();
+            if (grandma.currentTags.Contains("animation: grandma_rimshot"))
+            {
+                Check(line == "She was quite the catch.", "Rimshot is attached only to the intended punchline");
+                cues++;
+            }
+        }
+        Check(cues == 1, "Grandma's story contains exactly one rimshot cue");
+        checks += PunchlineAudioTests.Run();
+        checks += DoorPushTests.Run(root);
+        bool missingWorldRejected = false;
+        try { HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, null); }
+        catch (InvalidOperationException error) { missingWorldRejected = error.Message.Contains("._World"); }
+        Check(missingWorldRejected, "Missing world setup is rejected before the intro can appear to complete");
+        bool missingCaptionRejected = false;
+        try { HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, s => s.Kind != StorySequenceStepKind.LobbyLine); }
+        catch (InvalidOperationException error) { missingCaptionRejected = error.Message.Contains("LobbyLine(player)"); }
+        Check(missingCaptionRejected, "Partial world setup identifies the unbound caption operation");
+        bool missingReceptionRejected = false;
+        try { HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, s => s.Target != "reception"); }
+        catch (InvalidOperationException error) { missingReceptionRejected = error.Message.Contains("LobbyShot(reception)"); }
+        Check(missingReceptionRejected, "Partial camera setup identifies the unbound reception operation");
+        var boundUI = HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, s => true);
+        Check(boundUI.Count == steps.Count - 4 && !boundUI.Any(s => s.Kind == StorySequenceStepKind.LobbyShot || s.Kind == StorySequenceStepKind.LobbyLine),
+            "Complete world setup passes validation and retains every original UI operation");
+        var lobbyManagerSource = File.ReadAllText(Path.Combine(root, "Assets/Scripts/Multiplayer/Lobby/LobbyManager.cs"));
+        int beginIntro = lobbyManagerSource.IndexOf("void BeginIntroduction()");
+        int validateIntro = lobbyManagerSource.IndexOf("_IntroductionPresentation.ValidateSequence(steps)", beginIntro);
+        int markPlayed = lobbyManagerSource.IndexOf("_IntroductionPlayed = true", beginIntro);
+        Check(markPlayed > validateIntro, "A missing setup cannot mark the intro as played before validation succeeds");
         var conditional = StoryFunctions.ReadAnimationSequence(Compile("EXTERNAL SetVariant(objectTag,variantTag)\nVAR storm = true\n{storm:\n~ SetVariant(\"cloud\",\"cloud_lightning\")\n}\n-> END"));
         Check(conditional.Single().Variant == "cloud_lightning", "Ink variables and branching select typed operations");
         var zero = StoryFunctions.ReadAnimationSequence(Compile("EXTERNAL Wait(seconds)\n~ Wait(0)\n-> END"));
@@ -97,7 +138,8 @@ static class Program
         if (args.Contains("--compile"))
         {
             File.WriteAllText(Path.ChangeExtension(inkPath, ".json"), json);
-            Console.WriteLine("Compiled LobbyIntroduction.json from the authored Ink source.");
+            File.WriteAllText(Path.ChangeExtension(grandmaPath, ".json"), grandmaJson);
+            Console.WriteLine("Compiled lobby and Grandma Ink JSON from authored source.");
         }
         else
             Check(StoryFunctions.ReadAnimationSequence(File.ReadAllText(Path.ChangeExtension(inkPath, ".json"))).Select(s => (s.Kind, s.Target, s.Variant, s.Visible, s.X, s.Y, s.Count, s.Seconds))

@@ -50,7 +50,7 @@ namespace HauntedFish.Multiplayer
             _ZoomVelocity = 0;
             if (player) _PreviousPosition = player.transform.position;
             Camera.Lens.OrthographicSize = RestingSize;
-            Camera.Follow = FollowOverride ? FollowOverride : player ? player.transform : null;
+            Camera.Follow = ViewTarget();
             Camera.PreviousStateIsValid = false;
             if (_Composer)
             {
@@ -59,27 +59,33 @@ namespace HauntedFish.Multiplayer
             }
         }
 
+        Transform ViewTarget()
+        {
+            var local = HotelPlayer.LocalPlayer;
+            if (!local || local.ControlMode != HotelControlMode.Spectator)
+                return FollowOverride ? FollowOverride : local ? local.transform : null;
+            HotelPlayer living = null, ghost = null;
+            foreach (var member in HotelPlayer.ActivePlayers)
+            {
+                if (!member || member.RoundStateKey != local.RoundStateKey || member.InventoryScope != local.InventoryScope) continue;
+                if (member.ControlMode == HotelControlMode.Fish && !member.IsDead && (!living || member.NetId < living.NetId)) living = member;
+                if (member.NetId == local.GhostId) ghost = member;
+            }
+            return living ? living.transform : ghost ? ghost.transform : local.transform;
+        }
         void Update()
         {
             if (!Camera) return;
             // Recover if the camera or local player was assigned after activation.
-            if (_BoundCamera != Camera || _Player != HotelPlayer.LocalPlayer || Camera.Follow != (FollowOverride ? FollowOverride : HotelPlayer.LocalPlayer ? HotelPlayer.LocalPlayer.transform : null))
+            if (_BoundCamera != Camera || _Player != HotelPlayer.LocalPlayer || Camera.Follow != ViewTarget())
                 BindPlayer(HotelPlayer.LocalPlayer);
             if (!_Player || !_Composer) return;
 
-            var position = FollowOverride ? FollowOverride.position : _Player.transform.position;
-            var delta = position - _PreviousPosition;
-            _PreviousPosition = position;
-            // Ignore teleports, and measure horizontal motion on both hosts and interpolated clients.
-            var speed = delta.sqrMagnitude < 16f ? Mathf.Abs(delta.x) / Mathf.Max(Time.deltaTime, .0001f) : 0;
-            var movement = Mathf.Clamp01(speed / (_Movement ? Mathf.Max(.1f, _Movement.RunningSpeed) : 4.5f));
-            var targetSize = RestingSize * (1 + MovingExpansion * movement);
-            Camera.Lens.OrthographicSize = Mathf.SmoothDamp(Camera.Lens.OrthographicSize, targetSize,
-                ref _ZoomVelocity, ZoomSmoothTime);
+            Camera.Lens.OrthographicSize = RestingSize;
 
             var output = HotelViewCamera.Current;
             var offset = Vector3.zero;
-            if (output && Mouse.current != null && Application.isFocused)
+            if (_Player.ControlMode == HotelControlMode.Fish && output && Mouse.current != null && Application.isFocused)
             {
                 var pixelRect = output.pixelRect;
                 var mouse = Mouse.current.position.ReadValue();
@@ -91,7 +97,7 @@ namespace HauntedFish.Multiplayer
             }
             _MouseOffset = Vector3.SmoothDamp(_MouseOffset, offset, ref _OffsetVelocity, MouseSmoothTime);
             // Composer offsets are local to the target; keep the padding aligned to the game plane.
-            _Composer.TargetOffset = Quaternion.Inverse(_Player.transform.rotation) * _MouseOffset;
+            _Composer.TargetOffset = _Player.ControlMode == HotelControlMode.Ghost ? Vector3.zero : Quaternion.Inverse(_Player.transform.rotation) * Vector3.ClampMagnitude(_MouseOffset, .65f);
         }
     }
 }

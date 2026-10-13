@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\bin\Debug\net9.0\MenuTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\bin\Debug\net9.0\MenuTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\bin\Debug\net9.0\MenuTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\bin\Debug\net9.0\MenuTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\bin\Debug\net9.0\MenuTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\refint\MenuTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\MenuTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\MenuTests\obj\Debug\net9.0\ref\MenuTests.dll

@@ -1,0 +1,6 @@
+Modak Regular, copyright (c) 2015 Ek Type (www.ektype.in).
+Original unmodified font from the official Google Fonts repository:
+https://github.com/google/fonts/blob/main/ofl/modak/Modak-Regular.ttf
+License: SIL Open Font License 1.1; full notice retained in Modak-OFL.txt.
+https://github.com/google/fonts/blob/main/ofl/modak/OFL.txt
+TTF SHA-256: 9a96ba056ddcbb7d0c937c52f744ff5d71004a97689b1fd2cdbd678f314db245

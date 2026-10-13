@@ -28,6 +28,7 @@ static class Program
             TestCancelledDirectoryCallback();
             TestCancelledPreparationAndAdmission();
             TestHeartbeatFailure();
+            TestDeleteFailure();
             TestQuickplayMatch();
             TestQuickplayGates();
             TestHeartbeatCancellation();
@@ -44,6 +45,37 @@ static class Program
             Console.Error.WriteLine("FAIL session lifecycle checks: " + exception.Message);
             return 1;
         }
+    }
+
+    static void TestDeleteFailure()
+    {
+        using var f = new Fixture();
+        f.Session.CreateLobby();
+        f.Directory.DeleteError = "Unable to complete room request (HTTP 400).";
+        f.Session.LeaveLobby();
+        f.Runtime.Frame();
+        Check(f.Session.State == HotelSessionState.Failed && f.Session.Status == f.Directory.DeleteError,
+            "Failed room deletion remains visible as a session error");
+        Check(f.Transport.Ends == 1 && f.Scene.Ends == 1 && !f.Network.IsRunning,
+            "Failed deletion still completes local transport and scene cleanup");
+
+        using var replacement = new Fixture();
+        replacement.Session.CreateLobby();
+        replacement.Directory.DeleteError = "Room DELETE failed (HTTP 400).";
+        replacement.Session.JoinLobby("JOIN02");
+        replacement.Runtime.Frame();
+        Check(replacement.Session.State == HotelSessionState.Failed && replacement.Network.ClientStarts == 0,
+            "Replacement does not hide a failed room deletion by starting another connection");
+
+        using var lost = new Fixture();
+        lost.Session.CreateLobby();
+        lost.Directory.DeleteError = "Room DELETE failed (HTTP 400).";
+        lost.Session.ConnectionLost("Relay request timed out.");
+        Check(lost.Session.Status == "Relay request timed out." && !lost.Session.ReadyToPlay,
+            "Connection failure is visible immediately while cleanup is pending");
+        lost.Runtime.Frame();
+        Check(lost.Session.State == HotelSessionState.Failed && lost.Session.Status == "Relay request timed out.",
+            "Cleanup DELETE errors do not replace the original connection failure");
     }
 
     static void TestCreateAndAdmission()
@@ -582,7 +614,7 @@ static class Program
         public readonly List<Request> Requests = new List<Request>();
         public bool Automatic = true;
         public Room HeartbeatResult;
-        public string HeartbeatError, CreateError, JoinError;
+        public string HeartbeatError, CreateError, JoinError, DeleteError;
         IEnumerator Run(Request request, Room response = null, string error = null)
         {
             Requests.Add(request);
@@ -591,7 +623,7 @@ static class Program
         }
         public IEnumerator Create(CreateRoom request, Action<Room, string> completed) => Run(new Request { Kind = RequestKind.Create, Create = request, Callback = completed }, CreateError == null ? NewRoom("HOST01") : null, CreateError);
         public IEnumerator Join(string code, bool relay, Action<Room, string> completed) => Run(new Request { Kind = RequestKind.Join, Code = code, Relay = relay, Callback = completed }, JoinError == null ? NewRoom(code, false) : null, JoinError);
-        public IEnumerator Delete(Room room, Action<Room, string> completed) => Run(new Request { Kind = RequestKind.Delete, Code = room.code, Callback = completed });
+        public IEnumerator Delete(Room room, Action<Room, string> completed) => Run(new Request { Kind = RequestKind.Delete, Code = room.code, Callback = completed }, error: DeleteError);
         public IEnumerator Heartbeat(string code, RoomHeartbeat request, Action<Room, string> completed) => Run(new Request { Kind = RequestKind.Heartbeat, Code = code, Heartbeat = request, Callback = completed }, HeartbeatResult, HeartbeatError);
     }
 

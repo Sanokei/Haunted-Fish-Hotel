@@ -1,0 +1,72 @@
+[
+  {
+    "id": "window",
+    "creator": "alxl",
+    "title": "Rain on Window Loop",
+    "page": "https://opengameart.org/content/rain-on-window-loop",
+    "url": "https://opengameart.org/sites/default/files/rain_on_window_loop.wav",
+    "filename": "alxl_rain_on_window_loop.wav",
+    "quality": "Original WAV download",
+    "sha256": "97b9405025e5ed7ed8a58d24dd7146d06e925519b1f718efda94bb85dcd1a61a",
+    "bytes": 1916852,
+    "license": "CC0 1.0 Universal",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "retrieved_utc": "2026-10-10"
+  },
+  {
+    "id": "rain",
+    "creator": "Ylmir",
+    "title": "Rain (loopable)",
+    "page": "https://opengameart.org/content/rain-loopable",
+    "url": "https://opengameart.org/sites/default/files/Rain%20OGG.zip",
+    "filename": "ylmir_rain_ogg.zip",
+    "quality": "Author-published 160 kbps Ogg Vorbis recordings",
+    "sha256": "e68f3e1c77493cf43bec84cebff5043bff6be9ce16d59b24caa988cd460aa75b",
+    "bytes": 2736596,
+    "license": "CC0 1.0 Universal",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "retrieved_utc": "2026-10-10"
+  },
+  {
+    "id": "thunder_roll",
+    "creator": "TRP",
+    "title": "230823 Thunder, dry distant rolling, R-07 EM272s, Stratford 12pm",
+    "page": "https://freesound.org/people/TRP/sounds/717890/",
+    "filename": "trp_717890_hq.mp3",
+    "quality": "Public high-quality MP3 preview; source itself is MP3",
+    "url": "https://cdn.freesound.org/previews/717/717890_97550-hq.mp3",
+    "sha256": "9fef0328de54f0555625235c2a8cc6a76f90f90a8c57df6e9be2f07bda591afe",
+    "bytes": 5775600,
+    "license": "CC0 1.0 Universal",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "retrieved_utc": "2026-10-10"
+  },
+  {
+    "id": "thunder_clap",
+    "creator": "seth-m",
+    "title": "big thunder clap",
+    "page": "https://freesound.org/people/seth-m/sounds/458015/",
+    "filename": "seth_m_458015_hq.mp3",
+    "quality": "Public high-quality MP3 preview of original WAV",
+    "url": "https://cdn.freesound.org/previews/458/458015_3366749-hq.mp3",
+    "sha256": "a3641e7c7a00edf79658c60de035fb845f8d81c104543382e8f91bdc7cb23fc3",
+    "bytes": 254736,
+    "license": "CC0 1.0 Universal",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "retrieved_utc": "2026-10-10"
+  },
+  {
+    "id": "thunder_crack",
+    "creator": "cognito perceptu",
+    "title": "thunder dry crack rumble.wav",
+    "page": "https://freesound.org/people/cognito%20perceptu/sounds/536903/",
+    "filename": "cognito_perceptu_536903_hq.mp3",
+    "quality": "Public high-quality MP3 preview of original WAV",
+    "url": "https://cdn.freesound.org/previews/536/536903_57789-hq.mp3",
+    "sha256": "23f8f5ce29b8e554316a103725258307e8eb06fccedfc8720e4ad31939f6c3a7",
+    "bytes": 239818,
+    "license": "CC0 1.0 Universal",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "retrieved_utc": "2026-10-10"
+  }
+]

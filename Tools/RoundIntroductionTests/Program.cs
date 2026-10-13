@@ -51,6 +51,10 @@ static class Program {
   var grandma=new Ink.Compiler(File.ReadAllText(grandmaPath)).Compile();
   Check(grandma!=null,"Grandmafish inspect dialogue compiles");
   if(args.Contains("--compile"))File.WriteAllText(Path.ChangeExtension(grandmaPath,".json"),grandma.ToJson());
+  PresentationChecks.Run();
+  HallwayStagingChecks.Run();
+  ReadyUpChecks.Run();
+  StormEntryChecks.Run();
   Console.WriteLine("Passed "+checks+" round introduction checks.");
  }
 }

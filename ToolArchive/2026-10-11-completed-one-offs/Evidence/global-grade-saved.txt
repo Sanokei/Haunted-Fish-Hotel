@@ -1,0 +1,1 @@
+PASS saved actual Lobby: existing Global Volume sharedProfile=Assets/Prefabs/LobbyMood/LobbyMoodyInteriorProfile.asset weight=1 Main Camera post-processing=True; existing intro controller and camera bound; rear/outer stair return height4.5; storm authored bindings still valid. No duplicate roots.

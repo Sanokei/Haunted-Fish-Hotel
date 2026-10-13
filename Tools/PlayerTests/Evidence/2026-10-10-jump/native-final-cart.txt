@@ -1,0 +1,51 @@
+PHYSICS basket=1.700 handle=2.000 solidParts=2
+WINDOW jump=7 speed=1.8 direction=1 approaching=0: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=1.8 direction=1 approaching=0: 0/102 native crossings; apex=1.004; ceiling=False; floorLanding=True
+WINDOW jump=7 speed=1.8 direction=1 approaching=5: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=1.8 direction=1 approaching=5: 0/102 native crossings; apex=1.025; ceiling=True; floorLanding=True
+WINDOW jump=7 speed=1.8 direction=-1 approaching=0: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=1.8 direction=-1 approaching=0: 0/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+WINDOW jump=7 speed=1.8 direction=-1 approaching=5: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=1.8 direction=-1 approaching=5: 0/102 native crossings; apex=1.002; ceiling=True; floorLanding=True
+WINDOW jump=7 speed=4.5 direction=1 approaching=0: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=4.5 direction=1 approaching=0: 0/102 native crossings; apex=1.011; ceiling=False; floorLanding=True
+WINDOW jump=7 speed=4.5 direction=1 approaching=5: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=4.5 direction=1 approaching=5: 0/102 native crossings; apex=1.020; ceiling=True; floorLanding=True
+WINDOW jump=7 speed=4.5 direction=-1 approaching=0: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=4.5 direction=-1 approaching=0: 0/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+WINDOW jump=7 speed=4.5 direction=-1 approaching=5: min=-1.00 max=-1.00 longest=0.00
+jump=7 gravity=25 speed=4.5 direction=-1 approaching=5: 0/102 native crossings; apex=1.002; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=1.8 direction=1 approaching=0: min=1.80 max=2.80 longest=1.00
+jump=10.48 gravity=25 speed=1.8 direction=1 approaching=0: 11/102 native crossings; apex=2.194; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=1.8 direction=1 approaching=5: min=2.40 max=6.20 longest=3.80
+jump=10.48 gravity=25 speed=1.8 direction=1 approaching=5: 39/102 native crossings; apex=2.255; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=1.8 direction=-1 approaching=0: min=1.80 max=2.80 longest=1.00
+jump=10.48 gravity=25 speed=1.8 direction=-1 approaching=0: 11/102 native crossings; apex=2.195; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=1.8 direction=-1 approaching=5: min=2.60 max=5.80 longest=3.20
+jump=10.48 gravity=25 speed=1.8 direction=-1 approaching=5: 33/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=4.5 direction=1 approaching=0: min=1.80 max=4.60 longest=2.80
+jump=10.48 gravity=25 speed=4.5 direction=1 approaching=0: 29/102 native crossings; apex=2.217; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=4.5 direction=1 approaching=5: min=2.60 max=8.00 longest=5.40
+jump=10.48 gravity=25 speed=4.5 direction=1 approaching=5: 55/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=4.5 direction=-1 approaching=0: min=1.80 max=4.40 longest=2.60
+jump=10.48 gravity=25 speed=4.5 direction=-1 approaching=0: 27/102 native crossings; apex=2.232; ceiling=True; floorLanding=True
+WINDOW jump=10.48 speed=4.5 direction=-1 approaching=5: min=2.90 max=7.50 longest=4.60
+jump=10.48 gravity=25 speed=4.5 direction=-1 approaching=5: 47/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=1.8 direction=1 approaching=0: min=1.80 max=2.40 longest=0.60
+jump=20 gravity=25 speed=1.8 direction=1 approaching=0: 7/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=1.8 direction=1 approaching=5: min=2.10 max=4.40 longest=2.30
+jump=20 gravity=25 speed=1.8 direction=1 approaching=5: 24/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=1.8 direction=-1 approaching=0: min=1.80 max=2.30 longest=0.50
+jump=20 gravity=25 speed=1.8 direction=-1 approaching=0: 6/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=1.8 direction=-1 approaching=5: min=2.20 max=4.00 longest=1.80
+jump=20 gravity=25 speed=1.8 direction=-1 approaching=5: 19/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=4.5 direction=1 approaching=0: min=1.80 max=3.40 longest=1.60
+jump=20 gravity=25 speed=4.5 direction=1 approaching=0: 17/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=4.5 direction=1 approaching=5: min=2.20 max=5.40 longest=3.20
+jump=20 gravity=25 speed=4.5 direction=1 approaching=5: 33/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=4.5 direction=-1 approaching=0: min=1.80 max=3.20 longest=1.40
+jump=20 gravity=25 speed=4.5 direction=-1 approaching=0: 15/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+WINDOW jump=20 speed=4.5 direction=-1 approaching=5: min=2.30 max=5.00 longest=2.70
+jump=20 gravity=25 speed=4.5 direction=-1 approaching=5: 28/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+DAMAGE per-contact-step=5.000 duplicateParts=2 noDuplicate=True grace=True boss=True clearAbove=True
+PASS 26314 native edit-mode checks using production movement/motor and authored cart solid parts. Not Play Mode, input-device, peer synchronization, or human acceptance.

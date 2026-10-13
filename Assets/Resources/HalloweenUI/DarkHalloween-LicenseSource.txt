@@ -1,0 +1,11 @@
+Dark Halloween by nemo — license source record, checked 2026-10-10.
+Official page: https://nonemo.itch.io/dark-halloween
+The official page states: Asset license — Creative Commons Zero v1.0 Universal.
+License reference: https://creativecommons.org/publicdomain/zero/1.0/
+Downloaded via the official free No thanks / Download buttons (no payment).
+Skull.png: original decorations/png@3x/skull@3x.png
+Ghost.png: original decorations/png@3x/ghost_medium@3x.png
+The source archive does not contain a separate LICENSE file. This record
+preserves the verified source page's license attribution; it is not a new license.
+Original source archive SHA256:
+30B8AE2AAD6FD72B279472600A10706B3A977E53C7F30C18654EE678BC7ADEF1

@@ -1,0 +1,9 @@
+SEGMENTED BOSS DELIVERY
+Native Unity 6000.3.6f1: authoring successful, dedicated native BossSegmentedOpponent prefab nested into BossFightArena. Existing BossFight scene instance inherits updated asset.
+189 isolated native life/ownership/render/reaction checks passed. Twelve native stage/view/viewport PNGs. Each stage animates its separate head and eight arm pivots; bounded plane and authored reset verified. All sampled playable-board patches had zero changed pixels from opponent visibility.
+110 native presentation/pointer/occlusion checks passed.
+1619 real Play arena checks passed: physical triggers fish3/ghost1, four exactly-once results, life variants, practice, own-end input, reactions, shared storm/audio return lifecycle. Editor setup/selection and background setting restored.
+Managed:1702 match rules,3275 input/scene checks,1302 life-stage/match progression checks passed.
+3091 preexisting nonboss asset SHA256 hashes unchanged. No task-owned Unity process remains.
+Art originals unchanged. Twenty-five normal PNG import metas; twenty-one sources configured as sprites. V1 has no supplied full-body reference; neutral head and shared gray arms are assembled. V1 full shadow intentionally reuses v2 silhouette; v3 uses its supplied full source. Full sources never render as additional contestants.
+Limitations: no connected multi-client coordinator session or human mouse/audio acceptance performed. Native pointer projection/ownership and physical arena were verified. Multiplayer Game/Lobby integration belongs to their owners.

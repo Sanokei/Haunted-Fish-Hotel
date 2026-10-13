@@ -1,0 +1,12 @@
+STAGED FOREGROUND FRAMING CORRECTION - NOT APPLIED
+Recorder owns Unity. No editor launched, Assets scene/prefab/runtime unchanged.
+The screenshots genuinely miss the intended reference: silhouettes are beneath the luminous image and disappear in source recording's baked black lower margin. Existing fish/ghost textures and Color.black stay intact.
+Manual native helper TheatreForegroundFraming.Apply() updates ONLY these authored transforms in both Assets/Scenes/theatre.unity and Assets/Resources/Theatre/TheatrePresentation.prefab:
+1) Owned black fish silhouette (child of OWN CHARACTER - horizontal A D lane): local Y=3.0, preserving X/Z/scale/material/color.
+2) Seated fish audience left: local Y=5.8, preserving X=-8/Z=-24/scale/material/color.
+3) Seated ghost audience right: local Y=5.8, preserving X=7.5/Z=-24/scale/material/color.
+DO NOT move the Walker root (local0,2.7,-25), its X lane limits, Exit GO/collider (-9,2.7,-25), camera or screen. Own visual follows A/D through its original parent and reaches the same exit threshold/collision plane.
+At orthographic camera Y10,size10 these artwork-only lifts raise contour tops from roughly24-25% viewport to39-40%, overlapping the current decoded preview's luminous lower edge near27% viewport by about15-20% of its illuminated height. This is a measured-image-informed prediction, NOT native proof.
+Replacement recordings may have less baked letterboxing. Reinspect actual decoded Fish AND Ghost frames after recorder finishes, then reduce lift if needed so contours overlap about10-20% of their luminous picture and do not cover captions. Keep glyphs above the contour tops; recorder must place captions above foreground band. No glow or lightened silhouette.
+Next explicit grant: publish helper into Assets/Editor, native apply, run existing TheatreNativeValidation for decoded screenshots/input/exit, inspect pixels, update existing screenshot Library identity only after final screenshot passes. Old version1 screenshot remains inaccurate and is NOT a corrected deliverable.
+Tab selected states also staged: teal background/bold selected label, dark inactive tab. Helper binds existing authored backgrounds and labels, creates no runtime UI. Lift3.0 world units corresponds to108px at1280x720 orthographic height20. Actual new-video render must still verify captions and appropriate overlap.

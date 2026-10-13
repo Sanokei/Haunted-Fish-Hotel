@@ -1,0 +1,16 @@
+jump=7 gravity=25 speed=1.8 direction=1 approaching=0: 0/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=7 gravity=25 speed=1.8 direction=1 approaching=5: 3/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=7 gravity=25 speed=1.8 direction=-1 approaching=0: 0/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=7 gravity=25 speed=1.8 direction=-1 approaching=5: 3/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=7 gravity=25 speed=4.5 direction=1 approaching=0: 0/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=7 gravity=25 speed=4.5 direction=1 approaching=5: 18/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=7 gravity=25 speed=4.5 direction=-1 approaching=0: 0/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=7 gravity=25 speed=4.5 direction=-1 approaching=5: 18/102 native crossings; apex=1.002; ceiling=False; floorLanding=True
+jump=11 gravity=25 speed=1.8 direction=1 approaching=0: 0/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+jump=11 gravity=25 speed=1.8 direction=1 approaching=5: 14/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+jump=11 gravity=25 speed=1.8 direction=-1 approaching=0: 0/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+jump=11 gravity=25 speed=1.8 direction=-1 approaching=5: 14/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+jump=11 gravity=25 speed=4.5 direction=1 approaching=0: 0/102 native crossings; apex=2.280; ceiling=True; floorLanding=True
+FAIL System.Exception: Native sprint crossings have multiple valid launch positions
+  at JumpNativeValidation.<Run>g__Check|5_1 (System.Boolean value, System.String message, JumpNativeValidation+<>c__DisplayClass5_1& ) [0x0001a] in C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Assets\Editor\JumpNativeValidation.cs:29 
+  at JumpNativeValidation.Run () [0x0077d] in C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Assets\Editor\JumpNativeValidation.cs:41 

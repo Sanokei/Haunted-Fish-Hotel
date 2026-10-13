@@ -1,0 +1,1 @@
+PASS8PrettyObject roots;6scoped reusable prefab instances; explicit managers/anchors; 316 original scene references and world poses preserved; original wrapper asset retained. Native gameplay/render followup required.

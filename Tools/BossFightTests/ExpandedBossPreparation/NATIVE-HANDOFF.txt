@@ -1,0 +1,25 @@
+NATIVE HANDOFF - 2026-10-11
+Runtime/authoring published. Owned native batch PID11280 exited after35 real physical checks PASS.
+New interactive Unity editor PID16892 subsequently opened via Hub, plus asset-import workers. It is not our batch; do not kill it or start a second editor. No final retry was launched.
+
+CONFIRMED native35: six authored Arts mesh slots; exactly2 physical strikers; authored constraints116/84; hover no capture; actual fish click-drag X/Z move and own-half clamp; release; cue-ball cannot capture; actual ghost-end capture and physical mirroredX/Z; real cue-ball1/2/3 contact breakage; survivingdefense bounce; new-match rack health reset. Actual live Unity runtime+Mirage weaving compiled successfully.
+Managed3558defense/framing and3506theatrevisit/return/input.
+Protected Game.unity,Lobby.unity,HotelPlayer.cs,TrapManager.cs,GhostTrap.cs,GhostSelectionPresentation.cs hashes remain unchanged. Reserved additionalBossDefenseRequest appended with all preexistingrootComponent EditorJsonUtility JSON preserved. BossPrefab unchangedmetadataGUID andnativeauthoredsixslots. No user PNGs/radio sourceFBX/material edits.
+
+Theatre native14checks PASS afterselectedtabs,blackforegroundlift,sharedfonts,ack/position-return runtimepublished. Native decodedframe actual screenshot showsblackheads on illuminatedprojection lower19%; oldpreviewvideo itself stillblackletterboxes untilrecorderreplacement.
+Screenshot Library replacementconfirmed: libfile_cd521014f3288191ab93998b25096239 CURRENTVERSION2; file_0000000075b081f7ac633d53812f50ab. Screenshot Tools/TheatreTests/Evidence/player-video.png.
+LocalLibrary xattrnotpersisted: WindowsPython os.setxattr unavailable. Upload/replacement itself succeeded. Do notretryunsupportedxattr.
+TheatreRuntimeReady: Tools/TheatreTests/Evidence/runtime-ready.txt. Lobbyowner can bind exactpublishedTheatrePortal fields; no Lobbywrite in thisbatch. OwnerRPCreturn+positionlatency gates coveredmanagedchecks andnativeweaving, notyetfullremote-hostreturnroundtrip.
+Varela shared nativebakecompleted first run andglyphmetrics/characterTablevalid. RepeatBakeBodyFontOnlyreturnsallcharactersmissing despiteexistingvalidtable; ourwrapperusesHasCharactersbeforeTryAdd andpreservesnativeatlas/Modak. Settingsowner shouldapplysameidempotencycheck in theirnativebakerbeforecallingagain. Shared .metaGUIDs preserved.
+
+IMPORTANT RENDER LIMIT: expanded-native PNGs from35checkrun show onlyHUD overblue becauseURPsecondarybasecamera clearedarena. Do NOT treat these as validBoss gameplay/screenshots oruploadthem. Physical35resultisvalid, actual scene/physics continued underneath. Nativecapturehelper nowcorrected to preservemaincameraRender andcopyonlyactualnativeHUDpixels inside authoredbottom12% exclusionband. This correction+additionalnativeactualrackdrag/negativeauthoritychecks are compiled source/published but NOT RERUN due newlyopenedinteractiveeditor.
+Finalfollowupneededincoordinatedidleeditor: rerun BossDefenseNativeBatch.Run with--boss-defense-validation only inexclusivebatchAFTERliveeditorcloses, orrunBossDefenseNativeRegression.RunInCurrentPlayScene inliveeditoronidleauthoredBossFightPlayMode explicitly. LiveentrydoesnotExitinteractiveeditor; authoredscenealreadyloaded required. No source/nativeauthoring Game/Lobbysaves.
+Latest addedchecks: actual3Drack raycapture+DragInputeventplacement, spectator/foreignslot/staleepoch/opponenthalf/stacking rejects. These7checks remainpendingnative; pureauthorityconstraints alreadytestedmanaged3558.
+Full two-peer owned RPC transport/rejection and remote replicated defense artwork not yet end-to-end proven; boundservercheckscompiled+nativeMirageweavingpassed. Do notclaimhumanmouse/gamepadacceptance.
+
+Stable recorder contract: Tools/BossFightTests/ExpandedBossPreparation/RECORDER-API-CONTRACT.txt.
+Exact public APIs: Arena.DragInput.Tick(actor,epoch,practice,allowed,screen,pressed,held,released,.05f), Arena.Defenses.Place(actor,epoch,slot,seq,tableRelative), DragInput.Reply(slot,seq,epoch,accepted).
+Actualnetwork: BossArenaCoordinator.UpdateLocal -> ownedSendBossInput/physicalMovePaddle; defenseevent -> BossDefenseRequest.Submit -> requireAuthorityServerRPC -> AcceptDefense scopedauthority -> Board.Place; realCollisionEnter -> Board.CueBallContact -> pureHitdedup. Neverfilmhovercapture/freecueballteleport ormanuallycallHit.
+Editorrecordingbothsides: BeginEditorPractice,SetLocalViewer(1,true),wait!Serving; SetEditorPracticeViewer(Fish/Ghost). Tickside1fish/2ghost privatepracticekey; fishSetEditorPracticeInput,ghostSetEditorPracticeGhostInput drivesactualproductionFixedUpdateMovePaddle. No networkcontestantidentitiesare fabricated. Defenseeventcallback Board.Place(side,Board.Epoch,...),rejectReplywithsameepoch,unsubscribeonfinish. Ghost3..5 fish0..2. Filmactualcollisiondamage.
+
+Earlymessage-to-parent toolcall was rejected byautomaticapprovalreview due insufficientexplicitmessagingauthorization. No workaround used; thislocalhandoff andfinalreport provide outcome.

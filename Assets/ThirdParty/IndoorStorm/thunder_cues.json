@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "timebase": "seconds",
+  "onset_note": "Approximate first clear thunder rise measured from waveform envelopes; includes only 60\u2013100 ms of lead-in, not a distance delay. Natural rolls have a broad onset.",
+  "schedule": "clipStartDsp = strikeDsp + desiredAcousticDelaySeconds - cue.onsetSeconds / pitch. Clamp scheduling to >= dspTime + 0.05 seconds if late; keep pitch=1 for precise timing. Trigger once per lightning strike group, not per flicker.",
+  "gain_note": "All WAVs are already conservatively leveled. Suggested gain is an additional art-direction starting point; rainSource.volume=1.0.",
+  "rain": {
+    "file": "HFH_Rain_Indoor_Mix_Loop_60s.wav",
+    "loop": true,
+    "volume": 1.0,
+    "fadeInSeconds": 1.5,
+    "fadeOutSeconds": 2.0
+  },
+  "cues": [
+    {
+      "file": "HFH_Thunder_Medium_Roll.wav",
+      "onsetSeconds": 0.06,
+      "suggestedVolume": 0.8,
+      "minDistanceDelaySeconds": 1.0,
+      "maxDistanceDelaySeconds": 2.2,
+      "weight": 3
+    },
+    {
+      "file": "HFH_Thunder_Soft_Crack.wav",
+      "onsetSeconds": 0.06,
+      "suggestedVolume": 0.7,
+      "minDistanceDelaySeconds": 0.6,
+      "maxDistanceDelaySeconds": 1.3,
+      "weight": 2
+    },
+    {
+      "file": "HFH_Thunder_Distant_Long.wav",
+      "onsetSeconds": 0.085,
+      "suggestedVolume": 1.0,
+      "minDistanceDelaySeconds": 2.2,
+      "maxDistanceDelaySeconds": 3.8,
+      "weight": 3
+    },
+    {
+      "file": "HFH_Thunder_Far_Rumble.wav",
+      "onsetSeconds": 0.1,
+      "suggestedVolume": 1.0,
+      "minDistanceDelaySeconds": 1.8,
+      "maxDistanceDelaySeconds": 3.2,
+      "weight": 3
+    }
+  ]
+}

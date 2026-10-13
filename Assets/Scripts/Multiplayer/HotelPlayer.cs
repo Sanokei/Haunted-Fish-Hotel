@@ -49,6 +49,8 @@ namespace HauntedFish.Multiplayer
         [SyncVar] public uint GhostId;
         [SyncVar] public bool RoundReleased;
         [SyncVar] public bool RoundIntroComplete;
+        [SyncVar] public bool RoundCinematicComplete, RoundReady;
+        [SyncVar] public int RoundReadyCount, RoundParticipantCount;
         [SyncVar] public float GhostSetupRemaining;
         [SyncVar] public bool InBossFight;
         [SyncVar] public bool BossWatching;
@@ -60,7 +62,8 @@ namespace HauntedFish.Multiplayer
         [SyncVar] public Vector3 BossReturnPosition;
         [SyncVar] public int BossResultVersion;
         [SyncVar] public bool BossWon;
-        [SyncVar] public float Spook;
+        [SyncVar] public float Health = 100;
+        [SyncVar] public bool IsDead;
         [SyncVar] public int GhostEmergenceVersion;
         [SyncVar] public Vector3 GhostEmergencePosition;
         public bool GhostSetupReady => RoundIntroComplete || RoundReleased;
@@ -72,14 +75,14 @@ namespace HauntedFish.Multiplayer
         [SyncVar] public bool GhostPlacementAccepted;
         [SyncVar] int _EditorRole = -1;
         public HotelControlMode ControlMode => !_Movement.GameActive ? HotelControlMode.Lobby :
-            !GhostSetupReady ? HotelControlMode.Selection : _EditorRole >= 0 ?
+            !GhostSetupReady ? HotelControlMode.Selection : IsDead ? HotelControlMode.Spectator : _EditorRole >= 0 ?
                 (_EditorRole == 1 ? HotelControlMode.Ghost : HotelControlMode.Fish) :
                 NetId == GhostId ? HotelControlMode.Ghost : HotelControlMode.Fish;
 
         public void SwitchEditorRole()
         {
 #if UNITY_EDITOR
-            if (!IsRelevantPlayer || !RoundReleased || InBossFight || BossHallwayLocked || !_Movement.GameActive) return;
+            if (IsDead || !IsRelevantPlayer || !RoundReleased || InBossFight || BossHallwayLocked || !_Movement.GameActive) return;
             bool ghost = ControlMode != HotelControlMode.Ghost;
             if (Networked) RequestEditorRole(ghost);
             else ApplyEditorRole(ghost);
@@ -89,7 +92,7 @@ namespace HauntedFish.Multiplayer
         void RequestEditorRole(bool ghost)
         {
 #if UNITY_EDITOR
-            if (RoundReleased && !InBossFight && !BossHallwayLocked && _Movement.GameActive) ApplyEditorRole(ghost);
+            if (!IsDead && RoundReleased && !InBossFight && !BossHallwayLocked && _Movement.GameActive) ApplyEditorRole(ghost);
 #endif
         }
         void ApplyEditorRole(bool ghost)
@@ -137,6 +140,12 @@ namespace HauntedFish.Multiplayer
             _GameCommands?.Acknowledge(this, version);
         }
 
+        [ServerRpc(requireAuthority = true)]
+        public void ReadyForGame(string key, int version)
+        {
+            _GameCommands?.Ready(this, key, version);
+        }
+
         [SyncVar] public string HeldTrapFamily = "", RoundStateKey = "";
         [SyncVar] public string ConveyorJson = "";
         [SyncVar] public int PossessionEffectVersion;
@@ -153,8 +162,11 @@ namespace HauntedFish.Multiplayer
             BossMatchEpoch = 0;
             BossArenaJson = "";
             BossResultVersion = 0;
-            RoundReleased = RoundIntroComplete = false;
-            GhostSetupRemaining = Spook = 0;
+            RoundReleased = RoundIntroComplete = RoundCinematicComplete = RoundReady = false;
+            RoundReadyCount = RoundParticipantCount = 0;
+            GhostSetupRemaining = 0;
+            Health = 100;
+            IsDead = false;
             GhostEmergenceVersion = PossessionEffectVersion = 0;
             GhostFlightReady = false;
         }
@@ -198,6 +210,8 @@ namespace HauntedFish.Multiplayer
         HotelSessionContext _Session;
         HotelPlayerMovement _Movement;
         HotelFishSprite _Visual;
+        HotelPlayerAudio _Audio;
+        float _NextInteractionSound;
         float _NextSend;
         bool _QueuedJump;
         GameObject _TriggerSensor;
@@ -233,6 +247,7 @@ namespace HauntedFish.Multiplayer
         {
             _Movement = GetComponent<HotelPlayerMovement>();
             _Visual = GetComponentInChildren<HotelFishSprite>(true);
+            _Audio = GetComponent<HotelPlayerAudio>();
             _Movement.SetSimulationAuthority(!Networked);
             // Network avatars travel with the session. The authored offline Editor
             // preview belongs to Game and must unload with its scene and input maps.
@@ -336,12 +351,12 @@ namespace HauntedFish.Multiplayer
         }
 
         [ServerRpc]
-        void SetTalking(bool value) => _Talking = value;
+        void SetTalking(bool value) => _Talking = !IsDead && value;
 
         void Update()
         {
             ConfigureMovement();
-            if (IsRelevantPlayer && ControlsReady && !InBossFight && !BossHallwayLocked)
+            if (!IsDead && IsRelevantPlayer && ControlsReady && !InBossFight && !BossHallwayLocked)
                 SendOwnedInput();
 
             if (!Networked || (Connected && IsServer))
@@ -361,7 +376,11 @@ namespace HauntedFish.Multiplayer
 
             if (_Visual) _Visual.gameObject.SetActive(ControlMode != HotelControlMode.Ghost && !InBossFight);
             _Movement.ShowLamp(_MouseLight, NetId);
+            if (_TriggerSensor) _TriggerSensor.SetActive(!IsDead && Connected && IsClient && !IsServer);
+            if (_Visual) _Visual.SetCorpse(IsDead);
             if (_Visual) _Visual.Present(_FacingLeft, _Walking && ControlsReady, _Talking && ControlsReady, _Running && ControlsReady);
+            if (_Audio) _Audio.Present(_Walking && ControlsReady && !InBossFight && ControlMode != HotelControlMode.Ghost, _Running);
+            if (IsRelevantPlayer && ControlsReady && !InputBlocked && _Movement.InteractPressed) RequestInteractionSound();
         }
 
         void ConfigureMovement()
@@ -369,10 +388,10 @@ namespace HauntedFish.Multiplayer
             bool ownerReady = !Networked || Identity.Owner == null || Identity.Owner.SceneIsReady;
             bool sharedDialogue = DialogueManager.Instance && DialogueManager.Instance.IsSharedDialogue;
             bool inputBlocked = InputBlocked;
-            var ready = ControlsReady && ownerReady && !InBossFight && !BossHallwayLocked && ControlMode != HotelControlMode.Selection &&
+            var ready = !IsDead && ControlsReady && ownerReady && !InBossFight && !BossHallwayLocked && ControlMode != HotelControlMode.Selection &&
                 (ControlMode != HotelControlMode.Fish || RoundReleased);
             _Movement.SetMode(ControlMode);
-            _Movement.SetSimulationAuthority((!Networked || (Connected && IsServer)) && ControlMode != HotelControlMode.Ghost && !InBossFight && !BossHallwayLocked);
+            _Movement.SetSimulationAuthority((!Networked || (Connected && IsServer)) && !IsDead && ControlMode != HotelControlMode.Ghost && !InBossFight && !BossHallwayLocked);
             _Movement.SetControlState(ready, IsRelevantPlayer, inputBlocked);
             _Movement.SetBossControlState(InBossFight && IsRelevantPlayer && ControlsReady && !inputBlocked);
             _Movement.SharedDialogueLocked = sharedDialogue;
@@ -400,7 +419,7 @@ namespace HauntedFish.Multiplayer
         void SetInput(int mode, Vector2 move, bool jump, Vector3 mouse, bool run)
         {
             ConfigureMovement();
-            if (!ControlsReady || InBossFight || BossHallwayLocked || (Identity.Owner != null && !Identity.Owner.SceneIsReady)) return;
+            if (IsDead || !ControlsReady || InBossFight || BossHallwayLocked || (Identity.Owner != null && !Identity.Owner.SceneIsReady)) return;
             if (mode != (int)ControlMode || ControlMode == HotelControlMode.Selection) return;
             if (!Finite(move.x) || !Finite(move.y) || !Finite(mouse.x) || !Finite(mouse.y) || !Finite(mouse.z)) return;
             _Movement.AcceptInput(Vector2.ClampMagnitude(move, 1), jump, mouse, run && ControlMode == HotelControlMode.Fish);
@@ -429,20 +448,64 @@ namespace HauntedFish.Multiplayer
             _MouseLight = point + Vector3.right;
         }
 
-        internal void TakeFishBody(HotelPlayer fish)
+        internal void BecomeSpectator(float floorY)
         {
-            Teleport(fish.transform.position);
-            _FacingLeft = fish._FacingLeft;
-            _Movement.FaceDirection(_FacingLeft ? Vector3.left : Vector3.right);
-            _Walking = _Running = false;
+            if (IsDead || (Networked && !IsServer) || ControlMode != HotelControlMode.Fish) return;
+            IsDead = true;
+            ControlledCube = -1;
+            HeldTrapFamily = "";
+            ResetEditorRole();
+            ResetSceneMotion();
+            // Retain this network avatar as the corpse, resting on the hallway floor.
+            var body = BodyController;
+            float halfHeight = body ? Mathf.Max(body.radius, body.height * .5f) : .875f;
+            float centerY = body ? body.center.y : 0;
+            Teleport(new Vector3(transform.position.x, floorY + halfHeight - centerY, transform.position.z));
+            _Movement.SetSimulationAuthority(false);
+            if (_TriggerSensor) _TriggerSensor.SetActive(false);
         }
 
         [ServerRpc]
         public void RequestDialogue(int action, string story, Vector3 anchor, int choice, int revision,
             string inputKey, string inputValue)
         {
-            if (SharedDialogue.Instance)
+            if (!IsDead && SharedDialogue.Instance)
                 SharedDialogue.Instance.HandleRequest(this, action, story, anchor, choice, revision, inputKey, inputValue);
+        }
+
+        [ServerRpc]
+        public void RequestLobbyProp(int prop)
+        {
+            if (LobbyCursorManager.Instance && LobbyCursorManager.Instance.AcceptProp(this, prop)) RpcLobbyProp(prop);
+        }
+
+        public void PlayJumpSound()
+        {
+            if (Connected && IsServer) RpcFishSound(0);
+            else if (!Networked && _Audio) _Audio.PlayEvent(0);
+        }
+
+        public void RequestInteractionSound()
+        {
+            if (Connected) ServerInteractionSound();
+            else if (_Audio) _Audio.PlayEvent(1);
+        }
+
+        [ServerRpc]
+        void ServerInteractionSound()
+        {
+            if (IsDead || !ControlsReady || ControlMode == HotelControlMode.Ghost || Time.unscaledTime < _NextInteractionSound) return;
+            _NextInteractionSound = Time.unscaledTime + .15f;
+            RpcFishSound(1);
+        }
+
+        [ClientRpc]
+        void RpcFishSound(int kind) { if (_Audio) _Audio.PlayEvent(kind); }
+
+        [ClientRpc]
+        void RpcLobbyProp(int prop)
+        {
+            if (LobbyCursorManager.Instance) LobbyCursorManager.Instance.PlayProp(prop);
         }
     }
 }

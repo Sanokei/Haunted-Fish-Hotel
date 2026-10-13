@@ -1,0 +1,1 @@
+PASS native Unity 6000.3.6f1 compile/import; all7 Lobby/Storm helpers have no InitializeOnLoad attribute; canonical Windows/WebGL and NoTarget mapping; authored storm lifecycle/profile checks and source audio inspection fresh; actual Lobby radio scene saved with11 verified refs; original active scene restored and no Play entered. Live gameplay/listening remains untested.

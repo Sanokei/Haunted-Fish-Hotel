@@ -1,0 +1,1 @@
+PASS native FBX 5.670m width; collider-free split6 scale2.5; four URP materials; world film shader imported without errors; UI disabled; owned walker pose preserved. Native playback/render follows.

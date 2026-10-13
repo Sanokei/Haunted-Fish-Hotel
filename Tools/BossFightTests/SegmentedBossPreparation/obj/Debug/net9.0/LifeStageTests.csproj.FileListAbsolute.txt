@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\bin\Debug\net9.0\LifeStageTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\bin\Debug\net9.0\LifeStageTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\bin\Debug\net9.0\LifeStageTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\bin\Debug\net9.0\LifeStageTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\bin\Debug\net9.0\LifeStageTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\refint\LifeStageTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\LifeStageTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\SegmentedBossPreparation\obj\Debug\net9.0\ref\LifeStageTests.dll

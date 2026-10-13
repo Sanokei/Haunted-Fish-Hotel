@@ -1,0 +1,12 @@
+Halloween menu source records, 2026-10-10
+Button.png = original PNG/Extra/Default/button_rectangle_line.png
+Panel.png = original PNG/Extra/Default/input_rectangle.png
+Source: https://kenney.nl/assets/ui-pack (CC0; bundled Kenney-License.txt)
+Heading font: https://github.com/google/fonts/tree/main/ofl/creepster
+Original Creepster-Regular.ttf; bundled Creepster-OFL.txt (OFL 1.1).
+Only headings use Creepster; body text retains authored TMP font.
+Both control sprites use 8 px borders and Sliced rendering.
+Dark Halloween original Skull/Ghost ornaments were downloaded independently
+through the official free flow. See DarkHalloween-LicenseSource.txt.
+The Library bundle transfer failed; no Library metadata was bypassed.
+Optional Resources/HalloweenMenuTheme can override font, panel, controls and decorations.

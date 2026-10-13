@@ -1,0 +1,34 @@
+[
+  {
+    "Path": "Assets/Scripts/BossFight/BossCharacterPresentation.cs",
+    "SHA256": "9C04F8F214A33E72C3D0259D2BC68F1E37A949E7C0FB0A5348EF3ABA87CF0ABD"
+  },
+  {
+    "Path": "Assets/Scripts/BossFight/BossOpponentShadow.cs",
+    "SHA256": "58DB0B0A56C210015221D12F19C7C030DCF06E0F34646FA8113A5F2D49B45F70"
+  },
+  {
+    "Path": "Assets/Resources/BossFight/BossFightArena.prefab",
+    "SHA256": "1C874D144A286B3CB01D76B49A7844367D611DEC59BD8EA0ECE9DF52A1966396"
+  },
+  {
+    "Path": "Assets/Scenes/BossFight.unity",
+    "SHA256": "6F842DA0C358E8762CE443F1BAE96C1C053A64800A54A8788A093E313E419549"
+  },
+  {
+    "Path": "Assets/Editor/BossArenaValidation.cs",
+    "SHA256": "335EEA905C0480CC59462D1438DC20A44D4BF87073AF593AD182EB29F8661B47"
+  },
+  {
+    "Path": "Assets/Editor/BossPresentationNativeValidation.cs",
+    "SHA256": "AED06074B661361A79EAC158EEE596F76CF03B99A9F09BEA57863F8EA742307D"
+  },
+  {
+    "Path": "Tools/BossFightTests/BossInputAndSceneTests.cs",
+    "SHA256": "EF745D764A5B09FCD33B32137A2AD37828E065D86E09B75161B3211A96FE36E7"
+  },
+  {
+    "Path": "Assets/Scripts/BossFight/BossArenaManager.cs",
+    "SHA256": "9435DF4E3E55D6754FFD0DCD380A3BA8F7BEE1810336861B78EF2315790C06AC"
+  }
+]

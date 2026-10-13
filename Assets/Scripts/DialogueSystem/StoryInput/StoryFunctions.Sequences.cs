@@ -4,7 +4,7 @@ using Ink.Runtime;
 
 namespace Monologue.Dialogue
 {
-    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI, Spin }
+    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI, Spin, LobbyShot, LobbyLine }
 
     public readonly struct StorySequenceStep
     {
@@ -51,6 +51,16 @@ namespace Monologue.Dialogue
         // An automatic local sequence supplies a queue so operations run in Ink order.
         public static void BindAnimationFunctions(Story story, Action<StorySequenceStep> queue = null)
         {
+            story.BindExternalFunction("LobbyShot", (string tag, float seconds) =>
+            {
+                if (queue == null) throw new InvalidOperationException("LobbyShot requires a local introduction sequence.");
+                queue(new StorySequenceStep(StorySequenceStepKind.LobbyShot, tag, seconds: seconds));
+            });
+            story.BindExternalFunction("LobbyLine", (string text, float seconds) =>
+            {
+                if (queue == null) throw new InvalidOperationException("LobbyLine requires a local introduction sequence.");
+                queue(new StorySequenceStep(StorySequenceStepKind.LobbyLine, "player", text, seconds: seconds));
+            });
             story.BindExternalFunction("CreateUI", (string prefab, string instance, string parent) =>
             {
                 if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.CreateUI, instance, prefab, parent: parent));
@@ -109,6 +119,8 @@ namespace Monologue.Dialogue
         }
         public static void UnbindAnimationFunctions(Story story)
         {
+            story.UnbindExternalFunction("LobbyShot");
+            story.UnbindExternalFunction("LobbyLine");
             story.UnbindExternalFunction("CreateUI");
             story.UnbindExternalFunction("ExpandPanel");
             story.UnbindExternalFunction("FlashFrames");

@@ -1,0 +1,1 @@
+PASS native checks=109 authored geometry, physical two-axis dragging and real cue-ball contacts

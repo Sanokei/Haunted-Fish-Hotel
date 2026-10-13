@@ -126,7 +126,7 @@ namespace Monologue.Dialogue
             var advance = (keyboard != null && (keyboard.spaceKey.wasPressedThisFrame ||
                 keyboard.eKey.wasPressedThisFrame || keyboard.fKey.wasPressedThisFrame)) ||
                 (mouse != null && mouse.leftButton.wasPressedThisFrame && CurrentStory.currentChoices.Count == 0);
-            if (advance) ContinueStory();
+            if (advance && !_DialoguePanel.TryRevealTyping()) ContinueStory();
         }
         public void ContinueStory()
         {
@@ -158,7 +158,7 @@ namespace Monologue.Dialogue
         }
         public void EnterDialogMode(TextAsset inkAsset, DialogueAudience audience, Vector3 anchor)
         {
-            if (IsSharedDialogue) return;
+            if (IsSharedDialogue || dialogueOpen) return;
             if (audience == DialogueAudience.Everyone && SharedDialogue.Instance && SharedDialogue.Instance.Open(inkAsset, anchor)) return;
             DialogueAnchor = anchor;
             EnterDialogMode(inkAsset);

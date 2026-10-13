@@ -1,0 +1,145 @@
+{
+  "Fish": {
+    "source": "C:\\Users\\wkeif\\Documents\\Codex\\2026-10-11\\task-4\\TutorialEvidence\\FishTutorial-20261011-195827.mp4",
+    "source_seconds": 40.5333,
+    "chapters": [
+      {
+        "heading": "You Are The Fish",
+        "body": "Reach the stairwell while avoiding the ghost's traps.",
+        "card_seconds": 3.966666666666667
+      },
+      {
+        "heading": "Move",
+        "body": "A / D or arrow keys walk. Gamepad: left stick.",
+        "card_seconds": 4.733333333333333
+      },
+      {
+        "heading": "Run",
+        "body": "Hold Shift to run. Gamepad: click the left stick.",
+        "card_seconds": 4.333333333333333
+      },
+      {
+        "heading": "Jump",
+        "body": "Space jumps from the ground. Gamepad: A.",
+        "card_seconds": 3.6
+      },
+      {
+        "heading": "Clear The Traps",
+        "body": "Run and jump over obstacles. A cart can move; a chandelier can fall.",
+        "card_seconds": 5.833333333333333
+      },
+      {
+        "heading": "Look Into The Dark",
+        "body": "Move your mouse to aim the spotlight. Watch the floor and ceiling.",
+        "card_seconds": 5.466666666666667
+      },
+      {
+        "heading": "The Stairwell",
+        "body": "Reach the door, then press E. Gamepad: X. This starts the ghost challenge.",
+        "card_seconds": 5.833333333333333
+      },
+      {
+        "heading": "Watch Your Spook",
+        "body": "Moving or active traps raise spook on contact. At 100, you become the ghost; the old ghost takes your fish body.",
+        "card_seconds": 8.8
+      },
+      {
+        "heading": "Ready For The Round",
+        "body": "Read your role page and choose Ready. Everyone must be ready, then the ghost has a 10-second setup before you move.",
+        "card_seconds": 8.8
+      }
+    ],
+    "segments": 17,
+    "output": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\TutorialVideos\\FishTutorialProduction.mp4",
+    "note": ""
+  },
+  "Ghost": {
+    "source": "C:\\Users\\wkeif\\Documents\\Codex\\2026-10-11\\task-4\\TutorialEvidence\\GhostTutorial-20261011-195910.mp4",
+    "source_seconds": 35.5333,
+    "chapters": [
+      {
+        "heading": "You Are The Ghost",
+        "body": "Use traps to spook the fish. Packages arrive on the conveyor above the hallway.",
+        "card_seconds": 6.2
+      },
+      {
+        "heading": "Fly",
+        "body": "WASD or arrow keys flies in two dimensions. Gamepad: left stick.",
+        "card_seconds": 5.1
+      },
+      {
+        "heading": "Open A Package",
+        "body": "Fly close to a package and press E. Gamepad: X. You now carry its trap.",
+        "card_seconds": 6.566666666666666
+      },
+      {
+        "heading": "Carry It To The Hallway",
+        "body": "Fly down to a clear floor space. You cannot place over another trap or a fish.",
+        "card_seconds": 6.933333333333334
+      },
+      {
+        "heading": "The Safe Hallway",
+        "body": "The starting hallway forbids trap footprints and cart travel.",
+        "card_seconds": 4.333333333333333
+      },
+      {
+        "heading": "Place",
+        "body": "With a valid floor preview, press E / X to place the held trap.",
+        "card_seconds": 6.2
+      },
+      {
+        "heading": "Possess",
+        "body": "Fly near your placed trap and press E / X to control it.",
+        "card_seconds": 5.833333333333333
+      },
+      {
+        "heading": "Shopping Cart",
+        "body": "While possessed, A / D or left stick moves the cart. It collides with the real hallway and bodies.",
+        "card_seconds": 8.066666666666666
+      },
+      {
+        "heading": "Unpossess",
+        "body": "E / X releases control so you can fly again.",
+        "card_seconds": 4.733333333333333
+      },
+      {
+        "heading": "Falling Chandelier",
+        "body": "Carry a chandelier. Aim at a clear ceiling position with the mouse within reach, then E / X places it.",
+        "card_seconds": 8.433333333333334
+      },
+      {
+        "heading": "Drop It",
+        "body": "Possess the chandelier, then press Space. Gamepad: A. Time the drop as a fish passes.",
+        "card_seconds": 6.566666666666666
+      },
+      {
+        "heading": "Reset",
+        "body": "F resets a controlled trap if its reset position is clear. Gamepad: B.",
+        "card_seconds": 5.833333333333333
+      },
+      {
+        "heading": "Click Trap",
+        "body": "Possess the stationary click trap. Click its body to activate it; it does not drive like the cart.",
+        "card_seconds": 7.666666666666667
+      },
+      {
+        "heading": "Dispose",
+        "body": "Q discards a held trap or removes the trap you are currently possessing.",
+        "card_seconds": 5.833333333333333
+      },
+      {
+        "heading": "Spook And Role Swap",
+        "body": "Moving or active traps raise spook on contact. At 100, the fish becomes the ghost and you take its fish body.",
+        "card_seconds": 8.8
+      },
+      {
+        "heading": "Ready And Setup",
+        "body": "Choose Ready on your role page. Once everyone is ready, use your 10-second setup before the fish is released.",
+        "card_seconds": 8.066666666666666
+      }
+    ],
+    "segments": 31,
+    "output": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\TutorialVideos\\GhostTutorialProduction.mp4",
+    "note": "Archived Ghost footage ends during drop; later mechanics are explained by cards."
+  }
+}

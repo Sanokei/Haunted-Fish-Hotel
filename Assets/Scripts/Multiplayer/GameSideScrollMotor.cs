@@ -94,16 +94,20 @@ namespace HauntedFish.Multiplayer
             if (_Controller.isGrounded)
             {
                 if (_Vertical < 0) _Vertical = -2;
-                if (_PendingJump && _Movement.CanMove) _Vertical = JumpSpeed;
+                if (_PendingJump && _Movement.CanMove) { _Vertical = JumpSpeed; _Movement.PlayJumpSound(); }
             }
             _PendingJump = false;
+            // Integrate constant acceleration over this step; using the final
+            // velocity for the whole step made jump height depend on frame rate.
+            float verticalStep = _Vertical * delta - .5f * _Movement.Gravity * delta * delta;
             _Vertical -= _Movement.Gravity * delta;
             float horizontal = _Movement.CanMove ? _Axis * (_Run ? _Movement.RunningSpeed : _Movement.WalkingSpeed) : 0;
-            if (!_Movement.TryMove(new Vector3(horizontal, _Vertical, 0) * delta))
+            if (!_Movement.TryMove(new Vector3(horizontal * delta, verticalStep, 0)))
             {
                 ResetMotion();
                 return;
             }
+            if (_Vertical > 0 && (_Movement.LastCollisionFlags & CollisionFlags.Above) != 0) _Vertical = 0;
             var point = transform.position;
             if (_Environment is GameSceneController scene) point = scene.ClampFish(_Movement, point);
             else point.z = 0;

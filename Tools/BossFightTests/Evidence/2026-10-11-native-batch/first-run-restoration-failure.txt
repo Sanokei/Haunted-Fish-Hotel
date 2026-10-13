@@ -1,0 +1,1 @@
+FAIL owned native batch; FAIL test-helper restoration: 62 physical checks passed, but SceneSetup JSON lost loaded/active fields; owned batch will exit and helper will be corrected.

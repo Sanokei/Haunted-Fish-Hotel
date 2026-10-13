@@ -1,0 +1,125 @@
+{
+  "measurement": "FFmpeg loudnorm input analysis (EBU R128, oversampled true peak). WAV exports measured after quantization.",
+  "quality_assurance": {
+    "pcm_clipped_samples": 0,
+    "all_finite": true,
+    "runtime_wavs": "48000 Hz, stereo, signed 16-bit PCM, TPDF dither",
+    "overlap_test": "All 16 thunder cue pairs, starts 8 seconds apart, mixed with rain at unity gain. Sample peak measurement, not whole-game mastering.",
+    "worst_overlap_sample_peak_dbfs": -9.4,
+    "worst_pair_indices": [
+      2,
+      0
+    ],
+    "rain_seam_step_dbfs": -49.72,
+    "listening_test": "Not performed; audible character and final game mix still need headphone/speaker audition."
+  },
+  "assets": [
+    {
+      "integrated_lufs": -31.49,
+      "true_peak_dbtp": -17.97,
+      "loudness_range_lu": 1.8,
+      "filename": "HFH_Rain_Indoor_Mix_Loop_60s.wav",
+      "duration_seconds": 60.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "bit_depth": 16,
+      "loop": true,
+      "sample_peak_dbfs": -17.972,
+      "rms_dbfs": -34.842,
+      "dc_offset_dbfs": -240.0,
+      "gain_db": 0,
+      "sources": [
+        "rain",
+        "window"
+      ],
+      "notes": "Unity-ready bed. Sum of InteriorBody + WindowTexture stems at unity; use this OR those two stems.",
+      "sha256": "04fc0096f5bfc00ce8eb09af13e889e7de2b39844849e1a905a242b3b5412069",
+      "boundary_step_dbfs": -49.784,
+      "boundary_step_vs_typical_derivative_db": 0.548
+    },
+    {
+      "integrated_lufs": -26.64,
+      "true_peak_dbtp": -10.0,
+      "loudness_range_lu": 22.0,
+      "filename": "HFH_Thunder_Medium_Roll.wav",
+      "duration_seconds": 10.039979,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "bit_depth": 16,
+      "loop": false,
+      "sample_peak_dbfs": -9.996,
+      "rms_dbfs": -32.719,
+      "dc_offset_dbfs": -132.727,
+      "gain_db": -9.23,
+      "sources": [
+        "thunder_clap"
+      ],
+      "notes": "Source interval 0.66\u201310.70 s. Filtered for indoor perspective; controlled by gain without hard limiting.",
+      "sha256": "1a6a6bb4e3ae70245599117b3636cf881820ce904978fa4b0fcb5ebe3a333c73",
+      "onset_seconds": 0.06
+    },
+    {
+      "integrated_lufs": -30.72,
+      "true_peak_dbtp": -11.0,
+      "loudness_range_lu": 22.2,
+      "filename": "HFH_Thunder_Soft_Crack.wav",
+      "duration_seconds": 8.4,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "bit_depth": 16,
+      "loop": false,
+      "sample_peak_dbfs": -10.997,
+      "rms_dbfs": -33.171,
+      "dc_offset_dbfs": -128.849,
+      "gain_db": -9.96,
+      "sources": [
+        "thunder_crack"
+      ],
+      "notes": "Source interval 2.20\u201310.60 s; close texture softened for a lobby; no baked lightning delay.",
+      "sha256": "325723974be38f8c13997f20fc3022f4176e3472c996794480160eb350c0dd11",
+      "onset_seconds": 0.06
+    },
+    {
+      "integrated_lufs": -31.46,
+      "true_peak_dbtp": -15.0,
+      "loudness_range_lu": 22.4,
+      "filename": "HFH_Thunder_Distant_Long.wav",
+      "duration_seconds": 10.913021,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "bit_depth": 16,
+      "loop": false,
+      "sample_peak_dbfs": -15.002,
+      "rms_dbfs": -37.625,
+      "dc_offset_dbfs": -156.358,
+      "gain_db": -13.68,
+      "sources": [
+        "thunder_clap"
+      ],
+      "notes": "Distance variation of Medium_Roll, not a separate recording. 850 Hz low-pass, 0.92x speed, longer gentle onset/tail.",
+      "sha256": "407f54c5fbd6efb6aeb3112fd79e08181ee9f9ae09ebee45855eb0474aef390f",
+      "onset_seconds": 0.085
+    },
+    {
+      "integrated_lufs": -34.06,
+      "true_peak_dbtp": -14.0,
+      "loudness_range_lu": 19.4,
+      "filename": "HFH_Thunder_Far_Rumble.wav",
+      "duration_seconds": 8.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "bit_depth": 16,
+      "loop": false,
+      "sample_peak_dbfs": -13.997,
+      "rms_dbfs": -35.8,
+      "dc_offset_dbfs": -138.787,
+      "gain_db": -8.94,
+      "sources": [
+        "thunder_roll"
+      ],
+      "notes": "TRP source interval 140.6\u2013148.6 s. Independent dry distant thunder recording, softly occluded.",
+      "sha256": "5c501cc248b348643eeb2b426cdbc10e86a19d533f8c5d7b525896644d1bf2d0",
+      "onset_seconds": 0.1
+    }
+  ]
+}

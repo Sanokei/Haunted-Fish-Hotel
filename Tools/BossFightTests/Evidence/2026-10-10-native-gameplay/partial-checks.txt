@@ -1,0 +1,33 @@
+PARTIAL: initial native Play checks passed; full physics match timed out at stage1. These are log evidence, not a completed gameplay pass.
+BOSS CHECK authored references
+BOSS CHECK authored matched character reactions
+BOSS CHECK OBJ imported meshes
+BOSS CHECK table prefab colliders
+BOSS CHECK bounce material imported
+BOSS CHECK participant camera starts inactive
+BOSS CHECK observer cannot author
+BOSS CHECK editor practice has no network contestant IDs
+BOSS CHECK practice cannot award wins or overlap a real match
+BOSS CHECK practice serves physical cue ball
+BOSS CHECK settings pause freezes practice puck
+BOSS CHECK practice pause restores physical motion
+BOSS CHECK practice exits without scored result
+BOSS CHECK one authored contestant artwork per table side
+BOSS CHECK authority begins
+BOSS CHECK admission blocks input
+BOSS CHECK busy arena
+BOSS CHECK native Play camera at owned end 1
+BOSS CHECK native Play self hidden/opponent visible 1
+BOSS CHECK native Play pointer from owned end without puck teleport 1
+BOSS CHECK native Play owns one active attic storm/audio 1
+BOSS CHECK native Play camera at owned end 2
+BOSS CHECK native Play self hidden/opponent visible 2
+BOSS CHECK native Play pointer from owned end without puck teleport 2
+BOSS CHECK native Play owns one active attic storm/audio 2
+BOSS CHECK hallway spectator view
+BOSS CHECK spectator paddle input denied
+BOSS CHECK spectator view exit
+BOSS CHECK native Play return stops attic clock and every rain/thunder source
+BOSS CHECK participant API still excludes spectators
+BOSS CHECK zero identity cannot enable view
+BOSS CHECK participant view

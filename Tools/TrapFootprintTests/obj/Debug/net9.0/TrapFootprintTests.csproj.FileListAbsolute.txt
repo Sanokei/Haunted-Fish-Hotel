@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\bin\Debug\net9.0\TrapFootprintTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\bin\Debug\net9.0\TrapFootprintTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\bin\Debug\net9.0\TrapFootprintTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\bin\Debug\net9.0\TrapFootprintTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\bin\Debug\net9.0\TrapFootprintTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\refint\TrapFootprintTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\TrapFootprintTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\TrapFootprintTests\obj\Debug\net9.0\ref\TrapFootprintTests.dll

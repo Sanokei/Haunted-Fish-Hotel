@@ -1,0 +1,12 @@
+  Determining projects to restore...
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\LeanCommon.csproj (in 155 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\LeanGUI.csproj (in 156 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Assembly-CSharp-firstpass.csproj (in 158 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\InkEditor.csproj (in 155 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\LeanTransition.Editor.csproj (in 155 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\SimpleMan.CoroutineExtensions.csproj (in 155 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Assembly-CSharp.csproj (in 159 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\CW.Common.csproj (in 155 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Ink-Libraries.csproj (in 155 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\LeanPool.csproj (in 156 ms).
+  Restored C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\LeanTransition.csproj (in 155 ms).

@@ -1,0 +1,23 @@
+READY-UP / ROLE VIDEO HANDOFF
+
+Flow: authored cinematic -> host acknowledges that participant's minimum-duration intro -> its authored role page -> deliberate READY button / Enter / Space / gamepad south -> owner-only ReadyForGame(key,version) -> host validates current scene membership, round scope and intro -> all connected participants including ghost ready -> existing 10-second ghost setup advantage -> replicated final 5-to-1 countdown -> host releases fish together. Local presentation cannot start setup or unlock movement. Pages stay visible while waiting; there is no automatic ready timeout. Escape remains owned by the menu and existing InputBlocked state prevents page input while another UI captures it.
+
+Before release, join/disconnect resets pending round and cancels setup/deadline; next authoritative round has a fresh key/version and all participants must replay/ready again. Ghost loss also restarts selection. After release, a newcomer completes its own cinematic and explicit ready before the host admits it to that already-running round; existing players are not re-locked. Rejoin readiness never carries over.
+
+Authored replacements:
+- HallwayFishArtwork.prefab: eight serialized UI artwork slots + contact shadow, no HotelPlayer/NetworkIdentity clone.
+- AtticRoundCutscene.prefab: authored fish-stage RectTransform, eighteen upward streak Images, AtticTransitionAssets links both pages and fish prefab.
+- FishRoundHowTo.prefab / GhostRoundHowTo.prefab: distinct objective/controls, Ready button/status, actual VideoPlayer + RawImage video box, role-specific render target. Canvas order32763, above grace32761/attic32762; menu owner should use greater priority.
+- GraceCountdown.prefab: authored Canvas/scaler/Text/Outline with licensed Modak. Game.unity adds only its serialized binding for this refactor.
+Fish scale uses actor CharacterController height / actual hallway floor-to-ceiling clearance against authored artwork floor-to-ceiling space (current2/4.11*486 approximately236.5px). Actual roster fish sprite/color/geometry are bound into visual-only authored slots and actual X positions snapshot into the authored hallway; no player/network actors move or duplicate.
+
+GENUINE VIDEO STATUS: not recorded or imported. Both VideoPlayer clip references are deliberately empty and visible status says recording not connected. Do not claim the request complete or video verified.
+Prepared supported capture: Assets/Editor/GameTutorialCaptureTask.cs, compiled against installed Unity Recorder. It never enters Play/switches scenes/synthesizes input. Requires a released live Game participant in the requested role, authored output already MainCamera, and>=512MiB free. Records MainCamera real rendered gameplay at640x360 for8seconds, no audio/UI, variable rate with no frame-rate cap. It observes actual movement/jump or possession+action-input markers, logs limitations, and never labels procedural art as a recording.
+Minimal owner action in existing editor after Refresh:
+1. In a normal Game round finish the cinematic, have everyone press READY, wait for authoritative setup/countdown release.
+2. As fish choose Tools > Haunted Fish > Record tutorial > Fish walk and jump (8 seconds), focus Game and A/D then Space.
+3. As ghost prepare a usable trap; choose Ghost possess and activate (8 seconds), focus Game and E possess then its Space/click action. An existing editor role-switch may be used manually; capture itself never changes roles.
+4. Inspect both actual MP4s in C:/Users/wkeif/Documents/Codex/2026-10-09/task-3/TutorialCapture. Ghost markers prove possession/action input, not authoritative trap success; inspect the rendered effect.
+5. Stop Play, preserve unsaved scene work, then Tools > Haunted Fish > Record tutorial > Bind reviewed completed recordings (Edit mode). This imports the genuine VideoClips under Assets/TutorialVideos and binds each owned role prefab using LoadPrefabContents/SaveAsPrefabAsset only; no Game/Lobby scene save or switch.
+
+Native asset validation: compiled Assets/Editor/GameIntroPrefabValidationTask.cs runs once only in idle Edit mode with no dirty scenes/prefab stage/live actors; evidence at task-3/NativeIntroPrefabValidation/result.txt. This verifies native import/bindings only, not rendered layout/runtime/network success. No live editor control transport exists here; no second editor launched.

@@ -13,17 +13,88 @@ namespace HauntedFish.Multiplayer
         [SerializeField]
         Image _Left, _Right;
         [SerializeField] Rect _OpaqueArtBounds = new Rect(0, 0, 1, 1);
+        public Rect OpaqueArtBounds => _OpaqueArtBounds;
         Vector3 _Origin;
         Vector2 _Limits;
         int _Index;
         float _HalfWidth;
         GhostTrap _Trap;
         Image _AreaImage, _CartImage;
+        [SerializeField] Image[] _WorldImages;
+        [SerializeField] SpriteRenderer[] _WorldArt;
+        [SerializeField] Sprite _DangerPattern, _RangeMarker;
+        [SerializeField] MeshRenderer _PatternRenderer;
+        MaterialPropertyBlock _PatternBlock;
+        void PresentPattern(Camera camera)
+        {
+            if (!_PatternRenderer) return;
+            _PatternRenderer.enabled = _Root.activeInHierarchy;
+            if (!_PatternRenderer.enabled) return;
+            float depth = camera.WorldToScreenPoint(transform.position).z;
+            _Area.GetWorldCorners(_Corners);
+            for (int i=0;i<4;i++) _Corners[i] = camera.ScreenToWorldPoint(new Vector3(_Corners[i].x, _Corners[i].y, depth));
+            var art = _PatternRenderer.transform;
+            art.position = (_Corners[0] + _Corners[2]) * .5f;
+            art.rotation = camera.transform.rotation * _Area.rotation;
+            float width = Vector3.Distance(_Corners[0], _Corners[3]), height = Vector3.Distance(_Corners[0], _Corners[1]);
+            var scale = transform.lossyScale;
+            art.localScale = new Vector3(width / Mathf.Max(.001f,Mathf.Abs(scale.x)), height / Mathf.Max(.001f,Mathf.Abs(scale.y)), 1);
+            if (_PatternBlock == null) _PatternBlock = new MaterialPropertyBlock();
+            var rect = _DangerPattern.textureRect;
+            var texture = _DangerPattern.texture;
+            _PatternBlock.SetVector("_TextureRect", new Vector4(rect.x / texture.width, rect.y / texture.height, rect.width / texture.width, rect.height / texture.height));
+            _PatternBlock.SetVector("_Tiles", new Vector4(width / 1.3f, height / 1.3f, 0, 0));
+            _PatternBlock.SetFloat("_SharedTime", Time.unscaledTime);
+            _PatternRenderer.SetPropertyBlock(_PatternBlock);
+        }
+        readonly Vector3[] _Corners = new Vector3[4];
+        void CreateWorldArt()
+        {
+            // Renderer nodes and shared materials are saved in each production trap prefab.
+            if (_WorldImages == null || _WorldArt == null || _WorldImages.Length != _WorldArt.Length)
+                throw new System.InvalidOperationException("Bind authored trap presentation renderers.");
+            foreach (var image in _WorldImages) { image.enabled = false; image.raycastTarget = false; }
+        }
+        void UpdateWorldArt(Camera camera)
+        {
+            if (_WorldArt == null) return;
+            float depth = camera.WorldToScreenPoint(transform.position).z;
+            for (int i = 0; i < _WorldArt.Length; i++)
+            {
+                var image = _WorldImages[i];
+                var art = _WorldArt[i];
+                art.enabled = image != _AreaImage && _Root.activeInHierarchy && image.gameObject.activeInHierarchy && depth > camera.nearClipPlane;
+                art.flipX = image == _Right;
+                if (!art.enabled) continue;
+                var sprite = image.sprite;
+                if (!sprite) { art.enabled = false; continue; }
+                art.sprite = sprite;
+                art.color = image.color;
+                // Retain authored layout, pivot and camera effects in the world
+                // transparent pass, where sprite sorting can put fish in front.
+                image.rectTransform.GetWorldCorners(_Corners);
+                for (int c = 0; c < 4; c++)
+                    _Corners[c] = camera.ScreenToWorldPoint(new Vector3(_Corners[c].x, _Corners[c].y, depth));
+                art.transform.position = (_Corners[0] + _Corners[2]) * .5f;
+                art.transform.rotation = camera.transform.rotation * image.rectTransform.rotation;
+                var size = sprite.bounds.size;
+                var parentScale = transform.lossyScale;
+                art.transform.localScale = new Vector3(Vector3.Distance(_Corners[0], _Corners[3]) / Mathf.Max(.0001f, size.x * Mathf.Abs(parentScale.x)),
+                    Vector3.Distance(_Corners[0], _Corners[1]) / Mathf.Max(.0001f, size.y * Mathf.Abs(parentScale.y)), 1);
+                art.transform.position -= art.transform.TransformVector(sprite.bounds.center);
+            }
+        }
+        void OnDisable()
+        {
+            if (_PatternRenderer) _PatternRenderer.enabled = false;
+            if (_WorldArt != null) foreach (var art in _WorldArt) if (art) art.enabled = false;
+        }
         void Awake()
         {
             if (_Area)
                 _AreaImage = _Area.GetComponent<Image>();
             if (_Cart) _CartImage = _Cart.GetComponent<Image>();
+            if (_RangeMarker) { _Left.sprite = _Right.sprite = _RangeMarker; }
         }
 
         public void ConfigureTrap(GhostTrap trap)
@@ -42,13 +113,17 @@ namespace HauntedFish.Multiplayer
             if (_SceneArt)
                 _SceneArt.SetActive(false);
             _Root.SetActive(true);
+            CreateWorldArt();
         }
 
         void LateUpdate()
         {
             var camera = HotelViewCamera.Current;
             if (!camera || !_Root)
+            {
+                OnDisable();
                 return;
+            }
             if (_Trap)
             {
                 _Origin = _Trap.CaptureState().Origin;
@@ -88,9 +163,9 @@ namespace HauntedFish.Multiplayer
                     if (scene)
                     {
                         float hallwayHeight = scene.HallwayCeilingY - scene.HallwayBounds.max.y;
-                        float areaAspect = _AreaImage && _AreaImage.sprite ? _AreaImage.sprite.rect.width / _AreaImage.sprite.rect.height : _Trap.BackgroundSize.x / _Trap.BackgroundSize.y;
+                        float areaWidth = _Trap.BackgroundSize.x;
                         _Area.position = camera.WorldToScreenPoint(new Vector3(_Origin.x, scene.HallwayBounds.max.y + hallwayHeight * .5f, _Origin.z));
-                        _Area.sizeDelta = new Vector2(hallwayHeight * areaAspect * projectedRight.magnitude, hallwayHeight * height);
+                        _Area.sizeDelta = new Vector2(areaWidth * projectedRight.magnitude, hallwayHeight * height);
                     }
                     var art = _CartImage ? _CartImage.sprite : null;
                     float aspect = art ? art.rect.width * widthFraction / (art.rect.height * heightFraction) : 1;
@@ -99,7 +174,8 @@ namespace HauntedFish.Multiplayer
                     _Cart.position = camera.WorldToScreenPoint(transform.position + _Trap.ColliderOffset + Vector3.up * _Trap.BodyHalfSize.y);
                     _Cart.sizeDelta = new Vector2(artHeight * aspect * projectedRight.magnitude / widthFraction, artHeight * height / heightFraction);
                 }
-                _Left.rectTransform.sizeDelta = _Right.rectTransform.sizeDelta = new Vector2(4, _Area.sizeDelta.y);
+                float markerHeight = _Area.sizeDelta.y;
+                _Left.rectTransform.sizeDelta = _Right.rectTransform.sizeDelta = new Vector2(markerHeight * (1176f / 1400f), markerHeight);
                 if (_Trap.Phase == TrapPhase.Active && _Trap.InputMode == TrapInputMode.MouseClick)
                     _Cart.localScale = Vector3.one * (1 + .1f * Mathf.Sin(_Trap.CaptureState().Progress * Mathf.PI));
             }
@@ -124,6 +200,10 @@ namespace HauntedFish.Multiplayer
             if (!_Trap || _Trap.InputMode != TrapInputMode.MouseClick || _Trap.Phase != TrapPhase.Active)
                 _Cart.localScale = Vector3.one * (nearby && (!_Trap || _Trap.PlacementMode != TrapPlacementMode.HallwayCeiling) ? 1.12f : 1);
             _Left.color = _Right.color = possessed ? HotelPalette.Peach : HotelPalette.Moss;
+            if (possessed && _Trap && _Trap.PlacementMode == TrapPlacementMode.HallwayCeiling)
+                _Cart.rotation = Quaternion.Euler(0, 0, angle + 3 * Mathf.Sin(Time.unscaledTime * 2.2f));
+            PresentPattern(camera);
+            UpdateWorldArt(camera);
         }
     }
 }

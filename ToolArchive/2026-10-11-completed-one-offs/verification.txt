@@ -1,0 +1,8 @@
+PASS: 8 archived files hash verified; originals absent.
+PASS: zero dangling source or serialized asset references to archived helper names/GUIDs.
+PASS: all remaining Assets/Editor .cs compile, csc exit 0, against Unity 6000.3.6f1 installed references and Library/ScriptAssemblies/Assembly-CSharp.dll plus Recorder assemblies.
+Compiler response/output: 
+C:\Users\wkeif\AppData\Local\Temp\hfh-cleanup-20261011
+Unity was not running before archival. No Unity launched; no scene mutation, Play transition, or validation initiated.
+Retained LobbyAtmosphereAuthoringTask because LobbyStormRepairTask uses AuthorLightning; retained LobbyStormRepairTask because StormAuthoredNativeValidation uses RequireSafeEditMode.
+Retained Boss/Menu/Trap reusable validations and pending Game tutorial/intro tools; preserved all production assets and tests.

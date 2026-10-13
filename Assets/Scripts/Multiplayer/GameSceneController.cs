@@ -16,6 +16,29 @@ namespace HauntedFish.Multiplayer
         [SerializeField, Min(.1f)] float _GhostFlightSpeed = 8;
         [SerializeField] BoxCollider _HallwayFloor, _HallwayCeiling;
         [SerializeField] Text _SetupCaption;
+        [Tooltip("Assign licensed Modak Regular after font import; the countdown mirrors replicated setup time.")]
+        [SerializeField] Font _GraceCountdownFont;
+        Text _GraceCountdown;
+        [SerializeField] GraceCountdownPresentation _GraceCountdownPrefab;
+        [SerializeField] GameStormSceneBinding _Storm;
+        GraceCountdownPresentation _GraceView;
+        void RenderGraceCountdown(HotelPlayer local)
+        {
+            int second = local ? GameplayPresentationPolicy.CountdownSecond(local.RoundIntroComplete, local.RoundReleased, local.GhostSetupRemaining) : 0;
+            bool visible = second > 0;
+            if (!_GraceCountdown && visible && _GraceCountdownPrefab)
+            {
+                _GraceView = Instantiate(_GraceCountdownPrefab, transform, false);
+                _GraceCountdown = _GraceView.Digit;
+            }
+            if (!_GraceCountdown) return;
+            _GraceCountdown.gameObject.SetActive(visible);
+            if (visible)
+            {
+                if (_GraceCountdownFont) _GraceCountdown.font = _GraceCountdownFont;
+                _GraceCountdown.text = second.ToString();
+            }
+        }
         bool _SetupStarted;
         float _SetupDeadline;
         int _DisplayedSetupSecond = -1;
@@ -52,6 +75,7 @@ namespace HauntedFish.Multiplayer
         HauntedHotelMultiplayer _Session;
         readonly HashSet<HotelPlayer> _Players = new HashSet<HotelPlayer>();
         readonly GameRoundGate _Gate = new GameRoundGate();
+        readonly GameReadyGate _ReadyGate = new GameReadyGate();
         IHotelGameCommands _PlayerCommands;
         [SerializeField]
         Texture2D _SelectionArrow;
@@ -70,6 +94,19 @@ namespace HauntedFish.Multiplayer
         public TrapManager Traps => _Traps;
         [SerializeField] GameHauntingController _Haunting;
         public GameHauntingController Haunting => _Haunting;
+        // Dead members retain roster identity/readiness; only living fish count toward play.
+        public int LivingFishCount
+        {
+            get
+            {
+                int count = 0;
+                foreach (var player in _Players)
+                    if (player && player.RoundReleased && !player.IsDead && player.ControlMode == HotelControlMode.Fish &&
+                        player.RoundStateKey == _PlacementWorld.RoundKey && player.InventoryScope == _PlacementWorld.RoomScope) count++;
+                return count;
+            }
+        }
+        public bool AllFishDead => _Released && LivingFishCount == 0;
         public HauntedHotelMultiplayer Session => _Session;
 
         readonly List<HotelPlayer> _OrderedPlayers = new List<HotelPlayer>();
@@ -99,7 +136,11 @@ namespace HauntedFish.Multiplayer
 
             var players = _OrderedPlayers;
             if (players.Count == 0)
+            {
+                RenderGraceCountdown(null);
+                if (_SetupCaption) _SetupCaption.gameObject.SetActive(false);
                 return;
+            }
             bool authority = true, missingRoster = false, ready = true;
             int maximumVersion = 0;
             HotelPlayer current = null;
@@ -131,10 +172,12 @@ namespace HauntedFish.Multiplayer
                                 member.RoundReleased = false;
                                 member.GhostSetupRemaining = Mathf.Max(0, _SetupDeadline - Time.unscaledTime);
                                 _Gate.Join(member.NetId, current.RoundVersion, Time.unscaledTime);
+                                _ReadyGate.Join(member.NetId, current.RoundStateKey, current.RoundVersion);
                             }
 
                             member.RoundRoster = joinedRoster;
                         }
+                        PublishReadyStatus();
                     }
                 }
                 else
@@ -158,6 +201,7 @@ namespace HauntedFish.Multiplayer
                 string key = System.Guid.NewGuid().ToString("N");
                 _PlacementWorld.BeginRound(players[0].InventoryScope, key, version);
                 _Gate.Begin(players.Select(p => p.NetId), version, Time.unscaledTime);
+                _ReadyGate.Begin(players.Select(p => p.NetId), key, version);
                 foreach (var player in players)
                 {
                     player.ClearRoundInventory();
@@ -168,6 +212,7 @@ namespace HauntedFish.Multiplayer
                     player.GhostId = ghost;
                     player.RoundRoster = roster;
                     player.RoundVersion = version;
+                    player.RoundParticipantCount = players.Count;
                     if (player.NetId == ghost)
                         player.PlacedObjectsJson = _PlacementWorld.Snapshot;
                 }
@@ -197,6 +242,11 @@ namespace HauntedFish.Multiplayer
                         else
                             Acknowledge(local, _WatchedVersion);
                     }
+                }, () =>
+                {
+                    if (!local || local.RoundVersion != _WatchedVersion) return;
+                    if (local.Networked) local.ReadyForGame(local.RoundStateKey, _WatchedVersion);
+                    else MarkReady(local, local.RoundStateKey, _WatchedVersion);
                 });
             }
 
@@ -217,6 +267,7 @@ namespace HauntedFish.Multiplayer
                         if (member.RoundIntroComplete) member.RoundReleased = true;
                 }
             }
+            RenderGraceCountdown(local);
             if (_SetupCaption)
             {
                 bool show = local && local.RoundIntroComplete && !local.RoundReleased;
@@ -232,21 +283,47 @@ namespace HauntedFish.Multiplayer
 
         public void Acknowledge(HotelPlayer player, int version)
         {
-            if (!_Chosen || !_Players.Contains(player) || !_Gate.Finish(player.NetId, version, Time.unscaledTime))
-                return;
-            if (_Released || _SetupStarted)
+            if (!player || (player.Networked && !player.IsServer) || !_Chosen || !_Players.Contains(player) ||
+                player.RoundVersion != version || !_Gate.Finish(player.NetId, version, Time.unscaledTime)) return;
+            if (!_ReadyGate.FinishIntro(player.NetId, player.RoundStateKey, version)) return;
+            player.RoundCinematicComplete = true;
+        }
+        public void MarkReady(HotelPlayer player, string key, int version)
+        {
+            if (!player || (player.Networked && !player.IsServer) || !_Chosen || !_Players.Contains(player) ||
+                !player.RoundCinematicComplete || player.RoundStateKey != key || player.RoundVersion != version ||
+                !_ReadyGate.Ready(player.NetId, player.NetId, key, version)) return;
+            player.RoundReady = true;
+            if (_Released)
             {
-                player.RoundIntroComplete = true;
-                player.RoundReleased = _Released;
-                player.GhostSetupRemaining = Mathf.Max(0, _SetupDeadline - Time.unscaledTime);
+                // Late arrivals complete their own intro and deliberate ready before joining an already released round.
+                player.RoundIntroComplete = player.RoundReleased = true;
+                player.GhostSetupRemaining = 0;
             }
-            else
-                ReleaseIfFinished();
+            PublishReadyStatus();
+            ReleaseIfFinished();
+        }
+        void PublishReadyStatus()
+        {
+            foreach (var member in _Players) if (member)
+            {
+                member.RoundReadyCount = _ReadyGate.ReadyCount;
+                member.RoundParticipantCount = _ReadyGate.Count;
+            }
+        }
+        void ResetPendingRoster()
+        {
+            _Chosen = _SetupStarted = _Released = false; _SetupDeadline = 0;
+            foreach (var member in _Players) if (member)
+            {
+                member.RoundReleased = member.RoundIntroComplete = member.RoundCinematicComplete = member.RoundReady = false;
+                member.GhostSetupRemaining = 0; member.RoundRoster = "";
+            }
         }
 
         void ReleaseIfFinished()
         {
-            if (!_Chosen || _Released || _SetupStarted || _Players.Count == 0 || !_Gate.Complete)
+            if (!_Chosen || _Released || _SetupStarted || _Players.Count == 0 || !_Gate.Complete || !_ReadyGate.Complete)
                 return;
             _SetupStarted = true;
             _SetupDeadline = Time.unscaledTime + GhostSetupSeconds;
@@ -258,6 +335,7 @@ namespace HauntedFish.Multiplayer
                 }
         }
 
+        void OnDestroy() { if (_GraceView) Destroy(_GraceView.gameObject); }
         void OnEnable() => Activate();
         void OnDisable() => Exit();
         public void Enter(HauntedHotelMultiplayer session)
@@ -272,6 +350,7 @@ namespace HauntedFish.Multiplayer
                 return;
             _Entered = true;
             Current = this;
+            if (_Storm) _Storm.Begin();
             if (_EditorSwitch)
                 _EditorSwitch.enabled = Application.isEditor;
             if (_PlacementWorld)
@@ -286,7 +365,7 @@ namespace HauntedFish.Multiplayer
                 _GhostControls.Configure(_Camera, this);
             }
 
-            _PlayerCommands = new GamePlayerCommands(_PlacementWorld, _Traps, Acknowledge);
+            _PlayerCommands = new GamePlayerCommands(_PlacementWorld, _Traps, Acknowledge, MarkReady);
             HotelPlayer.PlayerEnabled += AttachPlayer;
             HotelPlayer.PlayerDisabled += DetachPlayer;
             for (int i = 0; i < HotelPlayer.ActivePlayers.Count; i++)
@@ -302,6 +381,7 @@ namespace HauntedFish.Multiplayer
             if (!_Entered)
                 return;
             _Entered = false;
+            if (_Storm) _Storm.Stop();
             if (Current == this)
                 Current = null;
             HotelPlayer.PlayerEnabled -= AttachPlayer;
@@ -318,6 +398,7 @@ namespace HauntedFish.Multiplayer
             _RosterDirty = true;
             _Chosen = _Watching = _Watched = _Released = _SetupStarted = false;
             if (_SetupCaption) _SetupCaption.gameObject.SetActive(false);
+            RenderGraceCountdown(null);
             if (_Selection)
                 _Selection.Close();
             if (_GhostControls)
@@ -347,16 +428,10 @@ namespace HauntedFish.Multiplayer
                 player.ClearRoundInventory();
             }
 
-            if (_Chosen && !_Released && !_SetupStarted && (!player.Networked || player.IsServer))
+            if (_Chosen && !_Released && (!player.Networked || player.IsServer))
             {
-                // New participants join through the same mandatory round presentation.
-                _Chosen = false;
-                foreach (var member in _Players)
-                    if (member)
-                    {
-                        member.RoundReleased = false;
-                        member.RoundRoster = "";
-                    }
+                // A pre-release roster change cancels countdown and starts a fresh scoped round for everyone.
+                ResetPendingRoster();
             }
 
             _Motors.Add(motor);
@@ -391,6 +466,12 @@ namespace HauntedFish.Multiplayer
             }
 
             _Gate.Remove(player.NetId);
+            _ReadyGate.Remove(player.NetId);
+            if (!player.Networked || player.IsServer)
+            {
+                if (!_Released) ResetPendingRoster();
+                else PublishReadyStatus();
+            }
             ReleaseIfFinished();
             _Motors.Remove(motor);
             motor.Unbind(this);

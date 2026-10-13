@@ -11,7 +11,7 @@ namespace HauntedFish.Multiplayer
     public sealed class LobbyManager : MonoBehaviour, IHotelScene
     {
         public void Enter(HauntedHotelMultiplayer session) => Bind(session);
-        public void Exit() => Bind(null);
+        public void Exit() { CancelIntroduction(false); StopLobbyStorm(); Bind(null); }
         public Vector3 SpawnPosition(int index) => new Vector3(index * 2.2f, 1.1f, 2f);
 
         [SerializeField] HotelLobbyPanel _Panel;
@@ -22,6 +22,7 @@ namespace HauntedFish.Multiplayer
         [SerializeField] Texture2D _DeskCursor;
         [SerializeField] LobbyCursorManager _CursorManager;
         public bool InspectionAllowed => isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && !MenuOpen && !IntroductionPlaying;
+        public bool AudioReady => isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && !IntroductionPlaying;
         [SerializeField] HauntedHotelMultiplayer _Lobby;
         [Header("Introduction (compiled Ink JSON)")]
         [SerializeField] TextAsset _IntroductionInk;
@@ -38,6 +39,8 @@ namespace HauntedFish.Multiplayer
         static bool RememberIntroduction => !Application.isEditor && !Debug.isDebugBuild;
         float _SkipHeldSeconds;
         public bool IntroductionPlaying { get; private set; }
+        public bool IntroductionPresentationReady => _IntroductionPresentation && _IntroductionPresentation.IsReady;
+        public bool IntroductionPending => !_IntroductionPlayed && _IntroductionInk && !(RememberIntroduction && PlayerPrefs.GetInt(IntroductionSeenKey, 0) == 1);
         readonly HashSet<HotelPlayer> _DeskPlayers = new HashSet<HotelPlayer>();
         void Awake()
         {
@@ -80,6 +83,7 @@ namespace HauntedFish.Multiplayer
         void OnEnable()
         {
             _SkipIntroduction.Enable();
+            if (_IntroductionPresentation) _IntroductionPresentation.SkipRequested += SkipIntroduction;
             PrepareIntroduction();
             _Panel.CopyRequested += CopyCode;
             _Panel.JoinRequested += JoinRoom;
@@ -94,10 +98,19 @@ namespace HauntedFish.Multiplayer
             }
             Refresh();
         }
+        void StopLobbyStorm()
+        {
+            if (!_LightningEffect) return;
+            _LightningEffect.StopAmbient();
+            var audio = _LightningEffect.GetComponentInChildren<LobbyStormAudio>(true);
+            if (audio) audio.StopAudio();
+        }
         void OnDisable()
         {
             _SkipIntroduction.Disable();
+            if (_IntroductionPresentation) _IntroductionPresentation.SkipRequested -= SkipIntroduction;
             CancelIntroduction(false);
+            StopLobbyStorm();
             if (_DeskZone) _DeskZone.ZonePresenceChanged -= OnZonePresenceChanged;
             _Panel.CopyRequested -= CopyCode;
             _Panel.JoinRequested -= JoinRoom;
@@ -169,7 +182,7 @@ namespace HauntedFish.Multiplayer
             Cursor.lockState = cursor ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.SetCursor(active && _AtDesk ? _DeskCursor : null, Vector2.zero, CursorMode.Auto);
             }
-            if (_Lobby) _Lobby.SetInputFocused(active && CanUseDesk && _Panel.InputFocused);
+            if (_Lobby) _Lobby.SetInputFocused(active && ((_CursorManager && _CursorManager.InspectingRadio) || (CanUseDesk && _Panel.InputFocused)));
         }
         bool CanUseDesk => isActiveAndEnabled && _AtDesk && !MenuOpen && !IntroductionPlaying && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning;
         void CopyCode() { if (CanUseDesk) GUIUtility.systemCopyBuffer = _Lobby.Code; }
@@ -177,7 +190,13 @@ namespace HauntedFish.Multiplayer
 
         public void PrepareIntroduction()
         {
-            if (_IntroductionPlayed || !_IntroductionInk || !isActiveAndEnabled) return;
+            if (!isActiveAndEnabled) return;
+            if (_IntroductionPlayed)
+            {
+                if (!IntroductionPlaying && _LightningEffect) _LightningEffect.StartAmbient();
+                return;
+            }
+            if (!_IntroductionInk) return;
             if (RememberIntroduction && PlayerPrefs.GetInt(IntroductionSeenKey, 0) == 1)
             {
                 _IntroductionPlayed = true;
@@ -188,7 +207,6 @@ namespace HauntedFish.Multiplayer
         }
         void BeginIntroduction()
         {
-            _IntroductionPlayed = true;
             try
             {
                 var steps = StoryFunctions.ReadAnimationSequence(_IntroductionInk.text);
@@ -197,6 +215,7 @@ namespace HauntedFish.Multiplayer
                 IntroductionPlaying = true;
                 if (_Lobby) _Lobby.SetIntroductionPlaying(true);
                 _IntroductionPresentation.Prepare();
+                _IntroductionPlayed = true;
                 _Introduction = StartCoroutine(PlayIntroduction(steps));
             }
             catch (Exception error)

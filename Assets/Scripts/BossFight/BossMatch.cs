@@ -18,6 +18,7 @@ namespace HauntedFish.BossFight
 
     public sealed class BossMatch
     {
+        public const int FishGoalsToWin=3, GhostGoalsToWin=1;
         public uint Epoch { get; private set; }
         public uint FishId { get; private set; }
         public uint GhostId { get; private set; }
@@ -48,8 +49,8 @@ namespace HauntedFish.BossFight
                 FishScore++;
             else
                 GhostScore++;
-            if (FishScore >= 1 || GhostScore >= 2)
-                Finish(FishScore >= 1, false);
+            if (FishScore >= FishGoalsToWin || GhostScore >= GhostGoalsToWin)
+                Finish(FishScore >= FishGoalsToWin, false);
             return true;
         }
 

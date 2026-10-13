@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scenes\\Game.unity",
+    "Hash": "93DF646B7A0AF8B2D6DE180AA427CDBBD126DDCB22BB939D20DA75D93761B5C9"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scenes\\Lobby.unity",
+    "Hash": "7382088142D1A792A509C75289A7EA1EA04C1119F36AF4D80DC90AA559FB91D4"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scripts\\Multiplayer\\HotelPlayer.cs",
+    "Hash": "E6A498A79396F64DCC88EDE956600D8ABFA3365D8816601F43190A06A4F261B5"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scripts\\Multiplayer\\TrapManager.cs",
+    "Hash": "49131DA52CB829DDFE373A349506A746E58B1EE34E29BA000B7AD92F9EDA570A"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scripts\\Multiplayer\\GhostTrap.cs",
+    "Hash": "96A29274C0F4704A82E7D8406AE5ADAE684C11D69CCECD04A138443DC23A2F84"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scripts\\Multiplayer\\GhostSelectionPresentation.cs",
+    "Hash": "A64E3F7C41D83918000F4F7494744659EC344F77F4E0F85BFEB3BEDABB151562"
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "HFH_CharcoalVelvet": {
+    "base_color_linear": [
+      0.023,
+      0.012,
+      0.022
+    ],
+    "base_color_srgb_hex": "#2A1D29",
+    "metallic": 0,
+    "roughness": 0.91,
+    "unity_smoothness": 0.08999999999999997
+  },
+  "HFH_BlackenedFrame": {
+    "base_color_linear": [
+      0.009,
+      0.012,
+      0.014
+    ],
+    "base_color_srgb_hex": "#181D1F",
+    "metallic": 0.15,
+    "roughness": 0.43,
+    "unity_smoothness": 0.5700000000000001
+  },
+  "HFH_AgedBronze": {
+    "base_color_linear": [
+      0.09,
+      0.062,
+      0.032
+    ],
+    "base_color_srgb_hex": "#554632",
+    "metallic": 0.67,
+    "roughness": 0.48,
+    "unity_smoothness": 0.52
+  },
+  "HFH_VelvetPiping": {
+    "base_color_linear": [
+      0.017,
+      0.009,
+      0.016
+    ],
+    "base_color_srgb_hex": "#231822",
+    "metallic": 0,
+    "roughness": 0.75,
+    "unity_smoothness": 0.25
+  }
+}

@@ -12,6 +12,8 @@ namespace HauntedFish.BossFight
         [SerializeField] StoryUI _FishUI, _GhostUI;
         [SerializeField] RectTransform _FishActor, _GhostActor;
         [SerializeField] TextAsset _Happy, _Frustrated, _Win, _Lose;
+        [SerializeField] Renderer[] _FishArtwork, _GhostArtwork;
+        [SerializeField] BossSegmentedRig _GhostRig;
         [SerializeField, Min(.1f)] float _TimingScale = 1;
         readonly Dictionary<TextAsset, IReadOnlyList<StorySequenceStep>> _Sequences = new Dictionary<TextAsset, IReadOnlyList<StorySequenceStep>>();
         Vector2 _FishPosition, _GhostPosition;
@@ -25,6 +27,13 @@ namespace HauntedFish.BossFight
         public bool Playing { get; private set; }
         public RectTransform FishActor => _FishActor;
         public RectTransform GhostActor => _GhostActor;
+        public void SetViewer(BossViewerSide side)
+        {
+            if(_FishArtwork!=null)foreach(var renderer in _FishArtwork)if(renderer)renderer.enabled=side==BossViewerSide.Ghost; // Spectator also hides the near decorative fish, preserving the goal.
+            if(_GhostRig)_GhostRig.SetVisible(side!=BossViewerSide.Ghost);
+            else if(_GhostArtwork!=null)foreach(var renderer in _GhostArtwork)if(renderer)renderer.enabled=side!=BossViewerSide.Ghost;
+        }
+        public void SetGhostLifeStage(int fishGoals){if(_GhostRig)_GhostRig.SetLifeStage(fishGoals);}
         void Awake() => Initialize();
         void Initialize()
         {
@@ -52,14 +61,16 @@ namespace HauntedFish.BossFight
             Initialize();
             FishId = state.FishId; GhostId = state.GhostId;
             if (_Epoch != state.Epoch) { ResetPose(); _Epoch = state.Epoch; _Event = 0; }
+            if(_GhostRig)_GhostRig.SetLifeStage(state.FishScore);
             if (state.Cancelled || state.ReactionRemaining <= 0) { if (Playing) ResetPose(); return; }
             if (state.ReactionEvent == 0 || state.ReactionEvent <= _Event) return;
             ResetPose(); _Event = state.ReactionEvent; EventsPlayed++; Playing = true;
             var scorer = state.ReactionFinal ? _Win : _Happy;
             var loser = state.ReactionFinal ? _Lose : _Frustrated;
-            _FishUI.Prepare(); _GhostUI.Prepare();
+            _FishUI.Prepare(); if(!_GhostRig)_GhostUI.Prepare();
             StartCoroutine(Play(_FishUI, state.ReactionFishScored ? scorer : loser, state.ReactionRemaining));
-            StartCoroutine(Play(_GhostUI, state.ReactionFishScored ? loser : scorer, state.ReactionRemaining));
+            if(_GhostRig)_GhostRig.PlayReaction(state.ReactionFishScored,state.ReactionFinal,state.ReactionRemaining,ReactionDuration(state.ReactionFinal));
+            else StartCoroutine(Play(_GhostUI, state.ReactionFishScored ? loser : scorer, state.ReactionRemaining));
             StartCoroutine(Finish(state.ReactionRemaining));
         }
         IEnumerator Play(StoryUI ui, TextAsset asset, float remaining)
@@ -78,6 +89,7 @@ namespace HauntedFish.BossFight
         {
             Initialize();
             StopAllCoroutines(); Playing = false;
+            if(_GhostRig)_GhostRig.ResetPose();
             if (_FishActor) { _FishActor.anchoredPosition = _FishPosition; _FishActor.localRotation = _FishRotation; _FishActor.localScale = _FishScale; }
             if (_GhostActor) { _GhostActor.anchoredPosition = _GhostPosition; _GhostActor.localRotation = _GhostRotation; _GhostActor.localScale = _GhostScale; }
         }

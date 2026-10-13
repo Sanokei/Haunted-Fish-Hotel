@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scripts\\BossFight\\BossArenaManager.cs",
+    "SHA256": "E63175059C469486AA453CE5E9FA459CFD7E23E9ECF54437222D152384C313BF"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scripts\\Multiplayer\\BossArenaCoordinator.cs",
+    "SHA256": "4F0321868EA7E66E7032F940D283555BF5A769FA78D0263BA5AF6C52A2FD57C4"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Resources\\BossFight\\BossFightArena.prefab",
+    "SHA256": "93E74FDEB7A07255F1185332B3829A6FB3AF67693933E6CC73E5925C3B00F6E5"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Resources\\HotelNetworkPlayer.prefab",
+    "SHA256": "8FB9BA6DFE2AB74C29724293F9BCE7A10A5EE00F881C32C30A0199EC887DC415"
+  }
+]

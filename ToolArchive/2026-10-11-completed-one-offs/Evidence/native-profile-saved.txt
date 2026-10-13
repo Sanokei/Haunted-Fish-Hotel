@@ -1,0 +1,8 @@
+PASS native AssetDatabase-authored VolumeProfile; 12 persistent component sub-assets.
+Profile=Assets/Prefabs/LobbyMood/LobbyMoodyInteriorProfile.asset guid=66250d017e7a6854e9b079621da92619 fileID=11400000
+Scene files, runtime scripts, storm/audio sources, Skip and menus were not edited.
+Neutral tonemapping; exposure -0.35EV; contrast 6; saturation -10; temperature -7; tint 2.
+Lift +0.002 protects near-black detail; gamma +0.008; gain -0.015. Gentle cool/warm split.
+Bloom 0.10; threshold 1.25; scatter 0.45; clamp 3; vignette 0.13; grain 0.025.
+Depth of field, motion blur, chromatic aberration and lens distortion explicitly overridden off.
+Native reload/bindings validated. Live scene integration and rendered visual QA remain required.

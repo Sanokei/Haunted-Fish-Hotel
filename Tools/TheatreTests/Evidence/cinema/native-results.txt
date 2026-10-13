@@ -1,0 +1,15 @@
+PASS theatre native checks=14 native authored video and A/D/exit checks passed
+PASS complete authored presentation
+PASS cinema has no enabled UI canvas
+PASS actual imported chair row has a mesh renderer
+PASS native compiled return behaviour present
+PASS real decoded production video stage 1
+PASS fish completion handler automatically selects ghost
+PASS real decoded production video stage 2
+PASS ghost completion handler automatically selects fish
+PASS W and Space do not move or jump theatre actor
+PASS A movement remains on authored lane
+PASS held A reaches far-left exit exactly once
+PASS close stops video and presentation
+PASS repeated entry resets actor safely
+PASS disconnect/owned-player disable releases local identity

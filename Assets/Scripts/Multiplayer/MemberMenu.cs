@@ -19,8 +19,11 @@ namespace HauntedFish.Multiplayer
         LobbyRoster _RenderedRoster;
         bool _RenderedLeader, _RenderedTransition, _RosterRendered;
         InputAction _ToggleMenu;
+        [SerializeField] MemberMenuPresentation _Presentation;
+        [SerializeField] GameObject _EventSystemPrefab;
         GameObject _EventSystem;
-        public bool IsOpen { get; private set; }
+        readonly MemberMenuInputCapture _Capture = new MemberMenuInputCapture();
+        public bool IsOpen => _Capture.IsOpen;
         [Serializable]
         sealed class MemberRow
         {
@@ -45,6 +48,7 @@ namespace HauntedFish.Multiplayer
             }
             _Start.onClick.AddListener(StartGame);
             _Resume.onClick.AddListener(Resume);
+            if (!_Presentation || !_Presentation.Initialize()) { enabled = false; return; }
             _Menu.SetActive(false);
         }
         public void Bind(HauntedHotelMultiplayer session)
@@ -56,14 +60,16 @@ namespace HauntedFish.Multiplayer
         }
         void OnEnable()
         {
-            _ToggleMenu.Enable();
+            _ToggleMenu?.Enable();
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         void OnDisable()
         {
-            _ToggleMenu.Disable();
+            _ToggleMenu?.Disable();
             SceneManager.sceneLoaded -= OnSceneLoaded;
             Resume();
+            _Capture.Reset();
+            if (_Lobby) _Lobby.SetMemberMenuOpen(false);
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -79,21 +85,28 @@ namespace HauntedFish.Multiplayer
         void EnsureEventSystem()
         {
             if (EventSystem.current) return;
-            _EventSystem = new GameObject("Member Menu EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
-            _EventSystem.transform.SetParent(transform, false);
+            if (!_EventSystemPrefab) { Debug.LogError("Assign the authored menu EventSystem prefab.", this); return; }
+            _EventSystem = Instantiate(_EventSystemPrefab, transform);
             _EventSystem.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();
         }
         void ToggleMenu(InputAction.CallbackContext context)
         {
-            SetOpen(!IsOpen && _Lobby && _Lobby.ReadyToPlay && !_Lobby.IntroductionPlaying);
+            if (!_Presentation) return;
+            if (IsOpen && _Presentation.Back()) return;
+            if (!IsOpen && LobbyCursorManager.Instance && LobbyCursorManager.Instance.CloseRadioInspection()) return;
+            SetOpen(!IsOpen && _Lobby && MemberMenuInputCapture.CanOpen(_Lobby.ReadyToPlay, _Lobby.Transitioning, _Lobby.IntroductionPlaying));
         }
         void SetOpen(bool open)
         {
-            IsOpen = open;
+            if (open == IsOpen) return;
+            _Capture.SetOpen(open, Time.frameCount);
+            if (open) { EnsureEventSystem(); _Menu.SetActive(true); _Presentation.Open(); }
+            else if (_Presentation) _Presentation.Close();
             if (!open && EventSystem.current && EventSystem.current.currentSelectedGameObject &&
                 EventSystem.current.currentSelectedGameObject.transform.IsChildOf(_Menu.transform))
                 EventSystem.current.SetSelectedGameObject(null);
-            if (_Lobby) _Lobby.SetMemberMenuOpen(open);
+            // Capture the closing click through release so Resume cannot also place a trap.
+            if (_Lobby && open) _Lobby.SetMemberMenuOpen(true);
             Refresh();
         }
         void Resume() => SetOpen(false);
@@ -105,10 +118,10 @@ namespace HauntedFish.Multiplayer
         void Refresh()
         {
             bool connected = isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay;
-            if (!connected && IsOpen)
+            if ((!connected || _Lobby.Transitioning) && IsOpen)
             {
-                IsOpen = false;
-                _Lobby.SetMemberMenuOpen(false);
+                SetOpen(false);
+                return;
             }
             _Menu.SetActive(IsOpen);
             _Start.gameObject.SetActive(connected && _Lobby.IsLobbyLeader && _Lobby.SceneTravel.TargetScene == "Lobby");
@@ -155,11 +168,22 @@ namespace HauntedFish.Multiplayer
                 row.Kick.interactable = !transition && member.Id != roster.TransportHost;
             }
         }
+        void LateUpdate()
+        {
+            if (IsOpen && _Lobby && _Lobby.Transitioning) Resume();
+            ReleaseInputCapture(Time.frameCount, Mouse.current == null ? (bool?)null : Mouse.current.leftButton.isPressed);
+            if (IsOpen) { Cursor.visible = true; Cursor.lockState = CursorLockMode.None; }
+        }
+        // Unity supplies frame/device state; the effect can also be exercised by isolated native validation.
+        void ReleaseInputCapture(int frame, bool? pointerPressed)
+        {
+            if (_Capture.TryRelease(frame, pointerPressed) && _Lobby) _Lobby.SetMemberMenuOpen(false);
+        }
         void OnDestroy()
         {
             if (_Lobby) _Lobby.StateChanged -= Refresh;
-            _ToggleMenu.performed -= ToggleMenu;
-            _ToggleMenu.Dispose();
+            _Presentation?.Dispose();
+            if (_ToggleMenu != null) { _ToggleMenu.performed -= ToggleMenu; _ToggleMenu.Dispose(); }
         }
     }
 }

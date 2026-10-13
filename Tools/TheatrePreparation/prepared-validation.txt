@@ -1,0 +1,1 @@
+PASS 1706 deterministic theatre visit/input checks; PASS runtime adapters compilation; PASS native authoring compilation; confirmed no external camera/listener mutation in portal. Native Unity/import/weaving/render/physics/video pending exclusive editor grant.

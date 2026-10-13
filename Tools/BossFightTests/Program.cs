@@ -29,13 +29,15 @@ class Program
             uint epoch = m.Epoch;
             Check(!m.TryBegin(3, 4), "busy");
             Check(!m.Score(epoch - 1, true), "stale goal");
-            Check(m.Score(epoch, true), "fish first goal");
+            Check(m.Score(epoch, true) && m.Active && m.FishScore==1 && results==i*3, "fish first goal removes one ghost life");
+            Check(m.Score(epoch, true) && m.Active && m.FishScore==2, "fish second goal leaves one ghost life");
+            Check(m.Score(epoch, true), "fish third goal");
             Check(!m.Active && m.ResultIssued && last.WinnerFish && !last.Cancelled, "fish win");
             Check(!m.Score(epoch, false) && !m.Cancel(1), "duplicate result");
             Check(results == i * 3 + 1, "fish result once");
             Check(m.TryBegin(1, 2), "ghost begin");
-            Check(m.Score(m.Epoch, false) && m.Active, "ghost first stays");
-            Check(m.Score(m.Epoch, false) && !m.Active && !last.WinnerFish, "ghost second wins");
+            Check(m.Score(m.Epoch, false) && !m.Active && !last.WinnerFish, "ghost first goal defeats one-life fish");
+            Check(!m.Score(m.Epoch, false), "ghost duplicate goal denied");
             Check(results == i * 3 + 2, "ghost result once");
             Check(m.TryBegin(1, 2), "cancel begin");
             Check(!m.Cancel(3), "spectator leaves");
@@ -44,5 +46,7 @@ class Program
         }
 
         Console.WriteLine(checks + " BossFight rule checks passed.");
+        int before = checks; BossInputAndSceneTests.Run(Check); BossPerspectiveFramingTests.Run(Check);
+        Console.WriteLine((checks - before) + " BossFight input policy and serialized scene checks passed.");
     }
 }

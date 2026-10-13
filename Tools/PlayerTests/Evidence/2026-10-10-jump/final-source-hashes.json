@@ -1,0 +1,8 @@
+{
+  "Assets/Resources/HotelNetworkPlayer.prefab": "c02e126dc29742a2c8fbdeef389c6c4764a2f285e86389473fba18d69b2405bf",
+  "Assets/Resources/Traps/ShoppingCartTrap.prefab": "8eecc08dc6f93d438291a8430c49c44394ea629e2748dfa9d87d8f08c555d8ab",
+  "Assets/Scripts/Multiplayer/GhostTrap.cs": "c0d048add4983e37768d2827f5ab4768f45f5417af8cd3a49a03d6f17ca5b8fb",
+  "Assets/Scripts/Multiplayer/GameHauntingController.cs": "e888c1b5bfba0e719de7b348bfab1d47f117000cd6ad0ad51924f513bc2f228d",
+  "Assets/Scripts/Multiplayer/HotelPlayerMovement.cs": "2904f700dff8fc12a8dc52b3c57b400a712ec4731669acff5ecc9725a31f06b9",
+  "Assets/Scripts/Multiplayer/GameSideScrollMotor.cs": "72df55e85df4b512a4207b378398b788a9efe40b8bfa69dd61aa5a1a623cafb7"
+}

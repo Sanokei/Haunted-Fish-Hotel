@@ -1,0 +1,31 @@
+MANAGERS - Match and presentation | prefab=
+  Managers
+  Boss Arena Manager
+  Arena
+  Score / first to one versus two
+  StormLightningAttic
+  StormAudioAttic
+  Boss storm room lifecycle
+ANCHORS - Participant spawns | prefab=
+  Fish participant spawn
+  Ghost participant spawn
+ROOM - Attic and lighting | prefab=Assets/Resources/BossFight/SceneObjects/BossROOM.prefab
+  Level
+  Attic
+TABLE - Felt and physical actors | prefab=Assets/Resources/BossFight/SceneObjects/BossTABLE.prefab
+  Felt hockey table
+  Fish paddle
+  Ghost paddle
+  Cue ball
+  Ghost goal
+  Fish goal
+CHARACTERS - One contestant per side | prefab=Assets/Resources/BossFight/SceneObjects/BossCHARACTERS.prefab
+  Matched player presentation (no input or colliders)
+  UI
+DEFENSES - Six authored sideline pieces | prefab=Assets/Resources/BossFight/SceneObjects/BossDEFENSES.prefab
+  Authored defense rack
+UI - Challenge HUD | prefab=Assets/Resources/BossFight/SceneObjects/BossUI.prefab
+  Boss lives HUD
+VIEWS - Cameras and storm anchors | prefab=Assets/Resources/BossFight/SceneObjects/BossVIEWS.prefab
+  Boss perspective camera rigs
+  Opponent storm wall anchors

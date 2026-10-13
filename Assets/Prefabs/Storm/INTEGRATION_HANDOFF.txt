@@ -1,0 +1,96 @@
+Shared authored storm integration
+=================================
+Controller: Assets/Scripts/LightningEffectManager.cs (existing GUID preserved).
+
+API IMPLEMENTED
+public bool ValidateAuthoredBindings(out string error)
+public void StartAmbient()
+public void Play()
+public void StopAmbient()
+public void SetOpponentRenderer(SpriteRenderer opponent)
+public bool AmbientActive, Playing
+events Action<bool> AmbientStateChanged and Action<long> StrikeStarted
+
+Serialized visuals:
+WindowPass[] _AuthoredWindowPasses; each entry has Window (SpriteRenderer), Pass (MeshRenderer)
+Light[] _AuthoredRoomLights
+Canvas _FlashCanvas
+SpriteRenderer _OpponentShadow, _OpponentRenderer
+Vector3 _OpponentShadowOffset = (.16,.08,.08)
+float _OpponentShadowScaleMultiplier = 1.12
+
+The controller contains NO runtime GameObject/Canvas/Image/material construction.
+It animates existing authored objects, using MaterialPropertyBlocks for projections.
+The original one strike clock, 3 white frames, exponential/double pulse and monotonic
+StrikeStarted event are retained. There is no audio strike timer.
+
+ACTUAL SAVED ASSETS
+Assets/Prefabs/Storm/StormAudioIndoor.prefab
+Assets/Prefabs/Storm/StormAudioAttic.prefab
+Assets/Prefabs/Storm/StormLightningHallway.prefab
+Assets/Prefabs/Storm/StormLightningAttic.prefab
+Assets/Prefabs/Storm/WindowLightningAuthored.mat
+All prefab roots are active. _StartAmbientOnEnable is0: the scene owner controls
+activation and calls StartAmbient after validation/entry, avoiding overlapping
+old/new scene clocks. No DontDestroyOnLoad or persistent storm root.
+
+HALLWAY OWNER
+Use the hallway lightning prefab/variant. Author WindowPass pairs in Edit Mode:
+Pass uses the receiver wall's actual mesh/submesh count and matching transform,
+with WindowLightningAuthored.mat in each slot. Pass disabled at rest, no shadows,
+no light/reflection probes. Bind the authored window mask SpriteRenderer and pass
+on the manager. The runtime only updates mask bounds/textureRect/flip/world matrix.
+Do not create geometry or white-frame UI during Play.
+Intensity1.6, fade .65sec, random interval9..23sec.
+The template cannot validate until scene-specific WindowPass pairs are authored.
+
+ATTIC / BOSS OWNER
+Use StormLightningAttic. It already references its authored range25 point light,
+white-frame Canvas and disabled black silhouette SpriteRenderer; window list empty.
+Bind _OpponentRenderer or call SetOpponentRenderer with the actual opponent sprite.
+Configure offset/sorting placement behind the opponent. Source sprite/flip/rotation
+and scale feed the EXISTING shadow renderer; alpha follows pulse. No cloned actor.
+Intensity1.35, fade .65sec, random interval9..23sec. No literal window projection.
+White-frame sort32760, raycasts off; authored intro Skip canvas32761 stays above it.
+
+AUDIO
+Component HauntedFish.Multiplayer.LobbyStormAudio: bind _Lightning to the ONE
+scene strike owner. The prefab owns three distinct stereo2D AudioSources:
+_RainSource, _ThunderSource, _ThunderSourceB. PlayOnAwake off, pitch1, Doppler0.
+Indoor: separate Assets/Art/Storm/IndoorTransmission/*_Muffled.wav, rain120..1000Hz,
+thunder40..1900Hz, six quiet baked reflections18..133ms for Web compatibility.
+RainGain .72, ThunderGain .85, dialogue factors .45/.60, gain fade .5sec.
+Attic: original Assets/Art/Storm/*.wav, RainGain .64, ThunderGain .90, same ducking.
+Cue order Medium Roll, Soft Crack, Distant Long, Far Rumble; onsets .060/.060/.085/.100,
+cue gains .8/.7/1/1, delays(1,2.2)/(.6,1.3)/(2.2,3.8)/(1.8,3.2), weights3/2/3/3.
+Do not change pitch while scheduled, normalize clips, or add another strike timer.
+Original WAVs and CC0 credits preserved. New variant frames/rate/channels unchanged;
+objective peaks below full scale. Human audition and target-browser playback pending.
+
+LIFECYCLE
+Before approving activation, ValidateAuthoredBindings(out error) must pass.
+On scene entry call StartAmbient once. Play requests an immediate white-frame strike.
+StopAmbient cancels motion/clock and restores authored light intensity/color/enabled,
+window visibility, projection property blocks, Canvas and shadow sprite/flip/pose/
+scale/tint. Stop/disable/destroy are idempotent; events notify one start/stop per lifetime.
+Disable/unload audio root or call StopAudio for immediate cancellation of all sources
+and queued DSP cues; it unsubscribes light/dialogue events. Start fresh in next scene.
+Do not keep both departing and arriving storms active through scene transitions.
+
+EVIDENCE / REMAINING CHECKS
+Final controller compiled against installed Unity6000.3 engine assemblies:
+0 warnings, 0 errors. Existing 55 production storm-audio regression checks passed.
+Assets/Editor/StormAuthoredNativeValidation.cs queues native checks for missing/duplicate
+references, one event per actual strike, no hierarchy creation, state restoration,
+cleanup/reactivation and indoor/attic profile use. Native refresh has not loaded it yet.
+Native rendered hallway/attic flash, live transitions and audible output remain unverified.
+Game.unity and BossFight.unity were not edited by this owner.
+
+LOBBY
+Assets/Editor/LobbyAtmosphereAuthoringTask.cs now authors and saves
+Assets/Prefabs/LobbyAtmosphere/LobbyWindowStormVisuals.prefab, retaining original masks
+and controller. It also authors Volume/profile, enclosure, storm bindings and visible
+clickable Skip into the existing LobbyIntroductionUI prefab. Dirty Lobby guard remains.
+LobbyIntroductionWorldSequence Begin/Close restores Volume and camera processing.
+LobbyManager.Exit now cancels an active intro before detaching the session.
+Those scene/native authoring stages still await safe Editor refresh; no saved.txt yet.

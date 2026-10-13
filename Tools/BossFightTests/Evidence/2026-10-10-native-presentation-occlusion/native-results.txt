@@ -1,0 +1,120 @@
+NATIVE ISOLATED BOSS PRESENTATION checks=110
+PASS native authored boss/view/two artwork bindings
+PASS fish requires three goals; ghost requires one goal
+PASS isolated authoritative match admission
+PASS spectator cannot own paddle
+PASS one attic strike owner and one audio owner
+PASS attic audio uses same strike owner
+PASS authored storm bindings valid: 
+PASS attic uses room lighting without window projection
+PASS attic storm/audio inactive at rest
+PASS local own renderer hidden/opponent visible: Fish
+PASS authored perspective camera: Fish
+PASS authored life HUD has one fish/three ghost: Fish
+PASS camera stands at viewer own end: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS full playable board/goal corner in native viewport: Fish (1280, 720)
+PASS screen-right pointer maps to owned-end world axis: Fish (1280, 720)
+PASS pointer never teleports puck: Fish (1280, 720)
+RENDER Fish (1280, 720)
+PASS camera stands at viewer own end: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS full playable board/goal corner in native viewport: Fish (720, 1280)
+PASS screen-right pointer maps to owned-end world axis: Fish (720, 1280)
+PASS pointer never teleports puck: Fish (720, 1280)
+RENDER Fish (720, 1280)
+PASS native attic ambient starts: Fish
+PASS shared storm selects visible far opponent: Fish
+PASS one authored shadow copies visible opponent: Fish
+PASS enlarged opponent shadow placed beyond far goal: Fish
+PASS native stop restores no active strike/flash/shadow: Fish
+PASS storm/view creates no hierarchy: Fish
+PASS local own renderer hidden/opponent visible: Ghost
+PASS authored perspective camera: Ghost
+PASS authored life HUD has one fish/three ghost: Ghost
+PASS camera stands at viewer own end: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS full playable board/goal corner in native viewport: Ghost (1280, 720)
+PASS screen-right pointer maps to owned-end world axis: Ghost (1280, 720)
+PASS pointer never teleports puck: Ghost (1280, 720)
+RENDER Ghost (1280, 720)
+PASS camera stands at viewer own end: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS full playable board/goal corner in native viewport: Ghost (720, 1280)
+PASS screen-right pointer maps to owned-end world axis: Ghost (720, 1280)
+PASS pointer never teleports puck: Ghost (720, 1280)
+RENDER Ghost (720, 1280)
+PASS native attic ambient starts: Ghost
+PASS shared storm selects visible far opponent: Ghost
+PASS one authored shadow copies visible opponent: Ghost
+PASS enlarged opponent shadow placed beyond far goal: Ghost
+PASS native stop restores no active strike/flash/shadow: Ghost
+PASS storm/view creates no hierarchy: Ghost
+PASS local own renderer hidden/opponent visible: Spectator
+PASS authored perspective camera: Spectator
+PASS authored life HUD has one fish/three ghost: Spectator
+PASS camera stands at viewer own end: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS full playable board/goal corner in native viewport: Spectator (1280, 720)
+PASS near-goal occlusion ROI has native rendered area: (1280, 720)
+OCCLUSION nearGoalROI=653,117,781,196 viewChanged=0 forcedNearFishChanged=6905 tolerance=10
+PASS spectator near goal matches unobstructed rendered baseline: (1280, 720)
+PASS render check detects the old near-fish goal obstruction: (1280, 720)
+RENDER Spectator (1280, 720)
+PASS camera stands at viewer own end: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS full playable board/goal corner in native viewport: Spectator (720, 1280)
+PASS near-goal occlusion ROI has native rendered area: (720, 1280)
+OCCLUSION nearGoalROI=330,352,476,441 viewChanged=0 forcedNearFishChanged=12487 tolerance=12
+PASS spectator near goal matches unobstructed rendered baseline: (720, 1280)
+PASS render check detects the old near-fish goal obstruction: (720, 1280)
+RENDER Spectator (720, 1280)
+PASS native attic ambient starts: Spectator
+PASS shared storm selects visible far opponent: Spectator
+PASS one authored shadow copies visible opponent: Spectator
+PASS enlarged opponent shadow placed beyond far goal: Spectator
+PASS native stop restores no active strike/flash/shadow: Spectator
+PASS storm/view creates no hierarchy: Spectator
+PASS exactly one native ambient start/stop per entry despite repeated calls
+PASS boss view disabled on return
+LIMIT: isolated Edit-mode native API/projection/render checks; no live coordinator, actual strike coroutine, DSP audition or Play-mode collision test.
+PASS active user scene preserved
+PASS loaded user scenes preserved
+PASS user dirty flags preserved
+PASS user selection preserved

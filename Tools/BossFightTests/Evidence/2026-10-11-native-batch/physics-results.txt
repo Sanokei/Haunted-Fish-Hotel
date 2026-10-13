@@ -1,0 +1,2 @@
+PASS 62 real arena checks; native trigger fish3 ghost1; 4 results.
+PASS original clean editor setup/selection restored after Play; background setting restored.

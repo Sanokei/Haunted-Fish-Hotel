@@ -1,0 +1,126 @@
+[
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Art\\Materials\\HotelLobby\\HotelLobbyColor1.mat",
+    "Hash": "967136C1B1F631424F1B36FB243A70AAE78AF0C0BC467D897F120EF867A0E2DD"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Art\\Materials\\HotelLobby\\HotelLobbyColor2.mat",
+    "Hash": "A3F668FFC67CA8CD81BB48DFFF2C7810198FD002FAF10A44F0CB6BA8594BF47E"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Art\\Materials\\HotelLobby\\HotelLobbyColor3.mat",
+    "Hash": "1BFDDDAAF3CFF3077C11C3E280C96F8992863956FD352375DFC458E396841847"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Art\\Materials\\HotelLobby\\HotelLobbyColor4.mat",
+    "Hash": "EA77F345B4FC0B326A5A9B232C33D13D0C9A75E0F6500DDF9C5734FEFA3AAFCD"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Art\\Materials\\HotelLobby\\HotelLobbyColor5.mat",
+    "Hash": "D47D6594C097EC8A3E8199F3BE92EFFCC6E364502061B8395C7F272118FB377B"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Art\\Materials\\HotelLobby\\HotelLobbyColor6.mat",
+    "Hash": "C0587D8F2ACC5DD050783CAFBF02807C6DAF8A6E7837FA0A0CC3C6AE11C8EA55"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Plugins\\CW\\LeanGUI\\Examples\\03 Radio.unity",
+    "Hash": "3261E6C838F31BBA9D582FFA979F70662E9807447FBD63DACC11820FD280CCD6"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyDollyAtmosphere.prefab",
+    "Hash": "69CA69EC92A120CFFC886AE626CFC4968D63635825A89F769BCEDD5F1EA506AD"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyDollyAtmosphere.prefab.meta",
+    "Hash": "464D071ADAF64B37980EA7BB31A1608FFC32ED77D2DEC9CC8E29E1CDDBAF4511"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyIndoorStormAudio.prefab",
+    "Hash": "840D146DDA962525476FA58C518DCE8510B2BF83B78793C9AFB8F694CCAF7612"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyIndoorStormAudio.prefab.meta",
+    "Hash": "AEEB7E47226FB7E1120C89947868ACBC029D6E8FF8CC75EF758CA41258F984EA"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyStairwellEnclosure.prefab",
+    "Hash": "110661D5749DA332F9D091A449BDA97FA9C31EBBA65ABB5850B27F883031325D"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyStairwellEnclosure.prefab.meta",
+    "Hash": "A38A2780ED1656FF7A781331E16A470AD80B3BC98862482E9A9FEFC68896C9EF"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyWindowStormVisuals.prefab",
+    "Hash": "1CAC977FBAD7FDD97A4C06C02542232CF9B3CB5800C2F8232BF8F4471E83F453"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyAtmosphere\\LobbyWindowStormVisuals.prefab.meta",
+    "Hash": "77D560CECB97F8B97D536A0F8A3CF758CCDCA950E4BFBCA7C4F15D62E361C38A"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\LobbyMood\\LobbyMoodyInteriorProfile.asset",
+    "Hash": "4247C5EB6583CDBFB465E44251F251C98E9845B6F5C21919F462642DBA6F8E26"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Radio\\LobbyRadioPlayback.prefab",
+    "Hash": "66E3207C6BA54E2B69CB3364C025165E0E6986A3F575A6C05C62E2CFBE65AA68"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\INTEGRATION_HANDOFF.txt",
+    "Hash": "54665DE06A289CAD6DF5A7978B9FD40F63EBE4CDFD8B5050D0E36EDC972C0846"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\INTEGRATION_HANDOFF.txt.meta",
+    "Hash": "673AC661B16B541361787CA03CCD07C8DA0DDA8962980758D14BB5990AFC5E62"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormAudioAttic.prefab",
+    "Hash": "B7AEBEA1A0A6BD98C5E9072EE4DCD7C75C7219C3821A69BB5BC203FF6E5D5A8C"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormAudioAttic.prefab.meta",
+    "Hash": "849D8A750C0CCCFCE87AB9B711E750959CD9A7C29DBEA2FB8B24F84BF6BED6D4"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormAudioIndoor.prefab",
+    "Hash": "D0D448A607988A428ABE80B2578100D3B120ACFDC500CB511CE535B2270F9631"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormAudioIndoor.prefab.meta",
+    "Hash": "C6F75B28C1A1B9B11FBAC8A18A386E1EF32CA6CC882E306B11D2FDB87E19674D"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormLightningAttic.prefab",
+    "Hash": "34D3900314A3CB6948CFCD59D8909A9EB062AF5F068C7970A0B84EF70869F1B7"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormLightningAttic.prefab.meta",
+    "Hash": "97213D771B90F4FA3F98AF6EE9ACF4BF4F9498302981CF9ADE90659C0C220874"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormLightningHallway.prefab",
+    "Hash": "BE669C961E974E52DFD63EF4B282915787511E667B2D02FE7A85AFD930652CE2"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\StormLightningHallway.prefab.meta",
+    "Hash": "E745145FFA84F299AE1B26E4A33C4474BA48D0A993F2504C03C11C8C12FEB58E"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\WindowLightningAuthored.mat",
+    "Hash": "28A80B2F7837D9A44E24E186AB2966977BE5281E81BCDA6A38C4684B83ABDB6D"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Prefabs\\Storm\\WindowLightningAuthored.mat.meta",
+    "Hash": "95C597B17BAF8CBC91CC3432CA0A0E442E993BCB90EB9CFCEA2A2516C8F49F07"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Resources\\LobbyIntroductionUI.prefab",
+    "Hash": "3F88DC96934F33B0913701412D5CD1F0563D23CCE515D001224F12F7E6451331"
+  },
+  {
+    "Path": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\Assets\\Scenes\\Lobby.unity",
+    "Hash": "2B6698253B22CE56B58A23A6E866A75BC5868982F97B12BC6F82DF0C4BE88ADE"
+  }
+]

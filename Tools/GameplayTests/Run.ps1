@@ -15,6 +15,11 @@ foreach($asset in $assets) {
     Copy-Item -LiteralPath (Join-Path $repoRoot $asset) -Destination (Join-Path $validationRoot $asset) -Force
     if(Test-Path -LiteralPath (Join-Path $repoRoot ($asset+'.meta'))) {Copy-Item -LiteralPath (Join-Path $repoRoot ($asset+'.meta')) -Destination (Join-Path $validationRoot ($asset+'.meta')) -Force}
 }
+$lobbyAssets = @('Assets/Scenes/Helper.unity','Assets/Resources/MultiplayerDialoguePanel.prefab','Assets/Resources/MultiplayerInputPanel.prefab','Assets/Art/FrontDeskDing.wav','Assets/Art/FrontDeskClick.wav','Assets/Art/BubbleSpeech.wav','Assets/Art/FishWalk01.wav','Assets/Art/FishWalk02.wav','Assets/Art/FishJump.wav','Assets/Art/FishInteract.wav','Assets/Art/lobby - no master effects.mp3','Assets/Art/Radio-body.png','Assets/Art/Radio-dial.png','Assets/Art/FrontDesk-bell.png','Assets/Art/FrontDesk-lamp.png','Assets/Art/FrontDesk-sign.png','Assets/Art/Fish-Plaque.png','Assets/Art/Music-full.png','Assets/Art/Music-layer-1.png','Assets/Art/Music-layer-2.png','Assets/Art/Music-layer-3.png','Assets/Art/Music-layer-4.png','Assets/Art/Cursors/cursor_help.png','Assets/Art/Cursors/cursor_exclamation.png')
+foreach ($asset in $lobbyAssets) {
+    Copy-Item -LiteralPath (Join-Path $repoRoot $asset) -Destination (Join-Path $validationRoot $asset) -Force
+    Copy-Item -LiteralPath (Join-Path $repoRoot ($asset+'.meta')) -Destination (Join-Path $validationRoot ($asset+'.meta')) -Force
+}
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'GameplayUpdateRunner.cs') -Destination (Join-Path $validationRoot 'Assets/GameplayUpdateRunner.cs') -Force
 $logPath=Join-Path $validationRoot 'gameplay-update.log'
 $arguments=@('-batchmode','-job-worker-count','2','-projectPath',('"'+$validationRoot+'"'),'-executeMethod','GameplayUpdateRunner.Run','--gameplay-update','-logFile',('"'+$logPath+'"'))

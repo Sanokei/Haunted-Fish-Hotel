@@ -17,11 +17,14 @@ namespace HauntedFish.Multiplayer
 
         [SerializeField] float _RunningFinFrequency = 2.8f;
         bool _FacingLeft, _Walking, _Talking, _Running;
-        bool _FacingInitialized;
+        bool _FacingInitialized, _Corpse;
+        public void SetCorpse(bool corpse) => _Corpse = corpse;
         Vector3 _RightFinPosition;
         Vector3 _FinRestScale;
         Quaternion _FinRestRotation;
         float _Phase, _FinAngle, _FinFrequency, _Activity;
+        Color _BodyColor, _FinColor;
+        float _InspectionOpacity = 1;
 
         void Awake()
         {
@@ -32,6 +35,7 @@ namespace HauntedFish.Multiplayer
                 return;
             }
             _RightFinPosition = _FinPivot.localPosition;
+            _BodyColor = _Body.color; _FinColor = _Fin.color;
             _FinRestScale = _FinPivot.localScale;
             _FinRestRotation = _FinPivot.localRotation;
             _Phase = Random.value;
@@ -39,6 +43,18 @@ namespace HauntedFish.Multiplayer
             _FinFrequency = _IdleFinFrequency;
             _Fin.sortingLayerID = _Body.sortingLayerID;
             _Fin.sortingOrder = _Body.sortingOrder - 1;
+            ApplyFacing();
+        }
+
+        public void CopyAppearanceFrom(HotelFishSprite other)
+        {
+            if (!other || !_Body || !_Fin) return;
+            _LeftBody = other._LeftBody; _RightBody = other._RightBody;
+            _BodyColor = other._BodyColor; _FinColor = other._FinColor;
+            _Body.color = _BodyColor; _Fin.color = _FinColor;
+            _Body.sharedMaterial = other._Body.sharedMaterial;
+            _Fin.sharedMaterial = other._Fin.sharedMaterial;
+            _Fin.sprite = other._Fin.sprite;
             ApplyFacing();
         }
 
@@ -65,6 +81,23 @@ namespace HauntedFish.Multiplayer
         {
             var camera = _FaceCamera ? HotelViewCamera.Current : null;
             if (camera) transform.rotation = camera.transform.rotation;
+            if (_Corpse)
+            {
+                _FinPivot.localRotation = _FinRestRotation;
+                _FinPivot.localScale = Vector3.Scale(_FinRestScale, new Vector3(_FacingLeft ? -1 : 1, 1, 1));
+                return;
+            }
+            var inspection = LobbyCursorManager.Instance;
+            bool obstructing = false;
+            if (camera && inspection && inspection.InspectingRadio)
+            {
+                var delta = inspection.RadioFocus - camera.transform.position;
+                var ray = new Ray(camera.transform.position, delta.normalized);
+                obstructing = _Body.bounds.IntersectRay(ray, out var distance) && distance < delta.magnitude;
+            }
+            _InspectionOpacity = Mathf.MoveTowards(_InspectionOpacity, obstructing ? .12f : 1, Time.unscaledDeltaTime * 6);
+            var bodyColor = _BodyColor; bodyColor.a *= _InspectionOpacity; _Body.color = bodyColor;
+            var finColor = _FinColor; finColor.a *= _InspectionOpacity; _Fin.color = finColor;
             float sign = _FacingLeft ? -1 : 1;
             float blend = 1 - Mathf.Exp(-5 * Time.deltaTime);
             // Speaking gets a small expressive flutter, rather than a full swimming stroke.
@@ -83,6 +116,12 @@ namespace HauntedFish.Multiplayer
             _FinPivot.localScale = Vector3.Scale(_FinRestScale,
                 new Vector3(sign * (1 + stroke * Mathf.Lerp(.025f, .07f, _Activity)),
                     1 - stroke * .025f * _Activity, 1));
+        }
+        void OnDisable()
+        {
+            _InspectionOpacity = 1;
+            if (_Body) _Body.color = _BodyColor;
+            if (_Fin) _Fin.color = _FinColor;
         }
     }
 }

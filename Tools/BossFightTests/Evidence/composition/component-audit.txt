@@ -1,0 +1,1 @@
+Native defense components before=6

@@ -1,0 +1,3 @@
+Candidate capsule overlap: 
+Floor ray: True Floor | splayed 16m to 8m
+Lobby remains unsaved; owner must bind and validate actual return.

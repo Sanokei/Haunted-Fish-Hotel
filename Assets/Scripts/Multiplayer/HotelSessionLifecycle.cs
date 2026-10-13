@@ -18,6 +18,7 @@ namespace HauntedFish.Multiplayer
         int _Capacity;
         object _Operation, _Heartbeat;
         string _ConnectionFailure;
+        string _CloseFailure;
         float _NextAttempt;
         bool _Disposed;
 
@@ -87,7 +88,18 @@ namespace HauntedFish.Multiplayer
             _ConnectionFailure = null;
             _Scene.PrepareIntroduction();
             if (!Current(version)) yield break;
-            if (Room != null || _Network.IsRunning) yield return CloseSession();
+            if (Room != null || _Network.IsRunning)
+            {
+                yield return CloseSession();
+                if (!Current(version)) yield break;
+                if (_CloseFailure != null)
+                {
+                    SetState(HotelSessionState.Failed, _CloseFailure);
+                    ScheduleRetry();
+                    _Operation = null;
+                    yield break;
+                }
+            }
             while (_Scene.Loading && Current(version)) yield return null;
             if (!Current(version)) yield break;
             ScheduleRetry();
@@ -178,15 +190,16 @@ namespace HauntedFish.Multiplayer
             var version = Version;
             yield return CloseSession();
             if (!Current(version)) yield break;
-            SetState(HotelSessionState.Idle, "Disconnected.");
+            SetState(_CloseFailure == null ? HotelSessionState.Idle : HotelSessionState.Failed, _CloseFailure ?? "Disconnected.");
             ScheduleRetry();
             _Operation = null;
         }
 
-        public IEnumerator CloseSession()
+        public IEnumerator CloseSession(string failureMessage = null)
         {
             var version = Version;
-            SetState(HotelSessionState.Leaving, "Disconnecting...");
+            _CloseFailure = null;
+            SetState(HotelSessionState.Leaving, failureMessage ?? "Disconnecting...");
             if (!Current(version)) yield break;
             StopHeartbeat();
             // Let the transport's current disconnect callback finish before issuing another stop.
@@ -197,7 +210,10 @@ namespace HauntedFish.Multiplayer
             _Scene.ResetInputFocus();
             _Network.Stop();
             if (previousRoom != null && !string.IsNullOrEmpty(previousRoom.ownerKey))
-                yield return _Directory.Delete(previousRoom, IgnoreResponse);
+                yield return _Directory.Delete(previousRoom, (room, error) =>
+                {
+                    if (Current(version)) _CloseFailure = error;
+                });
             if (!Current(version)) yield break;
             yield return _Transport.EndSession();
             if (!Current(version)) yield break;
@@ -207,7 +223,7 @@ namespace HauntedFish.Multiplayer
         public IEnumerator FailSession(string message)
         {
             var version = Version;
-            yield return CloseSession();
+            yield return CloseSession(message);
             if (!Current(version)) yield break;
             SetState(HotelSessionState.Failed, message);
             ScheduleRetry();
@@ -306,7 +322,6 @@ namespace HauntedFish.Multiplayer
         }
 
         void ScheduleRetry() => _NextAttempt = _Runtime.Time + Math.Max(_RetryInterval, _Transport.RetryDelay);
-        static void IgnoreResponse(Room room, string error) { }
 
         public void SetState(HotelSessionState state, string message)
         {

@@ -207,10 +207,32 @@ namespace HauntedFish.Multiplayer
             float ceiling = GameSceneController.Current ? GameSceneController.Current.HallwayCeilingY : 4.11f;
             return center.x - half.x >= hallway.min.x && center.x + half.x <= hallway.max.x &&
                 center.y + half.y <= ceiling + .0001f && FootprintAllowed(center, half) &&
-                !FishOccupies(center, prefab.HalfExtents) &&
+                TrapFootprintClear(prefab, grounded + prefab.ArmedOffset) && !FishOccupies(center, prefab.HalfExtents) &&
                 !Physics.CheckBox(center, prefab.HalfExtents, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
         }
 
+        static TrapFootprint Footprint(GhostTrap trap, Vector3 position, float rotation)
+        {
+            var center = position + Quaternion.Euler(0, rotation, 0) * trap.ColliderOffset;
+            var half = trap.BodyHalfSize;
+            return new TrapFootprint(center.x, center.z, half.x, half.z, rotation);
+        }
+        public bool TrapFootprintClear(GhostTrap definition, Vector3 position, float rotation = 0, int ignoreId = -1)
+        {
+            if (!definition || !Finite(rotation)) return false;
+            var candidate = Footprint(definition, position, rotation);
+            // Immediate registry checks work before Unity synchronizes new colliders.
+            // Preview and RPC authority share this validation.
+            foreach (var item in _Objects)
+            {
+                var trap = item.Value;
+                if (item.Key == ignoreId || !trap) continue;
+                var state = trap.CaptureState();
+                if (candidate.Overlaps(Footprint(trap, state.Position, state.Rotation)) ||
+                    candidate.Overlaps(Footprint(trap, state.Origin + trap.ArmedOffset, state.Rotation))) return false;
+            }
+            return true;
+        }
         public static bool FishOccupies(Vector3 center, Vector3 halfExtents)
         {
             // CharacterController contacts may not appear in an overlap query in
@@ -468,27 +490,7 @@ namespace HauntedFish.Multiplayer
             player.GhostFlightPosition = position;
             player.GhostFlightReady = true;
         }
-        internal void TransferGhost(HotelPlayer previous, HotelPlayer next, Vector3 flightPosition)
-        {
-            previous.ControlledCube = next.ControlledCube = -1;
-            previous.HeldTrapFamily = next.HeldTrapFamily = "";
-            foreach (var trap in _Objects.Values)
-            {
-                trap.StopInput();
-                var state = trap.CaptureState();
-                if (state.OwnerId != previous.NetId) continue;
-                state.OwnerId = next.NetId;
-                trap.ApplyState(state);
-                int index = _State.Cubes.FindIndex(item => item.Id == state.Id);
-                _State.Cubes[index] = state;
-            }
-            _Flights.Remove(previous);
-            _Flights[next] = new FlightMotion { Position = flightPosition, Axis = Vector2.zero, LastInput = Time.unscaledTime };
-            previous.GhostFlightReady = false;
-            next.GhostFlightPosition = flightPosition;
-            next.GhostFlightReady = true;
-            Changed(next);
-        }
+
         void Changed(HotelPlayer player)
         {
             _Dirty = true;
@@ -542,7 +544,7 @@ namespace HauntedFish.Multiplayer
                         _Dirty = true;
                     }
                     if (GameSceneController.Current && GameSceneController.Current.Haunting)
-                        GameSceneController.Current.Haunting.ApplyTrapSpook(trap, before, Time.deltaTime);
+                        GameSceneController.Current.Haunting.ApplyTrapDamage(trap, before, Time.deltaTime);
                 }
 
                 Publish(authority);

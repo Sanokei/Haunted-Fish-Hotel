@@ -1,0 +1,13 @@
+Authored defense rack | BossDefenseBoard | retained direct arena/view/slot binding on same GameObject
+Authored defense rack | BossDragInput | retained direct arena/view/slot binding on same GameObject
+Boss perspective camera rigs | BossArenaView | retained direct arena/view/slot binding on same GameObject
+Boss lives HUD | BossHudPresentation | retained direct arena/view/slot binding on same GameObject
+Fish Bottle defense | BossDefensePiece | retained direct arena/view/slot binding on same GameObject
+Fish TunaCan defense | BossDefensePiece | retained direct arena/view/slot binding on same GameObject
+Fish Radio defense | BossDefensePiece | retained direct arena/view/slot binding on same GameObject
+Ghost Bottle defense | BossDefensePiece | retained direct arena/view/slot binding on same GameObject
+Ghost TunaCan defense | BossDefensePiece | retained direct arena/view/slot binding on same GameObject
+Ghost Radio defense | BossDefensePiece | retained direct arena/view/slot binding on same GameObject
+BossSegmentedOpponent | BossSegmentedRig | retained direct arena/view/slot binding on same GameObject
+Matched player presentation (no input or colliders) | BossCharacterPresentation | retained direct arena/view/slot binding on same GameObject
+Opponent storm wall anchors | BossOpponentShadow | retained direct arena/view/slot binding on same GameObject

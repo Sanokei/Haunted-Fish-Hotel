@@ -6,6 +6,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="DoorPushTests.cs" />
+    <Compile Include="../../Assets/Scripts/DialogueSystem/StoryInput/StoryUI.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/LobbyIntroductionSequenceValidation.cs" />
+    <Compile Include="PunchlineAudioTests.cs" />
+    <Compile Include="../../Assets/Scripts/Multiplayer/Lobby/GrandmaFishPunchlineAudio.cs" />
     <Compile Include="../../Assets/Scripts/DialogueSystem/StoryInput/StoryFunctions.Sequences.cs" />
     <Compile Include="../../Assets/Plugins/Ink/InkLibs/InkRuntime/**/*.cs" />
     <Compile Include="../../Assets/Plugins/Ink/InkLibs/InkCompiler/**/*.cs" />

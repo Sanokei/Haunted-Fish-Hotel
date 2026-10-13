@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa13143dd224f6d998ec599d43455f4, type: 3}
+  m_Name: FishTutorialContent
+  m_EditorClassIdentifier: 
+  Role: 0
+  RoleLabel: Fish
+  Title: How to survive the hotel
+  Summary: 'A / D or arrows: walk. Shift: run. Space: jump. Gamepad: left stick,
+    stick click, A. Mouse aims the spotlight. Avoid carts and falling chandeliers;
+    reach the stairwell and press E / X to challenge the ghost. Moving or active
+    trap contact raises spook; at 100 you become ghost and the old ghost takes your
+    body. Fish wins at 3 goals; ghost at 1. Others spectate. Choose Ready, wait for
+    everyone, then the 10-second ghost setup before moving. Hallway return includes
+    another ghost head start.'
+  Instructions:
+  - Heading: Move and jump
+    Body: 'A / D or arrows walks; Shift runs; Space jumps from the ground. Gamepad:
+      left stick, stick click to run, A to jump.'
+  - Heading: See and avoid traps
+    Body: Mouse aims the spotlight. Watch the floor and ceiling, run and jump past
+      moving carts and falling chandeliers.
+  - Heading: Spook and role swap
+    Body: Contact from moving or active traps raises spook. At 100 you become ghost
+      and the old ghost takes your fish body.
+  - Heading: Stairwell challenge
+    Body: Reach the stairwell door and press E / gamepad X. Click and drag your striker
+      across both axes of your own half to hit the cue ball. Drag sideline defenses
+      onto your half; they bounce the ball and break after 1-3 hits.
+  - Heading: Win and return
+    Body: Fish wins at 3 goals; ghost wins at 1. Other participants spectate. The
+      hallway return includes another ghost head start.
+  - Heading: Round start
+    Body: Read the role page and deliberately choose Ready. Everyone must be ready;
+      wait through the 10-second ghost setup before moving.
+  Recording: {fileID: 32900000, guid: 6d6e6b36b22b38340acff8d4c93a5268, type: 3}
+  RecordingInk: {fileID: 4900000, guid: c854f2faf38548eeb7a89d1df80b3935, type: 3}
+  Loop: 1
+  HasAudio: 0
+  RecordedWidth: 640
+  RecordedHeight: 360
+  RecordedSeconds: 8.050854267961535
+  RecordedFrameRate: 13.042094230651855
+  RecordedFrames: 105
+  CaptureProvenance: Existing real production recording; authored replacement capture
+    pending.

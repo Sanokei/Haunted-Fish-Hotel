@@ -1,0 +1,4 @@
+FAIL System.InvalidOperationException: This can only be used during play mode, please use EditorSceneManager.NewScene() instead.
+  at (wrapper managed-to-native) UnityEngine.SceneManagement.SceneManager.CreateScene_Injected(UnityEngine.Bindings.ManagedSpanWrapper&,UnityEngine.SceneManagement.CreateSceneParameters&,UnityEngine.SceneManagement.Scene&)
+  at UnityEngine.SceneManagement.SceneManager.CreateScene (System.String sceneName, UnityEngine.SceneManagement.CreateSceneParameters parameters) [0x00039] in <18b3b31e3d8341f487466ebb6800bc67>:0 
+  at JumpNativeValidation.Run () [0x00052] in C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Assets\Editor\JumpNativeValidation.cs:21 

@@ -1,0 +1,1 @@
+PASS: all 12198 nontransparent cart pixels contained by enabled solid authored parts; outer2.5x2 footprint retained. Grounded, pending consumption, readiness/menu/grace and ceiling cancellation source checks pass. Not native/Play Mode.

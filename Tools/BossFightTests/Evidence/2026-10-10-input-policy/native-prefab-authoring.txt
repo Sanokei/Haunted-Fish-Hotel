@@ -1,0 +1,27 @@
+NATIVE PREFAB AUTHORING checks=23
+SOURCE_SHA256 sJXBYDetjt9Owj696FEf6xNvVfZC9qe7in7YLxoZwDY=
+PASS native Unity SaveAsPrefabAsset completed
+PASS arena is a native imported prefab asset
+PASS all authored Rigidbody objects retained
+PASS all authored collider objects retained
+PASS all authored sprite objects retained
+PASS internal authored prefab binding _Puck
+PASS internal authored prefab binding _FishPaddle
+PASS internal authored prefab binding _GhostPaddle
+PASS internal authored prefab binding _Reactions
+PASS internal authored prefab binding _FishSpawn
+PASS internal authored prefab binding _GhostSpawn
+PASS internal authored prefab binding _Camera
+PASS internal authored prefab binding _Score
+PASS internal authored prefab binding _Views
+PASS internal authored prefab binding _Hud
+PASS one standing contestant each side in native prefab
+PASS both goal triggers retained in native prefab
+PASS native prefab root identifier resolved
+PREFAB Assets/Resources/BossFight/BossFightArena.prefab guid=8e2be6cb079353643a9da74000446617 rootTransformFileID=503061646277690934
+SOURCE scene unchanged; native scene-instance integration remains a separate guarded operation.
+PASS saved boss scene bytes preserved
+PASS active user scene preserved
+PASS loaded user scene setup preserved
+PASS user scene dirty flags preserved
+PASS user selection preserved

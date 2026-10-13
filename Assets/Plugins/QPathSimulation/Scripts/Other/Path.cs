@@ -1,6 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public enum BlockType {
@@ -148,7 +150,9 @@ public class Path {
             go.GetComponent<BoxCollider>().size = new Vector3(1.4f, 1f, 1f);
             transform = go.transform;
             transform.parent = Parent;
+#if UNITY_EDITOR
             go.GetComponent<Renderer>().material = (Material)AssetDatabase.LoadAssetAtPath("Assets/QPathSimulation/Materials/street.mat", typeof(Material));
+#endif
         }
         Visualize();
     }

@@ -1,0 +1,42 @@
+[
+  {
+    "Original": "Assets/Editor/BossPrefabAuthoring.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Assets\\Editor\\BossPrefabAuthoring.cs",
+    "SHA256": "E1FF9B458B536637C36F676F955753FF6BE3C157ED7692C2BD32B8E8ABA33476"
+  },
+  {
+    "Original": "Assets/Editor/BossPrefabAuthoring.cs.meta",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Assets\\Editor\\BossPrefabAuthoring.cs.meta",
+    "SHA256": "CD57CD16C09C74F309FD6406572A67506D4D1E92FC6B8FB5858A94A70D905358"
+  },
+  {
+    "Original": "Assets/Editor/BossPrefabSceneIntegration.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Assets\\Editor\\BossPrefabSceneIntegration.cs",
+    "SHA256": "835FAC6606032093C136F3F9E9B4214058E622C6E9AC09003864980C207FC9E3"
+  },
+  {
+    "Original": "Assets/Editor/BossPrefabSceneIntegration.cs.meta",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Assets\\Editor\\BossPrefabSceneIntegration.cs.meta",
+    "SHA256": "AD9A1CAF17D754BB7D8FD524531C95EB97045F694017748983A65A6B27C8C5E5"
+  },
+  {
+    "Original": "Assets/Editor/BossIsolatedEditValidation.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Assets\\Editor\\BossIsolatedEditValidation.cs",
+    "SHA256": "4641A0B75888495BEB3D4A843B6073D527169D12E07DDA5B6936462C6A30966B"
+  },
+  {
+    "Original": "Assets/Editor/BossIsolatedEditValidation.cs.meta",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Assets\\Editor\\BossIsolatedEditValidation.cs.meta",
+    "SHA256": "B87F36A4AEDBC2C2B01D2A8C53A86A715959FD27E68E69CC7AB781E84CB22551"
+  },
+  {
+    "Original": "Tools/HallwayPreview/HallwayStagingPreviewTask.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Tools\\HallwayPreview\\HallwayStagingPreviewTask.cs",
+    "SHA256": "CC4EE476FDC32B12CA96566C15173811BE86F05B047BFF3619F6F3B9E646E4A6"
+  },
+  {
+    "Original": "Tools/HallwayPreview/README.txt",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-10-completed-helpers\\Tools\\HallwayPreview\\README.txt",
+    "SHA256": "E5278E83C4F18D2E136BAD01CDE2DBA1C38E76EBEA16E9BED9E31C6C0235449B"
+  }
+]

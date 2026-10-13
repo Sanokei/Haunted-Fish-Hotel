@@ -1,0 +1,15 @@
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\bin\Debug\net9.0\BossDefenseTests.exe
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\bin\Debug\net9.0\BossDefenseTests.deps.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\bin\Debug\net9.0\BossDefenseTests.runtimeconfig.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\bin\Debug\net9.0\BossDefenseTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\bin\Debug\net9.0\BossDefenseTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.AssemblyInfoInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.AssemblyInfo.cs
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.csproj.CoreCompileInputs.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.sourcelink.json
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\refint\BossDefenseTests.dll
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.pdb
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\BossDefenseTests.genruntimeconfig.cache
+C:\Users\wkeif\Documents\GitHub\Haunted Fish Hotel\Tools\BossFightTests\ExpandedBossPreparation\obj\Debug\net9.0\ref\BossDefenseTests.dll

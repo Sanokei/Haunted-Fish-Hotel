@@ -1,0 +1,1 @@
+PASS 23 native dialogue checks: real prefab options, Ink choices and variables, input submission, disable/destroy lifecycle. Mirage transport and rendered layout were not exercised.

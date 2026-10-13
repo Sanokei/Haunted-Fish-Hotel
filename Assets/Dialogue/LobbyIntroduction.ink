@@ -9,6 +9,8 @@ EXTERNAL Wait(seconds)
 EXTERNAL ExpandPanel(panelTag, seconds)
 EXTERNAL FlashFrames(frames)
 EXTERNAL DollyTo(sceneTag, amount, seconds)
+EXTERNAL LobbyShot(shotTag, seconds)
+EXTERNAL LobbyLine(text, seconds)
 
 // Still background with a cloud that changes to cloud_lightning.
 ~ SetVisible("background", true)
@@ -39,4 +41,10 @@ EXTERNAL DollyTo(sceneTag, amount, seconds)
 ~ FlashFrames(2)
 ~ DollyTo("gate_close", 1.0, 5.0)
 ~ Wait(2.0)
+// Reveal the real lobby: fish in front of camera, walk away, then camera passes fish toward reception.
+~ LobbyShot("entry", 1.5)
+~ LobbyShot("walk_away", 4.0)
+~ LobbyLine("Looks like nobody has checked into this place for years", 4.5)
+~ LobbyShot("reception", 4.0)
+~ Wait(1.0)
 -> END

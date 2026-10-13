@@ -1,0 +1,20 @@
+RECORDER PRODUCTION CONTRACT - 2026-10-11, sources published; native regression underway.
+Runtime paths:
+Assets/Scripts/BossFight/BossDragInput.cs
+Assets/Scripts/BossFight/BossArenaManager.cs
+Assets/Scripts/BossFight/BossDefenseBoard.cs, BossDefensePiece.cs, BossDefenseState.cs
+Assets/Scripts/Multiplayer/BossArenaCoordinator.cs, BossDefenseRequest.cs
+
+REAL PARTICIPANT path: existing BossArenaCoordinator.UpdateLocal reads Mouse.current position + leftButton pressed/held/released, then Arena.DragInput.Tick(actual actor NetId, Arena.MatchEpoch,false,allowed,screen,pressed,held,released,.05f). Returned axis uses Arena.AxisToTarget -> existing owned RPC SendBossInput -> ApplyInput -> physical MovePaddle. Do not use EditorPointerAxis or pointer-hover as demo. Click body, hold/drag, release. Puck is never capture target.
+Defense Tick raises DefenseMoveRequested(int slot,uint sequence,Vector2 tableRelativeXZ) every.10s while valid capture. Coordinator routes owned BossDefenseRequest.Submit(slot,seq,target,actual RoundStateKey,RoundVersion,MatchEpoch); requireAuthority ServerRPC -> Coordinator.AcceptDefense exact player/scope/epoch/ready/half checks -> Arena.Defenses.Place(actual NetId,epoch,slot,seq,target). Owner reply includes epoch. Do not bypass server rules in real games.
+
+EDITOR RECORDING (no fake network identities; existing physical native arena):
+Arena.BeginEditorPractice();Arena.SetLocalViewer(1,true); wait !Arena.Serving. Practice Board.Epoch private and side keys1fish/2ghost, Arena.FishId/GhostId stay0 and never produce network snapshots/rewards.
+Arena.SetEditorPracticeViewer(BossViewerSide.Fish or Ghost) selects faithful camera. Actual actor bodies locate via serialized arena refs or Rigidbody positions, not new contestants.
+Call Arena.DragInput.Tick(side1or2,Arena.Defenses.Epoch,true,true,screenPoint,pressed,held,released,.05f) using Arena.Camera.WorldToScreenPoint(physical own striker position + actual drag target). Tick runs production raycast capture, grab offset, limits and cue-ball exclusion. Fish feed returned axis to Arena.SetEditorPracticeInput(axis,false); Ghost feed to Arena.SetEditorPracticeGhostInput(axis). These drive production FixedUpdate MovePaddle on BOTH X/Z. Set other side input zero. Ghost setter opts out of AI only in this editor practice.
+Subscribe once DragInput.DefenseMoveRequested; in recording adapter call Board.Place(side,Board.Epoch,slot,seq,target), and reject via DragInput.Reply(slot,seq,Board.Epoch,false). Unsubscribe/Cancel on completion. Ghost uses slots3..5; fish0..2.
+Click a slot at Board.Piece(slot).RackPosition projected through same Arena.Camera; hold, drag toward Board.TablePosition(relative), release. Slot/rack/art already authored in BossFightArena.prefab; never create a proxy defense/puck or directly teleport a striker.
+Bottle slot0/3 health1 radius.28; tuna1/4 health2 radius.40; radio2/5 health3 radius.45. Place fish Z<-.55-radius, ghost Z>.55+radius, |X|<=3-radius-.12, |Z|<=5-1.25-radius; avoid cue-ball, paddles, otherdefenses and swept path. Preview uses exactly same pure authority validation without mutation.
+Damage path ONLY real server-authority BossDefensePiece.OnCollisionEnter(actual Arena.Puck Rigidbody) -> Board.CueBallContact -> State.Hit, dedup until CollisionExit. Do not call Hit/CueBallContact to fabricate filmed damage. Watch piece.State.Health and State.Broken, actual cue-ball deflection. Health/racks reset BeginEditorPractice/new match; serves keep damage.
+Arena.StopEditorPractice cancels captured input/restores authority on finish. New assets and actual physics validate in current native batch; do not recapture until editor released.
+Scoring confirmed: FishGoalsToWin3/GhostGoalsToWin1.

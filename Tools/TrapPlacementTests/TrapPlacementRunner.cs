@@ -56,6 +56,7 @@ public sealed class TrapPlacementRunner : MonoBehaviour
         Check(player.GhostPlacementAccepted&&world.Count==1,"Normal cart placement through current owned RPC succeeds outside grace");
         var placedCart=FindObjectsByType<GhostTrap>(FindObjectsSortMode.None).Single(t=>t.World==world&&t.FamilyTag=="cart");
         Physics.SyncTransforms();Check(Mathf.Abs(placedCart.CollisionBounds.min.y-scene.HallwayBounds.max.y)<.001f,"Normal cart retains floor-aligned collider");
+        yield return new WaitForSecondsRealtime(.21f); TrapOverlapRuntimeChecks.Run(world,player,placedCart,Check);
         placedCart.AcceptInput(new TrapInput(TrapInputKind.Move,-1),Time.unscaledTime);placedCart.Simulate(10,Time.unscaledTime);Physics.SyncTransforms();
         Check(placedCart.CollisionBounds.min.x>=world.GraceBounds.max.x-.001f,"Large cart movement cannot enter the player grace area");
         Set(controls,"_Position",placedCart.Position);world.Possess(player,placedCart.Index,placedCart.Position);world.Dispose(player,placedCart.Index);yield return null;yield return new WaitForSecondsRealtime(.21f);
@@ -73,10 +74,16 @@ public sealed class TrapPlacementRunner : MonoBehaviour
         Check(GhostPlacementController.HallwayPointer(camera,screen,out var pointed)&&Vector3.Distance(pointed,aim)<.002f,"Pointer-to-hallway plane remains exact under camera roll and zoom");
         InputSystem.QueueStateEvent(mouse,new MouseState{position=new Vector2(screen.x,screen.y)});InputSystem.Update();Set(controls,"_Pending",false);Call(controls,"Update");
         var preview=Get<GameObject>(controls,"_Preview");var previewSprite=Get<SpriteRenderer>(controls,"_PreviewSprite");
-        Check(preview.activeInHierarchy&&previewSprite.color==HotelPalette.Light&&Mathf.Abs(preview.transform.position.y+chandelier.BodyHalfSize.y-scene.HallwayCeilingY)<.002f,"Actual mouse preview is valid and ceiling snapped under camera effects");
+        var destination=Get<GameObject>(controls,"_PlacementPreview");var destinationSprite=Get<SpriteRenderer>(controls,"_PlacementPreviewSprite");
+        Check(destination&&destination.activeInHierarchy&&previewSprite.color==HotelPalette.Light&&Mathf.Abs(destination.transform.position.y+chandelier.BodyHalfSize.y-scene.HallwayCeilingY)<.002f,"Actual final-placement mouse preview is valid and ceiling snapped under camera effects");
+        Check(Vector3.Distance(preview.transform.position,controls.FlightPosition)<.002f,"Carried artwork follows ghost while separate destination remains ceiling snapped");
+        Check(Vector3.Distance(destination.transform.position,basePoint+chandelier.ArmedOffset+chandelier.ColliderOffset)<.002f,"Destination preview uses exact final authoritative body center");
+        var opaqueBounds=chandelier.GetComponentInChildren<GhostTrapAreaPresentation>(true).OpaqueArtBounds;
+        float opaqueTop=destinationSprite.sprite.bounds.min.y+destinationSprite.sprite.bounds.size.y*opaqueBounds.yMax;
+        Check(Mathf.Abs(destinationSprite.transform.TransformPoint(new Vector3(0,opaqueTop,0)).y-scene.HallwayCeilingY)<.002f,"Destination opaque artwork fits exactly to hallway ceiling despite texture padding");
         Check(Mathf.Abs(previewSprite.transform.localScale.x-previewSprite.transform.localScale.y)<.0001f,"Ceiling preview preserves artwork aspect ratio");Capture(camera,"01-valid-ceiling-preview-rolled");
         var blockedScreen=camera.WorldToScreenPoint(new Vector3(-1,2,0));InputSystem.QueueStateEvent(mouse,new MouseState{position=new Vector2(blockedScreen.x,blockedScreen.y)});InputSystem.Update();Set(controls,"_Position",new Vector3(-1,2,0));Call(controls,"Update");
-        Check(previewSprite.color==HotelPalette.Rust,"Actual mouse preview rejects safe-zone footprint overlap");Capture(camera,"02-invalid-grace-preview");
+        Check(previewSprite.color==HotelPalette.Rust&&destinationSprite.color.r==HotelPalette.Rust.r,"Actual mouse preview and snapped destination reject safe-zone footprint overlap");Capture(camera,"02-invalid-grace-preview");
         camera.transform.rotation=oldRot;camera.orthographicSize=oldZoom;Set(controls,"_Position",new Vector3(6,2,0));
         player.RequestPlaceHeldTrap(new Vector3(6,12,0),"chandelier",player.RoundStateKey,player.RoundVersion);Check(!player.GhostPlacementAccepted&&world.Count==0,"Forged vertical placement RPC cannot bypass canonical anchors");
         player.RequestPlaceHeldTrap(basePoint,"chandelier",player.RoundStateKey,player.RoundVersion);Check(player.GhostPlacementAccepted&&world.Count==1,"Native ceiling placement succeeds at hallway height");

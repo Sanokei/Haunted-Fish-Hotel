@@ -38,18 +38,67 @@ namespace Monologue.Dialogue
         [SerializeField] Visibility[] _FlashVisibility = Array.Empty<Visibility>();
         [SerializeField] AudioSource _Audio;
         [SerializeField] IntroductionSkipCircle _SkipProgress;
+        [SerializeField] GameObject[] _WorldArtwork = Array.Empty<GameObject>();
+        bool[] _ArtworkVisible;
+        public event Action SkipRequested;
+        public void RequestSkip() => SkipRequested?.Invoke();
+        public void PrepareWorld()
+        {
+            Close();
+            if (_Content) _Content.SetActive(true);
+            _ArtworkVisible = new bool[_WorldArtwork.Length];
+            for (int i = 0; i < _WorldArtwork.Length; i++) if (_WorldArtwork[i])
+            { _ArtworkVisible[i] = _WorldArtwork[i].activeSelf; _WorldArtwork[i].SetActive(false); }
+        }
         [Tooltip("Subscribe this UI to ordinary StoryFunctions events. Local sequences call Play directly.")]
         [SerializeField] bool _ListenToStoryEvents = true;
         readonly Dictionary<string, Element> _Objects = new Dictionary<string, Element>();
         readonly List<GameObject> _Spawned = new List<GameObject>();
         readonly Queue<StorySequenceStep> _Pending = new Queue<StorySequenceStep>();
         Coroutine _EventRoutine;
+        bool _Prepared;
+        sealed class RestPose
+        {
+            public RectTransform Target;
+            public Vector2 Position, Size;
+            public Vector3 Scale;
+            public Quaternion Rotation;
+            public IntroductionPanelShape Shape;
+            public float Slant;
+        }
+        readonly Dictionary<RectTransform, RestPose> _RestPoses = new Dictionary<RectTransform, RestPose>();
+        void RememberRest(RectTransform target)
+        {
+            if (!target || _RestPoses.ContainsKey(target)) return;
+            var shape = target.GetComponent<IntroductionPanelShape>();
+            _RestPoses.Add(target, new RestPose { Target = target, Position = target.anchoredPosition,
+                Size = target.sizeDelta, Scale = target.localScale, Rotation = target.localRotation,
+                Shape = shape, Slant = shape ? shape.Slant : 0 });
+        }
+        void RestoreRest()
+        {
+            foreach (var pose in _RestPoses.Values)
+            {
+                if (!pose.Target) continue;
+                pose.Target.anchoredPosition = pose.Position;
+                pose.Target.sizeDelta = pose.Size;
+                pose.Target.localScale = pose.Scale;
+                pose.Target.localRotation = pose.Rotation;
+                if (pose.Shape) pose.Shape.Slant = pose.Slant;
+            }
+        }
 
         public RectTransform Find(string tag) { Register(); return _Objects.TryGetValue(tag, out var item) ? item.Target : null; }
         void Register()
         {
             foreach (var element in _Elements)
-                if (element.Target && !string.IsNullOrWhiteSpace(element.Tag)) _Objects[element.Tag] = element;
+                if (element.Target && !string.IsNullOrWhiteSpace(element.Tag))
+                {
+                    _Objects[element.Tag] = element;
+                    RememberRest(element.Target);
+                }
+            foreach (var layout in _Layouts)
+                foreach (var pose in layout.Poses) RememberRest(pose.Target);
         }
         Layout FindLayout(string tag) => Array.Find(_Layouts, layout => layout.Tag == tag);
         public void ValidateSequence(IReadOnlyList<StorySequenceStep> steps)
@@ -87,10 +136,20 @@ namespace Monologue.Dialogue
                 default: return _Objects.ContainsKey(step.Target);
             }
         }
-        public void Prepare() { Register(); _Content.SetActive(true); }
+        public void Prepare()
+        {
+            Register();
+            if (!_Prepared) { RestoreRest(); _Prepared = true; }
+            _Content.SetActive(true);
+        }
         public void SetSkipProgress(float amount) { if (_SkipProgress) _SkipProgress.Progress = amount; }
         public void Close()
         {
+            if (_ArtworkVisible != null)
+                for (int i = 0; i < _ArtworkVisible.Length; i++)
+                    if (_WorldArtwork[i]) _WorldArtwork[i].SetActive(_ArtworkVisible[i]);
+            _ArtworkVisible = null;
+            if (_SkipProgress) _SkipProgress.Progress = 0;
             if (_EventRoutine != null) StopCoroutine(_EventRoutine);
             _EventRoutine = null;
             _Pending.Clear();
@@ -98,6 +157,8 @@ namespace Monologue.Dialogue
             foreach (var instance in _Spawned) if (instance) Destroy(instance);
             _Spawned.Clear();
             _Objects.Clear();
+            RestoreRest();
+            _Prepared = false;
             if (_WhiteFrame) _WhiteFrame.SetActive(false);
             if (_Content) _Content.SetActive(false);
         }
@@ -114,7 +175,10 @@ namespace Monologue.Dialogue
                     _Spawned.Add(instance.gameObject);
                     _Objects.Add(step.Target, new Element { Tag = step.Target, Target = instance });
                     break;
-                case StorySequenceStepKind.SetVisible: _Objects[step.Target].Target.gameObject.SetActive(step.Visible); break;
+                case StorySequenceStepKind.SetVisible:
+                    var visible = _Objects[step.Target]; visible.Target.gameObject.SetActive(step.Visible);
+                    if (step.Visible && visible.PulseSound && _Audio) _Audio.PlayOneShot(visible.PulseSound);
+                    break;
                 case StorySequenceStepKind.SetVariant:
                     foreach (var variant in _Objects[step.Target].Variants)
                     {
@@ -124,6 +188,7 @@ namespace Monologue.Dialogue
                     }
                     break;
                 case StorySequenceStepKind.MoveUI:
+                    if (_Objects[step.Target].PulseSound && _Audio) _Audio.PlayOneShot(_Objects[step.Target].PulseSound);
                     var element = _Objects[step.Target];
                     var start = element.Target.anchoredPosition;
                     yield return Tween(step.Seconds, t =>

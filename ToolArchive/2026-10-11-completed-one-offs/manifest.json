@@ -1,0 +1,50 @@
+[
+  {
+    "Original": "Assets/Editor/LobbyMoodyInteriorAuthoringTask.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\LobbyMoodyInteriorAuthoringTask.cs",
+    "SHA256": "9EEF0BA5FEE026082EA6D8393920CF641C1BEDC2CB5FDA92ED878DD545C31A92",
+    "Reason": "Profile authored and actual Lobby global-grade binding saved"
+  },
+  {
+    "Original": "Assets/Editor/LobbyMoodyInteriorAuthoringTask.cs.meta",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\LobbyMoodyInteriorAuthoringTask.cs.meta",
+    "SHA256": "9F389E94B1D89D4C38675C7CF51BC250E1F12DA829CF658DFC2CD3FDDE9F197E",
+    "Reason": "Profile authored and actual Lobby global-grade binding saved"
+  },
+  {
+    "Original": "Assets/Editor/LobbyRadioSceneIntegration.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\LobbyRadioSceneIntegration.cs",
+    "SHA256": "9E142D213B2CAC297FD0C35A3B86DD5D0F468A6A1F2117E5A800AB3CABCB4199",
+    "Reason": "Actual eleven-clip radio scene integration saved and native-batch verified"
+  },
+  {
+    "Original": "Assets/Editor/LobbyRadioSceneIntegration.cs.meta",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\LobbyRadioSceneIntegration.cs.meta",
+    "SHA256": "282F95F496470116CCE14DC7BD62AEE672F1FE6A3DAF02D178C6970BDD49D1E1",
+    "Reason": "Actual eleven-clip radio scene integration saved and native-batch verified"
+  },
+  {
+    "Original": "Assets/Editor/CartStepTraceValidation.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\CartStepTraceValidation.cs",
+    "SHA256": "0259221FA06E351455D1AD5DEE7B6A64C91A11FF381B59E3BEFB1CB7963C8E27",
+    "Reason": "Old trace explicitly invalid/superseded by FINAL-ACCEPTANCE and native-final-cart"
+  },
+  {
+    "Original": "Assets/Editor/CartStepTraceValidation.cs.meta",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\CartStepTraceValidation.cs.meta",
+    "SHA256": "A9ED519B0E22AE79672D3C1D148D45F1F851E1FC14FDFC6BCD7CD8FACBFC68AA",
+    "Reason": "Old trace explicitly invalid/superseded by FINAL-ACCEPTANCE and native-final-cart"
+  },
+  {
+    "Original": "Assets/Editor/JumpNativeValidation.cs",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\JumpNativeValidation.cs",
+    "SHA256": "C98A36FC00B06A5B10257B8EAA6BB5B6AF30417E46C6E013F9BBA70CE57CEE20",
+    "Reason": "Old native-collision-v2 fixture explicitly invalid/superseded by final native cart acceptance"
+  },
+  {
+    "Original": "Assets/Editor/JumpNativeValidation.cs.meta",
+    "Archive": "C:\\Users\\wkeif\\Documents\\GitHub\\Haunted Fish Hotel\\ToolArchive\\2026-10-11-completed-one-offs\\Assets\\Editor\\JumpNativeValidation.cs.meta",
+    "SHA256": "12FAC075D0D2D9FB1221A4BF87E404D591A06C43F469A465A4112D874D92CB81",
+    "Reason": "Old native-collision-v2 fixture explicitly invalid/superseded by final native cart acceptance"
+  }
+]

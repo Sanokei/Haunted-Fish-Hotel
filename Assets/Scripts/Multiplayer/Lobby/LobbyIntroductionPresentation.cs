@@ -6,34 +6,75 @@ using UnityEngine;
 
 namespace HauntedFish.Multiplayer
 {
-    // Lifecycle only. All visuals, bindings and animation destinations are authored in the prefab.
     public sealed class LobbyIntroductionPresentation : MonoBehaviour
     {
         [SerializeField] StoryUI _UIPrefab;
+        [SerializeField] StoryUI _AuthoredUI;
+        [SerializeField] LightningEffectManager _Lightning;
+        public bool IsReady { get; private set; }
+        [SerializeField] LobbyIntroductionWorldSequence _World;
         StoryUI _UI;
+        bool _WorldPlaying;
         public StoryUI UI => _UI;
+        public event Action SkipRequested;
+        void RequestSkip() => SkipRequested?.Invoke();
+        static bool IsWorld(StorySequenceStep step) =>
+            step.Kind == StorySequenceStepKind.LobbyShot || step.Kind == StorySequenceStepKind.LobbyLine;
         public void Prepare()
         {
             if (!_UI)
             {
-                if (!_UIPrefab) throw new InvalidOperationException("Assign the authored introduction UI prefab.");
-                _UI = Instantiate(_UIPrefab, transform, false);
+                if (!_AuthoredUI) throw new InvalidOperationException("Assign the scene-authored introduction UI.");
+                _UI = _AuthoredUI;
+                _UI.SkipRequested += RequestSkip;
             }
-            _UI.Prepare();
+            if (!_WorldPlaying) _UI.Prepare();
+            Canvas.ForceUpdateCanvases();
+            IsReady = true;
         }
-        public bool Supports(StorySequenceStep step) => _UIPrefab && _UIPrefab.Supports(step);
+        public bool Supports(StorySequenceStep step) =>
+            IsWorld(step) ? _World && _World.Supports(step) : _UIPrefab && _UIPrefab.Supports(step);
         public void ValidateSequence(IReadOnlyList<StorySequenceStep> steps)
         {
             if (!_UIPrefab) throw new InvalidOperationException("Assign the authored introduction UI prefab.");
-            _UIPrefab.ValidateSequence(steps);
+            var supportsWorld = _World ? new Func<StorySequenceStep, bool>(_World.Supports) : null;
+            var uiSteps = LobbyIntroductionSequenceValidation.UIOnly(steps, supportsWorld);
+            foreach (var step in uiSteps) if (step.Kind == StorySequenceStepKind.CreateUI)
+                throw new InvalidOperationException("Local intro UI must be authored before Play.");
+            _UIPrefab.ValidateSequence(uiSteps);
         }
-        public IEnumerator Play(StorySequenceStep step) { Prepare(); yield return _UI.Play(step); }
+        public IEnumerator Play(StorySequenceStep step)
+        {
+            if (IsWorld(step))
+            {
+                if (!_WorldPlaying)
+                {
+                    Prepare();
+                    yield return _World.Prepare();
+                    _UI.PrepareWorld();
+                    _WorldPlaying = true;
+                }
+                yield return _World.Play(step);
+            }
+            else
+            {
+                Prepare();
+                if (_Lightning && step.Kind == StorySequenceStepKind.SetVisible && step.Target == "storm" && step.Visible) _Lightning.StartAmbient();
+                if (_Lightning && step.Kind == StorySequenceStepKind.SetVariant && step.Target == "cloud" && step.Variant == "cloud_lightning") _Lightning.Play();
+                yield return _UI.Play(step);
+            }
+        }
         public void SetSkipProgress(float progress) { if (_UI) _UI.SetSkipProgress(progress); }
         public void Close()
         {
+            IsReady = false;
+            _WorldPlaying = false;
+            if (_Lightning) _Lightning.StopAmbient();
+            if (_World) _World.Close();
             if (!_UI) return;
+            _UI.SkipRequested -= RequestSkip;
             _UI.Close();
-            Destroy(_UI.gameObject);
+            // Scene-authored UI is retained for replay; Close hides/reset its content.
             _UI = null;
         }
         void OnDisable() => Close();

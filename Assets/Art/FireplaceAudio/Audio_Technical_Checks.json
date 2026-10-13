@@ -1,0 +1,37 @@
+{
+  "sample_rate_hz": 48000,
+  "channels": 1,
+  "encoding": "PCM 24-bit WAV",
+  "duration_seconds": 60.0,
+  "samples": 2880000,
+  "boundary_rotation_samples": 150,
+  "sample_peak_dbfs": -12.693918276874205,
+  "rms_dbfs": -30.167434968954897,
+  "dc_mean": 6.843291365675618e-19,
+  "seam_sample_step_amplitude": 5.015311826604568e-05,
+  "seam_step_dbfs": -85.99404119142756,
+  "maximum_internal_sample_step": 0.20386271736187256,
+  "source": "Joseph SARDIN, Fireplace #4, BigSoundBank 2856",
+  "source_download_format": "192 kbps stereo MP3 at 48 kHz",
+  "source_duration_seconds": 79.2,
+  "source_ranges_seconds": [
+    [
+      5,
+      35
+    ],
+    [
+      44,
+      78
+    ]
+  ],
+  "crossfade_seconds": 2,
+  "compression_max_gain_reduction_db": 16.883353676507465,
+  "normalization_gain_db": 18.39891194932636,
+  "source_sha256": "9bda58aa7b596f26c1a09b01d14ccc2157f6ed236262d9f32d640e2020eeea5e",
+  "master_sha256": "6dd786c5bb1488f84e0bb44e8dd2924b9b6976e994169683a13608b8c7a7c23e",
+  "perceptual_listening_validation": false,
+  "unity_in_scene_validation": false,
+  "integrated_loudness_lufs": -30.7,
+  "loudness_range_lu": 1.8,
+  "true_peak_dbfs": -12.7
+}

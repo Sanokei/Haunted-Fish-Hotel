@@ -7,6 +7,7 @@ namespace HauntedFish.Multiplayer
     public interface IHotelGameCommands
     {
         void Acknowledge(HotelPlayer player, int version);
+        void Ready(HotelPlayer player, string key, int version);
         void RefreshPlacement(HotelPlayer player);
         void AcceptFlightInput(HotelPlayer player, Vector2 axis, string key, int version);
         bool TakePackage(HotelPlayer player, int id, Vector3 position, string key, int version);

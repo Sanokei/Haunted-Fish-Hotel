@@ -1,0 +1,43 @@
+HAUNTED FISH HOTEL — INDOOR STORM AUDIO
+
+Source licenses verified 2026-10-10. Each listed work is offered under CC0 1.0 Universal. The alxl work has multiple offered licenses; this pack uses its expressly available CC0 option.
+
+CC0: https://creativecommons.org/publicdomain/zero/1.0/
+
+CC0 permits copying, adapting and commercial distribution without asking permission or requiring attribution. Voluntary credit below is recommended. Source authors do not endorse this pack. Licensing statements are the uploaders' own; no independent chain-of-title warranty is implied.
+
+Rain on Window Loop — alxl
+Source: https://opengameart.org/content/rain-on-window-loop
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Downloaded version: Original WAV download
+
+Rain (loopable) — Ylmir
+Source: https://opengameart.org/content/rain-loopable
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Downloaded version: Author-published 160 kbps Ogg Vorbis recordings
+
+230823 Thunder, dry distant rolling, R-07 EM272s, Stratford 12pm — TRP
+Source: https://freesound.org/people/TRP/sounds/717890/
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Downloaded version: Public high-quality MP3 preview; source itself is MP3
+
+big thunder clap — seth-m
+Source: https://freesound.org/people/seth-m/sounds/458015/
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Downloaded version: Public high-quality MP3 preview of original WAV
+
+thunder dry crack rumble.wav — cognito perceptu
+Source: https://freesound.org/people/cognito%20perceptu/sounds/536903/
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Downloaded version: Public high-quality MP3 preview of original WAV
+
+
+CHANGES
+Rain recordings were excerpted, crossfaded, EQ-filtered, stereo-width adjusted, layered and gain-mastered. Thunder recordings were trimmed, EQ-filtered, faded and gain-mastered; Distant_Long is a slowed/filtered variation of Medium_Roll. No hard limiter was used. All runtime WAVs were resampled to 48 kHz and exported as dithered 16-bit PCM.
+
+SOURCE QUALITY
+The window recording came from its original downloadable WAV. Ylmir rain came from the author-published 160 kbps Ogg files. Thunder came from public high-quality Freesound MP3 previews. WAV conversion does not restore lossy-source detail. Original downloads, 24-bit processing masters and separate rain stems are retained in the production workspace.
+
+
+OPTIONAL CREDIT
+Rain: Ylmir and alxl (OpenGameArt, CC0). Thunder: seth-m, cognito perceptu and TRP (Freesound, CC0). Indoor edit and layering prepared for Haunted Fish Hotel.

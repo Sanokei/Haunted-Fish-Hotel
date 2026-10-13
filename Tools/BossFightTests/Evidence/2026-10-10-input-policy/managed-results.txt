@@ -1,0 +1,4 @@
+1702 BossFight rule checks passed.
+3162 BossFight input policy and serialized scene checks passed after native prefab integration.
+23 native prefab authoring checks passed;19 native scene integration checks passed.
+Perspective rigs/bindings saved by Unity. New native gameplay/render/storm lifecycle tests remain pending.
