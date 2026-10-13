@@ -1,0 +1,64 @@
+{
+  "source": "Assets/Art/LobbyIntro/Letter-source.png",
+  "source_sha256": "15fd9ec044df3b738f6e9ff4a0d6c8305cc0ef034a50cd7de3c43617ae45955c",
+  "source_size": [
+    2048,
+    1271
+  ],
+  "coordinate_system": "top-left origin; right/bottom exclusive",
+  "method": "Lossless crop; original RGB copied byte for byte; exterior-only binary alpha mask.",
+  "mask": "All nonwhite source pixels protected. A one-pixel four-neighbor closing seals tiny outline gaps for interior filling only. Original ink mask is unioned back. Enclosed paper stays opaque.",
+  "imagegen": "Two extraction trials were rejected for resampling/redrawing and are not used in the project.",
+  "assets": {
+    "letter": {
+      "path": "Assets/Art/LobbyIntro/letter.png",
+      "crop_box": [
+        382,
+        189,
+        883,
+        516
+      ],
+      "size": [
+        501,
+        327
+      ],
+      "source_ink_bounds": [
+        386,
+        193,
+        880,
+        512
+      ],
+      "protected_drawn_pixels": 22722,
+      "opaque_pixels": 124277,
+      "transparent_pixels": 39550,
+      "rgb_bytes_changed": 0,
+      "drawn_pixels_removed": 0,
+      "sha256": "7056f8a2431ab2f768f470842ac22c1f27d888bf061cbd8c4d365328657bb60c"
+    },
+    "letter_read": {
+      "path": "Assets/Art/LobbyIntro/letter_read.png",
+      "crop_box": [
+        1213,
+        146,
+        1730,
+        892
+      ],
+      "size": [
+        517,
+        746
+      ],
+      "source_ink_bounds": [
+        1217,
+        150,
+        1726,
+        888
+      ],
+      "protected_drawn_pixels": 62651,
+      "opaque_pixels": 363633,
+      "transparent_pixels": 22049,
+      "rgb_bytes_changed": 0,
+      "drawn_pixels_removed": 0,
+      "sha256": "3abba8995ebe83813a7af9397f31c86fa595e38dcc1c552526e6a2fd447492e1"
+    }
+  }
+}

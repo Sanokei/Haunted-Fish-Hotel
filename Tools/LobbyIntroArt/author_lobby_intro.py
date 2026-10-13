@@ -144,12 +144,10 @@ def main():
     mid=material("RainMid",1,_Density=39,_Speed=0.66,_Wind=0.16,_Length=0.32,_Width=0.026,_Opacity=0.44,_Seed=17.1)
     near=material("RainNear",1,_Density=23,_Speed=0.98,_Wind=0.20,_Length=0.46,_Width=0.031,_Opacity=0.30,_Seed=39.7,_Light=0.65)
     glow=material("GateLampGlow",3,_Opacity=0.13)
-    paper=material("BlankLetterPaper",4)
-    envelope=material("EnvelopePaper",5)
     def sprite(name):return f"{{fileID: 21300000, guid: {guid('Assets/Art/LobbyIntro/'+name+'.png')}, type: 3}}"
     p=Prefab()
     # Keep all original file IDs, binding tags, layouts, Ink timing, audio, skip, and independent flash canvas.
-    # Authoring labels stay serialized but are invisible; no invented narrative replaces the blank letter.
+    # Authoring labels stay serialized but invisible; the supplied handwriting remains in its sprite.
     for ident,(kind,body) in list(p.docs.items()):
         if kind==1 and re.search(r"  m_Name: (Label|Background label)\n",body):p.field(ident,"m_IsActive",0)
     for image_id,name,tint in [
@@ -170,8 +168,14 @@ def main():
     p.color(6225460243091785818,(.057,.052,.050,1))
     p.color(3408271380882960119,(.064,.060,.056,1))
     p.color(7760204798687381609,(.01,.014,.021,.55))
-    p.field(4451160055209052605,"m_Material",envelope);p.color(4451160055209052605,(1,1,1,1))
-    p.field(2140734793831677871,"m_Material",paper);p.color(2140734793831677871,(1,1,1,1))
+    # Bind the two segmented source drawings to existing Image components, never generated UI.
+    # Default UI material respects both sprite alpha and the existing rhombus panel stencil.
+    for image_id,name in [(4451160055209052605,"letter"),(2140734793831677871,"letter_read")]:
+        p.field(image_id,"m_Material","{fileID: 0}");p.field(image_id,"m_Sprite",sprite(name))
+        p.field(image_id,"m_PreserveAspect",1);p.color(image_id,(1,1,1,1))
+    p.rect(1298306737601677680,(-70,289),(180,120))
+    # 470 high becomes 658 during the existing 1.4x fullscreen read beat, inside 720.
+    p.rect(4885660160476274963,(0,10),(330,470))
     # Sky and wet ground span the whole authored viewport, with no bright horizon seam.
     p.field(4224427339354618196,"m_Material",sky);p.color(4224427339354618196,(1,1,1,1))
     p.field(6619972303101062993,"m_Material",sky);p.color(6619972303101062993,(1,1,1,1));p.rect(71778210276053668,(0,0),(1280,720))
@@ -215,7 +219,7 @@ def main():
     binding+="    - Tag: gate_arrival\n      Camera: {x: 0, y: -140}\n      Push: 0.4\n"
     p.docs[story_id]=[kind,body.replace("  _Prefabs:",binding+"  _Prefabs:")]
     p.save()
-    print("Authored supplied exterior art, hallway doors, stationery materials and five rain layers. Existing bindings preserved.")
+    print("Authored supplied exterior art, hallway doors, segmented letter sprites and five rain layers. Existing bindings preserved.")
 
 
 if __name__=="__main__":main()

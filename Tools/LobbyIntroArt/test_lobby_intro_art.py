@@ -3,7 +3,10 @@ from pathlib import Path
 import hashlib
 import re
 import sys
+import tempfile
 import unittest
+
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "Tools/ScenePresentationTests"))
@@ -44,6 +47,65 @@ class LobbyIntroArtTests(unittest.TestCase):
             self.assertIn(guid,value(self.docs[ident].body,"m_Sprite"))
             self.assertEqual(value(self.docs[ident].body,"m_PreserveAspect"),"1")
             self.assertEqual(value(self.docs[ident].body,"m_RaycastTarget"),"0")
+
+    def test_supplied_letter_source_is_archived_unchanged(self):
+        source=ROOT / "Assets/Art/LobbyIntro/Letter-source.png"
+        self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),
+                         "15fd9ec044df3b738f6e9ff4a0d6c8305cc0ef034a50cd7de3c43617ae45955c")
+        with Image.open(source) as image:
+            self.assertEqual(image.size,(2048,1271))
+
+    def test_letter_pixels_and_handwriting_are_losslessly_preserved(self):
+        source=Image.open(ROOT / "Assets/Art/LobbyIntro/Letter-source.png").convert("RGBA")
+        for name,box in [("letter",(382,189,883,516)),("letter_read",(1213,146,1730,892))]:
+            path=ROOT / "Assets/Art/LobbyIntro" / (name+".png")
+            sprite=Image.open(path).convert("RGBA")
+            original=source.crop(box)
+            self.assertEqual(sprite.size,original.size)
+            self.assertEqual(sprite.convert("RGB").tobytes(),original.convert("RGB").tobytes(),name)
+            source_pixels=original.tobytes();sprite_pixels=sprite.tobytes()
+            self.assertTrue(all(sprite_pixels[i+3]==255 for i in range(0,len(source_pixels),4)
+                                if min(source_pixels[i:i+3])<255),name+" retains every drawn pixel")
+            alpha=sprite.getchannel("A")
+            self.assertEqual(alpha.getextrema(),(0,255))
+            self.assertEqual(alpha.getpixel((sprite.width//2,sprite.height//2)),255)
+            for xy in [(0,0),(sprite.width-1,0),(0,sprite.height-1),(sprite.width-1,sprite.height-1)]:
+                self.assertEqual(alpha.getpixel(xy),0)
+            metadata=path.with_name(path.name+".meta").read_text()
+            for contract in ["spriteMode: 1","alphaIsTransparency: 1","enableMipMap: 0",
+                             "textureType: 8","spriteGenerateFallbackPhysicsShape: 0","nPOTScale: 0"]:
+                self.assertIn(contract,metadata)
+            self.assertNotIn("textureCompression: 1",metadata)
+
+    def test_different_source_cannot_overwrite_approved_archive(self):
+        import segment_letter
+        source=ROOT / "Assets/Art/LobbyIntro/Letter-source.png"
+        before=source.read_bytes()
+        with tempfile.TemporaryDirectory() as temp:
+            other=Path(temp)/"different.png"
+            other.write_bytes(b"not the approved source image")
+            with self.assertRaisesRegex(ValueError,"Source differs"):
+                segment_letter.segment(other)
+        self.assertEqual(source.read_bytes(),before)
+
+    def test_segmented_letter_sprites_replace_procedural_stationery(self):
+        import author_lobby_intro
+        for ident,name in [(4451160055209052605,"letter"),(2140734793831677871,"letter_read")]:
+            body=self.docs[ident].body
+            expected=author_lobby_intro.guid("Assets/Art/LobbyIntro/"+name+".png")
+            self.assertIn(expected,value(body,"m_Sprite"))
+            self.assertEqual(value(body,"m_Material"),"{fileID: 0}")
+            self.assertEqual(value(body,"m_PreserveAspect"),"1")
+            self.assertEqual(value(body,"m_Color"),"{r: 1, g: 1, b: 1, a: 1}")
+            self.assertEqual(value(body,"m_RaycastTarget"),"0")
+        # The original read/fullscreen targets and expansion survive; the page stays entirely visible.
+        read=self.docs[4885660160476274963].body
+        self.assertEqual(local_ref(read,"m_Father"),7322483714184217825)
+        width,height=vector(value(read,"m_SizeDelta"))[:2]
+        x,y=vector(value(read,"m_AnchoredPosition"))[:2]
+        self.assertEqual((width,height),(330,470))
+        self.assertLessEqual((abs(y)+height/2)*1.4,360)
+        self.assertLess(width,538.6666-120)
 
     def test_blockout_labels_cannot_render(self):
         labels=[d for d in self.docs.values() if d.kind==1 and

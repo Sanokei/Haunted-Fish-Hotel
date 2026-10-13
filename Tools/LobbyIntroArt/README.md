@@ -11,7 +11,7 @@ All imagery and weather layers are authored in the prefab. There are no new runt
 - A low-contrast blue-black cloud field and a noisy wet path with sparse fading ripple rings.
 - Three rain depths with independently authored density, speed, width, length, slant and opacity. The opening uses the far/near materials; the gate shot uses all three.
 - Per-droplet taper, soft derivative-aware edges, randomized brightness/length, breakup along the glint and selective visibility near the gate lamps/open sky. This avoids opaque, uniformly white line primitives.
-- Low-opacity warm lamp scatter, plus blank textured stationery for the existing letter beats.
+- Low-opacity warm lamp scatter. Letter artwork uses its own source sprites and the standard UI material.
 
 The weather uses the shader's normal elapsed-time input. Disabling the existing Storm/Exterior/content objects stops rendering it; there is no separate coroutine or subscription to leak on skip, replay, scene exit or cancellation.
 
@@ -36,14 +36,21 @@ The lobby uses eight existing layers, from sky at depth 12 through hotel at 3.5,
 
 `StoryAnimationMath` contains the deterministic projection and easing rules. `StoryParallaxRig` contains authoring data. `StoryParallaxPlayer` owns per-UI camera/rest state and a cancellation version; `StoryUI` only routes the step through its existing ordered coroutine and closes the player on teardown. Close, skip, world handoff and disable restore all rig layer transforms. Stale iterators cannot reapply a cancelled camera, including after a new replay has begun. Configuration validation rejects missing/duplicate tags and targets, inconsistent coordinate spaces, nonfinite camera data, invalid timing/easing, and push values that reach a layer's camera plane.
 
-## Remaining content gap
+## Supplied envelope and handwritten letter
 
-The supplied set has no letter/envelope artwork or actual letter wording. The baseline contained only the labels “letter” and “letter_read (letter being read)”. Those authoring labels are hidden; no story text has been invented. The letter's timing, move, reading panel and fullscreen expansion remain, using blank stationery pending approved letter content.
+`Assets/Art/LobbyIntro/Letter-source.png` archives the byte-identical 2048×1271 `IMG_0101.PNG` attachment. The user explicitly approved lossless pixel cropping/background masking after two image-generation extraction trials were rejected for altering the original artwork. Neither generated trial is used in the project.
+
+The two production sprites are `Assets/Art/LobbyIntro/letter.png` (501×327) and `letter_read.png` (517×746). Their crop boxes in source coordinates are `(382,189)-(883,516)` and `(1213,146)-(1730,892)`, with a top-left origin and exclusive right/bottom edges. `letter_asset_provenance.json` records exact source/output hashes, drawn-pixel counts, alpha counts and boundaries.
+
+Every RGB byte in each crop is identical to its source. Every nonwhite drawn pixel stays opaque, including all handwritten words, punctuation, the two seals, the small character and the heart. A one-pixel binary closing seals tiny gaps in the drawn outline for a temporary mask only; filling that outline retains opaque white paper and removes only exterior canvas. No RGB resampling, denoising, replacement text, invented content or redrawing occurs. `segment_letter.py` reproduces this offline with Pillow, NumPy and SciPy.
+
+Both sprites bind to the existing `letter` and `letter_read` Image components in `LobbyIntroductionUI.prefab`. They use default UI material, white tint, preserved aspect ratio, alpha, stencil clipping and no raycast. The reading rect is 330×470: its existing 1.4× fullscreen expansion fits the 720-high canvas with a margin. The envelope keeps its existing floor transform, under-door move and contact-shadow binding. Both door beats still use the original `HALLWAY-Door-full.png`. No Ink, camera API, weather, audio, flash, skip, lifecycle or object-creation changes were needed.
 
 ## Verification
 
 ```
 python3 -m unittest discover -s Tools/LobbyIntroArt -p 'test_*.py' -v
+python3 Tools/LobbyIntroArt/segment_letter.py  # optional deterministic re-segmentation
 python3 -m unittest discover -s Tools/ScenePresentationTests -p 'test_*.py' -v
 python3 Tools/ScenePresentationTests/verify_scene_assets.py --asset Assets/Resources/LobbyIntroductionUI.prefab
 dotnet run --project Tools/IntroductionTests/IntroductionTests.csproj
@@ -53,4 +60,4 @@ The introduction suite compiles and executes the vendored Ink source, checks ser
 
 Native Unity import, shader compilation, actual appearance/performance, frame-accurate flashes and interactive skip/replay must still be checked in an available Editor. The current cloud Editor cannot initialize its required Unix socket; no workaround was attempted. The optional Blender source previews show the actual supplied PNGs and authored prefab poses. They explicitly approximate weather shader rendering and are **not Unity captures**.
 
-`author_lobby_intro.py` is an offline, idempotent authoring helper for this migration, not runtime code. It preserves existing prefab identities. Run it from this repository; `--source-dir` optionally reimports the original five PNGs. Inspect changes and rerun checks after any reauthoring.
+`author_lobby_intro.py` is an offline, idempotent authoring helper for this migration, not runtime code. It preserves existing prefab identities and the two new letter sprite bindings. Run it from this repository; `--source-dir` optionally reimports the original five PNGs. `segment_letter.py --source /path/to/IMG_0101.PNG` archives and segments the approved source; its hash guard rejects a different image. Inspect changes and rerun checks after any reauthoring.
