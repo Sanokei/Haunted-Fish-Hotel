@@ -28,6 +28,25 @@ namespace HauntedFish.BossFight
             double tan=Math.Tan(fov*Math.PI/360);const double edge=.92;
             distance=(float)Math.Max(1,Math.Max(Math.Max(Math.Abs(right)/(tan*aspect*edge)-depth,Math.Abs(up)/(tan*edge)-depth),near+.3-depth));return Finite(distance);
         }
+        // Fish view reserves unequal space above/below the board for the looming opponent.
+        // Every supplied board/tray/head point stays inside the same four-percent safe edge.
+        public static bool RequiredOffsetDistance(float fov,float aspect,float near,float[] right,float[] up,float[] depth,int count,out float distance,out float verticalOffset)
+        {
+            distance=verticalOffset=0;
+            if(!Finite(fov)||!Finite(aspect)||!Finite(near)||fov<20||fov>100||aspect<.1f||aspect>5||near<=0||
+                right==null||up==null||depth==null||count<1||count>right.Length||count>up.Length||count>depth.Length)return false;
+            double k=Math.Tan(fov*Math.PI/360)*.92,required=1,lower=double.NegativeInfinity,upper=double.PositiveInfinity;
+            for(int i=0;i<count;i++)
+            {
+                if(!Finite(right[i])||!Finite(up[i])||!Finite(depth[i]))return false;
+                required=Math.Max(required,Math.Max(Math.Abs(right[i])/(k*aspect)-depth[i],near+.3-depth[i]));
+                lower=Math.Max(lower,up[i]-k*depth[i]);
+                upper=Math.Min(upper,up[i]+k*depth[i]);
+            }
+            required=Math.Max(required,(lower-upper)/(2*k));
+            distance=(float)required;verticalOffset=(float)((lower+upper)*.5);
+            return Finite(distance)&&Finite(verticalOffset);
+        }
         public static bool CornerVisible(float x,float y,float z,float distance,float pitch,float fov,float aspect,float near,float far)
         {
             double radians=pitch*Math.PI/180,sin=Math.Sin(radians),cos=Math.Cos(radians),depth=distance-y*sin+z*cos;

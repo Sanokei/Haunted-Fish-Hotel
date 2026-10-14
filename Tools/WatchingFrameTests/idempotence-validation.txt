@@ -1,0 +1,1 @@
+PASS no-write deterministic rerun of the continuous upper-room extension manifest: 553 complete frame placements, original texture/mask references, 9 surfaces, exact wall-plane matching and height gains. Material/shader assets were not rewritten while lighting work is active.

@@ -1,0 +1,17 @@
+{
+  "instance_id": 8141014201,
+  "prefab_guid": "54c2f5541d8a58b894cdf6daeac98d12",
+  "scene_sha256_before": "86d997dc19642577e446443a06cc87fc69d344ceb31ce49c4fc6f37eef1ac888",
+  "scene_sha256_after": "7d8a3e56d1455d9262b3f4b4b0bd6abe2fd092c17fa3986bcbd0d0469e579fff",
+  "added_only": true,
+  "existing_tunnel_ids_preserved": [
+    8141014101,
+    8141014102,
+    8141014002
+  ],
+  "entry_z": -2.95,
+  "desk_edge_z": 6.3,
+  "runner_end_z": 6.25,
+  "base_y": 0.018,
+  "existing_carpet_y": 0.012
+}

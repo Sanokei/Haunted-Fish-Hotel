@@ -1,0 +1,165 @@
+{
+  "scope": "Stable authored world-art shaders/materials and atmospheric assets, including approved intro contrast. Native GPU validation is not established.",
+  "files": [
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.mat",
+      "sha256": "4295f9b53feac500167a93a8023fc3bdf20a1661bc86c157698e392535b4cc13"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.mat.meta",
+      "sha256": "14ee8dd5e6db6a8bd4f2569b79674c2910dc9814825d3aafe2a6bf17d44581ea"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.shader",
+      "sha256": "cebf60cf35991f07d59e51d5ee29761126437c2020e95c06d4a19d1f288d3496"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.shader.meta",
+      "sha256": "92b34e2969fc5c8525443008e761a75a6120126021a84e5402cc26fc3759e3ef"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.mat",
+      "sha256": "d7cdaac8a50c04ea28f0be467a9729819ca5a5577d27e97855f833168ae8b4af"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.mat.meta",
+      "sha256": "c6637f394c174d0419ca076851b9beefdf6d6b5c5f05c978290cacd7e06914c1"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.shader",
+      "sha256": "0b57724b1a0a0ae02cd942a463d57bdc99c7e11da5fada1228e711bd96b509fe"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.shader.meta",
+      "sha256": "178aff9da4109835f643ec0f5f8b46278e2c1c6c2f8521834853656b07a6a2d4"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbySpriteFog.shader",
+      "sha256": "6aafed127bc002051977ae57b5f368a2fc12231474f24b07d3619a2ed7024f9f"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbySpriteFog.shader.meta",
+      "sha256": "57f3c0256ee7da0de2f72f0719696183ca5d37f505828864d94395f4b159bc75"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbySpriteFog0.mat",
+      "sha256": "44ff3f5850d9beb309f69975652b90b9e30bad4daed8a79942bd0b92434fa0d8"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbySpriteFog0.mat.meta",
+      "sha256": "eb3da30eb956593bdfa01a28ab3749c3a2453888136131292ff39dd86d37937b"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtLighting.hlsl",
+      "sha256": "47311e445ef8dfe98be5796d310548ad84741220ebd93ba5f8bda70a26d6cc6f"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtLighting.hlsl.meta",
+      "sha256": "2e9681dc07df6fd7bf4768a95efadd449a9936de262fad2cb8d6d5caccdfcef2"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtSpritePass.hlsl",
+      "sha256": "160eb4b29c8365748c218a12c6676ae2ea517320cd86efba434328e3df8cd855"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtSpritePass.hlsl.meta",
+      "sha256": "df00d3e1a3b19e2b3d936ca3b6740ec540650b86579a80abbbe5e02bd4f49eac"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyDepthBlack.shader",
+      "sha256": "0f1d2eac262a10a51d7ea6f79ca1fff5fac4b6fd099324a2db2292fda3104642"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyDepthBlack.shader.meta",
+      "sha256": "164f9bf89e9856f5a67e42d8cecc4167a91a28818c200953bc340cec1cd63e68"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyHeightAtmosphere.shader",
+      "sha256": "fec95a055c00aa89d844ad45b1a6b9cedf7a5f62d6f4324e8b0dd52be14bb7df"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyHeightAtmosphere.shader.meta",
+      "sha256": "20e97533e808ee72aba0d84ae656ee47ec1f643fa5bb48b8ed1dcbd9d8d55a92"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyStairwellDepthBlack.mat",
+      "sha256": "15af1b3b2f8190708a2e72c4ad5ceeb333a838bf8aba3be2e4b3ab7d35965c33"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyStairwellDepthBlack.mat.meta",
+      "sha256": "bfedad13ea15f40b6bb0245fb251c3deb314540c5b89ba88f132295b4de3f6db"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyUpperRoomAtmosphere.mat",
+      "sha256": "aa1913de78abc09edb8ebba175c0c2914b66299f1ba86dabf59bb7f040d70e30"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyUpperRoomAtmosphere.mat.meta",
+      "sha256": "d116b051e5ede25f8c85a7a9a0b341212868cac5b7fb42c3aceec21c418987d1"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.mat",
+      "sha256": "69dc975591cd7ec415604c0a93614fe33c66e51d00972472d6cce1082089dea7"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.mat.meta",
+      "sha256": "bddd2e4cf99ccdb2bb3df317bcdd950f1d92da1bf44799b73b898451f1aafc6c"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.shader",
+      "sha256": "838ac95d1cd5eca2fd1cf2e970a46e92423da3a8ab3e80ffa174fe0935fa8856"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.shader.meta",
+      "sha256": "590369fc76d1448c91b1cb2fdbce43d9d39d63972791cc8f8606bdda122bbfcc"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.mat",
+      "sha256": "e71181b5109aea7eb799af5010f277f4670a1424d401cf4cafb6ad8b0b879dbc"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.mat.meta",
+      "sha256": "0ad91906f94398f01ed2cf432143d854d948abb66ceef5232ea29ad93edd5e65"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.shader",
+      "sha256": "6f365c52640f7894bacd5a07f2bb1c2b9cd10c32978a2400518cca55752845b2"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.shader.meta",
+      "sha256": "886ff73a960ad30feb83b671042b5feb5b9e9178430251f9e326d78c61107539"
+    },
+    {
+      "path": "Assets/Editor/WorldArtworkLightingValidation.cs",
+      "sha256": "f1f3cf580b2d6c8bb5569ad8b7e8a69a68385bf0fcc162ff7584ecdf8a4bd663"
+    },
+    {
+      "path": "Assets/Editor/WorldArtworkLightingValidation.cs.meta",
+      "sha256": "55e936b72bf151f290781039e4190329b715b7e2e7f4eeef7e64d55d7c7251e3"
+    },
+    {
+      "path": "Assets/Prefabs/LobbyAtmosphere/LobbyDepthDarkness.prefab",
+      "sha256": "651c104cd4f8ea0206ec9f58153eb1013b29533f2a328dcab8a011f429c80719"
+    },
+    {
+      "path": "Assets/Prefabs/LobbyAtmosphere/LobbyDepthDarkness.prefab.meta",
+      "sha256": "d18055345f95ff31ba07a5908341d609d731eacfe3f28fe7803b017c3a003350"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/WatchingEye.shader",
+      "sha256": "f3f88a74498dc800def1cf60258a61f26fa3f50b05cce8d1823a4ab3622b884b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/WatchingEye.shader.meta",
+      "sha256": "9f0f235dc4a94e2a3da6774e13d8dc89f311779ea99e427381fcfbeb687b5781"
+    },
+    {
+      "path": "Assets/Settings/Mobile_Renderer.asset",
+      "sha256": "03ad6259386062a1c07d397d2197d8956df310d423e54d8a553cc3f6d16a9cac"
+    },
+    {
+      "path": "Assets/Settings/Mobile_Renderer.asset.meta",
+      "sha256": "a148ee2b4987b05b8ff7ae5f9bf84916184f77aefddc821dceb551f5a69f8179"
+    }
+  ]
+}

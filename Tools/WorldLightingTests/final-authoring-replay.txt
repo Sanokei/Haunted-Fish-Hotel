@@ -1,0 +1,10 @@
+Cluster wall 12.29x17.13: 137 frames, 63.0% quad coverage, 40000 candidates
+Cluster wall 12.28x17.13: 136 frames, 62.8% quad coverage, 40000 candidates
+Cluster wall 7.98x17.13: 92 frames, 63.0% quad coverage, 40000 candidates
+{"Lobby": 365, "Lobby eyes": 121, "Hallway": 8, "Hallway eyes": 3}
+Cluster wall 8.16x26.00: 144 frames, 62.5% quad coverage, 36148 candidates
+Cluster wall 8.15x26.00: 144 frames, 63.3% quad coverage, 32871 candidates
+Cluster wall 5.22x26.00: 92 frames, 59.6% quad coverage, 18990 candidates
+Cluster wall 10.44x26.00: 173 frames, 63.2% quad coverage, 40000 candidates
+{"prefab": "70f1ff428fc587c222be0d00c69bd625", "counts": {"frames": 553, "eyes": 182, "empty_slots": 371, "surfaces": 9}}
+PASS no-write frame/material replay: 213 byte-exact files

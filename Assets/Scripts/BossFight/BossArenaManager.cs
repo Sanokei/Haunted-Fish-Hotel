@@ -174,7 +174,7 @@ namespace HauntedFish.BossFight
             _FishPaddle.position = _Centre + new Vector3(0, .1f, -3.6f);
             _GhostPaddle.position = _Centre + new Vector3(0, .1f, 3.6f);
             ScheduleServe();
-            if (_Score) _Score.text = "PRACTICE - Mouse / WASD\nTraining ghost - no match results";
+            if (_Score) _Score.text = string.Empty;
             RefreshViewer();
         }
         public Vector2 EditorPointerAxis(Vector2 screenPosition) => _EditorPractice ? ProjectPointer(screenPosition, .05f, false) : Vector2.zero;

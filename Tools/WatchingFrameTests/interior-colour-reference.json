@@ -1,0 +1,34 @@
+{
+  "library_file_id": "libfile_8941004c393081919e86231c0587e13b",
+  "file_id": "file_00000000193482098e6aa25139f0ed20",
+  "original_name": "image(20261014-021736).png",
+  "source_path": "Tools/WatchingFrameTests/References/frame-interior-dark-grey-swatch.png",
+  "sha256": "3521139cb92880bf240f3d72003eea78e28a826d0f51e033dd17d518d61d5147",
+  "size": [
+    159,
+    71
+  ],
+  "unique_colors": 1,
+  "uniform_pixel_count": 11289,
+  "rgba8": [
+    32,
+    32,
+    32,
+    255
+  ],
+  "hex_srgb": "#202020",
+  "srgb_rgba": [
+    0.12549019607843137,
+    0.12549019607843137,
+    0.12549019607843137,
+    1
+  ],
+  "linear_rgba": [
+    0.014443843596092545,
+    0.014443843596092545,
+    0.014443843596092545,
+    1
+  ],
+  "conversion": "IEC sRGB channel: c/12.92 when c<=0.04045; otherwise ((c+0.055)/1.055)^2.4. Alpha unchanged.",
+  "inspection": "Original PNG viewed and every pixel sampled; no estimation, resampling, recoloring or ICC profile conversion."
+}

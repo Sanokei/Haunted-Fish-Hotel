@@ -1,0 +1,6 @@
+{
+  "passed": 2727,
+  "physical_renderer_blocks": 1029,
+  "native_unity_verified": false,
+  "scope": "Source contracts and CPU alpha/composition checks; not GPU shader import, rendered gameplay or performance."
+}

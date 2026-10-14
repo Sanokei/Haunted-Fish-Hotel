@@ -1,0 +1,9 @@
+test_all_50_frame_segments_are_source_pixels (__main__.OriginalFrameTests.test_all_50_frame_segments_are_source_pixels) ... ok
+test_eye_is_aligned_and_masks_gaze (__main__.OriginalFrameTests.test_eye_is_aligned_and_masks_gaze) ... ok
+test_import_metadata_preserves_quality (__main__.OriginalFrameTests.test_import_metadata_preserves_quality) ... ok
+test_sources_remain_original (__main__.OriginalFrameTests.test_sources_remain_original) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.815s
+
+OK

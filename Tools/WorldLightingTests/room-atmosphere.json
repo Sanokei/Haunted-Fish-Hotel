@@ -1,0 +1,187 @@
+{
+  "upper_material": "Assets/Art/WorldLighting/LobbyUpperRoomAtmosphere.mat",
+  "height_fade": {
+    "start": 4.25,
+    "end": 12,
+    "minimum": 0.012
+  },
+  "stair_backdrop": [
+    [
+      "Rear staircase darkness",
+      [
+        -6.85,
+        5.1,
+        13.04
+      ],
+      [
+        6.4,
+        10.4,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    [
+      "Outer staircase darkness",
+      [
+        -9.87,
+        5.1,
+        9.35
+      ],
+      [
+        8.1,
+        10.4,
+        1
+      ],
+      [
+        0.0,
+        0.7071067811865475,
+        0.0,
+        0.7071067811865476
+      ]
+    ],
+    [
+      "Staircase overhead darkness",
+      [
+        -6.85,
+        10.3,
+        9.3
+      ],
+      [
+        6.4,
+        8.1,
+        1
+      ],
+      [
+        0.7071067811865476,
+        0,
+        0,
+        0.7071067811865476
+      ]
+    ]
+  ],
+  "lobby_lights_changed": [
+    {
+      "scene": "Lobby",
+      "file_id": 1555505994,
+      "shadow_type": "Soft",
+      "bias": 0.025,
+      "normal_bias": 0.08,
+      "intensity": null
+    },
+    {
+      "scene": "Lobby",
+      "file_id": 1060684691,
+      "shadow_type": "Soft",
+      "bias": 0.025,
+      "normal_bias": 0.08,
+      "intensity": null
+    },
+    {
+      "scene": "Lobby",
+      "file_id": 1998747293,
+      "shadow_type": "Soft",
+      "bias": 0.025,
+      "normal_bias": 0.08,
+      "intensity": 0.35
+    }
+  ],
+  "stair_threshold": {
+    "light_id": 184464686,
+    "intensity": 0.8,
+    "range": 3.4
+  },
+  "hallway_key": {
+    "light_id": 981003,
+    "intensity": 0.75,
+    "color": [
+      0.65,
+      0.74,
+      1
+    ],
+    "rotation_euler": [
+      50,
+      -30,
+      0
+    ],
+    "shadows": "Soft"
+  },
+  "sconce_point_shadows": "Unchanged: none, all 60 bulbs",
+  "limitations": "Source authored only; native shader import and visual/performance checks remain required.",
+  "frame_near_visibility": {
+    "maximum_multiplier": 0.1,
+    "fade_start_distance": 2.7,
+    "fade_end_distance": 9,
+    "formula": "max(height_visibility, .1 * (1 - smoothstep(2.7,9,distance(camera,frame))))",
+    "scope": "Whole frame composite including pupils, after lighting, before existing PresentationGain. Pupils obey atmosphere but remain independent of light/shadow response."
+  },
+  "lobby_physical_sprite_renderers": [
+    {
+      "id": 108660056,
+      "source": "FrontDesk-bell.png"
+    },
+    {
+      "id": 593733501,
+      "source": "FrontDesk-lamp.png"
+    },
+    {
+      "id": 734497626,
+      "source": "Windows/Window.png"
+    },
+    {
+      "id": 783037327,
+      "source": "Radio-body.png"
+    },
+    {
+      "id": 1313543254,
+      "source": "Fish-Plaque.png"
+    },
+    {
+      "id": 1616107843,
+      "source": "Windows/Window.png"
+    },
+    {
+      "id": 2016943117,
+      "source": "Radio-dial.png"
+    },
+    {
+      "id": 15202743,
+      "source": "HotelFish/FISH-right.png"
+    },
+    {
+      "id": 2070578375,
+      "source": "HotelFish/FISH-tail.png"
+    }
+  ],
+  "nonphysical_lobby_sprite_renderers": [
+    597769595,
+    974023391,
+    1381542350,
+    1982349989
+  ],
+  "urp_shadow_bias_policy": {
+    "use_pipeline_settings": false,
+    "point_resolution_tier": 1,
+    "point_resolution_pixels_pc": 512,
+    "lobby_data_components": [
+      1998747292,
+      981011,
+      981021
+    ],
+    "hallway_data_component": 981004
+  },
+  "intro_frame_near_visibility": {
+    "maximum_multiplier": 0.8,
+    "fade_start_distance": 9.6,
+    "fade_end_distance": 32,
+    "material_override": "IntroTunnel materials only: near distance32, visibility0.8, ambient0.8, pupil intensity0.125. Normal Lobby/Hallway remain unchanged.",
+    "formula": "max(height_visibility,.8*(1-smoothstep(9.6,32,camera_distance)))",
+    "ambient": 0.8,
+    "ambient_scope": "Original frame/outline/backing/picture only. Pupil unchanged; real wall and normalLobby unchanged.",
+    "pupil_intensity": 0.125
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "width": 2.4,
+  "length": 9.2,
+  "start_z": -2.95,
+  "end_z": 6.25,
+  "center": [
+    0.0,
+    0.018,
+    1.65
+  ],
+  "gold_borders": [
+    {
+      "inset": 0.08,
+      "width": 0.025
+    },
+    {
+      "inset": 0.22,
+      "width": 0.018
+    }
+  ],
+  "base_linear_rgb": [
+    0.11,
+    0.017,
+    0.026
+  ],
+  "gold_linear_rgb": [
+    0.19,
+    0.117,
+    0.05
+  ],
+  "mesh": "Assets/Art/LobbyRunner/LobbyCapsuleRunnerMesh.asset",
+  "mesh_guid": "d3cc85be618a5778aa88830cc4a0744c",
+  "prefab": "Assets/Prefabs/LobbyAtmosphere/LobbyCapsuleCarpetRunner.prefab",
+  "prefab_guid": "54c2f5541d8a58b894cdf6daeac98d12",
+  "root_gameobject_id": 100000,
+  "root_transform_id": 400000,
+  "materials": [
+    "Capsule_Runner_Burgundy",
+    "Capsule_Runner_Binding",
+    "Capsule_Runner_Antique_Gold"
+  ],
+  "vertices": 52,
+  "triangles": 26,
+  "source_capsule": "store_capsules_20261014/source/build_capsules.py",
+  "preserved_carpet_sha256": "c7e5cad5bb907153ba6ae58906503d1810551dcd55848bc47e0edc6f9bb37ae8"
+}

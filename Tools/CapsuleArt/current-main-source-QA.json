@@ -1,0 +1,102 @@
+{
+  "revision": "v8",
+  "camera_type": "PERSP",
+  "players": [
+    {
+      "object": "Fish original tail | exact custom pivot",
+      "camera_parallel_normal_dot": 0.9999999865540303,
+      "uniform_scale": [
+        1.2200000286102295,
+        1.2200000286102295,
+        1.2200000286102295
+      ],
+      "original_source": "Assets/Art/HotelFish/FISH-tail.png"
+    },
+    {
+      "object": "Fish right body | original full canvas",
+      "camera_parallel_normal_dot": 0.999999986612238,
+      "uniform_scale": [
+        1.2200000286102295,
+        1.2200000286102295,
+        1.2200000286102295
+      ],
+      "original_source": "Assets/Art/HotelFish/FISH-right.png"
+    },
+    {
+      "object": "Player 2 Fish original tail | exact custom pivot",
+      "camera_parallel_normal_dot": 0.9999999863211997,
+      "uniform_scale": [
+        0.9700000286102295,
+        0.9700000286102295,
+        0.9700000286102295
+      ],
+      "original_source": "Assets/Art/HotelFish/FISH-tail.png"
+    },
+    {
+      "object": "Player 2 Fish right body | original full canvas",
+      "camera_parallel_normal_dot": 0.9999999871361069,
+      "uniform_scale": [
+        0.9700000286102295,
+        0.9700000286102295,
+        0.9700000286102295
+      ],
+      "original_source": "Assets/Art/HotelFish/FISH-right.png"
+    },
+    {
+      "object": "Player 3 Fish original tail | exact custom pivot",
+      "camera_parallel_normal_dot": 0.9999999856809154,
+      "uniform_scale": [
+        0.6899999976158142,
+        0.6899999976158142,
+        0.6899999976158142
+      ],
+      "original_source": "Assets/Art/HotelFish/FISH-tail.png"
+    },
+    {
+      "object": "Player 3 Fish right body | original full canvas",
+      "camera_parallel_normal_dot": 0.9999999707797542,
+      "uniform_scale": [
+        0.6899999976158142,
+        0.6899999976158142,
+        0.6899999976158142
+      ],
+      "original_source": "Assets/Art/HotelFish/FISH-right.png"
+    }
+  ],
+  "walls": [
+    {
+      "object": "Original wallpaper 1 bay -1",
+      "wall_x": 5,
+      "height": 7.0,
+      "aspect": 2.389731506948622
+    },
+    {
+      "object": "Original wallpaper 1 bay 0",
+      "wall_x": 5,
+      "height": 7.0,
+      "aspect": 2.389731506948622
+    },
+    {
+      "object": "Original wallpaper 1 bay 1",
+      "wall_x": 5,
+      "height": 7.0,
+      "aspect": 2.389731767566889
+    },
+    {
+      "object": "Original wallpaper 1 bay 2",
+      "wall_x": 5,
+      "height": 7.0,
+      "aspect": 2.389731767566889
+    },
+    {
+      "object": "Original wallpaper 1 bay 3",
+      "wall_x": 5,
+      "height": 7.0,
+      "aspect": 2.3897312463303275
+    }
+  ],
+  "occupied_frames": 5,
+  "staged_frames": 14,
+  "packed_images": 34,
+  "native_unity_import_run": false
+}

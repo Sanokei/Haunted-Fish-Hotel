@@ -10,6 +10,47 @@ import verify_scene_assets as validator
 from verify_scene_assets import reference_issues, records, fit_distance, rotate, mesh_issues, AssetGraph, in_unity_ignored_directory
 
 
+class ExactLightingPreservationTests(unittest.TestCase):
+    path = 'Assets/Scenes/Lobby.unity'
+
+    def test_directional_light_uses_only_its_authored_bias_override(self):
+        original = '  m_UsePipelineSettings: 1\n  m_ShadowResolutionTier: 2\n'
+        current = original.replace('m_UsePipelineSettings: 1','m_UsePipelineSettings: 0')
+        normalize = validator.preserved_record_body
+        self.assertEqual(normalize(self.path,1998747292,current),original)
+        self.assertNotEqual(normalize(self.path,1998747292,current.replace('Tier: 2','Tier: 0')),original)
+        self.assertEqual(normalize(self.path,1998747291,current),current)
+
+    def test_black_clear_normalizes_only_the_approved_camera_and_values(self):
+        current = ('  m_ClearFlags: 2\n  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}\n'
+                   '  field of view: 60\n')
+        original = ('  m_ClearFlags: 1\n'
+                    '  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}\n'
+                    '  field of view: 60\n')
+        normalize = validator.preserved_record_body
+        self.assertEqual(normalize(self.path,330585545,current),original)
+        self.assertNotEqual(normalize(self.path,330585545,current.replace('view: 60','view: 55')),original)
+        self.assertEqual(normalize(self.path,330585545,current.replace('r: 0,','r: 0.1,')),current.replace('r: 0,','r: 0.1,'))
+        self.assertEqual(normalize(self.path,330585546,current),current)
+        self.assertEqual(normalize('Assets/Scenes/Game.unity',330585545,current),current)
+
+    def test_shadow_key_rotation_keeps_position_scale_and_hierarchy_protected(self):
+        current = ('  m_LocalRotation: {x: 0.408217894, y: -0.234569716, z: 0.109381655, w: 0.875426098}\n'
+                   '  m_LocalPosition: {x: 0, y: 0, z: 0}\n'
+                   '  m_LocalScale: {x: 1, y: 1, z: 1}\n  m_Father: {fileID: 0}\n'
+                   '  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}\n')
+        original = current.replace('0.408217894, y: -0.234569716, z: 0.109381655, w: 0.875426098',
+                                   '0, y: 0, z: 0, w: 1').replace('x: 50, y: -30','x: 0, y: 0')
+        normalize = validator.preserved_record_body
+        self.assertEqual(normalize(self.path,1998747294,current),original)
+        for old,new in (('m_LocalPosition: {x: 0','m_LocalPosition: {x: 1'),
+                        ('m_LocalScale: {x: 1','m_LocalScale: {x: 2'),
+                        ('m_Father: {fileID: 0}','m_Father: {fileID: 10}'),
+                        ('0.408217894','0.5')):
+            self.assertNotEqual(normalize(self.path,1998747294,current.replace(old,new)),original)
+        self.assertEqual(normalize(self.path,1998747293,current),current)
+
+
 class UnityIgnoredDirectoryTests(unittest.TestCase):
     def test_only_tilde_suffixed_directory_contents_are_ignored(self):
         for path in ('Assets/Art/Source~/PiranhaStun.blend',

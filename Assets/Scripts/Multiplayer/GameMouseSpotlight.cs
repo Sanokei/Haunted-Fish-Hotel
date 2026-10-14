@@ -12,6 +12,7 @@ namespace HauntedFish.Multiplayer
         Material _Material;
         [SerializeField] Canvas _Canvas;
         [SerializeField] Image _Image;
+        [SerializeField] HauntedFish.Presentation.WatchingFrameGallery _WatchingFrames;
 
         void Awake()
         {
@@ -29,6 +30,7 @@ namespace HauntedFish.Multiplayer
         {
             var player = HotelPlayer.LocalPlayer;
             if (_Canvas) _Canvas.enabled = player && player.ControlMode == HotelControlMode.Fish && !player.InBossFight && !player.BossWatching;
+            PublishBeam(false, Vector2.zero);
             if (player && (player.InBossFight || player.BossWatching)) return;
             if (player && player.ControlMode == HotelControlMode.Ghost) return;
             Cursor.lockState = CursorLockMode.None;
@@ -40,10 +42,18 @@ namespace HauntedFish.Multiplayer
             _Material.SetFloat("_Radius", Radius);
             _Material.SetFloat("_Softness", Softness);
             _Material.SetFloat("_Darkness", Darkness);
+            PublishBeam(Darkness > 0 && _Canvas && _Canvas.isActiveAndEnabled && _Image && _Image.isActiveAndEnabled,
+                new Vector2(mouse.x / Mathf.Max(1, Screen.width), mouse.y / Mathf.Max(1, Screen.height)));
+        }
+
+        void PublishBeam(bool active, Vector2 center)
+        {
+            if (_WatchingFrames) _WatchingFrames.SetFlashlightBeam(active, center, Radius, Softness,
+                Screen.width / (float)Mathf.Max(1, Screen.height));
         }
 
         void OnEnable() { if (_Canvas) _Canvas.enabled = true; }
-        void OnDisable() { if (_Canvas) _Canvas.enabled = false; }
+        void OnDisable() { if (_Canvas) _Canvas.enabled = false; PublishBeam(false, Vector2.zero); }
         void OnDestroy() { if (_Material) Destroy(_Material); }
     }
 }

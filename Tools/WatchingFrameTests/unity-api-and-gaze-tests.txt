@@ -1,0 +1,10 @@
+PASS 11020 gaze, beam and eyelid checks. Native Unity rendering not exercised.
+Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGallery.cs(38,31): warning CS0649: Field 'WatchingFrameGallery._ReactToFlashlight' is never assigned to, and will always have its default value false
+Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGallery.cs(39,33): warning CS0649: Field 'WatchingFrameGallery._BeamCamera' is never assigned to, and will always have its default value null
+PASS controller compiles against actual Unity APIs without gameplay doubles. No native execution, scene import, or shader compilation claimed.
+Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGallery.cs(39,33): warning CS0649: Field 'WatchingFrameGallery._BeamCamera' is never assigned to, and will always have its default value null
+Assets/Scripts/Multiplayer/GameMouseSpotlight.cs(13,33): warning CS0649: Field 'GameMouseSpotlight._Canvas' is never assigned to, and will always have its default value null
+Assets/Scripts/Multiplayer/GameMouseSpotlight.cs(14,32): warning CS0649: Field 'GameMouseSpotlight._Image' is never assigned to, and will always have its default value null
+Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGallery.cs(38,31): warning CS0649: Field 'WatchingFrameGallery._ReactToFlashlight' is never assigned to, and will always have its default value false
+Assets/Scripts/Multiplayer/GameMouseSpotlight.cs(15,72): warning CS0649: Field 'GameMouseSpotlight._WatchingFrames' is never assigned to, and will always have its default value null
+PASS actual GameMouseSpotlight and gallery compile together against real Unity/UI/Input APIs; only unrelated HotelPlayer network boundary is doubled.

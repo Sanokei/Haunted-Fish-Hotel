@@ -1,0 +1,4336 @@
+{
+  "baseline": "0d2a497b33c04b5bb1d9edab1f93644a2fea91e4",
+  "native_unity_verified": false,
+  "files": [
+    {
+      "path": "Assets/Art/Boss/Boss-neutral-life-head.png",
+      "bytes": 1582610,
+      "sha256": "5036641a8d467ecad5cf12aa504080965255ae5d56ea198c1d584642bed5d216"
+    },
+    {
+      "path": "Assets/Art/Boss/Boss-neutral-life-head.png.meta",
+      "bytes": 3385,
+      "sha256": "039c61ae5408db245679b7a961314f7b3fcda2c2f4bf58eb4faec06343c652eb"
+    },
+    {
+      "path": "Assets/Art/Boss/Player-fish-life-head.png",
+      "bytes": 1157495,
+      "sha256": "d891be7cc7c82815e18bfdf6d9a4ab0e9c650258aa7484b5d42f1c7009e21c74"
+    },
+    {
+      "path": "Assets/Art/Boss/Player-fish-life-head.png.meta",
+      "bytes": 3385,
+      "sha256": "0a39f43aef54670f7885cd08715fe1c745a3ad21f3975e57c89d2472bca0fdb5"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.mat",
+      "bytes": 1252,
+      "sha256": "4295f9b53feac500167a93a8023fc3bdf20a1661bc86c157698e392535b4cc13"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.mat.meta",
+      "bytes": 188,
+      "sha256": "14ee8dd5e6db6a8bd4f2569b79674c2910dc9814825d3aafe2a6bf17d44581ea"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.shader",
+      "bytes": 3284,
+      "sha256": "cebf60cf35991f07d59e51d5ee29761126437c2020e95c06d4a19d1f288d3496"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossArmVoidFade.shader.meta",
+      "bytes": 204,
+      "sha256": "92b34e2969fc5c8525443008e761a75a6120126021a84e5402cc26fc3759e3ef"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossVoidBlack.mat",
+      "bytes": 758,
+      "sha256": "4539f536f04f840a6b9cd6a2af33cf03a101c8e4db5843cb9287614ec86c3aca"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossVoidBlack.mat.meta",
+      "bytes": 188,
+      "sha256": "f78f0003bf7d1607f603814ac719a01dacc9122287144f946b56ef7b48cda82b"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossVoidBlack.shader",
+      "bytes": 2981,
+      "sha256": "4f2634fc883255ada2b491d9325c2dc6d38ffcd936a6ab0db00ac6b312e305f3"
+    },
+    {
+      "path": "Assets/Art/BossFight/BossVoidBlack.shader.meta",
+      "bytes": 204,
+      "sha256": "1b1248f654e2a4881d43fa577edf4c381022c5983b7d6da9d84f84d0340f7ce8"
+    },
+    {
+      "path": "Assets/Art/Capsule.meta",
+      "bytes": 169,
+      "sha256": "ba81ecc28c20f1abaf424d5f354f664131a7ca3cd6620baef95ba32668741c6b"
+    },
+    {
+      "path": "Assets/Art/Capsule/Current-Main-Provenance.json",
+      "bytes": 2490,
+      "sha256": "625ab0e80a5021044bcda6d90065eb16ea08b05209ab55ae8e20aad3ab21ab01"
+    },
+    {
+      "path": "Assets/Art/Capsule/Current-Main-Provenance.json.meta",
+      "bytes": 155,
+      "sha256": "76524c2e40c99149eac915216cdef0ea405d94481b5b0aefeb41ae48cad5b2f1"
+    },
+    {
+      "path": "Assets/Art/Capsule/Haunted-Fish-Hotel-Main-Art-Only.png",
+      "bytes": 1459728,
+      "sha256": "ef08c485dc9ce366d883a513a9ab6b39451a3b58b3d9f6f1ee02bc58e15bdd17"
+    },
+    {
+      "path": "Assets/Art/Capsule/Haunted-Fish-Hotel-Main-Art-Only.png.meta",
+      "bytes": 3401,
+      "sha256": "d4a44e8fbb5243404a77f66cca37a6e1875f25cfaa6acc96d06f2d02b8031f94"
+    },
+    {
+      "path": "Assets/Art/Capsule/Haunted-Fish-Hotel-Main.png",
+      "bytes": 1479899,
+      "sha256": "d1c0fa9e58f3354ff0ff581ed7fa9afe4310ee35aa79c4897a919689b7329a1d"
+    },
+    {
+      "path": "Assets/Art/Capsule/Haunted-Fish-Hotel-Main.png.meta",
+      "bytes": 3401,
+      "sha256": "3599ed773b91a9a90bb32b345f7dc6f9f10a6fc486e78139f48e37340c56e620"
+    },
+    {
+      "path": "Assets/Art/Capsule/README.txt",
+      "bytes": 1099,
+      "sha256": "a99a386dca038cb230a0c5d311d0e78e2e4d2970d2f0cae79c3355dc3583f5af"
+    },
+    {
+      "path": "Assets/Art/Capsule/README.txt.meta",
+      "bytes": 155,
+      "sha256": "874331f260cffb0e3a4e80e5033efaef7d3628c0d58f4c36033fdfef0d4d3297"
+    },
+    {
+      "path": "Assets/Art/Frames.meta",
+      "bytes": 172,
+      "sha256": "55930ce6f36a90038f0860f5d70d05a3ea60da620d79e4cd28bec017f87dfd4e"
+    },
+    {
+      "path": "Assets/Art/Frames/Eye.meta",
+      "bytes": 172,
+      "sha256": "1a54ac8511cb19e233bdf52e4909c044ac366235d646fd5ef2cf06294e1b5918"
+    },
+    {
+      "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye-interior-mask.png",
+      "bytes": 12815,
+      "sha256": "c29a27af44ab6dcd30202530da3649948f17f10eb0d42dc377347702b73a6b1a"
+    },
+    {
+      "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye-interior-mask.png.meta",
+      "bytes": 3395,
+      "sha256": "f7e923e8eaa23018585a3e042f7c725acc7b5d8838d2230b57f4bef1288c6ef4"
+    },
+    {
+      "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye-outline.png",
+      "bytes": 143779,
+      "sha256": "5b6c44534cbfb542598f0e9137b2c4f1e23871967a994022c2aead7a3671ca8f"
+    },
+    {
+      "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye-outline.png.meta",
+      "bytes": 3395,
+      "sha256": "79feb81d7767466f7878421c33424cc2eb1dd9c46cd2f95294e7ff7f88c01ea4"
+    },
+    {
+      "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye.png",
+      "bytes": 328111,
+      "sha256": "9975c14c32e619b8470c0b735d257e3ef9815b10f2ba9be1eb3cf34a6b7a2c01"
+    },
+    {
+      "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye.png.meta",
+      "bytes": 3395,
+      "sha256": "b0cac83c3a4479e65593c781b2137246b235929a4b5de032e79a025f67b7560c"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks.meta",
+      "bytes": 172,
+      "sha256": "b805db956e06569fbae2a959806e45aa5c54d94c0d19073460d6bc1c0bea98b5"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-01.png",
+      "bytes": 1129,
+      "sha256": "833d24b9e301c3bcf639b9d4373d679433ccee97ef0c9bfb0d243136076ca8f9"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-01.png.meta",
+      "bytes": 3395,
+      "sha256": "f0a3f5a4fddc3a4ef669e0e7ed70dfbff3902488caf759ac0e47ff69d1c2357b"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-02.png",
+      "bytes": 1738,
+      "sha256": "caead4ee9f8887b236affeb4d23a22c6e752d8ee2dc51ec2ca829e89fc92dafd"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-02.png.meta",
+      "bytes": 3395,
+      "sha256": "600ace337796c4a8f02664390602a074bfa082b59b7e7258ff6438238e8c5430"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-03.png",
+      "bytes": 1467,
+      "sha256": "cca6bf1c7b1edc0df13d751d9e18a92c51e5319e2973cc16b1203acbcc8a3a04"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-03.png.meta",
+      "bytes": 3395,
+      "sha256": "387ac9a248e558e9367f7e5c9163e40168bb400b8fef426fb5e7ecd200d0db1b"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-04.png",
+      "bytes": 1055,
+      "sha256": "e43fdbd23ada3d2de4386708c554afdac2cf7f0839d0b45590945fc349111e74"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-04.png.meta",
+      "bytes": 3395,
+      "sha256": "493ed90e1698d2c98124912d7154fe94aad175ac6c130dd7cf1ce88ff995f2bb"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-05.png",
+      "bytes": 1074,
+      "sha256": "9f66af88fefc985be004631bf6c3bcd35259985adec8a68090b103e83885c0f9"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-05.png.meta",
+      "bytes": 3395,
+      "sha256": "ac0f9304df1754522b0f6fe1792d2f8a35b051ebbbc31d7b6e5c9df224b98e35"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-06.png",
+      "bytes": 891,
+      "sha256": "0e9c956bb4d44f0989fc5007e8368671e5412dbb19495645cf8e6cc94fd44f95"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-06.png.meta",
+      "bytes": 3395,
+      "sha256": "7de4c02b0b4371f9209f466eaa85083423f42ebced220f2a7b85e7ce748e0c5f"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-07.png",
+      "bytes": 1292,
+      "sha256": "875086131c5bd37dd8194bad7e96300a0fb4a3ee573279306a7c32b1d5a9ea6a"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-07.png.meta",
+      "bytes": 3395,
+      "sha256": "65a05d22eb59e779696dc961199479591aacf5104745f7607c572ee6ca8be5b9"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-08.png",
+      "bytes": 1467,
+      "sha256": "82898c24b34c8608d23c72032ca86091dfac105eeab8b827baf5c3579c621f13"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-08.png.meta",
+      "bytes": 3395,
+      "sha256": "d1e3f358eac76518b155355ca57ac4bf6cd99619b931cd9f64e503448e517ace"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-09.png",
+      "bytes": 2042,
+      "sha256": "20466a37a629bd1b92ac83061a615ee166d8450b89c338f8999a6a145b036df1"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-09.png.meta",
+      "bytes": 3395,
+      "sha256": "cff002f34d5ebd509f154709504470a2e90c0a16ba705ab27acc5d1fc12028d4"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-10.png",
+      "bytes": 1544,
+      "sha256": "c724dcfc0db7ff0f5823314944fed1f02cd952f9cc74d05a865d2c3902eb0300"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-10.png.meta",
+      "bytes": 3395,
+      "sha256": "185120ccb8d8841450abb70ce6b30e61bb8875b16424ad3d3a79afba89e46f94"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-11.png",
+      "bytes": 1241,
+      "sha256": "af85f1c7488a90500bfdb529c5328855059bade58a1a6d19deb3e62e09e4135d"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-11.png.meta",
+      "bytes": 3395,
+      "sha256": "328ee2e4b8a339f7c3c096f8ffe330f2fa68c28ba4ed1554abdcb29ca8fd898d"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-12.png",
+      "bytes": 1304,
+      "sha256": "a8cb9d7be649419e680e6486e7a738d9546431b3c13ae3bd462730f11aef7c16"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-12.png.meta",
+      "bytes": 3395,
+      "sha256": "b19e9be09bbfe1572f9b24a1aef6971b7f1ba0d3fdea51ec421c707b77b8586d"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-13.png",
+      "bytes": 1803,
+      "sha256": "80f194941ce646fc83ecaa6859cbbd559d248636c200549f09a72b4fd58520b3"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-13.png.meta",
+      "bytes": 3395,
+      "sha256": "e0d86efecd1c956b72a5517dbaa4bf41bea617fd8dbb1a3a97840e075297456a"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-14.png",
+      "bytes": 772,
+      "sha256": "b33ac82812adb78911e2978a50fd2d1685a8deb8d344e2a4e2210eec144d60d4"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-14.png.meta",
+      "bytes": 3395,
+      "sha256": "700e125cfa9ccd1590525c3de64cc3961721af122207724e5808e04d08b83c36"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-15.png",
+      "bytes": 750,
+      "sha256": "8c65323ea97f588a7f344cbb1e835ad4a8dedc659983f6e954d7174520a277af"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-15.png.meta",
+      "bytes": 3395,
+      "sha256": "7111f4af03dd03c60650941a5c3ceaecf6234e9c845ec6654c560fa10fafe6f2"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-16.png",
+      "bytes": 560,
+      "sha256": "9c51200bd834013681342da0b283d53ad64cac38f5e535a6ff24fecffa22cf68"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-16.png.meta",
+      "bytes": 3395,
+      "sha256": "53bd6056a8f72cbdb95c78b8c12115b986c6fb9bed58f41901ca1585c73742cf"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-17.png",
+      "bytes": 888,
+      "sha256": "784fcf98e000e1187294addf71ed4087332ce466938665c7e5d4fcf8df564e4b"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-17.png.meta",
+      "bytes": 3395,
+      "sha256": "1d3a8ffb596ad7fc79c40c9e3a8bf71362faf8c501d2470730d31f0187deca5e"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-18.png",
+      "bytes": 1524,
+      "sha256": "3c2301b0d27e07503d898d291c29b6f593a3bbc5ad810d9af1bd29e17087ccae"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-18.png.meta",
+      "bytes": 3395,
+      "sha256": "2cb57e0ef3c8b068ee5f0573905b56b570709226dfbb73b235af5aa51a95626a"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-19.png",
+      "bytes": 1349,
+      "sha256": "db1e9e5111cbe35f7f66fe621a6aa636c2c413123131ceef1900a5cd49bf81c8"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-19.png.meta",
+      "bytes": 3395,
+      "sha256": "b590db586fd99fd57c8ebba7fb3d381219467160314a55f8adb7831e930a4229"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-20.png",
+      "bytes": 1358,
+      "sha256": "daa80dcd9587fd4edb1170ac8f6e55bdae2cc5a02650842b363ca9602c4adbac"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-20.png.meta",
+      "bytes": 3395,
+      "sha256": "eecc1b1a10d5bd59364768c66cff38507f4c5c8779b4294b4ac10f01793c1650"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-21.png",
+      "bytes": 538,
+      "sha256": "aa7caf673d0886484925cfbf43fe27c92f79fd06d9a1b32f7bc23b19667b3948"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-21.png.meta",
+      "bytes": 3395,
+      "sha256": "ad808e149d6d105931b2100d1051ef7fe028ab4d4fb6a73dab1d4d3f752e3aaf"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-22.png",
+      "bytes": 953,
+      "sha256": "b425631eb2c594c8e7bd5c4305318efddd8d346df2fbcbdf2f27414269960c02"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-22.png.meta",
+      "bytes": 3395,
+      "sha256": "c35c1a96845e5f4c16e29e2729f5f73165e9caf2d990cfaba5fc115357a3a9fb"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-23.png",
+      "bytes": 498,
+      "sha256": "87e33045cf83bf3cf32857e37703476c416d284e4df4ea79bcf6044b72b942dd"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-23.png.meta",
+      "bytes": 3395,
+      "sha256": "a86f1dfe35e0c0d752af27f24a651f097f32393f9bd6d11bfec850a99ab6ae8b"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-24.png",
+      "bytes": 931,
+      "sha256": "4d0236229570cea5c6f47defce312d7818b77b212f4f2601b79fd7d94cf88dc3"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-24.png.meta",
+      "bytes": 3395,
+      "sha256": "232bf863d0d681f6d29cf0be73cd161a370cf6914182aefea68261933d8459f4"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-25.png",
+      "bytes": 1089,
+      "sha256": "727b353ea4d7522600a78016bc29850f2c9581d42fba5f89f7ac7a964fde4083"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Backing-25.png.meta",
+      "bytes": 3395,
+      "sha256": "6582d2760057c741f9e5e91be4970cf7f8371e5387f820f560b7f945dd8c9924"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-01.png",
+      "bytes": 1083,
+      "sha256": "33027b3d8222ee6700aec8a563db80c9b0de63544eeb32897bc2009b63032d10"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-01.png.meta",
+      "bytes": 3395,
+      "sha256": "e30cf523b43016a3673f1b37b2c3f066cac56faa0faa182799524aef917719f0"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-02.png",
+      "bytes": 1687,
+      "sha256": "a53aae68c4db86ea96c58883f2a7016a785369dd4acdee0de0aec8742f83f2d7"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-02.png.meta",
+      "bytes": 3395,
+      "sha256": "0f58a80918623b421cb5f8385c832ab4ba0b2e2920b7cf41832e9b4d38cdb248"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-03.png",
+      "bytes": 1432,
+      "sha256": "490a14bf167fed72e9599d075ebde206c1d92adcfe1280e05a574b88bf36e8f1"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-03.png.meta",
+      "bytes": 3395,
+      "sha256": "cc7352df59b8e6e4f11d0185660bccb40166bcac81d7aaebf7ce00ccec05a034"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-04.png",
+      "bytes": 1004,
+      "sha256": "db86ee80b13d6ca015ccf6a8584e6f7dcd9443ded1a31818b1ad13719ebe8ad7"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-04.png.meta",
+      "bytes": 3395,
+      "sha256": "94cb99d085dd9796ff67f7e56a00fb47c348e955f69b05ad4cd4b91a5e4210da"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-05.png",
+      "bytes": 1007,
+      "sha256": "a4a3be08fd9c880d6bcd477bd889e477d7b7ebcf1a85314ebf7baadf8b674063"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-05.png.meta",
+      "bytes": 3395,
+      "sha256": "8a7cc37d963e31829502d86dbf9f1f69142dc90d1c18565d41f6a99c8830c77a"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-06.png",
+      "bytes": 825,
+      "sha256": "6e9480b697164b59e719acd84da39796ed2240904d0e3878f66296f1b4b58376"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-06.png.meta",
+      "bytes": 3395,
+      "sha256": "7d9b590c8c396554b3d15637e1a129d2a0425c4137753ec3990e5728b1647f56"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-07.png",
+      "bytes": 1244,
+      "sha256": "909626d3a8789d5578d256d8accf315e444233a9b6f8f865f537788f0ec2fc96"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-07.png.meta",
+      "bytes": 3395,
+      "sha256": "4eddb9e30f144e551b222e7ac60af6c6683c0805b04fe71273f884f71f913e6f"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-08.png",
+      "bytes": 1426,
+      "sha256": "71b31e52f5fe8831d346414e7bc29c089eee3fc83dabf18bfb4d5e8e301454bb"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-08.png.meta",
+      "bytes": 3395,
+      "sha256": "13080825b98eaf89d2dc40f96d580c8d2301cd72b6b9e0a22b5766ebe11a7e1a"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-09.png",
+      "bytes": 2043,
+      "sha256": "5d872a92f1a81afd8e948842fe685a32bda472ae253f58fd223f074774af43a1"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-09.png.meta",
+      "bytes": 3395,
+      "sha256": "75a82cc31311899550542b98d695cf8978c21c58d82f5a7aea3790aff73ebacb"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-10.png",
+      "bytes": 1557,
+      "sha256": "871354aa92e464f973ed0fdd3de270246a9050dea2cb415cedd84a42e4423d9e"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-10.png.meta",
+      "bytes": 3395,
+      "sha256": "eea44946216085ed25d58a4ff89e089aa66c23a16e0745e38a4a7b578df0e142"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-11.png",
+      "bytes": 1204,
+      "sha256": "caae5fa6215a8d55dfaaf81482141ceaad4a4f95b0fff98a7c7c553a2588a912"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-11.png.meta",
+      "bytes": 3395,
+      "sha256": "5f8a14bda59e90353eedaa79acb0f68b562b16c48fd367aebb9678ebbaec6806"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-12.png",
+      "bytes": 1247,
+      "sha256": "2c693a823a83d114b1fe8e97a3a816f81377685580bd128914d1bb89239c3545"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-12.png.meta",
+      "bytes": 3395,
+      "sha256": "220aa3cbdd2987e91e1d92255623c90d89595d6709be7c0151aa0d996494e6d3"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-13.png",
+      "bytes": 1745,
+      "sha256": "815991f77bc2d6a5da7ea0c9e97050c35ba5b43a0c6b26f379412edda5a1c067"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-13.png.meta",
+      "bytes": 3395,
+      "sha256": "4c7a91007a51de64b7728f1570d7b280dd4bde58c25eb3097ad684e0dce7913e"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-14.png",
+      "bytes": 723,
+      "sha256": "a6576ef13ea7818a9e0ed512eb62060f00c812084b4a8fa0df76060913ae937d"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-14.png.meta",
+      "bytes": 3395,
+      "sha256": "222520fc65114c5a7b46251ddff0327629b762eb71d4438c49c8290bf0e498ae"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-15.png",
+      "bytes": 701,
+      "sha256": "4e6925232d7b0bac8266e0accbce07596b54942f0e5ba736cc34f8134cf014f6"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-15.png.meta",
+      "bytes": 3395,
+      "sha256": "2e9b24b721a639c643766fad290d36c695160d766c7d4326c6b59f83a28f814a"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-16.png",
+      "bytes": 513,
+      "sha256": "6db9059b1ec3d89d7ba84d97a20599c7fbdf70bcf1dd3a07d4f4fe6b9e8a2279"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-16.png.meta",
+      "bytes": 3395,
+      "sha256": "b01229921caadd00993c7ba786d1fc4f9707b0da6fe95102912196da208dafca"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-17.png",
+      "bytes": 838,
+      "sha256": "3f91e39d7505e9f389863cce65a583e6c9b498a3883960657c8be15b323c1578"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-17.png.meta",
+      "bytes": 3395,
+      "sha256": "a6180838dec2adae0022e9f2bc5b1e271dea924c16c03eb664b7e46475a87f41"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-18.png",
+      "bytes": 1465,
+      "sha256": "df0a122b48ec5db127beedf42b97670a9e6216b9d6538a07f14c619d42d8655b"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-18.png.meta",
+      "bytes": 3395,
+      "sha256": "b3a5626af70ba0bd9f54b67b503f6c6c3ae7aa4964bffbbff2639417b2ec7ddc"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-19.png",
+      "bytes": 1286,
+      "sha256": "6c04b47cbb0109e872de91a9a9f5be36eb7adbc3866f3d35eb4e804a3374cd21"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-19.png.meta",
+      "bytes": 3395,
+      "sha256": "e4f71cb98754ed400ace7a9d58a117705d14d82c0f7a8325749cbe2c3286d240"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-20.png",
+      "bytes": 1280,
+      "sha256": "14636bd628fd460330df3d6db11a0bc572b557e8e5e8200160ac19a231b0fea8"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-20.png.meta",
+      "bytes": 3395,
+      "sha256": "f0aa04e0a201c9e9368c6d25873925d44121c120c7d5753903678af319ebedb2"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-21.png",
+      "bytes": 487,
+      "sha256": "e15e0d23606824644c5bdd7482b7bd7475ecd57686f1993d9728e9b01149cbde"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-21.png.meta",
+      "bytes": 3395,
+      "sha256": "f89cd274ab7bb417006e175237828a4f1488a64c13dee5d0aab38fa8b7635553"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-22.png",
+      "bytes": 894,
+      "sha256": "a9cecd87bdcf472d0c1c313d7a9cb6277831436533029ead7b59eb0000da70f8"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-22.png.meta",
+      "bytes": 3395,
+      "sha256": "fae6a7d43776271b70c74cc8864dfa6d218be715db90ce738b167ff129ccdc95"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-23.png",
+      "bytes": 437,
+      "sha256": "e602b66447482a37c073fb49e2c10163d33099d1087ab76bda59bd798e913dc5"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-23.png.meta",
+      "bytes": 3395,
+      "sha256": "3d15196f41244870bae2cea0cf8a1157c286a6aaebc20e7af1b71775dd55aa4b"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-24.png",
+      "bytes": 858,
+      "sha256": "a08a2f93053e5443923c2954d5c7b8127b52eb3cceff22586607d3ef2b35bbf0"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-24.png.meta",
+      "bytes": 3395,
+      "sha256": "6daecf1cd61749d862f0449a5312bb0ae0f5a01a8f8a0a8c92c4f184dc283a5e"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-25.png",
+      "bytes": 1017,
+      "sha256": "ad1efb0421ba4a76b75151984333534930547b757c9c201812bd92f977cf20e5"
+    },
+    {
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-25.png.meta",
+      "bytes": 3395,
+      "sha256": "3ad264c19f7adca8dd2c191bebbc682dd1e91a70df3f1849584220a5aeea0e3e"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals.meta",
+      "bytes": 172,
+      "sha256": "9e1c9b93083f40990e38a07bd222ce7ce662a6ac213be651416699067f9b40bf"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/Frames-Empty-00.png",
+      "bytes": 1065708,
+      "sha256": "7581b5da4e64fea7696aae28eea2b845b23cdd4063b5d39d23accdcd98214797"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/Frames-Empty-00.png.meta",
+      "bytes": 3395,
+      "sha256": "d712dc6f671e5bfda8827991df6401979223b06d14d7ff1494974679d8ced137"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/Frames-Filled-00.png",
+      "bytes": 2156883,
+      "sha256": "d44b08a14e1b823a20e6d237ccdc96d8d984a54f8e55bbf7710eda34c77c0fc4"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/Frames-Filled-00.png.meta",
+      "bytes": 3395,
+      "sha256": "75f0439c84913e3f8f16bff6b49ac92414063739375df4dbb9735b3973b894df"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/HALLWAY-Frame-Eye-outline.png",
+      "bytes": 197598,
+      "sha256": "e0075686a09a0b7b56e6bad571635e543ba6a3227d2d0cb06631ecffd906201d"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/HALLWAY-Frame-Eye-outline.png.meta",
+      "bytes": 3395,
+      "sha256": "dc8fb0c708fc964c28b05b2142d38a6a295ced37a408da6119733ce770de039e"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/HALLWAY-Frame-Eye.png",
+      "bytes": 380663,
+      "sha256": "a06a778634678025f8fd407dc4d1a876a3d8494694d17d772665046c97cb09b8"
+    },
+    {
+      "path": "Assets/Art/Frames/Originals/HALLWAY-Frame-Eye.png.meta",
+      "bytes": 3395,
+      "sha256": "bb0fb61020d31fc6b8dc450c37dc2679fc17e46c32c493074e959e15edfd2d16"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames.meta",
+      "bytes": 172,
+      "sha256": "244de9c8535615988227a7e325b40fb38aad73916ad64709a4402b849ed8ab3c"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-01.png",
+      "bytes": 33939,
+      "sha256": "f774d2178102d8858518db62e875bafe2b5004231c14dc85f5658aed5a121bf5"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-01.png.meta",
+      "bytes": 3395,
+      "sha256": "0e6903f43d214c372db468c8bd0da9b73485f81b83b036af8809f2a844617a93"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-02.png",
+      "bytes": 70026,
+      "sha256": "b385677365b3cdc2833f4842feaca4fc127852a0c90ea2283d79ba0a7650a95b"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-02.png.meta",
+      "bytes": 3395,
+      "sha256": "269395614a9061d36970f24cd1054b11e88faff1615b1744a5f59b19852cc37c"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-03.png",
+      "bytes": 122005,
+      "sha256": "fb346ab422026e5a83da6a7a7c8450fddf25767d1585b9a1313403f991900fae"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-03.png.meta",
+      "bytes": 3395,
+      "sha256": "5e1f92c8618ebf87c7c6e4f4eeb274ba4688a70c5bb25ddd62f81b2147e16788"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-04.png",
+      "bytes": 30286,
+      "sha256": "b84bdafde4a05da3b71addd284ff4e5d9c8b86ed5261d5135300e1d56cbf2b0f"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-04.png.meta",
+      "bytes": 3395,
+      "sha256": "fe93bced6532993083f86be76f6bde4b99d012c0263f2885f9b88f64d5e302a0"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-05.png",
+      "bytes": 18132,
+      "sha256": "2d0447d9e895c684e9dcbbad5ced92c83cc499acac8c6a91014a242449f98600"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-05.png.meta",
+      "bytes": 3395,
+      "sha256": "078aeffd0ae7c9cb2871bdb99bb72013c416c1579ac85e3466b9f760a897636a"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-06.png",
+      "bytes": 19874,
+      "sha256": "761da9405d61710861625c51cdb5f4572d7f4cdf0f1ba7831ded84703a1c4916"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-06.png.meta",
+      "bytes": 3395,
+      "sha256": "cc646b39f60d47e14036dcf1817bc35cc46b4e955f3f633a010f35c135868839"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-07.png",
+      "bytes": 39156,
+      "sha256": "6ef5d4735f604037d1d743b11abe554ff2e546d7e692ebb5b0a470d04a1b3904"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-07.png.meta",
+      "bytes": 3395,
+      "sha256": "e6ac5144c4bb32b6ec34b7247927669f8932c80e6b3b3849ecda1e66b804d732"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-08.png",
+      "bytes": 31602,
+      "sha256": "7156a6a2892bc915c52bf21d866ff8a213c57a433e110dec660c7fa7ff2c924e"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-08.png.meta",
+      "bytes": 3395,
+      "sha256": "8c1c3ea73fa6411e7bb72a4e88d1cb1f2b2ef1bf587c86399840e5ac6055c9c7"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-09.png",
+      "bytes": 128961,
+      "sha256": "04c9f191464a5a4a1d59b64c389e2951705bf4aac233ca13ca4eec91f682cb19"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-09.png.meta",
+      "bytes": 3395,
+      "sha256": "e9eef1cc925e9aeaff074889485c521b28445787e6ea549456ba986e62b79214"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-10.png",
+      "bytes": 49886,
+      "sha256": "92a0f42e0157f483439dbe02ccbef84d300d586768b07b211f11f4b3d316bbf7"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-10.png.meta",
+      "bytes": 3395,
+      "sha256": "e6b413832fbcd0975d8d6c1d6ae1f3dea5c433cc5edd49907cf578cf9466760f"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-11.png",
+      "bytes": 33858,
+      "sha256": "0314a8b5d518f3895f90e611aeca39562dae126a0b90f6d09335b2470ee149ff"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-11.png.meta",
+      "bytes": 3395,
+      "sha256": "6effd7a0b37a7f9219356bd957c16c66862fce2ff62637fe0cb376d9e9c965a4"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-12.png",
+      "bytes": 34190,
+      "sha256": "ed4e3002b8c4c13055b260a1bc41797b931b136c403ae4a5025433359380100b"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-12.png.meta",
+      "bytes": 3395,
+      "sha256": "88a9eb927179c579089e31886ca2d187d91f10905416049e1ecb584923f2a446"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-13.png",
+      "bytes": 42029,
+      "sha256": "dc0fbfb399df3037d1dc834fa0eb3b9beeca3d8ebcf72f0a1e20b431c905fc26"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-13.png.meta",
+      "bytes": 3395,
+      "sha256": "4512af8317a3acba5f07705d811c68f31370e7dc0e9e07a4acd065b8c211a7b5"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-14.png",
+      "bytes": 45791,
+      "sha256": "b2c005c61a8e7c007518a972dbbbe51c9e907d84268e6ba716b50bdb08e57d4f"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-14.png.meta",
+      "bytes": 3395,
+      "sha256": "27fd4a17634330782253c93b74cc3099b895374a87cd37925a282208a6be39b6"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-15.png",
+      "bytes": 22837,
+      "sha256": "4545305b9bf58dae5bf0328779b8be4bfccafa40840d6842ee61f99b89ba543f"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-15.png.meta",
+      "bytes": 3395,
+      "sha256": "3bacbaba00346be5dba5905b9c6a6633c931a1789c96f1f537eefc0f5cf7e9ee"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-16.png",
+      "bytes": 10054,
+      "sha256": "5c899d4d06a27deff4ae74e31fa91b20bed5e5705463a2ba98fa06e8b3dfc3b1"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-16.png.meta",
+      "bytes": 3395,
+      "sha256": "f6448c6607073a9dbef1005e0521b713aa4bd4d8619084d0ccd1e79cce181102"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-17.png",
+      "bytes": 31346,
+      "sha256": "0e180f484ddb9139cb1a817af24122e093fb6233effdb0e0cc82180df9d8c5fd"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-17.png.meta",
+      "bytes": 3395,
+      "sha256": "a8225a800d827f2fd8084cac45d89b5d88cee39f09753de20aa5983158416af2"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-18.png",
+      "bytes": 63268,
+      "sha256": "af43bf744bbea34b281c70b4229eef8609a790d4ff3d522d69721b9c16be0b26"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-18.png.meta",
+      "bytes": 3395,
+      "sha256": "2f725a09099bccfdfcdc7dc9a27e04316c11d227bcac36c66724edcb7bb057f0"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-19.png",
+      "bytes": 28454,
+      "sha256": "6c32ed37165b44c7e70184db8f17502a0cbd54e16f481725ce5b07dd332bfbd9"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-19.png.meta",
+      "bytes": 3395,
+      "sha256": "4748a777ed5ddc162a8cb3777cd210f0c2d861b94ac0af332802b3d83375edf8"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-20.png",
+      "bytes": 35867,
+      "sha256": "8b13c0d2592736039786443daf437f9a6b1a11d4be548ddea90992be26db23f1"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-20.png.meta",
+      "bytes": 3395,
+      "sha256": "61c4b834d959fb8bcd512a174e8109549ce70e78d906585857eec556dd6ce94b"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-21.png",
+      "bytes": 20908,
+      "sha256": "42742e28085b59250b7af3fd6ba29f6641dbb79d617d5d223eb8c236481caed8"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-21.png.meta",
+      "bytes": 3395,
+      "sha256": "31bd2d53043a21cb255877e1954c618546a40d57f321cb4b5a13ef1cc95e537e"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-22.png",
+      "bytes": 41464,
+      "sha256": "a6a33538765527d3d035bee413c7c4b21d6b3f562e83b80517cb1efe32e6fcbf"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-22.png.meta",
+      "bytes": 3395,
+      "sha256": "625aedfdfa7d77f272e814b87401b8ddc47040cfb33972e1c579188946d6b634"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-23.png",
+      "bytes": 20257,
+      "sha256": "f55ac56a79f9a9c636a781dabc3bc7601046c1c97c00e6d6d6b4cdac70cf411c"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-23.png.meta",
+      "bytes": 3395,
+      "sha256": "5842eabcf54a273da6769e556109b0793ced0fb16de604c4342dc7287e211637"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-24.png",
+      "bytes": 29824,
+      "sha256": "d85f3f6e8523a11da1815a38386b733e0cec4e0c8543ef12fbf76e8427f29a0e"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-24.png.meta",
+      "bytes": 3395,
+      "sha256": "dbc699857fc915f1f2b3b4a7d44229ebfd39c76060d48370f5de1c38dc31464f"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-25.png",
+      "bytes": 28173,
+      "sha256": "e8eb78bf3b99f9790529a7797adf9dd8bfc22ab9052d96f3057c0a8b50e45101"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-25.png.meta",
+      "bytes": 3395,
+      "sha256": "97d599dd3b5b679f561ecedaa570013b8b6b32d913649cc3f3f49e43e77d3893"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-01.png",
+      "bytes": 86653,
+      "sha256": "7b1579d512325e969071bbb58d54152056dc289cc8756242c758131a22bfc69c"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-01.png.meta",
+      "bytes": 3395,
+      "sha256": "199acee8ca80f7a85e3459b05b33c5f62dc667dc93ce50592e877500bc101917"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-02.png",
+      "bytes": 131541,
+      "sha256": "8fcfd215220ac77e0cac0ef05182e263e346d3212d9b5d47f6803743e30f4408"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-02.png.meta",
+      "bytes": 3395,
+      "sha256": "c4f7ca7afba5320cd1c1cc2a232a4b1ea3dc0391569ed69bb9f547802d9f913e"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-03.png",
+      "bytes": 168641,
+      "sha256": "eb974e036034a2c85e1832ada18ba48cd5ebd3f6f60685536f2cb5aa8d9aef33"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-03.png.meta",
+      "bytes": 3395,
+      "sha256": "ca38bd2fce5325bd0f76e823d33aeae03741c1e4c9e268cef6782ea977a5cbec"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-04.png",
+      "bytes": 47365,
+      "sha256": "2496713a57780a3fe276695f4b01d4fb4b62af76c10f933e3d118e50eaaccf78"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-04.png.meta",
+      "bytes": 3395,
+      "sha256": "3c79d82b9974beb53e1dde4d4e3902e8e8ff716e9477f50640c823fe78efc404"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-05.png",
+      "bytes": 28359,
+      "sha256": "3b685e1f01d45d3a728d9e2cb3988238109510ae0d1ca137167587fd2be53375"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-05.png.meta",
+      "bytes": 3395,
+      "sha256": "20461d580107f4a40c1916f286c279a23fa39fdb2ed9895cdaccec809a05dda0"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-06.png",
+      "bytes": 32219,
+      "sha256": "2a1fd5a5169cf41d3849353c5f552e2ca467893e50d3c52116c2ce6fc0dd0023"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-06.png.meta",
+      "bytes": 3395,
+      "sha256": "05ba5f4aeedf6c5feb79dd9834155ad32cffa9103480a3ee3243bc2b51871589"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-07.png",
+      "bytes": 104873,
+      "sha256": "db13460e2aed6e188bb9455b419e4be04a3991a8fdfe20d3771f7e5fc6906a3e"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-07.png.meta",
+      "bytes": 3395,
+      "sha256": "f399d94a30f8af504887faeba0f18ff2d3d3ae7b2772eb935965099f18fdf147"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-08.png",
+      "bytes": 70840,
+      "sha256": "d0b7684decd46de30e162de06c3f6175d7031e88c2520325c8eea8099f05ae16"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-08.png.meta",
+      "bytes": 3395,
+      "sha256": "fcd092a47d1d6946e5e0cbf8a07038a4978c2064f5ac231a98dd8eb0a4ae21aa"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-09.png",
+      "bytes": 328574,
+      "sha256": "aeeda9253f10be7e20ec22a45e4ae8547ba7e2277c5f1e7ff156024a9ba5c1ab"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-09.png.meta",
+      "bytes": 3395,
+      "sha256": "b9ff931409b628d7a9a7b731520c96878a1c53695c438d2449214eda6f51814a"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-10.png",
+      "bytes": 142596,
+      "sha256": "8e62abf655eebfb22638d98a28836292c29cf424f33e73c51ed1df9292472a0b"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-10.png.meta",
+      "bytes": 3395,
+      "sha256": "2c1a5f82221e122377bf06709829d79387faf1505149c8079090a7a23e74ac4e"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-11.png",
+      "bytes": 55731,
+      "sha256": "2bf7afc1d31a32974eb85e4b44ec01fee3c8063879630c9fe6f6d4e7ee634378"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-11.png.meta",
+      "bytes": 3395,
+      "sha256": "f6411b4197b900a5a4961dcb5fb8046f63bca65078ed6ff799d61a7b5c55b6b1"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-12.png",
+      "bytes": 57082,
+      "sha256": "03ff7950bfe5587ceb9778c386109be5c5c51058e0c5b5e9478de6a0d57f4dc9"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-12.png.meta",
+      "bytes": 3395,
+      "sha256": "60ece99e25ae405f3fda2723f0d5e4eaef187ac66fa6266debc3d09497c1831b"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-13.png",
+      "bytes": 151360,
+      "sha256": "caa750e10eed5a5fd9cbabb57cbbf7d523dd30967b5f93bc72fd2bca367a2af5"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-13.png.meta",
+      "bytes": 3395,
+      "sha256": "5fa8cb79b54d45bb2479ef8cc09e28c04b7be9985d6d2e0e8d417109c62283ff"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-14.png",
+      "bytes": 60090,
+      "sha256": "cbd334e8e557d92a3c4b3753a874a72739998e00ccef326570f5ac318a99a37e"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-14.png.meta",
+      "bytes": 3395,
+      "sha256": "04d2945a5cc0b2048bb0d9679c17fb44ab25fefdd1c11a7c6609e8831b89708f"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-15.png",
+      "bytes": 45166,
+      "sha256": "50f05f08b1260a9948b10b9a9f080c7743a560fea7906594316424faa54953f3"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-15.png.meta",
+      "bytes": 3395,
+      "sha256": "6c0d1ab76f0046425218b2df3e8e19633421f73baff84824446cc635090c6d58"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-16.png",
+      "bytes": 16627,
+      "sha256": "37c1fe33d714d4ae2c4aac5af799f62d2677849092c233d5980399d07db8ee40"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-16.png.meta",
+      "bytes": 3395,
+      "sha256": "40844cbf2b480b440d2582ead21decf0fdacfb58d630d5148b032d2cbb3a79a0"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-17.png",
+      "bytes": 43462,
+      "sha256": "a9c184b66dd1c9f82375e63baa0f51bc1dbfb89e226efc0d756f1627178292cc"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-17.png.meta",
+      "bytes": 3395,
+      "sha256": "9a54d174aa15080fd4c106e1704c369c0345a7c8dde5ad0cf82201ccd8758be6"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-18.png",
+      "bytes": 158379,
+      "sha256": "b440cb53142ea382b08f3d173b3d6b387b282a36ff527a6450c9ed3fa60f5e2b"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-18.png.meta",
+      "bytes": 3395,
+      "sha256": "f646e6b3ed8a628386ec3987ee471f3781041249dbb7ba75f7c4fbe3c1588a11"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-19.png",
+      "bytes": 52929,
+      "sha256": "8165254542588d360d7a514792278867474dffb8283b06260d87bc718692bc80"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-19.png.meta",
+      "bytes": 3395,
+      "sha256": "582ebc67c05850486b4bdf13578baf60a0252c3a2b907277c2abc7fd7bb03cc2"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-20.png",
+      "bytes": 73411,
+      "sha256": "ab6b2373cda0ba1974abe32c504f2e155725893165a1f62d78812ef049626dd1"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-20.png.meta",
+      "bytes": 3395,
+      "sha256": "d825626e6dde4e911c85bbeea92ccdbda7f039871bf7cd7cc3c502193b54dae6"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-21.png",
+      "bytes": 22460,
+      "sha256": "1a0d61b1da4a1ac7799bb498740f13dc2217ffb7b02514b144c418c065dde8b2"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-21.png.meta",
+      "bytes": 3395,
+      "sha256": "9b328f15677a0acc359418da5ce2ab9b02480ea20a87b7ac1703fc359ee50722"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-22.png",
+      "bytes": 64617,
+      "sha256": "20d619d4b9a8891ab0460e000f6704565a521a05c26b23467afec17c1f5fe3e1"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-22.png.meta",
+      "bytes": 3395,
+      "sha256": "66b3a5aec74565abe10374aa0fe67166790d80b07ba8de6b7063b3419f8d749c"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-23.png",
+      "bytes": 22240,
+      "sha256": "f22de87c50f705af9cec30347627cdf689703f2cd2b7cc5cf90e1d2fabf2d719"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-23.png.meta",
+      "bytes": 3395,
+      "sha256": "4d9c9884226dbe6e96a79949e9f40ba15fe95380db3b0100f06f323941655ebf"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-24.png",
+      "bytes": 34509,
+      "sha256": "a93f8b6b6d741138a6887b4a93af584614aae9e6beee895a17dd1198916b7117"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-24.png.meta",
+      "bytes": 3395,
+      "sha256": "13ce6bcb10f3e7b1e1d54acbc1d2f7cebdac07b515aac28a7ccd19fc4d2657a7"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-25.png",
+      "bytes": 63324,
+      "sha256": "55bbeb69b0dd3a952ce8806ab3f8a578c7937643784827b1851e4eec9d5ad330"
+    },
+    {
+      "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-25.png.meta",
+      "bytes": 3395,
+      "sha256": "b379d77a2a3b1d3e3f4adc32f9f79de2c5f84e47da5c641121558a0172f7d316"
+    },
+    {
+      "path": "Assets/Art/Hallway/HALLWAY-sconce.png",
+      "bytes": 170554,
+      "sha256": "eeb9f295999c4a2f495d170b26c221b340b2ea60127216e6150a417cab283356"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.mat",
+      "bytes": 1087,
+      "sha256": "d7cdaac8a50c04ea28f0be467a9729819ca5a5577d27e97855f833168ae8b4af"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.mat.meta",
+      "bytes": 188,
+      "sha256": "c6637f394c174d0419ca076851b9beefdf6d6b5c5f05c978290cacd7e06914c1"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.shader",
+      "bytes": 2978,
+      "sha256": "0b57724b1a0a0ae02cd942a463d57bdc99c7e11da5fada1228e711bd96b509fe"
+    },
+    {
+      "path": "Assets/Art/Hallway/HallwaySpriteLit.shader.meta",
+      "bytes": 204,
+      "sha256": "178aff9da4109835f643ec0f5f8b46278e2c1c6c2f8521834853656b07a6a2d4"
+    },
+    {
+      "path": "Assets/Art/LobbyIntro/Wallpaper.meta",
+      "bytes": 169,
+      "sha256": "99e633bbe9fb0cc950277792bb5f12ec20284e033b31392008a3bbaeb51eb82c"
+    },
+    {
+      "path": "Assets/Art/LobbyIntro/Wallpaper/Damask-Vintage-Wallpaper-CC0.jpg",
+      "bytes": 1271665,
+      "sha256": "c106c279bd169e1c8a79c8616d1499482a5a6ad0ec14dc189953f78374b6ec73"
+    },
+    {
+      "path": "Assets/Art/LobbyIntro/Wallpaper/Damask-Vintage-Wallpaper-CC0.jpg.meta",
+      "bytes": 3390,
+      "sha256": "8dc83952e9b28ad1fabc2e77d2871aebc8ace96e7dd24dcd46c523906f38e881"
+    },
+    {
+      "path": "Assets/Art/LobbyIntro/Wallpaper/LICENSE.txt",
+      "bytes": 323,
+      "sha256": "be347044ff17d139d02d693d7fa13442998a209f078e5c86d903251936964f9a"
+    },
+    {
+      "path": "Assets/Art/LobbyIntro/Wallpaper/LICENSE.txt.meta",
+      "bytes": 155,
+      "sha256": "b056372297f043bef09ce4d1798872d979812fee40e78d1908243c13a44feed3"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner.meta",
+      "bytes": 169,
+      "sha256": "25e41395b18707b40caacbd62f177ab94333bc979fb362df046303c974e61f38"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/Capsule_Runner_Antique_Gold.mat",
+      "bytes": 3539,
+      "sha256": "c6a46691a5bcecd7d597e43a09ac36df1fd6261359bd4e7838e67e2eea53d7a9"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/Capsule_Runner_Antique_Gold.mat.meta",
+      "bytes": 185,
+      "sha256": "d202a14d4407542aed631721ebc4da02979212879bbc1de38d8ae43e5d26b62d"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/Capsule_Runner_Binding.mat",
+      "bytes": 3536,
+      "sha256": "0bd3c4a0f16132b86a5c8a93fc39bac4bff4016b547e092936859298f6d05a31"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/Capsule_Runner_Binding.mat.meta",
+      "bytes": 185,
+      "sha256": "ad2f589b4623a2e43bbdf796b4cd7884c93ec60c146b8dbb3ad3dccc10eed6b8"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/Capsule_Runner_Burgundy.mat",
+      "bytes": 3537,
+      "sha256": "dd6e3baf2c4db527afefbd99fa2db06f57857e213b75185cbe6c73ca63c07dd2"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/Capsule_Runner_Burgundy.mat.meta",
+      "bytes": 185,
+      "sha256": "2a059fa22631e0d41cce9b6ad30f429bf53c5dd375b8cd193dc6e1abeabe2714"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/LobbyCapsuleRunnerMesh.asset",
+      "bytes": 9447,
+      "sha256": "49a15bf4b79e7a3b379c113cc2ec0932460f0f4b76532d25a8bb14cee03f749d"
+    },
+    {
+      "path": "Assets/Art/LobbyRunner/LobbyCapsuleRunnerMesh.asset.meta",
+      "bytes": 185,
+      "sha256": "912af0da6382f0a81d7a532a0984b6412beef33781430be7e6eedb33e85920ad"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbyCarpetDamask.shader",
+      "bytes": 6523,
+      "sha256": "13628fe78c46bbdda432a6ca8dcdc999cdcd7a2f20809de7e29c19352b09d4b5"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbyCarpetDamask.shader.meta",
+      "bytes": 201,
+      "sha256": "820d5f43c01338e92c4fd949cf8678db30c8ca3ca01956e1dc085b0490b38d6f"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbySpriteFog.shader",
+      "bytes": 2976,
+      "sha256": "6aafed127bc002051977ae57b5f368a2fc12231474f24b07d3619a2ed7024f9f"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/LobbySpriteFog0.mat",
+      "bytes": 1571,
+      "sha256": "44ff3f5850d9beb309f69975652b90b9e30bad4daed8a79942bd0b92434fa0d8"
+    },
+    {
+      "path": "Assets/Art/Materials/LobbyRevision/Lobby_Burgundy_Carpet.mat",
+      "bytes": 3825,
+      "sha256": "c7e5cad5bb907153ba6ae58906503d1810551dcd55848bc47e0edc6f9bb37ae8"
+    },
+    {
+      "path": "Assets/Art/WorldLighting.meta",
+      "bytes": 172,
+      "sha256": "fb2c3ff1baf195b5125ca6222f353a0ad7432d17c1656c1431d477ead01a22c3"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtLighting.hlsl",
+      "bytes": 1960,
+      "sha256": "47311e445ef8dfe98be5796d310548ad84741220ebd93ba5f8bda70a26d6cc6f"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtLighting.hlsl.meta",
+      "bytes": 161,
+      "sha256": "2e9681dc07df6fd7bf4768a95efadd449a9936de262fad2cb8d6d5caccdfcef2"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtSpritePass.hlsl",
+      "bytes": 3664,
+      "sha256": "160eb4b29c8365748c218a12c6676ae2ea517320cd86efba434328e3df8cd855"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/ArtSpritePass.hlsl.meta",
+      "bytes": 161,
+      "sha256": "df00d3e1a3b19e2b3d936ca3b6740ec540650b86579a80abbbe5e02bd4f49eac"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyDepthBlack.shader",
+      "bytes": 951,
+      "sha256": "0f1d2eac262a10a51d7ea6f79ca1fff5fac4b6fd099324a2db2292fda3104642"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyDepthBlack.shader.meta",
+      "bytes": 154,
+      "sha256": "164f9bf89e9856f5a67e42d8cecc4167a91a28818c200953bc340cec1cd63e68"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyHeightAtmosphere.shader",
+      "bytes": 4827,
+      "sha256": "fec95a055c00aa89d844ad45b1a6b9cedf7a5f62d6f4324e8b0dd52be14bb7df"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyHeightAtmosphere.shader.meta",
+      "bytes": 154,
+      "sha256": "20e97533e808ee72aba0d84ae656ee47ec1f643fa5bb48b8ed1dcbd9d8d55a92"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyStairwellDepthBlack.mat",
+      "bytes": 785,
+      "sha256": "15af1b3b2f8190708a2e72c4ad5ceeb333a838bf8aba3be2e4b3ab7d35965c33"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyStairwellDepthBlack.mat.meta",
+      "bytes": 160,
+      "sha256": "bfedad13ea15f40b6bb0245fb251c3deb314540c5b89ba88f132295b4de3f6db"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyUpperRoomAtmosphere.mat",
+      "bytes": 836,
+      "sha256": "aa1913de78abc09edb8ebba175c0c2914b66299f1ba86dabf59bb7f040d70e30"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/LobbyUpperRoomAtmosphere.mat.meta",
+      "bytes": 160,
+      "sha256": "d116b051e5ede25f8c85a7a9a0b341212868cac5b7fb42c3aceec21c418987d1"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.mat",
+      "bytes": 1597,
+      "sha256": "69dc975591cd7ec415604c0a93614fe33c66e51d00972472d6cce1082089dea7"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.mat.meta",
+      "bytes": 160,
+      "sha256": "bddd2e4cf99ccdb2bb3df317bcdd950f1d92da1bf44799b73b898451f1aafc6c"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.shader",
+      "bytes": 2869,
+      "sha256": "838ac95d1cd5eca2fd1cf2e970a46e92423da3a8ab3e80ffa174fe0935fa8856"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldFeedbackUnlitFog.shader.meta",
+      "bytes": 154,
+      "sha256": "590369fc76d1448c91b1cb2fdbce43d9d39d63972791cc8f8606bdda122bbfcc"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.mat",
+      "bytes": 1084,
+      "sha256": "e71181b5109aea7eb799af5010f277f4670a1424d401cf4cafb6ad8b0b879dbc"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.mat.meta",
+      "bytes": 160,
+      "sha256": "0ad91906f94398f01ed2cf432143d854d948abb66ceef5232ea29ad93edd5e65"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.shader",
+      "bytes": 2976,
+      "sha256": "6f365c52640f7894bacd5a07f2bb1c2b9cd10c32978a2400518cca55752845b2"
+    },
+    {
+      "path": "Assets/Art/WorldLighting/WorldSpriteLit.shader.meta",
+      "bytes": 154,
+      "sha256": "886ff73a960ad30feb83b671042b5feb5b9e9178430251f9e326d78c61107539"
+    },
+    {
+      "path": "Assets/Editor/BossPresentationNativeValidation.cs",
+      "bytes": 15113,
+      "sha256": "9d8518be590c22215dfb1a89ad74eddbc0a785809972a760a0db71d6828dd758"
+    },
+    {
+      "path": "Assets/Editor/HallwaySconceNativeValidation.cs",
+      "bytes": 3035,
+      "sha256": "a93a6acfe6f21a2fc182bf593b21aa380c4d3fff4299ba0203a1c68e473b3a5b"
+    },
+    {
+      "path": "Assets/Editor/HallwaySconceNativeValidation.cs.meta",
+      "bytes": 236,
+      "sha256": "73403f488b074f09072f9bb46a03ff224b2be694481fc48e15ddb536285e2054"
+    },
+    {
+      "path": "Assets/Editor/WorldArtworkLightingValidation.cs",
+      "bytes": 3154,
+      "sha256": "f1f3cf580b2d6c8bb5569ad8b7e8a69a68385bf0fcc162ff7584ecdf8a4bd663"
+    },
+    {
+      "path": "Assets/Editor/WorldArtworkLightingValidation.cs.meta",
+      "bytes": 243,
+      "sha256": "55e936b72bf151f290781039e4190329b715b7e2e7f4eeef7e64d55d7c7251e3"
+    },
+    {
+      "path": "Assets/Prefabs/LobbyAtmosphere/LobbyCapsuleCarpetRunner.prefab",
+      "bytes": 2704,
+      "sha256": "f51e516da59ab74c8c295589a9f52cae7a7ab18d971a8a9d07763e28cceaede5"
+    },
+    {
+      "path": "Assets/Prefabs/LobbyAtmosphere/LobbyCapsuleCarpetRunner.prefab.meta",
+      "bytes": 151,
+      "sha256": "631f471cc18ff5d46409b9c43452a3c101a826620e766400a7895a882b73f11c"
+    },
+    {
+      "path": "Assets/Prefabs/LobbyAtmosphere/LobbyDepthDarkness.prefab",
+      "bytes": 7364,
+      "sha256": "651c104cd4f8ea0206ec9f58153eb1013b29533f2a328dcab8a011f429c80719"
+    },
+    {
+      "path": "Assets/Prefabs/LobbyAtmosphere/LobbyDepthDarkness.prefab.meta",
+      "bytes": 154,
+      "sha256": "d18055345f95ff31ba07a5908341d609d731eacfe3f28fe7803b017c3a003350"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames.meta",
+      "bytes": 172,
+      "sha256": "56d1b523e0b7f34ce796e729c293292e04f10be838d0f3f74328ccaa91db932f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/HallwayWatchingFrames.prefab",
+      "bytes": 23077,
+      "sha256": "c80870587efd92267ca5a1e07e129be6aae246b7eb9f27f82406d917cfd34842"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/HallwayWatchingFrames.prefab.meta",
+      "bytes": 154,
+      "sha256": "40343715c8d304fdbd58eeab26a0ae9fec51f72083cd9d4c015ffb672fdd2311"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel.meta",
+      "bytes": 172,
+      "sha256": "f2f3ffa2bbd932b8ca98677d3e4dafcfafdbb7fd7acea6633961c3a6112b276e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/IntroWatchingFrameTunnel.prefab",
+      "bytes": 1511953,
+      "sha256": "af93c2de51af54606554f51dbab8d8f4927dd974d2984a4480fb7639000ac888"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/IntroWatchingFrameTunnel.prefab.meta",
+      "bytes": 154,
+      "sha256": "cf247d397ea4cb6896037aea91d8fbbe40d7f3322a29f68e9f1c17f19c1423a6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials.meta",
+      "bytes": 172,
+      "sha256": "f68871701ff54fe9987d74b028fa1b5df69e20394c56290a33b85347922e88e2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-01-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "dd9b6721298f70d43ab74294dfd052b0911b5edc14dad13c78aee7f6178275be"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-01-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "bb43801eca7f60c3bdc7f992f650cdf29ab57ae4c912fe0a478081efb273aa32"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-01.mat",
+      "bytes": 2472,
+      "sha256": "6ee06ec6a1ddc0ba6cf544ca5289dec67714b2af2aa4df14225faa4ae399ca97"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-01.mat.meta",
+      "bytes": 160,
+      "sha256": "472aaeedbbbc39249ee63a61a288abdde380ea60114a3f86bd94e848127b51ed"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-02-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "47c65bf0f8675f13772ec25ced2d8ff4b90f3d6dc11bc12db78f8954cc8dd158"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-02-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "32a87d37945143820e7ea084e3f6b4668defe2ae0103c4ae0cf8763a52e38a25"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-02.mat",
+      "bytes": 2471,
+      "sha256": "05c81882c3fa64145d4aa6052ec4a2ecaf8f69b6cd5a4c29e4f977b3e235955b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-02.mat.meta",
+      "bytes": 160,
+      "sha256": "cc51b8f6d21a0297b168d26b61f1a5399cd9b1bdfc67278776ca95a7620d169b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-03-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "e7d44f474e3366b162404282124629f87a9e565bc5bdf362eee622f49d05ba9d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-03-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "75d9a3dffb95110924a081c7aa8aa2fd8618bb0c47d66741360690a1b1f825cc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-03.mat",
+      "bytes": 2472,
+      "sha256": "2b09fb7f5a0d3ef2067f5318d1a26fe02305dfb543a1db5ebe35addfd08d1190"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-03.mat.meta",
+      "bytes": 160,
+      "sha256": "512a0872db72aef176591e2668406faa5423c5576ea3499aa572967f376fc44b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-04-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "0486b725b1b8d94c794aba7b8ddafc857c7c3a615a3cbd54ca6c39eb85ac4d5c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-04-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "aae5dc4e9afea1acada8dd8929da47f4c0bf9080994074529980016760a42079"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-04.mat",
+      "bytes": 2472,
+      "sha256": "baaed535e04109cb25ff01b41aad7de1a91db79357e45f9a1f34150f0c5247b4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-04.mat.meta",
+      "bytes": 160,
+      "sha256": "61fe60f1316407b1d7a03bf34236fbde93afdf7064d9a5ccddf11639666986e6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-05-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "29fa6143a0a582e96378f5887c6838d6c45dbe7ed43098eaca62a84158962e19"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-05-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "1d1426bf255557b76d99cb41daa09a1663196099ca3598dd7666592b8f485c35"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-05.mat",
+      "bytes": 2471,
+      "sha256": "6976f7beda2e7e27a7eaed1ff76082881e2e0122b23b3ba25c63375732cc1e3f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-05.mat.meta",
+      "bytes": 160,
+      "sha256": "4dad841e6f339ac4a6dde4f81016a2b53b7560cf82c570cb86ee75d7da7873ad"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-06-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "1a19334cb7ac90b05b04e86834ac4926fcd9788f241c9503f12194df9e6c1696"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-06-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "35b0f9332a7f0a4b8c402f439ea31d0cce32812c18ab720e80760d6e7bbda850"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-06.mat",
+      "bytes": 2471,
+      "sha256": "a67130e2e460c7d4535fc20aad4222e3f42a1f6038f1b9f65ac01319435cbdfb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-06.mat.meta",
+      "bytes": 160,
+      "sha256": "fd4962992f2c4dc86281d98cc390017c1623333858d5b41ccc67c4f39f530480"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-07-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "db95b645808dd32ca6587ef230c3810b03f7725b699c72867017fd8257756de2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-07-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "1eea386f16ad8c0570df0c292bc67c30e90a2dfc1e00556477bf720cd5eb641f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-07.mat",
+      "bytes": 2471,
+      "sha256": "e0c92eb8d402a6aa653e785f50eaca2411f979443199083346be4d51f865e735"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-07.mat.meta",
+      "bytes": 160,
+      "sha256": "75eb638b627117896d38facd23d13504267bf9269bfe297efec6c9893b9d4505"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-08-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "fb4e39ec97cf7af975ae1300af8de8fff05b72fc20bf02f624a7be4c93f37d23"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-08-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "3e4ea1b829f56a59bcb68d9b8da3b14c4d847980bfdf1663beaff40e01238d1a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-08.mat",
+      "bytes": 2472,
+      "sha256": "b5910f11603ace47412a88d90368c1e1c79d4cc8e21df7679de9a3150ce56d0d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-08.mat.meta",
+      "bytes": 160,
+      "sha256": "4a871b33e9512569fc2cebc4076cf41e449ccbfbfca2f8ba7a50276836edee2c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-09-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "e871dcdc773578021f12c4e17193197ad1a0a8dc1fa3fd81c88dec4f632091d8"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-09-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "719c5993fd5b0c2ceaa1654336e68e9e4ae48c70e53a56f3238ba5bd2f872859"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-09.mat",
+      "bytes": 2472,
+      "sha256": "2411a34a5a3302f34620d4b0e6774d70891b4dd3d03c40a8f118058c9f21431c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-09.mat.meta",
+      "bytes": 160,
+      "sha256": "d80134cc53edd8f3c58f7f176868ce240db85084921f359302eee96565fe1931"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-10-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "7383814fbcb29bae1a655bfe5e67cb4c49cf296d53b063f75d24dff3124b36d1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-10-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "98b3f9d63098c8a7772837a23e95a6562d0a02e50c2bd07bfdc9ce69422f03ad"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-10.mat",
+      "bytes": 2471,
+      "sha256": "db795b902c6dfc1bc5b7b16ad7ffa8791e42ae078e3b60d5607921d328f14c96"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-10.mat.meta",
+      "bytes": 160,
+      "sha256": "830679d512bc7c5385a48cc1030f35fdcac26045ebd56561fff058610678969c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-11-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "0e115d9345b78b222b6d23f6083ea8e5cc7ee95f503ba228262e23a717076ba3"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-11-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "46b262a6090cd6dad5ee0b72c83df1bcc95f27149bf137d2ad162b785bcdf720"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-11.mat",
+      "bytes": 2471,
+      "sha256": "33bdc399e366811da197e3207c9a8a71bd271237f01cdbe81e1a56544e374036"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-11.mat.meta",
+      "bytes": 160,
+      "sha256": "5189e8febad2ce9cfed79e3a392dcacd556f504d007c1c5cb82ff53d86e8f0c2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-12-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "83faaa56b22a3b1b71909afaae17d749ad49df9d17ed5225289f853def84c5ac"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-12-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "255491defaee932fd36dd68908305febbbec0a3daddf103e14ff3f8687c53159"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-12.mat",
+      "bytes": 2471,
+      "sha256": "94a10d1e75d6a694da1e23197dff140bd4ff5201bc09c70618f189c677af5725"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-12.mat.meta",
+      "bytes": 160,
+      "sha256": "32807e7de15c279f9d83c290d6cc40965274602d0bf03d9a6424ce921bfcfd76"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-13-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "9c417561c5acac8cdbcdb4631eb6bcebb8a86bddac6601514abd1c51b0ba6884"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-13-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "bc4855e6ff4af2e95a2d017acd608e8387d1f3b6dfb8580722f74219d30dd22c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-13.mat",
+      "bytes": 2472,
+      "sha256": "5e9c4d9e1808b0d6e2edce3bbb76d0e4efc71bb9b90178fd65a512a14421b42f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-13.mat.meta",
+      "bytes": 160,
+      "sha256": "7b4f575c54bf1f03bac161475b8e614f914e2acd3279dd463700eaaa160aea8d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-14-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "ae97013c3cb0ea8f8c231d1e69e10981ca0f06f8dc4e0981a392eecbf6df4ddf"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-14-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "7c5053efc0c58ed92cb0b3bae8032726a508415a32fcb6236d7049ce418b1a1f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-14.mat",
+      "bytes": 2473,
+      "sha256": "2e4d03e163a4ee319e43d20aa81e40fa83eaefa77f8537e93d9178f21c5e461a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-14.mat.meta",
+      "bytes": 160,
+      "sha256": "1b29ac90d281a22fa1d3fb2532980c3a2846ea28305249086e484aabd41616e1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-15-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "fb1c072721ba53a5f73de8264fedb241255d70e778555c9fda5392f7e3f5eb60"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-15-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "d96b5e045a3e8246565d5c46374659c2e278f6d6635fee3ce78e2dafaa24da8a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-15.mat",
+      "bytes": 2473,
+      "sha256": "1f22b9d218428196afa58f09aca5d2827f6ad502c450193fa6e28968ef43ca60"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-15.mat.meta",
+      "bytes": 160,
+      "sha256": "c0ad0c7abb513b9d0e1833768402a05460373d88517466a1dfc95133c1f1229a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-16-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "6d0aaaf61784f7dcdebe5bf63e143b9a3dd2deca2df9892224eb0b08704c260e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-16-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "9000270e6de07b6a1474f28f1cf20f240ee674d28958c1b04eed29b4a2169d6c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-16.mat",
+      "bytes": 2472,
+      "sha256": "8a50bdf57886462f80b8e584d9e48d6597800b7291effaea1cc49a6bfacd0566"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-16.mat.meta",
+      "bytes": 160,
+      "sha256": "5af374f0fec558e11d6474d56549e44c396701fb293c7940b9572fe61a71670b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-17-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "239a6202a874e6ec685eaa6354a9a2855b238196686afd638244a4a08eecd5a0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-17-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "5e8dc42078fd8e289d92ce1c933400d69e2a420c04f1874a6cd50b79bf4c7b87"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-17.mat",
+      "bytes": 2471,
+      "sha256": "c85cfa1ca7f0fac9750545e2050b071d7d22703938902fb4e0496c8e6bf3d51f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-17.mat.meta",
+      "bytes": 160,
+      "sha256": "653b710f9c3d57036fa9351fe4a25cb075bb22e0774ba2a6fcaa82dc42fcc5bb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-18-EmptySlot.mat",
+      "bytes": 2469,
+      "sha256": "52db188218559f3a355eceb247fd197410aae4757784cb9abfa72268c94623cf"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-18-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "b15cbcfa516f375dda451a8e4f9f72e8906ed001090490503842a9ab63b4fa14"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-18.mat",
+      "bytes": 2469,
+      "sha256": "72def2bcd09965a08a99d7b8c933b2c8bd94cfd023dbb9d6bdb0355d01a1b198"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-18.mat.meta",
+      "bytes": 160,
+      "sha256": "1d349dc81947235a5c000b65446157dab1b2260e3f3b36ba95a75fa7d1d05253"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-19-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "8bf561eb676cc16af488166ace12df15c1595065b606102818c3134e87672f33"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-19-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "48fec524299e4d02dd28b08afe76463759e9f02d322949ee8e073140b73d6304"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-19.mat",
+      "bytes": 2472,
+      "sha256": "fdcbd574b64648d57889bc4171431c9f037734d691eb48d1d3e6ff68b8ba85e6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-19.mat.meta",
+      "bytes": 160,
+      "sha256": "e7d5f707c766eac2be994d102982527cf8a43e435159de4f3695a36a64ba35ef"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-20-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "0f2354b7ba4486d3889d57d3923f6f78c5c71f8668e513760c7802dc0f5ade04"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-20-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "aea176cad674c56c98337769b5720cc78d819423291df81d151cafc38ee5ef4b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-20.mat",
+      "bytes": 2471,
+      "sha256": "3d4939d9d40ead5722108f709bf156abc16d633b3c857ada0f62b19a1507337b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-20.mat.meta",
+      "bytes": 160,
+      "sha256": "bb61c22b48f3b019b186f2bddae18325d25263c0dababcc8ada7602d069a674e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-21-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "d7b5b394f90150f4f25dac7ee02ee1713d9a2572fac4df133e82b044a3dfc907"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-21-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "14cb5939f7027b9716e594e1b99bc7e689e20651cc860939690084bde731cdb9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-21.mat",
+      "bytes": 2473,
+      "sha256": "c863c9267676654b945433119480a88bfdacaa0fe81e11dde083b6e2be8b28c0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-21.mat.meta",
+      "bytes": 160,
+      "sha256": "44e783a45f9ea6f855cfb775b14890ebe835dac4f38e0fe45990c3b931994495"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-22-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "c926d40f52ecfc92d7eb4b6a31b87ac780491748163b4e7e2a5acefd25a07bd9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-22-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "c2bc5efdd4121547a0ffcb0276c175347aee6bc87e5464f1b727866a265d8d70"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-22.mat",
+      "bytes": 2473,
+      "sha256": "d238e1071dbba7c11d6329b597dfce06ee6c744ca5dd6abbdc7d7b56d27bda1b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-22.mat.meta",
+      "bytes": 160,
+      "sha256": "f37be2d94b690941ef32ddccb6e7950669bc4004e5714126bfc612ee4b31be9d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-23-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "d3ad085668229bfccb59732a4794cd477dd1246cb0b1cf47df7c82dc5e71dba0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-23-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "708b09d746027613da08f6c570a7fd52904bd6d6b98223ef9ca2f370ab04cdc4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-23.mat",
+      "bytes": 2472,
+      "sha256": "04006adfc497accbb92e5206426e2eb45e41dda95766fe4942f6a447bb9e1afc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-23.mat.meta",
+      "bytes": 160,
+      "sha256": "c23a7c78bda65ea9adbed51966ef7d28ca8f28f76a0c4ba2ac5b3a91be12976d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-24-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "9791b198d389b46724a631b4ff6ad772985a8439fc697260edbc4a97a7788cd4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-24-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "133143ee54f1fc8665b6d1b8aa62ac805bcecefb021bb7e1a21d496bf670adac"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-24.mat",
+      "bytes": 2473,
+      "sha256": "d7df89c4c9a1683c3a812b2f021f7c6402133865c915a9428e3aa3d8c54fe396"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-24.mat.meta",
+      "bytes": 160,
+      "sha256": "c27a516cbffd59025751694715cf0e4f636b0ccbe109523282593a150e8a7305"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-25-EmptySlot.mat",
+      "bytes": 2471,
+      "sha256": "f98a327e2f958d9e3a24d7c0e4f823360e45e84ae90a4ab105be2c1e8e5136e6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-25-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "8e7997bfa82ece1b1aaef8fa170b6e2f769d2c4857bc668a264228bec250c0c6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-25.mat",
+      "bytes": 2471,
+      "sha256": "8446ecdeecc58943224bc4a2ab5a4c8a14348dae9fcc98b3b1ecff19400821a2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-empty-25.mat.meta",
+      "bytes": 160,
+      "sha256": "67105b351308e0a98a095f26eac2043fcfdbbdab450c5fa7a2ae41065f35eebc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-01-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "57f819ec0f18ef1f4c6c23848e74fc031fa2f68b1325639f836f133b29eaba13"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-01-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "3021cc7293c474e6b85ae0280ebb1e0f51ec29f9a7d2c6ae8682f618d2c029bc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-01.mat",
+      "bytes": 2473,
+      "sha256": "a183055864086ea359d26c881ed7a84d519fe5d6b57de54d4844eab277c809cc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-01.mat.meta",
+      "bytes": 160,
+      "sha256": "faa9a34529dc9824077ac3dd4af00d21c96bc7bd74af8af42533ce04c3f71505"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-02-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "d9693de30d66d4c4e025ea33737230f72758a58bed5b240eccc269717e2dc8a7"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-02-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "74777b9342588a0e5828d068aff1a444877f5023d46d178df6b1770d1a6c8ce8"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-02.mat",
+      "bytes": 2472,
+      "sha256": "06c6ffdcf6951e4d218b15af5d754bd3e73a7ab7202f264763a7a7d4025455ee"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-02.mat.meta",
+      "bytes": 160,
+      "sha256": "3279654a854e1621271a8685e66552b88a2458b03ba2c642c386b99dc3c3bdc0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-03-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "905057189ed1dd8b724dcbf4e32e8e685177f3248320b6d5ad5d2f3aef16858f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-03-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "148ca12f6ae960773e1704f4c2940a8ad907053c20b129489394687e1df5b770"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-03.mat",
+      "bytes": 2473,
+      "sha256": "1eac7c8cc2245bd31d22e3f7b503fa8b8eca693bffd4a45df989e2ace0b01ee7"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-03.mat.meta",
+      "bytes": 160,
+      "sha256": "58d7fd7b7674eb644eaf9a6d78437c00eef72f6100f4a52e6b7be5a7d0532eb4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-04-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "8aac90e1ea715f14b037215d05986432cc878cc8ab3d25c88e719feb8e214939"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-04-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "77698e5e21ae84ccab4521e962ca9d7fcb117ba5f291435c25294468a8ca5380"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-04.mat",
+      "bytes": 2473,
+      "sha256": "f9e6b0eeaa5c6647ae9faf579e739a5c8f7e2734f04d289392a5cbba80586355"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-04.mat.meta",
+      "bytes": 160,
+      "sha256": "76e2a95e8a0b88788d208bd81e8a0ee7d2e61f658bffb4afa44bebfc625b9a21"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-05-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "c4248fa618c2ab68d8468e8d8fc9fdfc15a204142109a6bf28eed85c7ee94d0e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-05-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "f14b3795e4014ebb33e6f78a4b4dc184731925aaa459be4b00d75699806cb3be"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-05.mat",
+      "bytes": 2472,
+      "sha256": "a3666111b4d0d03578f1174286281ae0c68a9d841cfae3273a1b85e81ba0a088"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-05.mat.meta",
+      "bytes": 160,
+      "sha256": "919f8e7fdee77f5880799d89c2f32e4fde83d1155fbca1dd707ad31fd1c471c8"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-06-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "58a2ff71fff060c2de7e982254a278957e8535a69645db020036d3248e7f583b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-06-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "5b010943ce6ccff1ebb7d6a8bc4667a34060acc72ff76ca8537ed24012e90841"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-06.mat",
+      "bytes": 2472,
+      "sha256": "00fa9fbc95126c56b767928efb2727d88a9845cc9e6b50f8ecc98341c0bebd37"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-06.mat.meta",
+      "bytes": 160,
+      "sha256": "954100153a9e9513a29a2878bf64223b8ef9a117e115c99f3d503394dab20d9b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-07-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "dddcf46bd5a7dca591d4d5ed022ed4a15274d8cf5913f4b999ec70a74fd8b48c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-07-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "dff8ab8365001e91b5bbf4931598693b7bcbfa6c2477d8a8eae7346dc6d4122e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-07.mat",
+      "bytes": 2472,
+      "sha256": "27642ba60dfa1343aa0be16bc447719c4ba4e8f7d62de03fb526374448f22e9c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-07.mat.meta",
+      "bytes": 160,
+      "sha256": "0d7b934f2cdfa4bb5476b8f3217c07d9906f3225fc5eaef043856279bd9516e7"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-08-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "c5795c09485f3a263b966b988e1c4e4a0a7f2be7018c325efb7e0a024c636be2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-08-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "8f49c66bc2d81de5e15491c1648e34215889a86a221b9d90bfa0ebc4e1f7604c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-08.mat",
+      "bytes": 2473,
+      "sha256": "2a503efdf2fd50ef461baeb88462003a25cec73f1c8052fb84562c6362383e7c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-08.mat.meta",
+      "bytes": 160,
+      "sha256": "7c4abbb8ac341e0f6de53eb45cd9b25d04d79bf28b4e4efacd20746e2039695d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-09-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "cfc8bacd332024c0b631da5535a7c058d63b2f44f13913c8184770757e19f7af"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-09-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "66b480faee18194c2e234b6c99da0823d4f99338fb4a995a75cdfeebbd54f97a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-09.mat",
+      "bytes": 2473,
+      "sha256": "1ef827c9f3c9ffd367629e361e6acb3641c34c0a4a971496cb7a30dcd243bef1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-09.mat.meta",
+      "bytes": 160,
+      "sha256": "4638d8dfc10c24b7b5e4a85f67349566618913c0d6e567cb0e478f3023918855"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-10-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "c1617b65a12b0bbf07981b1d430018da9b89879d2513a13a13c4b61abfc48bc1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-10-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "18e1d4dcfc0b2f16126453f5148ffb46a48c03ef07c228e2b58250e0d8d81740"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-10.mat",
+      "bytes": 2472,
+      "sha256": "da266a072733dc5a297efcfb5805d57ae01830057f15d74e65c72484b955b2e6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-10.mat.meta",
+      "bytes": 160,
+      "sha256": "a2e82bdb6ee87e01a13e1e0cb70208f79bda0391852f911d6b57822fcb1521cc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-11-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "bbd6a071b135fb67093ea15fded64bf0ab4095081c3febdf755960375d383900"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-11-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "c60946bbaa3dd5b97b009f9801a25b33f1c6d34e43d41b0a1419501980efec72"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-11.mat",
+      "bytes": 2472,
+      "sha256": "c04e80c715516050947170279c18a722b329d2f6eb668883f1075bda2c46ee89"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-11.mat.meta",
+      "bytes": 160,
+      "sha256": "8260b606fc9485714d51bfbce9933812865ecc9cdd89b5b77f40c249bde9da14"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-12-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "8498247361b5af7dcf6a590dc76ea055c8abf72da847846b130e3babf990d571"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-12-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "50ad187d221c5dfa0d93bf196333f9918b12d1fbbd2d7c5b13a4e4fd20a9fb64"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-12.mat",
+      "bytes": 2472,
+      "sha256": "9ab8ef94552128a3e480dbc0553df9a1ee1ef743d8ac68767d5a0231063c3423"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-12.mat.meta",
+      "bytes": 160,
+      "sha256": "f601ea5c678f658d827825a8d6df4d6ec5324458bcc6c3fcddcf011b5a9d4bbf"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-13-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "d97b9708382585bcfc37920219d420b37c9a2c1e58a36a5a0382638d5578f2fd"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-13-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "3373cb51fc2e8ce2f83ffe7e33d9ec18f25cb66649377eb7056d7f9a12bc96bc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-13.mat",
+      "bytes": 2473,
+      "sha256": "52788382b9555beb9a6bb67bd2703b84783781025ee79b900ae3970b4a813bfd"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-13.mat.meta",
+      "bytes": 160,
+      "sha256": "7ce58ac11ac14dce638aa138f34635cb8cbe190ca50c586615606e71a9b38694"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-14-EmptySlot.mat",
+      "bytes": 2474,
+      "sha256": "d3bd1892dc937662c9b1b2f54e53cf1c711dc16d96c4bfb098f7c428785972b0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-14-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "c08816a3bd7a8b3d77468d3f84a944a4a25441c2611467574e452faabec7e2e2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-14.mat",
+      "bytes": 2474,
+      "sha256": "f808700d26412d753ed998306219dbdcb7f8c598f49aed45fc953e205d5853db"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-14.mat.meta",
+      "bytes": 160,
+      "sha256": "e0f468f25afc3feb5038f45199ce9f32b6c47adee95382c85ce3c96b99605a80"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-15-EmptySlot.mat",
+      "bytes": 2474,
+      "sha256": "35e683cb64d0d988f56308b0eb956e36cb0f4fe9492a91d44b1e6c3910874785"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-15-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "2efed403581f6b10b16fa3151c771c31f5b9d54757d35a07de2f47d06d8fc298"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-15.mat",
+      "bytes": 2474,
+      "sha256": "3790476b7f73839fd94955a20ed4c86a6d71e4f8ca982486a66b85bc9e8a9bcb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-15.mat.meta",
+      "bytes": 160,
+      "sha256": "e90fcd37024f5b5d44f6b63053dd8d68773637c8943af9864bbe5237381511d3"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-16-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "4fa6fb2cab263ff4e841f9b98241887c3de723b4897f9682a917c9fa5a4f56ac"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-16-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "32c178beb0a8e501c1d315b6f07c2a13198775eec381f2788f1496207e85862b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-16.mat",
+      "bytes": 2473,
+      "sha256": "04a1ecbede44de9ea515513f3e81e3fa0ad18205e8e3346f662a523baac39df2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-16.mat.meta",
+      "bytes": 160,
+      "sha256": "683294f55c030988d513a2c599e0bd3bf9168d031c5a44595e2c5c37da28f143"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-17-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "8cbab22201320ad55de8968c1c22c27448c5284fc92b1fa6f3e5e5fb5af731d1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-17-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "18ac15727dce81cb9c4762cbfe8cd158fdcd4e317865dab7833324df5a201417"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-17.mat",
+      "bytes": 2472,
+      "sha256": "f9bf793e6cc0420c832c5cc2d00b72eb722a70b431dbeec4567a5507770d686d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-17.mat.meta",
+      "bytes": 160,
+      "sha256": "0c9665505da17e031cf1daf06d8533930d4d9ed1de32dbabe3b9f3f97385c786"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-18-EmptySlot.mat",
+      "bytes": 2470,
+      "sha256": "0871b333e6ebbc5786485e2054f12e1e1b77fe001d0295c044183f78ac75456a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-18-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "5ee071293219906d880d34a091bf54efda90a236ed9dde8c935e36ce7e6ce635"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-18.mat",
+      "bytes": 2470,
+      "sha256": "7bbc20924aab4d090f6f5185f319b554d019315f696a263923cbe96f8f5c2e57"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-18.mat.meta",
+      "bytes": 160,
+      "sha256": "b400998e0147783f57538aba2db35bb67b752369b493abb88a3faa3880b20c15"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-19-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "2fd8eb7ee26093677df14cd3b23239925c80ca41726d4127c0a9d9cc7de67b40"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-19-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "3129ccb705e6b62f47b7464ec53140107200af63e412c4e003be873a0b09cd97"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-19.mat",
+      "bytes": 2473,
+      "sha256": "4e31de23dea1b045d4da32fec2cd485c68c22af3e3f88f3750d28079c0738b5d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-19.mat.meta",
+      "bytes": 160,
+      "sha256": "02682f0626d95635fa505bdd519890a58d708a2acad26787783bc1e6ec6d2b67"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-20-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "0b263c512efacc9555f3a95a8ca931e154124feecee4b5b1a0b4f4bc61f6a403"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-20-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "cf0b6d951cbf1b8162ad525fe2774357911e837543db17249669b0071b3e3d49"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-20.mat",
+      "bytes": 2472,
+      "sha256": "4e87b594eb15f7638781764a41976e8a76af842b20a85f1eba4196cb0e687d49"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-20.mat.meta",
+      "bytes": 160,
+      "sha256": "43a4de5ef3e4c87dbe56a351914e291c39e53080cb2778942027240532c99121"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-21-EmptySlot.mat",
+      "bytes": 2474,
+      "sha256": "db58d7e500ed26c0b09fabbac2e00dabba80307f632be4c24732d9101382fdd9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-21-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "0e424c0b947ed3f9b61c0ff94c1c2131665c5d38bdb1847dc288d1fd7076d9a6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-21.mat",
+      "bytes": 2474,
+      "sha256": "fdf43699d1e2f6f3c6cacbe5075bbad08152079b3c64596acdd87a3cb0b0f89a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-21.mat.meta",
+      "bytes": 160,
+      "sha256": "6b5d3fbe7725f35763b7cb2fa1c043b7707423b1c6fb57543810839090f3bd30"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-22-EmptySlot.mat",
+      "bytes": 2474,
+      "sha256": "972cdd6380a75a3a325535a4babdebf010fd4a1be25196a48f5fcfc386fbe40e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-22-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "d216eef68d1da0f08e82359aec4cd01ca40699522108156a96fd33ba74ab63da"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-22.mat",
+      "bytes": 2474,
+      "sha256": "786ad170c22cf9ad3164d737860173bad63cd89e2e83b8958b2bd9ea55a94c10"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-22.mat.meta",
+      "bytes": 160,
+      "sha256": "079ebad2e5f07c7570d129e9510f767aa43bf50a4c36b2cf2f307e02557c49db"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-23-EmptySlot.mat",
+      "bytes": 2473,
+      "sha256": "3e4ed4e5caa56f7b38408a18446343d789f11fb1256198cc78295a915cd0e7aa"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-23-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "6d7d7719dba4c135a31d13f06a651fc765813aeb6c434513260a79a2053117d6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-23.mat",
+      "bytes": 2473,
+      "sha256": "01c8771c042c1e96c94a3a7cb942f79990b6151451fd614f7ead851f5d0ca696"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-23.mat.meta",
+      "bytes": 160,
+      "sha256": "1a20b09e36af33eb790e9b75bc3aa5bf44d1a54c73292835d5b45ae3fc7bfbe1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-24-EmptySlot.mat",
+      "bytes": 2474,
+      "sha256": "57d740aa3d7242eab58cdc4cb33da4ac1c5278e6ff75872128fe1c4ea9e95b6f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-24-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "b2c71797b9600697ff26499fdf61a3d5fd9cd84a6a85cae0fcff7cd9ba0f7926"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-24.mat",
+      "bytes": 2474,
+      "sha256": "93d070167515f5255f67c1dcc31ac4ff98bcb2e54a719dbe3b0ef11fc38654f6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-24.mat.meta",
+      "bytes": 160,
+      "sha256": "cb011f73cfc046d9dfcb05694866963688421f6a547c432f0f2328a6fe0de124"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-25-EmptySlot.mat",
+      "bytes": 2472,
+      "sha256": "30da64845ddc34f5f0db17308795872633b4b0f990e73563421b3bdd0b5b39c5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-25-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "ff1b9b54223a11a963a497774f78189abc38004d0b14b367fd999f66a9f5a473"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-25.mat",
+      "bytes": 2472,
+      "sha256": "37f62c6b7aceca07fafdf583c0ac65080838a477faed3c98adc612fed8cb5930"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnel-Frame-filled-25.mat.meta",
+      "bytes": 160,
+      "sha256": "23ab215f8e13566d92552f7e1b40647544116778bcd8c85eb718f8e66914fe34"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelBlack.mat",
+      "bytes": 645,
+      "sha256": "42d5e9317635b4c64d955572116b4365eb719793d62c3d8359b48732d2d2c337"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelBlack.mat.meta",
+      "bytes": 160,
+      "sha256": "a56e9955516d388cf58544fff2a48e6bed9932fac830f951d7d1718132330cc5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelBlack.shader",
+      "bytes": 603,
+      "sha256": "245a551b89ab28774f8973e0da1d2a6e90504757b54ada2dffb3809cdc8ed182"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelBlack.shader.meta",
+      "bytes": 154,
+      "sha256": "88437cd6c533fd43ddeba348088aaf5058cb0e06dff3c457d718b30cffed549c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelHeightFade.mat",
+      "bytes": 707,
+      "sha256": "e52280f1a087a9c198c054a1830a04d51a1865a8070513051cbd0b74828b21dd"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelHeightFade.mat.meta",
+      "bytes": 160,
+      "sha256": "8850faa1d84b3cef3307fb619c6937defa6ba9a30b8e59d51f6b53946809b48e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelHeightFade.shader",
+      "bytes": 953,
+      "sha256": "8787e3a6eda90c9266cc25aa492a8743d0003c662e73f304922e109d1e997202"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/IntroTunnel/Materials/IntroTunnelHeightFade.shader.meta",
+      "bytes": 154,
+      "sha256": "71cd12502c137b563f8739bf072f244f4bfaa432191d876789a5a47f890b05e4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/LobbyWatchingFrames.prefab",
+      "bytes": 980524,
+      "sha256": "93f98d8c6fdd3253a8494ac86ce58849fcaf2dda0a205350e21322925fb33cd9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/LobbyWatchingFrames.prefab.meta",
+      "bytes": 154,
+      "sha256": "2335e1e105c68b9c117e45a3f68d9eb0b6bfb4b56b88d2989c5d6b5862109b05"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials.meta",
+      "bytes": 172,
+      "sha256": "89c61e4bc601ff8efa0b5212e33d66d3fade69bca8161ba463c0cbdff9c29794"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-empty-04-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "02f4a8e0e0943def811cf36a22681f2d93b84bff1c20606147a20408ac60a460"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-empty-04-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "be7e66c0c430b15d24ec394668dc0ce8791afc56387e45f0d36876fa80a1202c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-empty-19-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "efa745bc778aa4424f2df1a23b6dcc10fba1a93aecaa3844161a55e75bddecf9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-empty-19-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "7dc22e18ae4ed22f2f29157778fd5df56660dd14792596a16d1f9ebdd677100c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-empty-23-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "7db692c67e2307a6edc832a00b9969ec8bbab5a87e249b96f56a1269924c0cbb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-empty-23-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "0a0817a32dcbb1c7a94934f4834bd4638b7120b70bba7783c1e771cd98ab9078"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-03-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "9adf718304fddb591b3c97297e2d20613d3acfc8327da17fa325b0a8a45a5f96"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-03-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "b32ccef5a40e41b9561e9b3e506ca35ba0a2daa63f5f08285d0041b008c290d5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-03.mat",
+      "bytes": 2381,
+      "sha256": "63a075356cfb647443aca7503a4a43b936b9fb0c4aa521e92bd5a7c5c2793f9d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-03.mat.meta",
+      "bytes": 160,
+      "sha256": "3d5051af5ce59b67a7a4552cbb5176f4a7586604d6e655ec334b9c20714eb567"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-22.mat",
+      "bytes": 2382,
+      "sha256": "6953fe1275d04cd00f1ae282563a429fd1f3db596c65c5661a86e164d244024b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-22.mat.meta",
+      "bytes": 160,
+      "sha256": "025c92e98d2ca559afe5bd1f710db2abc072b8db2bf4c6a8cc16352df1810400"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-24.mat",
+      "bytes": 2382,
+      "sha256": "d6dfe94ef48637e10cc57cd8ca77b73153577db8ecb77fc4894c36e0283d04dc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Game-Frame-filled-24.mat.meta",
+      "bytes": 160,
+      "sha256": "c72c2352cc67ac12324ddb318430d8273e1ecd85a3a484ef3f02c1cde27168a9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-01-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "a67204b425e94539f658ac5687720aca51f2fbf8a9ea85a852a1e4a509d35c53"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-01-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "3b6e1bf927b649a3ee781e470b4e005511e2a9f59571eaf680c38cfa39b51291"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-01.mat",
+      "bytes": 2381,
+      "sha256": "55374146fbe5a7ffc76ee6628c841148983b4d480b877326ae03ddf015a7e9cb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-01.mat.meta",
+      "bytes": 160,
+      "sha256": "a4bb9ea6f2c5ccac8a65908f3fc3f5b5614e5a8276e0c1a6b99144aa78e9bb9e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-02-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "df536fc08ff8a03ac2b9a4ebef8cae162b31099407fcdb18dc36559de8633a9f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-02-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "c632191dc75b9a1529b6e5853e03b7d3828e42158b97434d35fec79a57b203c0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-02.mat",
+      "bytes": 2380,
+      "sha256": "15b2f299599fa46b1a2e21e8904c79d6aac4ff874552135fa04097e8d77146ef"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-02.mat.meta",
+      "bytes": 160,
+      "sha256": "a8de4e50a0ad1992d5ed84c004233a62c41d772d4a64773b89924a200cfe544a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-03-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "753c454dce0c49212129db321411787425e563cb393e0c285930e7a464222831"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-03-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "a8dc344f2f257310ffc82c453f22e16c47d753fe0557fd467f4ca6d20a5ef6ae"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-03.mat",
+      "bytes": 2381,
+      "sha256": "13bd2af867d2feab0083ab76080c67c4a6bf22ae07be141146c6cc5ac9424181"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-03.mat.meta",
+      "bytes": 160,
+      "sha256": "aa5d2474eb3ce7859e2c66ee3089f199b4ca407ce117706e2d9a78631ffc007d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-04-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "edeeb859185e595906f908b2119c3e1a7aca1c5a5fa5de7c8a7e2142d97f8865"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-04-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "54d1d48d9652884987f58fe60e54f9b0bbd54c57dfcfb9bc35989401de6b3f43"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-04.mat",
+      "bytes": 2381,
+      "sha256": "bdb3f4ccdf18a1da5aa1ff708a3e5e085c6ec74b129d1892054b1716214fc0f2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-04.mat.meta",
+      "bytes": 160,
+      "sha256": "1b730980d234fc18a6189618f1326a019f1b63b02511b3f8d9655db970ed303c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-05-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "0afff6a3a2cc2d546dd215c16ba7b37e3ca846316c7df5fa2f9ccba10f391d53"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-05-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "b20aa1e1cfe9dc0281e6f3229353b3ca29790c166e34db64c37c042af23d767d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-05.mat",
+      "bytes": 2380,
+      "sha256": "3403d887b91c07f57cae47eb9a5ba93684b654fe5aa84818c91c81783393c54b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-05.mat.meta",
+      "bytes": 160,
+      "sha256": "cea5b149501d54fba017ae8d159f1521778407c91532a6d82242c4a28d4a509c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-06-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "d6b75d2e9dc00c71951f45135596ae5d01c58aa389efc524eb2f65210eee22bd"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-06-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "f2e82a634c865266b18d1b60b7a68f7a9521834a016b7ffa88171418d6ef423f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-06.mat",
+      "bytes": 2380,
+      "sha256": "cec6d62e5208f3d468f7f5c6260e02a8bd5ffefa9b69bd46515ad00d9413f96a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-06.mat.meta",
+      "bytes": 160,
+      "sha256": "69210bf8781aec052fb5ed3559036b7e78458422b193eead71c1f89cfc1e63a9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-07-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "cf84c7941676629cd2a9aa150825b58e390d440a830b9d6dc0bfc900f6d71b7d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-07-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "be31c6a650a794ae0bd50f2601d51bcfa8376f97e9d32c1ef2f610a1ea71443c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-07.mat",
+      "bytes": 2380,
+      "sha256": "40b1a1ba6f23a58b6af2eb407cda3d8345c595fe94eb4713243cf8042dda94f7"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-07.mat.meta",
+      "bytes": 160,
+      "sha256": "7e4fa509721e726f6f9a2b3bbd9ef8f0957fb7fef9b540762371c5fa73b96f98"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-08-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "01015b683a190e7b3e2879c5963fc5da66da6e4b3475ff192a07bc8078d9bdf4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-08-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "cc36de655e8bf572e5fab12071557a5a9a2485e7970c5fa72496c91e913a46f0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-08.mat",
+      "bytes": 2381,
+      "sha256": "21c36192d6154baf2b71841e3fcbf9df8ce99261954d029f60e75d023922c7e4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-08.mat.meta",
+      "bytes": 160,
+      "sha256": "3e27254ad42d673df3f3e25506e1b7485041612619a4fe71c62e1434103ce050"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-09-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "85889cf031c1339a088eb59537d99c1cb42b6738ae1710766b11a856f1a60982"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-09-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "830ef6f219767920fefaa0486428349ccbdc3c04b8ec2c79724a635bed8c0bb4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-09.mat",
+      "bytes": 2381,
+      "sha256": "222796f2bbb27ef0f8ad66b62060a527256a25b8793f7349bd9e845d3c129074"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-09.mat.meta",
+      "bytes": 160,
+      "sha256": "7e214d3121d88fc71a052215d655dbd66715f2a0450bcec6a43c538e75e491dd"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-10-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "81fffe67338dd9d980c74c9323c9874212c26bdcab1e3a6743cefb1af7b61553"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-10-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "8d820186438ada07594f3c14f904b177d2bfce3c7089103496e8845732f6919b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-10.mat",
+      "bytes": 2380,
+      "sha256": "cc4b5413f4f0571d52efc0b0673d4abd2aaf6b620fdefeb4ffea896aef242602"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-10.mat.meta",
+      "bytes": 160,
+      "sha256": "554085600f2affbe3ac37a4e2cf301ddd60eb48e4dd3e73f6c4c6a7c37be13bd"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-11-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "62538883454f3f63cd51821bbeaaf2b69d8a25cf4e83f989d97b196cd534f6a1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-11-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "588d2a5b432ff48ef3b989bd80ca5c4b112403cf8fb89f0286e5d71835447eac"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-11.mat",
+      "bytes": 2380,
+      "sha256": "d8bb069fb8830ef2e21aa4e84183321b59251d3a397eebdf9dd690580cb4424c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-11.mat.meta",
+      "bytes": 160,
+      "sha256": "33a0ad5966cc8b53177edd4fc09441e177f112cefeb19721561228e5e3ebfa37"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-12-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "8de5c9a327a927553b963e3a105c4b846496d57816c5900a1e5c7b80b03e81ff"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-12-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "e2e6080ddb4e34b05e1684e00b9e21d969a0a043d0a233c8ab38f77107f97369"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-12.mat",
+      "bytes": 2380,
+      "sha256": "f6d5cd3a09fdef5852125514dd77dec7931caba1dc16a2ec8c808aa7eeb4f3f6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-12.mat.meta",
+      "bytes": 160,
+      "sha256": "a1ca91dbdf3b1e9abd4a3bb0ae2d1f7e7b448ae41da94ab824a5da056989d994"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-13-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "98892128c2ff971feb0c9ea3b3e5ceb655b343c82c196d07bd9f7a6e9b94034e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-13-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "8171ebe450efef091fd135ca94949197e1337fc193b4321c1e2d7914ff610119"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-13.mat",
+      "bytes": 2381,
+      "sha256": "ec48d3d4c6fdc795391add89de2167f75e03dbd3adf538eb57eb55593e47b284"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-13.mat.meta",
+      "bytes": 160,
+      "sha256": "ff67f0b23c760bf10937ada2e344a79ceb9e042e4e61203848d6b855ace521c3"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-14-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "041a1b18006399ae3d9dbe19694f67f56b98018ad587868870efa46e0ea1cf84"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-14-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "96150c4a840877d160749e31199646ec81153a5433cf7d2ecde4d9b07a021ec0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-14.mat",
+      "bytes": 2382,
+      "sha256": "c347c168a750907fe53135d0290445bd9440915d626cf9fca8d6b83d486d38f0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-14.mat.meta",
+      "bytes": 160,
+      "sha256": "b5238e37dd7d81f50372f7c6bbab2518635e952af55b19753049c6a5ce37dfa9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-15-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "a323f8ac8f27276b452bc8b8b047b0cc73b70ba393d9335aec7fcff43d1d0390"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-15-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "88f1c88ca495c5652cb153182a5435536cfdb8d04160d18e87f74a8bd23501aa"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-15.mat",
+      "bytes": 2382,
+      "sha256": "d6bea35cb6590481aec398e88fd35b59f787271486b173b6895bcd31d9d5803a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-15.mat.meta",
+      "bytes": 160,
+      "sha256": "803185530a4cf32dbeac316256fe88ab450b629f5db8b2dbca1c78b41b9602fb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-16-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "a28e33848702e4e25c055cb0d36495ddfc3ba551d94ecc55fba406ac8309139d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-16-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "bcb858824f21ea1fa7556a0b2fc3bea462461b6921a0ca821efb10aca09f3a12"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-17-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "0677d5b6e7dafc54c4a127fc59d94dd3ba75335bbb6d42d5ddcd3cbac2179ac0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-17-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "1bb870a35b578940f31442f372466f29aac55d75a450031150481d2e488062f6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-17.mat",
+      "bytes": 2380,
+      "sha256": "6a06eec457248f69871b98ff79e2b35a958e303e4e28ed569180ecca0b14bcac"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-17.mat.meta",
+      "bytes": 160,
+      "sha256": "4a47504c7691485138332788e0b6d6dbb2ebfb24e200cc3334041d96b4225426"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-18-EmptySlot.mat",
+      "bytes": 2378,
+      "sha256": "5a86d01fe3eb32c53f14207de0cb7bbbed756291e863084e3b0efd62d735a2b2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-18-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "aee6a1da4647ec847fae5cd290df31d571c08bd490350badbbcf540ed2113ed4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-18.mat",
+      "bytes": 2378,
+      "sha256": "c927228dbd6a53387cb2cf60900dffc7cf8e83670c9b2aa1cb23402e4df0884f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-18.mat.meta",
+      "bytes": 160,
+      "sha256": "95c960c3dd95b1fd741fb352dc959aee4680084f4dd24d101c2c90e018184c8b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-19-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "744e4ad0d657a86ff8fe85eb7adc102afb21b015f3c73689258ca7ca187ed7d6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-19-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "967f711021e615b50c00ca605f1ad0cbccad1edef1a4e1988d780de40414b747"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-19.mat",
+      "bytes": 2381,
+      "sha256": "2ee818e249bbb8987b7c0490ef1e0280fb58f3e29f0e73cc27cf1a6bb0548ec5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-19.mat.meta",
+      "bytes": 160,
+      "sha256": "55db42d771b35e83c475edbfe3ab21e5b0856bec4d2a233779447b09dcd7b17e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-20-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "134256fe732494af4a37f37265824a1edce06efa19f482217b7e0dbb2be9c9bd"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-20-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "48c1d5cad54ba1fd0d2a0dff6d46d008978749e32bda760882dec59e7b664ed5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-20.mat",
+      "bytes": 2380,
+      "sha256": "61c1ab1aeca5ccc13567c66b2f56d4b614908db0ff2d9c8a3c66ca26124707b8"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-20.mat.meta",
+      "bytes": 160,
+      "sha256": "926607f181841013cd552912d89ce62e6eb0bdc1b0977e3b0a79b1b92f22366d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-21-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "85bd5253b8e057b9aeaf2df7d90dfcadcff04f4f66bf3473b195673c32e37ed4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-21-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "cc1563f015e891d62f80092b6775c90cb33aa8e21a013cd4767435ef493f9baf"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-21.mat",
+      "bytes": 2382,
+      "sha256": "3d059e9fa280398d4d43f74447bc734377e566a15cec200edc1b7a50f3fc61e0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-21.mat.meta",
+      "bytes": 160,
+      "sha256": "59646101f93f9afbcb638ab94b468139e25dc3148603c89c586e4ca11377209a"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-22-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "9de55b9f1b5552f464b656de5e2c44b60fffd9f3ce06886fee827f4b800d8cb1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-22-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "02e4d9c6098bcdc79ac81ed51657b87915279619bd2499518b5eff36078b1b4d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-22.mat",
+      "bytes": 2382,
+      "sha256": "147b15e203d405e7c260d03e26ad6ee6c0b42149618071dc6e3851bd5b4ad614"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-22.mat.meta",
+      "bytes": 160,
+      "sha256": "82dd0b7b647a51cb3c5c31a0d4cbc32042407a4465b202025deb18eaa5ceb41d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-23-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "1338a3ee310401257f342c05d7a7e0804bfc25bf4425ef3bfd91e967a02857bb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-23-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "cfc462f91f996844b42c897123580bf2c756e4a0a3cecfac49a970624bd56a5d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-23.mat",
+      "bytes": 2381,
+      "sha256": "e9389a724b0398de9733abb4a7bf5e30859b01cc59fb1249cd7d116aaf9a7ae3"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-23.mat.meta",
+      "bytes": 160,
+      "sha256": "d4bdda325e65c419e09a904530d2568a9a92f8e86573ae7048e89cd9587e2883"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-24-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "7239a746937fc4fca35418f9ec192e95f4aeadaf59317a7d2a8bfc87761ddc41"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-24-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "8f1dbc499cb9a13f022716c023e61f65c82423e187de52fd0075f4c4ea6e4063"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-24.mat",
+      "bytes": 2382,
+      "sha256": "f5f778bbc6329bab0224965b3788a361b972a1ad07655e2eac2b32c840bf607c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-24.mat.meta",
+      "bytes": 160,
+      "sha256": "f597b2829c7428e9f216c3045edeebc3473306e48d7ed0008d0fc7fee435e5ea"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-25-EmptySlot.mat",
+      "bytes": 2380,
+      "sha256": "d38e011e3a4947a2c479ecfac29f1637d84b74d6fa9ec835f11c7a0174a047e9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-25-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "2e55654e8dd61cc69fec67319c120cea2f3ad05331683089f914a6c62901c800"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-25.mat",
+      "bytes": 2380,
+      "sha256": "31ae62da5d76074b9252f8d608bd689e3f3fd8212a8aeb3594117cad9777614e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-empty-25.mat.meta",
+      "bytes": 160,
+      "sha256": "0df28628fb5c4a76dfae452eb4ae73146b4733607b5c75638b6570f1e45e7fbb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-01-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "7a195aa90d14711797d9722265243822d3602a8b41ffec91aa616aadac2ed37b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-01-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "cbe068133e742b3d7502e6e078ea661a6e026783da49f4608e158878628af2db"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-01.mat",
+      "bytes": 2382,
+      "sha256": "fc9056840f3338399b49a8ab1f322de0683b16a4737cb4b58da777527d27fe8e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-01.mat.meta",
+      "bytes": 160,
+      "sha256": "b74d4dd6b9512867c857d71f6d143440fa5f5ae21da56974ac4cd56498e620ca"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-02-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "e45aed6ca6c17f3baad7510f3f29856c9dc2b795d336ca8703eadc15341404a3"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-02-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "103f95d4c89706711346383c82a44f19cbf894f01aa2358d0fb669bc97ce501e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-03-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "35aa1348f5066e14d6eaabdaf4c40494fecc1fdcf87054627591bc80fddbe815"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-03-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "3224ece227ad28fd4e1bc27736de4b36c56c77645f13df8ae9058b6e7d97ada4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-03.mat",
+      "bytes": 2382,
+      "sha256": "71e2101220484ac8644c5836bf5f31cf34ae6d777bf2610b38fc366df481cd04"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-03.mat.meta",
+      "bytes": 160,
+      "sha256": "8dbd73d7cca153493e933eb8c54547a8139086baa167ecd5e2c55ede93a4ee86"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-04-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "aa8ae4c6b9510bf7bb4a9cd55da1880de355bfb336974966663a1fb4e9382032"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-04-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "8c6b1c91952e23d456a1ef1c92aaac2fc0b9b4daaeb9249f33bd1f1c46919e74"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-04.mat",
+      "bytes": 2382,
+      "sha256": "fd1ca3eef924e46188f7f7112ae6cf9a5cbde8e06902b57630b3ae66467fdda6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-04.mat.meta",
+      "bytes": 160,
+      "sha256": "eef1298bc6bc0bca226792469aacc2b0bf219d40b2135b6a7e573e6403a0f84d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-05-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "e771707fb5bea38df35feab9d548d491eaa97805bc7a361100bb05fc2550faf4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-05-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "e72465fd8d8441020bdf7116c696d8fd92fa058cb7763b85f2f322d444e9c3d8"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-05.mat",
+      "bytes": 2381,
+      "sha256": "cfe7356ca9f70b11ccc778f284c87a5287c398b3754cc4d2510989154c9d1fcf"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-05.mat.meta",
+      "bytes": 160,
+      "sha256": "708a9e982a916274b97c6f819608e6be05e6b0cf8bf44f049f31b16f9564c479"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-06-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "0d516dca04c86c0c9dec1703a3ceaa4e2204561d77ae6ff12c4f47a4818d224f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-06-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "c57cdb5fcecd63b9e1d80d6abf312b0f56910d55b1a062f15dbf5d728d8b663d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-06.mat",
+      "bytes": 2381,
+      "sha256": "9d9b625c8cf37429a01917e114617d788b0985106f01dc1fd935168d4bc3d9db"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-06.mat.meta",
+      "bytes": 160,
+      "sha256": "9c1cd7cfd82236a2176a8983e3fa4512da40bf7cf40243d58697d4975f59ae4f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-07-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "e4e03eb3884be173bb76bb0caa2b62212b94ea9d12c4b4df1c703cb5098b2cd8"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-07-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "0c8687ba99b6e4ed0e913c56ca069290c79f99ebda30643642cee4ad12636bb0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-07.mat",
+      "bytes": 2381,
+      "sha256": "844e970793a4a76aff8d21d04098e324b34cb9dbf1d7d4996852cf79d502f518"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-07.mat.meta",
+      "bytes": 160,
+      "sha256": "d6870eba50790917fc6060e00d3839868d1e2a0f61862257e21998c3de149878"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-08-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "4a9faadb9bdf9fe297be466528177290bd0d1288a53e8b9b6940bfc6e34e5a1b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-08-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "aa9e006435923658e8aa1b8388baccb380ed2f95f17c0f883b31a018ecafd702"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-08.mat",
+      "bytes": 2382,
+      "sha256": "e20414355007841359c71b0d121398882999de6bab16a974a9276a1836927629"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-08.mat.meta",
+      "bytes": 160,
+      "sha256": "5448e660568fd9891d20afc7732e82b9f008abcdc39d3f5ca65be0ffbfd54ff9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-09-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "720ae4e5ea52b7cb510e2e3a3fb14e3194a7bb7105ab32da17be8b799b1b15da"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-09-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "0e84c88de5760629e06e2289dff84cd3524b818c4f43dfa57ca7c330ae040e13"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-09.mat",
+      "bytes": 2382,
+      "sha256": "2df835987645632b47620c6e0dde645d02a244384516f7531f925344e5b45465"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-09.mat.meta",
+      "bytes": 160,
+      "sha256": "d3072cd7996f2f58014637acae64efa7e81c7c4874eb621fc759da8cd8da7fd6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-10-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "9fb31e3c66921c33e1ffe8f6ba08a2a0b9de8e346e01d0b02291004097dc6f0d"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-10-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "b7b69c034abf0333c668e3087381f63e22fe2d32bab30836d23b453fd8c49038"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-10.mat",
+      "bytes": 2381,
+      "sha256": "faa3637acbe6fd6996ae9240966ace0ca682d1ff5b7c177c0d532eea3c657368"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-10.mat.meta",
+      "bytes": 160,
+      "sha256": "a39d58860e6c3750f55d87207c2cce9760712ef833400a2320498903b7af70d9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-11-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "fa5b5cc15649a10b1791d5b11524529ce04deeb19a71c94b1ff6bdc9d143c53e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-11-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "7035a72502c240fd91c889f8ee775a10f9f3a5be45571ee644a4d8547d98cca4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-11.mat",
+      "bytes": 2381,
+      "sha256": "35ae56959a3aecae6585ce6be9b6c3886a1c86aceb55ebed00498aff364e3c0c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-11.mat.meta",
+      "bytes": 160,
+      "sha256": "3ca49cc9bb8143e63b20a297ccd9e3ad989f64195221569a8a04396fd1af74d9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-12-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "f7553142b7cb8d8121ea81d5ced02ff1c3d74bea024fe635b30a58dfbf91a0b6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-12-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "6ebc83bf8bbc12d67364269dae87704430da16bc3ba5444a8cdf6b6a893c9dc8"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-12.mat",
+      "bytes": 2381,
+      "sha256": "5950ad1146f045852a1be227a037f1633374b8cd22894e650ff9c3f095a861b9"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-12.mat.meta",
+      "bytes": 160,
+      "sha256": "bb2e5cce6bb5e60d4395d1947ad52abf5668329bd1e2f01808703cbea357dd75"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-13-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "5c2237cbd88184e5a1f49ac9d3d6f35341d0f341ac84ad15bb35bafbdc63f4e5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-13-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "b6fa534e45abf1e07e4159a10c7e6bce5316ec9f1abd5605a2dbda2f1cd1804e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-13.mat",
+      "bytes": 2382,
+      "sha256": "d815b045a2a84dafd895173dba147a080d52a37f4e0f5fe7be486b8818a67dd1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-13.mat.meta",
+      "bytes": 160,
+      "sha256": "cab5e7f5a227ffcc91397dd314aa95bf722d9097172d1bcb452a151627fb4eb4"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-14-EmptySlot.mat",
+      "bytes": 2383,
+      "sha256": "7f265f93c61068658fe9e2ff1e6ea589743d17488fccf92f487e43bfa4ce6c6b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-14-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "894d4037f6ec82507154ed8cfc0ab7e7da7655e4bc27c371b55d478613e59baa"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-14.mat",
+      "bytes": 2383,
+      "sha256": "58a2bad3ad5b40999de15a4d952835a340e0eb407b15f0fc7fbb1e3fb8718156"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-14.mat.meta",
+      "bytes": 160,
+      "sha256": "d624d05de83385d4e55f3c8aa52752e738e23ceff7a60263b50f05248c06d300"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-15-EmptySlot.mat",
+      "bytes": 2383,
+      "sha256": "5c911dfd8fa73e1618199ae661739f5dc26e8e0c82d7d58610172ecd446823bb"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-15-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "c5180fae3e34a55e0f242f5aff6876b0fca4dbf4941660db64aaadf0066582d1"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-15.mat",
+      "bytes": 2383,
+      "sha256": "aadbe03954f0e05a865f8c145120e1a6586a7e9f9bd03648e862938c667b99f3"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-15.mat.meta",
+      "bytes": 160,
+      "sha256": "f2921db0ca297d590a4afe1873b5045ced2685f81c9f082de230d3bc46bc89ac"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-16-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "859ce4c88299ef097a9f6176279bad54cf844512ca029a40c273aca09b6fce35"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-16-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "c699579d117f8b9215b61dd4be5ba17540b77f949c886c50b643bc87bffb04a6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-16.mat",
+      "bytes": 2382,
+      "sha256": "f1b215193170c13e462a8a1eaaa0746f1d5968d7f15d174b224fd31f51201aac"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-16.mat.meta",
+      "bytes": 160,
+      "sha256": "7d89120956cf15e70f2b5e0a890bba42afb5b6a002de8304495b1aadaa1bf0b7"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-17-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "a950ab773e486aa94678a9357c8d49500ff13b1bfb4a3263142c7153c81b7cf5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-17-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "b9190279bf448c17c07a9f081bdd3de659666ed0a56e85f01291b5373687501e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-17.mat",
+      "bytes": 2381,
+      "sha256": "1f84e13c0d7578b5d51ae3643d886f8b6beb99c5da36d2b65b58c408d2a5fe7b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-17.mat.meta",
+      "bytes": 160,
+      "sha256": "250acc290b410ab30369f9883014dbbb4dffc321c5bf433cd6134901c3dc5e6e"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-18-EmptySlot.mat",
+      "bytes": 2379,
+      "sha256": "86dce6d2bd0df43bd2979c8fb870a417824a986a4d0067f9c427c9f445c3e412"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-18-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "f49d598c732f2b935128fcaa4d6284fee8a813ef114699325cfbee5ca1e5236c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-18.mat",
+      "bytes": 2379,
+      "sha256": "3cc3378985456c6455a4b17f97807c3398d544c549d7c5c63a56aa3fd897c581"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-18.mat.meta",
+      "bytes": 160,
+      "sha256": "f8c6346c6bce939addc9a7d06f8c9d53204ad37167db44b9187df5726db1868c"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-19-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "ce5dd4aebb2fe7f795bbd348b7872ad1ee1d0e5cb3cf7c2d7c2a63bc987a2a73"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-19-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "db46d5ff611d03045765315c672dbbe771e0df641c556b7670561b17072bb4c2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-19.mat",
+      "bytes": 2382,
+      "sha256": "401b6459a6ca47ac6db8f97b0253773969fba77ae00289740f8cf50c685fc6cc"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-19.mat.meta",
+      "bytes": 160,
+      "sha256": "8be858c9d01aa8dfd0895dd807a7d991937e6fa3b8d1cb865311f9e751817fff"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-20-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "f828bbf5ea51eb26d005ac3e2bd0138cd08f2bef9f99af79f74fba706e22d4ef"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-20-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "77ded662232c712dcbde6fc9b25e14625e34e863bc4ff338fa7ebfc7fbc1fa02"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-20.mat",
+      "bytes": 2381,
+      "sha256": "a05338ef800672aad9272910758e1003bae2719b7698b7452cc1b2989db707f2"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-20.mat.meta",
+      "bytes": 160,
+      "sha256": "e706a7bdce13c6f2c51613a1d5cd536aaf4c1d8dab9faea1d91ca4a507d634a5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-21-EmptySlot.mat",
+      "bytes": 2383,
+      "sha256": "4196771fa60c4472dbb34eb3cf3996c79e30ab6a6794741a0c5962e66725e917"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-21-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "70b46bdab1e6e2cd5b1888fa2061db81567dbf5418ff908e48f4df37774adda6"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-21.mat",
+      "bytes": 2383,
+      "sha256": "fdccd3711afc12530b23bbc94fc7f8fae746d9f928434f1b607c4d58736a9043"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-21.mat.meta",
+      "bytes": 160,
+      "sha256": "65fcde4456a2477bc719083256ae33972bd1dbd143cd2279f13ed5ea72f63d68"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-22-EmptySlot.mat",
+      "bytes": 2383,
+      "sha256": "b3d77eb1b859418e41f12082e8d7c842d5fb5aa9a072f66acb0e709a2bb018da"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-22-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "7bea2b2e7c9d1f7a38594804b30ac57f2854bb79ef73420c952d527262e7ded0"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-22.mat",
+      "bytes": 2383,
+      "sha256": "e84845952070b64b78dfb181fc0c05cf83b4e113620d0d02a110eeba01c10d0f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-22.mat.meta",
+      "bytes": 160,
+      "sha256": "ba29b97e91b57c1bb444cd5489514f1c44ca9ab7dfd930bb005ae9cc461e02b5"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-23-EmptySlot.mat",
+      "bytes": 2382,
+      "sha256": "e88379c0434453d5d2cb7afc0dc2a4b8bad112ed66e2c8b622c44d218382cc80"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-23-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "7bf4d01a59349b23b12aadd695b434831b65c89bf71458ef01f2f85eee8e0f85"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-23.mat",
+      "bytes": 2382,
+      "sha256": "7d606e181a0dcc8f67149268d03be7fd4fd3af4963568a7b9ce67b55af2474db"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-23.mat.meta",
+      "bytes": 160,
+      "sha256": "a39f42c4bb5525bf8ffb495662f1b7f1b39c68e6324adf132ad3c9a747dc3075"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-24-EmptySlot.mat",
+      "bytes": 2383,
+      "sha256": "bd03bd37e09b45d83fd3418f57ca2abfc73e88bb2251822cc08af1ec9dedec72"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-24-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "645f0e7bbfcca026ee858c95fa16f0d01b4e073bd8c318229df0cedfa7d0cd21"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-24.mat",
+      "bytes": 2383,
+      "sha256": "e2a755d93bef882d668bb8475234f01021ccc6005ba4b2b8afcba86a48fc124f"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-24.mat.meta",
+      "bytes": 160,
+      "sha256": "c264a8977e34c946879bf73e78690b7803c1ec6d1d152055904b821222d40642"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-25-EmptySlot.mat",
+      "bytes": 2381,
+      "sha256": "e5db4e9ad69901b0e3a8908386683808dc136da7a8319b056d78a947c0fb9142"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-25-EmptySlot.mat.meta",
+      "bytes": 160,
+      "sha256": "bb196e9d593b215cbd60ce8987e4912b44892d57b5b71c126692c896086bda94"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-25.mat",
+      "bytes": 2381,
+      "sha256": "261a3d981f7742153e00fd6f1b4a5139d04e90e3f2163e6d183b23c1666f1058"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/Lobby-Frame-filled-25.mat.meta",
+      "bytes": 160,
+      "sha256": "294a131f338b6d1812e11e0bd38c82f11ec392deb27dda6d0a10e3cb18942861"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/WatchingEye.shader",
+      "bytes": 12806,
+      "sha256": "f3f88a74498dc800def1cf60258a61f26fa3f50b05cce8d1823a4ab3622b884b"
+    },
+    {
+      "path": "Assets/Prefabs/WatchingFrames/Materials/WatchingEye.shader.meta",
+      "bytes": 204,
+      "sha256": "9f0f235dc4a94e2a3da6774e13d8dc89f311779ea99e427381fcfbeb687b5781"
+    },
+    {
+      "path": "Assets/Resources/BossFight/BossFightArena.prefab",
+      "bytes": 562678,
+      "sha256": "903b94184e88c0e0e2272a879746ab202ae501d0d276c8d5a4e48b2dfd6ad10d"
+    },
+    {
+      "path": "Assets/Resources/BossFight/BossSegmentedOpponent.prefab",
+      "bytes": 80581,
+      "sha256": "60fe3bd66aea0a181cfbd648b62db3b2f6631ed6f06a1be67931f240e755e6b9"
+    },
+    {
+      "path": "Assets/Resources/BossFight/SceneObjects/BossCHARACTERS.prefab",
+      "bytes": 59538,
+      "sha256": "34d68792603f9e6467beed20372ae4e36685fcc6bbed7fdaae45cf2d0cae6a0c"
+    },
+    {
+      "path": "Assets/Resources/BossFight/SceneObjects/BossROOM.prefab",
+      "bytes": 20647,
+      "sha256": "3b978a506e60a565963a68dbe519c05b9ac553f2c611b5d434771dcb59c512f8"
+    },
+    {
+      "path": "Assets/Resources/BossFight/SceneObjects/BossTABLE.prefab",
+      "bytes": 179480,
+      "sha256": "fee8d1df4ce76b14a703a403bb5d4d2a1bb34eb36189bf4b165aaec5b1203bda"
+    },
+    {
+      "path": "Assets/Resources/BossFight/SceneObjects/BossUI.prefab",
+      "bytes": 32755,
+      "sha256": "1af689781df35bc518ae39d0e17797342ede93604a1bf830c15cdc7bb6c5306f"
+    },
+    {
+      "path": "Assets/Resources/BossFight/SceneObjects/BossVIEWS.prefab",
+      "bytes": 27911,
+      "sha256": "901cd2dc04e9a023acf40a25e0e64f3e78d091619975480976164b9884307a79"
+    },
+    {
+      "path": "Assets/Resources/GameHallway.prefab",
+      "bytes": 95556,
+      "sha256": "6fd7d5ccc03719abc985ea8b3c8a97a8835f50e312fe89b475a1b62e1089cd0d"
+    },
+    {
+      "path": "Assets/Resources/HallwayDoor.prefab",
+      "bytes": 7090,
+      "sha256": "f718a5de6e51df59b109faa2481f8e384073032271dfc58b6d2f8e3ee60fc189"
+    },
+    {
+      "path": "Assets/Resources/HallwaySconce.prefab",
+      "bytes": 9149,
+      "sha256": "3cb089184693353dfc15ff3481021d46f62074f8ce8f1e3757403419e9132de3"
+    },
+    {
+      "path": "Assets/Resources/HallwaySconce.prefab.meta",
+      "bytes": 154,
+      "sha256": "58c6ecbdabfb5186c86ec12b47ef9c2b45799604ee341cbcebf6d71219d82727"
+    },
+    {
+      "path": "Assets/Resources/HotelNetworkPlayer.prefab",
+      "bytes": 22075,
+      "sha256": "cd18575ee372a49379a587a11e2e28ef977ab1e9e22581bae6cd31d59774715b"
+    },
+    {
+      "path": "Assets/Resources/Theatre/ConnectedPlayerSilhouette.prefab",
+      "bytes": 2528,
+      "sha256": "5332af57f9e133262b6e4ae0e6b5f6edc6e6fccbf18e7a3f22f8207bfbe50252"
+    },
+    {
+      "path": "Assets/Resources/Theatre/TheatrePresentation.prefab",
+      "bytes": 76160,
+      "sha256": "b7cbde0678e09901addcf504385858b884419e277819aa3aae9aaf762693ad12"
+    },
+    {
+      "path": "Assets/Resources/Traps/AnglerFishTrap.prefab",
+      "bytes": 39295,
+      "sha256": "4241d5c446f09317ea73c9afb70f9d09c9f1ec7c24e25d4e3be542d4931a9a51"
+    },
+    {
+      "path": "Assets/Resources/Traps/ClickTrap.prefab",
+      "bytes": 31147,
+      "sha256": "046d9da8aac2b9eabcf498bee799e20a0b58dd5ab3b24bcab6bb40fb798858e1"
+    },
+    {
+      "path": "Assets/Resources/Traps/ConveyorPackage.prefab",
+      "bytes": 6117,
+      "sha256": "3f3cb59d317902cc03cbee462dd5dd95112193f3c8e73aeec18e60ba0429c7ef"
+    },
+    {
+      "path": "Assets/Resources/Traps/FallingChandelierTrap.prefab",
+      "bytes": 39538,
+      "sha256": "5ca0e0b1c3813e36510110966e2945a3f4fe9c58d0d9cbf5bbd7c2c07bc21571"
+    },
+    {
+      "path": "Assets/Resources/Traps/ShoppingCartTrap.prefab",
+      "bytes": 32943,
+      "sha256": "0a025a1cf7f5eb47c918ed56b9354f65744b7b3da32ffe8d0c097deb9d3fe115"
+    },
+    {
+      "path": "Assets/Resources/Traps/TrapSupply.prefab",
+      "bytes": 6100,
+      "sha256": "3e523ba72358ca18482f4ae122ef3823a4dad45352ad42012b4f079b59605039"
+    },
+    {
+      "path": "Assets/Resources/Tutorials/TutorialAngler.prefab",
+      "bytes": 39295,
+      "sha256": "4241d5c446f09317ea73c9afb70f9d09c9f1ec7c24e25d4e3be542d4931a9a51"
+    },
+    {
+      "path": "Assets/Resources/Tutorials/TutorialCart.prefab",
+      "bytes": 32943,
+      "sha256": "0a025a1cf7f5eb47c918ed56b9354f65744b7b3da32ffe8d0c097deb9d3fe115"
+    },
+    {
+      "path": "Assets/Resources/Tutorials/TutorialChandelier.prefab",
+      "bytes": 39540,
+      "sha256": "ba987fa34df06b3c13ef0dc2fc82c72c065cb13e36dd07249129ebad45b5ecf6"
+    },
+    {
+      "path": "Assets/Resources/Tutorials/TutorialClickTrap.prefab",
+      "bytes": 31147,
+      "sha256": "046d9da8aac2b9eabcf498bee799e20a0b58dd5ab3b24bcab6bb40fb798858e1"
+    },
+    {
+      "path": "Assets/Resources/Tutorials/TutorialRecordingStage.prefab",
+      "bytes": 75183,
+      "sha256": "b8a4a844c7128af0653e33bce7a27f59872b54df3265458fa780e06bafa08fac"
+    },
+    {
+      "path": "Assets/Scenes/BossFight.unity",
+      "bytes": 387555,
+      "sha256": "111daf3576fd72f4ac2be983a2bd2868f895387f58f54ad08873c401d19cdb97"
+    },
+    {
+      "path": "Assets/Scenes/Game.unity",
+      "bytes": 147876,
+      "sha256": "ecf7a77eb78a54f11dcf0fa8822eddfe03384189798f5cde49c8df4eaacd3936"
+    },
+    {
+      "path": "Assets/Scenes/Lobby.unity",
+      "bytes": 410239,
+      "sha256": "4ba2be5fc9a7f3dec98b5d9b33baa30ea804428fd29f9be85509216d7455d288"
+    },
+    {
+      "path": "Assets/Scenes/theatre.unity",
+      "bytes": 104084,
+      "sha256": "9c28d249c2d0a4f460c20de4d9d2ad453d2b255cfe240971c60bb5ee09296618"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossArenaManager.cs",
+      "bytes": 22307,
+      "sha256": "2fa7369ad77eb67b78b88d3d15730991111f79e9d59ee463b115636376350d82"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossArenaView.cs",
+      "bytes": 6434,
+      "sha256": "3767c3f4206265f0d210d34132abb96ae27eecf0f7fd3bdbeb503fa608fe09a5"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossHudPresentation.cs",
+      "bytes": 1337,
+      "sha256": "8f598f4e6b2c7c1646836f2cbf82c589f9bdf81bd90fa6356b53c42442b33610"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossHudSafeArea.cs",
+      "bytes": 1240,
+      "sha256": "b0bb3f488c7f9ee337cae77c631787855549324401a67035c1ccf88a8b06b2ae"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossHudSafeArea.cs.meta",
+      "bytes": 240,
+      "sha256": "47c3b3d14c32480b3b374c33afd8b49df94d2d4c1217efdd1996918a8998c212"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossLivesState.cs",
+      "bytes": 1091,
+      "sha256": "2bcbe735d69c58e76aa2ed5678d1c34e92b1ef187d0cb8bd85261d10b2856a78"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossLivesState.cs.meta",
+      "bytes": 240,
+      "sha256": "37b73deeea3e27925bfed8586959ee95f9de5c95a747ad8bcfd3509409578391"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossPerspectiveFraming.cs",
+      "bytes": 3933,
+      "sha256": "74bf0b5963319ebe91628bc1550e040b187e162fd493ddddab91070f8f561a77"
+    },
+    {
+      "path": "Assets/Scripts/BossFight/BossSegmentedRig.cs",
+      "bytes": 6550,
+      "sha256": "aba48d5f274d70179f5cc3235c25d1f6a3bfbc2dab86e560ca6a730cae2634ef"
+    },
+    {
+      "path": "Assets/Scripts/Multiplayer/GameMouseSpotlight.cs",
+      "bytes": 2705,
+      "sha256": "376337a74ab650aaec96ffb8300abd7530c76aaaffbdb495e08dfce11095de41"
+    },
+    {
+      "path": "Assets/Scripts/Presentation.meta",
+      "bytes": 172,
+      "sha256": "14f0e80d96f0051aefcf55462e54b93df8d7915a69009c3cce9236abe3a49cd1"
+    },
+    {
+      "path": "Assets/Scripts/Presentation/WatchingFrames.meta",
+      "bytes": 172,
+      "sha256": "aa5f1ff89a86cd0c5a197383b7e8cda5c392d198aaf14f8b13b51d0eb0cb3058"
+    },
+    {
+      "path": "Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGallery.cs",
+      "bytes": 7711,
+      "sha256": "bd2ade12d46e01a6dcf86d275b674c6c9dd5e91b703a0b815b6f211d6e88335e"
+    },
+    {
+      "path": "Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGallery.cs.meta",
+      "bytes": 243,
+      "sha256": "16c0861a32b8495d09a0a2e38f15dad41f26d10e05774c51a206949398c319fc"
+    },
+    {
+      "path": "Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGaze.cs",
+      "bytes": 2802,
+      "sha256": "9020a0958cc756d08cb147e3f8b8939f0b9d2ceb563b936c539121c41d8abad9"
+    },
+    {
+      "path": "Assets/Scripts/Presentation/WatchingFrames/WatchingFrameGaze.cs.meta",
+      "bytes": 243,
+      "sha256": "4a78b6d0592908004ffbb01ce671e50c1f426dd2b3be96dfc628c2a51d10c56f"
+    },
+    {
+      "path": "Assets/Settings/Mobile_Renderer.asset",
+      "bytes": 1713,
+      "sha256": "03ad6259386062a1c07d397d2197d8956df310d423e54d8a553cc3f6d16a9cac"
+    },
+    {
+      "path": "Tools/BossFightTests/BossPerspectiveFramingTests.cs",
+      "bytes": 4604,
+      "sha256": "06cb170fef1f89ac5ab99c9eb25d9c9eeec71a468dc85d252785ac904dc715f7"
+    },
+    {
+      "path": "Tools/BossFightTests/BossPresentationNativeValidation.cs",
+      "bytes": 14627,
+      "sha256": "c6dccd384ce0de58c385b87aed6d7a44a16bf2999982bf423e25545186762342"
+    },
+    {
+      "path": "Tools/BossFightTests/README.md",
+      "bytes": 23376,
+      "sha256": "214c7c452192db3206cdbcec90d01324fd0f78ead5c7c020b05673dbf9cf05cb"
+    },
+    {
+      "path": "Tools/BossFightTests/RunFramingMono.sh",
+      "bytes": 939,
+      "sha256": "68f04274303c2ea984486db9503ec83825b96964eed8564d4d5ddffce6c5018a"
+    },
+    {
+      "path": "Tools/BossLivesTests/Evidence/managed-source-results.txt",
+      "bytes": 1972,
+      "sha256": "0465dfb81c3449fb207c63bdab440a8ce25128a1c27b96e70fa44954812411f3"
+    },
+    {
+      "path": "Tools/BossLivesTests/Evidence/source-hashes.json",
+      "bytes": 1523,
+      "sha256": "d2980d8583dc82b8161948639a242ac9ffa4ffbf1e842c33526a7ec7b451c13c"
+    },
+    {
+      "path": "Tools/BossLivesTests/Evidence/unity-api-compile.txt",
+      "bytes": 1422,
+      "sha256": "8de2baed6f89fedabfc40af7984820f4e80ba2bc0944a466a8ec773689cd77bc"
+    },
+    {
+      "path": "Tools/BossLivesTests/Program.cs",
+      "bytes": 5857,
+      "sha256": "69f9d29a06c769384d9284d410616c2da04894bb0c83922f397a604be97d9065"
+    },
+    {
+      "path": "Tools/BossLivesTests/README.md",
+      "bytes": 4646,
+      "sha256": "b0586ae0f09a30953efc27635457773f8cfee24263a60dba0eeae35cb144924b"
+    },
+    {
+      "path": "Tools/BossLivesTests/RunMono.sh",
+      "bytes": 937,
+      "sha256": "6737cf1f89e2d761c25577d22f5364e569609b71f4d45bacfdfc048eaa2e62a2"
+    },
+    {
+      "path": "Tools/BossLivesTests/UnityDoubles.cs",
+      "bytes": 1827,
+      "sha256": "e2f3e2cb9eee26150bfcc7d6bfe4022d9afcf39259568bd840935f2c28158f71"
+    },
+    {
+      "path": "Tools/BossLivesTests/VerifyAuthoredHud.py",
+      "bytes": 5977,
+      "sha256": "0bd07a170d8073774d8601b217cf066ed3a44ff79eec2225cb72b8ec0f04014e"
+    },
+    {
+      "path": "Tools/CapsuleArt/current-main-source-QA.json",
+      "bytes": 2734,
+      "sha256": "0f477d0c909ef144036edd3c8b7d684b63b9b2fb7c8670609fd8565e3e7bb8c1"
+    },
+    {
+      "path": "Tools/CapsuleArt/verify_capsule_art.py",
+      "bytes": 2415,
+      "sha256": "d3ae675c3407dbcfb04c33389f462bdd842a5a39a63e8b6d2dab862d949e1286"
+    },
+    {
+      "path": "Tools/FrameArt/README.md",
+      "bytes": 4091,
+      "sha256": "242753cd68c764e226282c4a298f81df36e96ef3b04734962fa0547baae230de"
+    },
+    {
+      "path": "Tools/FrameArt/frame-segmentation.json",
+      "bytes": 49326,
+      "sha256": "3b1c667d7556717f752a72dc50b8d3fbf2fbe91b183be51b4e57445ff266ede1"
+    },
+    {
+      "path": "Tools/FrameArt/segment_original_frames.py",
+      "bytes": 11924,
+      "sha256": "05a8c4640d933d93f30511a9c7c3b14dd9743c20f7a14d40911fa721db069490"
+    },
+    {
+      "path": "Tools/FrameArt/test_original_frames.py",
+      "bytes": 5438,
+      "sha256": "a2b7cacae87309834daa6bd08b452eeb9b88aeec9c2f8381d15a36e2622c1bbf"
+    },
+    {
+      "path": "Tools/HallwayLighting/README.md",
+      "bytes": 5277,
+      "sha256": "b7687860b72333cca67ac2aa06aeee08ddfaff0bd0f034ed36a6aea517bf9840"
+    },
+    {
+      "path": "Tools/HallwayLighting/author_sconces.py",
+      "bytes": 9772,
+      "sha256": "9f9ef8114657cf901e985cf470cc929b9b0380d9d247717847dd3954a3c045db"
+    },
+    {
+      "path": "Tools/HallwayLighting/check_unity_api.sh",
+      "bytes": 779,
+      "sha256": "a86976cd2450bf7e20d687fba9c6e0745da1a642d7e8e1ee3361a70f27d02724"
+    },
+    {
+      "path": "Tools/HallwayLighting/lighting-manifest.json",
+      "bytes": 10124,
+      "sha256": "2e8ae8b432080310255a7785eae5cd1dfade19248f15e78f9608bccb8eb46546"
+    },
+    {
+      "path": "Tools/HallwayLighting/verification.json",
+      "bytes": 553,
+      "sha256": "31815e5d4635ed11287c9b589b2b0064413bb814401c289b81901aa81862cd3b"
+    },
+    {
+      "path": "Tools/HallwayLighting/verify_sconces.py",
+      "bytes": 6013,
+      "sha256": "24343974488ebb2b833e985de93a2ad81215287a13caa383f4de82bce2003a77"
+    },
+    {
+      "path": "Tools/LobbyRunnerTests/author_runner.py",
+      "bytes": 6966,
+      "sha256": "2c8a35905f431c487489a6b54e355810e9289637038663759ef53838514213bd"
+    },
+    {
+      "path": "Tools/LobbyRunnerTests/runner-authoring.json",
+      "bytes": 1020,
+      "sha256": "8c105917b26cc6c9163c43a85e28c1742ce6aa3d08c50d25e10c64ad3863dd28"
+    },
+    {
+      "path": "Tools/LobbyRunnerTests/scene-integration.json",
+      "bytes": 496,
+      "sha256": "db2c012fae8f79b54a0fa5df23638502c22fb5f8463bf09f23438100e87c7099"
+    },
+    {
+      "path": "Tools/LobbyRunnerTests/source-validation.json",
+      "bytes": 341,
+      "sha256": "4bbc0c8e3ddbbb80c23d4941fbb0c442ebb2fceba7ce34423649ed5afc0dcf98"
+    },
+    {
+      "path": "Tools/LobbyRunnerTests/verify_runner.py",
+      "bytes": 1975,
+      "sha256": "cacc4a79e9195fcfc49df5b322edc51fd3d95146834802ed40331e213562b15b"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/README.md",
+      "bytes": 1845,
+      "sha256": "9b2cd1985eac3a0a29a168a6942449499c4e568d96e681b1f53a5f7a25ff442c"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/aggregate.txt",
+      "bytes": 468,
+      "sha256": "83f80917bb0a9d82abb449a96f8c3935e3521dccbe8890e7b01e879a9f99cd8e"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/boss_framing.txt",
+      "bytes": 47,
+      "sha256": "2acd00e7dcd4f8e973a2021880949ee065f622b7939391680f227d8d0759213b"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/boss_lives.txt",
+      "bytes": 1972,
+      "sha256": "44e0e3642c5580ba76b196c19ab63c82ff5d674eba6049fa6e266616d3c94059"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/capsule.txt",
+      "bytes": 109,
+      "sha256": "d1e254fde07c3145334f0d4b0798142041721e724d57a8b022b690716ec3bac2"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/gallery-api.txt",
+      "bytes": 1709,
+      "sha256": "a39e0dfe5c1d1511c74778fcf1a2b58ad3056fc909fbdfc21189361e2f4dcb21"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/gallery-ordinary.txt",
+      "bytes": 367,
+      "sha256": "8cfabf157b765c9f90b4087cfee6a234402467e49f0dd2db0145ea7f17fd510d"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/original_frames.txt",
+      "bytes": 542,
+      "sha256": "93c9890cb0788ea117a8b2bab55decbc64b6412149856e040647c723969d575a"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/parser.txt",
+      "bytes": 117,
+      "sha256": "23647b6b5f82f22241b887655fa005b67e271c456b33cadb6bb20cb490b0af80"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/runner.txt",
+      "bytes": 341,
+      "sha256": "4bbc0c8e3ddbbb80c23d4941fbb0c442ebb2fceba7ce34423649ed5afc0dcf98"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/sconces.txt",
+      "bytes": 553,
+      "sha256": "31815e5d4635ed11287c9b589b2b0064413bb814401c289b81901aa81862cd3b"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/world_api.txt",
+      "bytes": 132,
+      "sha256": "7f6b5ad490e47824c737e4c369ece8f0cb2267b11a9d2788ec3c8c15b2999528"
+    },
+    {
+      "path": "Tools/PublicationChecks/2026-10-14-stable/world_lighting.txt",
+      "bytes": 213,
+      "sha256": "b10b5ae40ef3675d3a0a43fae2abd97e07a6657c0759079cea027115ff7be739"
+    },
+    {
+      "path": "Tools/ScenePresentationTests/test_verify_scene_assets.py",
+      "bytes": 11929,
+      "sha256": "e922d5eaabaaebc9abca53b325b017caf3c399d48f4944426edae21f674dae9c"
+    },
+    {
+      "path": "Tools/ScenePresentationTests/verify_scene_assets.py",
+      "bytes": 29118,
+      "sha256": "cabb965430501a206120a7b4c20da1bd9768e77ad30ad9ba19e0dc319aa88dc4"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/.gitignore",
+      "bytes": 13,
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/INTRO-TUNNEL.md",
+      "bytes": 4143,
+      "sha256": "00432b4b0ebe1ee22f74019fc8e6abe4b7793be2fdacf57e6291bcbcd294cf5a"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/MASK-ISOLATION.md",
+      "bytes": 3646,
+      "sha256": "147484e1dd6353a1a0208031a6091b3ddf50df86fd58765988dad4125302b9f2"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/Program.cs",
+      "bytes": 3713,
+      "sha256": "c9a4989b46d235c95b36e57b0628bc93e06e8c55487408e6cebae237751a26fa"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/README.md",
+      "bytes": 11078,
+      "sha256": "2236210810152c2965e9e91c88ffe35afc4dbbd9e245b7d17c402e6cf4776923"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/References/frame-interior-dark-grey-swatch.png",
+      "bytes": 592,
+      "sha256": "3521139cb92880bf240f3d72003eea78e28a826d0f51e033dd17d518d61d5147"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/Run.sh",
+      "bytes": 1949,
+      "sha256": "78e5f29386d7d5ea6989d742b378364b299cdbe5bc43ac92a94ab4caba425d4f"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/aggregate-scene-validation.txt",
+      "bytes": 468,
+      "sha256": "75cd7f57216216a607363cdb2b11fbc52cc5dbeb9c166143d9a61b05afcf2cd0"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/author_frame_galleries.py",
+      "bytes": 24210,
+      "sha256": "e791205cc5d4bbda62437e2c052a92a216cd4eb40712be0c5e7e549c1e79ac8b"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/author_intro_frame_tunnel.py",
+      "bytes": 14596,
+      "sha256": "529631f580f8bd959ba850a304f6679695655b17e4a5ec5e373c6b40172e4cdb"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/build_frame_opening_masks.py",
+      "bytes": 2566,
+      "sha256": "6920ae1bc942d4775ce199dcc95c11617c03802616b6840b81d31aef033c87d2"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/eye-distribution-idempotence.json",
+      "bytes": 32933,
+      "sha256": "5790ea736b435f090226855dc3c4f4f630a6cc16d308e71b7303d827367b649c"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/eye-distribution-validation.json",
+      "bytes": 13181,
+      "sha256": "ed4f76885826023b58dca92f1c3f59327a1809a35b97a5b120f673c6df928378"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/frame-opening-masks.json",
+      "bytes": 13335,
+      "sha256": "17968bababc29c4017b75f11af270ce9c6abc704fbff53edb6c9782368f52005"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/gallery-placement.json",
+      "bytes": 960707,
+      "sha256": "3eb25791e15626aa2bf2cdc915afcb6101298cb1ceaa7bef4a248c0b9d15043b"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/grey-revision-validation.txt",
+      "bytes": 131,
+      "sha256": "56d4f654e2bee507bf9c8f4fc47e0e84b109f728504b7edf82604557e3ce7f48"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/idempotence-validation.txt",
+      "bytes": 277,
+      "sha256": "f6fd37c416432351ecd26fa1ab105671028ece1d983658a46f856265165459c8"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/interior-colour-reference.json",
+      "bytes": 957,
+      "sha256": "0c5b669c2b34240f62960c240f4cf1e072c33409e17042482c6350b8794baa2e"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/intro-tunnel-placement.json",
+      "bytes": 1651297,
+      "sha256": "929c5112fa8c2a7213123f948cf7889ba27353a682cd03110e901824f83fe9ad"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/original-art-validation.txt",
+      "bytes": 542,
+      "sha256": "328d5e4d3550cef4598c021f74e05366432d65b719305a253364b7408b95eba9"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/source-validation.json",
+      "bytes": 329,
+      "sha256": "3c3706f2ced1f41ababafc43724f29061480c8b22e1b7bf1e7e217831deb867f"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/tunnel-source-validation.json",
+      "bytes": 180,
+      "sha256": "eef6b765406415566dcdec9ac6f7b8fec265ae447b6612fde1df2790846564fb"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/unity-api-and-gaze-tests.txt",
+      "bytes": 1709,
+      "sha256": "699f7ca80d510e28dff65a09f1e77d22c402f4224dfb600b65e94690110e41bf"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/verify_authored_galleries.py",
+      "bytes": 18275,
+      "sha256": "468e68a97636616f1413048b0c06e48e99d05b0b52f98115c90f8861c8e1d49e"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/verify_eye_distribution.py",
+      "bytes": 3123,
+      "sha256": "d97c54b2bcb91648ae8f8a98581a8045c9482576d395f6de95b31f137e77ce01"
+    },
+    {
+      "path": "Tools/WatchingFrameTests/verify_intro_frame_tunnel.py",
+      "bytes": 11390,
+      "sha256": "c7708f0a7a9b8de59335263fc38630021a47264d379a05ce7baa7554f8fbd776"
+    },
+    {
+      "path": "Tools/WorldLightingTests/README.md",
+      "bytes": 7485,
+      "sha256": "4c221bdd3fb3120734c3eb07834d760deccd06080ad6487f56ce0000eecbcea6"
+    },
+    {
+      "path": "Tools/WorldLightingTests/aggregate-scene-validation.txt",
+      "bytes": 468,
+      "sha256": "dbdc4b3be511a252bad03b5e96d90cb53eaa7d0771b5a3df37e6cb298a71e9a5"
+    },
+    {
+      "path": "Tools/WorldLightingTests/author_existing_scene_shadow_keys.py",
+      "bytes": 2415,
+      "sha256": "5e3b219430e5c9b84d44d8715c97e40522de33104d12efe6cdcdf5e44284dd4d"
+    },
+    {
+      "path": "Tools/WorldLightingTests/author_room_atmosphere.py",
+      "bytes": 10148,
+      "sha256": "b18595c9e1d9a6cfe0f3e0b681e39795be77d77fbd2895865e8b2e75df3049d4"
+    },
+    {
+      "path": "Tools/WorldLightingTests/author_world_lighting.py",
+      "bytes": 5499,
+      "sha256": "40c4a7b66f646c18ea1ff1932b83d8d6f38b1f21edad2c416c08cc3155fbe86b"
+    },
+    {
+      "path": "Tools/WorldLightingTests/authoring-manifest.json",
+      "bytes": 218265,
+      "sha256": "6a13e07802ea01829e57f0fcf093aa15e173330f4c6f9baf58315b2732b61443"
+    },
+    {
+      "path": "Tools/WorldLightingTests/check_unity_api.sh",
+      "bytes": 758,
+      "sha256": "8bfdfb3102ae60b9f19b5775f47b9a11c22315abf59560bf649a8556dc523577"
+    },
+    {
+      "path": "Tools/WorldLightingTests/existing-key-replay.txt",
+      "bytes": 65,
+      "sha256": "20157f3e6c600573de1fa5c438df1f9e06ae4700874eaf0cbc3abcf689829fa2"
+    },
+    {
+      "path": "Tools/WorldLightingTests/existing-key-shadows.json",
+      "bytes": 1087,
+      "sha256": "893272e6026e754d31b477c0716ff35b5b45a409744032e513c8661ee02db0a2"
+    },
+    {
+      "path": "Tools/WorldLightingTests/extension-regression.txt",
+      "bytes": 180,
+      "sha256": "83ba0519ae1b4d62238410ac167073b2c395a6492f7c9c094fe7125dcd647de8"
+    },
+    {
+      "path": "Tools/WorldLightingTests/final-authoring-replay.txt",
+      "bytes": 773,
+      "sha256": "d96a9e8ae934301109cf84f9e65bf9fdb5b424690b59e87bf9c41a3395e779db"
+    },
+    {
+      "path": "Tools/WorldLightingTests/final-freeze-checkpoint.txt",
+      "bytes": 225,
+      "sha256": "fb596f718c4ff48cd3f78efd69e38a05938531cda96e648152b74d42ebe25bbe"
+    },
+    {
+      "path": "Tools/WorldLightingTests/freeze_world_lighting.py",
+      "bytes": 4272,
+      "sha256": "0346e6888b0b1ce8b917ae0eee0eea4ddbc85558b5e1959ed10288d46577dca0"
+    },
+    {
+      "path": "Tools/WorldLightingTests/gallery-regression.txt",
+      "bytes": 329,
+      "sha256": "3c3706f2ced1f41ababafc43724f29061480c8b22e1b7bf1e7e217831deb867f"
+    },
+    {
+      "path": "Tools/WorldLightingTests/gaze-api-regression.txt",
+      "bytes": 1709,
+      "sha256": "0e773568f96a4f94d4ed5a303251f44ed8093d12e4b7298143288fcca9b7700f"
+    },
+    {
+      "path": "Tools/WorldLightingTests/intro-camera-distance-audit.json",
+      "bytes": 5460,
+      "sha256": "9e0a8e3badc9f570c3c311b4788747811865578b1f2b3ce1158450b5a2d45486"
+    },
+    {
+      "path": "Tools/WorldLightingTests/joint-lighting-gallery-freeze.json",
+      "bytes": 474728,
+      "sha256": "7e3575a2a1cef76241e333b38ac74925a340ed1f1e76dc65cc8b2911e1b8b49f"
+    },
+    {
+      "path": "Tools/WorldLightingTests/latest-source-check.txt",
+      "bytes": 213,
+      "sha256": "b10b5ae40ef3675d3a0a43fae2abd97e07a6657c0759079cea027115ff7be739"
+    },
+    {
+      "path": "Tools/WorldLightingTests/render_shadow_source_proof.py",
+      "bytes": 6838,
+      "sha256": "b018fa21c1c5796043029a20c8a40c1d61efed0f93eb21c9c527c0c21050a6b4"
+    },
+    {
+      "path": "Tools/WorldLightingTests/room-atmosphere.json",
+      "bytes": 3933,
+      "sha256": "0e258a36f2bab713152998581a6d63e383863e2cf42dbd9ad5c00bc593de4726"
+    },
+    {
+      "path": "Tools/WorldLightingTests/sconce-regression.txt",
+      "bytes": 553,
+      "sha256": "31815e5d4635ed11287c9b589b2b0064413bb814401c289b81901aa81862cd3b"
+    },
+    {
+      "path": "Tools/WorldLightingTests/source-freeze.json",
+      "bytes": 6747,
+      "sha256": "697a41ca2d1811ef890cc4cadc7ffb7babe6daf3555bc331a026fe7d5e27901d"
+    },
+    {
+      "path": "Tools/WorldLightingTests/source-validation.json",
+      "bytes": 1686,
+      "sha256": "c8abf3c37ed8a6d27c07727c9dd243a674890155df0b0a183a1f85f7975db24a"
+    },
+    {
+      "path": "Tools/WorldLightingTests/unity-api-validation.txt",
+      "bytes": 132,
+      "sha256": "7f6b5ad490e47824c737e4c369ece8f0cb2267b11a9d2788ec3c8c15b2999528"
+    },
+    {
+      "path": "Tools/WorldLightingTests/verify_authoring_replay.py",
+      "bytes": 1525,
+      "sha256": "0d67a383a7b06e6791929c7ce168c9af9dcaa301c2ecfa69e2474a456c80e2f2"
+    },
+    {
+      "path": "Tools/WorldLightingTests/verify_world_lighting.py",
+      "bytes": 11921,
+      "sha256": "f2f96d707c04ff655ac5a03779b53d59860aabcd64136740f73701a9c7d722bc"
+    }
+  ]
+}

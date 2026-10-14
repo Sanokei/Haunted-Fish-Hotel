@@ -1,0 +1,9 @@
+Assets/Scripts/BossFight/BossHudPresentation.cs(15,28): warning CS0649: Field 'BossHudPresentation._GhostLives' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(8,27): warning CS0649: Field 'BossHudPresentation._Canvas' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(12,29): warning CS0169: The field 'BossHudPresentation._LifeLabel' is never used
+Assets/Scripts/BossFight/BossHudPresentation.cs(14,26): warning CS0649: Field 'BossHudPresentation._FishLife' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(10,42): warning CS0169: The field 'BossHudPresentation._Lives' is never used
+Assets/Scripts/BossFight/BossHudSafeArea.cs(9,40): warning CS0649: Field 'BossHudSafeArea._Content' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(11,46): warning CS0169: The field 'BossHudPresentation._Hint' is never used
+Assets/Scripts/BossFight/BossHudPresentation.cs(13,31): warning CS0649: Field 'BossHudPresentation._FishRow' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(13,41): warning CS0649: Field 'BossHudPresentation._GhostRow' is never assigned to, and will always have its default value null

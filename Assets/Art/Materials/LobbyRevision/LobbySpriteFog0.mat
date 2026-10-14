@@ -42,6 +42,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DarknessFloor: 0.012
+    - _DarknessEnd: 12
+    - _DarknessStart: 4.25
+    - _ShadowCutoff: 0.2
+    - _LightLimit: 1.1
+    - _LightResponse: 0.85
+    - _Ambient: 0.32
     - PixelSnap: 0
     - _EnableExternalAlpha: 0
     - _ZWrite: 0

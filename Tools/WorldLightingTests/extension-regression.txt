@@ -1,0 +1,11 @@
+{
+  "passed": 13734,
+  "counts": {
+    "frames": 553,
+    "eyes": 182,
+    "empty_slots": 371,
+    "surfaces": 9
+  },
+  "scene_installed": true,
+  "native_unity_verified": false
+}

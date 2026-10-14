@@ -1,0 +1,14 @@
+{
+  "result": "PASS source checks only",
+  "fixtures": 20,
+  "lights_per_fixture": 3,
+  "inherited_game_lights": 60,
+  "inherited_guide_lights": 60,
+  "overlay_original_art_references": 74,
+  "original_sha256": "eeb9f295999c4a2f495d170b26c221b340b2ea60127216e6150a417cab283356",
+  "limits": [
+    "No native Unity import, shader compilation or runtime lighting has been verified.",
+    "Mobile Forward still caps per-object light selection at its existing setting.",
+    "Attic cutscene overlay art updates, but does not receive 3D point lights."
+  ]
+}

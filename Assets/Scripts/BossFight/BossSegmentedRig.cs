@@ -17,7 +17,7 @@ namespace HauntedFish.BossFight
         [SerializeField] SpriteRenderer _ShadowSource;
         [SerializeField] Sprite[] _ShadowSprites;
         [SerializeField] Renderer[] _AllArtwork;
-        [SerializeField] float _IdleArmDegrees=8.5f,_HeadBob=.045f,_IdleReachDegrees=12f;
+        [SerializeField] float _IdleArmDegrees=8.5f,_HeadBob=.02f,_IdleReachDegrees=12f;
         struct Pose
         {
             public Transform Transform;public Vector3 Position,Scale;public Quaternion Rotation;
@@ -105,7 +105,7 @@ namespace HauntedFish.BossFight
                 if(j==0)
                 {
                     float shudder=_FishScored?Mathf.Sin(progress*Mathf.PI*8)*(_Final?7:4):Mathf.Sin(progress*Mathf.PI)*-4;
-                    pose.Transform.localPosition=pose.Position+Vector3.up*(_HeadBob*Mathf.Sin(phase)+pulse*(_FishScored?-.06f:.10f));
+                    pose.Transform.localPosition=pose.Position+Vector3.up*(_HeadBob*Mathf.Sin(phase)+pulse*(_FishScored?-.02f:.10f));
                     pose.Transform.localRotation=pose.Rotation*Quaternion.Euler(0,0,shudder*pulse);
                 }
                 else

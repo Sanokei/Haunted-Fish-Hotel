@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace HauntedFish.BossFight
 {
-    // All cameras/focus/actor bindings are authored in BossFightArena.prefab.
+    // Camera, focus, actor and presentation-occluder bindings are authored in the arena scene/prefabs.
     public sealed class BossArenaView : MonoBehaviour
     {
         [SerializeField] Camera _Fish,_Ghost,_Spectator;
@@ -20,6 +20,7 @@ namespace HauntedFish.BossFight
         [SerializeField] Renderer[] _FishNearWalls,_GhostNearWalls;
         BossViewerSide _Side;
         bool _Watching;
+        float[] _FishFrameRight,_FishFrameUp,_FishFrameDepth;
         public Camera CurrentCamera=>_Side==BossViewerSide.Fish?_Fish:_Side==BossViewerSide.Ghost?_Ghost:_Spectator;
         public BossViewerSide Side=>_Side;
         public void Select(BossViewerSide side,bool watch)
@@ -43,14 +44,15 @@ namespace HauntedFish.BossFight
             float pitch=Mathf.Asin(Mathf.Clamp(-camera.transform.forward.y,-1,1))*Mathf.Rad2Deg;
             var size=_Side==BossViewerSide.Spectator?_SpectatorFrameSize:_FrameSize;
             float centreY=_Side==BossViewerSide.Spectator?_SpectatorFrameCentreY:_FrameCentreY;
+            if(_Side==BossViewerSide.Fish&&FitFish(camera,size,centreY))return;
             if(BossPerspectiveFraming.RequiredDistance(camera.fieldOfView,camera.aspect,camera.nearClipPlane,size.x*.5f,
                 centreY-size.y*.5f,centreY+size.y*.5f,size.z*.5f,pitch,out float distance))
             {
-                // Fixed authored opaque-art/tray boundary markers. Preview objects and transparent sprite
-                // canvas bounds cannot pull the camera backward while the player drags defenses.
+                // Fixed authored board/tray and central-head boundaries; outer tentacles may crop.
+                // Preview objects and transparent sprite canvas bounds never change the camera.
                 FitMarkers(camera, _AuthoredFrameMarkers, ref distance);
                 // The local ghost is hidden in its own view. Only its opponent and spectators
-                // reserve the raised silhouette's envelope, including the authored arm motion.
+                // reserve only the central head envelope; sprawling arm tips may leave the frame.
                 if (_Side != BossViewerSide.Ghost)
                 {
                     FitMarkers(camera, _FishViewFrameMarkers, ref distance);
@@ -58,6 +60,33 @@ namespace HauntedFish.BossFight
                 camera.transform.position=_Focus.position-camera.transform.forward*distance;
                 camera.farClipPlane=Mathf.Max(100,distance+size.magnitude+5);
             }
+        }
+        bool FitFish(Camera camera,Vector3 size,float centreY)
+        {
+            int count=8+(_AuthoredFrameMarkers?.Length??0)+(_FishViewFrameMarkers?.Length??0);
+            if(_FishFrameRight==null||_FishFrameRight.Length!=count)
+            {_FishFrameRight=new float[count];_FishFrameUp=new float[count];_FishFrameDepth=new float[count];}
+            int used=0;
+            for(int x=-1;x<=1;x+=2)for(int y=-1;y<=1;y+=2)for(int z=-1;z<=1;z+=2)
+                AddFishFramePoint(camera,new Vector3(x*size.x*.5f,centreY+y*size.y*.5f,z*size.z*.5f),ref used);
+            AddFishFrameMarkers(camera,_AuthoredFrameMarkers,ref used);
+            AddFishFrameMarkers(camera,_FishViewFrameMarkers,ref used);
+            if(!BossPerspectiveFraming.RequiredOffsetDistance(camera.fieldOfView,camera.aspect,camera.nearClipPlane,
+                _FishFrameRight,_FishFrameUp,_FishFrameDepth,used,out float distance,out float offset))return false;
+            camera.transform.position=_Focus.position+camera.transform.up*offset-camera.transform.forward*distance;
+            camera.farClipPlane=Mathf.Max(100,distance+size.magnitude+15);
+            return true;
+        }
+        void AddFishFrameMarkers(Camera camera,Transform[] markers,ref int used)
+        {
+            if(markers==null)return;
+            foreach(var marker in markers)if(marker)AddFishFramePoint(camera,marker.position-_Focus.position,ref used);
+        }
+        void AddFishFramePoint(Camera camera,Vector3 point,ref int used)
+        {
+            _FishFrameRight[used]=Vector3.Dot(point,camera.transform.right);
+            _FishFrameUp[used]=Vector3.Dot(point,camera.transform.up);
+            _FishFrameDepth[used]=Vector3.Dot(point,camera.transform.forward);used++;
         }
         void FitMarkers(Camera camera, Transform[] markers, ref float distance)
         {

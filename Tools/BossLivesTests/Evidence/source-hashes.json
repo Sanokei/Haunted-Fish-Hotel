@@ -1,0 +1,15 @@
+{
+  "Assets/Art/Boss/Player-fish-life-head.png": "d891be7cc7c82815e18bfdf6d9a4ab0e9c650258aa7484b5d42f1c7009e21c74",
+  "Assets/Art/Boss/Player-fish-life-head.png.meta": "0a39f43aef54670f7885cd08715fe1c745a3ad21f3975e57c89d2472bca0fdb5",
+  "Assets/Art/Boss/BOSS-v1-neutral-head.png": "dee7cea2c8e04c03ffa268c0d2299960a0e7e0cedb0976033bda4817551b1ff1",
+  "Assets/Art/Boss/BOSS-v1-neutral-head.png.meta": "8a3768c4166cc3d9f6c2453e4e95e3275ab3ac4f53590a393b71597185563e23",
+  "Assets/Art/HotelFish/FISH-right.png": "f8c6cd40901e2f4f4877f6453ab6685d9ebf148045863b96409b146e9e10db60",
+  "Assets/Resources/BossFight/SceneObjects/BossUI.prefab": "1af689781df35bc518ae39d0e17797342ede93604a1bf830c15cdc7bb6c5306f",
+  "Assets/Resources/BossFight/BossFightArena.prefab": "903b94184e88c0e0e2272a879746ab202ae501d0d276c8d5a4e48b2dfd6ad10d",
+  "Assets/Scenes/BossFight.unity": "111daf3576fd72f4ac2be983a2bd2868f895387f58f54ad08873c401d19cdb97",
+  "Assets/Scripts/BossFight/BossHudPresentation.cs": "8f598f4e6b2c7c1646836f2cbf82c589f9bdf81bd90fa6356b53c42442b33610",
+  "Assets/Scripts/BossFight/BossHudSafeArea.cs": "b0bb3f488c7f9ee337cae77c631787855549324401a67035c1ccf88a8b06b2ae",
+  "Assets/Scripts/BossFight/BossLivesState.cs": "2bcbe735d69c58e76aa2ed5678d1c34e92b1ef187d0cb8bd85261d10b2856a78",
+  "Assets/Art/Boss/Boss-neutral-life-head.png": "5036641a8d467ecad5cf12aa504080965255ae5d56ea198c1d584642bed5d216",
+  "Assets/Art/Boss/Boss-neutral-life-head.png.meta": "039c61ae5408db245679b7a961314f7b3fcda2c2f4bf58eb4faec06343c652eb"
+}

@@ -1,0 +1,15 @@
+Assets/Scripts/BossFight/BossHudPresentation.cs(12,29): warning CS0169: The field 'BossHudPresentation._LifeLabel' is never used
+Assets/Scripts/BossFight/BossHudSafeArea.cs(9,40): warning CS0649: Field 'BossHudSafeArea._Content' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(13,41): warning CS0649: Field 'BossHudPresentation._GhostRow' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(14,26): warning CS0649: Field 'BossHudPresentation._FishLife' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(15,28): warning CS0649: Field 'BossHudPresentation._GhostLives' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(10,42): warning CS0169: The field 'BossHudPresentation._Lives' is never used
+Assets/Scripts/BossFight/BossHudPresentation.cs(8,27): warning CS0649: Field 'BossHudPresentation._Canvas' is never assigned to, and will always have its default value null
+Assets/Scripts/BossFight/BossHudPresentation.cs(11,46): warning CS0169: The field 'BossHudPresentation._Hint' is never used
+Assets/Scripts/BossFight/BossHudPresentation.cs(13,31): warning CS0649: Field 'BossHudPresentation._FishRow' is never assigned to, and will always have its default value null
+1356 Boss life HUD production-rule/presenter/safe-area checks passed (Unity doubles; not native Unity).
+9333 authored scene/prefab/icon/source checks passed (read-only source inspection; not native Unity).
+Player-fish-life-head.png SHA256 d891be7cc7c82815e18bfdf6d9a4ab0e9c650258aa7484b5d42f1c7009e21c74
+Lower opaque edge y, image coordinates: {376: 914, 689: 1123, 1003: 949}
+Boss-neutral-life-head.png SHA256 5036641a8d467ecad5cf12aa504080965255ae5d56ea198c1d584642bed5d216
+Lower opaque edge y, image coordinates: {376: 1100, 627: 1165, 877: 1103}

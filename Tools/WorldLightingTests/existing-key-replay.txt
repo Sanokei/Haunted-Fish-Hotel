@@ -1,0 +1,1 @@
+PASS no-write existing-key authoring replay: 3 byte-exact files.

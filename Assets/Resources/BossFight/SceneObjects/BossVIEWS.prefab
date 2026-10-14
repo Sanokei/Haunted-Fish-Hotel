@@ -44,7 +44,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.035, g: 0.025, b: 0.055, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -293,13 +293,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2880520612538634548}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.207911691, y: 0, z: 0, w: 0.978147601}
+  m_LocalRotation: {x: 0.104528463, y: 0, z: 0, w: 0.994521895}
   m_LocalPosition: {x: 1000, y: 6.665555, z: -11.602027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9111255679618805572}
-  m_LocalEulerAnglesHint: {x: 24, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 12, y: 0, z: 0}
 --- !u!20 &5803687183042292330
 Camera:
   m_ObjectHideFlags: 0
@@ -310,7 +310,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.035, g: 0.025, b: 0.055, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -589,7 +589,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.035, g: 0.025, b: 0.055, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -852,7 +852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910000000000001041}
   m_Layer: 0
-  m_Name: FRAME - Ghost silhouette left lower
+  m_Name: FRAME - Boss head only left lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -867,7 +867,7 @@ Transform:
   m_GameObject: {fileID: 910000000000001040}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 990.1, y: 1.2, z: 6.65}
+  m_LocalPosition: {x: 994.2, y: -0.6, z: 13.}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -883,7 +883,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910000000000001051}
   m_Layer: 0
-  m_Name: FRAME - Ghost silhouette right lower
+  m_Name: FRAME - Boss head only right lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -898,7 +898,7 @@ Transform:
   m_GameObject: {fileID: 910000000000001050}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1009.9, y: 1.2, z: 6.65}
+  m_LocalPosition: {x: 1005.8, y: -0.6, z: 13.}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -914,7 +914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910000000000001061}
   m_Layer: 0
-  m_Name: FRAME - Ghost silhouette left upper
+  m_Name: FRAME - Boss head only left upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -929,7 +929,7 @@ Transform:
   m_GameObject: {fileID: 910000000000001060}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 990.1, y: 7.0, z: 6.65}
+  m_LocalPosition: {x: 994.2, y: 10.5, z: 13.}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -945,7 +945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910000000000001071}
   m_Layer: 0
-  m_Name: FRAME - Ghost silhouette right upper
+  m_Name: FRAME - Boss head only right upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -960,7 +960,7 @@ Transform:
   m_GameObject: {fileID: 910000000000001070}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1009.9, y: 7.0, z: 6.65}
+  m_LocalPosition: {x: 1005.8, y: 10.5, z: 13.}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

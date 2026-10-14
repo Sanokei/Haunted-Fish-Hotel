@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IntroTunnel original filled frame 11 - grey isolated opening
+  m_Shader: {fileID: 4800000, guid: 4baccd66e16f285510f0df2a758ce61c, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a21162a5d9e15ebf9689c01335ba7655, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FrameOpening:
+        m_Texture: {fileID: 2800000, guid: 8f1d037f086e572e93431b6f5586676b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FrameBacking:
+        m_Texture: {fileID: 2800000, guid: c7f542b596b05fb197f32870d377b095, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineTex:
+        m_Texture: {fileID: 2800000, guid: 9cf5240d82a954ebb8370791c51ab67d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PupilTex:
+        m_Texture: {fileID: 2800000, guid: f0d03dc5cead5d5085eca7b0de10d5a9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InteriorMask:
+        m_Texture: {fileID: 2800000, guid: 81eed171f199589c9a79d10f1ddf93a9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PictureTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _HasEye: 0
+    - _HasPicture: 0
+    - _CullMode: 2
+    - _PresentationGain: 1
+    - _Closure: 0
+    - _ClosedLineWidth: 0.006
+    - _Ambient: 0.8
+    - _LightResponse: 0.85
+    - _LightLimit: 1.1
+    - _ShadowCutoff: 0.2
+    - _DarknessStart: 4.25
+    - _DarknessEnd: 12
+    - _DarknessFloor: 0.012
+    - _NearArtDistance: 32
+    - _NearArtVisibility: 0.8
+    - _PupilIntensity: 0.125
+    m_Colors:
+    - _PictureRect: {r: 0.5, g: 0.5, b: 1, a: 1}
+    - _InteriorColor: {r: 0.014443843596092545, g: 0.014443843596092545, b: 0.014443843596092545, a: 1}
+    - _PupilOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EyeRect: {r: 0.4840517544027626, g: 0.5271289252058483, b: 4.6930383910583995, a: 0.7419345238095237}

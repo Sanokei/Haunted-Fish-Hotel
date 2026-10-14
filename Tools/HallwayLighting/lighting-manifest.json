@@ -1,0 +1,464 @@
+{
+  "schema": 1,
+  "source_status": "Authored source, requires native Unity shader import/render verification",
+  "original_art": "Assets/Art/Hallway/HALLWAY-sconce.png",
+  "original_sha256": "eeb9f295999c4a2f495d170b26c221b340b2ea60127216e6150a417cab283356",
+  "size": [
+    1173,
+    1714
+  ],
+  "sprite_pivot": [
+    0.5,
+    0.5
+  ],
+  "pixels_per_unit": 100,
+  "prefab": "Assets/Resources/HallwaySconce.prefab",
+  "prefab_guid": "c92cabf8c70e5495a0b4db09cb1d5f4e",
+  "sprite_local_scale": [
+    0.162,
+    0.162,
+    0.162
+  ],
+  "lights": [
+    {
+      "name": "Left",
+      "source_pixel_center": [
+        466,
+        563
+      ],
+      "local_position": [
+        -0.19521000000000002,
+        0.47628,
+        -0.22
+      ],
+      "color": [
+        0.38,
+        0.68,
+        1
+      ],
+      "intensity": 0.22,
+      "range": 2.15,
+      "shadows": "None",
+      "type": "Point"
+    },
+    {
+      "name": "Center",
+      "source_pixel_center": [
+        563,
+        563
+      ],
+      "local_position": [
+        -0.03807,
+        0.47628,
+        -0.22
+      ],
+      "color": [
+        0.38,
+        0.68,
+        1
+      ],
+      "intensity": 0.22,
+      "range": 2.15,
+      "shadows": "None",
+      "type": "Point"
+    },
+    {
+      "name": "Right",
+      "source_pixel_center": [
+        687,
+        563
+      ],
+      "local_position": [
+        0.16280999999999998,
+        0.47628,
+        -0.22
+      ],
+      "color": [
+        0.38,
+        0.68,
+        1
+      ],
+      "intensity": 0.22,
+      "range": 2.15,
+      "shadows": "None",
+      "type": "Point"
+    }
+  ],
+  "material": "Assets/Art/Hallway/HallwaySpriteLit.mat",
+  "shader": "Assets/Art/Hallway/HallwaySpriteLit.shader",
+  "shader_response": {
+    "ambient": 0.52,
+    "light_response": 0.72,
+    "additional_limit": 1.1,
+    "formula": "albedo * (ambient + min(sum(main and punctual light color * Unity distance attenuation * shadow attenuation * two-sided Lambert) * response, limit))"
+  },
+  "placements": [
+    {
+      "name": "Panel 1 - Sconce 1",
+      "position": {
+        "x": -11.86100011,
+        "y": 1.895091384,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 1.0000287691358023,
+        "y": 1.0000287691358023,
+        "z": 1.0000287691358023
+      },
+      "art_scale": {
+        "x": 0.1620046606,
+        "y": 0.1620046606,
+        "z": 0.1620046606
+      }
+    },
+    {
+      "name": "Panel 1 - Sconce 2",
+      "position": {
+        "x": -9.000300718,
+        "y": 1.895084192,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.9999561851851851,
+        "y": 0.9999561851851851,
+        "z": 0.9999561851851851
+      },
+      "art_scale": {
+        "x": 0.161992902,
+        "y": 0.161992902,
+        "z": 0.161992902
+      }
+    },
+    {
+      "name": "Panel 1 - Sconce 3",
+      "position": {
+        "x": -6.089260401,
+        "y": 1.914254649,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.999912361111111,
+        "y": 0.999912361111111,
+        "z": 0.999912361111111
+      },
+      "art_scale": {
+        "x": 0.1619858025,
+        "y": 0.1619858025,
+        "z": 0.1619858025
+      }
+    },
+    {
+      "name": "Panel 2 - Sconce 1",
+      "position": {
+        "x": -2.039203147,
+        "y": 1.895091384,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 1.0000287691358023,
+        "y": 1.0000287691358023,
+        "z": 1.0000287691358023
+      },
+      "art_scale": {
+        "x": 0.1620046606,
+        "y": 0.1620046606,
+        "z": 0.1620046606
+      }
+    },
+    {
+      "name": "Panel 2 - Sconce 2",
+      "position": {
+        "x": 0.8214962479,
+        "y": 1.895084192,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.9999561851851851,
+        "y": 0.9999561851851851,
+        "z": 0.9999561851851851
+      },
+      "art_scale": {
+        "x": 0.161992902,
+        "y": 0.161992902,
+        "z": 0.161992902
+      }
+    },
+    {
+      "name": "Panel 2 - Sconce 3",
+      "position": {
+        "x": 3.732536565,
+        "y": 1.914254649,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.999912361111111,
+        "y": 0.999912361111111,
+        "z": 0.999912361111111
+      },
+      "art_scale": {
+        "x": 0.1619858025,
+        "y": 0.1619858025,
+        "z": 0.1619858025
+      }
+    },
+    {
+      "name": "Panel 3 - Sconce 1",
+      "position": {
+        "x": 7.782593819,
+        "y": 1.895091384,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 1.0000287691358023,
+        "y": 1.0000287691358023,
+        "z": 1.0000287691358023
+      },
+      "art_scale": {
+        "x": 0.1620046606,
+        "y": 0.1620046606,
+        "z": 0.1620046606
+      }
+    },
+    {
+      "name": "Panel 3 - Sconce 2",
+      "position": {
+        "x": 10.64329321,
+        "y": 1.895084192,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.9999561851851851,
+        "y": 0.9999561851851851,
+        "z": 0.9999561851851851
+      },
+      "art_scale": {
+        "x": 0.161992902,
+        "y": 0.161992902,
+        "z": 0.161992902
+      }
+    },
+    {
+      "name": "Panel 3 - Sconce 3",
+      "position": {
+        "x": 13.55433353,
+        "y": 1.914254649,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.999912361111111,
+        "y": 0.999912361111111,
+        "z": 0.999912361111111
+      },
+      "art_scale": {
+        "x": 0.1619858025,
+        "y": 0.1619858025,
+        "z": 0.1619858025
+      }
+    },
+    {
+      "name": "Panel 4 - Sconce 1",
+      "position": {
+        "x": 17.60439079,
+        "y": 1.895091384,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 1.0000287691358023,
+        "y": 1.0000287691358023,
+        "z": 1.0000287691358023
+      },
+      "art_scale": {
+        "x": 0.1620046606,
+        "y": 0.1620046606,
+        "z": 0.1620046606
+      }
+    },
+    {
+      "name": "Panel 4 - Sconce 2",
+      "position": {
+        "x": 20.46509018,
+        "y": 1.895084192,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.9999561851851851,
+        "y": 0.9999561851851851,
+        "z": 0.9999561851851851
+      },
+      "art_scale": {
+        "x": 0.161992902,
+        "y": 0.161992902,
+        "z": 0.161992902
+      }
+    },
+    {
+      "name": "Panel 4 - Sconce 3",
+      "position": {
+        "x": 23.3761305,
+        "y": 1.914254649,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.999912361111111,
+        "y": 0.999912361111111,
+        "z": 0.999912361111111
+      },
+      "art_scale": {
+        "x": 0.1619858025,
+        "y": 0.1619858025,
+        "z": 0.1619858025
+      }
+    },
+    {
+      "name": "Panel 5 - Sconce 1",
+      "position": {
+        "x": 27.42618775,
+        "y": 1.895091384,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 1.0000287691358023,
+        "y": 1.0000287691358023,
+        "z": 1.0000287691358023
+      },
+      "art_scale": {
+        "x": 0.1620046606,
+        "y": 0.1620046606,
+        "z": 0.1620046606
+      }
+    },
+    {
+      "name": "Panel 5 - Sconce 2",
+      "position": {
+        "x": 30.28688715,
+        "y": 1.895084192,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.9999561851851851,
+        "y": 0.9999561851851851,
+        "z": 0.9999561851851851
+      },
+      "art_scale": {
+        "x": 0.161992902,
+        "y": 0.161992902,
+        "z": 0.161992902
+      }
+    },
+    {
+      "name": "Panel 5 - Sconce 3",
+      "position": {
+        "x": 33.19792746,
+        "y": 1.914254649,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.999912361111111,
+        "y": 0.999912361111111,
+        "z": 0.999912361111111
+      },
+      "art_scale": {
+        "x": 0.1619858025,
+        "y": 0.1619858025,
+        "z": 0.1619858025
+      }
+    },
+    {
+      "name": "Panel 6 - Sconce 1",
+      "position": {
+        "x": 37.24798472,
+        "y": 1.895091384,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 1.0000287691358023,
+        "y": 1.0000287691358023,
+        "z": 1.0000287691358023
+      },
+      "art_scale": {
+        "x": 0.1620046606,
+        "y": 0.1620046606,
+        "z": 0.1620046606
+      }
+    },
+    {
+      "name": "Panel 6 - Sconce 2",
+      "position": {
+        "x": 40.10868411,
+        "y": 1.895084192,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.9999561851851851,
+        "y": 0.9999561851851851,
+        "z": 0.9999561851851851
+      },
+      "art_scale": {
+        "x": 0.161992902,
+        "y": 0.161992902,
+        "z": 0.161992902
+      }
+    },
+    {
+      "name": "Panel 6 - Sconce 3",
+      "position": {
+        "x": 43.01972443,
+        "y": 1.914254649,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.999912361111111,
+        "y": 0.999912361111111,
+        "z": 0.999912361111111
+      },
+      "art_scale": {
+        "x": 0.1619858025,
+        "y": 0.1619858025,
+        "z": 0.1619858025
+      }
+    },
+    {
+      "name": "Panel 7 - Sconce 1",
+      "position": {
+        "x": 47.06978168,
+        "y": 1.895091384,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 1.0000287691358023,
+        "y": 1.0000287691358023,
+        "z": 1.0000287691358023
+      },
+      "art_scale": {
+        "x": 0.1620046606,
+        "y": 0.1620046606,
+        "z": 0.1620046606
+      }
+    },
+    {
+      "name": "Panel 7 - Sconce 2",
+      "position": {
+        "x": 49.93048108,
+        "y": 1.895084192,
+        "z": 1.88
+      },
+      "root_scale": {
+        "x": 0.9999561851851851,
+        "y": 0.9999561851851851,
+        "z": 0.9999561851851851
+      },
+      "art_scale": {
+        "x": 0.161992902,
+        "y": 0.161992902,
+        "z": 0.161992902
+      }
+    }
+  ],
+  "inherited_consumers": [
+    "Assets/Scenes/Game.unity",
+    "Assets/Resources/Tutorials/TutorialRecordingStage.prefab",
+    "Assets/Scenes/TutorialRecording.unity"
+  ],
+  "overlay_cutscene": "Original image shared; screen-space-overlay UI is not a 3D light receiver.",
+  "shadow_policy": "Alpha-clipped two-sided sprite casters/receivers, one inherited hallway directional shadow key, sixty sconce lights remain shadowless."
+}

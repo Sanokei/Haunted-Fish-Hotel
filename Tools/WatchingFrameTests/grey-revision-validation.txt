@@ -1,0 +1,1 @@
+PASS all 373 original placements, masks, gaze anchors and height-first UV rectangles unchanged by exact uploaded #202020 revision.

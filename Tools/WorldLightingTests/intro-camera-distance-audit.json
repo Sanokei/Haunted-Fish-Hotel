@@ -1,0 +1,205 @@
+{
+  "camera": {
+    "position": [
+      0.0,
+      8.5,
+      3.2
+    ],
+    "pitch": -89,
+    "vertical_fov": 24,
+    "aspect": 1.7777777777777777
+  },
+  "visible_center_count": 408,
+  "nearest_center": {
+    "distance": 15.257145185079299,
+    "frame": "Intro upper extension Right 105",
+    "has_eye": false,
+    "position": [
+      4.915238345138592,
+      22.655517437844164,
+      6.070929688438479
+    ],
+    "intro_near_visibility": 0.6726962047823603
+  },
+  "nearest_16_centers": [
+    {
+      "distance": 15.257145185079299,
+      "frame": "Intro upper extension Right 105",
+      "has_eye": false,
+      "position": [
+        4.915238345138592,
+        22.655517437844164,
+        6.070929688438479
+      ],
+      "intro_near_visibility": 0.6726962047823603
+    },
+    {
+      "distance": 15.269654240824485,
+      "frame": "Intro upper extension Left 135",
+      "has_eye": true,
+      "position": [
+        -4.914073252985467,
+        22.67913452163477,
+        6.022475671464183
+      ],
+      "intro_near_visibility": 0.6721898369495451
+    },
+    {
+      "distance": 15.421408388212125,
+      "frame": "Intro upper extension Left 050",
+      "has_eye": false,
+      "position": [
+        -5.247995009166062,
+        22.8862235793183,
+        5.020702113376465
+      ],
+      "intro_near_visibility": 0.6659884330288088
+    },
+    {
+      "distance": 16.091546250717204,
+      "frame": "Intro upper extension Right 043",
+      "has_eye": false,
+      "position": [
+        5.332902683923165,
+        23.5964639849014,
+        4.810833590210654
+      ],
+      "intro_near_visibility": 0.6373788659194082
+    },
+    {
+      "distance": 17.524989059372917,
+      "frame": "Intro upper extension Left 006",
+      "has_eye": false,
+      "position": [
+        -5.5843747231752054,
+        25.091605696248486,
+        4.011554620784752
+      ],
+      "intro_near_visibility": 0.5704465059085474
+    },
+    {
+      "distance": 17.851631159406534,
+      "frame": "Intro upper extension Left 070",
+      "has_eye": true,
+      "position": [
+        -4.73391586457829,
+        25.380797593881006,
+        6.562952309059615
+      ],
+      "intro_near_visibility": 0.5542997718094668
+    },
+    {
+      "distance": 18.007132695789615,
+      "frame": "Intro upper extension Right 007",
+      "has_eye": false,
+      "position": [
+        5.451041468171755,
+        25.61634993744428,
+        4.454408089498202
+      ],
+      "intro_near_visibility": 0.5465167123063059
+    },
+    {
+      "distance": 18.881763580872644,
+      "frame": "Intro upper extension Right 088",
+      "has_eye": true,
+      "position": [
+        6.182709569303604,
+        26.315353325185068,
+        2.246960544139181
+      ],
+      "intro_near_visibility": 0.5017578590689666
+    },
+    {
+      "distance": 19.069956092966102,
+      "frame": "Intro upper extension Left 054",
+      "has_eye": false,
+      "position": [
+        -6.227839675193719,
+        26.489591411450704,
+        2.081143790830597
+      ],
+      "intro_near_visibility": 0.49194378813105094
+    },
+    {
+      "distance": 19.285244562751497,
+      "frame": "Intro upper extension Left 091",
+      "has_eye": false,
+      "position": [
+        -6.557056692338272,
+        26.513557619405347,
+        1.0934845666452806
+      ],
+      "intro_near_visibility": 0.4806528425624878
+    },
+    {
+      "distance": 19.360336990469577,
+      "frame": "Intro upper extension Left 066",
+      "has_eye": false,
+      "position": [
+        -5.730596984715166,
+        26.989020091721102,
+        3.5728842062242276
+      ],
+      "intro_near_visibility": 0.4767000295540056
+    },
+    {
+      "distance": 19.41962982073948,
+      "frame": "Intro upper extension Left 128",
+      "has_eye": false,
+      "position": [
+        -5.38944201332057,
+        27.10446512646378,
+        4.596357589517181
+      ],
+      "intro_near_visibility": 0.473573979361761
+    },
+    {
+      "distance": 19.508208560835744,
+      "frame": "Intro upper extension Right 037",
+      "has_eye": false,
+      "position": [
+        4.608628292054227,
+        27.072057664551203,
+        6.995974265366827
+      ],
+      "intro_near_visibility": 0.4688962437304957
+    },
+    {
+      "distance": 19.50982200852095,
+      "frame": "Intro upper extension Left 039",
+      "has_eye": true,
+      "position": [
+        -4.853140289443808,
+        27.15605799331007,
+        6.205276074738729
+      ],
+      "intro_near_visibility": 0.4688109574360999
+    },
+    {
+      "distance": 19.54831073017765,
+      "frame": "Intro upper extension Right 124",
+      "has_eye": false,
+      "position": [
+        5.004291178819136,
+        27.21688495171634,
+        5.8022566947528365
+      ],
+      "intro_near_visibility": 0.46677561438896675
+    },
+    {
+      "distance": 20.74442440508059,
+      "frame": "Intro upper extension Left 093",
+      "has_eye": true,
+      "position": [
+        -6.563793751872657,
+        28.06335320663604,
+        1.0732732207958686
+      ],
+      "intro_near_visibility": 0.40297723957764264
+    }
+  ],
+  "finding": "Previous9m falloff misses all centered in-frustum extension frames. Intro32m profile reveals nearest side ring while fog and per-frame gain extinguish central far surfaces.",
+  "scope": "Source CPU center-only frustum projection. Not full textured-quad occlusion or native Unity rendering.",
+  "profile": "Root-approved intro material: near distance32, visibility0.8, ambient0.8, pupil intensity0.125."
+}

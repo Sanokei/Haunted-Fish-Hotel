@@ -1,0 +1,1665 @@
+{
+  "schema": 1,
+  "source_policy": "Original PNG files retained byte-for-byte. Segmented frame PNGs retain exact source RGBA pixels, with four pixels of padding and no resampling or alpha edits to retained art. Overlapping crop rectangles exclude foreign frame pixels using nearest-main-component ownership. Every main frame component is fully retained. Tiny disconnected sheet-edge marks outside all crop rectangles remain in the originals.",
+  "coordinate_system": "Source and crop bounding boxes use [left, top, right, bottom], right/bottom exclusive. Interior bboxes are local to the matching cropped sprite.",
+  "sprite_import": {
+    "pixels_per_unit": 100,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "mesh": "FullRect",
+    "filter": "Bilinear",
+    "compression": "None",
+    "mipmaps": false
+  },
+  "sources": [
+    {
+      "filename": "Frames-Empty-00.png",
+      "library_file_id": "libfile_804b0efec66081918d12a3fac4e914bc",
+      "path": "Assets/Art/Frames/Originals/Frames-Empty-00.png",
+      "size": [
+        2048,
+        857
+      ],
+      "sha256": "7581b5da4e64fea7696aae28eea2b845b23cdd4063b5d39d23accdcd98214797",
+      "guid": "2e8dc5f6a6755f0a97331a9be3736f72",
+      "original_byte_check": true
+    },
+    {
+      "filename": "Frames-Filled-00.png",
+      "library_file_id": "libfile_6de59f4b96588191ba813675d8d16ab6",
+      "path": "Assets/Art/Frames/Originals/Frames-Filled-00.png",
+      "size": [
+        2048,
+        857
+      ],
+      "sha256": "d44b08a14e1b823a20e6d237ccdc96d8d984a54f8e55bbf7710eda34c77c0fc4",
+      "guid": "d77912c569065d58835072a0db572250",
+      "original_byte_check": true
+    },
+    {
+      "filename": "HALLWAY-Frame-Eye-outline.png",
+      "library_file_id": "libfile_5645ab82aca88191b0a0bab505779419",
+      "path": "Assets/Art/Frames/Originals/HALLWAY-Frame-Eye-outline.png",
+      "size": [
+        2048,
+        1714
+      ],
+      "sha256": "e0075686a09a0b7b56e6bad571635e543ba6a3227d2d0cb06631ecffd906201d",
+      "guid": "8963042eb1095744b57989bab7c41259",
+      "original_byte_check": true
+    },
+    {
+      "filename": "HALLWAY-Frame-Eye.png",
+      "library_file_id": "libfile_f3175e76d9d481919dd3bf94ded767f7",
+      "path": "Assets/Art/Frames/Originals/HALLWAY-Frame-Eye.png",
+      "size": [
+        2048,
+        1714
+      ],
+      "sha256": "a06a778634678025f8fd407dc4d1a876a3d8494694d17d772665046c97cb09b8",
+      "guid": "ebb86d0920a55f3e956afce4b4a42725",
+      "original_byte_check": true
+    }
+  ],
+  "frames": [
+    {
+      "id": 1,
+      "name": "Brown long horizontal",
+      "source_bbox": [
+        674,
+        23,
+        1065,
+        182
+      ],
+      "main_component_bbox": [
+        678,
+        27,
+        1061,
+        178
+      ],
+      "size": [
+        391,
+        159
+      ],
+      "interior_bbox_local": [
+        47,
+        42,
+        350,
+        120
+      ],
+      "interior_centroid_local": [
+        199.58602046727168,
+        79.90224946900946
+      ],
+      "interior_bbox_normalized": [
+        0.12020460358056266,
+        0.2641509433962264,
+        0.8951406649616368,
+        0.7547169811320755
+      ],
+      "interior_pixels": 20716,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-01.png",
+          "guid": "be371f15228c584cb30c0a3b58fe70fe",
+          "sha256": "7b1579d512325e969071bbb58d54152056dc289cc8756242c758131a22bfc69c",
+          "rgba_sha256": "1ea1457823ef8ee599480f5a0c3d80f265a848f6e71d0112c638f03d5bf85f41",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 43657,
+          "excluded_foreign_alpha_pixels": 20,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-01.png",
+          "guid": "05fb20b283ef5313b61c49b652a827aa",
+          "sha256": "f774d2178102d8858518db62e875bafe2b5004231c14dc85f5658aed5a121bf5",
+          "rgba_sha256": "ae866e52cae7f20bb3bd540767f21a48cdfd46749dd26118be25341c99296bce",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 22941,
+          "excluded_foreign_alpha_pixels": 20,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Brown tall crest",
+      "source_bbox": [
+        339,
+        29,
+        580,
+        403
+      ],
+      "main_component_bbox": [
+        343,
+        33,
+        576,
+        399
+      ],
+      "size": [
+        241,
+        374
+      ],
+      "interior_bbox_local": [
+        64,
+        93,
+        181,
+        320
+      ],
+      "interior_centroid_local": [
+        125.27543836634746,
+        205.33591324500415
+      ],
+      "interior_bbox_normalized": [
+        0.26556016597510373,
+        0.24866310160427807,
+        0.7510373443983402,
+        0.8556149732620321
+      ],
+      "interior_pixels": 22869,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-02.png",
+          "guid": "4a81acddc5115016bf2b086c00c26e1c",
+          "sha256": "8fcfd215220ac77e0cac0ef05182e263e346d3212d9b5d47f6803743e30f4408",
+          "rgba_sha256": "5ff85bc1cf4cae1d6a0a8096c0f4ca389956e0a9b4ec705ab44f1616c37ba440",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 60301,
+          "excluded_foreign_alpha_pixels": 20,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-02.png",
+          "guid": "dcb35659d8ab54a995eca7cba22ce912",
+          "sha256": "b385677365b3cdc2833f4842feaca4fc127852a0c90ea2283d79ba0a7650a95b",
+          "rgba_sha256": "d4ac4beb3050930c44331933986a86d5254ee738d331cf1a257d202c1dc19a58",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 37432,
+          "excluded_foreign_alpha_pixels": 20,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Gold ornate square",
+      "source_bbox": [
+        1718,
+        33,
+        2028,
+        337
+      ],
+      "main_component_bbox": [
+        1722,
+        37,
+        2024,
+        333
+      ],
+      "size": [
+        310,
+        304
+      ],
+      "interior_bbox_local": [
+        81,
+        79,
+        218,
+        213
+      ],
+      "interior_centroid_local": [
+        150.88469004003397,
+        144.87183064418295
+      ],
+      "interior_bbox_normalized": [
+        0.26129032258064516,
+        0.2598684210526316,
+        0.7032258064516129,
+        0.7006578947368421
+      ],
+      "interior_pixels": 16486,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-03.png",
+          "guid": "36ab1f3ddeb55513a6bc438e49b4a628",
+          "sha256": "eb974e036034a2c85e1832ada18ba48cd5ebd3f6f60685536f2cb5aa8d9aef33",
+          "rgba_sha256": "89d35acf06c2b2656bd816a286b8e1069434e29323614922a8944f44297ce076",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 84019,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-03.png",
+          "guid": "d23f3ac4f67b5c1ab1f0a7d60450148e",
+          "sha256": "fb346ab422026e5a83da6a7a7c8450fddf25767d1585b9a1313403f991900fae",
+          "rgba_sha256": "c841e2e044562067a3c5217b4f022a3d8a81981aa3edbdab0ba7b5597f6ce2f1",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 67533,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "Brown upright oval inset",
+      "source_bbox": [
+        185,
+        34,
+        339,
+        218
+      ],
+      "main_component_bbox": [
+        189,
+        38,
+        335,
+        214
+      ],
+      "size": [
+        154,
+        184
+      ],
+      "interior_bbox_local": [
+        42,
+        36,
+        107,
+        158
+      ],
+      "interior_centroid_local": [
+        75.42063747585318,
+        93.65502253702512
+      ],
+      "interior_bbox_normalized": [
+        0.2727272727272727,
+        0.1956521739130435,
+        0.6948051948051948,
+        0.8586956521739131
+      ],
+      "interior_pixels": 6212,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-04.png",
+          "guid": "73625a8545e25df4998e863b49ec9a3b",
+          "sha256": "2496713a57780a3fe276695f4b01d4fb4b62af76c10f933e3d118e50eaaccf78",
+          "rgba_sha256": "68d2f72aec29e33dbda30d51711f2aa9becd5521790750fda0e8ebf725c583d1",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 23616,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-04.png",
+          "guid": "469a8fe0e48e5081bfc1760cc1d664c6",
+          "sha256": "b84bdafde4a05da3b71addd284ff4e5d9c8b86ed5261d5135300e1d56cbf2b0f",
+          "rgba_sha256": "1e50ca1c5fa9527a5ecf0e7e378587cf568c81d79381bebee479023cc4b22ccf",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 17404,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "Gold diamond",
+      "source_bbox": [
+        1535,
+        36,
+        1693,
+        201
+      ],
+      "main_component_bbox": [
+        1539,
+        40,
+        1689,
+        197
+      ],
+      "size": [
+        158,
+        165
+      ],
+      "interior_bbox_local": [
+        38,
+        40,
+        119,
+        123
+      ],
+      "interior_centroid_local": [
+        79.26557949912639,
+        81.4496214327315
+      ],
+      "interior_bbox_normalized": [
+        0.24050632911392406,
+        0.24242424242424243,
+        0.7531645569620253,
+        0.7454545454545455
+      ],
+      "interior_pixels": 3434,
+      "overlapping_foreign_components_excluded": [
+        71
+      ],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-05.png",
+          "guid": "db9860c3bd705c0d81315d928aaffa5f",
+          "sha256": "3b685e1f01d45d3a728d9e2cb3988238109510ae0d1ca137167587fd2be53375",
+          "rgba_sha256": "d77242c4ca3a42f516319b5a8e2daac93ed8c55d517e64e96b038d93abe75826",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 12624,
+          "excluded_foreign_alpha_pixels": 413,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-05.png",
+          "guid": "343a22d88988584097fbeab0936317bd",
+          "sha256": "2d0447d9e895c684e9dcbbad5ced92c83cc499acac8c6a91014a242449f98600",
+          "rgba_sha256": "71d8ad1698bd6292547cae4cac4e521d0b6a5f05b761a4d5f873ce606a624d24",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 9136,
+          "excluded_foreign_alpha_pixels": 413,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "Gold small oval crest",
+      "source_bbox": [
+        17,
+        102,
+        168,
+        253
+      ],
+      "main_component_bbox": [
+        21,
+        106,
+        164,
+        249
+      ],
+      "size": [
+        151,
+        151
+      ],
+      "interior_bbox_local": [
+        42,
+        37,
+        112,
+        112
+      ],
+      "interior_centroid_local": [
+        77.23895533317061,
+        75.20722479863315
+      ],
+      "interior_bbox_normalized": [
+        0.2781456953642384,
+        0.24503311258278146,
+        0.7417218543046358,
+        0.7417218543046358
+      ],
+      "interior_pixels": 4097,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-06.png",
+          "guid": "e8a238de51ee58af971473f0083a7067",
+          "sha256": "2a1fd5a5169cf41d3849353c5f552e2ca467893e50d3c52116c2ce6fc0dd0023",
+          "rgba_sha256": "b18132cc9cf7937259b0805b4bd912d037cf461f493f70311cd66c16fa545a28",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 12898,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-06.png",
+          "guid": "2a38aff4b13c5214aeacc0967a9e0e37",
+          "sha256": "761da9405d61710861625c51cdb5f4572d7f4cdf0f1ba7831ded84703a1c4916",
+          "rgba_sha256": "76aacafdbb4cdd498061c6297306e6e7d74caede302c3cbee607cac74cb4a608",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 8801,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "Gold brown cut-corner horizontal",
+      "source_bbox": [
+        1108,
+        116,
+        1401,
+        295
+      ],
+      "main_component_bbox": [
+        1112,
+        120,
+        1397,
+        291
+      ],
+      "size": [
+        293,
+        179
+      ],
+      "interior_bbox_local": [
+        29,
+        28,
+        259,
+        148
+      ],
+      "interior_centroid_local": [
+        144.9902757984743,
+        87.50570039399783
+      ],
+      "interior_bbox_normalized": [
+        0.09897610921501707,
+        0.1564245810055866,
+        0.8839590443686007,
+        0.8268156424581006
+      ],
+      "interior_pixels": 23858,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-07.png",
+          "guid": "204fa9a39811596e87239363526f7309",
+          "sha256": "db13460e2aed6e188bb9455b419e4be04a3991a8fdfe20d3771f7e5fc6906a3e",
+          "rgba_sha256": "b8326eb2b37d671cbac7e143e4d55577a2c90f4077785c891c452c4ed9f78f9a",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 46102,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-07.png",
+          "guid": "2a9eba60d435521b964b08955b891443",
+          "sha256": "6ef5d4735f604037d1d743b11abe554ff2e546d7e692ebb5b0a470d04a1b3904",
+          "rgba_sha256": "9f2c8c905206d3b14af5418150e2463e281ca70f79cec4f29a255ccd30f837b5",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 22186,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 8,
+      "name": "Gold upright oval",
+      "source_bbox": [
+        1413,
+        137,
+        1571,
+        422
+      ],
+      "main_component_bbox": [
+        1417,
+        141,
+        1567,
+        418
+      ],
+      "size": [
+        158,
+        285
+      ],
+      "interior_bbox_local": [
+        32,
+        30,
+        125,
+        250
+      ],
+      "interior_centroid_local": [
+        77.71035980148883,
+        139.3035359801489
+      ],
+      "interior_bbox_normalized": [
+        0.20253164556962025,
+        0.10526315789473684,
+        0.7911392405063291,
+        0.8771929824561403
+      ],
+      "interior_pixels": 16120,
+      "overlapping_foreign_components_excluded": [
+        31
+      ],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-08.png",
+          "guid": "1722438251f955149fc09f03ebbbc366",
+          "sha256": "d0b7684decd46de30e162de06c3f6175d7031e88c2520325c8eea8099f05ae16",
+          "rgba_sha256": "a7143e4dd12734f83edf408b29663f5a4138424d3a3f5350d8ee1db37ecd5809",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 33009,
+          "excluded_foreign_alpha_pixels": 140,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-08.png",
+          "guid": "d04fb06564a95c399eeefa384c3426df",
+          "sha256": "7156a6a2892bc915c52bf21d866ff8a213c57a433e110dec660c7fa7ff2c924e",
+          "rgba_sha256": "3967da97736cd32eec4a647268fc6ac82fff5b6d77bd67616ca5b5bac3980d3d",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 16883,
+          "excluded_foreign_alpha_pixels": 140,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "Gold large rectangle",
+      "source_bbox": [
+        601,
+        182,
+        1093,
+        538
+      ],
+      "main_component_bbox": [
+        605,
+        186,
+        1089,
+        534
+      ],
+      "size": [
+        492,
+        356
+      ],
+      "interior_bbox_local": [
+        57,
+        61,
+        429,
+        295
+      ],
+      "interior_centroid_local": [
+        242.45276777181505,
+        176.14745521821166
+      ],
+      "interior_bbox_normalized": [
+        0.11585365853658537,
+        0.17134831460674158,
+        0.8719512195121951,
+        0.8286516853932584
+      ],
+      "interior_pixels": 81618,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-09.png",
+          "guid": "5c64c5a4d2575ef2b2d0dc095d63a2f4",
+          "sha256": "aeeda9253f10be7e20ec22a45e4ae8547ba7e2277c5f1e7ff156024a9ba5c1ab",
+          "rgba_sha256": "31f4708ea074e7937c892512ef1cef981a722730236894b250edaf3314ed49e7",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 157349,
+          "excluded_foreign_alpha_pixels": 26,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-09.png",
+          "guid": "4709bd1eb49955619f4c26595e565c2b",
+          "sha256": "04c9f191464a5a4a1d59b64c389e2951705bf4aac233ca13ca4eec91f682cb19",
+          "rgba_sha256": "d80c44a3ca41a8375293d989e89e7a47fe99880b7b0874f89427c2ad977a5582",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 75673,
+          "excluded_foreign_alpha_pixels": 26,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 10,
+      "name": "Gold tall crest",
+      "source_bbox": [
+        136,
+        257,
+        352,
+        599
+      ],
+      "main_component_bbox": [
+        140,
+        261,
+        348,
+        595
+      ],
+      "size": [
+        216,
+        342
+      ],
+      "interior_bbox_local": [
+        26,
+        64,
+        181,
+        310
+      ],
+      "interior_centroid_local": [
+        103.10468319559229,
+        184.71404353222536
+      ],
+      "interior_bbox_normalized": [
+        0.12037037037037036,
+        0.1871345029239766,
+        0.8379629629629629,
+        0.9064327485380117
+      ],
+      "interior_pixels": 33033,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-10.png",
+          "guid": "9a8ba2afae76551fb1f4e81d73107806",
+          "sha256": "8e62abf655eebfb22638d98a28836292c29cf424f33e73c51ed1df9292472a0b",
+          "rgba_sha256": "afefd9f7690176a0ed7b85be3e07f2897c464a557c49df6bc2b00ba90fee227d",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 59354,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-10.png",
+          "guid": "9f053a3334e55f4384f8cfb12b2175db",
+          "sha256": "92a0f42e0157f483439dbe02ccbef84d300d586768b07b211f11f4b3d316bbf7",
+          "rgba_sha256": "eba757916d6df1f0eac95983c3f48322ce46ad7d679ef8b331bb8358a723b094",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 26312,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 11,
+      "name": "Brown narrow oval",
+      "source_bbox": [
+        24,
+        271,
+        127,
+        607
+      ],
+      "main_component_bbox": [
+        28,
+        275,
+        123,
+        603
+      ],
+      "size": [
+        103,
+        336
+      ],
+      "interior_bbox_local": [
+        31,
+        36,
+        70,
+        293
+      ],
+      "interior_centroid_local": [
+        49.85733070348455,
+        158.88468113083496
+      ],
+      "interior_bbox_normalized": [
+        0.30097087378640774,
+        0.10714285714285714,
+        0.6796116504854369,
+        0.8720238095238095
+      ],
+      "interior_pixels": 7605,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-11.png",
+          "guid": "a21162a5d9e15ebf9689c01335ba7655",
+          "sha256": "2bf7afc1d31a32974eb85e4b44ec01fee3c8063879630c9fe6f6d4e7ee634378",
+          "rgba_sha256": "062516035a2fc23a5b302780f62059716379ec20d3671e672069b853b0e876de",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 25377,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-11.png",
+          "guid": "8581ff354abd5cfea3f439cdbc544053",
+          "sha256": "0314a8b5d518f3895f90e611aeca39562dae126a0b90f6d09335b2470ee149ff",
+          "rgba_sha256": "3580bea843d5e9bca04f29c05188fa06c7e679c90d280c5b73b9ea5ccb0325fa",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 17772,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 12,
+      "name": "Gold scalloped oval",
+      "source_bbox": [
+        1575,
+        285,
+        1723,
+        555
+      ],
+      "main_component_bbox": [
+        1579,
+        289,
+        1719,
+        551
+      ],
+      "size": [
+        148,
+        270
+      ],
+      "interior_bbox_local": [
+        40,
+        60,
+        111,
+        206
+      ],
+      "interior_centroid_local": [
+        75.5056967572305,
+        132.7905346187555
+      ],
+      "interior_bbox_normalized": [
+        0.2702702702702703,
+        0.2222222222222222,
+        0.75,
+        0.762962962962963
+      ],
+      "interior_pixels": 7987,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-12.png",
+          "guid": "3e4e25aa87225ab6a063dc024bc3811c",
+          "sha256": "03ff7950bfe5587ceb9778c386109be5c5c51058e0c5b5e9478de6a0d57f4dc9",
+          "rgba_sha256": "02037302409887b3c5ec1be7d730610a792b4a8f335033d4af04472577571a0e",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 22202,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-12.png",
+          "guid": "feeb08716b9755a0986de25d2ed535f7",
+          "sha256": "ed4e3002b8c4c13055b260a1bc41797b931b136c403ae4a5025433359380100b",
+          "rgba_sha256": "671174ceba12723c68ea0a746f5cc7e72fe8543c445a6ba1c442889ad5a9247f",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 14215,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 13,
+      "name": "Gold lobed rectangle",
+      "source_bbox": [
+        1109,
+        338,
+        1419,
+        591
+      ],
+      "main_component_bbox": [
+        1113,
+        342,
+        1415,
+        587
+      ],
+      "size": [
+        310,
+        253
+      ],
+      "interior_bbox_local": [
+        30,
+        35,
+        274,
+        219
+      ],
+      "interior_centroid_local": [
+        153.30151240169388,
+        126.81810042347247
+      ],
+      "interior_bbox_normalized": [
+        0.0967741935483871,
+        0.1383399209486166,
+        0.8838709677419355,
+        0.8656126482213439
+      ],
+      "interior_pixels": 41325,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-13.png",
+          "guid": "b6d2349b077b597c8d0d709bc232c272",
+          "sha256": "caa750e10eed5a5fd9cbabb57cbbf7d523dd30967b5f93bc72fd2bca367a2af5",
+          "rgba_sha256": "7990491b10a0ac3dba5b2749bb465375b728f61df2c97f039c15ed8c21e9c43a",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 63492,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-13.png",
+          "guid": "863d503bff4b57db85edcabfcc6d0691",
+          "sha256": "dc0fbfb399df3037d1dc834fa0eb3b9beeca3d8ebcf72f0a1e20b431c905fc26",
+          "rgba_sha256": "effdb12cbd3a6090cd313f80436556d57962cce8254ef82fec4baa6203103fdb",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 22152,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 14,
+      "name": "Brown small horizontal",
+      "source_bbox": [
+        1758,
+        373,
+        2019,
+        517
+      ],
+      "main_component_bbox": [
+        1762,
+        377,
+        2015,
+        513
+      ],
+      "size": [
+        261,
+        144
+      ],
+      "interior_bbox_local": [
+        60,
+        52,
+        199,
+        92
+      ],
+      "interior_centroid_local": [
+        128.3118629364563,
+        70.81912817176317
+      ],
+      "interior_bbox_normalized": [
+        0.22988505747126436,
+        0.3611111111111111,
+        0.7624521072796935,
+        0.6388888888888888
+      ],
+      "interior_pixels": 4611,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-14.png",
+          "guid": "0e341244a77d5e8995fa1c4675de0e5d",
+          "sha256": "cbd334e8e557d92a3c4b3753a874a72739998e00ccef326570f5ac318a99a37e",
+          "rgba_sha256": "8a76b36aeb70ec699a846e8394e16742c6fdd6c52703b83e9c0e963b9857ef00",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 32170,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-14.png",
+          "guid": "94b7b77309535d59b9a7e1a35b8502f1",
+          "sha256": "b2c005c61a8e7c007518a972dbbbe51c9e907d84268e6ba716b50bdb08e57d4f",
+          "rgba_sha256": "2fd89d64f16aa0263b4d7088e082f403c2300745649ee64a22b94fe91d8c25bb",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 27559,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 15,
+      "name": "Gold narrow crest horizontal",
+      "source_bbox": [
+        355,
+        405,
+        597,
+        532
+      ],
+      "main_component_bbox": [
+        359,
+        409,
+        593,
+        528
+      ],
+      "size": [
+        242,
+        127
+      ],
+      "interior_bbox_local": [
+        34,
+        42,
+        207,
+        93
+      ],
+      "interior_centroid_local": [
+        119.21933784800602,
+        66.08151492350137
+      ],
+      "interior_bbox_normalized": [
+        0.14049586776859505,
+        0.33070866141732286,
+        0.8553719008264463,
+        0.7322834645669292
+      ],
+      "interior_pixels": 7974,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-15.png",
+          "guid": "4e629986474c58afb22e42ec3baa7b6d",
+          "sha256": "50f05f08b1260a9948b10b9a9f080c7743a560fea7906594316424faa54953f3",
+          "rgba_sha256": "cd7ec68ab6ea79d354c59b21d78d6bf6e9aa2895b38b14a44863f41a27456b38",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 19117,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-15.png",
+          "guid": "6590b7fda5be5f08bf1dcda946c85f12",
+          "sha256": "4545305b9bf58dae5bf0328779b8be4bfccafa40840d6842ee61f99b89ba543f",
+          "rgba_sha256": "87c4ff38ec9be886012857db4de91563ba20848ac7a6eb5399817ef937e7ed95",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 11141,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 16,
+      "name": "Brown small rectangle",
+      "source_bbox": [
+        1438,
+        453,
+        1556,
+        546
+      ],
+      "main_component_bbox": [
+        1442,
+        457,
+        1552,
+        542
+      ],
+      "size": [
+        118,
+        93
+      ],
+      "interior_bbox_local": [
+        26,
+        26,
+        87,
+        67
+      ],
+      "interior_centroid_local": [
+        56.38074712643678,
+        46.18582375478927
+      ],
+      "interior_bbox_normalized": [
+        0.22033898305084745,
+        0.27956989247311825,
+        0.7372881355932204,
+        0.7204301075268817
+      ],
+      "interior_pixels": 2088,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-16.png",
+          "guid": "e1b405ce5e585a909e649056b1ff071a",
+          "sha256": "37c1fe33d714d4ae2c4aac5af799f62d2677849092c233d5980399d07db8ee40",
+          "rgba_sha256": "d768b85b370ffb0cde0fc1549d2fad89a1da686bd333e0bb6b02b591fb480e4a",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 8273,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-16.png",
+          "guid": "c00986621cb45218af66a5decca1ee62",
+          "sha256": "5c899d4d06a27deff4ae74e31fa91b20bed5e5705463a2ba98fa06e8b3dfc3b1",
+          "rgba_sha256": "fa21cb13984f700878787b1c8d0dedbdc4e137559d10d9c69489fa55b27dddd4",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 6184,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 17,
+      "name": "Gold slender crest",
+      "source_bbox": [
+        1920,
+        521,
+        2019,
+        801
+      ],
+      "main_component_bbox": [
+        1924,
+        525,
+        2015,
+        797
+      ],
+      "size": [
+        99,
+        280
+      ],
+      "interior_bbox_local": [
+        34,
+        65,
+        66,
+        223
+      ],
+      "interior_centroid_local": [
+        48.86071686312244,
+        142.66321866730814
+      ],
+      "interior_bbox_normalized": [
+        0.3434343434343434,
+        0.23214285714285715,
+        0.6666666666666666,
+        0.7964285714285714
+      ],
+      "interior_pixels": 4157,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-17.png",
+          "guid": "13863f16755a586e840dc4f7ae5c6e10",
+          "sha256": "a9c184b66dd1c9f82375e63baa0f51bc1dbfb89e226efc0d756f1627178292cc",
+          "rgba_sha256": "2aaaa2495a0fb335d809c154fe0f2127e60d64b558c4bb872e8d77a4da8b4575",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 20474,
+          "excluded_foreign_alpha_pixels": 14,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-17.png",
+          "guid": "6580e9b1c4b35eb294e1e2ff4feaf85c",
+          "sha256": "0e180f484ddb9139cb1a817af24122e093fb6233effdb0e0cc82180df9d8c5fd",
+          "rgba_sha256": "51e4eaed2d7f4a815d5445993c148bab8f75fcb464e4e314e9e848e5bd6aa698",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 16214,
+          "excluded_foreign_alpha_pixels": 14,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 18,
+      "name": "Gold scroll landscape",
+      "source_bbox": [
+        510,
+        550,
+        909,
+        803
+      ],
+      "main_component_bbox": [
+        514,
+        554,
+        905,
+        799
+      ],
+      "size": [
+        399,
+        253
+      ],
+      "interior_bbox_local": [
+        55,
+        47,
+        347,
+        197
+      ],
+      "interior_centroid_local": [
+        204.56032046462184,
+        122.4844045736213
+      ],
+      "interior_bbox_normalized": [
+        0.13784461152882205,
+        0.1857707509881423,
+        0.8696741854636592,
+        0.7786561264822134
+      ],
+      "interior_pixels": 38569,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-18.png",
+          "guid": "81c80c06c3e5559586bd45c2b92821e3",
+          "sha256": "b440cb53142ea382b08f3d173b3d6b387b282a36ff527a6450c9ed3fa60f5e2b",
+          "rgba_sha256": "3d58d05ad987a497c0926064e3e6da4e25824df41ab47d1f2ca9d91dc0e19ef8",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 73332,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-18.png",
+          "guid": "3f4225c2d0b750b0bbb586dc1f495ea5",
+          "sha256": "af43bf744bbea34b281c70b4229eef8609a790d4ff3d522d69721b9c16be0b26",
+          "rgba_sha256": "a758f6acf561c50d378e03d34e855b0142ed8cb309803de34f61659ea02dac5a",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 34717,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 19,
+      "name": "Brown pointed oval",
+      "source_bbox": [
+        293,
+        580,
+        512,
+        840
+      ],
+      "main_component_bbox": [
+        297,
+        584,
+        508,
+        836
+      ],
+      "size": [
+        219,
+        260
+      ],
+      "interior_bbox_local": [
+        44,
+        87,
+        167,
+        178
+      ],
+      "interior_centroid_local": [
+        106.27171259155912,
+        132.4334379723288
+      ],
+      "interior_bbox_normalized": [
+        0.2009132420091324,
+        0.3346153846153846,
+        0.7625570776255708,
+        0.6846153846153846
+      ],
+      "interior_pixels": 8601,
+      "overlapping_foreign_components_excluded": [
+        104
+      ],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-19.png",
+          "guid": "22d50ebf8f365bb5bac7d6e0d937b7c7",
+          "sha256": "8165254542588d360d7a514792278867474dffb8283b06260d87bc718692bc80",
+          "rgba_sha256": "88dbb81fd733614c666951286e7dac48a3552ceeb06320fb6633fcb483de7eb3",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 24180,
+          "excluded_foreign_alpha_pixels": 506,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-19.png",
+          "guid": "46d8db55834159d6be9681f17c25070b",
+          "sha256": "6c32ed37165b44c7e70184db8f17502a0cbd54e16f481725ce5b07dd332bfbd9",
+          "rgba_sha256": "f890354c43a60a92020297bca15fd73e2d25f5fb99fe464ecd8b690307c4bf67",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 15578,
+          "excluded_foreign_alpha_pixels": 506,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 20,
+      "name": "Gold round",
+      "source_bbox": [
+        1677,
+        590,
+        1893,
+        804
+      ],
+      "main_component_bbox": [
+        1681,
+        594,
+        1889,
+        800
+      ],
+      "size": [
+        216,
+        214
+      ],
+      "interior_bbox_local": [
+        41,
+        40,
+        173,
+        172
+      ],
+      "interior_centroid_local": [
+        105.9568978264084,
+        105.03600473162797
+      ],
+      "interior_bbox_normalized": [
+        0.18981481481481483,
+        0.18691588785046728,
+        0.8009259259259259,
+        0.8037383177570093
+      ],
+      "interior_pixels": 13526,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-20.png",
+          "guid": "404e841433435e509982a98cac2c313b",
+          "sha256": "ab6b2373cda0ba1974abe32c504f2e155725893165a1f62d78812ef049626dd1",
+          "rgba_sha256": "af4b59841745c760ab22a67f3dc6c5eed75cbe92b7f67377a16a05f2a7b09d12",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 33319,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-20.png",
+          "guid": "c8fdc0dd66d05b3cb3986e6e8177c1e9",
+          "sha256": "8b13c0d2592736039786443daf437f9a6b1a11d4be548ddea90992be26db23f1",
+          "rgba_sha256": "5db72fe2b9c70e3f7a67d95dbaa806c811a30d645a448a3f2fbe1e8a0d195910",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 19793,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 21,
+      "name": "Brown small square B",
+      "source_bbox": [
+        1304,
+        596,
+        1434,
+        731
+      ],
+      "main_component_bbox": [
+        1308,
+        600,
+        1430,
+        727
+      ],
+      "size": [
+        130,
+        135
+      ],
+      "interior_bbox_local": [
+        52,
+        56,
+        77,
+        79
+      ],
+      "interior_centroid_local": [
+        64.30332681017613,
+        67.55381604696673
+      ],
+      "interior_bbox_normalized": [
+        0.4,
+        0.4148148148148148,
+        0.5923076923076923,
+        0.5851851851851851
+      ],
+      "interior_pixels": 511,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-21.png",
+          "guid": "d394688f99db51d5bb87d470ab789511",
+          "sha256": "1a0d61b1da4a1ac7799bb498740f13dc2217ffb7b02514b144c418c065dde8b2",
+          "rgba_sha256": "b3f2f3d75b759478e10c84e1308ca46c0a713128fa5605bbb87a6a0ab5f4575a",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 13919,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-21.png",
+          "guid": "722de53549815e9788fdd9c23f99b293",
+          "sha256": "42742e28085b59250b7af3fd6ba29f6641dbb79d617d5d223eb8c236481caed8",
+          "rgba_sha256": "21418e97e10f59c59f24696ae75cd7a61e13977030ae47e897fa811eb46ace2e",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 13408,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 22,
+      "name": "Brown square",
+      "source_bbox": [
+        927,
+        602,
+        1136,
+        805
+      ],
+      "main_component_bbox": [
+        931,
+        606,
+        1132,
+        801
+      ],
+      "size": [
+        209,
+        203
+      ],
+      "interior_bbox_local": [
+        51,
+        53,
+        151,
+        147
+      ],
+      "interior_centroid_local": [
+        101.89582594300579,
+        100.03511883646684
+      ],
+      "interior_bbox_normalized": [
+        0.24401913875598086,
+        0.26108374384236455,
+        0.722488038277512,
+        0.7241379310344828
+      ],
+      "interior_pixels": 8457,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-22.png",
+          "guid": "edd9345992e85a53a08d5619388fcb71",
+          "sha256": "20d619d4b9a8891ab0460e000f6704565a521a05c26b23467afec17c1f5fe3e1",
+          "rgba_sha256": "b33864d0076689169bbaad414ea0431da148e0d79fa07ee4befbf6111a07beb5",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 35858,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-22.png",
+          "guid": "c474cd45636c514591bd0b4007420aff",
+          "sha256": "a6a33538765527d3d035bee413c7c4b21d6b3f562e83b80517cb1efe32e6fcbf",
+          "rgba_sha256": "b1d7f8c78e41e32a020ab967a12cf2a120d6c55efbd4d4e8cadc9add1e336c58",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 27401,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 23,
+      "name": "Brown small square A",
+      "source_bbox": [
+        1154,
+        602,
+        1283,
+        731
+      ],
+      "main_component_bbox": [
+        1158,
+        606,
+        1279,
+        727
+      ],
+      "size": [
+        129,
+        129
+      ],
+      "interior_bbox_local": [
+        45,
+        47,
+        75,
+        75
+      ],
+      "interior_centroid_local": [
+        60.32005899705015,
+        60.23156342182891
+      ],
+      "interior_bbox_normalized": [
+        0.3488372093023256,
+        0.3643410852713178,
+        0.5813953488372093,
+        0.5813953488372093
+      ],
+      "interior_pixels": 678,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-23.png",
+          "guid": "eb8847d610ab5158907d2fc278f24620",
+          "sha256": "f22de87c50f705af9cec30347627cdf689703f2cd2b7cc5cf90e1d2fabf2d719",
+          "rgba_sha256": "4004050955ea7b0c53b315df246bccee24f2149c2aa8be8807a9eed1a651db2e",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 12820,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-23.png",
+          "guid": "5a4d5b0708d05c72b12b52eb92e78f25",
+          "sha256": "f55ac56a79f9a9c636a781dabc3bc7601046c1c97c00e6d6d6b4cdac70cf411c",
+          "rgba_sha256": "8e00e65932b32b15fe2752e1c3d835731843103c55855eb6c619090b3b1a9219",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 12140,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 24,
+      "name": "Brown diamond",
+      "source_bbox": [
+        1454,
+        621,
+        1636,
+        808
+      ],
+      "main_component_bbox": [
+        1458,
+        625,
+        1632,
+        804
+      ],
+      "size": [
+        182,
+        187
+      ],
+      "interior_bbox_local": [
+        62,
+        66,
+        114,
+        122
+      ],
+      "interior_centroid_local": [
+        87.62403373155306,
+        94.08292340126494
+      ],
+      "interior_bbox_normalized": [
+        0.34065934065934067,
+        0.35294117647058826,
+        0.6263736263736264,
+        0.6524064171122995
+      ],
+      "interior_pixels": 1423,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-24.png",
+          "guid": "36903e559c915ae1968e335080e49da0",
+          "sha256": "a93f8b6b6d741138a6887b4a93af584614aae9e6beee895a17dd1198916b7117",
+          "rgba_sha256": "8203f44fe49913f56e3c251f00237bd266ec9cb712f7e6dedce2cafa634de896",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 16304,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-24.png",
+          "guid": "e416c3e73e7c5e288bf3c837dbadf45b",
+          "sha256": "d85f3f6e8523a11da1815a38386b733e0cec4e0c8543ef12fbf76e8427f29a0e",
+          "rgba_sha256": "5e1c02780e36356a396363f9ce1eaafe40fd9584bd27ae874c17c07c0ffbdbc1",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 14813,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    },
+    {
+      "id": 25,
+      "name": "Gold wide oval",
+      "source_bbox": [
+        7,
+        624,
+        282,
+        758
+      ],
+      "main_component_bbox": [
+        11,
+        628,
+        278,
+        754
+      ],
+      "size": [
+        275,
+        134
+      ],
+      "interior_bbox_local": [
+        35,
+        28,
+        238,
+        106
+      ],
+      "interior_centroid_local": [
+        136.0592557099505,
+        67.54855454400256
+      ],
+      "interior_bbox_normalized": [
+        0.12727272727272726,
+        0.208955223880597,
+        0.8654545454545455,
+        0.7910447761194029
+      ],
+      "interior_pixels": 12522,
+      "overlapping_foreign_components_excluded": [],
+      "variants": {
+        "filled": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Filled-25.png",
+          "guid": "95c19f820a49555b895a0838c3b83860",
+          "sha256": "55bbeb69b0dd3a952ce8806ab3f8a578c7937643784827b1851e4eec9d5ad330",
+          "rgba_sha256": "a0cb7fb819b6d3f33b8c3d23c1de175376764e10278085d0d78b92da262133db",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 26435,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        },
+        "empty": {
+          "path": "Assets/Art/Frames/Segmented Frames/Frame-Empty-25.png",
+          "guid": "d0268d46d7f25bc98d48c311fc82371f",
+          "sha256": "e8eb78bf3b99f9790529a7797adf9dd8bfc22ab9052d96f3057c0a8b50e45101",
+          "rgba_sha256": "f05754dfcaecc96ceaaa5dab45641ad4730b2dc4842ba06a7694926b6f841d8d",
+          "source_pixel_check": true,
+          "nonzero_alpha_pixels": 13813,
+          "excluded_foreign_alpha_pixels": 0,
+          "complete_main_component_retained": true
+        }
+      }
+    }
+  ],
+  "eye": {
+    "source_crop_bbox": [
+      206,
+      431,
+      1860,
+      1284
+    ],
+    "size": [
+      1654,
+      853
+    ],
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "outline_alpha_bbox_source": [
+      210,
+      435,
+      1856,
+      1280
+    ],
+    "interior_bbox_source": [
+      356,
+      452,
+      1710,
+      1249
+    ],
+    "interior_bbox_local": [
+      150,
+      21,
+      1504,
+      818
+    ],
+    "interior_pixel_count": 635448,
+    "mask_method": "Exact enclosed fully-transparent interior of original outline, found by flood fill, largest connected enclosed region. Stroke itself is excluded. Original outline is drawn over the mask edge.",
+    "assets": {
+      "mask": {
+        "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye-interior-mask.png",
+        "guid": "81eed171f199589c9a79d10f1ddf93a9",
+        "sha256": "c29a27af44ab6dcd30202530da3649948f17f10eb0d42dc377347702b73a6b1a"
+      },
+      "outline": {
+        "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye-outline.png",
+        "guid": "9cf5240d82a954ebb8370791c51ab67d",
+        "sha256": "5b6c44534cbfb542598f0e9137b2c4f1e23871967a994022c2aead7a3671ca8f",
+        "source_pixel_check": true,
+        "alpha_bbox_source": [
+          210,
+          435,
+          1856,
+          1280
+        ],
+        "alpha_bbox_local": [
+          4,
+          4,
+          1650,
+          849
+        ]
+      },
+      "pupil": {
+        "path": "Assets/Art/Frames/Eye/HALLWAY-Frame-Eye.png",
+        "guid": "f0d03dc5cead5d5085eca7b0de10d5a9",
+        "sha256": "9975c14c32e619b8470c0b735d257e3ef9815b10f2ba9be1eb3cf34a6b7a2c01",
+        "source_pixel_check": true,
+        "alpha_bbox_source": [
+          765,
+          602,
+          1325,
+          1113
+        ],
+        "alpha_bbox_local": [
+          559,
+          171,
+          1119,
+          682
+        ]
+      }
+    }
+  },
+  "validation": {
+    "paired_frames": 25,
+    "frame_crops": 50,
+    "original_byte_checks_passed": 4,
+    "frame_source_pixel_checks_passed": 50,
+    "eye_source_pixel_checks_passed": 2,
+    "foreign_frame_components_in_crops": 0,
+    "retained_source_pixel_mutations": 0,
+    "all_main_frame_components_fully_retained": true,
+    "eye_mask_connected_components": 1,
+    "mask_outline_overlap_pixels": 0
+  }
+}

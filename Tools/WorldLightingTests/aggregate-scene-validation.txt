@@ -1,0 +1,5 @@
+PASS: 8566 assertions, 311 YAML assets, 976 changed asset paths against HEAD.
+NOTE: 33 pre-existing externally unresolved GUIDs encountered; source-only checks do not validate unavailable package imports.
+NOTE: Camera checks use serialized scene/prefab overrides and a Python math transcription; they do not prove Unity rendering or occlusion.
+YAML syntax: checked with installed PyYAML
+NOT RUN: Unity import/compilation, rendering, physics, or connected multiplayer.

@@ -1,0 +1,33 @@
+{
+  "keys": [
+    {
+      "asset": "Assets/Scenes/BossFight.unity",
+      "light_id": 672667459,
+      "additional_data_id": 981041,
+      "light_count_unchanged": true,
+      "shadow_type": 1,
+      "bias": 0.025,
+      "normal_bias": 0.12,
+      "resolution_tier": 2,
+      "pc_resolution_pixels": 1024,
+      "intensity": 65,
+      "range": 21,
+      "note": "Existing pose, color, intensity, range and all gameplay/physics retained. Boss shadow type/bias retained; theatre enables its existing single spotlight shadow."
+    },
+    {
+      "asset": "Assets/Scenes/theatre.unity",
+      "light_id": 1297839878,
+      "additional_data_id": 981031,
+      "light_count_unchanged": true,
+      "shadow_type": 2,
+      "bias": 0.025,
+      "normal_bias": 0.08,
+      "resolution_tier": 1,
+      "pc_resolution_pixels": 512,
+      "intensity": 0.15,
+      "range": 18,
+      "note": "Existing pose, color, intensity, range and all gameplay/physics retained. Boss shadow type/bias retained; theatre enables its existing single spotlight shadow."
+    }
+  ],
+  "native_gpu_validation": false
+}

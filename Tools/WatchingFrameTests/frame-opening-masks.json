@@ -1,0 +1,356 @@
+{
+  "schema": 1,
+  "method": "Largest alpha-enclosed opening of each exact original empty frame, with enclosed specks filled. Opaque backing extends four source pixels under partially transparent inner paint, bounded inside the original outer silhouette. Texture-local mask; no stencil IDs, SpriteMask, UI masks or global shader properties.",
+  "frames": [
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-01.png",
+      "backing_guid": "3902c39d3c06525daf5b4a2ba7c9bad2",
+      "frame_id": 1,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-01.png",
+      "guid": "11cb28d351bd57699d28b42c92485071",
+      "size": [
+        391,
+        159
+      ],
+      "pixels": 20730,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-01.png",
+      "sha256": "33027b3d8222ee6700aec8a563db80c9b0de63544eeb32897bc2009b63032d10"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-02.png",
+      "backing_guid": "507a3727ff68556894921e22126f4f5d",
+      "frame_id": 2,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-02.png",
+      "guid": "d3362eb492295682bd6f458445a4fd37",
+      "size": [
+        241,
+        374
+      ],
+      "pixels": 22911,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-02.png",
+      "sha256": "a53aae68c4db86ea96c58883f2a7016a785369dd4acdee0de0aec8742f83f2d7"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-03.png",
+      "backing_guid": "c54ddb27d2f95d3ab972ea6d8e12ca91",
+      "frame_id": 3,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-03.png",
+      "guid": "c6e95857eb5c568a9ee79ae9898d3f0f",
+      "size": [
+        310,
+        304
+      ],
+      "pixels": 16535,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-03.png",
+      "sha256": "490a14bf167fed72e9599d075ebde206c1d92adcfe1280e05a574b88bf36e8f1"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-04.png",
+      "backing_guid": "70d1a29c41705693b3d49aba3f86c439",
+      "frame_id": 4,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-04.png",
+      "guid": "1e80eb7dad955d008242e46a7540132b",
+      "size": [
+        154,
+        184
+      ],
+      "pixels": 6221,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-04.png",
+      "sha256": "db86ee80b13d6ca015ccf6a8584e6f7dcd9443ded1a31818b1ad13719ebe8ad7"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-05.png",
+      "backing_guid": "f1ad7fa910bc5598aefc11284f40146f",
+      "frame_id": 5,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-05.png",
+      "guid": "5fdc39d92da55d44937c02a482fe1b09",
+      "size": [
+        158,
+        165
+      ],
+      "pixels": 3453,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-05.png",
+      "sha256": "a4a3be08fd9c880d6bcd477bd889e477d7b7ebcf1a85314ebf7baadf8b674063"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-06.png",
+      "backing_guid": "b3b05d3a92a15dbe871c324ff8b88425",
+      "frame_id": 6,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-06.png",
+      "guid": "d2e20422a9565c8e952cbc7157d00995",
+      "size": [
+        151,
+        151
+      ],
+      "pixels": 4100,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-06.png",
+      "sha256": "6e9480b697164b59e719acd84da39796ed2240904d0e3878f66296f1b4b58376"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-07.png",
+      "backing_guid": "5dd51fc168015bfa8465fca6b1f0969a",
+      "frame_id": 7,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-07.png",
+      "guid": "222edee0daae532f9536c9e14c54ef4d",
+      "size": [
+        293,
+        179
+      ],
+      "pixels": 23903,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-07.png",
+      "sha256": "909626d3a8789d5578d256d8accf315e444233a9b6f8f865f537788f0ec2fc96"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-08.png",
+      "backing_guid": "4fdf6d5cd3315f0e84f44e1b3dbf29b8",
+      "frame_id": 8,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-08.png",
+      "guid": "f473fcabc28d506ab9a92afd4c09a4dd",
+      "size": [
+        158,
+        285
+      ],
+      "pixels": 16242,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-08.png",
+      "sha256": "71b31e52f5fe8831d346414e7bc29c089eee3fc83dabf18bfb4d5e8e301454bb"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-09.png",
+      "backing_guid": "1659c0e9119b561cb1118af0550344da",
+      "frame_id": 9,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-09.png",
+      "guid": "fdda73034c2150a3a96a400830e09ef9",
+      "size": [
+        492,
+        356
+      ],
+      "pixels": 81657,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-09.png",
+      "sha256": "5d872a92f1a81afd8e948842fe685a32bda472ae253f58fd223f074774af43a1"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-10.png",
+      "backing_guid": "7221c523ab2f5ceb9117ce55ebb8944c",
+      "frame_id": 10,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-10.png",
+      "guid": "1a08b3f4a940515a8aa5e15f3eaef4f4",
+      "size": [
+        216,
+        342
+      ],
+      "pixels": 33040,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-10.png",
+      "sha256": "871354aa92e464f973ed0fdd3de270246a9050dea2cb415cedd84a42e4423d9e"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-11.png",
+      "backing_guid": "c7f542b596b05fb197f32870d377b095",
+      "frame_id": 11,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-11.png",
+      "guid": "8f1d037f086e572e93431b6f5586676b",
+      "size": [
+        103,
+        336
+      ],
+      "pixels": 7638,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-11.png",
+      "sha256": "caae5fa6215a8d55dfaaf81482141ceaad4a4f95b0fff98a7c7c553a2588a912"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-12.png",
+      "backing_guid": "83f60b670f8158f089d3f0553f4a9598",
+      "frame_id": 12,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-12.png",
+      "guid": "32577d204cf35eccacc35605c3b16588",
+      "size": [
+        148,
+        270
+      ],
+      "pixels": 8030,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-12.png",
+      "sha256": "2c693a823a83d114b1fe8e97a3a816f81377685580bd128914d1bb89239c3545"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-13.png",
+      "backing_guid": "200f8fa8ffb552939b8e741e6021c7c3",
+      "frame_id": 13,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-13.png",
+      "guid": "ce9b247823a95f9eb3186690f6b2292b",
+      "size": [
+        310,
+        253
+      ],
+      "pixels": 41387,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-13.png",
+      "sha256": "815991f77bc2d6a5da7ea0c9e97050c35ba5b43a0c6b26f379412edda5a1c067"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-14.png",
+      "backing_guid": "212270bb4b0c512993631dabedaa01e6",
+      "frame_id": 14,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-14.png",
+      "guid": "e30fbc2c5193560ba1ef8f03602d43f7",
+      "size": [
+        261,
+        144
+      ],
+      "pixels": 4611,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-14.png",
+      "sha256": "a6576ef13ea7818a9e0ed512eb62060f00c812084b4a8fa0df76060913ae937d"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-15.png",
+      "backing_guid": "bcbd21efa28e5ab398636bab0a4f3c45",
+      "frame_id": 15,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-15.png",
+      "guid": "40dd8e887ad9583ab2bfdf8f48c5ddb0",
+      "size": [
+        242,
+        127
+      ],
+      "pixels": 7975,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-15.png",
+      "sha256": "4e6925232d7b0bac8266e0accbce07596b54942f0e5ba736cc34f8134cf014f6"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-16.png",
+      "backing_guid": "28ec6fff76da512695cb7f64d18d3d7d",
+      "frame_id": 16,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-16.png",
+      "guid": "885a58ed3ecd5e81908455e08f04ebfe",
+      "size": [
+        118,
+        93
+      ],
+      "pixels": 2088,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-16.png",
+      "sha256": "6db9059b1ec3d89d7ba84d97a20599c7fbdf70bcf1dd3a07d4f4fe6b9e8a2279"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-17.png",
+      "backing_guid": "b08bf1be56be5ee9870fb35089784978",
+      "frame_id": 17,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-17.png",
+      "guid": "ecd2c901212252c195a245ab07f3ce09",
+      "size": [
+        99,
+        280
+      ],
+      "pixels": 4157,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-17.png",
+      "sha256": "3f91e39d7505e9f389863cce65a583e6c9b498a3883960657c8be15b323c1578"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-18.png",
+      "backing_guid": "4071dbd47d935d228127f3315476a50e",
+      "frame_id": 18,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-18.png",
+      "guid": "e536f711201b58989f66a5549706c3f4",
+      "size": [
+        399,
+        253
+      ],
+      "pixels": 38602,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-18.png",
+      "sha256": "df0a122b48ec5db127beedf42b97670a9e6216b9d6538a07f14c619d42d8655b"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-19.png",
+      "backing_guid": "d3ad6b4f8ef159eba1df17c5548f2d45",
+      "frame_id": 19,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-19.png",
+      "guid": "aafa94c5b43f5ca9bfeb9154f287aaa7",
+      "size": [
+        219,
+        260
+      ],
+      "pixels": 8660,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-19.png",
+      "sha256": "6c04b47cbb0109e872de91a9a9f5be36eb7adbc3866f3d35eb4e804a3374cd21"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-20.png",
+      "backing_guid": "8983556f6e5d5d87a43e8964b32fb6f9",
+      "frame_id": 20,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-20.png",
+      "guid": "f2bffcbe97685c6d9850e9c065f4c154",
+      "size": [
+        216,
+        214
+      ],
+      "pixels": 13584,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-20.png",
+      "sha256": "14636bd628fd460330df3d6db11a0bc572b557e8e5e8200160ac19a231b0fea8"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-21.png",
+      "backing_guid": "bc11d0c420235b9281e8573a0cc94c9b",
+      "frame_id": 21,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-21.png",
+      "guid": "66820ec961d45419914189f6abc8ccfe",
+      "size": [
+        130,
+        135
+      ],
+      "pixels": 511,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-21.png",
+      "sha256": "e15e0d23606824644c5bdd7482b7bd7475ecd57686f1993d9728e9b01149cbde"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-22.png",
+      "backing_guid": "7f70880b2f655cf9ae60797b56e206fa",
+      "frame_id": 22,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-22.png",
+      "guid": "d0a01f816241592abffe0b46051c99ef",
+      "size": [
+        209,
+        203
+      ],
+      "pixels": 8472,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-22.png",
+      "sha256": "a9cecd87bdcf472d0c1c313d7a9cb6277831436533029ead7b59eb0000da70f8"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-23.png",
+      "backing_guid": "ad02ec46c7845639820e74547852411e",
+      "frame_id": 23,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-23.png",
+      "guid": "2645e1932b26592ca692bd1310c14919",
+      "size": [
+        129,
+        129
+      ],
+      "pixels": 678,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-23.png",
+      "sha256": "e602b66447482a37c073fb49e2c10163d33099d1087ab76bda59bd798e913dc5"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-24.png",
+      "backing_guid": "36858b808c6d59148e4f2be7cb7f5441",
+      "frame_id": 24,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-24.png",
+      "guid": "1d46a05f2b925a4da37ea4e2ae818bca",
+      "size": [
+        182,
+        187
+      ],
+      "pixels": 1423,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-24.png",
+      "sha256": "a08a2f93053e5443923c2954d5c7b8127b52eb3cceff22586607d3ef2b35bbf0"
+    },
+    {
+      "backing_path": "Assets/Art/Frames/Opening Masks/Frame-Backing-25.png",
+      "backing_guid": "9534b0dd89d75110a4fb90222f553021",
+      "frame_id": 25,
+      "path": "Assets/Art/Frames/Opening Masks/Frame-Opening-25.png",
+      "guid": "488c087d26e85bc3a98735fa3db4cd7f",
+      "size": [
+        275,
+        134
+      ],
+      "pixels": 12611,
+      "source": "Assets/Art/Frames/Segmented Frames/Frame-Empty-25.png",
+      "sha256": "ad1efb0421ba4a76b75151984333534930547b757c9c201812bd92f977cf20e5"
+    }
+  ]
+}

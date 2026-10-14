@@ -1,0 +1,44 @@
+{
+  "passed": 2727,
+  "physical_renderer_blocks": 1029,
+  "alpha_evidence": [
+    {
+      "source": "Assets/Art/HotelFish/FISH-right.png",
+      "sha256": "f8c6cd40901e2f4f4877f6453ab6685d9ebf148045863b96409b146e9e10db60",
+      "opaque_fraction": 0.18877649307250977,
+      "fully_transparent_pixels": 3392077
+    },
+    {
+      "source": "Assets/Art/HotelFish/FISH-tail.png",
+      "sha256": "012cdb6e3905d2604d6d3331362afec6126bf86d280db6dd5dc2e46fb61b80a5",
+      "opaque_fraction": 0.02294015884399414,
+      "fully_transparent_pixels": 4094719
+    },
+    {
+      "source": "Assets/Art/Hallway/HALLWAY-sconce.png",
+      "sha256": "eeb9f295999c4a2f495d170b26c221b340b2ea60127216e6150a417cab283356",
+      "opaque_fraction": 0.03303768871964594,
+      "fully_transparent_pixels": 1941221
+    },
+    {
+      "source": "Assets/Art/Traps/TRAP-Hotel-cart.png",
+      "sha256": "afa7a02142616a3d01f959c2aa8ca5cfeff89e42fa755a4c93d05f3c893b823a",
+      "opaque_fraction": 0.25313258171081543,
+      "fully_transparent_pixels": 3122789
+    },
+    {
+      "source": "Assets/Art/Traps/TRAP-Angler-fish.png",
+      "sha256": "eb52083c098e3a6be154d72e3f7f38a9436e2fea153a7e0c75b74a85190fb6fb",
+      "opaque_fraction": 0.3112936019897461,
+      "fully_transparent_pixels": 2845570
+    },
+    {
+      "source": "Assets/Art/Traps/TRAP-Chandelier-v3.png",
+      "sha256": "9644d2b580b03cdb82ad8547fadb8ccfb76824981a996c0fe441c78f7a2d01f4",
+      "opaque_fraction": 0.11715459823608398,
+      "fully_transparent_pixels": 3675037
+    }
+  ],
+  "native_unity_verified": false,
+  "scope": "Source contracts and CPU alpha/composition checks; not GPU shader import, rendered gameplay or performance."
+}

@@ -1,0 +1,12 @@
+{
+  "passed": 9768,
+  "recording_fixture_checked": false,
+  "counts": {
+    "Lobby": 365,
+    "Lobby eyes": 121,
+    "Hallway": 8,
+    "Hallway eyes": 3
+  },
+  "native_unity_verified": false,
+  "scope": "Source GUID/hierarchy, original-art sizing, mixed layout, mask math, controller architecture. Not Unity import, native shader compilation or rendered gameplay."
+}

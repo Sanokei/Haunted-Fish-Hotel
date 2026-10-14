@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "checks": 39,
+  "revision": "v8",
+  "exports": 2,
+  "native_unity_import_run": false
+}

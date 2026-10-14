@@ -1,0 +1,1 @@
+PASS validator compiles against real Unity 6000.3.6f1 APIs, no doubles. Shader import/native runtime validation is NOT established.

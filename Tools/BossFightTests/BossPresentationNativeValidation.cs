@@ -47,7 +47,7 @@ public static class BossPresentationNativeValidation
             Check(BossMatch.FishGoalsToWin==3&&BossMatch.GhostGoalsToWin==1,"fish requires three goals; ghost requires one goal");
             Call(arena,"Awake");arena.SetAuthority(true);Check(arena.TryBegin(101,202),"isolated authoritative match admission");arena.SetParticipantsReady(true);
             Check(!arena.ApplyInput(303,Vector2.one),"spectator cannot own paddle");
-            var hud=root.GetComponentInChildren<BossHudPresentation>(true);var lives=Get<Text>(hud,"_Lives");
+            var hud=root.GetComponentInChildren<BossHudPresentation>(true);
             var storm=root.GetComponentInChildren<LightningEffectManager>(true);var audio=root.GetComponentInChildren<LobbyStormAudio>(true);
             var shadowAdapter=root.GetComponentInChildren<BossOpponentShadow>(true);var shadow=Get<SpriteRenderer>(storm,"_OpponentShadow");
             var roomLights=Get<Light[]>(storm,"_AuthoredRoomLights");var flash=Get<Canvas>(storm,"_FlashCanvas");
@@ -63,7 +63,11 @@ public static class BossPresentationNativeValidation
                 arena.SetLocalViewer(side==BossViewerSide.Fish?101u:side==BossViewerSide.Ghost?202u:303u,true);
                 Check(fish.enabled==(side==BossViewerSide.Ghost)&&ghost.enabled==(side!=BossViewerSide.Ghost),"local own renderer hidden/opponent visible: "+side);
                 Check(!view.CurrentCamera.orthographic,"authored perspective camera: "+side);
-                Check(lives.text.Contains("1")&&lives.text.Contains("3"),"authored life HUD has one fish/three ghost: "+side);
+                Check(Get<Canvas>(hud,"_Canvas").enabled==(side!=BossViewerSide.Spectator),"opponent life row hides for spectator: "+side);
+                Check(Get<Image>(hud,"_FishLife").enabled==(side==BossViewerSide.Ghost),"ghost viewer sees one opponent fish head: "+side);
+                var ghostLives=Get<Image[]>(hud,"_GhostLives");
+                Check(ghostLives.Length==3&&ghostLives.All(icon=>icon.enabled==(side==BossViewerSide.Fish)),"fish viewer sees three neutral opponent heads: "+side);
+                Check(!Get<Text>(hud,"_Lives").gameObject.activeSelf&&!Get<TMPro.TMP_Text>(hud,"_Hint").gameObject.activeSelf,"removed bottom/practice text stays disabled");
                 foreach(var size in new[]{new Vector2Int(1280,720),new Vector2Int(720,1280)})
                 {
                     var camera=view.CurrentCamera;var rt=new RenderTexture(size.x,size.y,24);rt.Create();camera.targetTexture=rt;camera.scene=root.scene;view.Fit();

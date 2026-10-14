@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lobby_Burgundy_Carpet
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: a10ece6761125b1eb27b8923b22cb816, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -26,6 +26,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _DamaskMap:
+        m_Texture: {fileID: 2800000, guid: c0ad79de817d5ca984a855b97d21ec26, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -84,6 +88,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DamaskMaskHigh: 0.36
+    - _DamaskMaskLow: 0.04
+    - _DamaskStrength: 0.24
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
@@ -117,6 +124,8 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
+    - _DamaskUV: {r: 0.02551020408, g: 0.03433476395, b: 0.5, a: 0.25751072961}
+    - _DamaskGold: {r: 0.66, g: 0.49, b: 0.26, a: 1}
     - _BaseColor: {r: 0.48, g: 0.16, b: 0.19, a: 1}
     - _Color: {r: 0.48, g: 0.16, b: 0.19, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

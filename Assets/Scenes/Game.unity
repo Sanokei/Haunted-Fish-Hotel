@@ -1758,6 +1758,7 @@ MonoBehaviour:
   Darkness: 0.92
   _Canvas: {fileID: 31000140}
   _Image: {fileID: 31000145}
+  _WatchingFrames: {fileID: 8141014012}
 --- !u!81 &24000036
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2469,8 +2470,8 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31000042}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 2
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -2486,7 +2487,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 7832355c27d8dfb99f9fcb54054eea8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4783,8 +4784,8 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103041087}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 2
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -4800,7 +4801,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 7832355c27d8dfb99f9fcb54054eea8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4833,6 +4834,27 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &8141014002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1140000, guid: f9e03a8f0f3a125c705b2bee3065897d, type: 3}
+      propertyPath: _Viewer
+      value: ''
+      objectReference: {fileID: 24000025}
+    - target: {fileID: 1140000, guid: f9e03a8f0f3a125c705b2bee3065897d, type: 3}
+      propertyPath: _BeamCamera
+      value: ''
+      objectReference: {fileID: 24000026}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f9e03a8f0f3a125c705b2bee3065897d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4856,6 +4878,7 @@ SceneRoots:
   - {fileID: 32000042}
   - {fileID: 42000000}
   - {fileID: 39000002}
+  - {fileID: 8141014002}
 --- !u!1 &1505875686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,8 +4937,8 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638488643}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 2
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -4931,7 +4954,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 7832355c27d8dfb99f9fcb54054eea8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5242,3 +5265,14 @@ MonoBehaviour:
   _ActionAsset: {fileID: -944628639613478452, guid: 6b1b59be39e74c7fb572115019637e61, type: 3}
   _Text: {fileID: 550014}
   _Template: "{input:Game/Interact} Challenge the ghost at air hockey"
+--- !u!114 &8141014012 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1140000, guid: f9e03a8f0f3a125c705b2bee3065897d, type: 3}
+  m_PrefabInstance: {fileID: 8141014002}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f623f054516b34377cc6ac99005148b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:

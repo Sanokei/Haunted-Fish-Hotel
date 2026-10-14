@@ -1,0 +1,13 @@
+{
+  "mesh_data_bytes": 2496,
+  "vertex_count": 52,
+  "triangle_count": 26,
+  "all_face_normals_up": true,
+  "valid_submesh_ranges": true,
+  "width": 2.4,
+  "length": 9.2,
+  "prefab_static_no_scripts_or_colliders": true,
+  "prior_damask_material_unchanged": true,
+  "authored_scene_instance": 8141014201,
+  "native_unity_import_run": false
+}

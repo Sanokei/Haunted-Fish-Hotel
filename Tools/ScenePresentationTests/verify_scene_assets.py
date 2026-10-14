@@ -332,6 +332,45 @@ def existed_meta(guid, base):
     return result.returncode == 0
 
 
+def preserved_record_body(path, ident, body):
+    """Normalize only exact approved bindings/lighting values; retain all other guards."""
+    if path != 'Assets/Scenes/Lobby.unity':
+        return body
+    additions = {
+        47000002: ('  - {fileID: 47000021}\n', '  - {fileID: 47000031}\n'),
+        47000003: ('  _EndingCamera: {fileID: 47000021}\n',
+                   '  _EndingFieldOfView: 24\n', '  _EndingTiltStart: 0.2\n',
+                   '  _EndingZoomStart: 0.4\n', '  _EndingDarkness: {fileID: 47000035}\n',
+                   '  _EndingDarknessStart: 0.8\n', '  _EndingDarknessOpacity: 0.995\n',
+                   '  _EndingTunnel: {fileID: 8141014102}\n',
+                   ),
+        672612689: ('  - {fileID: 48010001}\n',),
+        672612691: ('  _Music: {fileID: 48010003}\n',),
+    }
+    for line in additions.get(ident, ()):
+        body = body.replace(line, '', 1)
+    # Authored darkness/shadow changes, confirmed by the lighting owner.
+    # Black camera clear prevents outside sky through staircase gaps; the same
+    # directional light rotates to an oblique key that projects card shadows.
+    # Lens, camera pose, light position/scale/hierarchy and all other fields stay
+    # protected. A different value does not match these exact substitutions.
+    lighting_replacements = {
+        # Honor this light's explicitly authored bias instead of URP defaults.
+        1998747292: (('  m_UsePipelineSettings: 0\n', '  m_UsePipelineSettings: 1\n'),),
+        330585545: ((
+            '  m_ClearFlags: 2\n  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}\n',
+            '  m_ClearFlags: 1\n  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}\n'),),
+        1998747294: ((
+            '  m_LocalRotation: {x: 0.408217894, y: -0.234569716, z: 0.109381655, w: 0.875426098}\n',
+            '  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}\n'), (
+            '  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}\n',
+            '  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}\n')),
+    }
+    for current, previous in lighting_replacements.get(ident, ()):
+        body = body.replace(current, previous, 1)
+    return body
+
+
 def check_preserved_records(report, base):
     physics = {50, 54, 56, 58, 60, 61, 64, 65, 135, 136, 143}
     scopes = {'Assets/Scenes/Lobby.unity': physics | {4, 20, 81, 82, 114, 223, 224, 225},
@@ -346,7 +385,7 @@ def check_preserved_records(report, base):
             if path.endswith('/BossCHARACTERS.prefab') and doc.ident == 764626834192637407:
                 continue  # The decorative fish sprite alone is resized; gameplay/reaction pivots stay authored.
             if doc.kind in kinds:
-                report.check(doc.ident in current and current[doc.ident].body == doc.body,
+                report.check(doc.ident in current and preserved_record_body(path, doc.ident, current[doc.ident].body) == preserved_record_body(path, doc.ident, doc.body),
                              f'{path}: protected authored object {doc.ident} (class {doc.kind}) preserved')
 
 
