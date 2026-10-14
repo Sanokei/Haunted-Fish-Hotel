@@ -31,7 +31,7 @@
           "seconds": 5.833333333333333
         },
         {
-          "heading": "Tablecart",
+          "heading": "Dining cart",
           "body_words": 8,
           "seconds": 3.966666666666667
         },
@@ -71,7 +71,7 @@
           "seconds": 4.733333333333333
         }
       ],
-      "ink_sha256": "be2e1f7a09f1342dd65eb64894074c58d83a7a57dccd93ba2a42efc2c544bc3c"
+      "ink_sha256": "2d9c66f02ddf4301a133264ecccf5f3ccaead04e479323db85f6ffa6875b3dae"
     },
     "Ghost": {
       "card_count": 15,
@@ -107,7 +107,7 @@
           "seconds": 3.966666666666667
         },
         {
-          "heading": "Tablecart",
+          "heading": "Dining cart",
           "body_words": 13,
           "seconds": 5.833333333333333
         },
@@ -157,7 +157,7 @@
           "seconds": 4.333333333333333
         }
       ],
-      "ink_sha256": "97ab9276fb60dba9fbc42f055a527e46c4ffbc83ba140a71d3bc992e2f149df9"
+      "ink_sha256": "c342c9783c47f9fa312778b0b9d157a45708974239ece2c0595968b3a7b3d0c7"
     }
   }
 }

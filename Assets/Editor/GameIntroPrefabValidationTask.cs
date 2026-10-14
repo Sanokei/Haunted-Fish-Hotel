@@ -7,6 +7,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using HauntedFish.Multiplayer;
+using HauntedFish.InputPrompts;
 public static class GameIntroPrefabValidationTask
 {
     static void RequireIdleEditMode()
@@ -49,8 +50,12 @@ public static class GameIntroPrefabValidationTask
                 Require(page.ValidateAuthoredBindings(out string pageError), pageError);
                 Require(page.GetComponentsInChildren<Canvas>(true).Length == 1 &&
                     page.GetComponentsInChildren<Button>(true).Length == 1, "Ready guide must be one authored page with one Ready action");
-                Require(page.GetComponentsInChildren<Text>(true).All(text => text.font && !string.IsNullOrWhiteSpace(text.text)),
-                    "Every authored guide field needs a real imported font and visible content");
+                var prompts = page.GetComponentsInChildren<InputGlyphPrompt>(true);
+                Require(prompts.Length >= 6 && prompts.All(prompt => prompt.HasBindings), "All active-device glyph rows need authored catalog, control and image bindings");
+                var fallbacks = prompts.Select(prompt => new SerializedObject(prompt).FindProperty("_Fallback").objectReferenceValue).ToArray();
+                Require(page.GetComponentsInChildren<Text>(true).All(text => text.font &&
+                    (fallbacks.Contains(text) || !string.IsNullOrWhiteSpace(text.text))),
+                    "Every guide field needs an imported font; only glyph fallback slots may start empty");
                 Require(!page.GetComponent<UnityEngine.Video.VideoPlayer>() && !page.GetComponentInChildren<RawImage>(true),
                     "Ready guide must not contain a cinema/video replacement");
             }

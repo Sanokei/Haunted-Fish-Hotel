@@ -3991,6 +3991,7 @@ GameObject:
   - component: {fileID: 6718912786557801098}
   - component: {fileID: 5398190371629490443}
   - component: {fileID: 2984867983583701591}
+  - component: {fileID: 51004000}
   m_Layer: 0
   m_Name: Skip hint
   m_TagString: Untagged
@@ -4014,8 +4015,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -195, y: 65}
-  m_SizeDelta: {x: 200, y: 55}
+  m_AnchoredPosition: {x: -255, y: 65}
+  m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6718912786557801098
 CanvasRenderer:
@@ -4045,9 +4046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'CLICK TO SKIP
-
-    or hold SPACE'
+  m_text: "Skip introduction"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4066,7 +4065,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 57a166b6f5bc1abf4547f1c92949f12e, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: 0
@@ -5656,3 +5655,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &51004000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852033194056368440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46eb25c8bc896c7fea520e80685976d0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _Catalog: {fileID: 11400000, guid: 8637790bc13a4245d40e97a5fa26c552, type: 2}
+  _SpriteAsset: {fileID: 11400000, guid: 57a166b6f5bc1abf4547f1c92949f12e, type: 2}
+  _ActionAsset: {fileID: -944628639613478452, guid: 6b1b59be39e74c7fb572115019637e61, type: 3}
+  _Text: {fileID: 5398190371629490443}
+  _Template: "Skip: {input:<Mouse>/leftButton}\nHold to skip: {input:<Keyboard>/space}"

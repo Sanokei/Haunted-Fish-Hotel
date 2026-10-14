@@ -1,8 +1,8 @@
 Assets/Scripts/Multiplayer/RoundHowToPage.cs(11,33): warning CS0649: Field 'RoundHowToPage._Canvas' is never assigned to, and will always have its default value null
 Assets/Scripts/Multiplayer/RoundHowToPage.cs(13,31): warning CS0649: Field 'RoundHowToPage._ContinueLabel' is never assigned to, and will always have its default value null
 Assets/Scripts/Multiplayer/RoundHowToPage.cs(12,33): warning CS0649: Field 'RoundHowToPage._Continue' is never assigned to, and will always have its default value null
-Assets/Scripts/Multiplayer/RoundHowToPage.cs(15,45): warning CS0649: Field 'RoundHowToPage._Layout' is never assigned to, and will always have its default value null
 Assets/Scripts/Multiplayer/RoundHowToPage.cs(14,31): warning CS0649: Field 'RoundHowToPage._Status' is never assigned to, and will always have its default value null
+Assets/Scripts/Multiplayer/RoundHowToPage.cs(15,45): warning CS0649: Field 'RoundHowToPage._Layout' is never assigned to, and will always have its default value null
 Passed 1892 explicit ready-up, role-page and natural scale checks.
 Passed 58 actual RoundHowToPage adapter checks using Unity/input doubles; no native or network pass claimed.
 Assets/Scripts/Multiplayer/RoundHowToSafeArea.cs(10,40): warning CS0649: Field 'RoundHowToSafeArea._Page' is never assigned to, and will always have its default value null

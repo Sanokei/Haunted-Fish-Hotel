@@ -1,0 +1,8 @@
+..........................
+----------------------------------------------------------------------
+Ran 26 tests in 7.800s
+
+OK
+PASS: 112 recording source/serialized-fixture checks. Native import, rendering, physics and capture remain unverified.
+PASS Fish: vendored Ink compile, execution and serialized parity; 11 captions.
+PASS Ghost: vendored Ink compile, execution and serialized parity; 15 captions.

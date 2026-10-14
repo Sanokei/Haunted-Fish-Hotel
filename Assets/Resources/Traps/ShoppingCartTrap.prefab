@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 31000098}
   - component: {fileID: 31000099}
   m_Layer: 0
-  m_Name: Tablecart scene artwork
+  m_Name: Dining cart scene artwork
   m_TagString: Untagged
   m_IsActive: 1
 --- !u!4 &31000098
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 31000121}
   - component: {fileID: 31000122}
   m_Layer: 5
-  m_Name: Moving tablecart
+  m_Name: Moving dining cart
   m_TagString: Untagged
   m_IsActive: 1
 --- !u!224 &31000120
@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   _FamilyTag: cart
-  _DisplayName: Tablecart
+  _DisplayName: Dining cart
   _InputMode: 0
   _Behaviour: 0
   _Impact: 1

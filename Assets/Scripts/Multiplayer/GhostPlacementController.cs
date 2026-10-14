@@ -1,4 +1,5 @@
 using UnityEngine;
+using HauntedFish.InputPrompts;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -90,6 +91,7 @@ namespace HauntedFish.Multiplayer
         SpriteRenderer _PreviewSprite;
         [SerializeField]
         Text _Label;
+        [SerializeField] InputPromptSpriteText _InputPrompts;
         InputActionAsset _Actions;
         InputActionMap _Map;
         InputAction _Move, _Confirm, _Reset, _Click, _Activate, _Point, _Dispose;
@@ -139,6 +141,7 @@ namespace HauntedFish.Multiplayer
         {
             _Actions = Instantiate(Resources.Load<InputActionAsset>("HotelMultiplayerActions"));
             _Map = _Actions.FindActionMap("Ghost", true);
+            InputPromptActions.Register(_Map);
             _Move = _Map.FindAction("Move", true);
             _Confirm = _Map.FindAction("Confirm", true);
             _Reset = _Map.FindAction("Reset", true);
@@ -146,6 +149,7 @@ namespace HauntedFish.Multiplayer
             _Activate = _Map.FindAction("TrapActivate", true);
             _Point = _Map.FindAction("TrapPoint", true);
             _Dispose = _Map.FindAction("Dispose", true);
+            if (_InputPrompts) _InputPrompts.SetActionMap(_Map);
         }
 
         void Update()
@@ -382,6 +386,7 @@ namespace HauntedFish.Multiplayer
             if (mode != 0 && Time.unscaledTime < _FeedbackUntil)
             {
                 _Label.text = _Feedback;
+                if (_InputPrompts) _InputPrompts.SetTemplate("");
                 _HudMode = -1;
                 return;
             }
@@ -393,27 +398,36 @@ namespace HauntedFish.Multiplayer
             _HudSupply = supply;
             _HudFamily = _Family;
             _HudClear = clear;
+            string prompts = "";
             switch (mode)
             {
                 case 0:
-                    _Label.text = "Placing " + _Family + "...";
+                    _Label.text = "Placing trap...";
                     break;
                 case 1:
-                    _Label.text = trap.DisplayName + " - " + trap.ControlHint + " - E / X: unpossess - Q: dispose";
+                    _Label.text = trap.DisplayName;
+                    string use = trap.InputMode == TrapInputMode.Movement ? "{input:Ghost/Move} Drive" :
+                        trap.InputMode == TrapInputMode.MouseClick ? "{input:Ghost/TrapClick} Activate" : "{input:Ghost/TrapActivate} Drop";
+                    prompts = use + "   {input:Ghost/Reset} Reset   {input:Ghost/Confirm} Release   {input:Ghost/Dispose} Discard";
                     break;
                 case 2:
-                    _Label.text = "WASD / stick: fly - Click / E / X: place - Q: dispose" + (clear ? "" : " - Place on the hallway floor in a clear space");
+                    _Label.text = clear ? "Choose a clear trap destination" : "Place on the hallway floor in a clear space";
+                    prompts = "{input:Ghost/Move} Fly   {input:Ghost/Confirm} Place   {input:Ghost/Dispose} Discard";
                     break;
                 case 3:
-                    _Label.text = "E / X: possess " + trap.DisplayName + " - " + trap.ControlHint;
+                    _Label.text = trap.DisplayName + " - " + trap.ControlHint;
+                    prompts = "{input:Ghost/Confirm} Possess";
                     break;
                 case 4:
-                    _Label.text = "E / X: open " + _TrapManager.Definition(supply.FamilyTag).Prefab.DisplayName;
+                    _Label.text = _TrapManager.Definition(supply.FamilyTag).Prefab.DisplayName;
+                    prompts = "{input:Ghost/Confirm} Open package";
                     break;
                 default:
-                    _Label.text = "Fly to the package conveyor above the hallway - E / X: open";
+                    _Label.text = "Fly to the package conveyor above the hallway";
+                    prompts = "{input:Ghost/Move} Fly   {input:Ghost/Confirm} Open nearby package";
                     break;
             }
+            if (_InputPrompts) _InputPrompts.SetTemplate(prompts);
         }
 
         void Dispatch(HotelPlayer player, TrapInputKind kind, Vector3 point)
@@ -470,6 +484,7 @@ namespace HauntedFish.Multiplayer
 
         void OnDestroy()
         {
+            InputPromptActions.Unregister(_Map);
             if (_Actions)
                 Destroy(_Actions);
         }

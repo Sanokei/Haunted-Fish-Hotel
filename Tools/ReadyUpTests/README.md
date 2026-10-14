@@ -1,16 +1,24 @@
 # Single-page round ready guide
 
-The existing `FishRoundHowTo.prefab` and `GhostRoundHowTo.prefab` retain their asset GUIDs and role-specific references from `AtticRoundCutscene`. Each now contains one authored Canvas, one fixed guide page and one Ready button. The page has a role heading, objective, controls, current trap rules, participant counter and setup rule. There are no videos, page navigation or runtime-created UI elements in this guide. Theatre assets, title cards and playback remain separate and unchanged.
+The existing `FishRoundHowTo.prefab` and `GhostRoundHowTo.prefab` retain their asset GUIDs and role-specific references from `AtticRoundCutscene`. Each now contains one authored Canvas, one fixed guide page and one Ready button. The page has a role heading, objective, controls, current trap rules, participant counter and setup rule. There are no videos, page navigation or runtime-created UI elements in this guide. Theatre playback remains separate. Its authored caption/content sources now say Dining cart; existing MP4s remain unchanged until a real replacement capture.
 
 ## Serialized layout proof
 
-`Evidence/serialized-layout.json` is derived from the actual prefab objects and imported TTF files. It records file IDs, sizes, copy, measured line widths, conservative full-font line-height budgets, and safe-area bounds for 720p, 1080p, 16:10, 4:3, ultrawide, an inset landscape display and portrait. The accompanying Fish/Ghost PNGs are reproducible source previews drawn from those rectangles and fonts, visibly labeled as source-only. This is source/metric evidence, not a Unity screenshot or a runtime rendering pass.
+`Evidence/serialized-layout.json` is derived from the actual prefab objects and imported TTF files. It records file IDs, sizes, copy, measured line widths, conservative full-font line-height budgets, and safe-area bounds for 720p, 1080p, 16:10, 4:3, ultrawide and an inset landscape display. The accompanying Fish/Ghost PNGs are reproducible source previews drawn from those rectangles and fonts, visibly labeled as source-only. This is source/metric evidence, not a Unity screenshot or a runtime rendering pass.
 
 - Both canvases use Expand scaling with a 1280 × 720 reference.
 - Object 210 is the normalized display-safe container. Object 220 holds the fixed authored page.
-- The page uses the existing Modak heading font. Body copy references the real imported Liberation Sans asset instead of the old built-in-font placeholder.
-- All content and live labels have independent authored rectangles. Text does not auto-shrink. Controls and rules are 24 reference pixels; the page scales uniformly only when needed to fit the safe display.
+- The page uses only two coherent families: unchanged Modak role/section headings and the approved Haunted Intertitle body face. Short key actions, trap names and lethal warnings use that same face’s authored Bold style. Most copy stays regular; no unrelated font was added. The source proof approximates the short bold emphasis, not native Unity font rasterization.
+- All content and live labels have independent authored rectangles. Text does not auto-shrink. Controls are 28 reference pixels and rules 27; the page scales uniformly only when needed to fit the safe display.
 - `RoundHowToSafeArea` listens for canvas rendering and only changes existing anchors/scale when display geometry changes. Disable removes its callback.
+
+## Active-device controls
+
+Each short action row owns existing glyph Image slots and an empty fallback Text slot, bound to the shared `InputGlyphPrompt` catalog/resolver. Keyboard composites have separately authored key slots. The runtime changes sprites/visibility in place when input family or binding changes; it never constructs UI. Only the current PC, Xbox or PlayStation glyph family is shown. Discard uses the actual Ghost/Dispose binding: Q on PC, Y on Xbox and Triangle on PlayStation. Pointer aiming is still mouse-only, so that row explicitly says Mouse required on a controller. Unknown/unbound controls never invent buttons. The ready action has its own Enter/South glyph.
+
+The current previews are named `*-guide-pc-1280x720-source.png`, `*-guide-xbox-1280x720-source.png`, `*-guide-playstation-1280x720-source.png`, and `*-guide-playstation-1024x768-source.png`. Generic `fish-guide-source.png`/`ghost-guide-source.png` aliases now contain the PC version. Counts stay at authored 0/0; optional populated examples explicitly label their counts illustrative.
+
+`author_guides.py` reproducibly writes the serialized objects while preserving the existing prefab/script identities. It requires the shared catalog/art to be present. `guide_source.py` reads those actual objects, fonts, action bindings and glyph sprites for source tests/previews.
 
 ## Readiness behavior
 
@@ -26,7 +34,10 @@ A deliberate click, Enter, Space or gamepad South submits once. Hidden/menu-bloc
 bash Tools/ReadyUpTests/RunMono.sh /path/to/Unity/Editor/Data
 bash Tools/ReadyUpTests/CheckUnityApi.sh /path/to/Unity/Editor/Data
 python3 Tools/ReadyUpTests/verify_layout.py --report Tools/ReadyUpTests/Evidence/serialized-layout.json
-python3 Tools/ReadyUpTests/render_source_previews.py --output Tools/ReadyUpTests/Evidence
+python3 Tools/ReadyUpTests/render_source_previews.py --output Tools/ReadyUpTests/Evidence --family PC
+python3 Tools/ReadyUpTests/render_source_previews.py --output Tools/ReadyUpTests/Evidence --family Xbox
+python3 Tools/ReadyUpTests/render_source_previews.py --output Tools/ReadyUpTests/Evidence --family PlayStation
+python3 Tools/ReadyUpTests/render_source_previews.py --output Tools/ReadyUpTests/Evidence --family PlayStation --width 1024 --height 768
 MONO_ROOT=/path/to/Unity/Editor/Data/MonoBleedingEdge bash Tools/RoundIntroductionTests/run-mono.sh
 ```
 
@@ -37,7 +48,7 @@ Recorded 2026-10-13 results:
 - 1,892 explicit readiness, role, stale-scope, ownership, late-join, disconnect and replay checks passed.
 - 58 actual page-adapter checks passed, including early/hidden/menu input, repeated clicks, per-frame SetVisible(true) after a click, pending acknowledgement, keyboard/gamepad, counters, disable and replay.
 - 49 actual safe-area-adapter checks passed, including geometry changes, insets, unchanged-frame stability, disable/re-enable and transient zero-size screens.
-- 266 serialized-layout/font/current-rule/dynamic-label checks passed.
+- 682 serialized-layout/font/active-device/dynamic-label checks passed.
 - Real Unity/UI/InputSystem API compilation passed. Only the expected serialized-field assignment warnings remain.
 - The full standalone round-introduction runner passed with the new display-policy source included.
 

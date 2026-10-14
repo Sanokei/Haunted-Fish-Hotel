@@ -1,0 +1,27 @@
+Kenney Input Prompts 1.5A
+
+Creator: Kenney (https://kenney.nl)
+Official source page: https://kenney.nl/assets/input-prompts
+Official archive: https://kenney.nl/media/pages/assets/input-prompts/8de120163f-1783763952/kenney_input-prompts_1.5.zip
+Archive SHA-256: ac2fcf599080b0f3ba2d174c9474db6df1a0e96ff0662580e2da79a122ab78a1
+License: Creative Commons Zero (CC0 1.0 Universal)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+
+The bundled License.txt is copied byte-for-byte from the official archive.
+Every included PNG is an unmodified 128 x 128 Double image from that archive.
+No generative artwork, paint-over, recoloring, cropping or pixel resampling was used.
+glyph-manifest.json records each archive member, SHA-256, control path and Sprite GUID.
+Folder names and image stems preserve the source names; the Double path component is omitted.
+
+The positional generic face buttons come from Nintendo Switch/Double/switch_buttons_*.png.
+They contain positions, not Nintendo letter assignments. Generic sticks are unlettered.
+There are no WASD/AD composite images in this source; individual bound key sprites are composed in UI.
+
+Reproduce with Tools/InputPromptTests/import_glyphs.py --archive <downloaded archive>.
+Validate committed content with Tools/InputPromptTests/import_glyphs.py --verify.
+Unity import: Sprite (Single), full rect, alpha transparency, no mipmaps or compression,
+bilinear filtering, clamp wrap, 100 pixels per unit. Metadata GUIDs are deterministic.
+InputPromptAtlas.png copies each original's exact RGBA pixels into a 2048 x 2048 atlas.
+InputPromptSprites.asset is a TMP_SpriteAsset with an embedded TMP Sprite material.
+The atlas uses no resize, crop, recolor or alpha multiplication; each cell is 128 x 128.
+Manifest spriteName/spriteIndex/atlasRect identify each inline glyph. Use tint=0 to keep source colors.

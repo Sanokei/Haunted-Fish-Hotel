@@ -1,0 +1,867 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67211a8fec0371c91028212e5985e767, type: 3}
+  m_Name: HotelInputGlyphs
+  m_EditorClassIdentifier:
+  _Glyphs:
+  - Family: 0
+    ControlPath: "<Keyboard>/a"
+    Sprite: {fileID: 21300000, guid: 7a6793d62f6e98c47d3e6d0dc7992c4e, type: 3}
+    SpriteName: g000
+  - Family: 0
+    ControlPath: "<Keyboard>/b"
+    Sprite: {fileID: 21300000, guid: 61ef0ee80ff47c0c440ce2ec00386168, type: 3}
+    SpriteName: g001
+  - Family: 0
+    ControlPath: "<Keyboard>/c"
+    Sprite: {fileID: 21300000, guid: 94e1731d5578a0d0c19fa7b13154145e, type: 3}
+    SpriteName: g002
+  - Family: 0
+    ControlPath: "<Keyboard>/d"
+    Sprite: {fileID: 21300000, guid: 407c9d3dfa54929879ebcda36674ec41, type: 3}
+    SpriteName: g003
+  - Family: 0
+    ControlPath: "<Keyboard>/e"
+    Sprite: {fileID: 21300000, guid: c13ed8eaf27b5122d1e6af0e9b0ba1c6, type: 3}
+    SpriteName: g004
+  - Family: 0
+    ControlPath: "<Keyboard>/f"
+    Sprite: {fileID: 21300000, guid: a498eb4ac264a341ddb3c32ff6c5aa57, type: 3}
+    SpriteName: g005
+  - Family: 0
+    ControlPath: "<Keyboard>/g"
+    Sprite: {fileID: 21300000, guid: 3171e0fd202c35b6c6781507ec624daf, type: 3}
+    SpriteName: g006
+  - Family: 0
+    ControlPath: "<Keyboard>/h"
+    Sprite: {fileID: 21300000, guid: 477ffc1f416cf3a4454c864eba71bbdd, type: 3}
+    SpriteName: g007
+  - Family: 0
+    ControlPath: "<Keyboard>/i"
+    Sprite: {fileID: 21300000, guid: 8064b764e0941ee2f97d9c6b59b2c168, type: 3}
+    SpriteName: g008
+  - Family: 0
+    ControlPath: "<Keyboard>/j"
+    Sprite: {fileID: 21300000, guid: 3741a54c0c19596fce313de53c59d18a, type: 3}
+    SpriteName: g009
+  - Family: 0
+    ControlPath: "<Keyboard>/k"
+    Sprite: {fileID: 21300000, guid: 5c4e9472f95ffcd80a3c9f06ecc1da5d, type: 3}
+    SpriteName: g010
+  - Family: 0
+    ControlPath: "<Keyboard>/l"
+    Sprite: {fileID: 21300000, guid: 804459d8aeb1e98a631531ad0f32bbc3, type: 3}
+    SpriteName: g011
+  - Family: 0
+    ControlPath: "<Keyboard>/m"
+    Sprite: {fileID: 21300000, guid: 4dbbf91906349e62152d463681e1f12e, type: 3}
+    SpriteName: g012
+  - Family: 0
+    ControlPath: "<Keyboard>/n"
+    Sprite: {fileID: 21300000, guid: 1031bd7cfc81dad587b0de7d28bcc6d1, type: 3}
+    SpriteName: g013
+  - Family: 0
+    ControlPath: "<Keyboard>/o"
+    Sprite: {fileID: 21300000, guid: d35fa323bf9b4e3c791064560dbdadbc, type: 3}
+    SpriteName: g014
+  - Family: 0
+    ControlPath: "<Keyboard>/p"
+    Sprite: {fileID: 21300000, guid: cc2b6d12daa2553ab6c7c1d062543c30, type: 3}
+    SpriteName: g015
+  - Family: 0
+    ControlPath: "<Keyboard>/q"
+    Sprite: {fileID: 21300000, guid: d9d74bafc58188357e59f24bdb18f8b2, type: 3}
+    SpriteName: g016
+  - Family: 0
+    ControlPath: "<Keyboard>/r"
+    Sprite: {fileID: 21300000, guid: 4c79d4d7600b90c5b74544f454dd0b7c, type: 3}
+    SpriteName: g017
+  - Family: 0
+    ControlPath: "<Keyboard>/s"
+    Sprite: {fileID: 21300000, guid: 9d941688bf3ad5f31c23351036aad0cf, type: 3}
+    SpriteName: g018
+  - Family: 0
+    ControlPath: "<Keyboard>/t"
+    Sprite: {fileID: 21300000, guid: 401b76495188dfe69e6d3b9070ff2b43, type: 3}
+    SpriteName: g019
+  - Family: 0
+    ControlPath: "<Keyboard>/u"
+    Sprite: {fileID: 21300000, guid: 7463c78ce9bd5d71f60a52de0a3cddbf, type: 3}
+    SpriteName: g020
+  - Family: 0
+    ControlPath: "<Keyboard>/v"
+    Sprite: {fileID: 21300000, guid: 30f4640b6a729ff8ddacd6faf5e31316, type: 3}
+    SpriteName: g021
+  - Family: 0
+    ControlPath: "<Keyboard>/w"
+    Sprite: {fileID: 21300000, guid: caaa7a3ae9d78ee64987baa7470734b5, type: 3}
+    SpriteName: g022
+  - Family: 0
+    ControlPath: "<Keyboard>/x"
+    Sprite: {fileID: 21300000, guid: 8047d908078a345cc777b6b36004df0b, type: 3}
+    SpriteName: g023
+  - Family: 0
+    ControlPath: "<Keyboard>/y"
+    Sprite: {fileID: 21300000, guid: 2ad170900d3ada255a1f64ebe51fa0d5, type: 3}
+    SpriteName: g024
+  - Family: 0
+    ControlPath: "<Keyboard>/z"
+    Sprite: {fileID: 21300000, guid: 3db51f8459e0b1a1ac8b1f44fbc7f106, type: 3}
+    SpriteName: g025
+  - Family: 0
+    ControlPath: "<Keyboard>/0"
+    Sprite: {fileID: 21300000, guid: 0cac017386e8609a225ec034bb0b50d3, type: 3}
+    SpriteName: g026
+  - Family: 0
+    ControlPath: "<Keyboard>/1"
+    Sprite: {fileID: 21300000, guid: 7116dbc88882c2823b286abc2dfe9c67, type: 3}
+    SpriteName: g027
+  - Family: 0
+    ControlPath: "<Keyboard>/2"
+    Sprite: {fileID: 21300000, guid: 345fe4365bdddf281284f729dbda02cd, type: 3}
+    SpriteName: g028
+  - Family: 0
+    ControlPath: "<Keyboard>/3"
+    Sprite: {fileID: 21300000, guid: 6b8170a0520935517b53da673c3e1579, type: 3}
+    SpriteName: g029
+  - Family: 0
+    ControlPath: "<Keyboard>/4"
+    Sprite: {fileID: 21300000, guid: 79bdfc2870ed9708073fd9dc942b15b5, type: 3}
+    SpriteName: g030
+  - Family: 0
+    ControlPath: "<Keyboard>/5"
+    Sprite: {fileID: 21300000, guid: 6a5a41f1c72fa91abcd0be581e7360ed, type: 3}
+    SpriteName: g031
+  - Family: 0
+    ControlPath: "<Keyboard>/6"
+    Sprite: {fileID: 21300000, guid: ccb14cb16f7acaf39bf4233bf268e031, type: 3}
+    SpriteName: g032
+  - Family: 0
+    ControlPath: "<Keyboard>/7"
+    Sprite: {fileID: 21300000, guid: 75f1a244b72d405e757c6ac2bd385397, type: 3}
+    SpriteName: g033
+  - Family: 0
+    ControlPath: "<Keyboard>/8"
+    Sprite: {fileID: 21300000, guid: a8c4c91c4f81f36cc53a8b037a36023d, type: 3}
+    SpriteName: g034
+  - Family: 0
+    ControlPath: "<Keyboard>/9"
+    Sprite: {fileID: 21300000, guid: 4fd8d62bb23cca5546359ee290c93558, type: 3}
+    SpriteName: g035
+  - Family: 0
+    ControlPath: "<Keyboard>/f1"
+    Sprite: {fileID: 21300000, guid: ae81bfd12752154697900a839634848c, type: 3}
+    SpriteName: g036
+  - Family: 0
+    ControlPath: "<Keyboard>/f2"
+    Sprite: {fileID: 21300000, guid: 09444cdd862520ec3ff62050a7bf934e, type: 3}
+    SpriteName: g037
+  - Family: 0
+    ControlPath: "<Keyboard>/f3"
+    Sprite: {fileID: 21300000, guid: c16f142502278d30e55be0ed3be31320, type: 3}
+    SpriteName: g038
+  - Family: 0
+    ControlPath: "<Keyboard>/f4"
+    Sprite: {fileID: 21300000, guid: 50195cbf7734878efe3b74ee56e7d890, type: 3}
+    SpriteName: g039
+  - Family: 0
+    ControlPath: "<Keyboard>/f5"
+    Sprite: {fileID: 21300000, guid: 22616ff2fd57f86e88c45f7cabfe32dc, type: 3}
+    SpriteName: g040
+  - Family: 0
+    ControlPath: "<Keyboard>/f6"
+    Sprite: {fileID: 21300000, guid: 8c07a41de9c0ef55fd01fe08886377b0, type: 3}
+    SpriteName: g041
+  - Family: 0
+    ControlPath: "<Keyboard>/f7"
+    Sprite: {fileID: 21300000, guid: 64b310450ab909b081db4dad94106ff9, type: 3}
+    SpriteName: g042
+  - Family: 0
+    ControlPath: "<Keyboard>/f8"
+    Sprite: {fileID: 21300000, guid: 93f0c6d505591e0a668d2f302fe2a55c, type: 3}
+    SpriteName: g043
+  - Family: 0
+    ControlPath: "<Keyboard>/f9"
+    Sprite: {fileID: 21300000, guid: aa7971c160895233a8757cd93ba52b7d, type: 3}
+    SpriteName: g044
+  - Family: 0
+    ControlPath: "<Keyboard>/f10"
+    Sprite: {fileID: 21300000, guid: 2866649cad9418e8c1f73b8af439a715, type: 3}
+    SpriteName: g045
+  - Family: 0
+    ControlPath: "<Keyboard>/f11"
+    Sprite: {fileID: 21300000, guid: b39ceec7f9489da642be27ab65dee6f8, type: 3}
+    SpriteName: g046
+  - Family: 0
+    ControlPath: "<Keyboard>/f12"
+    Sprite: {fileID: 21300000, guid: c69ebe699f13910f71e449daa469a40a, type: 3}
+    SpriteName: g047
+  - Family: 0
+    ControlPath: "<Keyboard>/upArrow"
+    Sprite: {fileID: 21300000, guid: 215b9f7837b9e9253a9f6c43dacbba99, type: 3}
+    SpriteName: g048
+  - Family: 0
+    ControlPath: "<Keyboard>/downArrow"
+    Sprite: {fileID: 21300000, guid: 9c3c4c94f055bfb31d197a87aacdd766, type: 3}
+    SpriteName: g049
+  - Family: 0
+    ControlPath: "<Keyboard>/leftArrow"
+    Sprite: {fileID: 21300000, guid: ae153e8022403b3fb93a99641ddf8779, type: 3}
+    SpriteName: g050
+  - Family: 0
+    ControlPath: "<Keyboard>/rightArrow"
+    Sprite: {fileID: 21300000, guid: 408c39b4aceb53df0f05e885e1c9a5cb, type: 3}
+    SpriteName: g051
+  - Family: 0
+    ControlPath: "<Keyboard>/leftShift"
+    Sprite: {fileID: 21300000, guid: e31d027a6e8d3b5cdffcc3db2d19fb30, type: 3}
+    SpriteName: g052
+  - Family: 0
+    ControlPath: "<Keyboard>/rightShift"
+    Sprite: {fileID: 21300000, guid: e31d027a6e8d3b5cdffcc3db2d19fb30, type: 3}
+    SpriteName: g052
+  - Family: 0
+    ControlPath: "<Keyboard>/shift"
+    Sprite: {fileID: 21300000, guid: e31d027a6e8d3b5cdffcc3db2d19fb30, type: 3}
+    SpriteName: g052
+  - Family: 0
+    ControlPath: "<Keyboard>/leftCtrl"
+    Sprite: {fileID: 21300000, guid: 44d37d0a0f7a990955554f5aaff30c72, type: 3}
+    SpriteName: g053
+  - Family: 0
+    ControlPath: "<Keyboard>/rightCtrl"
+    Sprite: {fileID: 21300000, guid: 44d37d0a0f7a990955554f5aaff30c72, type: 3}
+    SpriteName: g053
+  - Family: 0
+    ControlPath: "<Keyboard>/ctrl"
+    Sprite: {fileID: 21300000, guid: 44d37d0a0f7a990955554f5aaff30c72, type: 3}
+    SpriteName: g053
+  - Family: 0
+    ControlPath: "<Keyboard>/leftAlt"
+    Sprite: {fileID: 21300000, guid: feb1ebfa49de39e881c3d494e98374b6, type: 3}
+    SpriteName: g054
+  - Family: 0
+    ControlPath: "<Keyboard>/rightAlt"
+    Sprite: {fileID: 21300000, guid: feb1ebfa49de39e881c3d494e98374b6, type: 3}
+    SpriteName: g054
+  - Family: 0
+    ControlPath: "<Keyboard>/alt"
+    Sprite: {fileID: 21300000, guid: feb1ebfa49de39e881c3d494e98374b6, type: 3}
+    SpriteName: g054
+  - Family: 0
+    ControlPath: "<Keyboard>/space"
+    Sprite: {fileID: 21300000, guid: 0e7cb2fd2e394cbd4ae9693e8355493e, type: 3}
+    SpriteName: g055
+  - Family: 0
+    ControlPath: "<Keyboard>/enter"
+    Sprite: {fileID: 21300000, guid: 62a01e618a2d6143518a18c217c8e626, type: 3}
+    SpriteName: g056
+  - Family: 0
+    ControlPath: "<Keyboard>/escape"
+    Sprite: {fileID: 21300000, guid: c20cfa8ceeddc0417446564c74dfb679, type: 3}
+    SpriteName: g057
+  - Family: 0
+    ControlPath: "<Keyboard>/tab"
+    Sprite: {fileID: 21300000, guid: 60eedd79b435246cb987ef2c9d3005a9, type: 3}
+    SpriteName: g058
+  - Family: 0
+    ControlPath: "<Keyboard>/backspace"
+    Sprite: {fileID: 21300000, guid: 3791d2b93bd981288b7dd00cc608a048, type: 3}
+    SpriteName: g059
+  - Family: 0
+    ControlPath: "<Keyboard>/delete"
+    Sprite: {fileID: 21300000, guid: 1570e471b918f31b9af664089381099e, type: 3}
+    SpriteName: g060
+  - Family: 0
+    ControlPath: "<Keyboard>/insert"
+    Sprite: {fileID: 21300000, guid: 3a50d7becbe660ea464cc7eb9219f28a, type: 3}
+    SpriteName: g061
+  - Family: 0
+    ControlPath: "<Keyboard>/home"
+    Sprite: {fileID: 21300000, guid: 260a7b0ffcde6b4a43e5c398f8053ac8, type: 3}
+    SpriteName: g062
+  - Family: 0
+    ControlPath: "<Keyboard>/end"
+    Sprite: {fileID: 21300000, guid: 98d34e455887d5f528347a5ca6498097, type: 3}
+    SpriteName: g063
+  - Family: 0
+    ControlPath: "<Keyboard>/pageUp"
+    Sprite: {fileID: 21300000, guid: ba2f98500057fcef85eeb6cdace51bda, type: 3}
+    SpriteName: g064
+  - Family: 0
+    ControlPath: "<Keyboard>/pageDown"
+    Sprite: {fileID: 21300000, guid: ed5c61b7e8723150535442090c63a41d, type: 3}
+    SpriteName: g065
+  - Family: 0
+    ControlPath: "<Keyboard>/capsLock"
+    Sprite: {fileID: 21300000, guid: 649d31d2b75c8136200f87d75d08ba9c, type: 3}
+    SpriteName: g066
+  - Family: 0
+    ControlPath: "<Keyboard>/numLock"
+    Sprite: {fileID: 21300000, guid: 3f25c361d141acd88d73af85d4e1f823, type: 3}
+    SpriteName: g067
+  - Family: 0
+    ControlPath: "<Keyboard>/scrollLock"
+    Sprite: {fileID: 21300000, guid: c328bcc32d801f352368801cd89544c3, type: 3}
+    SpriteName: g068
+  - Family: 0
+    ControlPath: "<Keyboard>/pause"
+    Sprite: {fileID: 21300000, guid: 2383bacffde86e88ba9569cb4d00aa42, type: 3}
+    SpriteName: g069
+  - Family: 0
+    ControlPath: "<Keyboard>/printScreen"
+    Sprite: {fileID: 21300000, guid: 756471a71ce9cb3ffb1674c6e5f1f2c8, type: 3}
+    SpriteName: g070
+  - Family: 0
+    ControlPath: "<Keyboard>/backquote"
+    Sprite: {fileID: 21300000, guid: 0eeeef62ae30aa65a440735968dac746, type: 3}
+    SpriteName: g071
+  - Family: 0
+    ControlPath: "<Keyboard>/quote"
+    Sprite: {fileID: 21300000, guid: 2b76b82a51f69b25dff40231f1aab4b4, type: 3}
+    SpriteName: g072
+  - Family: 0
+    ControlPath: "<Keyboard>/semicolon"
+    Sprite: {fileID: 21300000, guid: 77384465c6e772e705b7ae16f032e7d5, type: 3}
+    SpriteName: g073
+  - Family: 0
+    ControlPath: "<Keyboard>/comma"
+    Sprite: {fileID: 21300000, guid: 21fa76fb0c13f9d0ca0fa6b8aca12df8, type: 3}
+    SpriteName: g074
+  - Family: 0
+    ControlPath: "<Keyboard>/period"
+    Sprite: {fileID: 21300000, guid: 346536e52ae481bac40c172790422b54, type: 3}
+    SpriteName: g075
+  - Family: 0
+    ControlPath: "<Keyboard>/slash"
+    Sprite: {fileID: 21300000, guid: 962c7b6042305f4ce81a3f0023c37854, type: 3}
+    SpriteName: g076
+  - Family: 0
+    ControlPath: "<Keyboard>/backslash"
+    Sprite: {fileID: 21300000, guid: 9e58ba0ef4670b8bc77bdd6bdcd51dc8, type: 3}
+    SpriteName: g077
+  - Family: 0
+    ControlPath: "<Keyboard>/leftBracket"
+    Sprite: {fileID: 21300000, guid: 53b6e0908bcc0984f4624b6f44c3af40, type: 3}
+    SpriteName: g078
+  - Family: 0
+    ControlPath: "<Keyboard>/rightBracket"
+    Sprite: {fileID: 21300000, guid: 4a435935bb945adc78c181e20f8e72ff, type: 3}
+    SpriteName: g079
+  - Family: 0
+    ControlPath: "<Keyboard>/minus"
+    Sprite: {fileID: 21300000, guid: 4f090a84d9848b08636e1dbb5067afd1, type: 3}
+    SpriteName: g080
+  - Family: 0
+    ControlPath: "<Keyboard>/equals"
+    Sprite: {fileID: 21300000, guid: 9cd460b8895a0b22e979c33e5a08d3ab, type: 3}
+    SpriteName: g081
+  - Family: 0
+    ControlPath: "<Keyboard>/anyKey"
+    Sprite: {fileID: 21300000, guid: 7b60a09eb033c18cdcb67af2036246e0, type: 3}
+    SpriteName: g082
+  - Family: 0
+    ControlPath: "<Keyboard>/numpadEnter"
+    Sprite: {fileID: 21300000, guid: 2426ec98e4913a2b53f77599f40dcdb5, type: 3}
+    SpriteName: g083
+  - Family: 0
+    ControlPath: "<Keyboard>/numpadPlus"
+    Sprite: {fileID: 21300000, guid: 8e4f95e2c377ba331816741c56078dca, type: 3}
+    SpriteName: g084
+  - Family: 0
+    ControlPath: "<Keyboard>/numpadMinus"
+    Sprite: {fileID: 21300000, guid: 4f090a84d9848b08636e1dbb5067afd1, type: 3}
+    SpriteName: g080
+  - Family: 0
+    ControlPath: "<Keyboard>/numpadMultiply"
+    Sprite: {fileID: 21300000, guid: 113b5dbd785b582524ee663e5341f48b, type: 3}
+    SpriteName: g085
+  - Family: 0
+    ControlPath: "<Keyboard>/numpadDivide"
+    Sprite: {fileID: 21300000, guid: 962c7b6042305f4ce81a3f0023c37854, type: 3}
+    SpriteName: g076
+  - Family: 0
+    ControlPath: "<Keyboard>/numpadPeriod"
+    Sprite: {fileID: 21300000, guid: 346536e52ae481bac40c172790422b54, type: 3}
+    SpriteName: g075
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad0"
+    Sprite: {fileID: 21300000, guid: 0cac017386e8609a225ec034bb0b50d3, type: 3}
+    SpriteName: g026
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad1"
+    Sprite: {fileID: 21300000, guid: 7116dbc88882c2823b286abc2dfe9c67, type: 3}
+    SpriteName: g027
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad2"
+    Sprite: {fileID: 21300000, guid: 345fe4365bdddf281284f729dbda02cd, type: 3}
+    SpriteName: g028
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad3"
+    Sprite: {fileID: 21300000, guid: 6b8170a0520935517b53da673c3e1579, type: 3}
+    SpriteName: g029
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad4"
+    Sprite: {fileID: 21300000, guid: 79bdfc2870ed9708073fd9dc942b15b5, type: 3}
+    SpriteName: g030
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad5"
+    Sprite: {fileID: 21300000, guid: 6a5a41f1c72fa91abcd0be581e7360ed, type: 3}
+    SpriteName: g031
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad6"
+    Sprite: {fileID: 21300000, guid: ccb14cb16f7acaf39bf4233bf268e031, type: 3}
+    SpriteName: g032
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad7"
+    Sprite: {fileID: 21300000, guid: 75f1a244b72d405e757c6ac2bd385397, type: 3}
+    SpriteName: g033
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad8"
+    Sprite: {fileID: 21300000, guid: a8c4c91c4f81f36cc53a8b037a36023d, type: 3}
+    SpriteName: g034
+  - Family: 0
+    ControlPath: "<Keyboard>/numpad9"
+    Sprite: {fileID: 21300000, guid: 4fd8d62bb23cca5546359ee290c93558, type: 3}
+    SpriteName: g035
+  - Family: 0
+    ControlPath: "<Keyboard>/arrows"
+    Sprite: {fileID: 21300000, guid: c870360a36865916a25ba33845d67b43, type: 3}
+    SpriteName: g086
+  - Family: 0
+    ControlPath: "<Mouse>/leftButton"
+    Sprite: {fileID: 21300000, guid: 0b75b6e17c8a774c90b0d6f4036af72e, type: 3}
+    SpriteName: g087
+  - Family: 0
+    ControlPath: "<Mouse>/rightButton"
+    Sprite: {fileID: 21300000, guid: b3f9acff3206bb9f9f2a73facad9375b, type: 3}
+    SpriteName: g088
+  - Family: 0
+    ControlPath: "<Mouse>/middleButton"
+    Sprite: {fileID: 21300000, guid: d58299540b8b98bf6b7b16e4fb52e2ce, type: 3}
+    SpriteName: g089
+  - Family: 0
+    ControlPath: "<Mouse>/scroll"
+    Sprite: {fileID: 21300000, guid: 2f8a4407651668ac47ecac4a70fbf7c5, type: 3}
+    SpriteName: g090
+  - Family: 0
+    ControlPath: "<Mouse>/scroll/y"
+    Sprite: {fileID: 21300000, guid: 2f8a4407651668ac47ecac4a70fbf7c5, type: 3}
+    SpriteName: g090
+  - Family: 0
+    ControlPath: "<Mouse>/scroll/up"
+    Sprite: {fileID: 21300000, guid: 87ef9c5640bd62e6dec5c07922be2533, type: 3}
+    SpriteName: g091
+  - Family: 0
+    ControlPath: "<Mouse>/scroll/down"
+    Sprite: {fileID: 21300000, guid: 6337911bf8fa420ef77e9f8fbf66dc04, type: 3}
+    SpriteName: g092
+  - Family: 0
+    ControlPath: "<Mouse>/position"
+    Sprite: {fileID: 21300000, guid: 7e7b541310cab7185a57c6131f171861, type: 3}
+    SpriteName: g093
+  - Family: 0
+    ControlPath: "<Mouse>/delta"
+    Sprite: {fileID: 21300000, guid: 7e7b541310cab7185a57c6131f171861, type: 3}
+    SpriteName: g093
+  - Family: 0
+    ControlPath: "<Pointer>/position"
+    Sprite: {fileID: 21300000, guid: 7e7b541310cab7185a57c6131f171861, type: 3}
+    SpriteName: g093
+  - Family: 0
+    ControlPath: "<Pointer>/delta"
+    Sprite: {fileID: 21300000, guid: 7e7b541310cab7185a57c6131f171861, type: 3}
+    SpriteName: g093
+  - Family: 0
+    ControlPath: "<Mouse>/forwardButton"
+    Sprite: {fileID: 21300000, guid: ad3508f4f1e0c5c4ddced3c836401e0b, type: 3}
+    SpriteName: g094
+  - Family: 0
+    ControlPath: "<Mouse>/backButton"
+    Sprite: {fileID: 21300000, guid: 3c4029bf809255b3d5b9135136391be5, type: 3}
+    SpriteName: g095
+  - Family: 1
+    ControlPath: "buttonSouth"
+    Sprite: {fileID: 21300000, guid: f8d47959dcb3cf8b0d9b73cd2aa31247, type: 3}
+    SpriteName: g096
+  - Family: 1
+    ControlPath: "buttonEast"
+    Sprite: {fileID: 21300000, guid: 123782e8d7dec01fb8cd471df2768b6b, type: 3}
+    SpriteName: g097
+  - Family: 1
+    ControlPath: "buttonWest"
+    Sprite: {fileID: 21300000, guid: 81f9878cad74ea03230cbe657ee89095, type: 3}
+    SpriteName: g098
+  - Family: 1
+    ControlPath: "buttonNorth"
+    Sprite: {fileID: 21300000, guid: 0d8097c3596a22260acb908e12ed33c8, type: 3}
+    SpriteName: g099
+  - Family: 1
+    ControlPath: "leftShoulder"
+    Sprite: {fileID: 21300000, guid: 8884c9f4c7f3500237ba5c2a00c29260, type: 3}
+    SpriteName: g100
+  - Family: 1
+    ControlPath: "rightShoulder"
+    Sprite: {fileID: 21300000, guid: 76e25462044bdef398aefbd80be5e0e1, type: 3}
+    SpriteName: g101
+  - Family: 1
+    ControlPath: "leftTrigger"
+    Sprite: {fileID: 21300000, guid: 83ad71a27dfd32e0b8f84cfface7a9c3, type: 3}
+    SpriteName: g102
+  - Family: 1
+    ControlPath: "rightTrigger"
+    Sprite: {fileID: 21300000, guid: 122139021f436478dd8849ec2ca9e596, type: 3}
+    SpriteName: g103
+  - Family: 1
+    ControlPath: "start"
+    Sprite: {fileID: 21300000, guid: 19af7b7343788912613292f6ed335b82, type: 3}
+    SpriteName: g104
+  - Family: 1
+    ControlPath: "select"
+    Sprite: {fileID: 21300000, guid: acdaa7f2fb65f9b9ed7cf5854a267022, type: 3}
+    SpriteName: g105
+  - Family: 1
+    ControlPath: "leftStick"
+    Sprite: {fileID: 21300000, guid: eeb06f4b420ade2da55f67d836182f61, type: 3}
+    SpriteName: g106
+  - Family: 1
+    ControlPath: "leftStickPress"
+    Sprite: {fileID: 21300000, guid: 90d89e1e048c06329f81d89e8ab5d48b, type: 3}
+    SpriteName: g107
+  - Family: 1
+    ControlPath: "leftStick/x"
+    Sprite: {fileID: 21300000, guid: e3013d8fd72f7452cd3c7126ffd07b61, type: 3}
+    SpriteName: g108
+  - Family: 1
+    ControlPath: "leftStick/y"
+    Sprite: {fileID: 21300000, guid: 6648a33bdfc9b143b128a88821f0d0fe, type: 3}
+    SpriteName: g109
+  - Family: 1
+    ControlPath: "leftStick/up"
+    Sprite: {fileID: 21300000, guid: 90b927ab1e2671d725ba9f7931f2ce48, type: 3}
+    SpriteName: g110
+  - Family: 1
+    ControlPath: "leftStick/down"
+    Sprite: {fileID: 21300000, guid: 311daf215e04ab62cb6b23288981cedd, type: 3}
+    SpriteName: g111
+  - Family: 1
+    ControlPath: "leftStick/left"
+    Sprite: {fileID: 21300000, guid: 4ff542ce654f2992948f6824461325a7, type: 3}
+    SpriteName: g112
+  - Family: 1
+    ControlPath: "leftStick/right"
+    Sprite: {fileID: 21300000, guid: bd12a357bdcd3ac754fd15237f8f516b, type: 3}
+    SpriteName: g113
+  - Family: 1
+    ControlPath: "rightStick"
+    Sprite: {fileID: 21300000, guid: 3e361292d5b8128369e57480d1daced3, type: 3}
+    SpriteName: g114
+  - Family: 1
+    ControlPath: "rightStickPress"
+    Sprite: {fileID: 21300000, guid: 4d6dc9f2ee6640c7fb3f9893fa6926bd, type: 3}
+    SpriteName: g115
+  - Family: 1
+    ControlPath: "rightStick/x"
+    Sprite: {fileID: 21300000, guid: 8fb995bdb19435fa8e0a120c83a8267d, type: 3}
+    SpriteName: g116
+  - Family: 1
+    ControlPath: "rightStick/y"
+    Sprite: {fileID: 21300000, guid: 2559862b09d67e2ad24273e37b79726a, type: 3}
+    SpriteName: g117
+  - Family: 1
+    ControlPath: "rightStick/up"
+    Sprite: {fileID: 21300000, guid: 07ac0941d50e67eda331ba507328429f, type: 3}
+    SpriteName: g118
+  - Family: 1
+    ControlPath: "rightStick/down"
+    Sprite: {fileID: 21300000, guid: 7837c6c39a6329109748c6e34dfab0d5, type: 3}
+    SpriteName: g119
+  - Family: 1
+    ControlPath: "rightStick/left"
+    Sprite: {fileID: 21300000, guid: 25d7c1cc49b6d9394c96d2f599ee2c56, type: 3}
+    SpriteName: g120
+  - Family: 1
+    ControlPath: "rightStick/right"
+    Sprite: {fileID: 21300000, guid: ff0b90ab91ea330762f497d6ba1fe123, type: 3}
+    SpriteName: g121
+  - Family: 1
+    ControlPath: "dpad"
+    Sprite: {fileID: 21300000, guid: d77ba644873bc4f421458ed4d088c9c2, type: 3}
+    SpriteName: g122
+  - Family: 1
+    ControlPath: "dpad/x"
+    Sprite: {fileID: 21300000, guid: d3bf9e34938f66a0aa9fe4fb92a64f74, type: 3}
+    SpriteName: g123
+  - Family: 1
+    ControlPath: "dpad/y"
+    Sprite: {fileID: 21300000, guid: 6c85b9d0a86556edab12cca70f69fc5d, type: 3}
+    SpriteName: g124
+  - Family: 1
+    ControlPath: "dpad/up"
+    Sprite: {fileID: 21300000, guid: 930b3d09d54db61f093ace337f5f34b0, type: 3}
+    SpriteName: g125
+  - Family: 1
+    ControlPath: "dpad/down"
+    Sprite: {fileID: 21300000, guid: 3c332f0c55f15c3b10ce74f8ccd94e32, type: 3}
+    SpriteName: g126
+  - Family: 1
+    ControlPath: "dpad/left"
+    Sprite: {fileID: 21300000, guid: f675e4cbd4d287dc803ae0c239a63bd0, type: 3}
+    SpriteName: g127
+  - Family: 1
+    ControlPath: "dpad/right"
+    Sprite: {fileID: 21300000, guid: eebf0fa69524de73da82a1d5e59f1aff, type: 3}
+    SpriteName: g128
+  - Family: 2
+    ControlPath: "buttonSouth"
+    Sprite: {fileID: 21300000, guid: 9919bfa9cc73b560aec16b015478426b, type: 3}
+    SpriteName: g129
+  - Family: 2
+    ControlPath: "buttonEast"
+    Sprite: {fileID: 21300000, guid: ca4e29cc595052b39f1c5cf445b01a3f, type: 3}
+    SpriteName: g130
+  - Family: 2
+    ControlPath: "buttonWest"
+    Sprite: {fileID: 21300000, guid: 6f9b3ac9b37c379f506d90a44f9ee16d, type: 3}
+    SpriteName: g131
+  - Family: 2
+    ControlPath: "buttonNorth"
+    Sprite: {fileID: 21300000, guid: f697e41c37ac1f10b00d614a0d54ef69, type: 3}
+    SpriteName: g132
+  - Family: 2
+    ControlPath: "leftShoulder"
+    Sprite: {fileID: 21300000, guid: 836038639df695181325b51756a0daba, type: 3}
+    SpriteName: g133
+  - Family: 2
+    ControlPath: "rightShoulder"
+    Sprite: {fileID: 21300000, guid: 0467ea46912d2269644a12510d1a08fd, type: 3}
+    SpriteName: g134
+  - Family: 2
+    ControlPath: "leftTrigger"
+    Sprite: {fileID: 21300000, guid: 31daa6c81aaf1727ca3723082cc28084, type: 3}
+    SpriteName: g135
+  - Family: 2
+    ControlPath: "rightTrigger"
+    Sprite: {fileID: 21300000, guid: a9e77c7fb17e3d0d8a4d29d583d4e782, type: 3}
+    SpriteName: g136
+  - Family: 2
+    ControlPath: "start"
+    Sprite: {fileID: 21300000, guid: 2ee1646e61b3bde12a744e6b439214ad, type: 3}
+    SpriteName: g137
+  - Family: 2
+    ControlPath: "select"
+    Sprite: {fileID: 21300000, guid: 737013ae5b29e89969f64cdfc75207e7, type: 3}
+    SpriteName: g138
+  - Family: 2
+    ControlPath: "touchpadButton"
+    Sprite: {fileID: 21300000, guid: aba06997e473041660a23452bd5c42ff, type: 3}
+    SpriteName: g139
+  - Family: 2
+    ControlPath: "leftStick"
+    Sprite: {fileID: 21300000, guid: e3a34201bdc3f47a471c3316a776a468, type: 3}
+    SpriteName: g140
+  - Family: 2
+    ControlPath: "leftStickPress"
+    Sprite: {fileID: 21300000, guid: e242d2ef94d355d842e6a0208aebe9c7, type: 3}
+    SpriteName: g141
+  - Family: 2
+    ControlPath: "leftStick/x"
+    Sprite: {fileID: 21300000, guid: a2e51314bf0c3824369a0826769ac881, type: 3}
+    SpriteName: g142
+  - Family: 2
+    ControlPath: "leftStick/y"
+    Sprite: {fileID: 21300000, guid: c60f40f644e8499926ad550866703d4d, type: 3}
+    SpriteName: g143
+  - Family: 2
+    ControlPath: "leftStick/up"
+    Sprite: {fileID: 21300000, guid: 46143a3666a6a4f691521b5cd282defa, type: 3}
+    SpriteName: g144
+  - Family: 2
+    ControlPath: "leftStick/down"
+    Sprite: {fileID: 21300000, guid: e197445d4da9a92998f2c68aebf02572, type: 3}
+    SpriteName: g145
+  - Family: 2
+    ControlPath: "leftStick/left"
+    Sprite: {fileID: 21300000, guid: 4b445de729a2d548dd511c68f9205d6b, type: 3}
+    SpriteName: g146
+  - Family: 2
+    ControlPath: "leftStick/right"
+    Sprite: {fileID: 21300000, guid: cd3948f345ad88d0217781175973aac2, type: 3}
+    SpriteName: g147
+  - Family: 2
+    ControlPath: "rightStick"
+    Sprite: {fileID: 21300000, guid: c88a4903a3127f8f1165ce614fda6073, type: 3}
+    SpriteName: g148
+  - Family: 2
+    ControlPath: "rightStickPress"
+    Sprite: {fileID: 21300000, guid: 640575e98a1e6ef38a5709d35969d82d, type: 3}
+    SpriteName: g149
+  - Family: 2
+    ControlPath: "rightStick/x"
+    Sprite: {fileID: 21300000, guid: 5418fe3f7a805ad1e8e0e6cb0321c1ad, type: 3}
+    SpriteName: g150
+  - Family: 2
+    ControlPath: "rightStick/y"
+    Sprite: {fileID: 21300000, guid: b959a2892550129ddedd0cb6fd7687ca, type: 3}
+    SpriteName: g151
+  - Family: 2
+    ControlPath: "rightStick/up"
+    Sprite: {fileID: 21300000, guid: fc030393633ae119e5a5dd232ef1ab6a, type: 3}
+    SpriteName: g152
+  - Family: 2
+    ControlPath: "rightStick/down"
+    Sprite: {fileID: 21300000, guid: a3b361717d71c775560b49b972037762, type: 3}
+    SpriteName: g153
+  - Family: 2
+    ControlPath: "rightStick/left"
+    Sprite: {fileID: 21300000, guid: ee1870b3f5d0d4b9dc1f047853d9e45a, type: 3}
+    SpriteName: g154
+  - Family: 2
+    ControlPath: "rightStick/right"
+    Sprite: {fileID: 21300000, guid: 0c66bb9a078748ef7c087df19304ab88, type: 3}
+    SpriteName: g155
+  - Family: 2
+    ControlPath: "dpad"
+    Sprite: {fileID: 21300000, guid: 0e41ca13f0f98601a7f2037e504aba52, type: 3}
+    SpriteName: g156
+  - Family: 2
+    ControlPath: "dpad/x"
+    Sprite: {fileID: 21300000, guid: 6c853ca917a93b1b2fa38a4c9385282d, type: 3}
+    SpriteName: g157
+  - Family: 2
+    ControlPath: "dpad/y"
+    Sprite: {fileID: 21300000, guid: b2baa93b1f92052997176cebedb46dbb, type: 3}
+    SpriteName: g158
+  - Family: 2
+    ControlPath: "dpad/up"
+    Sprite: {fileID: 21300000, guid: 4d24f39ef146fc3119e0331549b344a9, type: 3}
+    SpriteName: g159
+  - Family: 2
+    ControlPath: "dpad/down"
+    Sprite: {fileID: 21300000, guid: ba4e9f81edae3cf02e19bcf163f36ae1, type: 3}
+    SpriteName: g160
+  - Family: 2
+    ControlPath: "dpad/left"
+    Sprite: {fileID: 21300000, guid: bdc584fe6983c32bbf287d6a7c28253a, type: 3}
+    SpriteName: g161
+  - Family: 2
+    ControlPath: "dpad/right"
+    Sprite: {fileID: 21300000, guid: f8b71ab8ac57557c8f17f88b8d06a069, type: 3}
+    SpriteName: g162
+  - Family: 3
+    ControlPath: "buttonSouth"
+    Sprite: {fileID: 21300000, guid: 243b9c94b34ebffe6697460247c88675, type: 3}
+    SpriteName: g163
+  - Family: 3
+    ControlPath: "buttonEast"
+    Sprite: {fileID: 21300000, guid: a905be3ccccf4e17388b9f7337292a63, type: 3}
+    SpriteName: g164
+  - Family: 3
+    ControlPath: "buttonWest"
+    Sprite: {fileID: 21300000, guid: 4ab0d26cf63478646a29ed2bd0a49953, type: 3}
+    SpriteName: g165
+  - Family: 3
+    ControlPath: "buttonNorth"
+    Sprite: {fileID: 21300000, guid: 1540666f9f9cc5aa9dfce7aa047f168c, type: 3}
+    SpriteName: g166
+  - Family: 3
+    ControlPath: "leftStick"
+    Sprite: {fileID: 21300000, guid: 6bab55b35f4c027a7cf9404201e08bad, type: 3}
+    SpriteName: g167
+  - Family: 3
+    ControlPath: "leftStickPress"
+    Sprite: {fileID: 21300000, guid: f703eac097c9ece65d41915892eac4c8, type: 3}
+    SpriteName: g168
+  - Family: 3
+    ControlPath: "leftStick/x"
+    Sprite: {fileID: 21300000, guid: 430dd8c84a0ceeb5d491c3f24761b731, type: 3}
+    SpriteName: g169
+  - Family: 3
+    ControlPath: "leftStick/y"
+    Sprite: {fileID: 21300000, guid: e5eed5a2bc013432fc7b942161fddac7, type: 3}
+    SpriteName: g170
+  - Family: 3
+    ControlPath: "leftStick/up"
+    Sprite: {fileID: 21300000, guid: c885c2a1fcbc63a78fa3edebd0a31262, type: 3}
+    SpriteName: g171
+  - Family: 3
+    ControlPath: "leftStick/down"
+    Sprite: {fileID: 21300000, guid: 3cd2ae87c8baf57e60007eb3d26aa93f, type: 3}
+    SpriteName: g172
+  - Family: 3
+    ControlPath: "leftStick/left"
+    Sprite: {fileID: 21300000, guid: d334535ffd216ee50cccb73fba364a34, type: 3}
+    SpriteName: g173
+  - Family: 3
+    ControlPath: "leftStick/right"
+    Sprite: {fileID: 21300000, guid: 466a9cb5fc6c9a13cee832aa7a62a7a1, type: 3}
+    SpriteName: g174
+  - Family: 3
+    ControlPath: "rightStick"
+    Sprite: {fileID: 21300000, guid: 6bab55b35f4c027a7cf9404201e08bad, type: 3}
+    SpriteName: g167
+  - Family: 3
+    ControlPath: "rightStickPress"
+    Sprite: {fileID: 21300000, guid: f703eac097c9ece65d41915892eac4c8, type: 3}
+    SpriteName: g168
+  - Family: 3
+    ControlPath: "rightStick/x"
+    Sprite: {fileID: 21300000, guid: 430dd8c84a0ceeb5d491c3f24761b731, type: 3}
+    SpriteName: g169
+  - Family: 3
+    ControlPath: "rightStick/y"
+    Sprite: {fileID: 21300000, guid: e5eed5a2bc013432fc7b942161fddac7, type: 3}
+    SpriteName: g170
+  - Family: 3
+    ControlPath: "rightStick/up"
+    Sprite: {fileID: 21300000, guid: c885c2a1fcbc63a78fa3edebd0a31262, type: 3}
+    SpriteName: g171
+  - Family: 3
+    ControlPath: "rightStick/down"
+    Sprite: {fileID: 21300000, guid: 3cd2ae87c8baf57e60007eb3d26aa93f, type: 3}
+    SpriteName: g172
+  - Family: 3
+    ControlPath: "rightStick/left"
+    Sprite: {fileID: 21300000, guid: d334535ffd216ee50cccb73fba364a34, type: 3}
+    SpriteName: g173
+  - Family: 3
+    ControlPath: "rightStick/right"
+    Sprite: {fileID: 21300000, guid: 466a9cb5fc6c9a13cee832aa7a62a7a1, type: 3}
+    SpriteName: g174
+  - Family: 3
+    ControlPath: "dpad"
+    Sprite: {fileID: 21300000, guid: 00e09fac49123f6eefedd86ccab2ea15, type: 3}
+    SpriteName: g175
+  - Family: 3
+    ControlPath: "dpad/x"
+    Sprite: {fileID: 21300000, guid: d62d49b314968e3592d123321438d652, type: 3}
+    SpriteName: g176
+  - Family: 3
+    ControlPath: "dpad/y"
+    Sprite: {fileID: 21300000, guid: 21c4cf4090ff9526838aebbd695eff54, type: 3}
+    SpriteName: g177
+  - Family: 3
+    ControlPath: "dpad/up"
+    Sprite: {fileID: 21300000, guid: a244f3f224b51264ede625260b3f4332, type: 3}
+    SpriteName: g178
+  - Family: 3
+    ControlPath: "dpad/down"
+    Sprite: {fileID: 21300000, guid: b150b0919deee1b055ded352aa0389fc, type: 3}
+    SpriteName: g179
+  - Family: 3
+    ControlPath: "dpad/left"
+    Sprite: {fileID: 21300000, guid: 191e1ab785e1c25ab4384d573e481ada, type: 3}
+    SpriteName: g180
+  - Family: 3
+    ControlPath: "dpad/right"
+    Sprite: {fileID: 21300000, guid: b4e8af342f0c1382751bd801102f0d83, type: 3}
+    SpriteName: g181

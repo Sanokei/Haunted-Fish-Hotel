@@ -15,16 +15,16 @@ MonoBehaviour:
   Role: 0
   RoleLabel: Fish
   Title: How to survive the hotel
-  Summary: "A / D or arrows: walk. Shift: run. Space: jump. Gamepad: left stick, stick click, A. Mouse aims the spotlight. Hold run when jumping to clear the tablecart. Tablecart hits knock back and stun without draining health. Avoid the angler's lethal horizontal path and the swinging/falling chandelier; reach the stairwell and press E / X to challenge the ghost. Damaging traps drain health; dead fish spectate. Tablecart hits do not drain health. Fish wins at 3 goals; ghost at 1. Others spectate. Choose Ready, wait for everyone, then the 10-second ghost setup before moving. Hallway return includes another ghost head start."
+  Summary: "{input:Game/Move} Walk. {input:Game/Run} Run. {input:Game/Jump} Jump. {input:<Pointer>/position} Aim the spotlight. Hold run when jumping to clear the dining cart. Dining cart hits knock back and stun without draining health. Avoid the angler's lethal horizontal path and the swinging/falling chandelier; reach the stairwell and use {input:Game/Interact} to challenge the ghost. Damaging traps drain health; dead fish spectate. Dining cart hits do not drain health. Fish wins at 3 goals; ghost at 1. Others spectate. Choose Ready, wait for everyone, then the 10-second ghost setup before moving. Hallway return includes another ghost head start."
   Instructions:
   - Heading: "Move and jump"
-    Body: "A / D or arrows walks; Shift runs; Space jumps from the ground. Gamepad: left stick, stick click to run, A to jump."
+    Body: "{input:Game/Move} Walk. {input:Game/Run} Run. {input:Game/Jump} Jump from the ground."
   - Heading: "See and avoid traps"
-    Body: "Mouse aims the spotlight. Hold run when launching a jump to clear the tablecart. Watch for the angler's lethal horizontal rush and the swinging chandelier above."
+    Body: "{input:<Pointer>/position} Aim the spotlight. Hold run when launching a jump to clear the dining cart. Watch for the angler's lethal horizontal rush and the swinging chandelier above."
   - Heading: "Health and spectating"
-    Body: "Damaging traps drain health. Dead fish spectate as their soul rises away. Tablecart hits only knock back and stun; the piranha effect clears on recovery."
+    Body: "Damaging traps drain health. Dead fish spectate as their soul rises away. Dining cart hits only knock back and stun; the piranha effect clears on recovery."
   - Heading: "Stairwell challenge"
-    Body: "Reach the stairwell door and press E / gamepad X. Click and drag your striker across both axes of your own half to hit the cue ball. Drag sideline defenses onto your half; they bounce the ball and break after 1-3 hits."
+    Body: "Reach the stairwell door and use {input:Game/Interact}. {input:<Mouse>/leftButton} Hold and drag your striker across both axes of your own half to hit the cue ball. Drag sideline defenses onto your half; they bounce the ball and break after 1-3 hits."
   - Heading: "Win and return"
     Body: "Fish wins at 3 goals; ghost wins at 1. Other participants spectate. The hallway return includes another ghost head start."
   - Heading: "Round start"

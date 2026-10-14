@@ -1,348 +1,987 @@
 {
-  "kind": "Serialized source and actual font metric checks only; no Unity import/render/network pass",
+  "kind": "Serialized source/font/glyph proof only; no native Unity rendering or network pass",
   "roles": {
-    "Fish dynamic states": [
+    "Fish PC inputs": [
       {
-        "file_id": 193,
-        "label": "2147483647 / 2147483647 PLAYERS READY",
-        "maximum_line_width": 491.91,
-        "reserved_height": 28
+        "component": 185,
+        "paths": [
+          "<Keyboard>/enter"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_enter.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "YOU ARE READY",
-        "maximum_line_width": 204.2,
-        "reserved_height": 29
+        "component": 1002,
+        "paths": [
+          "<Keyboard>/a",
+          "<Keyboard>/d"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_a.png",
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_d.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "READY SENT",
-        "maximum_line_width": 159.27,
-        "reserved_height": 29
+        "component": 1102,
+        "paths": [
+          "<Keyboard>/leftShift"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_shift.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "WAITING FOR CONNECTION",
-        "maximum_line_width": 340.72,
-        "reserved_height": 29
+        "component": 1202,
+        "paths": [
+          "<Keyboard>/space"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_space.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "FINISHING INTRODUCTION",
-        "maximum_line_width": 324.97,
-        "reserved_height": 29
+        "component": 1302,
+        "paths": [
+          "<Keyboard>/e"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_e.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "READ, THEN READY UP",
-        "maximum_line_width": 285.2,
-        "reserved_height": 29
+        "component": 1402,
+        "paths": [
+          "<Pointer>/position"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_move.png"
+        ],
+        "fallback": ""
+      }
+    ],
+    "Fish Xbox inputs": [
+      {
+        "component": 185,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_a.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "CLOSE MENU TO READY",
-        "maximum_line_width": 299.12,
-        "reserved_height": 29
+        "component": 1002,
+        "paths": [
+          "<Gamepad>/leftStick"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "READY UP",
-        "maximum_line_width": 127.33,
-        "reserved_height": 29
+        "component": 1102,
+        "paths": [
+          "<Gamepad>/leftStickPress"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_press.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1202,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_a.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1302,
+        "paths": [
+          "<Gamepad>/buttonWest"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_x.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1402,
+        "paths": [],
+        "glyphs": [],
+        "fallback": "Mouse required"
+      }
+    ],
+    "Fish PlayStation inputs": [
+      {
+        "component": 185,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_cross.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1002,
+        "paths": [
+          "<Gamepad>/leftStick"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1102,
+        "paths": [
+          "<Gamepad>/leftStickPress"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_press.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1202,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_cross.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1302,
+        "paths": [
+          "<Gamepad>/buttonWest"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_square.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1402,
+        "paths": [],
+        "glyphs": [],
+        "fallback": "Mouse required"
       }
     ],
     "Fish": [
       {
-        "object": "Bubbly role heading",
         "file_id": 133,
-        "rect": [
-          1100,
-          90
-        ],
-        "measured_width": 463.09,
-        "reserved_line_height": 85,
+        "text": "YOU ARE THE FISH",
+        "font": "Assets/Art/Fonts/Modak-Regular.ttf",
         "font_size": 56,
-        "text": "YOU ARE THE FISH"
+        "short_bold_emphasis": false,
+        "width": 463.09,
+        "line_height": 85,
+        "bounds": [
+          -550.0,
+          221.0,
+          550.0,
+          311.0
+        ]
       },
       {
-        "object": "Role objective",
         "file_id": 143,
-        "rect": [
-          1100,
-          52
-        ],
-        "measured_width": 718.64,
-        "reserved_line_height": 29,
-        "font_size": 25,
-        "text": "Reach the stairwell together. E / gamepad X starts the challenge."
+        "text": "Reach the stairwell. Challenge the ghost.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 30,
+        "short_bold_emphasis": false,
+        "width": 382.28,
+        "line_height": 34,
+        "bounds": [
+          -550.0,
+          166.0,
+          550.0,
+          218.0
+        ]
       },
       {
-        "object": "Controls heading",
         "file_id": 243,
-        "rect": [
-          494,
-          50
-        ],
-        "measured_width": 226.42,
-        "reserved_line_height": 46,
+        "text": "CONTROLS",
+        "font": "Assets/Art/Fonts/Modak-Regular.ttf",
         "font_size": 30,
-        "text": "YOUR CONTROLS"
+        "short_bold_emphasis": false,
+        "width": 144.78,
+        "line_height": 46,
+        "bounds": [
+          -529.0,
+          95.0,
+          -35.0,
+          145.0
+        ]
       },
       {
-        "object": "Trap rules heading",
         "file_id": 253,
-        "rect": [
-          494,
-          50
-        ],
-        "measured_width": 241.55,
-        "reserved_line_height": 46,
+        "text": "Traps to avoid",
+        "font": "Assets/Art/Fonts/Modak-Regular.ttf",
         "font_size": 30,
-        "text": "KNOW THE TRAPS"
+        "short_bold_emphasis": false,
+        "width": 197.02,
+        "line_height": 46,
+        "bounds": [
+          35.0,
+          95.0,
+          529.0,
+          145.0
+        ]
       },
       {
-        "object": "Fish controls",
-        "file_id": 163,
-        "rect": [
-          494,
-          250
-        ],
-        "measured_width": 352.17,
-        "reserved_line_height": 232.96,
-        "font_size": 24,
-        "text": "A / D / arrows / stick: Walk\nShift / stick press: Run\nSpace / gamepad A: Jump\nE / gamepad X: Interact\nMouse: Aim your spotlight\n\nRun and jump to clear tablecarts."
-      },
-      {
-        "object": "Fish trap rules",
         "file_id": 173,
-        "rect": [
-          494,
-          250
-        ],
-        "measured_width": 440.92,
-        "reserved_line_height": 198.8,
-        "font_size": 24,
-        "text": "Tablecart: Knockback + stun; no damage.\nChandelier: Watch the ceiling for drops.\nAngler: Kills every fish it crosses.\nDamaging traps drain health.\nIf you die, you spectate.\nStarting hallway: No traps or cart travel."
+        "text": "Dining cart",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 98.39,
+        "line_height": 32,
+        "bounds": [
+          35.0,
+          57.0,
+          529.0,
+          91.0
+        ]
       },
       {
-        "object": "Everyone-ready countdown rule",
+        "file_id": 303,
+        "text": "Knockback + stun. No damage.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 27,
+        "short_bold_emphasis": false,
+        "width": 262.66,
+        "line_height": 30,
+        "bounds": [
+          35.0,
+          22.0,
+          529.0,
+          56.0
+        ]
+      },
+      {
+        "file_id": 313,
+        "text": "Chandelier",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 94.2,
+        "line_height": 32,
+        "bounds": [
+          35.0,
+          -22.0,
+          529.0,
+          12.0
+        ]
+      },
+      {
+        "file_id": 323,
+        "text": "Watch for the drop.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 27,
+        "short_bold_emphasis": false,
+        "width": 165.97,
+        "line_height": 30,
+        "bounds": [
+          35.0,
+          -57.0,
+          529.0,
+          -23.0
+        ]
+      },
+      {
+        "file_id": 333,
+        "text": "Angler",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 58.52,
+        "line_height": 32,
+        "bounds": [
+          35.0,
+          -99.0,
+          529.0,
+          -65.0
+        ]
+      },
+      {
+        "file_id": 343,
+        "text": "Lethal on contact.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 27,
+        "short_bold_emphasis": true,
+        "width": 152.44,
+        "line_height": 31,
+        "bounds": [
+          35.0,
+          -134.0,
+          529.0,
+          -100.0
+        ]
+      },
+      {
+        "file_id": 353,
+        "text": "STARTING HALLWAY: TRAP-FREE",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 20,
+        "short_bold_emphasis": true,
+        "width": 220.48,
+        "line_height": 23,
+        "bounds": [
+          35.0,
+          -167.0,
+          529.0,
+          -143.0
+        ]
+      },
+      {
         "file_id": 263,
-        "rect": [
-          1100,
-          42
-        ],
-        "measured_width": 771.97,
-        "reserved_line_height": 26,
-        "font_size": 23,
-        "text": "Everyone must ready up. Then the ghost gets 10 seconds before fish move."
+        "text": "Everyone ready. 10-second ghost setup. Then fish move.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 490.95,
+        "line_height": 31,
+        "bounds": [
+          -550.0,
+          -225.0,
+          550.0,
+          -183.0
+        ]
       },
       {
-        "object": "Live participant readiness",
         "file_id": 193,
-        "rect": [
-          540,
-          70
-        ],
-        "measured_width": 251.72,
-        "reserved_line_height": 28,
-        "font_size": 24,
-        "text": "0 / 0 PLAYERS READY"
+        "text": "0 / 0 PLAYERS READY",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 26,
+        "short_bold_emphasis": false,
+        "width": 185.84,
+        "line_height": 30,
+        "bounds": [
+          -545.0,
+          -307.0,
+          -5.0,
+          -237.0
+        ]
       },
       {
-        "object": "Ready up label",
         "file_id": 203,
-        "rect": [
-          460,
-          58
-        ],
-        "measured_width": 285.2,
-        "reserved_line_height": 29,
-        "font_size": 25,
-        "text": "READ, THEN READY UP"
+        "text": "READ, THEN READY UP",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 213.08,
+        "line_height": 32,
+        "bounds": [
+          122.0,
+          -299.0,
+          502.0,
+          -241.0
+        ]
       },
       {
-        "object": "Ready input shortcuts",
-        "file_id": 273,
-        "rect": [
-          540,
-          26
-        ],
-        "measured_width": 278.8,
-        "reserved_line_height": 23,
-        "font_size": 19,
-        "text": "Enter / Space / gamepad A / click"
+        "file_id": 1033,
+        "text": "Move",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 46.0,
+        "line_height": 31,
+        "bounds": [
+          -367.0,
+          49.0,
+          -47.0,
+          91.0
+        ]
+      },
+      {
+        "file_id": 1133,
+        "text": "Run",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 34.44,
+        "line_height": 31,
+        "bounds": [
+          -367.0,
+          -1.0,
+          -47.0,
+          41.0
+        ]
+      },
+      {
+        "file_id": 1233,
+        "text": "Jump",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 47.86,
+        "line_height": 32,
+        "bounds": [
+          -367.0,
+          -51.0,
+          -47.0,
+          -9.0
+        ]
+      },
+      {
+        "file_id": 1333,
+        "text": "Interact",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 70.28,
+        "line_height": 32,
+        "bounds": [
+          -367.0,
+          -101.0,
+          -47.0,
+          -59.0
+        ]
+      },
+      {
+        "file_id": 1433,
+        "text": "Aim spotlight",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 118.33,
+        "line_height": 31,
+        "bounds": [
+          -367.0,
+          -151.0,
+          -47.0,
+          -109.0
+        ]
       }
     ],
-    "Ghost dynamic states": [
+    "Ghost PC inputs": [
       {
-        "file_id": 193,
-        "label": "2147483647 / 2147483647 PLAYERS READY",
-        "maximum_line_width": 491.91,
-        "reserved_height": 28
+        "component": 185,
+        "paths": [
+          "<Keyboard>/enter"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_enter.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "YOU ARE READY",
-        "maximum_line_width": 204.2,
-        "reserved_height": 29
+        "component": 1002,
+        "paths": [
+          "<Keyboard>/w",
+          "<Keyboard>/a",
+          "<Keyboard>/s",
+          "<Keyboard>/d"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_w.png",
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_a.png",
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_s.png",
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_d.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "READY SENT",
-        "maximum_line_width": 159.27,
-        "reserved_height": 29
+        "component": 1102,
+        "paths": [
+          "<Keyboard>/e"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_e.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "WAITING FOR CONNECTION",
-        "maximum_line_width": 340.72,
-        "reserved_height": 29
+        "component": 1202,
+        "paths": [
+          "<Keyboard>/space"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_space.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "FINISHING INTRODUCTION",
-        "maximum_line_width": 324.97,
-        "reserved_height": 29
+        "component": 1302,
+        "paths": [
+          "<Keyboard>/f"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "READ, THEN READY UP",
-        "maximum_line_width": 285.2,
-        "reserved_height": 29
+        "component": 1402,
+        "paths": [
+          "<Keyboard>/q"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_q.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "CLOSE MENU TO READY",
-        "maximum_line_width": 299.12,
-        "reserved_height": 29
+        "component": 1502,
+        "paths": [
+          "<Pointer>/position"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_move.png"
+        ],
+        "fallback": ""
+      }
+    ],
+    "Ghost Xbox inputs": [
+      {
+        "component": 185,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_a.png"
+        ],
+        "fallback": ""
       },
       {
-        "file_id": 203,
-        "label": "READY UP",
-        "maximum_line_width": 127.33,
-        "reserved_height": 29
+        "component": 1002,
+        "paths": [
+          "<Gamepad>/leftStick"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1102,
+        "paths": [
+          "<Gamepad>/buttonWest"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_x.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1202,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_a.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1302,
+        "paths": [
+          "<Gamepad>/buttonEast"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_b.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1402,
+        "paths": [
+          "<Gamepad>/buttonNorth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/Xbox Series/xbox_button_y.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1502,
+        "paths": [],
+        "glyphs": [],
+        "fallback": "Mouse required"
+      }
+    ],
+    "Ghost PlayStation inputs": [
+      {
+        "component": 185,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_cross.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1002,
+        "paths": [
+          "<Gamepad>/leftStick"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1102,
+        "paths": [
+          "<Gamepad>/buttonWest"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_square.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1202,
+        "paths": [
+          "<Gamepad>/buttonSouth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_cross.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1302,
+        "paths": [
+          "<Gamepad>/buttonEast"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_circle.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1402,
+        "paths": [
+          "<Gamepad>/buttonNorth"
+        ],
+        "glyphs": [
+          "Assets/Art/InputPrompts/PlayStation Series/playstation_button_triangle.png"
+        ],
+        "fallback": ""
+      },
+      {
+        "component": 1502,
+        "paths": [],
+        "glyphs": [],
+        "fallback": "Mouse required"
       }
     ],
     "Ghost": [
       {
-        "object": "Bubbly role heading",
         "file_id": 133,
-        "rect": [
-          1100,
-          90
-        ],
-        "measured_width": 519.06,
-        "reserved_line_height": 85,
+        "text": "YOU ARE THE GHOST",
+        "font": "Assets/Art/Fonts/Modak-Regular.ttf",
         "font_size": 56,
-        "text": "YOU ARE THE GHOST"
+        "short_bold_emphasis": false,
+        "width": 519.06,
+        "line_height": 85,
+        "bounds": [
+          -550.0,
+          221.0,
+          550.0,
+          311.0
+        ]
       },
       {
-        "object": "Role objective",
         "file_id": 143,
-        "rect": [
-          1100,
-          52
-        ],
-        "measured_width": 927.06,
-        "reserved_line_height": 29,
-        "font_size": 25,
-        "text": "Collect conveyor packages and possess traps to stop the fish reaching the stairwell."
+        "text": "Use packages and traps to stop the fish.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 30,
+        "short_bold_emphasis": false,
+        "width": 379.05,
+        "line_height": 34,
+        "bounds": [
+          -550.0,
+          166.0,
+          550.0,
+          218.0
+        ]
       },
       {
-        "object": "Controls heading",
         "file_id": 243,
-        "rect": [
-          494,
-          50
-        ],
-        "measured_width": 226.42,
-        "reserved_line_height": 46,
+        "text": "CONTROLS",
+        "font": "Assets/Art/Fonts/Modak-Regular.ttf",
         "font_size": 30,
-        "text": "YOUR CONTROLS"
+        "short_bold_emphasis": false,
+        "width": 144.78,
+        "line_height": 46,
+        "bounds": [
+          -529.0,
+          95.0,
+          -35.0,
+          145.0
+        ]
       },
       {
-        "object": "Trap rules heading",
         "file_id": 253,
-        "rect": [
-          494,
-          50
-        ],
-        "measured_width": 241.55,
-        "reserved_line_height": 46,
+        "text": "TRAPS",
+        "font": "Assets/Art/Fonts/Modak-Regular.ttf",
         "font_size": 30,
-        "text": "KNOW THE TRAPS"
+        "short_bold_emphasis": false,
+        "width": 91.94,
+        "line_height": 46,
+        "bounds": [
+          35.0,
+          95.0,
+          529.0,
+          145.0
+        ]
       },
       {
-        "object": "Ghost controls",
-        "file_id": 163,
-        "rect": [
-          494,
-          250
-        ],
-        "measured_width": 405.47,
-        "reserved_line_height": 232.96,
-        "font_size": 24,
-        "text": "WASD / arrows / stick: Fly\nE / X: Open, place, possess / release\nA / D / stick: Drive owned trap\nSpace / A: Drop chandelier\nF / B: Reset when clear\nQ: Discard held or possessed trap\nMouse: Aim placement; click click-trap"
-      },
-      {
-        "object": "Ghost trap rules",
         "file_id": 173,
-        "rect": [
-          494,
-          250
-        ],
-        "measured_width": 452.2,
-        "reserved_line_height": 198.8,
-        "font_size": 24,
-        "text": "Tablecart: Knockback + stun; no damage.\nChandelier: Ceiling drop; reset when clear.\nAngler: Kills every fish it crosses.\nPlace clear of fish and other traps.\nStarting hallway: No traps or cart travel.\nX / A / B above are gamepad buttons."
+        "text": "Dining cart",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 98.39,
+        "line_height": 32,
+        "bounds": [
+          35.0,
+          57.0,
+          529.0,
+          91.0
+        ]
       },
       {
-        "object": "Everyone-ready countdown rule",
+        "file_id": 303,
+        "text": "Drive to stun fish. No damage.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 27,
+        "short_bold_emphasis": false,
+        "width": 257.12,
+        "line_height": 30,
+        "bounds": [
+          35.0,
+          22.0,
+          529.0,
+          56.0
+        ]
+      },
+      {
+        "file_id": 313,
+        "text": "Chandelier",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 94.2,
+        "line_height": 32,
+        "bounds": [
+          35.0,
+          -22.0,
+          529.0,
+          12.0
+        ]
+      },
+      {
+        "file_id": 323,
+        "text": "Drop, then reset when clear.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 27,
+        "short_bold_emphasis": false,
+        "width": 237.12,
+        "line_height": 30,
+        "bounds": [
+          35.0,
+          -57.0,
+          529.0,
+          -23.0
+        ]
+      },
+      {
+        "file_id": 333,
+        "text": "Angler",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 58.52,
+        "line_height": 32,
+        "bounds": [
+          35.0,
+          -99.0,
+          529.0,
+          -65.0
+        ]
+      },
+      {
+        "file_id": 343,
+        "text": "Rush through fish. Every hit is lethal.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 27,
+        "short_bold_emphasis": true,
+        "width": 318.12,
+        "line_height": 31,
+        "bounds": [
+          35.0,
+          -134.0,
+          529.0,
+          -100.0
+        ]
+      },
+      {
+        "file_id": 353,
+        "text": "PLACE CLEAR. KEEP STARTING HALLWAY SAFE.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 20,
+        "short_bold_emphasis": true,
+        "width": 314.16,
+        "line_height": 23,
+        "bounds": [
+          35.0,
+          -167.0,
+          529.0,
+          -143.0
+        ]
+      },
+      {
         "file_id": 263,
-        "rect": [
-          1100,
-          42
-        ],
-        "measured_width": 771.97,
-        "reserved_line_height": 26,
-        "font_size": 23,
-        "text": "Everyone must ready up. Then the ghost gets 10 seconds before fish move."
+        "text": "Everyone ready. 10-second ghost setup. Then fish move.",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 490.95,
+        "line_height": 31,
+        "bounds": [
+          -550.0,
+          -225.0,
+          550.0,
+          -183.0
+        ]
       },
       {
-        "object": "Live participant readiness",
         "file_id": 193,
-        "rect": [
-          540,
-          70
-        ],
-        "measured_width": 251.72,
-        "reserved_line_height": 28,
-        "font_size": 24,
-        "text": "0 / 0 PLAYERS READY"
+        "text": "0 / 0 PLAYERS READY",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 26,
+        "short_bold_emphasis": false,
+        "width": 185.84,
+        "line_height": 30,
+        "bounds": [
+          -545.0,
+          -307.0,
+          -5.0,
+          -237.0
+        ]
       },
       {
-        "object": "Ready up label",
         "file_id": 203,
-        "rect": [
-          460,
-          58
-        ],
-        "measured_width": 285.2,
-        "reserved_line_height": 29,
-        "font_size": 25,
-        "text": "READ, THEN READY UP"
+        "text": "READ, THEN READY UP",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 213.08,
+        "line_height": 32,
+        "bounds": [
+          122.0,
+          -299.0,
+          502.0,
+          -241.0
+        ]
       },
       {
-        "object": "Ready input shortcuts",
-        "file_id": 273,
-        "rect": [
-          540,
-          26
-        ],
-        "measured_width": 278.8,
-        "reserved_line_height": 23,
-        "font_size": 19,
-        "text": "Enter / Space / gamepad A / click"
+        "file_id": 1033,
+        "text": "Fly / drive",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 92.77,
+        "line_height": 31,
+        "bounds": [
+          -367.0,
+          49.0,
+          -47.0,
+          91.0
+        ]
+      },
+      {
+        "file_id": 1133,
+        "text": "Open / place / possess",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 198.91,
+        "line_height": 31,
+        "bounds": [
+          -367.0,
+          7.0,
+          -47.0,
+          49.0
+        ]
+      },
+      {
+        "file_id": 1233,
+        "text": "Drop chandelier",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 139.31,
+        "line_height": 32,
+        "bounds": [
+          -367.0,
+          -35.0,
+          -47.0,
+          7.0
+        ]
+      },
+      {
+        "file_id": 1333,
+        "text": "Reset trap",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": true,
+        "width": 92.12,
+        "line_height": 32,
+        "bounds": [
+          -367.0,
+          -77.0,
+          -47.0,
+          -35.0
+        ]
+      },
+      {
+        "file_id": 1433,
+        "text": "Discard trap",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 109.44,
+        "line_height": 31,
+        "bounds": [
+          -367.0,
+          -119.0,
+          -47.0,
+          -77.0
+        ]
+      },
+      {
+        "file_id": 1533,
+        "text": "Aim placement",
+        "font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
+        "font_size": 28,
+        "short_bold_emphasis": false,
+        "width": 129.06,
+        "line_height": 31,
+        "bounds": [
+          -367.0,
+          -161.0,
+          -47.0,
+          -119.0
+        ]
       }
     ]
   },
@@ -364,7 +1003,7 @@
         1280.0,
         720.0
       ],
-      "body_pixels": 24.0
+      "body_pixels": 27.0
     },
     {
       "pixels": [
@@ -383,7 +1022,7 @@
         1920.0,
         1080.0
       ],
-      "body_pixels": 36.0
+      "body_pixels": 40.5
     },
     {
       "pixels": [
@@ -402,7 +1041,7 @@
         1280.0,
         760.0
       ],
-      "body_pixels": 24.0
+      "body_pixels": 27.0
     },
     {
       "pixels": [
@@ -421,7 +1060,7 @@
         1024.0,
         672.0
       ],
-      "body_pixels": 19.2
+      "body_pixels": 21.6
     },
     {
       "pixels": [
@@ -440,7 +1079,7 @@
         3000.0,
         1440.0
       ],
-      "body_pixels": 48.0
+      "body_pixels": 54.0
     },
     {
       "pixels": [
@@ -459,27 +1098,8 @@
         2058.8888888888887,
         1040.0
       ],
-      "body_pixels": 33.33
-    },
-    {
-      "pixels": [
-        800,
-        1280
-      ],
-      "safe_area": [
-        20,
-        40,
-        760,
-        1180
-      ],
-      "page_pixel_bounds": [
-        20.0,
-        416.25,
-        780.0,
-        843.75
-      ],
-      "body_pixels": 14.25
+      "body_pixels": 37.5
     }
   ],
-  "checks": 266
+  "checks": 682
 }

@@ -6,7 +6,7 @@ namespace HauntedFish.Multiplayer
     public sealed class GhostTrap : MonoBehaviour, IGhostTrap
     {
         [SerializeField]
-        string _FamilyTag = "cart", _DisplayName = "Tablecart";
+        string _FamilyTag = "cart", _DisplayName = "Dining cart";
         [SerializeField]
         TrapInputMode _InputMode;
         [SerializeField]
@@ -146,7 +146,8 @@ namespace HauntedFish.Multiplayer
         public Vector3 HalfExtents => BodyHalfSize * .96f;
         public TrapPhase Phase => (TrapPhase)_State.Phase;
         public Vector2 Limits => World ? World.TravelLimits(_State.Origin, BodyHalfSize, ColliderOffset, _TravelHalfWidth) : new Vector2(Mathf.Max(-15 + BodyHalfSize.x, _State.Origin.x - _TravelHalfWidth), Mathf.Min(15 - BodyHalfSize.x, _State.Origin.x + _TravelHalfWidth));
-        public string ControlHint => _InputMode == TrapInputMode.Movement ? "A/D / stick: move" : _InputMode == TrapInputMode.MouseClick ? "Mouse click: activate - R: reset" : "Space / A: activate - R: reset";
+        public string ControlHint => _InputMode == TrapInputMode.Movement ? "Drive while possessed" :
+            _InputMode == TrapInputMode.MouseClick ? "Activate while possessed" : "Drop while possessed";
 
         public void Initialize(GhostPlacementWorld world, GhostCubePlacement state, int index)
         {

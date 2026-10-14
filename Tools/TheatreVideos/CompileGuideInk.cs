@@ -39,7 +39,7 @@ static class CompileGuideInk
             var captions = steps.Where(step => step.StartsWith("caption|")).ToArray();
             if (!captions[0].StartsWith(opening) || captions.Count(step => step.StartsWith(opening)) != 1)
                 throw new Exception(role + " opening title must occur exactly once.");
-            if (steps.Any(step => step.Contains("becomes ghost") || step.Contains("become ghost") || step.Contains("Shopping Cart")))
+            if (steps.Any(step => step.Contains("becomes ghost") || step.Contains("become ghost") || step.Contains("Shopping Cart") || step.StartsWith("caption|") && (step.Contains("Tablecart") || step.Contains("tablecart"))))
                 throw new Exception(role + " contains obsolete trap/role-swap copy.");
             if (write) File.WriteAllText(jsonPath, json);
             if (!steps.SequenceEqual(Operations(File.ReadAllText(jsonPath))))

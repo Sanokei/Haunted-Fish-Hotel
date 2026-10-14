@@ -1,4 +1,5 @@
 using UnityEngine;
+using HauntedFish.InputPrompts;
 using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
@@ -89,6 +90,7 @@ namespace HauntedFish.Multiplayer
 
         void OnDisable()
         {
+            UnregisterPromptMaps();
             if (_OwnedActions) _OwnedActions.Disable();
             ControlsReady = false;
             ClearTrapStun();
@@ -98,7 +100,13 @@ namespace HauntedFish.Multiplayer
 
         void OnDestroy()
         {
+            UnregisterPromptMaps();
             if (_OwnedActions) Destroy(_OwnedActions);
+        }
+
+        void UnregisterPromptMaps()
+        {
+            InputPromptActions.Unregister(_LobbyMap); InputPromptActions.Unregister(_GameMap); InputPromptActions.Unregister(_BossMap);
         }
 
         public void SetSimulationAuthority(bool authority)
@@ -119,6 +127,8 @@ namespace HauntedFish.Multiplayer
                 _InputBlocked == blocked && _GameControl == game) return;
             _ControlStateInitialized = true;
             _LocalControl = local;
+            if (local) { InputPromptActions.Register(_LobbyMap); InputPromptActions.Register(_GameMap); InputPromptActions.Register(_BossMap); }
+            else UnregisterPromptMaps();
             _GameControl = game;
             var wasReady = ControlsReady;
             var wasBlocked = _InputBlocked;

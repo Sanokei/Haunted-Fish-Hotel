@@ -22,7 +22,7 @@ def main():
         reports[role]['ink_sha256'] = sha256(path)
         for index, (_, (heading, body)) in enumerate(step for step in steps if step[0] == 'TutorialCaption'):
             picture, _ = render_card(role, index, heading, body)
-            if index == 0 or role == 'Fish' and heading in ('Move', 'Wowza'):
+            if index == 0 or role == 'Fish' and heading in ('Move', 'Wowza', 'Dining cart'):
                 name = role + ('-opening' if index == 0 else '-' + heading)
                 picture.save(args.output_dir / (name + '.png'))
                 samples[name] = picture

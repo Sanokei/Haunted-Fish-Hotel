@@ -15,22 +15,22 @@ MonoBehaviour:
   Role: 1
   RoleLabel: Ghost
   Title: How to haunt the hotel
-  Summary: "WASD / arrows: fly. E / X: open a nearby conveyor package, place in a clear space, possess your placed trap or unpossess. Tablecart: A / D or stick moves it; hits knock back and briefly show the piranha stun effect without draining health. Angler: A / D drives through every fish, kills each crossed fish, and slows inside bodies; its light is on while possessed. Chandelier: aim ceiling placement with mouse; Space / A drops it. Stationary click trap: click its body. F / B resets when clear; Q disposes held or possessed traps. Starting safe hallway forbids traps. Damaging traps drain health; dead fish spectate. Tablecart hits do not drain health. Choose Ready; after everyone is ready you have 10 seconds to set up."
+  Summary: "{input:Ghost/Move} Fly. {input:Ghost/Confirm}: open a nearby conveyor package, place in a clear space, possess your placed trap or unpossess. Dining cart: {input:Ghost/Move} moves it; hits knock back and briefly show the piranha stun effect without draining health. Angler: {input:Ghost/Move} drives through every fish, kills each crossed fish, and slows inside bodies; its light is on while possessed. Chandelier: aim ceiling placement with {input:Ghost/TrapPoint}; {input:Ghost/TrapActivate} drops it. Stationary click trap: {input:Ghost/TrapClick} on its body. {input:Ghost/Reset} resets when clear; {input:Ghost/Dispose} disposes held or possessed traps. Starting safe hallway forbids traps. Damaging traps drain health; dead fish spectate. Dining cart hits do not drain health. Choose Ready; after everyone is ready you have 10 seconds to set up."
   Instructions:
   - Heading: "Fly and collect"
-    Body: "WASD / arrows / left stick flies. E / gamepad X opens a nearby package from the conveyor above the hallway."
+    Body: "{input:Ghost/Move} Fly. {input:Ghost/Confirm} opens a nearby package from the conveyor above the hallway."
   - Heading: "Place legally"
-    Body: "Carry to a clear floor position and E / X places. Keep trap footprints outside the safe starting hallway, fish and other traps. Chandelier placement aims at the ceiling with the mouse within reach."
+    Body: "Carry to a clear floor position and {input:Ghost/Confirm} places. Keep trap footprints outside the safe starting hallway, fish and other traps. Chandelier placement aims at the ceiling with {input:Ghost/TrapPoint} within reach."
   - Heading: "Possess and use"
-    Body: "E / X near your placed trap possesses it. Tablecart: A / D / stick moves; hits knock back and stun without killing. Chandelier: Space / gamepad A drops. Stationary click trap: click its body."
+    Body: "{input:Ghost/Confirm} near your placed trap possesses it. Dining cart: {input:Ghost/Move} moves; hits knock back and stun without killing. Chandelier: {input:Ghost/TrapActivate} drops. Stationary click trap: {input:Ghost/TrapClick} on its body."
   - Heading: "Angler"
-    Body: "A / D or stick drives the angler horizontally through every fish. Each crossed fish dies; the angler slows while inside bodies. Its light is on only while possessed."
+    Body: "{input:Ghost/Move} drives the angler horizontally through every fish. Each crossed fish dies; the angler slows while inside bodies. Its light is on only while possessed."
   - Heading: "Release, reset, dispose"
-    Body: "E / X unpossesses. F / gamepad B resets when the reset position is clear. Q discards a held trap or removes a possessed one."
+    Body: "{input:Ghost/Confirm} unpossesses. {input:Ghost/Reset} resets when the reset position is clear. {input:Ghost/Dispose} discards a held trap or removes a possessed one."
   - Heading: "Health and spectating"
-    Body: "Damaging traps drain health. Dead fish spectate as their soul rises away. Tablecart hits only knock back and stun; the piranha effect clears on recovery."
+    Body: "Damaging traps drain health. Dead fish spectate as their soul rises away. Dining cart hits only knock back and stun; the piranha effect clears on recovery."
   - Heading: "Ghost challenge"
-    Body: "Click and drag your striker across both axes of your own half to hit the cue ball. Drag sideline defenses onto your half; they bounce the ball and break after 1-3 hits. Ghost wins at 1 goal; fish at 3. Other participants spectate; hallway return includes a ghost head start."
+    Body: "{input:<Mouse>/leftButton} Hold and drag your striker across both axes of your own half to hit the cue ball. Drag sideline defenses onto your half; they bounce the ball and break after 1-3 hits. Ghost wins at 1 goal; fish at 3. Other participants spectate; hallway return includes a ghost head start."
   - Heading: "Round start"
     Body: "Read the role page and deliberately choose Ready. Everyone must be ready before the 10-second ghost setup and fish release."
   Recording: {fileID: 32900000, guid: 36dca6826c30d7e45931c7d39c668f32, type: 3}

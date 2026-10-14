@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using HauntedFish.BossFight;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
+using HauntedFish.InputPrompts;
 using UnityEngine.InputSystem;
 
 namespace HauntedFish.Multiplayer
@@ -21,7 +22,8 @@ namespace HauntedFish.Multiplayer
     public sealed class BossArenaCoordinator : MonoBehaviour, IHotelBossCommands, IHotelBossDefenseCommands
     {
         [SerializeField] BoxCollider _Entrance;
-        [SerializeField] Text _Prompt;
+        [SerializeField] TMP_Text _Prompt;
+        [SerializeField] InputPromptSpriteText _PromptGlyphs;
         [SerializeField] GhostPlacementWorld _World;
         [SerializeField] GameCameraOwner _GameCamera;
         [SerializeField] string _SceneName = "BossFight";
@@ -371,7 +373,8 @@ namespace HauntedFish.Multiplayer
                 bool result = Time.unscaledTime < _ResultUntil;
                 bool waiting = !_EditorPreview && local.BossWatching && (!_Arena || !_Arena.ParticipantsReady);
                 _Prompt.gameObject.SetActive(!local.BossWatching&&(entrance||result||local.BossReturnSetupRemaining>0));
-                _Prompt.text = _EditorPreview ? "EDITOR PRACTICE: drag your striker or sideline defenses; WASD also moves the striker." : local.BossReturnSetupRemaining > 0 ? "Ghost head start: " + Mathf.CeilToInt(local.BossReturnSetupRemaining) + "s" : waiting ? "Entering the ghost challenge..." : result ? (local.BossWon ? "You won the ghost's challenge!" : "Returned to the hallway.") : local.BossWatching ? (local.InBossFight ? "Drag your striker to hit the cue ball; drag sideline defenses onto your half" : "Watching the ghost challenge - participants control the paddles") : "E / X: upstairs to the ghost challenge";
+                string prompt = _EditorPreview ? "EDITOR PRACTICE" : local.BossReturnSetupRemaining > 0 ? "Ghost head start: " + Mathf.CeilToInt(local.BossReturnSetupRemaining) + "s" : waiting ? "Entering the ghost challenge..." : result ? (local.BossWon ? "You won the ghost's challenge!" : "Returned to the hallway.") : "{input:Game/Interact} Upstairs to the ghost challenge";
+                if (_PromptGlyphs) _PromptGlyphs.SetTemplate(prompt);
             }
         }
         void SetCamera(uint localId)

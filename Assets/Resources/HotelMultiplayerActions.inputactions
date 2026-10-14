@@ -678,6 +678,17 @@
                     "action": "Dispose",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "438d80e5-2153-5818-8567-599f4fd8ef31",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dispose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

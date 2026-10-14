@@ -1,4 +1,5 @@
 using System.Text;
+using HauntedFish.InputPrompts;
 using HauntedFish.Tutorials;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace HauntedFish.Multiplayer
         [SerializeField] TutorialRoleContent _FishContent, _GhostContent;
         [SerializeField] Button _Fish, _Ghost, _Playback, _Replay;
         [SerializeField] TMP_Text _Title, _Instructions, _Status, _PlaybackLabel;
+        [SerializeField] InputPromptSpriteText _InputPrompts;
         [SerializeField] ScrollRect _Scroll;
         [SerializeField] RawImage _Surface;
         [SerializeField] VideoPlayer _Video;
@@ -21,7 +23,7 @@ namespace HauntedFish.Multiplayer
         [SerializeField] Image _GhostPreview;
         bool _Initialized, _Opened, _GhostSelected;
         public bool HasAuthoredBindings => _Fish && _Ghost && _Playback && _Replay && _Title &&
-            _Instructions && _Status && _PlaybackLabel && _Scroll && _Surface && _Video && _Audio && _GhostPreview;
+            _Instructions && _Status && _PlaybackLabel && _Scroll && _Surface && _Video && _Audio && _GhostPreview && _InputPrompts && _InputPrompts.HasBindings;
 
         public bool Initialize()
         {
@@ -55,7 +57,7 @@ namespace HauntedFish.Multiplayer
             _Fish.interactable = ghost; _Ghost.interactable = !ghost;
             var content = ghost ? _GhostContent : _FishContent;
             _Title.text = content && !string.IsNullOrEmpty(content.Title) ? content.Title : (ghost ? "PLAY AS THE GHOST" : "PLAY AS A FISH");
-            _Instructions.text = content ? FormatInstructions(content) : "Tutorial instructions are unavailable.";
+            _InputPrompts.SetTemplate(content ? FormatInstructions(content) : "Tutorial instructions are unavailable.");
             Canvas.ForceUpdateCanvases(); _Scroll.verticalNormalizedPosition = 1;
             _Video.clip = content ? content.Recording : null;
             _Video.isLooping = content && content.Loop;

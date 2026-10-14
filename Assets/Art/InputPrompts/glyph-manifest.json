@@ -1,0 +1,4305 @@
+{
+  "schemaVersion": 1,
+  "assetPack": "Kenney Input Prompts",
+  "version": "1.5A",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sourcePage": "https://kenney.nl/assets/input-prompts",
+  "archiveUrl": "https://kenney.nl/media/pages/assets/input-prompts/8de120163f-1783763952/kenney_input-prompts_1.5.zip",
+  "archiveSha256": "ac2fcf599080b0f3ba2d174c9474db6df1a0e96ff0662580e2da79a122ab78a1",
+  "licenseSha256": "ca2f58f80f903512119da5828868199478119818cd7ecffb303d625cb74cbb5a",
+  "transformation": "None. PNG files and License.txt are copied byte-for-byte from the archive.",
+  "familyIds": {
+    "KeyboardMouse": 0,
+    "Xbox": 1,
+    "PlayStation": 2,
+    "GenericGamepad": 3
+  },
+  "tmpSpriteAsset": {
+    "name": "InputPromptSprites",
+    "relativePath": "Assets/Art/InputPrompts/InputPromptSprites.asset",
+    "guid": "57a166b6f5bc1abf4547f1c92949f12e",
+    "fileId": 11400000,
+    "materialFileId": 2100000,
+    "scriptGuid": "84a92b25f83d49b9bc132d206b370281",
+    "shaderGuid": "cf81c85f95fe47e1a27f6ae460cf182c",
+    "sha256": "ef475c859834a9c08c59bee87840cbf4a198ff259425bb079c773719e903a75b",
+    "atlasRelativePath": "Assets/Art/InputPrompts/InputPromptAtlas.png",
+    "atlasGuid": "83e456f6684ace9c397060983b2a978d",
+    "atlasSha256": "90e2d401c8fb7b16ae442e6b4c721f4070dc8cf4ccde4471b83b0b3579156f95",
+    "atlasWidth": 2048,
+    "atlasHeight": 2048,
+    "spriteCount": 182,
+    "assembly": "Exact RGBA pixel copies into 128px cells; no resize, crop, recolor or alpha multiplication."
+  },
+  "notes": [
+    "Original Double PNGs are 128 x 128 pixels. Source directory and image stems are preserved.",
+    "No source WASD or AD artwork exists; compose the individual actual-bound-key sprites at runtime.",
+    "Generic face glyphs are the unlabeled positional diagrams in the Nintendo Switch source folder.",
+    "Generic sticks are unlettered; accompany them with the action or control caption when left/right matters.",
+    "Generic shoulders, triggers and menu controls deliberately use the presenter's text fallback.",
+    "PlayStation start/select use PS4 Options/Share artwork because one family covers PS4 and PS5."
+  ],
+  "glyphs": [
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/a",
+      "spriteGuid": "7a6793d62f6e98c47d3e6d0dc7992c4e",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_a.png",
+      "source": "Keyboard & Mouse/Double/keyboard_a.png",
+      "sha256": "1c0cd66c5e5874dc58178101079711092fad41afa61ba159cd8e76049efe2be0",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 0,
+      "spriteName": "g000",
+      "atlasRect": {
+        "x": 0,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/b",
+      "spriteGuid": "61ef0ee80ff47c0c440ce2ec00386168",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_b.png",
+      "source": "Keyboard & Mouse/Double/keyboard_b.png",
+      "sha256": "37ea09a5908b33f83b1c0da8383930f623cae05639e2af01508518c965b3fe09",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 1,
+      "spriteName": "g001",
+      "atlasRect": {
+        "x": 128,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/c",
+      "spriteGuid": "94e1731d5578a0d0c19fa7b13154145e",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_c.png",
+      "source": "Keyboard & Mouse/Double/keyboard_c.png",
+      "sha256": "b567b9677cee28ed6cee1e60a5213ebdb631816fabfd44824990860d1d07f4a4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 2,
+      "spriteName": "g002",
+      "atlasRect": {
+        "x": 256,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/d",
+      "spriteGuid": "407c9d3dfa54929879ebcda36674ec41",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_d.png",
+      "source": "Keyboard & Mouse/Double/keyboard_d.png",
+      "sha256": "9d0425030c1abe92de4a80d679e08653e23b81508d626e95b152bff2e2b6f425",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 3,
+      "spriteName": "g003",
+      "atlasRect": {
+        "x": 384,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/e",
+      "spriteGuid": "c13ed8eaf27b5122d1e6af0e9b0ba1c6",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_e.png",
+      "source": "Keyboard & Mouse/Double/keyboard_e.png",
+      "sha256": "6299bcd537dee8496be6c86e9fc35126e0df8319bd9e4c94e4806e8b1b61c72d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 4,
+      "spriteName": "g004",
+      "atlasRect": {
+        "x": 512,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f",
+      "spriteGuid": "a498eb4ac264a341ddb3c32ff6c5aa57",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f.png",
+      "sha256": "f674c5618bd569477fbd66cb718c836199e9c49ed4697b404458dc245e04a89d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 5,
+      "spriteName": "g005",
+      "atlasRect": {
+        "x": 640,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/g",
+      "spriteGuid": "3171e0fd202c35b6c6781507ec624daf",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_g.png",
+      "source": "Keyboard & Mouse/Double/keyboard_g.png",
+      "sha256": "b244e9a54311f6fec37d0984f76f1b2db07635fcef3f5521b0ba59657661be3d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 6,
+      "spriteName": "g006",
+      "atlasRect": {
+        "x": 768,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/h",
+      "spriteGuid": "477ffc1f416cf3a4454c864eba71bbdd",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_h.png",
+      "source": "Keyboard & Mouse/Double/keyboard_h.png",
+      "sha256": "3f89ef4b7030006f2e6b6a0c29c7063aa2d6bbba27294c9bcf81bd8d16cdc886",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 7,
+      "spriteName": "g007",
+      "atlasRect": {
+        "x": 896,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/i",
+      "spriteGuid": "8064b764e0941ee2f97d9c6b59b2c168",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_i.png",
+      "source": "Keyboard & Mouse/Double/keyboard_i.png",
+      "sha256": "ca98dc72e77067cc170f3e11a59bd6a506402813d4ed4a8cc592b38936d421dd",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 8,
+      "spriteName": "g008",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/j",
+      "spriteGuid": "3741a54c0c19596fce313de53c59d18a",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_j.png",
+      "source": "Keyboard & Mouse/Double/keyboard_j.png",
+      "sha256": "155d5376cc9761596c3b86de1766b35f696417da265df14ca391f91e4959dd86",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 9,
+      "spriteName": "g009",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/k",
+      "spriteGuid": "5c4e9472f95ffcd80a3c9f06ecc1da5d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_k.png",
+      "source": "Keyboard & Mouse/Double/keyboard_k.png",
+      "sha256": "df3d81ab3fd4b8954941e684046e539d3ff727510c7c4d7113b86d62e78c536c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 10,
+      "spriteName": "g010",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/l",
+      "spriteGuid": "804459d8aeb1e98a631531ad0f32bbc3",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_l.png",
+      "source": "Keyboard & Mouse/Double/keyboard_l.png",
+      "sha256": "297216214ef305455161e20d61e3c698b784565b42232469a3091f9ae75ddac4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 11,
+      "spriteName": "g011",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/m",
+      "spriteGuid": "4dbbf91906349e62152d463681e1f12e",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_m.png",
+      "source": "Keyboard & Mouse/Double/keyboard_m.png",
+      "sha256": "3655322614be6ad0246730a81e4f9b5a0a875b7baf81a66e047a58a4c322f6f7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 12,
+      "spriteName": "g012",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/n",
+      "spriteGuid": "1031bd7cfc81dad587b0de7d28bcc6d1",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_n.png",
+      "source": "Keyboard & Mouse/Double/keyboard_n.png",
+      "sha256": "a3bdb62898909e5957115f480c42781c6145ab8c4b87cacbb1df4856dd4f61d4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 13,
+      "spriteName": "g013",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/o",
+      "spriteGuid": "d35fa323bf9b4e3c791064560dbdadbc",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_o.png",
+      "source": "Keyboard & Mouse/Double/keyboard_o.png",
+      "sha256": "7cc068a351fe32b5fa3bed3ccdba09111451566739e95d5de8423cd56761e1f7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 14,
+      "spriteName": "g014",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/p",
+      "spriteGuid": "cc2b6d12daa2553ab6c7c1d062543c30",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_p.png",
+      "source": "Keyboard & Mouse/Double/keyboard_p.png",
+      "sha256": "e28e675e84f7462eea98a686945588bbfcdd30bd2ae670532feb8765ebea4a66",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 15,
+      "spriteName": "g015",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1920,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/q",
+      "spriteGuid": "d9d74bafc58188357e59f24bdb18f8b2",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_q.png",
+      "source": "Keyboard & Mouse/Double/keyboard_q.png",
+      "sha256": "0cb36d9a91c4d894c6390c6b330eb9dadee2b95db333fb51024939c637e1e59a",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 16,
+      "spriteName": "g016",
+      "atlasRect": {
+        "x": 0,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/r",
+      "spriteGuid": "4c79d4d7600b90c5b74544f454dd0b7c",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_r.png",
+      "source": "Keyboard & Mouse/Double/keyboard_r.png",
+      "sha256": "2e682642a4e4369cc983613f54eac5c4f57dd5bffecd8abb4e6f997cb6743a0d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 17,
+      "spriteName": "g017",
+      "atlasRect": {
+        "x": 128,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/s",
+      "spriteGuid": "9d941688bf3ad5f31c23351036aad0cf",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_s.png",
+      "source": "Keyboard & Mouse/Double/keyboard_s.png",
+      "sha256": "b504d48f2b2452bc895fc03a243e83564ad01d7e9b6fdb11f044e85e6c3b9ff2",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 18,
+      "spriteName": "g018",
+      "atlasRect": {
+        "x": 256,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/t",
+      "spriteGuid": "401b76495188dfe69e6d3b9070ff2b43",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_t.png",
+      "source": "Keyboard & Mouse/Double/keyboard_t.png",
+      "sha256": "ce0eeb693cdb33d2209d846bb90e3e90dba6792970a131190a5d28b430d9b5e3",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 19,
+      "spriteName": "g019",
+      "atlasRect": {
+        "x": 384,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/u",
+      "spriteGuid": "7463c78ce9bd5d71f60a52de0a3cddbf",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_u.png",
+      "source": "Keyboard & Mouse/Double/keyboard_u.png",
+      "sha256": "7e5678abc7b4c7941aefc69793980b132c194c6d9dd737564e793d960db28cd5",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 20,
+      "spriteName": "g020",
+      "atlasRect": {
+        "x": 512,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/v",
+      "spriteGuid": "30f4640b6a729ff8ddacd6faf5e31316",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_v.png",
+      "source": "Keyboard & Mouse/Double/keyboard_v.png",
+      "sha256": "3a7339074e532efe68a14e63206a399ac00e0fa52b13321c1f1ca7e62e111148",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 21,
+      "spriteName": "g021",
+      "atlasRect": {
+        "x": 640,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/w",
+      "spriteGuid": "caaa7a3ae9d78ee64987baa7470734b5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_w.png",
+      "source": "Keyboard & Mouse/Double/keyboard_w.png",
+      "sha256": "80afe8ada6813562b89433b7728222e5cf79076e07edb521144da74fa49bcb6f",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 22,
+      "spriteName": "g022",
+      "atlasRect": {
+        "x": 768,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/x",
+      "spriteGuid": "8047d908078a345cc777b6b36004df0b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_x.png",
+      "source": "Keyboard & Mouse/Double/keyboard_x.png",
+      "sha256": "9efec23a1c281006414fc29e254208f8c365bed9a8864b86f9daf24b92c9241d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 23,
+      "spriteName": "g023",
+      "atlasRect": {
+        "x": 896,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/y",
+      "spriteGuid": "2ad170900d3ada255a1f64ebe51fa0d5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_y.png",
+      "source": "Keyboard & Mouse/Double/keyboard_y.png",
+      "sha256": "a9eabbcfe92b1938f3dbca3f24b942381b38a75dc58b1b0a59b75169b3d51778",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 24,
+      "spriteName": "g024",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/z",
+      "spriteGuid": "3db51f8459e0b1a1ac8b1f44fbc7f106",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_z.png",
+      "source": "Keyboard & Mouse/Double/keyboard_z.png",
+      "sha256": "8d5d695e88bd3e5842b9f60fbc011cccae3a179b1e48e3d9731d15961c2343bd",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 25,
+      "spriteName": "g025",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/0",
+      "spriteGuid": "0cac017386e8609a225ec034bb0b50d3",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_0.png",
+      "source": "Keyboard & Mouse/Double/keyboard_0.png",
+      "sha256": "f5fc1248185effa6c5f5c55f56389280af67cbfebf24949019316bb514372d07",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 26,
+      "spriteName": "g026",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/1",
+      "spriteGuid": "7116dbc88882c2823b286abc2dfe9c67",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_1.png",
+      "source": "Keyboard & Mouse/Double/keyboard_1.png",
+      "sha256": "78450dc5650646422a582f7e146377f651301ad5853172d4c03cad76a3a03894",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 27,
+      "spriteName": "g027",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/2",
+      "spriteGuid": "345fe4365bdddf281284f729dbda02cd",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_2.png",
+      "source": "Keyboard & Mouse/Double/keyboard_2.png",
+      "sha256": "ba5483497652bac89efc99b2cfe3e8c7adcf8be6a0cb8283a01d92d8b66ecf7c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 28,
+      "spriteName": "g028",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/3",
+      "spriteGuid": "6b8170a0520935517b53da673c3e1579",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_3.png",
+      "source": "Keyboard & Mouse/Double/keyboard_3.png",
+      "sha256": "927dd6e2ef540b5adaf30c0db41a78f3188bf765b1439d0e4ebad9143d3392d6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 29,
+      "spriteName": "g029",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/4",
+      "spriteGuid": "79bdfc2870ed9708073fd9dc942b15b5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_4.png",
+      "source": "Keyboard & Mouse/Double/keyboard_4.png",
+      "sha256": "a87afcc608eacc42de09421edc1b1cc5403e4c50454dd71e4b92b8646a5297c6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 30,
+      "spriteName": "g030",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/5",
+      "spriteGuid": "6a5a41f1c72fa91abcd0be581e7360ed",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_5.png",
+      "source": "Keyboard & Mouse/Double/keyboard_5.png",
+      "sha256": "fbb9a5562a04a1aef13d55b63351912f25e3036e3b9496cfb03fcc00ef860465",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 31,
+      "spriteName": "g031",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/6",
+      "spriteGuid": "ccb14cb16f7acaf39bf4233bf268e031",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_6.png",
+      "source": "Keyboard & Mouse/Double/keyboard_6.png",
+      "sha256": "9ae73b6265b4ff54a4dd6da671f75b47ffd6e774c91906c4b252b114a4ddf403",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 32,
+      "spriteName": "g032",
+      "atlasRect": {
+        "x": 0,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/7",
+      "spriteGuid": "75f1a244b72d405e757c6ac2bd385397",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_7.png",
+      "source": "Keyboard & Mouse/Double/keyboard_7.png",
+      "sha256": "651c9f56f1fe2c9a958f312f2f05c27d4339286cbd67dff29f9cae3b2a778a26",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 33,
+      "spriteName": "g033",
+      "atlasRect": {
+        "x": 128,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/8",
+      "spriteGuid": "a8c4c91c4f81f36cc53a8b037a36023d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_8.png",
+      "source": "Keyboard & Mouse/Double/keyboard_8.png",
+      "sha256": "aa4ccb20824d5c487910ff106933e682743555e16620edc274db0b04dc30aa66",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 34,
+      "spriteName": "g034",
+      "atlasRect": {
+        "x": 256,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/9",
+      "spriteGuid": "4fd8d62bb23cca5546359ee290c93558",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_9.png",
+      "source": "Keyboard & Mouse/Double/keyboard_9.png",
+      "sha256": "6771ca4467ed7316531a9452b0537320a549596d12bd9ca57f268dc87af9c4f1",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 35,
+      "spriteName": "g035",
+      "atlasRect": {
+        "x": 384,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f1",
+      "spriteGuid": "ae81bfd12752154697900a839634848c",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f1.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f1.png",
+      "sha256": "b1972b5274d40291b7f1b14e26c530ca7d56ee2e293e2fa0d4a052db875f88fe",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 36,
+      "spriteName": "g036",
+      "atlasRect": {
+        "x": 512,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f2",
+      "spriteGuid": "09444cdd862520ec3ff62050a7bf934e",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f2.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f2.png",
+      "sha256": "54b64ddd5fd5177984373584a182c93aa0d387d60c8087ad52f825dc8044e99e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 37,
+      "spriteName": "g037",
+      "atlasRect": {
+        "x": 640,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f3",
+      "spriteGuid": "c16f142502278d30e55be0ed3be31320",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f3.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f3.png",
+      "sha256": "6d782b735216a8eb24ded7ff34046df8c90a10d2f6fe0453a2605bc6dd8b68b7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 38,
+      "spriteName": "g038",
+      "atlasRect": {
+        "x": 768,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f4",
+      "spriteGuid": "50195cbf7734878efe3b74ee56e7d890",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f4.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f4.png",
+      "sha256": "a36c18fd8af9d4111a8918447195bff331ed6d085a04c690fc7c4c35233012bf",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 39,
+      "spriteName": "g039",
+      "atlasRect": {
+        "x": 896,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f5",
+      "spriteGuid": "22616ff2fd57f86e88c45f7cabfe32dc",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f5.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f5.png",
+      "sha256": "a12e2d9f2db42100cf2017c4f35eb475ad3541f94684cacb3ae39d24e606da1f",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 40,
+      "spriteName": "g040",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f6",
+      "spriteGuid": "8c07a41de9c0ef55fd01fe08886377b0",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f6.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f6.png",
+      "sha256": "a35e61732adfdddd9fdf927bccfc4ebe2b627351a9c741ab0090679f40f67f65",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 41,
+      "spriteName": "g041",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f7",
+      "spriteGuid": "64b310450ab909b081db4dad94106ff9",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f7.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f7.png",
+      "sha256": "ace6f9a85005bf2c704327d64a150a02907be3f0a93600696c625011a95b4334",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 42,
+      "spriteName": "g042",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f8",
+      "spriteGuid": "93f0c6d505591e0a668d2f302fe2a55c",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f8.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f8.png",
+      "sha256": "d428a70e99b8a9fa1f98a839ea012ad89bcd8dd26c0700d3a01695be1dbcea16",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 43,
+      "spriteName": "g043",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f9",
+      "spriteGuid": "aa7971c160895233a8757cd93ba52b7d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f9.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f9.png",
+      "sha256": "1d29b6f1b97fd703ffe0836d0a02901e8058279993a62caa46b47ae166897261",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 44,
+      "spriteName": "g044",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f10",
+      "spriteGuid": "2866649cad9418e8c1f73b8af439a715",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f10.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f10.png",
+      "sha256": "2c70b5e2620341a4b24269ca0d09c7cd17d78b4e732763ef11f6df445fcb99c6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 45,
+      "spriteName": "g045",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f11",
+      "spriteGuid": "b39ceec7f9489da642be27ab65dee6f8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f11.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f11.png",
+      "sha256": "fcbffb13ce49ec0b88a47ffe00c5f000507496a9e02e9aa266255910f0dab7c8",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 46,
+      "spriteName": "g046",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/f12",
+      "spriteGuid": "c69ebe699f13910f71e449daa469a40a",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_f12.png",
+      "source": "Keyboard & Mouse/Double/keyboard_f12.png",
+      "sha256": "2d497b75c0437913b03361cb5f6512c036c2bce2bd671b84aa12523fa5cfa7c6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 47,
+      "spriteName": "g047",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/upArrow",
+      "spriteGuid": "215b9f7837b9e9253a9f6c43dacbba99",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_arrow_up.png",
+      "source": "Keyboard & Mouse/Double/keyboard_arrow_up.png",
+      "sha256": "339fc70daa8c0aebc7957dfd4eecd1bc380ac99248919649d86221dd9f065aa8",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 48,
+      "spriteName": "g048",
+      "atlasRect": {
+        "x": 0,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/downArrow",
+      "spriteGuid": "9c3c4c94f055bfb31d197a87aacdd766",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_arrow_down.png",
+      "source": "Keyboard & Mouse/Double/keyboard_arrow_down.png",
+      "sha256": "e8797a9bdfc2e80fcea03f112e5cd0e1c016f855c8019c7f30f72f6bae6b3490",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 49,
+      "spriteName": "g049",
+      "atlasRect": {
+        "x": 128,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/leftArrow",
+      "spriteGuid": "ae153e8022403b3fb93a99641ddf8779",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_arrow_left.png",
+      "source": "Keyboard & Mouse/Double/keyboard_arrow_left.png",
+      "sha256": "85eebf78f88eb458ff5d9ff5ddf4cb57875085ecec2b9a6e63744ed402405bbf",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 50,
+      "spriteName": "g050",
+      "atlasRect": {
+        "x": 256,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/rightArrow",
+      "spriteGuid": "408c39b4aceb53df0f05e885e1c9a5cb",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_arrow_right.png",
+      "source": "Keyboard & Mouse/Double/keyboard_arrow_right.png",
+      "sha256": "16a3a94fda511e7858a185686009da7b61fa2c4f92f3bf7dbc9a87cf87bf8b7c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 51,
+      "spriteName": "g051",
+      "atlasRect": {
+        "x": 384,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/leftShift",
+      "spriteGuid": "e31d027a6e8d3b5cdffcc3db2d19fb30",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_shift.png",
+      "source": "Keyboard & Mouse/Double/keyboard_shift.png",
+      "sha256": "047712e52aede18f73523cb7b7df2f28e51d07370977491a994bc9a21f129e8e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 52,
+      "spriteName": "g052",
+      "atlasRect": {
+        "x": 512,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/rightShift",
+      "spriteGuid": "e31d027a6e8d3b5cdffcc3db2d19fb30",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_shift.png",
+      "source": "Keyboard & Mouse/Double/keyboard_shift.png",
+      "sha256": "047712e52aede18f73523cb7b7df2f28e51d07370977491a994bc9a21f129e8e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 52,
+      "spriteName": "g052",
+      "atlasRect": {
+        "x": 512,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/shift",
+      "spriteGuid": "e31d027a6e8d3b5cdffcc3db2d19fb30",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_shift.png",
+      "source": "Keyboard & Mouse/Double/keyboard_shift.png",
+      "sha256": "047712e52aede18f73523cb7b7df2f28e51d07370977491a994bc9a21f129e8e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 52,
+      "spriteName": "g052",
+      "atlasRect": {
+        "x": 512,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/leftCtrl",
+      "spriteGuid": "44d37d0a0f7a990955554f5aaff30c72",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_ctrl.png",
+      "source": "Keyboard & Mouse/Double/keyboard_ctrl.png",
+      "sha256": "f184d63c372053a2af3a41ac77ebc41fdc9d83cffce3dd26dce6ca49283bff44",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 53,
+      "spriteName": "g053",
+      "atlasRect": {
+        "x": 640,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/rightCtrl",
+      "spriteGuid": "44d37d0a0f7a990955554f5aaff30c72",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_ctrl.png",
+      "source": "Keyboard & Mouse/Double/keyboard_ctrl.png",
+      "sha256": "f184d63c372053a2af3a41ac77ebc41fdc9d83cffce3dd26dce6ca49283bff44",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 53,
+      "spriteName": "g053",
+      "atlasRect": {
+        "x": 640,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/ctrl",
+      "spriteGuid": "44d37d0a0f7a990955554f5aaff30c72",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_ctrl.png",
+      "source": "Keyboard & Mouse/Double/keyboard_ctrl.png",
+      "sha256": "f184d63c372053a2af3a41ac77ebc41fdc9d83cffce3dd26dce6ca49283bff44",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 53,
+      "spriteName": "g053",
+      "atlasRect": {
+        "x": 640,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/leftAlt",
+      "spriteGuid": "feb1ebfa49de39e881c3d494e98374b6",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_alt.png",
+      "source": "Keyboard & Mouse/Double/keyboard_alt.png",
+      "sha256": "256d961872f3b4fe736c8794743a9d2762b1b1bd3bfe78200fcf229855276a18",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 54,
+      "spriteName": "g054",
+      "atlasRect": {
+        "x": 768,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/rightAlt",
+      "spriteGuid": "feb1ebfa49de39e881c3d494e98374b6",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_alt.png",
+      "source": "Keyboard & Mouse/Double/keyboard_alt.png",
+      "sha256": "256d961872f3b4fe736c8794743a9d2762b1b1bd3bfe78200fcf229855276a18",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 54,
+      "spriteName": "g054",
+      "atlasRect": {
+        "x": 768,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/alt",
+      "spriteGuid": "feb1ebfa49de39e881c3d494e98374b6",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_alt.png",
+      "source": "Keyboard & Mouse/Double/keyboard_alt.png",
+      "sha256": "256d961872f3b4fe736c8794743a9d2762b1b1bd3bfe78200fcf229855276a18",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 54,
+      "spriteName": "g054",
+      "atlasRect": {
+        "x": 768,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/space",
+      "spriteGuid": "0e7cb2fd2e394cbd4ae9693e8355493e",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_space.png",
+      "source": "Keyboard & Mouse/Double/keyboard_space.png",
+      "sha256": "7f25e4d93c3589ef947f03dd3e76f9b7cc17479a0b2e0040cf150be17279c6f4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 55,
+      "spriteName": "g055",
+      "atlasRect": {
+        "x": 896,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/enter",
+      "spriteGuid": "62a01e618a2d6143518a18c217c8e626",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_enter.png",
+      "source": "Keyboard & Mouse/Double/keyboard_enter.png",
+      "sha256": "6ea6de1a2fca79569f25e3c5bb7af5ff2ece6e6a4e416a22f573a17a21926b54",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 56,
+      "spriteName": "g056",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/escape",
+      "spriteGuid": "c20cfa8ceeddc0417446564c74dfb679",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_escape.png",
+      "source": "Keyboard & Mouse/Double/keyboard_escape.png",
+      "sha256": "9b85675aa9a3c6edcfb94da7314aa3a77cf77f9934b6c645059577cf901a1bde",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 57,
+      "spriteName": "g057",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/tab",
+      "spriteGuid": "60eedd79b435246cb987ef2c9d3005a9",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_tab.png",
+      "source": "Keyboard & Mouse/Double/keyboard_tab.png",
+      "sha256": "b9d41ddb968a48702663e4b13bb5a047c8349ed5708897027d4de794dc35f43c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 58,
+      "spriteName": "g058",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/backspace",
+      "spriteGuid": "3791d2b93bd981288b7dd00cc608a048",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_backspace.png",
+      "source": "Keyboard & Mouse/Double/keyboard_backspace.png",
+      "sha256": "0717a8214837612e61cd50d52695f7d152d81347b375b93ea8e67e57a6e2de4e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 59,
+      "spriteName": "g059",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/delete",
+      "spriteGuid": "1570e471b918f31b9af664089381099e",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_delete.png",
+      "source": "Keyboard & Mouse/Double/keyboard_delete.png",
+      "sha256": "fb51dc4e200b9d1aa27a149dd645fa89456aaf3dc8fa7a8d5fa2a3390640769f",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 60,
+      "spriteName": "g060",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/insert",
+      "spriteGuid": "3a50d7becbe660ea464cc7eb9219f28a",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_insert.png",
+      "source": "Keyboard & Mouse/Double/keyboard_insert.png",
+      "sha256": "dac760f5b5f57833719b06928d7100453931aceaef599d6db150ee725e0f9e3c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 61,
+      "spriteName": "g061",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/home",
+      "spriteGuid": "260a7b0ffcde6b4a43e5c398f8053ac8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_home.png",
+      "source": "Keyboard & Mouse/Double/keyboard_home.png",
+      "sha256": "668dc5eaab46ad93b6d76c8f1e011acd047b91bd003cb2eeea3bfa928d253881",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 62,
+      "spriteName": "g062",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/end",
+      "spriteGuid": "98d34e455887d5f528347a5ca6498097",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_end.png",
+      "source": "Keyboard & Mouse/Double/keyboard_end.png",
+      "sha256": "d0fa42d396de631fe410fb2c165a947a1fc16349729e9e7d8257071876e3c8a3",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 63,
+      "spriteName": "g063",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1536,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/pageUp",
+      "spriteGuid": "ba2f98500057fcef85eeb6cdace51bda",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_page_up.png",
+      "source": "Keyboard & Mouse/Double/keyboard_page_up.png",
+      "sha256": "3193366feb20a81641b849438fc85645031c0361d0cf2d601b8c71043d1be214",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 64,
+      "spriteName": "g064",
+      "atlasRect": {
+        "x": 0,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/pageDown",
+      "spriteGuid": "ed5c61b7e8723150535442090c63a41d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_page_down.png",
+      "source": "Keyboard & Mouse/Double/keyboard_page_down.png",
+      "sha256": "eb6198efee3198b3f112ce51b698e723095d07a75b708eddf8a7b743fbf8d840",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 65,
+      "spriteName": "g065",
+      "atlasRect": {
+        "x": 128,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/capsLock",
+      "spriteGuid": "649d31d2b75c8136200f87d75d08ba9c",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_capslock.png",
+      "source": "Keyboard & Mouse/Double/keyboard_capslock.png",
+      "sha256": "ab1af1488573720e71c67cc45549d9d48d5d7dfe29e0abe22771eac0172e0e0e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 66,
+      "spriteName": "g066",
+      "atlasRect": {
+        "x": 256,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numLock",
+      "spriteGuid": "3f25c361d141acd88d73af85d4e1f823",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_numlock.png",
+      "source": "Keyboard & Mouse/Double/keyboard_numlock.png",
+      "sha256": "8f9de1b88ec4cbb7520e56831145f7ac7ca680182e0b17d6d7764ae34aaa4d57",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 67,
+      "spriteName": "g067",
+      "atlasRect": {
+        "x": 384,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/scrollLock",
+      "spriteGuid": "c328bcc32d801f352368801cd89544c3",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_scroll_lock.png",
+      "source": "Keyboard & Mouse/Double/keyboard_scroll_lock.png",
+      "sha256": "76542849d9d48785db02911ec40b66ab05447b420dd175c8e9ac797916d49bb9",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 68,
+      "spriteName": "g068",
+      "atlasRect": {
+        "x": 512,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/pause",
+      "spriteGuid": "2383bacffde86e88ba9569cb4d00aa42",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_pause.png",
+      "source": "Keyboard & Mouse/Double/keyboard_pause.png",
+      "sha256": "92230c7907c2297b0dd244b972ac414fab4ed5f9d4a300045704bf2068b9514d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 69,
+      "spriteName": "g069",
+      "atlasRect": {
+        "x": 640,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/printScreen",
+      "spriteGuid": "756471a71ce9cb3ffb1674c6e5f1f2c8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_printscreen.png",
+      "source": "Keyboard & Mouse/Double/keyboard_printscreen.png",
+      "sha256": "938778de24e31507c1186fa4225f8298d7678365133a62aa024e99c34b4efb78",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 70,
+      "spriteName": "g070",
+      "atlasRect": {
+        "x": 768,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/backquote",
+      "spriteGuid": "0eeeef62ae30aa65a440735968dac746",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_tilde.png",
+      "source": "Keyboard & Mouse/Double/keyboard_tilde.png",
+      "sha256": "9a9b9b7ced654fa234f688d583524bcb107b05d7269fbbbd5c54510b7c93d71d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 71,
+      "spriteName": "g071",
+      "atlasRect": {
+        "x": 896,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/quote",
+      "spriteGuid": "2b76b82a51f69b25dff40231f1aab4b4",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_apostrophe.png",
+      "source": "Keyboard & Mouse/Double/keyboard_apostrophe.png",
+      "sha256": "ef4fc48a043b6a15d76457d7fc5a2c6f0cfa4ce1b29fa07f176ff28a41b93be8",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 72,
+      "spriteName": "g072",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/semicolon",
+      "spriteGuid": "77384465c6e772e705b7ae16f032e7d5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_semicolon.png",
+      "source": "Keyboard & Mouse/Double/keyboard_semicolon.png",
+      "sha256": "65a18eb328badae58c9d216805d18a8691fa772e92639b4f2c106f8c8b4584fb",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 73,
+      "spriteName": "g073",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/comma",
+      "spriteGuid": "21fa76fb0c13f9d0ca0fa6b8aca12df8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_comma.png",
+      "source": "Keyboard & Mouse/Double/keyboard_comma.png",
+      "sha256": "db060befc6a7b0943d67a815c9ba1f6062ea07d8e125a77c2bc31f9c1882389d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 74,
+      "spriteName": "g074",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/period",
+      "spriteGuid": "346536e52ae481bac40c172790422b54",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_period.png",
+      "source": "Keyboard & Mouse/Double/keyboard_period.png",
+      "sha256": "ede0e38a268c8cdb33042d3e40209c3a240131ba803b5562d35c8081245f3ba2",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 75,
+      "spriteName": "g075",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/slash",
+      "spriteGuid": "962c7b6042305f4ce81a3f0023c37854",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_slash_forward.png",
+      "source": "Keyboard & Mouse/Double/keyboard_slash_forward.png",
+      "sha256": "21c602b309b9efc0fb5c222eba20aef08773d4a4b0165e81c7ff5fc7c8239255",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 76,
+      "spriteName": "g076",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/backslash",
+      "spriteGuid": "9e58ba0ef4670b8bc77bdd6bdcd51dc8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_slash_back.png",
+      "source": "Keyboard & Mouse/Double/keyboard_slash_back.png",
+      "sha256": "a47be6843d169df79b567824ecc3d21153c0de214c2f750ab0b391f77045d5ef",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 77,
+      "spriteName": "g077",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/leftBracket",
+      "spriteGuid": "53b6e0908bcc0984f4624b6f44c3af40",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_bracket_open.png",
+      "source": "Keyboard & Mouse/Double/keyboard_bracket_open.png",
+      "sha256": "715fa0d24c835d2b7650196016f074fe285834e1595326afa83e3da3cd65b09a",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 78,
+      "spriteName": "g078",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/rightBracket",
+      "spriteGuid": "4a435935bb945adc78c181e20f8e72ff",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_bracket_close.png",
+      "source": "Keyboard & Mouse/Double/keyboard_bracket_close.png",
+      "sha256": "78769ea382c41e65998cddbd2cd433904b3d4f2f54539373564224c6a41146f5",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 79,
+      "spriteName": "g079",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/minus",
+      "spriteGuid": "4f090a84d9848b08636e1dbb5067afd1",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_minus.png",
+      "source": "Keyboard & Mouse/Double/keyboard_minus.png",
+      "sha256": "86fd8e4e0478f9e7a22ac9edcd532f2f7d8a36263242e705d8c9212b086867dd",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 80,
+      "spriteName": "g080",
+      "atlasRect": {
+        "x": 0,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/equals",
+      "spriteGuid": "9cd460b8895a0b22e979c33e5a08d3ab",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_equals.png",
+      "source": "Keyboard & Mouse/Double/keyboard_equals.png",
+      "sha256": "feba62704372180cd59a4488a7a924a1d2d6672ed0a1d83226b885bc736bba30",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 81,
+      "spriteName": "g081",
+      "atlasRect": {
+        "x": 128,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/anyKey",
+      "spriteGuid": "7b60a09eb033c18cdcb67af2036246e0",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_any.png",
+      "source": "Keyboard & Mouse/Double/keyboard_any.png",
+      "sha256": "f0680ca1238c2bde08aff471e8aaff921715942757296220a3dd59d2b3d29877",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 82,
+      "spriteName": "g082",
+      "atlasRect": {
+        "x": 256,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpadEnter",
+      "spriteGuid": "2426ec98e4913a2b53f77599f40dcdb5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_numpad_enter.png",
+      "source": "Keyboard & Mouse/Double/keyboard_numpad_enter.png",
+      "sha256": "f8c9a2db3fbee958b2a665f4704dad9ed01ef7284e40cda2ba8207c2f8d8cd22",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 83,
+      "spriteName": "g083",
+      "atlasRect": {
+        "x": 384,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpadPlus",
+      "spriteGuid": "8e4f95e2c377ba331816741c56078dca",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_numpad_plus.png",
+      "source": "Keyboard & Mouse/Double/keyboard_numpad_plus.png",
+      "sha256": "d26713407782c6cb93d65ff2b326462b76e66f10fd7f062b0289c3d0b9729cf1",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 84,
+      "spriteName": "g084",
+      "atlasRect": {
+        "x": 512,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpadMinus",
+      "spriteGuid": "4f090a84d9848b08636e1dbb5067afd1",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_minus.png",
+      "source": "Keyboard & Mouse/Double/keyboard_minus.png",
+      "sha256": "86fd8e4e0478f9e7a22ac9edcd532f2f7d8a36263242e705d8c9212b086867dd",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 80,
+      "spriteName": "g080",
+      "atlasRect": {
+        "x": 0,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpadMultiply",
+      "spriteGuid": "113b5dbd785b582524ee663e5341f48b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_asterisk.png",
+      "source": "Keyboard & Mouse/Double/keyboard_asterisk.png",
+      "sha256": "d8442d5581e541dccdc87487ce5b035a6903618333dde0da240b310260ddc9ba",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 85,
+      "spriteName": "g085",
+      "atlasRect": {
+        "x": 640,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpadDivide",
+      "spriteGuid": "962c7b6042305f4ce81a3f0023c37854",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_slash_forward.png",
+      "source": "Keyboard & Mouse/Double/keyboard_slash_forward.png",
+      "sha256": "21c602b309b9efc0fb5c222eba20aef08773d4a4b0165e81c7ff5fc7c8239255",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 76,
+      "spriteName": "g076",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpadPeriod",
+      "spriteGuid": "346536e52ae481bac40c172790422b54",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_period.png",
+      "source": "Keyboard & Mouse/Double/keyboard_period.png",
+      "sha256": "ede0e38a268c8cdb33042d3e40209c3a240131ba803b5562d35c8081245f3ba2",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 75,
+      "spriteName": "g075",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1408,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad0",
+      "spriteGuid": "0cac017386e8609a225ec034bb0b50d3",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_0.png",
+      "source": "Keyboard & Mouse/Double/keyboard_0.png",
+      "sha256": "f5fc1248185effa6c5f5c55f56389280af67cbfebf24949019316bb514372d07",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 26,
+      "spriteName": "g026",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad1",
+      "spriteGuid": "7116dbc88882c2823b286abc2dfe9c67",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_1.png",
+      "source": "Keyboard & Mouse/Double/keyboard_1.png",
+      "sha256": "78450dc5650646422a582f7e146377f651301ad5853172d4c03cad76a3a03894",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 27,
+      "spriteName": "g027",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad2",
+      "spriteGuid": "345fe4365bdddf281284f729dbda02cd",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_2.png",
+      "source": "Keyboard & Mouse/Double/keyboard_2.png",
+      "sha256": "ba5483497652bac89efc99b2cfe3e8c7adcf8be6a0cb8283a01d92d8b66ecf7c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 28,
+      "spriteName": "g028",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad3",
+      "spriteGuid": "6b8170a0520935517b53da673c3e1579",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_3.png",
+      "source": "Keyboard & Mouse/Double/keyboard_3.png",
+      "sha256": "927dd6e2ef540b5adaf30c0db41a78f3188bf765b1439d0e4ebad9143d3392d6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 29,
+      "spriteName": "g029",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad4",
+      "spriteGuid": "79bdfc2870ed9708073fd9dc942b15b5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_4.png",
+      "source": "Keyboard & Mouse/Double/keyboard_4.png",
+      "sha256": "a87afcc608eacc42de09421edc1b1cc5403e4c50454dd71e4b92b8646a5297c6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 30,
+      "spriteName": "g030",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad5",
+      "spriteGuid": "6a5a41f1c72fa91abcd0be581e7360ed",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_5.png",
+      "source": "Keyboard & Mouse/Double/keyboard_5.png",
+      "sha256": "fbb9a5562a04a1aef13d55b63351912f25e3036e3b9496cfb03fcc00ef860465",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 31,
+      "spriteName": "g031",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1792,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad6",
+      "spriteGuid": "ccb14cb16f7acaf39bf4233bf268e031",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_6.png",
+      "source": "Keyboard & Mouse/Double/keyboard_6.png",
+      "sha256": "9ae73b6265b4ff54a4dd6da671f75b47ffd6e774c91906c4b252b114a4ddf403",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 32,
+      "spriteName": "g032",
+      "atlasRect": {
+        "x": 0,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad7",
+      "spriteGuid": "75f1a244b72d405e757c6ac2bd385397",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_7.png",
+      "source": "Keyboard & Mouse/Double/keyboard_7.png",
+      "sha256": "651c9f56f1fe2c9a958f312f2f05c27d4339286cbd67dff29f9cae3b2a778a26",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 33,
+      "spriteName": "g033",
+      "atlasRect": {
+        "x": 128,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad8",
+      "spriteGuid": "a8c4c91c4f81f36cc53a8b037a36023d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_8.png",
+      "source": "Keyboard & Mouse/Double/keyboard_8.png",
+      "sha256": "aa4ccb20824d5c487910ff106933e682743555e16620edc274db0b04dc30aa66",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 34,
+      "spriteName": "g034",
+      "atlasRect": {
+        "x": 256,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/numpad9",
+      "spriteGuid": "4fd8d62bb23cca5546359ee290c93558",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_9.png",
+      "source": "Keyboard & Mouse/Double/keyboard_9.png",
+      "sha256": "6771ca4467ed7316531a9452b0537320a549596d12bd9ca57f268dc87af9c4f1",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 35,
+      "spriteName": "g035",
+      "atlasRect": {
+        "x": 384,
+        "y": 1664,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Keyboard>/arrows",
+      "spriteGuid": "c870360a36865916a25ba33845d67b43",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/keyboard_arrows_all.png",
+      "source": "Keyboard & Mouse/Double/keyboard_arrows_all.png",
+      "sha256": "8ad345bff8245a292dcd3e71b524e41f6c8593b637afbdd563efa1f418619d5d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 86,
+      "spriteName": "g086",
+      "atlasRect": {
+        "x": 768,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/leftButton",
+      "spriteGuid": "0b75b6e17c8a774c90b0d6f4036af72e",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_left.png",
+      "source": "Keyboard & Mouse/Double/mouse_left.png",
+      "sha256": "b008b3981c39400991002b597992216eab13761dcd3e34676f45189e86d7d94c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 87,
+      "spriteName": "g087",
+      "atlasRect": {
+        "x": 896,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/rightButton",
+      "spriteGuid": "b3f9acff3206bb9f9f2a73facad9375b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_right.png",
+      "source": "Keyboard & Mouse/Double/mouse_right.png",
+      "sha256": "2bb942eb636491e1249f6b85f576dafb0eeae3d3a5b8d7a60711ccd8d73f9c2b",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 88,
+      "spriteName": "g088",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/middleButton",
+      "spriteGuid": "d58299540b8b98bf6b7b16e4fb52e2ce",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_scroll.png",
+      "source": "Keyboard & Mouse/Double/mouse_scroll.png",
+      "sha256": "a67365a6a3c625a7728be4bbb9223a37c3d28084cfc7873180766ac921f398d0",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 89,
+      "spriteName": "g089",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/scroll",
+      "spriteGuid": "2f8a4407651668ac47ecac4a70fbf7c5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_scroll_vertical.png",
+      "source": "Keyboard & Mouse/Double/mouse_scroll_vertical.png",
+      "sha256": "e7114a6bc78dbf7e629121d1ee86283aa25e43547d7a36bdf8acf598f5ab30bf",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 90,
+      "spriteName": "g090",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/scroll/y",
+      "spriteGuid": "2f8a4407651668ac47ecac4a70fbf7c5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_scroll_vertical.png",
+      "source": "Keyboard & Mouse/Double/mouse_scroll_vertical.png",
+      "sha256": "e7114a6bc78dbf7e629121d1ee86283aa25e43547d7a36bdf8acf598f5ab30bf",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 90,
+      "spriteName": "g090",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/scroll/up",
+      "spriteGuid": "87ef9c5640bd62e6dec5c07922be2533",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_scroll_up.png",
+      "source": "Keyboard & Mouse/Double/mouse_scroll_up.png",
+      "sha256": "d16432440a1c86f9954b5e4a78f7c9e1d9ea10266cf768a3c937c8ad4d732614",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 91,
+      "spriteName": "g091",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/scroll/down",
+      "spriteGuid": "6337911bf8fa420ef77e9f8fbf66dc04",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_scroll_down.png",
+      "source": "Keyboard & Mouse/Double/mouse_scroll_down.png",
+      "sha256": "5ab3b5018b58c52f197663046cfd3b443bc31fb7c609afd6f07662966b455c05",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 92,
+      "spriteName": "g092",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/position",
+      "spriteGuid": "7e7b541310cab7185a57c6131f171861",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_move.png",
+      "source": "Keyboard & Mouse/Double/mouse_move.png",
+      "sha256": "fc35076abef7b687c8ca62076472520f3f08a8050268fbc5d738ba509abab37e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 93,
+      "spriteName": "g093",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/delta",
+      "spriteGuid": "7e7b541310cab7185a57c6131f171861",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_move.png",
+      "source": "Keyboard & Mouse/Double/mouse_move.png",
+      "sha256": "fc35076abef7b687c8ca62076472520f3f08a8050268fbc5d738ba509abab37e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 93,
+      "spriteName": "g093",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Pointer>/position",
+      "spriteGuid": "7e7b541310cab7185a57c6131f171861",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_move.png",
+      "source": "Keyboard & Mouse/Double/mouse_move.png",
+      "sha256": "fc35076abef7b687c8ca62076472520f3f08a8050268fbc5d738ba509abab37e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 93,
+      "spriteName": "g093",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Pointer>/delta",
+      "spriteGuid": "7e7b541310cab7185a57c6131f171861",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_move.png",
+      "source": "Keyboard & Mouse/Double/mouse_move.png",
+      "sha256": "fc35076abef7b687c8ca62076472520f3f08a8050268fbc5d738ba509abab37e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 93,
+      "spriteName": "g093",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/forwardButton",
+      "spriteGuid": "ad3508f4f1e0c5c4ddced3c836401e0b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_side_forward.png",
+      "source": "Keyboard & Mouse/Double/mouse_side_forward.png",
+      "sha256": "c793c266940dfd6778ab5479604ab4c8c74f4add7b25aba27e9e3144229bc103",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 94,
+      "spriteName": "g094",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "KeyboardMouse",
+      "familyId": 0,
+      "controlPath": "<Mouse>/backButton",
+      "spriteGuid": "3c4029bf809255b3d5b9135136391be5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Keyboard & Mouse/mouse_side_back.png",
+      "source": "Keyboard & Mouse/Double/mouse_side_back.png",
+      "sha256": "2530058e79d9f75d741e8aa9c2b8b331a2a07d7d7e443716834e5fceff6e2ab4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 95,
+      "spriteName": "g095",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1280,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "buttonSouth",
+      "spriteGuid": "f8d47959dcb3cf8b0d9b73cd2aa31247",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_button_a.png",
+      "source": "Xbox Series/Double/xbox_button_a.png",
+      "sha256": "8cb54cb79449712f2ef7d3c8344197378eb8ec2c31070d69266c5961223a077a",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 96,
+      "spriteName": "g096",
+      "atlasRect": {
+        "x": 0,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "buttonEast",
+      "spriteGuid": "123782e8d7dec01fb8cd471df2768b6b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_button_b.png",
+      "source": "Xbox Series/Double/xbox_button_b.png",
+      "sha256": "8fb40910582d1ebcdef9471aecef72ae5afad807a6232914f1df80c0bd338efd",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 97,
+      "spriteName": "g097",
+      "atlasRect": {
+        "x": 128,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "buttonWest",
+      "spriteGuid": "81f9878cad74ea03230cbe657ee89095",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_button_x.png",
+      "source": "Xbox Series/Double/xbox_button_x.png",
+      "sha256": "f7e01f4d530e4294fb3c79c51eaeb97229f03172678ca434465562245ff75c92",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 98,
+      "spriteName": "g098",
+      "atlasRect": {
+        "x": 256,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "buttonNorth",
+      "spriteGuid": "0d8097c3596a22260acb908e12ed33c8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_button_y.png",
+      "source": "Xbox Series/Double/xbox_button_y.png",
+      "sha256": "00d4b498e1aaa2c6712eaa0f350d7f1cf37a0423b1680e1e0e4f358dd777bd05",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 99,
+      "spriteName": "g099",
+      "atlasRect": {
+        "x": 384,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftShoulder",
+      "spriteGuid": "8884c9f4c7f3500237ba5c2a00c29260",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_lb.png",
+      "source": "Xbox Series/Double/xbox_lb.png",
+      "sha256": "6ca8c3411823d389dd94c6fa7015299a93d58c7e67ad1831280b5901792b6755",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 100,
+      "spriteName": "g100",
+      "atlasRect": {
+        "x": 512,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightShoulder",
+      "spriteGuid": "76e25462044bdef398aefbd80be5e0e1",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_rb.png",
+      "source": "Xbox Series/Double/xbox_rb.png",
+      "sha256": "2f3fa780da01cf7c48c91aaaa9a5d8da075c73a32cab32bb1497fd571ca134f8",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 101,
+      "spriteName": "g101",
+      "atlasRect": {
+        "x": 640,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftTrigger",
+      "spriteGuid": "83ad71a27dfd32e0b8f84cfface7a9c3",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_lt.png",
+      "source": "Xbox Series/Double/xbox_lt.png",
+      "sha256": "021e4d4a82eeb3f4e0af16f00c3889d18fec98c3fc4c9e71f2a56be180f4eb7a",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 102,
+      "spriteName": "g102",
+      "atlasRect": {
+        "x": 768,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightTrigger",
+      "spriteGuid": "122139021f436478dd8849ec2ca9e596",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_rt.png",
+      "source": "Xbox Series/Double/xbox_rt.png",
+      "sha256": "ca6114d20903961f8cab4cfa33c8dec29056bc15b2ab45a0f92048b8e6eb23b2",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 103,
+      "spriteName": "g103",
+      "atlasRect": {
+        "x": 896,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "start",
+      "spriteGuid": "19af7b7343788912613292f6ed335b82",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_button_menu.png",
+      "source": "Xbox Series/Double/xbox_button_menu.png",
+      "sha256": "b0854e263e6b95b66f981b761f098f08bbea301540b79bea108d1f7ecb447ad7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 104,
+      "spriteName": "g104",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "select",
+      "spriteGuid": "acdaa7f2fb65f9b9ed7cf5854a267022",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_button_view.png",
+      "source": "Xbox Series/Double/xbox_button_view.png",
+      "sha256": "9fc708afe796b96ff0f4b8840672354ee03cdd68eb1874dd9c3a50d5c6947477",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 105,
+      "spriteName": "g105",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStick",
+      "spriteGuid": "eeb06f4b420ade2da55f67d836182f61",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l.png",
+      "source": "Xbox Series/Double/xbox_stick_l.png",
+      "sha256": "68edebe98e5efdbfc800154bcc523e67c6b6812df39ee45cf5a6362d6d670861",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 106,
+      "spriteName": "g106",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStickPress",
+      "spriteGuid": "90d89e1e048c06329f81d89e8ab5d48b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_press.png",
+      "source": "Xbox Series/Double/xbox_stick_l_press.png",
+      "sha256": "8c772ed1203af9c4923dd1bb5a67f96814a08d9569130ae8435a49fc3b33ab4e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 107,
+      "spriteName": "g107",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStick/x",
+      "spriteGuid": "e3013d8fd72f7452cd3c7126ffd07b61",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_horizontal.png",
+      "source": "Xbox Series/Double/xbox_stick_l_horizontal.png",
+      "sha256": "3ed84d16c11569a619d0be90021dd0e186095e42a9e5c22fc6c5ddf4ad0d5211",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 108,
+      "spriteName": "g108",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStick/y",
+      "spriteGuid": "6648a33bdfc9b143b128a88821f0d0fe",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_vertical.png",
+      "source": "Xbox Series/Double/xbox_stick_l_vertical.png",
+      "sha256": "650b79e332d1ff4747c47ca2a291d5da2e4f6e220cf377a5901715315da0c5f7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 109,
+      "spriteName": "g109",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStick/up",
+      "spriteGuid": "90b927ab1e2671d725ba9f7931f2ce48",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_up.png",
+      "source": "Xbox Series/Double/xbox_stick_l_up.png",
+      "sha256": "fd3fc11c0aa84a26c26ecd9cf59f545b7500c819356193e73e96c051462b33ea",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 110,
+      "spriteName": "g110",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStick/down",
+      "spriteGuid": "311daf215e04ab62cb6b23288981cedd",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_down.png",
+      "source": "Xbox Series/Double/xbox_stick_l_down.png",
+      "sha256": "0adabdf37e08e280ec2921c30223bbdfc36fdb0d6a27298fa9b6cfe680fb0869",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 111,
+      "spriteName": "g111",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1152,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStick/left",
+      "spriteGuid": "4ff542ce654f2992948f6824461325a7",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_left.png",
+      "source": "Xbox Series/Double/xbox_stick_l_left.png",
+      "sha256": "722e4b751fdc4dc22fadc845b0c6d83dd3dfda429c9ddb2a96c9292a3f26eee4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 112,
+      "spriteName": "g112",
+      "atlasRect": {
+        "x": 0,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "leftStick/right",
+      "spriteGuid": "bd12a357bdcd3ac754fd15237f8f516b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_l_right.png",
+      "source": "Xbox Series/Double/xbox_stick_l_right.png",
+      "sha256": "739306973d12bbf17d98f087319565c6a490522b9eccd7a717da02d1aa157fc0",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 113,
+      "spriteName": "g113",
+      "atlasRect": {
+        "x": 128,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStick",
+      "spriteGuid": "3e361292d5b8128369e57480d1daced3",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r.png",
+      "source": "Xbox Series/Double/xbox_stick_r.png",
+      "sha256": "0b4b5433b6706aea900c26523b07ccf430a3d203407773552a1bda8c3d5ddfb7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 114,
+      "spriteName": "g114",
+      "atlasRect": {
+        "x": 256,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStickPress",
+      "spriteGuid": "4d6dc9f2ee6640c7fb3f9893fa6926bd",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r_press.png",
+      "source": "Xbox Series/Double/xbox_stick_r_press.png",
+      "sha256": "f0e502e4868f6d21b4bfb03e544696bbc534649db8be808259096ceefb3968ee",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 115,
+      "spriteName": "g115",
+      "atlasRect": {
+        "x": 384,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStick/x",
+      "spriteGuid": "8fb995bdb19435fa8e0a120c83a8267d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r_horizontal.png",
+      "source": "Xbox Series/Double/xbox_stick_r_horizontal.png",
+      "sha256": "d4e1212b3367a869683fae738e63b78fa522798dc49cd915c15bce944c488ef7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 116,
+      "spriteName": "g116",
+      "atlasRect": {
+        "x": 512,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStick/y",
+      "spriteGuid": "2559862b09d67e2ad24273e37b79726a",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r_vertical.png",
+      "source": "Xbox Series/Double/xbox_stick_r_vertical.png",
+      "sha256": "6cace67054fb076943fcbb953eff4f220f6b0eca6072e6c0e6be4bfcfeac5071",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 117,
+      "spriteName": "g117",
+      "atlasRect": {
+        "x": 640,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStick/up",
+      "spriteGuid": "07ac0941d50e67eda331ba507328429f",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r_up.png",
+      "source": "Xbox Series/Double/xbox_stick_r_up.png",
+      "sha256": "e597eba5a1a6ef405633173abbb776943e9f85aad8f512dc80a980abdbd0af51",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 118,
+      "spriteName": "g118",
+      "atlasRect": {
+        "x": 768,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStick/down",
+      "spriteGuid": "7837c6c39a6329109748c6e34dfab0d5",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r_down.png",
+      "source": "Xbox Series/Double/xbox_stick_r_down.png",
+      "sha256": "5a0f076217b36e87fe25a6cfd1365ee0a022da95e6f644faf3d3fd10cc295368",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 119,
+      "spriteName": "g119",
+      "atlasRect": {
+        "x": 896,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStick/left",
+      "spriteGuid": "25d7c1cc49b6d9394c96d2f599ee2c56",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r_left.png",
+      "source": "Xbox Series/Double/xbox_stick_r_left.png",
+      "sha256": "f599d0ef469ed77955c7de4276464453f0e7bf9f7953c701d786b97095712ce7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 120,
+      "spriteName": "g120",
+      "atlasRect": {
+        "x": 1024,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "rightStick/right",
+      "spriteGuid": "ff0b90ab91ea330762f497d6ba1fe123",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_stick_r_right.png",
+      "source": "Xbox Series/Double/xbox_stick_r_right.png",
+      "sha256": "a7cca7c77a257d6fec2040725b80c31df8d619c3540981a6bac588764c55102f",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 121,
+      "spriteName": "g121",
+      "atlasRect": {
+        "x": 1152,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "dpad",
+      "spriteGuid": "d77ba644873bc4f421458ed4d088c9c2",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_dpad_all.png",
+      "source": "Xbox Series/Double/xbox_dpad_all.png",
+      "sha256": "793d594ed71fe869dbefc8273c4ae903066635d4a2b54926edc4e0911b6c4898",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 122,
+      "spriteName": "g122",
+      "atlasRect": {
+        "x": 1280,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "dpad/x",
+      "spriteGuid": "d3bf9e34938f66a0aa9fe4fb92a64f74",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_dpad_horizontal.png",
+      "source": "Xbox Series/Double/xbox_dpad_horizontal.png",
+      "sha256": "29bbd6724a393cdc38b5c663d5cb2ef7afeea1fe2235135e2e88835e3e93cf08",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 123,
+      "spriteName": "g123",
+      "atlasRect": {
+        "x": 1408,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "dpad/y",
+      "spriteGuid": "6c85b9d0a86556edab12cca70f69fc5d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_dpad_vertical.png",
+      "source": "Xbox Series/Double/xbox_dpad_vertical.png",
+      "sha256": "5941f16074826b0a1cf39a5c97ebd757d1b5c187002392356814a348412f589d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 124,
+      "spriteName": "g124",
+      "atlasRect": {
+        "x": 1536,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "dpad/up",
+      "spriteGuid": "930b3d09d54db61f093ace337f5f34b0",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_dpad_up.png",
+      "source": "Xbox Series/Double/xbox_dpad_up.png",
+      "sha256": "dc9f076144d7596fd25757d16bfb7cfceb8875c8a71b585c7641a1bc27770c45",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 125,
+      "spriteName": "g125",
+      "atlasRect": {
+        "x": 1664,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "dpad/down",
+      "spriteGuid": "3c332f0c55f15c3b10ce74f8ccd94e32",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_dpad_down.png",
+      "source": "Xbox Series/Double/xbox_dpad_down.png",
+      "sha256": "7f21fef66a72a7126f07e042e8b6d14092d7245909aeb8d8d5ed34fdf7f3b38c",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 126,
+      "spriteName": "g126",
+      "atlasRect": {
+        "x": 1792,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "dpad/left",
+      "spriteGuid": "f675e4cbd4d287dc803ae0c239a63bd0",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_dpad_left.png",
+      "source": "Xbox Series/Double/xbox_dpad_left.png",
+      "sha256": "606e97e9eb4f89d1dadd50fb3e9df32e36346bbccbf1c31f880475d8b3686ee3",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 127,
+      "spriteName": "g127",
+      "atlasRect": {
+        "x": 1920,
+        "y": 1024,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "Xbox",
+      "familyId": 1,
+      "controlPath": "dpad/right",
+      "spriteGuid": "eebf0fa69524de73da82a1d5e59f1aff",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Xbox Series/xbox_dpad_right.png",
+      "source": "Xbox Series/Double/xbox_dpad_right.png",
+      "sha256": "280db7d24c98edc833d6bb520ddf4e8b3a989a90f4bda1b3b2908d2d8af58060",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 128,
+      "spriteName": "g128",
+      "atlasRect": {
+        "x": 0,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "buttonSouth",
+      "spriteGuid": "9919bfa9cc73b560aec16b015478426b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_button_cross.png",
+      "source": "PlayStation Series/Double/playstation_button_cross.png",
+      "sha256": "0db3b8a6395a5131c4bc5b0e76094a3ded08777b39147717285698d5f017d7e6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 129,
+      "spriteName": "g129",
+      "atlasRect": {
+        "x": 128,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "buttonEast",
+      "spriteGuid": "ca4e29cc595052b39f1c5cf445b01a3f",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_button_circle.png",
+      "source": "PlayStation Series/Double/playstation_button_circle.png",
+      "sha256": "823934cf4eda3b62bbf62b52efd7991fa6e426b7ae332a6ae4a52281492bcc23",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 130,
+      "spriteName": "g130",
+      "atlasRect": {
+        "x": 256,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "buttonWest",
+      "spriteGuid": "6f9b3ac9b37c379f506d90a44f9ee16d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_button_square.png",
+      "source": "PlayStation Series/Double/playstation_button_square.png",
+      "sha256": "6572c66c06e754e1c87eb3fda259c0bcde2dd772d796aa455f1ea152ef1ee440",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 131,
+      "spriteName": "g131",
+      "atlasRect": {
+        "x": 384,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "buttonNorth",
+      "spriteGuid": "f697e41c37ac1f10b00d614a0d54ef69",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_button_triangle.png",
+      "source": "PlayStation Series/Double/playstation_button_triangle.png",
+      "sha256": "eb40679d71df16f6440dcad5e5080d0637ce5e49d64687a8a2ab4d65deec6cc3",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 132,
+      "spriteName": "g132",
+      "atlasRect": {
+        "x": 512,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftShoulder",
+      "spriteGuid": "836038639df695181325b51756a0daba",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_trigger_l1.png",
+      "source": "PlayStation Series/Double/playstation_trigger_l1.png",
+      "sha256": "adccfe75bc456d009988d74066b46bf42ccc5e4ec6ff1b37e43fc610ea6fc8e7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 133,
+      "spriteName": "g133",
+      "atlasRect": {
+        "x": 640,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightShoulder",
+      "spriteGuid": "0467ea46912d2269644a12510d1a08fd",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_trigger_r1.png",
+      "source": "PlayStation Series/Double/playstation_trigger_r1.png",
+      "sha256": "646a8861ea66c1f8d75290c5cfa9917282b49049f23817ee67cdd7212336010e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 134,
+      "spriteName": "g134",
+      "atlasRect": {
+        "x": 768,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftTrigger",
+      "spriteGuid": "31daa6c81aaf1727ca3723082cc28084",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_trigger_l2.png",
+      "source": "PlayStation Series/Double/playstation_trigger_l2.png",
+      "sha256": "96e398fe7ff69938d2e2eed8c82c16e57196bf04ebfb8644fd44f7b355a4ed0b",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 135,
+      "spriteName": "g135",
+      "atlasRect": {
+        "x": 896,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightTrigger",
+      "spriteGuid": "a9e77c7fb17e3d0d8a4d29d583d4e782",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_trigger_r2.png",
+      "source": "PlayStation Series/Double/playstation_trigger_r2.png",
+      "sha256": "2625a37e798df8af29f6927234584f87ea796a40c2497f93b30e3b733b2a23fa",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 136,
+      "spriteName": "g136",
+      "atlasRect": {
+        "x": 1024,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "start",
+      "spriteGuid": "2ee1646e61b3bde12a744e6b439214ad",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation4_button_options.png",
+      "source": "PlayStation Series/Double/playstation4_button_options.png",
+      "sha256": "5f0d8384a2d92c2f2866c688f625fa7426c4e775021d17373b0a4dbe5b540758",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 137,
+      "spriteName": "g137",
+      "atlasRect": {
+        "x": 1152,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "select",
+      "spriteGuid": "737013ae5b29e89969f64cdfc75207e7",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation4_button_share.png",
+      "source": "PlayStation Series/Double/playstation4_button_share.png",
+      "sha256": "1f2b8f7f6114038ab5891d32043b17d62822a2bd3c5db28e3755262be8e4085d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 138,
+      "spriteName": "g138",
+      "atlasRect": {
+        "x": 1280,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "touchpadButton",
+      "spriteGuid": "aba06997e473041660a23452bd5c42ff",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation4_touchpad_press.png",
+      "source": "PlayStation Series/Double/playstation4_touchpad_press.png",
+      "sha256": "2fa996528d223a935f38f5e317e2635e3ba6eb7606a6496c1bb4ffbfd6b34ce4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 139,
+      "spriteName": "g139",
+      "atlasRect": {
+        "x": 1408,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStick",
+      "spriteGuid": "e3a34201bdc3f47a471c3316a776a468",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l.png",
+      "source": "PlayStation Series/Double/playstation_stick_l.png",
+      "sha256": "68edebe98e5efdbfc800154bcc523e67c6b6812df39ee45cf5a6362d6d670861",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 140,
+      "spriteName": "g140",
+      "atlasRect": {
+        "x": 1536,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStickPress",
+      "spriteGuid": "e242d2ef94d355d842e6a0208aebe9c7",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_press.png",
+      "source": "PlayStation Series/Double/playstation_stick_l_press.png",
+      "sha256": "8c772ed1203af9c4923dd1bb5a67f96814a08d9569130ae8435a49fc3b33ab4e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 141,
+      "spriteName": "g141",
+      "atlasRect": {
+        "x": 1664,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStick/x",
+      "spriteGuid": "a2e51314bf0c3824369a0826769ac881",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_horizontal.png",
+      "source": "PlayStation Series/Double/playstation_stick_l_horizontal.png",
+      "sha256": "3ed84d16c11569a619d0be90021dd0e186095e42a9e5c22fc6c5ddf4ad0d5211",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 142,
+      "spriteName": "g142",
+      "atlasRect": {
+        "x": 1792,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStick/y",
+      "spriteGuid": "c60f40f644e8499926ad550866703d4d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_vertical.png",
+      "source": "PlayStation Series/Double/playstation_stick_l_vertical.png",
+      "sha256": "650b79e332d1ff4747c47ca2a291d5da2e4f6e220cf377a5901715315da0c5f7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 143,
+      "spriteName": "g143",
+      "atlasRect": {
+        "x": 1920,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStick/up",
+      "spriteGuid": "46143a3666a6a4f691521b5cd282defa",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_up.png",
+      "source": "PlayStation Series/Double/playstation_stick_l_up.png",
+      "sha256": "fd3fc11c0aa84a26c26ecd9cf59f545b7500c819356193e73e96c051462b33ea",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 144,
+      "spriteName": "g144",
+      "atlasRect": {
+        "x": 0,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStick/down",
+      "spriteGuid": "e197445d4da9a92998f2c68aebf02572",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_down.png",
+      "source": "PlayStation Series/Double/playstation_stick_l_down.png",
+      "sha256": "0adabdf37e08e280ec2921c30223bbdfc36fdb0d6a27298fa9b6cfe680fb0869",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 145,
+      "spriteName": "g145",
+      "atlasRect": {
+        "x": 128,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStick/left",
+      "spriteGuid": "4b445de729a2d548dd511c68f9205d6b",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_left.png",
+      "source": "PlayStation Series/Double/playstation_stick_l_left.png",
+      "sha256": "722e4b751fdc4dc22fadc845b0c6d83dd3dfda429c9ddb2a96c9292a3f26eee4",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 146,
+      "spriteName": "g146",
+      "atlasRect": {
+        "x": 256,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "leftStick/right",
+      "spriteGuid": "cd3948f345ad88d0217781175973aac2",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_l_right.png",
+      "source": "PlayStation Series/Double/playstation_stick_l_right.png",
+      "sha256": "739306973d12bbf17d98f087319565c6a490522b9eccd7a717da02d1aa157fc0",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 147,
+      "spriteName": "g147",
+      "atlasRect": {
+        "x": 384,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStick",
+      "spriteGuid": "c88a4903a3127f8f1165ce614fda6073",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r.png",
+      "source": "PlayStation Series/Double/playstation_stick_r.png",
+      "sha256": "0b4b5433b6706aea900c26523b07ccf430a3d203407773552a1bda8c3d5ddfb7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 148,
+      "spriteName": "g148",
+      "atlasRect": {
+        "x": 512,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStickPress",
+      "spriteGuid": "640575e98a1e6ef38a5709d35969d82d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r_press.png",
+      "source": "PlayStation Series/Double/playstation_stick_r_press.png",
+      "sha256": "f0e502e4868f6d21b4bfb03e544696bbc534649db8be808259096ceefb3968ee",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 149,
+      "spriteName": "g149",
+      "atlasRect": {
+        "x": 640,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStick/x",
+      "spriteGuid": "5418fe3f7a805ad1e8e0e6cb0321c1ad",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r_horizontal.png",
+      "source": "PlayStation Series/Double/playstation_stick_r_horizontal.png",
+      "sha256": "d4e1212b3367a869683fae738e63b78fa522798dc49cd915c15bce944c488ef7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 150,
+      "spriteName": "g150",
+      "atlasRect": {
+        "x": 768,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStick/y",
+      "spriteGuid": "b959a2892550129ddedd0cb6fd7687ca",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r_vertical.png",
+      "source": "PlayStation Series/Double/playstation_stick_r_vertical.png",
+      "sha256": "6cace67054fb076943fcbb953eff4f220f6b0eca6072e6c0e6be4bfcfeac5071",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 151,
+      "spriteName": "g151",
+      "atlasRect": {
+        "x": 896,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStick/up",
+      "spriteGuid": "fc030393633ae119e5a5dd232ef1ab6a",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r_up.png",
+      "source": "PlayStation Series/Double/playstation_stick_r_up.png",
+      "sha256": "e597eba5a1a6ef405633173abbb776943e9f85aad8f512dc80a980abdbd0af51",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 152,
+      "spriteName": "g152",
+      "atlasRect": {
+        "x": 1024,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStick/down",
+      "spriteGuid": "a3b361717d71c775560b49b972037762",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r_down.png",
+      "source": "PlayStation Series/Double/playstation_stick_r_down.png",
+      "sha256": "5a0f076217b36e87fe25a6cfd1365ee0a022da95e6f644faf3d3fd10cc295368",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 153,
+      "spriteName": "g153",
+      "atlasRect": {
+        "x": 1152,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStick/left",
+      "spriteGuid": "ee1870b3f5d0d4b9dc1f047853d9e45a",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r_left.png",
+      "source": "PlayStation Series/Double/playstation_stick_r_left.png",
+      "sha256": "f599d0ef469ed77955c7de4276464453f0e7bf9f7953c701d786b97095712ce7",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 154,
+      "spriteName": "g154",
+      "atlasRect": {
+        "x": 1280,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "rightStick/right",
+      "spriteGuid": "0c66bb9a078748ef7c087df19304ab88",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_stick_r_right.png",
+      "source": "PlayStation Series/Double/playstation_stick_r_right.png",
+      "sha256": "a7cca7c77a257d6fec2040725b80c31df8d619c3540981a6bac588764c55102f",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 155,
+      "spriteName": "g155",
+      "atlasRect": {
+        "x": 1408,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "dpad",
+      "spriteGuid": "0e41ca13f0f98601a7f2037e504aba52",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_dpad_all.png",
+      "source": "PlayStation Series/Double/playstation_dpad_all.png",
+      "sha256": "1ca8d885b53f82196bd1e7575bdb6f42427bfa3f8e684f3f1e36a5d943b23f35",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 156,
+      "spriteName": "g156",
+      "atlasRect": {
+        "x": 1536,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "dpad/x",
+      "spriteGuid": "6c853ca917a93b1b2fa38a4c9385282d",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_dpad_horizontal.png",
+      "source": "PlayStation Series/Double/playstation_dpad_horizontal.png",
+      "sha256": "a8327b591871646f5133da3c801f9e71a76da828f006c1dd86247a89f3e33657",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 157,
+      "spriteName": "g157",
+      "atlasRect": {
+        "x": 1664,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "dpad/y",
+      "spriteGuid": "b2baa93b1f92052997176cebedb46dbb",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_dpad_vertical.png",
+      "source": "PlayStation Series/Double/playstation_dpad_vertical.png",
+      "sha256": "82ea83d596325a9f6711fcb37d87e2bea24db2812681e45c255395adfe80a3ad",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 158,
+      "spriteName": "g158",
+      "atlasRect": {
+        "x": 1792,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "dpad/up",
+      "spriteGuid": "4d24f39ef146fc3119e0331549b344a9",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_dpad_up.png",
+      "source": "PlayStation Series/Double/playstation_dpad_up.png",
+      "sha256": "bcba6882a61b12abe0cef9d41d416c453c800879473dd13c33a5b97e49a35f30",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 159,
+      "spriteName": "g159",
+      "atlasRect": {
+        "x": 1920,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "dpad/down",
+      "spriteGuid": "ba4e9f81edae3cf02e19bcf163f36ae1",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_dpad_down.png",
+      "source": "PlayStation Series/Double/playstation_dpad_down.png",
+      "sha256": "b20c4845145e7bc50f4d70c5460595aa8e7b4cbf10db1cb35fafa5890ffc7ba6",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 160,
+      "spriteName": "g160",
+      "atlasRect": {
+        "x": 0,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "dpad/left",
+      "spriteGuid": "bdc584fe6983c32bbf287d6a7c28253a",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_dpad_left.png",
+      "source": "PlayStation Series/Double/playstation_dpad_left.png",
+      "sha256": "9b576722e5b4b7a0b94ed673ad71cc0d451f85c5d37776d7fdf14e24ecd699cf",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 161,
+      "spriteName": "g161",
+      "atlasRect": {
+        "x": 128,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "PlayStation",
+      "familyId": 2,
+      "controlPath": "dpad/right",
+      "spriteGuid": "f8b71ab8ac57557c8f17f88b8d06a069",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/PlayStation Series/playstation_dpad_right.png",
+      "source": "PlayStation Series/Double/playstation_dpad_right.png",
+      "sha256": "b7b4386603bfbd29035910109761b51dd553e75ea5a5df64f7d7de9082950888",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 162,
+      "spriteName": "g162",
+      "atlasRect": {
+        "x": 256,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "buttonSouth",
+      "spriteGuid": "243b9c94b34ebffe6697460247c88675",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_buttons_down.png",
+      "source": "Nintendo Switch/Double/switch_buttons_down.png",
+      "sha256": "fd59ba5c6ea553cf6eb3de1a36bde32051be175d02f5c30346338c935fac2b19",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 163,
+      "spriteName": "g163",
+      "atlasRect": {
+        "x": 384,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "buttonEast",
+      "spriteGuid": "a905be3ccccf4e17388b9f7337292a63",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_buttons_right.png",
+      "source": "Nintendo Switch/Double/switch_buttons_right.png",
+      "sha256": "4c2b3385fe56da44a8f2cbfe5099b3b47286fcd1a31e2618c8dcee34e24d250e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 164,
+      "spriteName": "g164",
+      "atlasRect": {
+        "x": 512,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "buttonWest",
+      "spriteGuid": "4ab0d26cf63478646a29ed2bd0a49953",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_buttons_left.png",
+      "source": "Nintendo Switch/Double/switch_buttons_left.png",
+      "sha256": "25d4c847a2b9e9fb265578a591641826ae8fb08975395410079a4dee9dcd100f",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 165,
+      "spriteName": "g165",
+      "atlasRect": {
+        "x": 640,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "buttonNorth",
+      "spriteGuid": "1540666f9f9cc5aa9dfce7aa047f168c",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_buttons_up.png",
+      "source": "Nintendo Switch/Double/switch_buttons_up.png",
+      "sha256": "32c47c0ce19a6d930babef6293e3de9ffd3bbb18e495babc8f87e949e6e28ac1",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 166,
+      "spriteName": "g166",
+      "atlasRect": {
+        "x": 768,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStick",
+      "spriteGuid": "6bab55b35f4c027a7cf9404201e08bad",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick.png",
+      "source": "Generic/Double/generic_stick.png",
+      "sha256": "80e364649fa402f96510c72ce6b69746a1bfbe8dabed82ff42518c679981d21e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 167,
+      "spriteName": "g167",
+      "atlasRect": {
+        "x": 896,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStickPress",
+      "spriteGuid": "f703eac097c9ece65d41915892eac4c8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_press.png",
+      "source": "Generic/Double/generic_stick_press.png",
+      "sha256": "79ef58cb0d71a5d5428aba7d51efb3f5cce6681e9b6d6d30652b0e820ea50bae",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 168,
+      "spriteName": "g168",
+      "atlasRect": {
+        "x": 1024,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStick/x",
+      "spriteGuid": "430dd8c84a0ceeb5d491c3f24761b731",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_horizontal.png",
+      "source": "Generic/Double/generic_stick_horizontal.png",
+      "sha256": "683690b5b0392178dc9cb03276f6fde35d7bf56340b1498e63a238bb7de1de62",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 169,
+      "spriteName": "g169",
+      "atlasRect": {
+        "x": 1152,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStick/y",
+      "spriteGuid": "e5eed5a2bc013432fc7b942161fddac7",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_vertical.png",
+      "source": "Generic/Double/generic_stick_vertical.png",
+      "sha256": "f8214e8a98742a77081a4870fb6492b286c25452693097a406b97caf21c079bc",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 170,
+      "spriteName": "g170",
+      "atlasRect": {
+        "x": 1280,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStick/up",
+      "spriteGuid": "c885c2a1fcbc63a78fa3edebd0a31262",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_up.png",
+      "source": "Generic/Double/generic_stick_up.png",
+      "sha256": "e914dcfc8a7e1df442f63a89e909b9be1f34e99f74cd4ea347ebd7729b74f50e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 171,
+      "spriteName": "g171",
+      "atlasRect": {
+        "x": 1408,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStick/down",
+      "spriteGuid": "3cd2ae87c8baf57e60007eb3d26aa93f",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_down.png",
+      "source": "Generic/Double/generic_stick_down.png",
+      "sha256": "c43c281b9184dff324d945823a330d49960d9071f54f7c2e26784f39c276aec5",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 172,
+      "spriteName": "g172",
+      "atlasRect": {
+        "x": 1536,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStick/left",
+      "spriteGuid": "d334535ffd216ee50cccb73fba364a34",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_left.png",
+      "source": "Generic/Double/generic_stick_left.png",
+      "sha256": "9d76f7988903763a2e3ecc8cefba21b5c893385db7854a55c40c1f692b3051df",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 173,
+      "spriteName": "g173",
+      "atlasRect": {
+        "x": 1664,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "leftStick/right",
+      "spriteGuid": "466a9cb5fc6c9a13cee832aa7a62a7a1",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_right.png",
+      "source": "Generic/Double/generic_stick_right.png",
+      "sha256": "46899d685ae566eb0a84607bb28d4f52c08f7dfbc74c6cacfa4bb0e28ae20232",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 174,
+      "spriteName": "g174",
+      "atlasRect": {
+        "x": 1792,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStick",
+      "spriteGuid": "6bab55b35f4c027a7cf9404201e08bad",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick.png",
+      "source": "Generic/Double/generic_stick.png",
+      "sha256": "80e364649fa402f96510c72ce6b69746a1bfbe8dabed82ff42518c679981d21e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 167,
+      "spriteName": "g167",
+      "atlasRect": {
+        "x": 896,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStickPress",
+      "spriteGuid": "f703eac097c9ece65d41915892eac4c8",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_press.png",
+      "source": "Generic/Double/generic_stick_press.png",
+      "sha256": "79ef58cb0d71a5d5428aba7d51efb3f5cce6681e9b6d6d30652b0e820ea50bae",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 168,
+      "spriteName": "g168",
+      "atlasRect": {
+        "x": 1024,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStick/x",
+      "spriteGuid": "430dd8c84a0ceeb5d491c3f24761b731",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_horizontal.png",
+      "source": "Generic/Double/generic_stick_horizontal.png",
+      "sha256": "683690b5b0392178dc9cb03276f6fde35d7bf56340b1498e63a238bb7de1de62",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 169,
+      "spriteName": "g169",
+      "atlasRect": {
+        "x": 1152,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStick/y",
+      "spriteGuid": "e5eed5a2bc013432fc7b942161fddac7",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_vertical.png",
+      "source": "Generic/Double/generic_stick_vertical.png",
+      "sha256": "f8214e8a98742a77081a4870fb6492b286c25452693097a406b97caf21c079bc",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 170,
+      "spriteName": "g170",
+      "atlasRect": {
+        "x": 1280,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStick/up",
+      "spriteGuid": "c885c2a1fcbc63a78fa3edebd0a31262",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_up.png",
+      "source": "Generic/Double/generic_stick_up.png",
+      "sha256": "e914dcfc8a7e1df442f63a89e909b9be1f34e99f74cd4ea347ebd7729b74f50e",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 171,
+      "spriteName": "g171",
+      "atlasRect": {
+        "x": 1408,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStick/down",
+      "spriteGuid": "3cd2ae87c8baf57e60007eb3d26aa93f",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_down.png",
+      "source": "Generic/Double/generic_stick_down.png",
+      "sha256": "c43c281b9184dff324d945823a330d49960d9071f54f7c2e26784f39c276aec5",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 172,
+      "spriteName": "g172",
+      "atlasRect": {
+        "x": 1536,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStick/left",
+      "spriteGuid": "d334535ffd216ee50cccb73fba364a34",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_left.png",
+      "source": "Generic/Double/generic_stick_left.png",
+      "sha256": "9d76f7988903763a2e3ecc8cefba21b5c893385db7854a55c40c1f692b3051df",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 173,
+      "spriteName": "g173",
+      "atlasRect": {
+        "x": 1664,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "rightStick/right",
+      "spriteGuid": "466a9cb5fc6c9a13cee832aa7a62a7a1",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Generic/generic_stick_right.png",
+      "source": "Generic/Double/generic_stick_right.png",
+      "sha256": "46899d685ae566eb0a84607bb28d4f52c08f7dfbc74c6cacfa4bb0e28ae20232",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 174,
+      "spriteName": "g174",
+      "atlasRect": {
+        "x": 1792,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "dpad",
+      "spriteGuid": "00e09fac49123f6eefedd86ccab2ea15",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_dpad_all.png",
+      "source": "Nintendo Switch/Double/switch_dpad_all.png",
+      "sha256": "6f0b082189252914db030720baeef50607529d88ce9300fbed632b118f85bb79",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 175,
+      "spriteName": "g175",
+      "atlasRect": {
+        "x": 1920,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "dpad/x",
+      "spriteGuid": "d62d49b314968e3592d123321438d652",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_dpad_horizontal.png",
+      "source": "Nintendo Switch/Double/switch_dpad_horizontal.png",
+      "sha256": "5c6cd43de67f53b78cd09f1e372a36dda3f804896608852d2110881622fc31fa",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 176,
+      "spriteName": "g176",
+      "atlasRect": {
+        "x": 0,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "dpad/y",
+      "spriteGuid": "21c4cf4090ff9526838aebbd695eff54",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_dpad_vertical.png",
+      "source": "Nintendo Switch/Double/switch_dpad_vertical.png",
+      "sha256": "4ff9b009f7f7fe428dd15334c184433e56a59a029bc0930c3a2a3331eef1f1ca",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 177,
+      "spriteName": "g177",
+      "atlasRect": {
+        "x": 128,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "dpad/up",
+      "spriteGuid": "a244f3f224b51264ede625260b3f4332",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_dpad_up.png",
+      "source": "Nintendo Switch/Double/switch_dpad_up.png",
+      "sha256": "2339abd12ad6b6932a70218b4c0b49432be7144c2dec1454b1f88fd7ce8e7b0d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 178,
+      "spriteName": "g178",
+      "atlasRect": {
+        "x": 256,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "dpad/down",
+      "spriteGuid": "b150b0919deee1b055ded352aa0389fc",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_dpad_down.png",
+      "source": "Nintendo Switch/Double/switch_dpad_down.png",
+      "sha256": "c7d431d57ac22b5c64f8d495d35c6b4a0316da24740617ba2f03b00d292e406d",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 179,
+      "spriteName": "g179",
+      "atlasRect": {
+        "x": 384,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "dpad/left",
+      "spriteGuid": "191e1ab785e1c25ab4384d573e481ada",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_dpad_left.png",
+      "source": "Nintendo Switch/Double/switch_dpad_left.png",
+      "sha256": "1ef148460fe326b3b433bc3ecdb8eb8bb82a3d5e564e496cdb84564d80b3a5a0",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 180,
+      "spriteName": "g180",
+      "atlasRect": {
+        "x": 512,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    {
+      "family": "GenericGamepad",
+      "familyId": 3,
+      "controlPath": "dpad/right",
+      "spriteGuid": "b4e8af342f0c1382751bd801102f0d83",
+      "spriteFileId": 21300000,
+      "relativePath": "Assets/Art/InputPrompts/Nintendo Switch/switch_dpad_right.png",
+      "source": "Nintendo Switch/Double/switch_dpad_right.png",
+      "sha256": "8dc4e69d8318590e5bde6760527a25245c2bb6e21c2386485cdf12227d1ef78b",
+      "width": 128,
+      "height": 128,
+      "spriteIndex": 181,
+      "spriteName": "g181",
+      "atlasRect": {
+        "x": 640,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    }
+  ]
+}

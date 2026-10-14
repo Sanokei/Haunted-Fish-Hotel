@@ -9201,6 +9201,7 @@ GameObject:
   - component: {fileID: 980000357}
   - component: {fileID: 980000358}
   - component: {fileID: 980000359}
+  - component: {fileID: 51002000}
   m_Layer: 5
   m_Name: Tutorial instructions
   m_TagString: Untagged
@@ -9274,7 +9275,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 57a166b6f5bc1abf4547f1c92949f12e, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -9863,6 +9864,7 @@ MonoBehaviour:
   _Video: {fileID: 980000381}
   _Audio: {fileID: 980000380}
   _GhostPreview: {fileID: 980000387}
+  _InputPrompts: {fileID: 51002000}
 --- !u!114 &980000383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9951,3 +9953,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &51002000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980000355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46eb25c8bc896c7fea520e80685976d0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _Catalog: {fileID: 11400000, guid: 8637790bc13a4245d40e97a5fa26c552, type: 2}
+  _SpriteAsset: {fileID: 11400000, guid: 57a166b6f5bc1abf4547f1c92949f12e, type: 2}
+  _ActionAsset: {fileID: -944628639613478452, guid: 6b1b59be39e74c7fb572115019637e61, type: 3}
+  _Text: {fileID: 980000358}
+  _Template: ""
