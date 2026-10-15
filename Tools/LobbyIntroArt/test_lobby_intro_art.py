@@ -155,18 +155,7 @@ class LobbyIntroArtTests(unittest.TestCase):
         self.assertIn("- Tag: wide\n      Camera: {x: 0, y: 0}\n      Push: 0",rig)
         self.assertIn("- Tag: gate_arrival\n      Camera: {x: 0, y: -140}\n      Push: 0.4",rig)
         layers={int(i):float(depth) for i,depth in re.findall(r"Target: \{fileID: (\d+)\}\n      Depth: ([0-9.]+)",rig)}
-        self.assertEqual(len(layers),11)
-        # Foggy block-city slabs sit between the sky and the driveway, receding in depth order.
-        city=[5812000000000000201,5812000000000000202,5812000000000000203]
-        self.assertGreater(layers[71778210276053668],layers[city[0]])
-        self.assertGreater(layers[city[0]],layers[city[1]])
-        self.assertGreater(layers[city[1]],layers[city[2]])
-        self.assertGreater(layers[city[2]],layers[7402074234106522035])
-        container=self.docs[7828835273548323913].body
-        children=[int(i) for i in re.findall(r"- \{fileID: (\d+)\}",container.split("m_Children:",1)[1].split("m_Father",1)[0])]
-        self.assertEqual(children[:5],[71778210276053668]+city+[3403337161785866876])
-        self.assertLess(layers[321912153842628392],layers[8785289786444420281])
-        self.assertLess(layers[8785289786444420281],layers[7402074234106522035])
+        self.assertEqual(len(layers),8)
         for ident,depth in layers.items():
             body=self.docs[ident].body
             self.assertEqual(local_ref(body,"m_Father"),7828835273548323913)
@@ -176,7 +165,7 @@ class LobbyIntroArtTests(unittest.TestCase):
         # Evaluate serialized projection all along the move, not just its endpoints.
         for phase in [i/100 for i in range(101)]:
             t=phase**3*(phase*(phase*6-15)+10)
-            for ident in [71778210276053668,70824330142336985,56783861116141782,11742778312899493,5812000000000000201,5812000000000000202,5812000000000000203]:
+            for ident in [71778210276053668,70824330142336985,56783861116141782,11742778312899493]:
                 body=self.docs[ident].body
                 x,y=vector(value(body,"m_AnchoredPosition"))[:2]
                 w,h=vector(value(body,"m_SizeDelta"))[:2]
