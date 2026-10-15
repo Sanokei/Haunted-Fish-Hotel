@@ -171,9 +171,15 @@ class Layer:
 def build_layers(t, wait=False):
     trees = tree_files()
     lay = []
-    lay.append(Layer(12, (0, 0), to_image(sky(1600 // SHADER_SCALE, 900 // SHADER_SCALE, t)), (1600, 900)))
-    for name, depth in (('CityFar', 9), ('CityMid', 6.5), ('CityNear', 4.6)):
+    # Use the new FogSky instead of generated sky
+    fog_sky = Image.open(ART / 'City/FogSky.png').convert('RGBA')
+    lay.append(Layer(12, (0, 0), fog_sky, (1600, 900)))
+    # Use the new OpeningCity layers with facade photos
+    for name, depth in (('OpeningCityFar', 9), ('OpeningCityMid', 7.5), ('OpeningCityBack', 6.5), ('OpeningCityNear', 4.6)):
         lay.append(Layer(depth, (0, 0), city_layer(name), (1600, 900)))
+    # CloudBank above the city
+    cloud_bank = Image.open(ART / 'City/CloudBank.png').convert('RGBA')
+    lay.append(Layer(11, (0, -100), cloud_bank, (1600, 900)))
     lay.append(Layer(2.2, (0, -190), to_image(wet_ground(1280 // SHADER_SCALE, 340 // SHADER_SCALE, t)), (1280, 340)))
     far = rain(1600 // SHADER_SCALE, 900 // SHADER_SCALE, t, 1600 / 900, 67, .38, .13, 2.3, .35, .21, .018, .4)
     lay.append(Layer(7, (0, 0), to_image(far), (1600, 900)))
