@@ -13,6 +13,12 @@ namespace HauntedFish.BossFight
         public int FishScore, GhostScore;
         public Vector3 PuckPosition, PuckVelocity, FishPaddlePosition, GhostPaddlePosition;
         public BossDefenseSnapshot[] Defenses;
+        // Hot-potato cue bomb. Clients replay the fuse when FuseRevision changes and the blast when BlastEvent grows.
+        public bool FuseArmed;
+        public uint FuseRevision, BlastEvent;
+        public float FuseHeat, FuseSeconds;
+        public Vector3 BlastPosition;
+        public int BlastVictim;
     }
 
     public sealed class BossArenaManager : MonoBehaviour
@@ -24,7 +30,14 @@ namespace HauntedFish.BossFight
         [SerializeField] BossHudPresentation _Hud;
         [SerializeField] BossDefenseBoard _Defenses;
         [SerializeField] BossDragInput _DragInput;
+        [SerializeField] BossCueBomb _Bomb;
+        [SerializeField] BossCueBombView _BombView;
         uint _PracticeDefenseEpoch;
+        readonly BossStunState _Stun = new BossStunState();
+        uint _BlastEvent, _BombEpoch, _ObservedBlast, _ObservedFuseRevision;
+        Vector3 _BlastPosition;
+        BossSide _BlastVictim;
+        bool _ObservedFuseArmed;
         uint _LocalViewer;
         bool _LocalWatching;
         [SerializeField]
@@ -81,6 +94,7 @@ namespace HauntedFish.BossFight
         {
             _Match.Completed += OnCompleted;
             if(_Defenses)_Defenses.Changed+=Publish;
+            if(_Bomb){_Bomb.Changed+=OnFuseChanged;_Bomb.Detonated+=OnDetonated;_Bomb.Defused+=OnFuseDefused;}
             SetAuthority(false);
             SetLocalParticipant(0);
         }
@@ -88,6 +102,7 @@ namespace HauntedFish.BossFight
         public void SetAuthority(bool authority)
         {
             _Authority = authority;
+            if(_Bomb)_Bomb.Disarm();
             if(_Defenses)_Defenses.SetAuthority(authority);
             _Puck.isKinematic = !authority || !_Match.Active;
             _FishPaddle.isKinematic = _GhostPaddle.isKinematic = true;
@@ -125,6 +140,7 @@ namespace HauntedFish.BossFight
                 return false;
             if(_Defenses){_Defenses.Begin(_Match.Epoch,fishId,ghostId);_Defenses.SetPlayable(true,false);}
             if(_DragInput)_DragInput.Cancel();
+            _Stun.Clear(); _BlastEvent = 0; _BlastVictim = BossSide.None;
             _WinnerFish = _Cancelled = _Ready = false;
             _ReactionEvent = 0; _ReactionUntil = 0;
             if (_Reactions) _Reactions.ResetPose();
@@ -267,6 +283,7 @@ namespace HauntedFish.BossFight
 
         void ScheduleServe()
         {
+            if(_Bomb)_Bomb.Disarm();
             if(_Defenses){_Defenses.ServeStarted();_Defenses.SetPlayable(_EditorPractice||_Match.Active,false);}
             if (!_Puck.isKinematic)
             {
@@ -298,15 +315,16 @@ namespace HauntedFish.BossFight
             if (_EditorPractice)
             {
                 if (_PracticePaused) return;
-                MovePaddle(_FishPaddle, _PracticeAxis, false);
+                MovePaddle(_FishPaddle, _Stun.IsStunned(BossSide.Fish, Time.unscaledTime) ? Vector2.zero : _PracticeAxis, false);
                 // A restrained local training paddle follows the puck in its own half.
                 var delta = new Vector2(_Puck.position.x - _GhostPaddle.position.x, _Centre.z + 3.6f - _GhostPaddle.position.z);
-                MovePaddle(_GhostPaddle,_PracticeGhostManual?_PracticeGhostAxis:Vector2.ClampMagnitude(delta,.55f),true);
+                MovePaddle(_GhostPaddle,_Stun.IsStunned(BossSide.Ghost, Time.unscaledTime)?Vector2.zero:_PracticeGhostManual?_PracticeGhostAxis:Vector2.ClampMagnitude(delta,.55f),true);
                 if (_Serving && Time.unscaledTime >= _NextServe)
                 {
                     if(_PracticeRoundEnded){_PracticeFishScore=_PracticeGhostScore=0;_PracticeRoundEnded=false;RefreshViewer();}
                     _Serving = false; _Puck.isKinematic = false;
                     _Puck.linearVelocity = new Vector3(.15f, 0, -1).normalized * _ServeSpeed;
+                    if(_Bomb)_Bomb.Arm();
                 }
                 if (!_Serving)
                 {
@@ -319,13 +337,14 @@ namespace HauntedFish.BossFight
             if (!_Authority || !_Ready || !_Match.Active)
                 return;
             float now = Time.unscaledTime;
-            MovePaddle(_FishPaddle, now - _FishInputTime <= _InputTimeout ? _FishAxis : Vector2.zero, false);
-            MovePaddle(_GhostPaddle, now - _GhostInputTime <= _InputTimeout ? _GhostAxis : Vector2.zero, true);
+            MovePaddle(_FishPaddle, now - _FishInputTime <= _InputTimeout && !_Stun.IsStunned(BossSide.Fish, now) ? _FishAxis : Vector2.zero, false);
+            MovePaddle(_GhostPaddle, now - _GhostInputTime <= _InputTimeout && !_Stun.IsStunned(BossSide.Ghost, now) ? _GhostAxis : Vector2.zero, true);
             if (_Serving && now >= _NextServe)
             {
                 _Serving = false;
                 _Puck.isKinematic = false;
                 _Puck.linearVelocity = new Vector3(UnityEngine.Random.Range(-.25f, .25f), 0, _Match.GhostScore == 0 ? 1 : -1).normalized * _ServeSpeed;
+                if(_Bomb)_Bomb.Arm();
             }
 
             if (!_Serving)
@@ -357,6 +376,7 @@ namespace HauntedFish.BossFight
         void OnCompleted(BossMatchResult result)
         {
             _Serving = _Ready = false;
+            if(_Bomb)_Bomb.Disarm();
             if (_Puck)
             {
                 if (!_Puck.isKinematic) _Puck.linearVelocity = Vector3.zero;
@@ -396,7 +416,10 @@ namespace HauntedFish.BossFight
                 PuckVelocity = _Puck && !_Puck.isKinematic ? _Puck.linearVelocity : Vector3.zero,
                 FishPaddlePosition = _FishPaddle ? _FishPaddle.position : _View?.FishPaddlePosition ?? _Centre,
                 GhostPaddlePosition = _GhostPaddle ? _GhostPaddle.position : _View?.GhostPaddlePosition ?? _Centre,
-                Defenses = _Defenses ? _Defenses.Snapshot() : null
+                Defenses = _Defenses ? _Defenses.Snapshot() : null,
+                FuseArmed = _Bomb && _Bomb.Armed, FuseRevision = _Bomb ? _Bomb.Revision : 0,
+                FuseHeat = _Bomb ? _Bomb.Heat : 0, FuseSeconds = _Bomb ? _Bomb.Duration : 0,
+                BlastEvent = _BlastEvent, BlastPosition = _BlastPosition, BlastVictim = (int)_BlastVictim
             };
             PresentScore();
             SnapshotChanged?.Invoke(JsonUtility.ToJson(_View));
@@ -418,6 +441,8 @@ namespace HauntedFish.BossFight
 
             if (s == null || !float.IsFinite(s.ReactionRemaining) || s.ReactionRemaining < 0 || s.ReactionRemaining > 10 || !Finite(s.PuckPosition) || !Finite(s.PuckVelocity) || !Finite(s.FishPaddlePosition) || !Finite(s.GhostPaddlePosition))
                 return false;
+            if (!float.IsFinite(s.FuseHeat) || !float.IsFinite(s.FuseSeconds) || s.FuseSeconds < 0 || s.FuseSeconds > 60 || !Finite(s.BlastPosition) || s.BlastVictim < 0 || s.BlastVictim > 2)
+                return false;
             if(_Defenses&&!_Defenses.ValidateSnapshot(s.Epoch,s.FishId,s.GhostId,s.Defenses))return false;
             if (_Observed && (s.Epoch < _ObservedEpoch || (s.Epoch == _ObservedEpoch && s.Revision <= _ObservedRevision)))
                 return false;
@@ -429,8 +454,57 @@ namespace HauntedFish.BossFight
             _FishPaddle.position = s.FishPaddlePosition;
             _GhostPaddle.position = s.GhostPaddlePosition;
             if(_Defenses)_Defenses.ApplySnapshot(s.Epoch,s.FishId,s.GhostId,s.Defenses,s.Active,s.ParticipantsReady&&!s.Serving);
+            PresentBomb(s);
             PresentScore();
             return true;
+        }
+
+        // Authority events -> presentation and snapshot. Everything the bomb does reaches the table through these three.
+        void OnFuseChanged(float heat, float seconds)
+        {
+            ShowFuse(true, heat, seconds);
+            Publish();
+        }
+        void OnFuseDefused()
+        {
+            ShowFuse(false, 0, 0);
+            Publish();
+        }
+        void OnDetonated(Vector3 position, BossSide striker)
+        {
+            if (!_Authority && !_EditorPractice) return;
+            var outcome = BossBlast.Resolve(position.z - _Centre.z, striker);
+            if(_Defenses)_Defenses.Blast(position, BossBlast.DefaultRadius);
+            _Stun.Stun(outcome.Victim, Time.unscaledTime, outcome.StunSeconds);
+            _BlastEvent++; _BlastPosition = position; _BlastVictim = outcome.Victim;
+            ShowBlast(position, outcome.Victim);
+            ScheduleServe(); // the cue returns to the centre; the next serve lights a fresh fuse
+            Publish();
+        }
+        // Clients replay the fuse when its revision changes and the blast when the event counter grows. The first
+        // snapshot of an epoch only adopts the counters, so joining mid-match never replays old explosions.
+        // The same three presentation calls serve the authority (from bomb events) and clients (from snapshots).
+        void ShowFuse(bool armed, float heat, float seconds)
+        {
+            if (_BombView) { if (armed) _BombView.Light(heat, seconds); else _BombView.Defuse(); }
+            if (_Reactions) _Reactions.PresentFuse(armed, heat, seconds);
+        }
+        void ShowBlast(Vector3 position, BossSide victim)
+        {
+            if (_BombView) _BombView.Detonate(position, victim);
+            if (_Reactions) _Reactions.PresentBlast(victim == BossSide.Ghost);
+        }
+        void PresentBomb(BossArenaSnapshot s)
+        {
+            if (!_BombView && !_Reactions) return;
+            if (_BombEpoch != s.Epoch) { _BombEpoch = s.Epoch; _ObservedBlast = s.BlastEvent; _ObservedFuseRevision = uint.MaxValue; _ObservedFuseArmed = false; }
+            if (s.BlastEvent > _ObservedBlast) { _ObservedBlast = s.BlastEvent; ShowBlast(s.BlastPosition, (BossSide)s.BlastVictim); }
+            if (s.FuseArmed)
+            {
+                if (s.FuseRevision != _ObservedFuseRevision) { _ObservedFuseRevision = s.FuseRevision; ShowFuse(true, s.FuseHeat, s.FuseSeconds); }
+                _ObservedFuseArmed = true;
+            }
+            else if (_ObservedFuseArmed) { _ObservedFuseArmed = false; _ObservedFuseRevision = s.FuseRevision; ShowFuse(false, 0, 0); }
         }
 
         static bool Finite(Vector3 p) => float.IsFinite(p.x) && float.IsFinite(p.y) && float.IsFinite(p.z);
@@ -449,7 +523,14 @@ namespace HauntedFish.BossFight
             StopEditorPractice();
 #endif
             if (_Authority && Active) Cancel(_Match.FishId);
+            if(_Bomb)_Bomb.Disarm();
             SetLocalParticipant(0);
+        }
+
+        void OnDestroy()
+        {
+            if(_Bomb){_Bomb.Changed-=OnFuseChanged;_Bomb.Detonated-=OnDetonated;_Bomb.Defused-=OnFuseDefused;}
+            if(_Defenses)_Defenses.Changed-=Publish;
         }
     }
 }

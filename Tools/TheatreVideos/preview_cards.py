@@ -22,13 +22,13 @@ def main():
         reports[role]['ink_sha256'] = sha256(path)
         for index, (_, (heading, body)) in enumerate(step for step in steps if step[0] == 'TutorialCaption'):
             picture, _ = render_card(role, index, heading, body)
-            if index == 0 or role == 'Fish' and heading in ('Move', 'Wowza', 'Dining cart'):
+            if index == 0 or role == 'Fish' and heading in ('A Gentleman Walks', 'Wowza', 'Dining cart'):
                 name = role + ('-opening' if index == 0 else '-' + heading)
                 picture.save(args.output_dir / (name + '.png'))
                 samples[name] = picture
     sheet = Image.new('RGB', (2560, 1440))
     for name, position in [('Fish-opening', (0, 0)), ('Ghost-opening', (1280, 0)),
-                           ('Fish-Move', (0, 720)), ('Fish-Wowza', (1280, 720))]:
+                           ('Fish-A Gentleman Walks', (0, 720)), ('Fish-Wowza', (1280, 720))]:
         sheet.paste(samples[name], position)
     sheet.save(args.output_dir / 'HauntedIntertitle-static-card-QA.png')
     report = {'status': 'source_estimates_and_static_cards_only', 'font': str(FONT.relative_to(ROOT)),

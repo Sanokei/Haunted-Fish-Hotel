@@ -12,6 +12,12 @@ namespace HauntedFish.Multiplayer
     {
         [SerializeField] CinemachineCamera _Camera;
         [SerializeField] Transform _EntryCamera, _FishStart, _FishWalkEnd, _ReceptionCamera;
+        // The final shot cranes up the lobby and tilts into the intro-only frame tunnel. All timing is authored.
+        [SerializeField] GameObject _Tunnel;
+        [SerializeField] Transform _TunnelCamera;
+        [SerializeField, Range(5, 90)] float _TunnelFieldOfView = 24;
+        [SerializeField] AnimationCurve _TunnelDolly = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        [SerializeField] AnimationCurve _TunnelTilt = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField] TMP_Text _Caption;
         [SerializeField] HotelFishSprite _AuthoredFish;
         [SerializeField] AudioSource _CaptionVoice;
@@ -26,13 +32,15 @@ namespace HauntedFish.Multiplayer
         HotelFishSprite _Fish;
         SpriteRenderer[] _OriginalRenderers;
         bool[] _OriginalHidden;
-        bool _Walking;
+        bool _Walking, _TunnelWasActive;
+        float _CameraFieldOfView;
 
         public bool Supports(StorySequenceStep step) =>
             step.Kind == StorySequenceStepKind.LobbyLine ? _Caption :
             step.Kind == StorySequenceStepKind.LobbyShot && _Camera && _EntryCamera && _FishStart &&
             _AuthoredFish && _FishWalkEnd && _ReceptionCamera &&
-            (step.Target == "entry" || step.Target == "walk_away" || step.Target == "reception");
+            (step.Target == "entry" || step.Target == "walk_away" || step.Target == "reception" ||
+             step.Target == "tunnel" && _Tunnel && _TunnelCamera);
 
         public IEnumerator Play(StorySequenceStep step)
         {
@@ -62,6 +70,22 @@ namespace HauntedFish.Multiplayer
                 yield return Tween(step.Seconds, t => _Fish.transform.position = Vector3.Lerp(start, _FishWalkEnd.position, t));
                 _Walking = false;
             }
+            else if (step.Target == "tunnel")
+            {
+                var position = _Camera.transform.position;
+                var rotation = _Camera.transform.rotation;
+                float fieldOfView = _Camera.Lens.FieldOfView;
+                yield return Tween(step.Seconds, t =>
+                {
+                    float tilt = _TunnelTilt.Evaluate(t);
+                    _Camera.transform.SetPositionAndRotation(
+                        Vector3.LerpUnclamped(position, _TunnelCamera.position, _TunnelDolly.Evaluate(t)),
+                        Quaternion.SlerpUnclamped(rotation, _TunnelCamera.rotation, tilt));
+                    var lens = _Camera.Lens;
+                    lens.FieldOfView = Mathf.LerpUnclamped(fieldOfView, _TunnelFieldOfView, tilt);
+                    _Camera.Lens = lens;
+                });
+            }
             else
             {
                 var position = _Camera.transform.position;
@@ -86,6 +110,8 @@ namespace HauntedFish.Multiplayer
                 if (_Atmosphere) _Atmosphere.Begin();
                 _CameraPosition = _Camera.transform.position;
                 _CameraRotation = _Camera.transform.rotation;
+                _CameraFieldOfView = _Camera.Lens.FieldOfView;
+                BeginEndingVisibility();
                 _Follow = _Camera.Follow; _LookAt = _Camera.LookAt;
                 _Dolly = _Camera.GetComponent<CinemachineSplineDolly>();
                 if (_Dolly) { _DollyEnabled = _Dolly.enabled; _Dolly.enabled = false; }
@@ -106,6 +132,18 @@ namespace HauntedFish.Multiplayer
                 _Camera.transform.SetPositionAndRotation(_EntryCamera.position, _EntryCamera.rotation);
                 _Camera.PreviousStateIsValid = false;
             }
+        }
+        // The tunnel extends the real lobby upward and stays active for every world beat, so the crane
+        // into it never pops anything into view mid-shot.
+        void BeginEndingVisibility()
+        {
+            if (!_Tunnel) return;
+            _TunnelWasActive = _Tunnel.activeSelf;
+            _Tunnel.SetActive(true);
+        }
+        void EndEndingVisibility()
+        {
+            if (_Tunnel) _Tunnel.SetActive(_TunnelWasActive);
         }
         void EndLine()
         {
@@ -146,6 +184,8 @@ namespace HauntedFish.Multiplayer
             if (_Active && _Camera)
             {
                 _Camera.transform.SetPositionAndRotation(_CameraPosition, _CameraRotation);
+                var lens = _Camera.Lens; lens.FieldOfView = _CameraFieldOfView; _Camera.Lens = lens;
+                EndEndingVisibility();
                 // Use the current owner after a disconnect/late replacement rather than a destroyed target.
                 var player = HotelPlayer.LocalPlayer;
                 _Camera.Follow = player ? player.transform : _Follow;

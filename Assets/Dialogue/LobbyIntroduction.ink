@@ -52,5 +52,7 @@ EXTERNAL LobbyLine(text, seconds)
 ~ LobbyShot("walk_away", 4.0)
 ~ LobbyLine("Looks like nobody has checked into this place for years", 4.5)
 ~ LobbyShot("reception", 4.0)
+// Crane up the lobby and tilt into the endless tunnel of watching frames.
+~ LobbyShot("tunnel", 6.0)
 ~ Wait(1.0)
 -> END

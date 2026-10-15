@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 namespace HauntedFish.BossFight
 {
@@ -9,24 +10,30 @@ namespace HauntedFish.BossFight
         public Transform[] Arms;
         public Renderer[] Artwork;
     }
-    // All 27 visible segments and the nonrendering silhouette source are authored.
-    // This component only selects variants and poses their existing transforms.
+    // All 27 visible segments and the nonrendering silhouette source are authored, and so is every movement: each
+    // variant root carries an Animator whose controller holds Idle, Juggle, Panic, Frustrated, Gloat, Flinch, Defeat
+    // and Triumph clips that swing each tentacle about its own shoulder. This component only picks variants and
+    // selects states; it has no per-frame code. A variant without an Animator simply holds its authored rest pose.
     public sealed class BossSegmentedRig : MonoBehaviour
     {
         [SerializeField] BossGhostVariant[] _Variants;
         [SerializeField] SpriteRenderer _ShadowSource;
         [SerializeField] Sprite[] _ShadowSprites;
         [SerializeField] Renderer[] _AllArtwork;
-        [SerializeField] float _IdleArmDegrees=8.5f,_HeadBob=.02f,_IdleReachDegrees=12f;
+        [SerializeField,Range(0,1)] float _PanicHeat=.65f;
+        static readonly int Speed=Animator.StringToHash("Speed");
+        static readonly int Idle=Animator.StringToHash("Idle"),Juggle=Animator.StringToHash("Juggle"),Panic=Animator.StringToHash("Panic");
+        static readonly int Frustrated=Animator.StringToHash("Frustrated"),Gloat=Animator.StringToHash("Gloat"),Flinch=Animator.StringToHash("Flinch");
+        static readonly int Defeat=Animator.StringToHash("Defeat"),Triumph=Animator.StringToHash("Triumph");
         struct Pose
         {
             public Transform Transform;public Vector3 Position,Scale;public Quaternion Rotation;
             public void Restore(){Transform.localPosition=Position;Transform.localRotation=Rotation;Transform.localScale=Scale;}
         }
-        Pose[][] _Poses;
-        bool _Initialized,_Visible=true,_FishScored,_Final;
+        Pose[][] _Poses;Animator[] _Animators;
+        bool _Initialized,_Visible=true;
         int _Index=-1;
-        float _ReactionStart,_ReactionEnd,_ReactionLength;
+        float _ReactionEnd;Coroutine _Panic;
         public int VariantIndex=>_Index;
         public Renderer[] AllArtwork=>_AllArtwork;
         public Renderer[] ActiveArtwork=>_Index>=0?_Variants[_Index].Artwork:Array.Empty<Renderer>();
@@ -60,7 +67,7 @@ namespace HauntedFish.BossFight
         {
             if(_Initialized)return;
             if(!ValidateAuthoredBindings(out string error))throw new InvalidOperationException(error);
-            _Poses=new Pose[3][];
+            _Poses=new Pose[3][];_Animators=new Animator[3];
             for(int v=0;v<3;v++)
             {
                 _Poses[v]=new Pose[9];
@@ -69,10 +76,19 @@ namespace HauntedFish.BossFight
                     var t=j==0?_Variants[v].Head:_Variants[v].Arms[j-1];
                     _Poses[v][j]=new Pose{Transform=t,Position=t.localPosition,Rotation=t.localRotation,Scale=t.localScale};
                 }
+                _Animators[v]=_Variants[v].Root.GetComponent<Animator>();
             }
             _Initialized=true;_ShadowSource.forceRenderingOff=true;
         }
         void Awake(){Initialize();SetLifeStage(0);}
+        Animator Current=>_Index>=0?_Animators[_Index]:null;
+        // Authored clip length by state name, so one-shot reactions can be stretched to the time the arena allots.
+        float ClipSeconds(string state)
+        {
+            var animator=Current;if(!animator||!animator.runtimeAnimatorController)return 0;
+            foreach(var clip in animator.runtimeAnimatorController.animationClips)if(clip&&clip.name.EndsWith("_"+state))return clip.length;
+            return 0;
+        }
         public void SetLifeStage(int fishGoals)
         {
             Initialize();int next=BossGhostLifeStage.VariantIndex(fishGoals);
@@ -87,41 +103,54 @@ namespace HauntedFish.BossFight
             foreach(var renderer in _AllArtwork)renderer.enabled=_Visible;
             _ShadowSource.enabled=_Visible;_ShadowSource.forceRenderingOff=true;
         }
+        void Select(int state,float normalizedStart,float speed)
+        {
+            var animator=Current;if(!animator||!animator.isActiveAndEnabled)return;
+            animator.SetFloat(Speed,speed);animator.Play(state,0,Mathf.Clamp01(normalizedStart));
+        }
+        // fishScored: the boss was scored on (it rages); otherwise the ghost scored (it gloats). final: the match-deciding goal.
         public void PlayReaction(bool fishScored,bool final,float remaining,float fullLength)
         {
-            Initialize();_FishScored=fishScored;_Final=final;
-            _ReactionLength=Mathf.Max(.05f,fullLength);remaining=Mathf.Clamp(remaining,0,_ReactionLength);
-            _ReactionStart=Time.unscaledTime-(_ReactionLength-remaining);_ReactionEnd=Time.unscaledTime+remaining;
+            Initialize();StopPanic();
+            fullLength=Mathf.Max(.05f,fullLength);remaining=Mathf.Clamp(remaining,0,fullLength);
+            string name=final?(fishScored?"Defeat":"Triumph"):(fishScored?"Frustrated":"Gloat");
+            int state=final?(fishScored?Defeat:Triumph):(fishScored?Frustrated:Gloat);
+            float clip=ClipSeconds(name);
+            // Stretch the authored clip over the reaction window; resume mid-clip if a snapshot arrived late.
+            Select(state,1-remaining/fullLength,clip>0?Mathf.Clamp(clip/fullLength,.4f,4f):1);
+            _ReactionEnd=Time.unscaledTime+remaining;
         }
-        void LateUpdate(){if(_Initialized&&_Index>=0)EvaluatePose(Time.unscaledTime);}
-        void EvaluatePose(float now)
+        // The cue bomb is lit: juggle it, then panic once the fuse is hot. A single wait schedules the change.
+        public void PresentFuse(bool armed,float heat,float fuseSeconds)
         {
-            var poses=_Poses[_Index];float stage=_Index+1;
-            float progress=Mathf.Clamp01((now-_ReactionStart)/Mathf.Max(.05f,_ReactionLength));
-            float pulse=now<_ReactionEnd?Mathf.Sin(progress*Mathf.PI):0;
-            for(int j=0;j<poses.Length;j++)
-            {
-                var pose=poses[j];float frequency=j==0?.5f+.08f*stage:.18f+.075f*((j*7)%5);float phase=now*frequency+j*.77f;
-                if(j==0)
-                {
-                    float shudder=_FishScored?Mathf.Sin(progress*Mathf.PI*8)*(_Final?7:4):Mathf.Sin(progress*Mathf.PI)*-4;
-                    pose.Transform.localPosition=pose.Position+Vector3.up*(_HeadBob*Mathf.Sin(phase)+pulse*(_FishScored?-.02f:.10f));
-                    pose.Transform.localRotation=pose.Rotation*Quaternion.Euler(0,0,shudder*pulse);
-                }
-                else
-                {
-                    float side=j<=4?-1:1;
-                    float reaction=_FishScored?side*(_Final?18:10):side*-16;
-                    float reach=Mathf.Clamp01((Mathf.Sin(now*(.22f+.025f*j)+j*1.91f)-.82f)/.18f);
-                    reach=Mathf.SmoothStep(0,1,reach);
-                    pose.Transform.localRotation=pose.Rotation*Quaternion.Euler(0,0,_IdleArmDegrees*Mathf.Sin(phase)+side*_IdleReachDegrees*reach+reaction*pulse);
-                }
-            }
+            Initialize();StopPanic();
+            if(ReactionPlaying)return;
+            if(!armed){Select(Idle,0,1);return;}
+            if(heat>=_PanicHeat){Select(Panic,0,1);return;}
+            Select(Juggle,0,1);
+            if(isActiveAndEnabled&&fuseSeconds>0)_Panic=StartCoroutine(PanicAfter((_PanicHeat-heat)*fuseSeconds));
+        }
+        IEnumerator PanicAfter(float seconds)
+        {
+            yield return new WaitForSecondsRealtime(seconds);
+            _Panic=null;
+            if(!ReactionPlaying)Select(Panic,0,1);
+        }
+        void StopPanic(){if(_Panic!=null)StopCoroutine(_Panic);_Panic=null;}
+        // The bomb blew up on a side: the boss ducks if it was its own, and gloats if it was the fish's.
+        public void PresentBlast(bool onBossSide)
+        {
+            Initialize();StopPanic();
+            float clip=ClipSeconds(onBossSide?"Flinch":"Gloat");
+            Select(onBossSide?Flinch:Gloat,0,1);
+            _ReactionEnd=Time.unscaledTime+(clip>0?clip:1);
         }
         public void ResetPose()
         {
-            _ReactionStart=_ReactionEnd=_ReactionLength=0;
-            if(_Initialized)foreach(var variant in _Poses)foreach(var pose in variant)pose.Restore();
+            StopPanic();_ReactionEnd=0;
+            if(!_Initialized)return;
+            foreach(var variant in _Poses)foreach(var pose in variant)pose.Restore();
+            Select(Idle,0,1);
         }
         void OnDisable(){ResetPose();if(_ShadowSource)_ShadowSource.enabled=false;}
         void OnEnable(){if(_Initialized)ApplyVisibility();}

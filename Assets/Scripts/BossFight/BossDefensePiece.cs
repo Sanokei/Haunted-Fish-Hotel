@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace HauntedFish.BossFight
@@ -9,27 +10,33 @@ namespace HauntedFish.BossFight
         [SerializeField] Rigidbody _Body;
         [SerializeField] Collider _Collision,_Pickup;
         [SerializeField] GameObject _Healthy,_Crack1,_Crack2,_Broken,_ValidPreview,_InvalidPreview;
-        Vector3 _Rack;BossDefenseBoard _Board;BossDefenseSlot _State;bool _Bound,_Authority;
-        float _FractureUntil;readonly HashSet<Collider> _CueContacts=new HashSet<Collider>();
+        [SerializeField,Min(0)] float _FractureSeconds=.18f;
+        Vector3 _Rack;BossDefenseBoard _Board;BossDefenseSlot _State;bool _Bound,_Authority,_Fracturing;
+        Coroutine _Fracture;readonly HashSet<Collider> _CueContacts=new HashSet<Collider>();
         public int Slot=>_Slot;public BossDefenseSlot State=>_State;public Collider Pickup=>_Pickup;
         public Vector3 RackPosition=>_Rack;
-        public bool ValidateAuthoredBindings(out string error){error=null;if(_Slot<0||_Slot>=6||!_Body||!_Collision||!_Pickup||!_Healthy||!_Crack1||!_Crack2||!_Broken||!_ValidPreview||!_InvalidPreview){error="Assign all authored 3D body/pickup/health/preview refs for slot "+_Slot;return false;}return true;}
+        public bool ValidateAuthoredBindings(out string error){error=null;if(!BossDefenseCatalog.IsValidSlot(_Slot)||!_Body||!_Collision||!_Pickup||!_Healthy||!_Crack1||!_Crack2||!_Broken||!_ValidPreview||!_InvalidPreview){error="Assign all authored 3D body/pickup/health/preview refs for slot "+_Slot;return false;}return true;}
         public void Bind(BossDefenseBoard board){if(_Bound)return;if(!ValidateAuthoredBindings(out string error))throw new InvalidOperationException(error);_Board=board;_Rack=_Body.position;_Bound=true;HidePreview();}
         public void SetAuthority(bool authority){_Authority=authority;_Body.isKinematic=true;_Body.detectCollisions=true;UpdateCollision();}
         public void Present(BossDefenseSlot state,Vector3 tablePosition)
         {
             bool broke=!_State.Broken&&state.Broken&&state.Placed;_State=state;
-            if(broke)_FractureUntil=Time.unscaledTime+.18f;
+            if(broke&&isActiveAndEnabled)BeginFracture();
             _Body.position=state.Placed?tablePosition:_Rack;
             UpdateCollision();UpdateArtwork();if(!state.Placed||state.Broken)_CueContacts.Clear();
         }
         void UpdateCollision(){if(_Collision)_Collision.enabled=_Authority&&_State.Placed&&!_State.Broken;if(_Pickup)_Pickup.enabled=!_State.Broken;}
         void UpdateArtwork()
         {
-            bool fracture=_State.Broken&&Time.unscaledTime<_FractureUntil;bool live=!_State.Broken||fracture;
-            _Healthy.SetActive(live);_Crack1.SetActive(live&&(_State.Health<=(int)_State.Kind||fracture));_Crack2.SetActive(live&&(_State.Kind==BossDefenseKind.Building&&_State.Health==1||fracture));_Broken.SetActive(_State.Broken&&!fracture);
+            bool fracture=_State.Broken&&_Fracturing;bool live=!_State.Broken||fracture;
+            int max=BossDefenseCatalog.MaxHealth(_State.Kind);
+            _Healthy.SetActive(live);_Crack1.SetActive(live&&(_State.Health<max||fracture));_Crack2.SetActive(live&&(max>=3&&_State.Health==1||fracture));_Broken.SetActive(_State.Broken&&!fracture);
         }
-        void Update(){if(_Bound&&_State.Broken&&_FractureUntil>0&&Time.unscaledTime>=_FractureUntil){_FractureUntil=0;UpdateArtwork();}}
+        // The shatter flash is one timed beat: a single wait, not a per-frame check.
+        void BeginFracture(){EndFracture();_Fracturing=true;_Fracture=StartCoroutine(Fracture());}
+        IEnumerator Fracture(){yield return new WaitForSecondsRealtime(_FractureSeconds);_Fracturing=false;_Fracture=null;UpdateArtwork();}
+        void EndFracture(){if(_Fracture!=null)StopCoroutine(_Fracture);_Fracture=null;_Fracturing=false;}
+        void OnDisable()=>EndFracture();
         public void ShowPreview(Vector3 position,bool valid){_ValidPreview.transform.position=_InvalidPreview.transform.position=position;_ValidPreview.SetActive(valid);_InvalidPreview.SetActive(!valid);}
         public void HidePreview(){if(_ValidPreview)_ValidPreview.SetActive(false);if(_InvalidPreview)_InvalidPreview.SetActive(false);}
         void OnCollisionEnter(Collision collision)

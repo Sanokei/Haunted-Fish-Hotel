@@ -1,45 +1,34 @@
 {
-  "revision": "v8",
-  "rendered_utc_date": "2026-10-14",
+  "revision": "v11",
+  "rendered_utc_date": "2026-10-15",
   "status": "main composition review; remaining formats pending acceptance",
-  "engine": "Blender 4.3.2 / Cycles",
+  "engine": "Blender (bpy) Cycles",
   "exports": [
     {
       "file": "Haunted-Fish-Hotel-Main.png",
       "contains_title": true,
       "width": 1232,
       "height": 706,
-      "sha256": "d1c0fa9e58f3354ff0ff581ed7fa9afe4310ee35aa79c4897a919689b7329a1d",
-      "bytes": 1479899
+      "sha256": "1560053defd1b48d136f811242d1b286c2a75b1f46745c5fc4a0598124e9f809",
+      "bytes": 857919
     },
     {
       "file": "Haunted-Fish-Hotel-Main-Art-Only.png",
       "contains_title": false,
       "width": 1232,
       "height": 706,
-      "sha256": "ef08c485dc9ce366d883a513a9ab6b39451a3b58b3d9f6f1ee02bc58e15bdd17",
-      "bytes": 1459728
+      "sha256": "3823bbcbe44177d4b9258b7399e8a35ae5a689c10f4e2d1d8a089b7d0316b3b7",
+      "bytes": 891147
     }
   ],
   "art_only_is_store_ready": false,
   "title": "HAUNTED FISH HOTEL",
   "temporary_title_font": "Assets/Art/Fonts/HauntedIntertitle-Regular.ttf",
   "editable_source": {
-    "file": "Haunted-Fish-Hotel-Capsule-Main-v8.blend",
-    "bytes": 54347980,
-    "sha256": "a0681c4c481cdb8b8d67b7b973e4ec8d60784f59bbccc418fb32309e2018ab11",
-    "storage": "Packed editable deliverable kept outside the Unity repository to avoid a large imported binary."
+    "file": "Tools/CapsuleArt/render_capsule_v11.py",
+    "storage": "Reproducible bpy script in the repository; no .blend is kept."
   },
-  "composition": "Perspective hallway into dark left; upright camera-square original profile fish trio; enlarged original tentacles; dim left-edge angler; approaching cart; shared cool room lighting.",
-  "frame_occupancy": {
-    "staged": 14,
-    "with_eyes": 5,
-    "visible_wall": 7,
-    "visible_with_eyes": 2,
-    "empty_interior_srgb": "#202020",
-    "distribution": "irregular"
-  },
-  "watching_frame_authoring": "Tools/WatchingFrameTests/gallery-placement.json",
+  "composition": "Camera sees only the right wall and looks down into the dark hallway; tentacles and the self-lit angler emerge from the dark, a chandelier swings overhead and the service cart barrels down the hall nose-up, wheels off the carpet, toward the oblivious bellhop; title on the wall at right.",
   "original_art_sources": [
     "Assets/Art/HotelFish/FISH-right.png",
     "Assets/Art/HotelFish/FISH-tail.png",

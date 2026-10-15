@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace HauntedFish.BossFight
 {
-    public enum BossDefenseKind { Bottle=0,TunaCan=1,Building=2 }
+    public enum BossDefenseKind { Bottle=0,TunaCan=1,Building=2,Bumper=3,Ramp=4,Crate=5 }
     public struct BossDefenseFootprint { public float X,Z,Radius;public BossDefenseFootprint(float x,float z,float radius){X=x;Z=z;Radius=radius;} }
     public struct BossDefenseSlot
     {
@@ -12,7 +12,7 @@ namespace HauntedFish.BossFight
     // Server state only; Unity adapters supply real cue-ball contact episodes and current physical blockers.
     public sealed class BossDefenseState
     {
-        readonly BossDefenseSlot[] _Slots=new BossDefenseSlot[6];
+        readonly BossDefenseSlot[] _Slots=new BossDefenseSlot[BossDefenseCatalog.SlotCount];
         readonly HashSet<(int slot,int contact)> _Contacts=new HashSet<(int,int)>();
         readonly float _HalfWidth,_HalfLength;
         uint _Fish,_Ghost;public uint Epoch{get;private set;}public uint Revision{get;private set;}
@@ -25,26 +25,26 @@ namespace HauntedFish.BossFight
         {
             if(epoch==0||fish==0||ghost==0||fish==ghost)throw new ArgumentException("Distinct scoped contestants required.");
             Epoch=epoch;_Fish=fish;_Ghost=ghost;Revision=0;Ready=false;Active=true;_Contacts.Clear();
-            for(int i=0;i<6;i++)_Slots[i]=new BossDefenseSlot{Owner=i<3?fish:ghost,Kind=(BossDefenseKind)(i%3),Health=i%3+1,Radius=i%3==0?.28f:i%3==1?.40f:.45f};
+            for(int i=0;i<_Slots.Length;i++){var kind=BossDefenseCatalog.KindOf(i);_Slots[i]=new BossDefenseSlot{Owner=BossDefenseCatalog.IsFishSlot(i)?fish:ghost,Kind=kind,Health=BossDefenseCatalog.MaxHealth(kind),Radius=BossDefenseCatalog.Radius(kind)};}
         }
         public bool TryPlace(uint actor,uint epoch,int index,uint sequence,float x,float z,IReadOnlyList<BossDefenseFootprint> dynamicBlockers)=>ValidatePlace(actor,epoch,index,sequence,x,z,dynamicBlockers,true);
-        public bool CanPlace(uint actor,int index,float x,float z,IReadOnlyList<BossDefenseFootprint> blockers)=>index>=0&&index<6&&ValidatePlace(actor,Epoch,index,_Slots[index].LastSequence+1,x,z,blockers,false);
+        public bool CanPlace(uint actor,int index,float x,float z,IReadOnlyList<BossDefenseFootprint> blockers)=>BossDefenseCatalog.IsValidSlot(index)&&ValidatePlace(actor,Epoch,index,_Slots[index].LastSequence+1,x,z,blockers,false);
         bool ValidatePlace(uint actor,uint epoch,int index,uint sequence,float x,float z,IReadOnlyList<BossDefenseFootprint> dynamicBlockers,bool commit)
         {
-            if(!Active||!Ready||epoch!=Epoch||index<0||index>=6||sequence==0||!Finite(x)||!Finite(z))return false;
+            if(!Active||!Ready||epoch!=Epoch||!BossDefenseCatalog.IsValidSlot(index)||sequence==0||!Finite(x)||!Finite(z))return false;
             var slot=_Slots[index];if(slot.Owner!=actor||actor==0||slot.Broken||sequence<=slot.LastSequence)return false;
             const float margin=.12f;float radius=slot.Radius;
             if(Math.Abs(x)>_HalfWidth-radius-margin||Math.Abs(z)>_HalfLength-1.25f-radius)return false;
             if(actor==_Fish?z>-.55f-radius:z<.55f+radius)return false;
-            for(int i=0;i<6;i++)if(i!=index&&_Slots[i].Placed&&!_Slots[i].Broken&&Overlap(x,z,radius,new BossDefenseFootprint(_Slots[i].X,_Slots[i].Z,_Slots[i].Radius),margin))return false;
+            for(int i=0;i<_Slots.Length;i++)if(i!=index&&_Slots[i].Placed&&!_Slots[i].Broken&&Overlap(x,z,radius,new BossDefenseFootprint(_Slots[i].X,_Slots[i].Z,_Slots[i].Radius),margin))return false;
             if(dynamicBlockers==null)return false;
             foreach(var blocker in dynamicBlockers)if(!Finite(blocker.X)||!Finite(blocker.Z)||!Finite(blocker.Radius)||blocker.Radius<0||Overlap(x,z,radius,blocker,margin))return false;
-            if(slot.Placed){foreach(var blocker in dynamicBlockers)if(Sweep(slot.X,slot.Z,x,z,radius,blocker,margin))return false;for(int i=0;i<6;i++)if(i!=index&&_Slots[i].Placed&&!_Slots[i].Broken&&Sweep(slot.X,slot.Z,x,z,radius,new BossDefenseFootprint(_Slots[i].X,_Slots[i].Z,_Slots[i].Radius),margin))return false;}
+            if(slot.Placed){foreach(var blocker in dynamicBlockers)if(Sweep(slot.X,slot.Z,x,z,radius,blocker,margin))return false;for(int i=0;i<_Slots.Length;i++)if(i!=index&&_Slots[i].Placed&&!_Slots[i].Broken&&Sweep(slot.X,slot.Z,x,z,radius,new BossDefenseFootprint(_Slots[i].X,_Slots[i].Z,_Slots[i].Radius),margin))return false;}
             if(commit){slot.Placed=true;slot.X=x;slot.Z=z;slot.LastSequence=sequence;_Slots[index]=slot;Revision++;}return true;
         }
         public bool Observe(int index,int health,bool placed,uint sequence,float x,float z)
         {
-            if(index<0||index>=6||health<0||health>index%3+1||!Finite(x)||!Finite(z))return false;
+            if(!BossDefenseCatalog.IsValidSlot(index)||health<0||health>BossDefenseCatalog.MaxHealth(BossDefenseCatalog.KindOf(index))||!Finite(x)||!Finite(z))return false;
             var slot=_Slots[index];slot.Health=health;slot.Placed=placed;slot.LastSequence=sequence;slot.X=x;slot.Z=z;_Slots[index]=slot;return true;
         }
         public bool ClearStrikerPath(float fromX,float fromZ,float toX,float toZ,float radius)
@@ -61,9 +61,24 @@ namespace HauntedFish.BossFight
         {double dx=x-(double)other.X,dz=z-(double)other.Z,min=radius+other.Radius+margin;return dx*dx+dz*dz<min*min;}
         public bool Hit(uint epoch,int index,int contactEpisode,bool verifiedCueBall)
         {
-            if(!Active||!Ready||epoch!=Epoch||index<0||index>=6||contactEpisode==0||!verifiedCueBall)return false;
+            if(!Active||!Ready||epoch!=Epoch||!BossDefenseCatalog.IsValidSlot(index)||contactEpisode==0||!verifiedCueBall)return false;
             var slot=_Slots[index];if(!slot.Placed||slot.Broken||!_Contacts.Add((index,contactEpisode)))return false;
             slot.Health--;_Slots[index]=slot;Revision++;return true;
+        }
+        // A bomb blast hurts every standing piece it reaches, either side's. Returns the number of pieces damaged.
+        public int ApplyBlast(float x,float z,float radius)
+        {
+            if(!Active||!Ready||!Finite(x)||!Finite(z)||!Finite(radius)||radius<=0)return 0;
+            int damaged=0;
+            for(int i=0;i<_Slots.Length;i++)
+            {
+                var slot=_Slots[i];if(!slot.Placed||slot.Broken)continue;
+                double dx=slot.X-(double)x,dz=slot.Z-(double)z,reach=radius+slot.Radius;
+                if(dx*dx+dz*dz>reach*reach)continue;
+                slot.Health--;_Slots[i]=slot;damaged++;
+            }
+            if(damaged>0)Revision++;
+            return damaged;
         }
         public void ContactEnded(int index,int episode)=>_Contacts.Remove((index,episode));
         public void ServeStarted(){_Contacts.Clear();}

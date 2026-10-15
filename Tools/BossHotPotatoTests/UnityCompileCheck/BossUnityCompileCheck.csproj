@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Nullable>disable</Nullable>
+    <NoWarn>CS0649;CS0169;CS0414;CS0067</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs;UnityStubs.cs;ExternalStubs.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossArenaManager.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossMatch.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossPaddleInputPolicy.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossDefenseCatalog.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossDefenseState.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossDefenseBoard.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossDefensePiece.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossFuse.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossBlast.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossStunState.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossCueBomb.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossCueBombView.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossSegmentedRig.cs" />
+    <Compile Include="../../../Assets/Scripts/BossFight/BossGhostLifeStage.cs" />
+  </ItemGroup>
+</Project>

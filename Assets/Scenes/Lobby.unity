@@ -3358,6 +3358,7 @@ Transform:
   - {fileID: 47000011}
   - {fileID: 47000013}
   - {fileID: 860867861}
+  - {fileID: 47000022}
   m_Father: {fileID: 672612689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &47000003
@@ -3377,6 +3378,66 @@ MonoBehaviour:
   _FishStart: {fileID: 47000007}
   _FishWalkEnd: {fileID: 47000009}
   _ReceptionCamera: {fileID: 47000011}
+  _Tunnel: {fileID: 8141014102}
+  _TunnelCamera: {fileID: 47000022}
+  _TunnelFieldOfView: 24
+  _TunnelDolly:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _TunnelTilt:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _Caption: {fileID: 47000018}
   _AuthoredFish: {fileID: 860867862}
   _CaptionVoice: {fileID: 786673411}
@@ -13365,6 +13426,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 101, guid: 29350f2ef5091c16ca1887b913666b48, type: 3}
   m_PrefabInstance: {fileID: 8141014401}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &47000021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47000022}
+  m_Layer: 0
+  m_Name: Tunnel camera shot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47000022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47000021}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7009093, y: 0, z: 0, w: 0.7132504}
+  m_LocalPosition: {x: 0, y: 8.5, z: 3.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47000002}
+  m_LocalEulerAnglesHint: {x: -89, y: 0, z: 0}
+--- !u!1001 &8141014101
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1140000, guid: 70f1ff428fc587c222be0d00c69bd625, type: 3}
+      propertyPath: _Viewer
+      value: ''
+      objectReference: {fileID: 330585546}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70f1ff428fc587c222be0d00c69bd625, type: 3}
+--- !u!1 &8141014102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 70f1ff428fc587c222be0d00c69bd625, type: 3}
+  m_PrefabInstance: {fileID: 8141014101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8141014103 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 70f1ff428fc587c222be0d00c69bd625, type: 3}
+  m_PrefabInstance: {fileID: 8141014101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13413,3 +13532,4 @@ SceneRoots:
   - {fileID: 8141014001}
   - {fileID: 8141014201}
   - {fileID: 8141014402}
+  - {fileID: 8141014103}

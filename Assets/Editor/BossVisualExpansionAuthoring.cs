@@ -18,7 +18,7 @@ public static class BossVisualExpansionAuthoring
             var rig=root.GetComponentInChildren<BossSegmentedRig>(true);var parentScale=rig.transform.parent.lossyScale;rig.transform.localScale=new Vector3(1.7f/parentScale.x,1.7f/parentScale.y,1.7f/parentScale.z);
             // Absolute desired world scale; repeat application does not accumulate scaling.
             foreach(var head in rig.GetComponentsInChildren<SpriteRenderer>(true).Where(r=>r.name=="Head"))head.transform.localScale=Vector3.one*1.12f;
-            var so=new SerializedObject(rig);so.FindProperty("_IdleArmDegrees").floatValue=8.5f;so.FindProperty("_IdleReachDegrees").floatValue=12f;so.ApplyModifiedPropertiesWithoutUndo();
+            // Arm motion is authored in Assets/Animations/BossFight/Arms; the old idle-sway tuning fields no longer exist.
             var views=root.GetComponentInChildren<BossArenaView>(true);var viewSerialized=new SerializedObject(views);viewSerialized.FindProperty("_GhostFraming").objectReferenceValue=rig;viewSerialized.ApplyModifiedPropertiesWithoutUndo();
             foreach(var camera in root.GetComponentsInChildren<Camera>(true))camera.rect=new Rect(0,.12f,1,.88f);
             var managerSerialized=new SerializedObject(root.GetComponentInChildren<BossArenaManager>(true));var legacyScore=(TextMesh)managerSerialized.FindProperty("_Score").objectReferenceValue;if(legacyScore)legacyScore.gameObject.SetActive(false);

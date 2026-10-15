@@ -34,6 +34,9 @@ namespace HauntedFish.BossFight
             else if(_GhostArtwork!=null)foreach(var renderer in _GhostArtwork)if(renderer)renderer.enabled=side!=BossViewerSide.Ghost;
         }
         public void SetGhostLifeStage(int fishGoals){if(_GhostRig)_GhostRig.SetLifeStage(fishGoals);}
+        // The cue bomb through the boss's eyes: it juggles a lit fuse, panics when it runs short, and reacts to the blast.
+        public void PresentFuse(bool armed,float heat,float fuseSeconds){if(_GhostRig)_GhostRig.PresentFuse(armed,heat,fuseSeconds);}
+        public void PresentBlast(bool onBossSide){if(_GhostRig)_GhostRig.PresentBlast(onBossSide);}
         void Awake() => Initialize();
         void Initialize()
         {

@@ -475,7 +475,7 @@ MonoBehaviour:
   _Characters: {fileID: 0}
   _StormShadows: {fileID: 546791108167366528}
   _Storm: {fileID: 0}
-  _FrameSize: {x: 7.3, y: 1.5, z: 12.65}
+  _FrameSize: {x: 12.2, y: 1.5, z: 12.65}
   _FrameCentreY: -0.05
   _SpectatorFrameSize: {x: 9, y: 6, z: 15.6}
   _SpectatorFrameCentreY: 1.6

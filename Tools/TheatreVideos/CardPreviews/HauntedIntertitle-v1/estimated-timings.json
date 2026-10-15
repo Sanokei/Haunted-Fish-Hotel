@@ -9,10 +9,10 @@
   "roles": {
     "Fish": {
       "card_count": 11,
-      "body_words": 101,
-      "card_seconds": 51.067,
+      "body_words": 112,
+      "card_seconds": 55.233,
       "gameplay_seconds": 34.6,
-      "estimated_finished_seconds": 85.667,
+      "estimated_finished_seconds": 89.833,
       "minimum_source_seconds": 60.3,
       "cards": [
         {
@@ -21,39 +21,39 @@
           "seconds": 3.5
         },
         {
-          "heading": "Move",
-          "body_words": 13,
-          "seconds": 5.833333333333333
+          "heading": "A Gentleman Walks",
+          "body_words": 14,
+          "seconds": 6.2
         },
         {
-          "heading": "Jump",
-          "body_words": 13,
-          "seconds": 5.833333333333333
-        },
-        {
-          "heading": "Dining cart",
-          "body_words": 8,
-          "seconds": 3.966666666666667
-        },
-        {
-          "heading": "Read The Danger Bands",
-          "body_words": 8,
-          "seconds": 3.966666666666667
-        },
-        {
-          "heading": "Look Into The Dark",
-          "body_words": 8,
-          "seconds": 3.966666666666667
-        },
-        {
-          "heading": "The Stairwell",
+          "heading": "The Heroic Leap",
           "body_words": 10,
           "seconds": 4.733333333333333
         },
         {
+          "heading": "Dining cart",
+          "body_words": 11,
+          "seconds": 5.1
+        },
+        {
+          "heading": "Read The Danger Bands",
+          "body_words": 11,
+          "seconds": 5.1
+        },
+        {
+          "heading": "Something Is Watching",
+          "body_words": 10,
+          "seconds": 4.733333333333333
+        },
+        {
+          "heading": "The Stairwell",
+          "body_words": 12,
+          "seconds": 5.466666666666667
+        },
+        {
           "heading": "Swinging Chandelier",
-          "body_words": 8,
-          "seconds": 3.966666666666667
+          "body_words": 11,
+          "seconds": 5.1
         },
         {
           "heading": "Angler",
@@ -62,23 +62,23 @@
         },
         {
           "heading": "Wowza",
-          "body_words": 11,
-          "seconds": 5.1
+          "body_words": 10,
+          "seconds": 4.733333333333333
         },
         {
           "heading": "Ready For The Round",
-          "body_words": 10,
-          "seconds": 4.733333333333333
+          "body_words": 11,
+          "seconds": 5.1
         }
       ],
-      "ink_sha256": "2d9c66f02ddf4301a133264ecccf5f3ccaead04e479323db85f6ffa6875b3dae"
+      "ink_sha256": "800eb84e84631161a9b0c703c8eb587248878b3d41216c3c8b1a2f1d287e7e04"
     },
     "Ghost": {
       "card_count": 15,
-      "body_words": 136,
-      "card_seconds": 68.667,
+      "body_words": 135,
+      "card_seconds": 67.733,
       "gameplay_seconds": 51.0,
-      "estimated_finished_seconds": 119.667,
+      "estimated_finished_seconds": 118.733,
       "minimum_source_seconds": 71.5,
       "cards": [
         {
@@ -88,53 +88,53 @@
         },
         {
           "heading": "Open A Package",
-          "body_words": 12,
-          "seconds": 5.466666666666667
+          "body_words": 11,
+          "seconds": 5.1
         },
         {
-          "heading": "Place",
-          "body_words": 17,
-          "seconds": 7.3
+          "heading": "Place, Politely",
+          "body_words": 10,
+          "seconds": 4.733333333333333
         },
         {
           "heading": "Possess",
-          "body_words": 8,
-          "seconds": 3.966666666666667
+          "body_words": 10,
+          "seconds": 4.733333333333333
         },
         {
           "heading": "Read The Danger Bands",
-          "body_words": 8,
-          "seconds": 3.966666666666667
+          "body_words": 10,
+          "seconds": 4.733333333333333
         },
         {
           "heading": "Dining cart",
-          "body_words": 13,
-          "seconds": 5.833333333333333
+          "body_words": 11,
+          "seconds": 5.1
         },
         {
           "heading": "Swinging Chandelier",
-          "body_words": 12,
-          "seconds": 5.466666666666667
+          "body_words": 10,
+          "seconds": 4.733333333333333
         },
         {
           "heading": "Drop It",
-          "body_words": 5,
-          "seconds": 3.5
+          "body_words": 9,
+          "seconds": 4.333333333333333
         },
         {
           "heading": "Reset",
-          "body_words": 7,
-          "seconds": 3.6
+          "body_words": 10,
+          "seconds": 4.733333333333333
         },
         {
           "heading": "Click Trap",
-          "body_words": 7,
-          "seconds": 3.6
+          "body_words": 9,
+          "seconds": 4.333333333333333
         },
         {
           "heading": "Dispose",
-          "body_words": 7,
-          "seconds": 3.6
+          "body_words": 10,
+          "seconds": 4.733333333333333
         },
         {
           "heading": "Angler",
@@ -143,13 +143,13 @@
         },
         {
           "heading": "Possess The Angler",
-          "body_words": 11,
-          "seconds": 5.1
+          "body_words": 9,
+          "seconds": 4.333333333333333
         },
         {
           "heading": "Wowza",
-          "body_words": 11,
-          "seconds": 5.1
+          "body_words": 8,
+          "seconds": 3.966666666666667
         },
         {
           "heading": "Ready And Setup",
@@ -157,7 +157,7 @@
           "seconds": 4.333333333333333
         }
       ],
-      "ink_sha256": "c342c9783c47f9fa312778b0b9d157a45708974239ece2c0595968b3a7b3d0c7"
+      "ink_sha256": "de15cc2a83e934e6f0de6e9870ab023a6a49fc1615662ef57d926f64be088133"
     }
   }
 }

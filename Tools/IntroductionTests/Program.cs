@@ -45,7 +45,7 @@ static class Program
             StorySequenceStepKind.PushTo, StorySequenceStepKind.Wait, StorySequenceStepKind.ExpandPanel,
             StorySequenceStepKind.Wait, StorySequenceStepKind.ParallaxTo, StorySequenceStepKind.FlashFrames, StorySequenceStepKind.ParallaxTo,
             StorySequenceStepKind.Wait, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.LobbyShot,
-            StorySequenceStepKind.LobbyLine, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.Wait }), "Authored storyboard uses explicit typed story functions in the required order");
+            StorySequenceStepKind.LobbyLine, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.LobbyShot, StorySequenceStepKind.Wait }), "Authored storyboard uses explicit typed story functions in the required order");
         Check(steps[0].Target == "exterior" && !steps[0].Visible &&
             steps[1].Target == "letter_read" && !steps[1].Visible,
             "Replay hides the previous exterior and reading reveals before showing the storm");
@@ -68,7 +68,7 @@ static class Program
         Check(steps[23].Kind == StorySequenceStepKind.ParallaxTo && steps[23].Target == "exterior" && steps[23].Variant == "gate_arrival" && steps[23].Seconds == 5 && steps[23].Easing == "smoother",
             "The flash is followed by the reusable authored crane-down/push-in camera pose");
         Check(steps.Where(s => s.Kind == StorySequenceStepKind.LobbyShot).Select(s => s.Target)
-            .SequenceEqual(new[] { "entry", "walk_away", "reception" }), "Fish enters before walking away and the reception dolly follows");
+            .SequenceEqual(new[] { "entry", "walk_away", "reception", "tunnel" }), "Fish enters, walks away, the reception dolly follows, then the camera cranes and tilts into the frame tunnel");
         Check(steps.Single(s => s.Kind == StorySequenceStepKind.LobbyLine).Variant ==
             "Looks like nobody has checked into this place for years", "Fish caption exactly matches the requested dialogue");
         var grandmaPath = Path.Combine(root, "Assets/Dialogue/GrandmafishInspect.ink");
@@ -100,8 +100,12 @@ static class Program
         try { HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, s => s.Target != "reception"); }
         catch (InvalidOperationException error) { missingReceptionRejected = error.Message.Contains("LobbyShot(reception)"); }
         Check(missingReceptionRejected, "Partial camera setup identifies the unbound reception operation");
+        bool missingTunnelRejected = false;
+        try { HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, s => s.Target != "tunnel"); }
+        catch (InvalidOperationException error) { missingTunnelRejected = error.Message.Contains("LobbyShot(tunnel)"); }
+        Check(missingTunnelRejected, "Partial camera setup identifies the unbound frame-tunnel operation");
         var boundUI = HauntedFish.Multiplayer.LobbyIntroductionSequenceValidation.UIOnly(steps, s => true);
-        Check(boundUI.Count == steps.Count - 4 && !boundUI.Any(s => s.Kind == StorySequenceStepKind.LobbyShot || s.Kind == StorySequenceStepKind.LobbyLine),
+        Check(boundUI.Count == steps.Count - 5 && !boundUI.Any(s => s.Kind == StorySequenceStepKind.LobbyShot || s.Kind == StorySequenceStepKind.LobbyLine),
             "Complete world setup passes validation and retains every original UI operation");
         var lobbyManagerSource = File.ReadAllText(Path.Combine(root, "Assets/Scripts/Multiplayer/Lobby/LobbyManager.cs"));
         int beginIntro = lobbyManagerSource.IndexOf("void BeginIntroduction()");
