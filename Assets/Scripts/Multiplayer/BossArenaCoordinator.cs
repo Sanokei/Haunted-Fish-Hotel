@@ -91,6 +91,7 @@ namespace HauntedFish.Multiplayer
                 return false;
             }
         }
+        float _NextEntryRequest;
         public bool TryEnter(HotelPlayer fish, string key, int version)
         {
             if (!Authority || !fish || fish.Networked && !fish.IsServer || !fish.ControlsReady || !fish.RoundReleased ||
@@ -268,12 +269,32 @@ namespace HauntedFish.Multiplayer
         }
 #if UNITY_EDITOR
         // Editor shortcut enters the same scoped real match; no automatic solo preview or training fight.
+        System.Collections.IEnumerator EditorPractice(HotelPlayer local)
+        {
+            if(_EditorPreview)yield break;
+            if(!_Arena&&!_Loading)StartCoroutine(LoadArena());
+            float deadline=Time.unscaledTime+10;
+            while(!_Arena&&Time.unscaledTime<deadline)yield return null;
+            if(!_Arena||!local)yield break;
+            _EditorPreview=true;local.ResetSceneMotion();local.BossWatching=true;
+            _Arena.BeginEditorPractice();
+            SetCamera(local.NetId==0?1:local.NetId);
+        }
+        void EditorLeavePractice()
+        {
+            if(!_EditorPreview)return;
+            if(_Arena)_Arena.StopEditorPractice();
+            var local=HotelPlayer.LocalPlayer;if(local)local.BossWatching=false;
+            SetCamera(0);_EditorPreview=false;
+        }
         public void EditorGoToBoss()
         {
+            if(_EditorPreview){EditorLeavePractice();return;}
             WatchPlayers();TickReturnGate();var local=HotelPlayer.LocalPlayer;
             if(!local||!local.RoundReleased||local.BossReturnLocked||local.ControlMode!=HotelControlMode.Fish||_Arena&&_Arena.Active)return;
             var ghost=FindPlayer(local.GhostId);
-            if(!ghost||ghost==local){var session=FindFirstObjectByType<HauntedHotelMultiplayer>();if(session)session.SetStatus("The ghost challenge requires both contestants in this round.");return;}
+            // Solo editor round (the role switch makes one player both sides): play the arena as editor practice.
+            if(!ghost||ghost==local){StartCoroutine(EditorPractice(local));return;}
             var previous=local.transform.position;local.Teleport(_Entrance.bounds.center-local.BodyController.center);
             if(!TryEnter(local,local.RoundStateKey,local.RoundVersion))local.Teleport(previous);
         }
@@ -362,8 +383,14 @@ namespace HauntedFish.Multiplayer
                 else AcceptInput(local, axis, local.RoundStateKey, local.RoundVersion, _Arena.MatchEpoch);
             }
             bool entrance = local.RoundReleased && !local.InBossFight && !local.BossHallwayLocked && local.BossReturnSetupRemaining <= 0 && local.ControlMode == HotelControlMode.Fish && EntranceContains(local);
-            if (entrance && !local.InputBlocked && local.Movement.InteractPressed)
+            // Reaching the attic door enters the challenge automatically; retries are throttled.
+            if (entrance && Time.unscaledTime >= _NextEntryRequest)
             {
+                _NextEntryRequest = Time.unscaledTime + .5f;
+#if UNITY_EDITOR
+                var soloGhost = FindPlayer(local.GhostId);
+                if (!_EditorPreview && (!soloGhost || soloGhost == local)) { StartCoroutine(EditorPractice(local)); return; }
+#endif
                 if (local.Networked) local.RequestBossFight(local.RoundStateKey, local.RoundVersion);
                 else TryEnter(local, local.RoundStateKey, local.RoundVersion);
             }
@@ -373,7 +400,7 @@ namespace HauntedFish.Multiplayer
                 bool result = Time.unscaledTime < _ResultUntil;
                 bool waiting = !_EditorPreview && local.BossWatching && (!_Arena || !_Arena.ParticipantsReady);
                 _Prompt.gameObject.SetActive(!local.BossWatching&&(entrance||result||local.BossReturnSetupRemaining>0));
-                string prompt = _EditorPreview ? "EDITOR PRACTICE" : local.BossReturnSetupRemaining > 0 ? "Ghost head start: " + Mathf.CeilToInt(local.BossReturnSetupRemaining) + "s" : waiting ? "Entering the ghost challenge..." : result ? (local.BossWon ? "You won the ghost's challenge!" : "Returned to the hallway.") : "{input:Game/Interact} Upstairs to the ghost challenge";
+                string prompt = _EditorPreview ? "EDITOR PRACTICE" : local.BossReturnSetupRemaining > 0 ? "Ghost head start: " + Mathf.CeilToInt(local.BossReturnSetupRemaining) + "s" : waiting ? "Entering the ghost challenge..." : result ? (local.BossWon ? "You won the ghost's challenge!" : "Returned to the hallway.") : "Entering the ghost challenge...";
                 if (_PromptGlyphs) _PromptGlyphs.SetTemplate(prompt);
             }
         }

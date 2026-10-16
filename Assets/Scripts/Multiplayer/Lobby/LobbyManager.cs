@@ -21,14 +21,23 @@ namespace HauntedFish.Multiplayer
         [SerializeField] LobbyTrigger _StairZone;
         [SerializeField] Texture2D _DeskCursor;
         [SerializeField] LobbyCursorManager _CursorManager;
-        public bool InspectionAllowed => isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && !MenuOpen && !IntroductionPlaying;
-        public bool AudioReady => isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && !IntroductionPlaying;
+        public bool InspectionAllowed => isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && !MenuOpen && !CinematicPlaying;
+        // The radio comes in under the intro's final crane so the music is already playing when the lobby is handed over.
+        public bool AudioReady => isActiveAndEnabled && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && (!IntroductionPlaying || _IntroductionMusicCue);
+        bool _IntroductionMusicCue;
         [SerializeField] HauntedHotelMultiplayer _Lobby;
         [Header("Introduction (compiled Ink JSON)")]
         [SerializeField] TextAsset _IntroductionInk;
         [SerializeField, Min(.1f)] float _SkipHoldSeconds = 1f;
         [SerializeField] LobbyIntroductionPresentation _IntroductionPresentation;
         [SerializeField] LightningEffectManager _LightningEffect;
+        [Header("Outro and credits")]
+        [SerializeField] LobbyOutroSequence _Outro;
+        [Tooltip("Walking into this zone rolls the credits while they are still pending.")]
+        [SerializeField] LobbyTrigger _LeaveZone;
+        bool _WasLeaving;
+        // Introduction, outro and credits all lock lobby input and the ready zone the same way.
+        bool CinematicPlaying => IntroductionPlaying || (_Outro && _Outro.Playing);
         [Tooltip("Restore custom scene state here; called after completion, skipping, or an error.")]
         [SerializeField] UnityEvent _IntroductionFinished = new UnityEvent();
         InputAction _SkipIntroduction;
@@ -39,6 +48,8 @@ namespace HauntedFish.Multiplayer
         static bool RememberIntroduction => !Application.isEditor && !Debug.isDebugBuild;
         float _SkipHeldSeconds;
         public bool IntroductionPlaying { get; private set; }
+        // The step the introduction is currently waiting on, for diagnostics.
+        public string IntroductionStep { get; private set; } = "";
         public bool IntroductionPresentationReady => _IntroductionPresentation && _IntroductionPresentation.IsReady;
         public bool IntroductionPending => !_IntroductionPlayed && _IntroductionInk && !(RememberIntroduction && PlayerPrefs.GetInt(IntroductionSeenKey, 0) == 1);
         readonly HashSet<HotelPlayer> _DeskPlayers = new HashSet<HotelPlayer>();
@@ -53,6 +64,10 @@ namespace HauntedFish.Multiplayer
             if (_WasOnStairs != onStairs) { _WasOnStairs = onStairs; Refresh(); }
             var atDesk = _Lobby && _Lobby.ReadyToPlay && _DeskZone && _DeskZone.ContainsPosition(HotelPlayer.LocalPlayer);
             if (_AtDesk != atDesk) Refresh();
+            var leaving = _Outro && _LeaveZone && _LeaveZone.ContainsPosition(HotelPlayer.LocalPlayer);
+            if (leaving && !_WasLeaving && !CinematicPlaying && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning && !MenuOpen)
+                _Outro.PlayCredits();
+            _WasLeaving = leaving;
             if (!IntroductionPlaying) { _SkipHeldSeconds = 0; return; }
             _SkipHeldSeconds = _SkipIntroduction.IsPressed() ? _SkipHeldSeconds + Time.unscaledDeltaTime : 0;
             var progress = Mathf.Clamp01(_SkipHeldSeconds / Mathf.Max(.1f, _SkipHoldSeconds));
@@ -72,7 +87,7 @@ namespace HauntedFish.Multiplayer
             _AtDesk = false;
             if (_Panel) _Panel.ClearSelection();
             _Lobby = session;
-            if (_Lobby) _Lobby.SetIntroductionPlaying(IntroductionPlaying);
+            if (_Lobby) _Lobby.SetIntroductionPlaying(CinematicPlaying);
             if (_Lobby)
             {
                 _Lobby.BindReadyZone(IsInReadyZone);
@@ -84,6 +99,7 @@ namespace HauntedFish.Multiplayer
         {
             _SkipIntroduction.Enable();
             if (_IntroductionPresentation) _IntroductionPresentation.SkipRequested += SkipIntroduction;
+            if (_Outro) _Outro.PlayingChanged += OnOutroPlayingChanged;
             PrepareIntroduction();
             _Panel.CopyRequested += CopyCode;
             _Panel.JoinRequested += JoinRoom;
@@ -109,6 +125,7 @@ namespace HauntedFish.Multiplayer
         {
             _SkipIntroduction.Disable();
             if (_IntroductionPresentation) _IntroductionPresentation.SkipRequested -= SkipIntroduction;
+            if (_Outro) _Outro.PlayingChanged -= OnOutroPlayingChanged;
             CancelIntroduction(false);
             StopLobbyStorm();
             if (_DeskZone) _DeskZone.ZonePresenceChanged -= OnZonePresenceChanged;
@@ -142,7 +159,8 @@ namespace HauntedFish.Multiplayer
                 RefreshInputFocus();
             }
         }
-        bool IsInReadyZone(HotelPlayer player) => isActiveAndEnabled && !IntroductionPlaying && _StairZone && player &&
+        bool IsInReadyZone(HotelPlayer player) => isActiveAndEnabled && !CinematicPlaying && _StairZone && player &&
+            !(player.IsRelevantPlayer && HauntedFish.Theatre.TheatrePortal.Visiting) &&
             player.gameObject.activeInHierarchy && (_StairZone.Contains(player) || _StairZone.ContainsPosition(player));
         void OnLocalPlayerChanged(HotelPlayer player)
         {
@@ -157,7 +175,7 @@ namespace HauntedFish.Multiplayer
             var transition = !_Lobby || _Lobby.Transitioning;
             var roster = _Lobby ? _Lobby.Roster : default;
             if (!connected) _AtDesk = false;
-            if (_Panel) _Panel.Render(connected, transition, MenuOpen || IntroductionPlaying, _Lobby ? _Lobby.Code : "",
+            if (_Panel) _Panel.Render(connected, transition, MenuOpen || CinematicPlaying, _Lobby ? _Lobby.Code : "",
                 roster, _Lobby ? _Lobby.Status : "Connecting...", IsInReadyZone(HotelPlayer.LocalPlayer));
             RefreshInputFocus();
         }
@@ -184,13 +202,21 @@ namespace HauntedFish.Multiplayer
             }
             if (_Lobby) _Lobby.SetInputFocused(active && ((_CursorManager && _CursorManager.InspectingRadio) || (CanUseDesk && _Panel.InputFocused)));
         }
-        bool CanUseDesk => isActiveAndEnabled && _AtDesk && !MenuOpen && !IntroductionPlaying && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning;
+        bool CanUseDesk => isActiveAndEnabled && _AtDesk && !MenuOpen && !CinematicPlaying && _Lobby && _Lobby.ReadyToPlay && !_Lobby.Transitioning;
         void CopyCode() { if (CanUseDesk) GUIUtility.systemCopyBuffer = _Lobby.Code; }
         void JoinRoom(string code) { if (CanUseDesk) _Lobby.JoinLobby(code); }
 
         public void PrepareIntroduction()
         {
             if (!isActiveAndEnabled) return;
+            // Coming back from a match plays that match's outro instead of the opening.
+            if (!IntroductionPlaying && _Outro && LobbyOutcome.Pending != LobbyOutroKind.None)
+            {
+                _IntroductionPlayed = true;
+                if (_LightningEffect) _LightningEffect.StartAmbient();
+                _Outro.PlayOutcome(LobbyOutcome.Take());
+                return;
+            }
             if (_IntroductionPlayed)
             {
                 if (!IntroductionPlaying && _LightningEffect) _LightningEffect.StartAmbient();
@@ -212,7 +238,7 @@ namespace HauntedFish.Multiplayer
                 var steps = StoryFunctions.ReadAnimationSequence(_IntroductionInk.text);
                 if (!_IntroductionPresentation) throw new InvalidOperationException("Assign the introduction UI presentation.");
                 _IntroductionPresentation.ValidateSequence(steps);
-                IntroductionPlaying = true;
+                IntroductionPlaying = true; LobbyFireplaceFlicker.CrackleMuted = true;
                 if (_Lobby) _Lobby.SetIntroductionPlaying(true);
                 _IntroductionPresentation.Prepare();
                 _IntroductionPlayed = true;
@@ -232,6 +258,8 @@ namespace HauntedFish.Multiplayer
             {
                 foreach (var step in steps)
                 {
+                    IntroductionStep = step.Kind + " " + step.Target + " " + step.Variant;
+                    if (step.Kind == StorySequenceStepKind.LobbyShot && step.Target == "tunnel") _IntroductionMusicCue = true;
                     if (step.Kind == StorySequenceStepKind.Wait)
                     {
                         yield return new WaitForSecondsRealtime(step.Seconds);
@@ -258,11 +286,12 @@ namespace HauntedFish.Multiplayer
         void FinishIntroduction(bool completed = false)
         {
             var wasPlaying = IntroductionPlaying;
-            IntroductionPlaying = false;
+            IntroductionPlaying = false; LobbyFireplaceFlicker.CrackleMuted = false;
+            _IntroductionMusicCue = false;
             _SkipHeldSeconds = 0;
             _Introduction = null;
             if (_IntroductionPresentation) _IntroductionPresentation.Close();
-            if (_Lobby) _Lobby.SetIntroductionPlaying(false);
+            if (_Lobby) _Lobby.SetIntroductionPlaying(CinematicPlaying);
             if (wasPlaying)
             {
                 if (completed && _LightningEffect) _LightningEffect.Play();
@@ -274,6 +303,11 @@ namespace HauntedFish.Multiplayer
                 _IntroductionFinished?.Invoke();
                 Refresh();
             }
+        }
+        void OnOutroPlayingChanged()
+        {
+            if (_Lobby) _Lobby.SetIntroductionPlaying(CinematicPlaying);
+            Refresh();
         }
         void OnDestroy()
         {

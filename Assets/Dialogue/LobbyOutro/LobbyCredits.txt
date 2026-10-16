@@ -1,0 +1,107 @@
+// Lobby credits roll. "# " is a heading, "- " is small print, "@handle" gets the Instagram mark,
+// blank lines are spacing, and lines starting with "//" are notes that never show on screen.
+// Every asset credit below comes from a license or source file in the project.
+// NOT YET CREDITED (no license or source file found; add them before release):
+//   Art/Cars, Art/MetroStation, Art/LiquorBottles, Art/Cigarettes, Art/TrafficCone, Art/Radio,
+//   Art/UrbanCity, Art/UrbanBits, Art/UrbanTextures, Art/Seamless-Oak-Texture-2.jpg,
+//   Art/RadioAds (vintage radio adverts), Art/lobby - no master effects.mp3, Art/Video/BubbleTransition.mp4,
+//   and the music from Jamie Smith and Bi10 (track names).
+# A game by
+Sano Kei
+Constance @heab.tea
+Jamie Smith
+Bi10
+
+
+
+# Game developed by
+Sano Kei
+
+# Game designed by
+Sano Kei
+Constance @heab.tea
+
+# Including music from
+Jamie Smith
+Bi10
+
+
+
+# Music
+Maple Leaf Rag
+- Scott Joplin, 1916 piano roll performance. Public domain, via Wikimedia Commons
+Lobby introduction organ
+- Original composition for Haunted Fish Hotel
+
+
+
+# 3D models
+Aline: Furniture Asset Pack
+- Adelina Georgieva (www.dueacaso.it). CC0 1.0
+Modular Fire Escape
+- Juniix, Poly Haven. CC0 1.0
+Street Lamp 01, Street Lamp 02
+- Josh Dean, Poly Haven. CC0 1.0
+Lowpoly Island
+- alfance, sketchfab.com. CC BY
+
+
+
+# Textures and images
+Building facades
+- Historic American Buildings Survey, Library of Congress. Public domain
+- Jack E. Boucher, HABS. Public domain
+- Berenice Abbott, Changing New York, NYPL. Public domain
+- Carol M. Highsmith, Library of Congress. Public domain
+- Man vyi. Public domain
+- ambientCG, Lennart Demes. CC0 1.0
+Damask Vintage Background Black
+- Karen Arnold, publicdomainpictures.net. CC0 1.0
+Dark Halloween ornaments
+- nemo (nonemo.itch.io). CC0 1.0
+UI Pack, Input Prompts
+- Kenney (www.kenney.nl). CC0 1.0
+
+
+
+# Fonts
+Smythe
+- Vernon Adams. SIL Open Font License 1.1
+Modak
+- Ek Type. SIL Open Font License 1.1
+Creepster
+- Google Fonts. SIL Open Font License 1.1
+Haunted Intertitle
+- Original typeface for Haunted Fish Hotel
+
+
+
+# Sound
+"Thunderclap"
+- Richard Humphries. CC BY 4.0, via Wikimedia Commons
+Rain, thunder, knocks, door, lock and gate recordings
+- ezwa, Caesar, stephan, Asud12, Karlunun, cori, Wodencafe, SpaceJoe, Benoit Prieur
+- Wikimedia Commons. Public domain and CC0 1.0
+Indoor storm
+- Ylmir, alxl (OpenGameArt). seth-m, cognito perceptu, TRP (Freesound). CC0 1.0
+Fireplace #4
+- Joseph Sardin, BigSoundBank.com. CC0 1.0
+Front desk, footsteps and fish sounds
+- LoafDV, FlashTrauma, Felix Blume (Freesound). Independent.nu, Johannes Pinter (OpenGameArt). CC0 1.0
+
+
+
+# Built with
+Unity
+ink by inkle
+- MIT License
+
+
+
+# Special thanks to
+Ferrous Blue
+
+
+
+
+Thank you for staying at the Haunted Fish Hotel

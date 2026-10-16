@@ -21,6 +21,12 @@ namespace HauntedFish.BossFight
         [SerializeField] Sprite[] _ShadowSprites;
         [SerializeField] Renderer[] _AllArtwork;
         [SerializeField,Range(0,1)] float _PanicHeat=.65f;
+        // Once the boss is angry (variant 1+) it rises from behind the table so its whole face shows.
+        [SerializeField] float _AngryRise=1.6f;
+        [SerializeField,Min(.05f)] float _RiseSeconds=.8f;
+        // The authored juggle and panic clips swing the tentacles too hard for ordinary rallies: keep their timing and
+        // shape, but blend each pose part of the way back toward the rest pose.
+        const float JuggleAmplitude=.4f,PanicAmplitude=.75f;
         static readonly int Speed=Animator.StringToHash("Speed");
         static readonly int Idle=Animator.StringToHash("Idle"),Juggle=Animator.StringToHash("Juggle"),Panic=Animator.StringToHash("Panic");
         static readonly int Frustrated=Animator.StringToHash("Frustrated"),Gloat=Animator.StringToHash("Gloat"),Flinch=Animator.StringToHash("Flinch");
@@ -31,6 +37,7 @@ namespace HauntedFish.BossFight
             public void Restore(){Transform.localPosition=Position;Transform.localRotation=Rotation;Transform.localScale=Scale;}
         }
         Pose[][] _Poses;Animator[] _Animators;
+        Vector3[] _RootRest;float _Rise,_RiseVelocity,_Amplitude=1;
         bool _Initialized,_Visible=true;
         int _Index=-1;
         float _ReactionEnd;Coroutine _Panic;
@@ -78,6 +85,8 @@ namespace HauntedFish.BossFight
                 }
                 _Animators[v]=_Variants[v].Root.GetComponent<Animator>();
             }
+            _RootRest=new Vector3[3];
+            for(int v=0;v<3;v++)_RootRest[v]=_Variants[v].Root.transform.localPosition;
             _Initialized=true;_ShadowSource.forceRenderingOff=true;
         }
         void Awake(){Initialize();SetLifeStage(0);}
@@ -103,8 +112,9 @@ namespace HauntedFish.BossFight
             foreach(var renderer in _AllArtwork)renderer.enabled=_Visible;
             _ShadowSource.enabled=_Visible;_ShadowSource.forceRenderingOff=true;
         }
-        void Select(int state,float normalizedStart,float speed)
+        void Select(int state,float normalizedStart,float speed,float amplitude=1)
         {
+            _Amplitude=amplitude;
             var animator=Current;if(!animator||!animator.isActiveAndEnabled)return;
             animator.SetFloat(Speed,speed);animator.Play(state,0,Mathf.Clamp01(normalizedStart));
         }
@@ -126,15 +136,15 @@ namespace HauntedFish.BossFight
             Initialize();StopPanic();
             if(ReactionPlaying)return;
             if(!armed){Select(Idle,0,1);return;}
-            if(heat>=_PanicHeat){Select(Panic,0,1);return;}
-            Select(Juggle,0,1);
+            if(heat>=_PanicHeat){Select(Panic,0,1,PanicAmplitude);return;}
+            Select(Juggle,0,1,JuggleAmplitude);
             if(isActiveAndEnabled&&fuseSeconds>0)_Panic=StartCoroutine(PanicAfter((_PanicHeat-heat)*fuseSeconds));
         }
         IEnumerator PanicAfter(float seconds)
         {
             yield return new WaitForSecondsRealtime(seconds);
             _Panic=null;
-            if(!ReactionPlaying)Select(Panic,0,1);
+            if(!ReactionPlaying)Select(Panic,0,1,PanicAmplitude);
         }
         void StopPanic(){if(_Panic!=null)StopCoroutine(_Panic);_Panic=null;}
         // The bomb blew up on a side: the boss ducks if it was its own, and gloats if it was the fish's.
@@ -151,6 +161,23 @@ namespace HauntedFish.BossFight
             if(!_Initialized)return;
             foreach(var variant in _Poses)foreach(var pose in variant)pose.Restore();
             Select(Idle,0,1);
+        }
+        void Update()
+        {
+            if(!_Initialized||_Index<0)return;
+            float target=_Index>=1?_AngryRise:0;
+            _Rise=Mathf.SmoothDamp(_Rise,target,ref _RiseVelocity,_RiseSeconds,Mathf.Infinity,Time.unscaledDeltaTime);
+            for(int v=0;v<3;v++)_Variants[v].Root.transform.localPosition=_RootRest[v]+Vector3.up*_Rise;
+        }
+        void LateUpdate()
+        {
+            if(!_Initialized||_Index<0||_Amplitude>=1)return;
+            foreach(var pose in _Poses[_Index])
+            {
+                var t=pose.Transform;
+                t.localRotation=Quaternion.Slerp(pose.Rotation,t.localRotation,_Amplitude);
+                t.localPosition=Vector3.Lerp(pose.Position,t.localPosition,_Amplitude);
+            }
         }
         void OnDisable(){ResetPose();if(_ShadowSource)_ShadowSource.enabled=false;}
         void OnEnable(){if(_Initialized)ApplyVisibility();}

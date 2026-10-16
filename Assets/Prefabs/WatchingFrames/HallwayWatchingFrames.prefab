@@ -11,8 +11,11 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 1140000}
   m_Layer: 0
-  m_Name: Hallway authored watching frame gallery
+  m_Name: HallwayWatchingFrames
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -23,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 100000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0, y: 0.0, z: 0.0}
-  m_LocalScale: {x: 1.0, y: 1.0, z: 1.0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 100101}
@@ -36,7 +39,7 @@ Transform:
   - {fileID: 100161}
   - {fileID: 100171}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1140000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,16 +50,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f623f054516b34377cc6ac99005148b, type: 3}
-  m_Name: ''
-  m_EditorClassIdentifier: ''
+  m_Name: 
+  m_EditorClassIdentifier: 
   _Viewer: {fileID: 0}
-  _BeamCamera: {fileID: 0}
-  _ReactToFlashlight: 1
-  _BeamOccluders:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  _CloseSeconds: 0.16
-  _OpenSeconds: 0.24
   _Eyes:
   - Renderer: {fileID: 100102}
     AimPoint: {fileID: 100105}
@@ -83,6 +79,13 @@ MonoBehaviour:
   _MinimumDistance: 4
   _TravelUV: {x: 0.23, y: 0.12}
   _ViewerMovementThreshold: 0.004
+  _ReactToFlashlight: 1
+  _BeamCamera: {fileID: 0}
+  _BeamOccluders:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _CloseSeconds: 0.16
+  _OpenSeconds: 0.24
 --- !u!1 &100100
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +100,9 @@ GameObject:
   m_Layer: 0
   m_Name: Hallway watching frame 01 | Brown diamond | filled
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100101
 Transform:
@@ -106,22 +112,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100100}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0, y: 0.0, z: -0.037131974, w: 0.99931037}
+  m_LocalRotation: {x: -0, y: 0, z: -0.037131973, w: 0.9993104}
   m_LocalPosition: {x: -13.55, y: 2.3, z: 1.78}
-  m_LocalScale: {x: 1.18, y: 1.2124176, z: 1.0}
+  m_LocalScale: {x: 1.18, y: 1.2124176, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 100105}
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100103
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100100}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100102
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -139,6 +137,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -160,10 +163,20 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100103
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100100}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &100104
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +189,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored opening center - gaze and flashlight anchor
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100105
 Transform:
@@ -186,12 +202,12 @@ Transform:
   m_GameObject: {fileID: 100104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0185493, y: -0.0031172, z: 0.0}
-  m_LocalScale: {x: 1.0, y: 1.0, z: 1.0}
+  m_LocalPosition: {x: -0.0185493, y: -0.0031172, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 100101}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100110
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +222,9 @@ GameObject:
   m_Layer: 0
   m_Name: Hallway watching frame 02 | Brown upright oval inset | empty
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100111
 Transform:
@@ -215,21 +234,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100110}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0, y: 0.0, z: -0.035968404, w: 0.999352928}
+  m_LocalRotation: {x: -0, y: 0, z: -0.035968404, w: 0.99935293}
   m_LocalPosition: {x: -4.35, y: 2.35, z: 1.78}
-  m_LocalScale: {x: 1.14, y: 1.3620779, z: 1.0}
+  m_LocalScale: {x: 1.14, y: 1.362078, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100113
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100110}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100112
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -247,6 +258,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -268,10 +284,20 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100113
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100110}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &100120
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +312,9 @@ GameObject:
   m_Layer: 0
   m_Name: Hallway watching frame 03 | Gold ornate square | filled
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100121
 Transform:
@@ -295,22 +324,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100120}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0, y: 0.0, z: -0.03052581, w: 0.999533979}
+  m_LocalRotation: {x: -0, y: 0, z: -0.03052581, w: 0.99953395}
   m_LocalPosition: {x: 5.5, y: 2.18, z: 1.78}
-  m_LocalScale: {x: 1.2746711, y: 1.25, z: 1.0}
+  m_LocalScale: {x: 1.2746711, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 100125}
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100123
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100120}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100122
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -328,6 +349,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -349,10 +375,20 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100123
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100120}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &100124
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +401,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored opening center - gaze and flashlight anchor
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100125
 Transform:
@@ -375,12 +414,12 @@ Transform:
   m_GameObject: {fileID: 100124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0132752, y: 0.0234479, z: 0.0}
-  m_LocalScale: {x: 1.0, y: 1.0, z: 1.0}
+  m_LocalPosition: {x: -0.0132752, y: 0.0234479, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 100121}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100130
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +434,9 @@ GameObject:
   m_Layer: 0
   m_Name: Hallway watching frame 04 | Brown pointed oval | empty
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100131
 Transform:
@@ -404,21 +446,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100130}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0, y: 0.0, z: -0.02318373, w: 0.999731221}
+  m_LocalRotation: {x: -0, y: 0, z: -0.02318373, w: 0.99973124}
   m_LocalPosition: {x: 15.34, y: 2.4, z: 1.78}
-  m_LocalScale: {x: 1.08, y: 1.2821918, z: 1.0}
+  m_LocalScale: {x: 1.08, y: 1.2821918, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100133
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100130}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100132
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -436,6 +470,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -457,10 +496,20 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100133
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100130}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &100140
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,9 +521,13 @@ GameObject:
   - component: {fileID: 100141}
   - component: {fileID: 100142}
   - component: {fileID: 100143}
+  - component: {fileID: 100144}
   m_Layer: 0
   m_Name: Hallway watching frame 05 | Gold ornate square | filled
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100141
 Transform:
@@ -484,21 +537,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100140}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0, y: 0.0, z: -0.015503196, w: 0.999879818}
+  m_LocalRotation: {x: -0, y: 0, z: -0.015503196, w: 0.99987984}
   m_LocalPosition: {x: 25.12, y: 2.24, z: 1.78}
-  m_LocalScale: {x: 1.1625, y: 1.14, z: 1.0}
+  m_LocalScale: {x: 1.1625, y: 1.14, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100143
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100140}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100142
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -516,6 +561,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -537,10 +587,50 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100143
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100140}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &100144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1f0a7e9b4d4e6f8a2b5d7c9e1f3a4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Renderer: {fileID: 100142}
+  _Pictures:
+  - {fileID: 2800000, guid: 39e5e242d7651e74f925e07b90a0de2b, type: 3}
+  - {fileID: 2800000, guid: e50e446e62465de46a569bc9a03d42c6, type: 3}
+  - {fileID: 2800000, guid: d9df545a77a90e0438a23cb2fc451e84, type: 3}
+  - {fileID: 2800000, guid: db2e0a2d48440d94cab4cad588323989, type: 3}
+  - {fileID: 2800000, guid: ed9f2e0bfb2d58b45adac311c7656192, type: 3}
+  - {fileID: 2800000, guid: fd935cb7fe6bef04c8fa626dc8edc66b, type: 3}
+  - {fileID: 2800000, guid: 8ee3f67d0d0d3e04685133623539c2de, type: 3}
+  - {fileID: 2800000, guid: e80b113bc933f1a489337748b43685a7, type: 3}
+  - {fileID: 2800000, guid: aa06d14b1e04c314e83a809d3627040e, type: 3}
+  - {fileID: 2800000, guid: 9320e704f4e6d8a49aab88fdc2c6f869, type: 3}
+  - {fileID: 2800000, guid: 340250a203050474e83ad386fb1e789a, type: 3}
+  - {fileID: 2800000, guid: e6dfaa8c4bacbee41b831743c8ecbeef, type: 3}
+  - {fileID: 2800000, guid: e71d08e9b86242e46909f03f5b2be498, type: 3}
+  - {fileID: 2800000, guid: d3033086aaaed8d49a42184a5c0d6b18, type: 3}
+  - {fileID: 2800000, guid: 62567f2a497121a46ac563c2caf7b883, type: 3}
+  - {fileID: 2800000, guid: 55675bbf8c97f964ca95ac34e60f63fe, type: 3}
 --- !u!1 &100150
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +645,9 @@ GameObject:
   m_Layer: 0
   m_Name: Hallway watching frame 06 | Brown upright oval inset | empty
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100151
 Transform:
@@ -564,21 +657,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100150}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0, y: 0.0, z: -0.029898131, w: 0.999552951}
+  m_LocalRotation: {x: -0, y: 0, z: -0.029898131, w: 0.99955297}
   m_LocalPosition: {x: 34.94, y: 2.32, z: 1.78}
-  m_LocalScale: {x: 1.12, y: 1.3381818, z: 1.0}
+  m_LocalScale: {x: 1.12, y: 1.3381819, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100153
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100150}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100152
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -596,6 +681,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -617,10 +707,20 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100153
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100150}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &100160
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +735,9 @@ GameObject:
   m_Layer: 0
   m_Name: Hallway watching frame 07 | Brown square | filled
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100161
 Transform:
@@ -644,22 +747,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100160}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0, y: 0.0, z: 0.041720887, w: 0.999129305}
+  m_LocalRotation: {x: 0, y: 0, z: 0.041720886, w: 0.9991293}
   m_LocalPosition: {x: 44.76, y: 2.25, z: 1.78}
-  m_LocalScale: {x: 1.2972414, y: 1.26, z: 1.0}
+  m_LocalScale: {x: 1.2972414, y: 1.26, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 100165}
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100163
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100160}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100162
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -677,6 +772,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -698,10 +798,20 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100163
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100160}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &100164
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +824,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored opening center - gaze and flashlight anchor
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &100165
 Transform:
@@ -724,12 +837,12 @@ Transform:
   m_GameObject: {fileID: 100164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0124602, y: 0.0072162, z: 0.0}
-  m_LocalScale: {x: 1.0, y: 1.0, z: 1.0}
+  m_LocalPosition: {x: -0.0124602, y: 0.0072162, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 100161}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100170
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +857,10 @@ GameObject:
   m_Layer: 0
   m_Name: Hallway watching frame 08 | Brown small square A | empty
   m_TagString: Untagged
-  m_IsActive: 1
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!4 &100171
 Transform:
   m_ObjectHideFlags: 0
@@ -753,21 +869,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100170}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0, y: 0.0, z: -0.031248922, w: 0.999511633}
+  m_LocalRotation: {x: -0, y: 0, z: -0.031248922, w: 0.99951166}
   m_LocalPosition: {x: 51.9, y: 2.39, z: 1.78}
-  m_LocalScale: {x: 1.18, y: 1.18, z: 1.0}
+  m_LocalScale: {x: 1.18, y: 1.18, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0.0, y: 0.0, z: 0.0}
---- !u!33 &100173
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100170}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &100172
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -785,6 +893,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -806,7 +919,17 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &100173
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100170}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}

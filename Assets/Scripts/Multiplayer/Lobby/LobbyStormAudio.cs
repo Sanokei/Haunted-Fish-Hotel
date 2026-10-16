@@ -13,6 +13,9 @@ namespace HauntedFish.Multiplayer
         [SerializeField] AudioSource _ThunderSourceB;
         [SerializeField] AudioClip _RainLoop;
         [SerializeField] AudioClip[] _ThunderClips;
+        [Header("Unfiltered storm for the exterior shots of the introduction")]
+        [SerializeField] AudioClip _ExteriorRainLoop;
+        [SerializeField] AudioClip[] _ExteriorThunderClips;
         [Tooltip("Parallel arrays match Medium Roll, Soft Crack, Distant Long, Far Rumble.")]
         [SerializeField] float[] _ThunderOnsetSeconds = { .060f, .060f, .085f, .100f };
         [SerializeField] float[] _ThunderCueGains = { .8f, .7f, 1f, 1f };
@@ -41,7 +44,27 @@ namespace HauntedFish.Multiplayer
         long _LastReceivedStrike = long.MinValue;
         float _RainEnvelope, _FadeOutElapsed, _FadeOutVolume;
         bool _FadingOut, _RainPlaying, _IntroductionTalking;
+        AudioClip _InteriorRainLoop;
+        AudioClip[] _InteriorThunderClips;
+        bool _Exterior;
         public bool Running => _State.Running;
+
+        // Exterior shots hear the storm directly; interior shots keep the muffled-through-walls mix.
+        public void SetExterior(bool exterior)
+        {
+            if (_Exterior == exterior) return;
+            if (_InteriorRainLoop == null && _InteriorThunderClips == null)
+            { _InteriorRainLoop = _RainLoop; _InteriorThunderClips = _ThunderClips; }
+            _Exterior = exterior;
+            if (exterior)
+            {
+                if (_ExteriorRainLoop) _RainLoop = _ExteriorRainLoop;
+                if (_ExteriorThunderClips != null && _ExteriorThunderClips.Length == _InteriorThunderClips.Length) _ThunderClips = _ExteriorThunderClips;
+            }
+            else { _RainLoop = _InteriorRainLoop; _ThunderClips = _InteriorThunderClips; }
+            if (_RainPlaying && _RainSource && _RainLoop && _RainSource.clip != _RainLoop)
+            { float time = _RainSource.time; _RainSource.clip = _RainLoop; _RainSource.time = Mathf.Min(time, _RainLoop.length - .1f); _RainSource.Play(); }
+        }
         public int PendingThunder => _State.PendingCount;
 
         void OnEnable()

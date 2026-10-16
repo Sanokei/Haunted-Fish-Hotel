@@ -30,13 +30,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _Mode: 1
-    - _Density: 67
-    - _Speed: 0.38
-    - _Wind: 0.13
+    - _Density: 113.9
+    - _Speed: 1.1
+    - _Wind: 0.06
     - _Seed: 2.3
-    - _Opacity: 0.35
-    - _Length: 0.21
-    - _Width: 0.018
+    - _Opacity: 0.34
+    - _Length: 0.5
+    - _Width: 0.006
     - _Aspect: 1.7777777777777777
     - _Light: 0.4
     - _StencilComp: 8

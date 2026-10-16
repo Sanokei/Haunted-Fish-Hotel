@@ -9,6 +9,8 @@ namespace HauntedFish.Theatre
     public sealed class TheatrePortal : MonoBehaviour
     {
         public static TheatrePortal Current{get;private set;}
+        // True from the doorway load until the return completes; lobby ready zones ignore the theatre-goer meanwhile.
+        public static bool Visiting=>Current&&(Current._Visit.Active||Current._Visit.Loading||Current._Leaving);
         [SerializeField] LobbyTrigger _Entry;
         [SerializeField] Transform _SafeReturn;
         [SerializeField] LobbyManager _Lobby;

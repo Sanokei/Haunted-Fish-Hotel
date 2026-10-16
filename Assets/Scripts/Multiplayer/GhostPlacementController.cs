@@ -11,15 +11,14 @@ namespace HauntedFish.Multiplayer
     {
         [SerializeField] Image _ForbiddenArea;
         void HideForbiddenArea() { if (_ForbiddenArea) _ForbiddenArea.gameObject.SetActive(false); }
-        void ShowForbiddenArea(Camera view)
+        void ShowForbiddenArea(Camera view, Bounds bounds)
         {
-            if (!view || !_World || !_World.HasGraceZone || !_Hud || !_ForbiddenArea) return;
+            if (!view || !_World || !_Hud || !_ForbiddenArea) return;
 
             var parent = _ForbiddenArea.transform.parent as RectTransform;
             var canvas = _ForbiddenArea.GetComponentInParent<Canvas>();
             if (!parent || !canvas) return;
             var uiCamera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
-            var bounds = _World.GraceBounds;
             Vector2 minimum = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
             Vector2 maximum = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
             // Project all eight authored corners, covering the whole hallway volume and floor.
@@ -94,7 +93,7 @@ namespace HauntedFish.Multiplayer
         [SerializeField] InputPromptSpriteText _InputPrompts;
         InputActionAsset _Actions;
         InputActionMap _Map;
-        InputAction _Move, _Confirm, _Reset, _Click, _Activate, _Point, _Dispose;
+        InputAction _Move, _Confirm, _Click, _Activate, _Point, _Dispose;
         string _Family = "";
         Vector3 _Position;
         public Vector3 FlightPosition => _Position;
@@ -129,6 +128,7 @@ namespace HauntedFish.Multiplayer
             _HudMode = -1;
         }
         string _PreparedRoundKey;
+        const float PossessedGhostAlpha = .35f;
         public void Configure(GameCameraOwner camera, GameSceneController scene)
         {
             _Camera = camera;
@@ -144,7 +144,6 @@ namespace HauntedFish.Multiplayer
             InputPromptActions.Register(_Map);
             _Move = _Map.FindAction("Move", true);
             _Confirm = _Map.FindAction("Confirm", true);
-            _Reset = _Map.FindAction("Reset", true);
             _Click = _Map.FindAction("TrapClick", true);
             _Activate = _Map.FindAction("TrapActivate", true);
             _Point = _Map.FindAction("TrapPoint", true);
@@ -257,6 +256,13 @@ namespace HauntedFish.Multiplayer
                 _Position = player.GhostFlightPosition;
             if (_GhostSprite && Mathf.Abs(move.x) > .01f)
                 _GhostSprite.flipX = move.x < 0;
+            if (_GhostSprite)
+            {
+                // Let the possessed trap show through the ghost.
+                var tint = _GhostSprite.color;
+                tint.a = Mathf.MoveTowards(tint.a, player.ControlledCube >= 0 ? PossessedGhostAlpha : 1, Time.unscaledDeltaTime * 4);
+                _GhostSprite.color = tint;
+            }
             if (player.ControlledCube >= 0)
             {
                 NearbyTrapId = -1;
@@ -290,8 +296,6 @@ namespace HauntedFish.Multiplayer
                         Dispatch(player, TrapInputKind.Click, hit.point);
                 }
 
-                if (!overUI && _Reset.WasPressedThisFrame())
-                    Dispatch(player, TrapInputKind.Reset, Vector3.zero);
                 if (_Confirm.WasPressedThisFrame())
                 {
                     if (player.Networked)
@@ -327,9 +331,9 @@ namespace HauntedFish.Multiplayer
             }
             // Mirror the command adapter's reach gate for every family, including floor traps.
             clear = clear && _World.PlacementNearFlight(player, placement, _Family);
-            bool forbidden = _Possessed && !_Pending && heldDefinition && _World.HasGraceZone &&
-                !_World.FootprintAllowed(placement + heldDefinition.ArmedOffset + heldDefinition.ColliderOffset, heldDefinition.BodyHalfSize);
-            if (forbidden) ShowForbiddenArea(HotelViewCamera.Current);
+            var forbidden = _Possessed && !_Pending && heldDefinition
+                ? _World.ForbiddenZone(placement + heldDefinition.ArmedOffset + heldDefinition.ColliderOffset, heldDefinition.BodyHalfSize) : null;
+            if (forbidden.HasValue) ShowForbiddenArea(HotelViewCamera.Current, forbidden.Value);
             if (_PreviewSprite)
                 _PreviewSprite.color = clear ? HotelPalette.Light : HotelPalette.Rust;
             if (ceilingPlacement && !_Pending) PresentPlacementPreview(heldDefinition, placement, clear);
@@ -375,7 +379,7 @@ namespace HauntedFish.Multiplayer
                         ExplainPlacement("Placement rejected - keep the trap and try a clear legal area");
                 }
                 else if (_Possessed)
-                    ExplainPlacement(forbidden ? "No traps in the starting safe hallway" :
+                    ExplainPlacement(forbidden.HasValue ? "No traps here - keep the start and attic entrance clear" :
                         !player.GhostSetupReady ? "Wait for ghost setup to finish" :
                         "Move close to the trap destination and choose a clear hallway space");
             }
@@ -408,7 +412,7 @@ namespace HauntedFish.Multiplayer
                     _Label.text = trap.DisplayName;
                     string use = trap.InputMode == TrapInputMode.Movement ? "{input:Ghost/Move} Drive" :
                         trap.InputMode == TrapInputMode.MouseClick ? "{input:Ghost/TrapClick} Activate" : "{input:Ghost/TrapActivate} Drop";
-                    prompts = use + "   {input:Ghost/Reset} Reset   {input:Ghost/Confirm} Release   {input:Ghost/Dispose} Discard";
+                    prompts = use + "   {input:Ghost/Confirm} Release";
                     break;
                 case 2:
                     _Label.text = clear ? "Choose a clear trap destination" : "Place on the hallway floor in a clear space";
@@ -424,7 +428,7 @@ namespace HauntedFish.Multiplayer
                     break;
                 default:
                     _Label.text = "Fly to the package conveyor above the hallway";
-                    prompts = "{input:Ghost/Move} Fly   {input:Ghost/Confirm} Open nearby package";
+                    // Free flight shows no button strip; prompts appear only near something usable.
                     break;
             }
             if (_InputPrompts) _InputPrompts.SetTemplate(prompts);

@@ -297,8 +297,27 @@ namespace HauntedFish.BossFight
             _Serving = true;
         }
 
+        // Piranha stun effect authored under each paddle (the same effect a stunned player shows).
+        GameObject _FishStunEffect, _GhostStunEffect;
+        static GameObject StunEffect(Rigidbody paddle)
+        {
+            if (!paddle) return null;
+            foreach (Transform child in paddle.transform) if (child.name.EndsWith("piranha stun")) return child.gameObject;
+            return null;
+        }
+        static void PresentStun(GameObject effect, bool stunned)
+        {
+            if (!effect || effect.activeSelf == stunned) return;
+            effect.SetActive(stunned);
+            var animation = effect.GetComponent<Animation>();
+            if (stunned && animation) animation.Play();
+        }
         void Update()
         {
+            if (!_FishStunEffect) _FishStunEffect = StunEffect(_FishPaddle);
+            if (!_GhostStunEffect) _GhostStunEffect = StunEffect(_GhostPaddle);
+            PresentStun(_FishStunEffect, _Stun.IsStunned(BossSide.Fish, Time.unscaledTime));
+            PresentStun(_GhostStunEffect, _Stun.IsStunned(BossSide.Ghost, Time.unscaledTime));
             if (!_Authority || !_CompletionPending) return;
             if (Time.unscaledTime >= _ReactionUntil)
             {

@@ -75,7 +75,7 @@ public static class InputPromptNativeValidation
         var created=new List<InputDevice>();var prefabs=new List<GameObject>();var imageViews=new List<InputGlyphPrompt>();var textViews=new List<InputPromptSpriteText>();
         var originalSettings=InputSystem.settings;InputSettings temporarySettings=null;GameObject root=null;InputActionAsset actions=null, gameplayActions=null;
         Action listener=null;int notifications=0;
-        string report=Path.Combine(Path.GetTempPath(),"HauntedFish-InputPrompts-NativeValidation.txt");
+        string report=System.IO.Path.Combine(System.IO.Path.GetTempPath(),"HauntedFish-InputPrompts-NativeValidation.txt");
         try
         {
             temporarySettings=Object.Instantiate(originalSettings);InputSystem.settings=temporarySettings;

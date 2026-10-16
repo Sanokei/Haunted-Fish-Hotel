@@ -42,7 +42,7 @@ namespace HauntedFish.Multiplayer
         [SerializeField]
         UnityEvent _Activated = new UnityEvent(), _Landed = new UnityEvent();
         GhostCubePlacement _State;
-        float _Axis, _LastInput, _Elapsed;
+        float _Axis, _LastInput, _Elapsed, _RunSign;
         RaycastHit[] _Hits = new RaycastHit[8];
         Collider[] _Overlaps = new Collider[8];
         RaycastHit[] _PushHits = new RaycastHit[8];
@@ -145,6 +145,9 @@ namespace HauntedFish.Multiplayer
         public Vector3 BodyHalfSize => _Collider ? Vector3.Scale(_Collider.size, transform.lossyScale) * .5f : Vector3.one * .5f;
         public Vector3 HalfExtents => BodyHalfSize * .96f;
         public TrapPhase Phase => (TrapPhase)_State.Phase;
+        // One-shot traps release the ghost on activation and stay unpossessable until re-armed.
+        public bool EjectsOnActivate => _InputMode == TrapInputMode.Space;
+        public bool Possessable => !EjectsOnActivate || Phase == TrapPhase.Armed;
         public Vector2 Limits => World ? World.TravelLimits(_State.Origin, BodyHalfSize, ColliderOffset, _TravelHalfWidth) : new Vector2(Mathf.Max(-15 + BodyHalfSize.x, _State.Origin.x - _TravelHalfWidth), Mathf.Min(15 - BodyHalfSize.x, _State.Origin.x + _TravelHalfWidth));
         public string ControlHint => _InputMode == TrapInputMode.Movement ? "Drive while possessed" :
             _InputMode == TrapInputMode.MouseClick ? "Activate while possessed" : "Drop while possessed";
@@ -215,6 +218,12 @@ namespace HauntedFish.Multiplayer
             _State.Progress = 0;
             _Elapsed = 0;
             _State.Activations++;
+            if (_Behaviour == TrapBehaviour.PiercingSlide)
+            {
+                // Run to whichever travel bound is farther away.
+                var limits = Limits;
+                _RunSign = limits.y - Position.x >= Position.x - limits.x ? 1 : -1;
+            }
             _Activated.Invoke();
             return true;
         }
@@ -232,10 +241,17 @@ namespace HauntedFish.Multiplayer
                     _Axis = 0;
                 if (_Behaviour == TrapBehaviour.PiercingSlide)
                 {
+                    if (Phase != TrapPhase.Active) return false;
                     if (_PassageSweep == null) _PassageSweep = new GhostTrapPassageSweep(this);
-                    float delta = _PassageSweep.Advance(_Axis, _PiercingSpeed, _BodySpeedFactor, seconds, _MotionContacts);
-                    MotionDirection = Mathf.Sign(_Axis);
-                    if (Mathf.Abs(delta) <= MinimumMovement) return false;
+                    float delta = _PassageSweep.Advance(_RunSign, _PiercingSpeed, _BodySpeedFactor, seconds, _MotionContacts);
+                    MotionDirection = _RunSign;
+                    if (Mathf.Abs(delta) <= MinimumMovement)
+                    {
+                        // Arrived (or blocked): re-arm at this end so the next run returns.
+                        _State.Phase = (int)TrapPhase.Armed;
+                        _PassageSweep.Clear();
+                        return true;
+                    }
                     _State.Position += Vector3.right * delta;
                     transform.position = _State.Position;
                     Physics.SyncTransforms();

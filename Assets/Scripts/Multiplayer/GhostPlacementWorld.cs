@@ -36,23 +36,40 @@ namespace HauntedFish.Multiplayer
         [SerializeField] BoxCollider _GraceZone;
         [Tooltip("Maximum horizontal placement reach for a hallway ceiling trap; vertical flight within the hallway does not require floor alignment.")]
         [SerializeField, Min(.1f)] float _HallwayPlacementReach = 4;
+        [Tooltip("Attic entrance: no traps, shown with the same red bound as the player start.")]
+        [SerializeField] BoxCollider _AtticZone;
         public Bounds GraceBounds => _GraceZone ? _GraceZone.bounds : default;
-        public bool HasGraceZone => _GraceZone && _GraceZone.enabled && _GraceZone.gameObject.activeInHierarchy;
-        public bool FootprintAllowed(Vector3 center, Vector3 half)
+        public bool HasGraceZone => Usable(_GraceZone);
+        static bool Usable(BoxCollider zone) => zone && zone.enabled && zone.gameObject.activeInHierarchy;
+        // Every authored no-placement volume: the player start grace zone and the attic entrance.
+        public IEnumerable<Bounds> ForbiddenZones
         {
-            if (!HasGraceZone) return true;
-            var safe = GraceBounds;
-            return center.x - half.x >= safe.max.x - .0001f || center.x + half.x <= safe.min.x + .0001f ||
-                center.z - half.z >= safe.max.z || center.z + half.z <= safe.min.z;
+            get
+            {
+                if (Usable(_GraceZone)) yield return _GraceZone.bounds;
+                if (Usable(_AtticZone)) yield return _AtticZone.bounds;
+            }
+        }
+        static bool Outside(Bounds safe, Vector3 center, Vector3 half) =>
+            center.x - half.x >= safe.max.x - .0001f || center.x + half.x <= safe.min.x + .0001f ||
+            center.z - half.z >= safe.max.z || center.z + half.z <= safe.min.z;
+        public bool FootprintAllowed(Vector3 center, Vector3 half) => ForbiddenZone(center, half) == null;
+        // The zone this footprint overlaps, or null when placement is allowed there.
+        public Bounds? ForbiddenZone(Vector3 center, Vector3 half)
+        {
+            foreach (var zone in ForbiddenZones)
+                if (!Outside(zone, center, half)) return zone;
+            return null;
         }
         public Vector2 TravelLimits(Vector3 origin, Vector3 half, Vector3 offset, float travel)
         {
             var hallway = GameSceneController.Current ? GameSceneController.Current.HallwayBounds : new Bounds(new Vector3(0, -.5f, 0), new Vector3(30, 1, 2));
             float left = hallway.min.x + half.x - offset.x, right = hallway.max.x - half.x - offset.x;
-            if (HasGraceZone && origin.z + offset.z + half.z > GraceBounds.min.z && origin.z + offset.z - half.z < GraceBounds.max.z)
+            foreach (var zone in ForbiddenZones)
             {
-                if (origin.x + offset.x >= GraceBounds.max.x) left = Mathf.Max(left, GraceBounds.max.x + half.x - offset.x);
-                else right = Mathf.Min(right, GraceBounds.min.x - half.x - offset.x);
+                if (origin.z + offset.z + half.z <= zone.min.z || origin.z + offset.z - half.z >= zone.max.z) continue;
+                if (origin.x + offset.x >= zone.max.x) left = Mathf.Max(left, zone.max.x + half.x - offset.x);
+                else right = Mathf.Min(right, zone.min.x - half.x - offset.x);
             }
             return new Vector2(Mathf.Max(left, origin.x - travel), Mathf.Min(right, origin.x + travel));
         }
@@ -264,7 +281,7 @@ namespace HauntedFish.Multiplayer
             float distance = 2;
             foreach (var item in _Objects)
             {
-                if (!item.Value || (owner && item.Value.CaptureState().OwnerId != owner.NetId))
+                if (!item.Value || !item.Value.Possessable || (owner && item.Value.CaptureState().OwnerId != owner.NetId))
                     continue;
                 float candidate = Vector3.Distance(point, item.Value.Position);
                 if (candidate < distance)
@@ -422,7 +439,7 @@ namespace HauntedFish.Multiplayer
             var trap = Trap(id);
             if (!trap || trap.CaptureState().OwnerId != player.NetId || !string.IsNullOrEmpty(player.HeldTrapFamily) || !Finite(ghostPosition.x) || !Finite(ghostPosition.y) || !Finite(ghostPosition.z) || (!InteractionPosition(player, ghostPosition, out var verified) || Vector3.Distance(verified, trap.Position) > 2))
                 return;
-            if (player.ControlledCube == id)
+            if (player.ControlledCube == id || !trap.Possessable)
                 return;
             for (int i = 0; i < HotelPlayer.ActivePlayers.Count; i++)
             {
@@ -453,6 +470,9 @@ namespace HauntedFish.Multiplayer
             int index = _State.Cubes.FindIndex(p => p.Id == id);
             _State.Cubes[index] = trap.CaptureState();
             _Dirty = true;
+            // Release where the ghost was; it must not ride the falling or running trap.
+            if (command.Kind != TrapInputKind.Move && trap.EjectsOnActivate)
+                Possess(player, -1, trap.Position);
             Publish(player);
             return true;
         }

@@ -45,13 +45,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _PictureTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 903c81c74fa0c3b40935151a47600108, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _HasEye: 0
-    - _HasPicture: 0
+    - _HasPicture: 1
     - _CullMode: 2
     - _PresentationGain: 1
     - _Closure: 0
@@ -67,7 +67,7 @@ Material:
     - _NearArtVisibility: 0.8
     - _PupilIntensity: 0.125
     m_Colors:
-    - _PictureRect: {r: 0.5, g: 0.5, b: 1, a: 1}
+    - _PictureRect: {r: 0.49636, g: 0.50000, b: 0.73818, a: 1.05816}
     - _InteriorColor: {r: 0.014443843596092545, g: 0.014443843596092545, b: 0.014443843596092545, a: 1}
     - _PupilOffset: {r: 0, g: 0, b: 0, a: 0}
     - _EyeRect: {r: 0.4947609298543654, g: 0.4959063093731153, b: 0.5334824256634338, a: 0.5646268656716418}

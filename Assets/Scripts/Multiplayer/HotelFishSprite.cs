@@ -1,3 +1,4 @@
+using Monologue.Dialogue;
 using UnityEngine;
 
 namespace HauntedFish.Multiplayer
@@ -109,12 +110,17 @@ namespace HauntedFish.Multiplayer
                 return;
             }
             var inspection = LobbyCursorManager.Instance;
+            var dialogue = DialogueManager.Instance;
             bool obstructing = false;
             if (camera && inspection && inspection.InspectingRadio)
+                obstructing = Obstructs(camera, inspection.RadioFocus);
+            // Fade whoever stands between the camera and the speaker, but never the speaker itself.
+            else if (camera && dialogue && dialogue.ActiveDialoguePanel)
             {
-                var delta = inspection.RadioFocus - camera.transform.position;
-                var ray = new Ray(camera.transform.position, delta.normalized);
-                obstructing = _Body.bounds.IntersectRay(ray, out var distance) && distance < delta.magnitude;
+                var speaker = dialogue.DialogueAnchor;
+                var bounds = _Body.bounds;
+                bounds.Expand(new Vector3(0, 0, 1));
+                obstructing = !bounds.Contains(speaker) && Obstructs(camera, speaker);
             }
             _InspectionOpacity = Mathf.MoveTowards(_InspectionOpacity, obstructing ? .12f : 1, Time.unscaledDeltaTime * 6);
             var bodyColor = _BodyColor; bodyColor.a *= _InspectionOpacity; _Body.color = bodyColor;
@@ -137,6 +143,12 @@ namespace HauntedFish.Multiplayer
             _FinPivot.localScale = Vector3.Scale(_FinRestScale,
                 new Vector3(sign * (1 + stroke * Mathf.Lerp(.025f, .07f, _Activity)),
                     1 - stroke * .025f * _Activity, 1));
+        }
+        bool Obstructs(Camera camera, Vector3 focus)
+        {
+            var delta = focus - camera.transform.position;
+            var ray = new Ray(camera.transform.position, delta.normalized);
+            return _Body.bounds.IntersectRay(ray, out var distance) && distance < delta.magnitude;
         }
         void OnDisable()
         {

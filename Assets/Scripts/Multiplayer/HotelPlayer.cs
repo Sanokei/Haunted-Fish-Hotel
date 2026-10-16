@@ -232,6 +232,7 @@ namespace HauntedFish.Multiplayer
         [SyncVar] bool _Walking;
         [SyncVar] bool _Talking;
         [SyncVar] Vector3 _MouseLight;
+        public Vector3 LampWorldPosition => _MouseLight;
 
         HotelSessionContext _Session;
         HotelPlayerMovement _Movement;
@@ -447,6 +448,7 @@ namespace HauntedFish.Multiplayer
                 _Movement.ReadOwnedInput(out move, out jump, out mouse);
                 run = _Movement.RunHeld;
             }
+            run = _Movement.GateSprint(run, move.sqrMagnitude > .0001f);
             // Retain a one-frame jump until the next network send.
             _QueuedJump |= jump;
             if (Connected && Time.unscaledTime < _NextSend) return;

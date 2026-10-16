@@ -45,6 +45,33 @@ namespace HauntedFish.Multiplayer
         public bool Running => GameActive && Mode == HotelControlMode.Fish && Motor.Running;
         public bool InteractPressed => _GameInteract != null && _GameInteract.enabled && _GameInteract.WasPressedThisFrame();
         public Vector2 BossAxis => _BossMove != null && _BossMove.enabled ? Vector2.ClampMagnitude(_BossMove.ReadValue<Vector2>(), 1) : Vector2.zero;
+        [Header("Sprint stamina")]
+        [Tooltip("Seconds of continuous sprint from a full bar.")]
+        [SerializeField, Min(.1f)] float _SprintSeconds = 1.2f;
+        [Tooltip("Seconds to refill an empty bar while not sprinting.")]
+        [SerializeField, Min(.1f)] float _SprintRecoverSeconds = 2.5f;
+        [Tooltip("After running dry, sprint unlocks again once the bar refills to this share.")]
+        [SerializeField, Range(0, 1)] float _SprintRestart = .35f;
+        bool _Winded;
+        public float Stamina { get; private set; } = 1;
+        public bool Winded => _Winded;
+        // Local owner only: spends stamina while sprinting and refills it otherwise.
+        public bool GateSprint(bool requested, bool moving)
+        {
+            float dt = Time.deltaTime;
+            bool sprint = requested && moving && !_Winded && Stamina > 0;
+            if (sprint)
+            {
+                Stamina = Mathf.Max(0, Stamina - dt / _SprintSeconds);
+                if (Stamina <= 0) _Winded = true;
+            }
+            else
+            {
+                Stamina = Mathf.Min(1, Stamina + dt / _SprintRecoverSeconds);
+                if (_Winded && Stamina >= _SprintRestart) _Winded = false;
+            }
+            return sprint;
+        }
         public bool RunHeld => Mode == HotelControlMode.Fish && ControlsReady && !_InputBlocked && !StunBlocksInput && _GameRun != null && _GameRun.enabled && _GameRun.IsPressed();
         public bool FacingLeft { get; private set; }
         public Vector3 LampPosition => Motor.LampPosition;

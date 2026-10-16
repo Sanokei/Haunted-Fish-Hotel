@@ -10,6 +10,7 @@ namespace HauntedFish.Multiplayer
         [Range(.001f, .3f)] public float Softness = .12f;
         [Range(0, 1)] public float Darkness = .92f;
         Material _Material;
+        readonly Vector4[] _Lights = new Vector4[4];
         [SerializeField] Canvas _Canvas;
         [SerializeField] Image _Image;
         [SerializeField] HauntedFish.Presentation.WatchingFrameGallery _WatchingFrames;
@@ -29,9 +30,12 @@ namespace HauntedFish.Multiplayer
         void LateUpdate()
         {
             var player = HotelPlayer.LocalPlayer;
-            if (_Canvas) _Canvas.enabled = player && player.ControlMode == HotelControlMode.Fish && !player.InBossFight && !player.BossWatching;
+            // A ghost inside a hallway trap sees the fish's darkness and their lamps.
+            bool possessing = player && player.ControlMode == HotelControlMode.Ghost && player.ControlledCube >= 0;
+            if (_Canvas) _Canvas.enabled = player && (player.ControlMode == HotelControlMode.Fish || possessing) && !player.InBossFight && !player.BossWatching;
             PublishBeam(false, Vector2.zero);
             if (player && (player.InBossFight || player.BossWatching)) return;
+            if (possessing) { PresentFishLamps(); return; }
             if (player && player.ControlMode == HotelControlMode.Ghost) return;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -42,8 +46,32 @@ namespace HauntedFish.Multiplayer
             _Material.SetFloat("_Radius", Radius);
             _Material.SetFloat("_Softness", Softness);
             _Material.SetFloat("_Darkness", Darkness);
+            _Material.SetFloat("_LightCount", 0);
             PublishBeam(Darkness > 0 && _Canvas && _Canvas.isActiveAndEnabled && _Image && _Image.isActiveAndEnabled,
                 new Vector2(mouse.x / Mathf.Max(1, Screen.width), mouse.y / Mathf.Max(1, Screen.height)));
+        }
+
+        void PresentFishLamps()
+        {
+            if (!_Material) return;
+            var view = HotelViewCamera.Current;
+            int count = 0;
+            var players = HotelPlayer.ActivePlayers;
+            for (int i = 0; i < players.Count && count < _Lights.Length; i++)
+            {
+                var fish = players[i];
+                if (!view || !fish.ControlsReady || fish.ControlMode != HotelControlMode.Fish || fish.IsDead) continue;
+                var screen = view.WorldToViewportPoint(fish.LampWorldPosition);
+                if (screen.z <= 0) continue;
+                _Lights[count++] = new Vector4(screen.x, screen.y, 0, 0);
+            }
+            _Material.SetVector("_Mouse", new Vector4(0, 0, 1, 0));
+            _Material.SetVectorArray("_Lights", _Lights);
+            _Material.SetFloat("_LightCount", count);
+            _Material.SetFloat("_Aspect", Screen.width / (float)Mathf.Max(1, Screen.height));
+            _Material.SetFloat("_Radius", Radius);
+            _Material.SetFloat("_Softness", Softness);
+            _Material.SetFloat("_Darkness", Darkness);
         }
 
         void PublishBeam(bool active, Vector2 center)

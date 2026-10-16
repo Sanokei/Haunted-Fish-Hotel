@@ -17,7 +17,6 @@ namespace HauntedFish.Multiplayer
         bool _WorldPlaying;
         public StoryUI UI => _UI;
         public event Action SkipRequested;
-        void RequestSkip() => SkipRequested?.Invoke();
         static bool IsWorld(StorySequenceStep step) =>
             step.Kind == StorySequenceStepKind.LobbyShot || step.Kind == StorySequenceStepKind.LobbyLine;
         public void Prepare()
@@ -26,7 +25,7 @@ namespace HauntedFish.Multiplayer
             {
                 if (!_AuthoredUI) throw new InvalidOperationException("Assign the scene-authored introduction UI.");
                 _UI = _AuthoredUI;
-                _UI.SkipRequested += RequestSkip;
+                // Skipping is hold-Space only (LobbyManager); the UI click skip is not forwarded.
             }
             if (!_WorldPlaying) _UI.Prepare();
             Canvas.ForceUpdateCanvases();
@@ -54,15 +53,22 @@ namespace HauntedFish.Multiplayer
                     _UI.PrepareWorld();
                     _WorldPlaying = true;
                 }
+                SetExteriorStorm(false);
                 yield return _World.Play(step);
             }
             else
             {
                 Prepare();
-                if (_Lightning && step.Kind == StorySequenceStepKind.SetVisible && step.Target == "storm" && step.Visible) _Lightning.StartAmbient();
+                if (_Lightning && step.Kind == StorySequenceStepKind.SetVisible && step.Target == "storm" && step.Visible)
+                { SetExteriorStorm(true); _Lightning.StartAmbient(); }
                 if (_Lightning && step.Kind == StorySequenceStepKind.SetVariant && step.Target == "cloud" && step.Variant == "cloud_lightning") _Lightning.Play();
                 yield return _UI.Play(step);
             }
+        }
+        void SetExteriorStorm(bool exterior)
+        {
+            var audio = _Lightning ? _Lightning.GetComponentInChildren<LobbyStormAudio>(true) : null;
+            if (audio) audio.SetExterior(exterior);
         }
         public void SetSkipProgress(float progress) { if (_UI) _UI.SetSkipProgress(progress); }
         public void Close()
@@ -70,9 +76,9 @@ namespace HauntedFish.Multiplayer
             IsReady = false;
             _WorldPlaying = false;
             if (_Lightning) _Lightning.StopAmbient();
+            SetExteriorStorm(false);
             if (_World) _World.Close();
             if (!_UI) return;
-            _UI.SkipRequested -= RequestSkip;
             _UI.Close();
             // Scene-authored UI is retained for replay; Close hides/reset its content.
             _UI = null;

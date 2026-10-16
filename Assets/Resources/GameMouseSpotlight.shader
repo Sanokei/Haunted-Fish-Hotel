@@ -23,6 +23,9 @@ Shader "HauntedFish/GameMouseSpotlight"
             struct appdata { float4 vertex : POSITION; float2 uv : TEXCOORD0; };
             struct v2f { float4 vertex : SV_POSITION; float2 uv : TEXCOORD0; };
             float4 _Mouse;
+            // Extra beams (uv xy) for a possessing ghost watching every fish lamp.
+            float4 _Lights[4];
+            float _LightCount;
             float _Aspect, _Radius, _Softness, _Darkness;
             v2f vert(appdata v)
             {
@@ -35,7 +38,14 @@ Shader "HauntedFish/GameMouseSpotlight"
             {
                 float2 offset = i.uv - _Mouse.xy;
                 offset.x *= _Aspect;
-                float darkness = smoothstep(_Radius, _Radius + max(.001, _Softness), length(offset));
+                float darkness = _Mouse.z > .5 ? 1 : smoothstep(_Radius, _Radius + max(.001, _Softness), length(offset));
+                for (int l = 0; l < 4; l++)
+                {
+                    if (l >= _LightCount) break;
+                    float2 o = i.uv - _Lights[l].xy;
+                    o.x *= _Aspect;
+                    darkness = min(darkness, smoothstep(_Radius, _Radius + max(.001, _Softness), length(o)));
+                }
                 return half4(0, 0, 0, darkness * _Darkness);
             }
             ENDCG

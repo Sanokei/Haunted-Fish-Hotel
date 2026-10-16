@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Game original empty frame 04 - grey isolated opening
   m_Shader: {fileID: 4800000, guid: 4baccd66e16f285510f0df2a758ce61c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,54 +19,60 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 469a8fe0e48e5081bfc1760cc1d664c6, type: 3}
+    - _FrameBacking:
+        m_Texture: {fileID: 2800000, guid: 70d1a29c41705693b3d49aba3f86c439, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FrameOpening:
         m_Texture: {fileID: 2800000, guid: 1e80eb7dad955d008242e46a7540132b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _FrameBacking:
-        m_Texture: {fileID: 2800000, guid: 70d1a29c41705693b3d49aba3f86c439, type: 3}
+    - _InteriorMask:
+        m_Texture: {fileID: 2800000, guid: 81eed171f199589c9a79d10f1ddf93a9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 469a8fe0e48e5081bfc1760cc1d664c6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
         m_Texture: {fileID: 2800000, guid: 9cf5240d82a954ebb8370791c51ab67d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _PupilTex:
-        m_Texture: {fileID: 2800000, guid: f0d03dc5cead5d5085eca7b0de10d5a9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InteriorMask:
-        m_Texture: {fileID: 2800000, guid: 81eed171f199589c9a79d10f1ddf93a9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _PictureTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _PupilTex:
+        m_Texture: {fileID: 2800000, guid: f0d03dc5cead5d5085eca7b0de10d5a9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _HasEye: 0
-    - _HasPicture: 0
-    - _CullMode: 0
-    - _PresentationGain: 1
-    - _Closure: 0
-    - _ClosedLineWidth: 0.006
     - _Ambient: 0.52
-    - _LightResponse: 0.72
-    - _LightLimit: 1.1
-    - _ShadowCutoff: 0.2
-    - _DarknessStart: 10000
+    - _ClosedLineWidth: 0.006
+    - _Closure: 0
+    - _CullMode: 0
     - _DarknessEnd: 10001
     - _DarknessFloor: 1
+    - _DarknessStart: 10000
+    - _HasEye: 0
+    - _HasPicture: 1
+    - _LightLimit: 1.1
+    - _LightResponse: 0.72
+    - _NearArtDistance: 9
+    - _NearArtVisibility: 0.1
+    - _PresentationGain: 1
+    - _PupilIntensity: 1
+    - _ShadowCutoff: 0.2
     m_Colors:
-    - _PictureRect: {r: 0.5, g: 0.5, b: 1, a: 1}
-    - _InteriorColor: {r: 0.014443843596092545, g: 0.014443843596092545, b: 0.014443843596092545, a: 1}
+    - _EyeRect: {r: 0.4897444, g: 0.4910053, b: 1.4900379, a: 0.6431522}
+    - _InteriorColor: {r: 0.014443844, g: 0.014443844, b: 0.014443844, a: 1}
+    - _PictureRect: {r: 0.48377, g: 0.47283, b: 0.73892, a: 0.66304}
     - _PupilOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EyeRect: {r: 0.4897443991938518, g: 0.49100531229877653, b: 1.4900379105068438, a: 0.6431521739130435}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

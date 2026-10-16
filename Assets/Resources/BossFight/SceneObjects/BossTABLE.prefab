@@ -413,6 +413,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8948289375002263108}
   - {fileID: 1862498187827741080}
   - {fileID: 5373722574051739424}
   - {fileID: 5814000000000000064}
@@ -5803,6 +5804,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5498176838489269682}
   - {fileID: 5695399604818833717}
   - {fileID: 2523362000344398313}
   - {fileID: 5814000000000000081}
@@ -8261,3 +8263,135 @@ MonoBehaviour:
   _FishStun: {fileID: 5814000000000000065}
   _GhostStun: {fileID: 5814000000000000082}
   _BlastRoot: {fileID: 5814000000000000017}
+--- !u!1001 &4087286432867960408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6110363844157461204}
+    m_Modifications:
+    - target: {fileID: 1000, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_Name
+      value: Fish paddle piranha stun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.06
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+--- !u!4 &8948289375002263108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+  m_PrefabInstance: {fileID: 4087286432867960408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2103621326819449764
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3980294283995937509}
+    m_Modifications:
+    - target: {fileID: 1000, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_Name
+      value: Ghost paddle piranha stun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.06
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+--- !u!4 &5498176838489269682 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1001, guid: f09f499c3306521aa4d913ad0a26e390, type: 3}
+  m_PrefabInstance: {fileID: 2103621326819449764}
+  m_PrefabAsset: {fileID: 0}

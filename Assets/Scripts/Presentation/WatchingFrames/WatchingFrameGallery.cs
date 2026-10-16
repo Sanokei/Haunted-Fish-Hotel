@@ -139,6 +139,8 @@ namespace HauntedFish.Presentation
             foreach (var eye in _Eyes)
             {
                 if (eye == null || !eye.Renderer || !eye.Plane) continue;
+                // Off-screen eyes keep their last pose; no raycast or property-block work until a camera sees them.
+                if (!eye.Renderer.isVisible) { eye.HasOffset = false; continue; }
                 var offset = eye.LastOffset;
                 if (gazeMoved || !eye.HasOffset)
                 {

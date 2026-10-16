@@ -57,6 +57,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ae535a63db8bf1b44a3454b1958009ff, type: 3}
   - {fileID: 8300000, guid: 3c394c20f0f99a244aeea7e31dedec0d, type: 3}
   - {fileID: 8300000, guid: a41139b9c2638c7418723f5affc132b6, type: 3}
+  _ExteriorRainLoop: {fileID: 8300000, guid: 14632f621260414288843ac222051b10, type: 3}
+  _ExteriorThunderClips:
+  - {fileID: 8300000, guid: 7294bc921fce433180449d2cedd92776, type: 3}
+  - {fileID: 8300000, guid: df15f064a5de4e289ab0be6167dac1e0, type: 3}
+  - {fileID: 8300000, guid: 95e71cd93e51446d9c6b3fd4fc718825, type: 3}
+  - {fileID: 8300000, guid: 312c874d61ce4447bca9fa3d0f15b5a4, type: 3}
   _ThunderOnsetSeconds:
   - 0.06
   - 0.06

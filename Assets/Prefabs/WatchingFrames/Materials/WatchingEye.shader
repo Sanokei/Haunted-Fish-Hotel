@@ -112,12 +112,12 @@ Shader "HauntedFish/WatchingEye"
                 half4 outline = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, lidUV);
                 outline.a *= lidBounds;
                 float closedBlend = smoothstep(.92, 1, closure);
-                float line = (1 - smoothstep(_ClosedLineWidth,
+                float closedLine = (1 - smoothstep(_ClosedLineWidth,
                     _ClosedLineWidth + max(.0005, fwidth(eyeUV.y)), abs(eyeUV.y - .5))) *
                     smoothstep(.006, .018, eyeUV.x) * smoothstep(.006, .018, 1 - eyeUV.x);
                 half3 lineColor = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, float2(.5, .985)).rgb;
                 outline.rgb = lerp(outline.rgb, lineColor, closedBlend);
-                outline.a = lerp(outline.a, line, closedBlend);
+                outline.a = lerp(outline.a, closedLine, closedBlend);
                 pupil.a *= (1 - closedBlend) * saturate(_HasEye);
                 outline.a *= saturate(_HasEye);
                 // Separate pupil energy before lighting. Its RGB never samples shadow attenuation.

@@ -72,22 +72,28 @@ namespace HauntedFish.Multiplayer
         {
             // Renderer nodes and shared materials are saved in each production trap prefab.
             if (_WorldImages == null || _WorldArt == null || _WorldImages.Length != _WorldArt.Length)
-                throw new System.InvalidOperationException("Bind authored trap presentation renderers.");
-            foreach (var image in _WorldImages) { image.enabled = false; image.raycastTarget = false; }
+                Debug.LogError("Trap presentation renderers are not paired on " + name, this);
+            if (_WorldImages != null)
+                foreach (var image in _WorldImages) if (image) { image.enabled = false; image.raycastTarget = false; }
             // Split chandelier uses this image only as a sizing reference, never a duplicate full-art layer.
             if (_CartImage) { _CartImage.enabled = false; _CartImage.raycastTarget = false; }
         }
         void UpdateWorldArt(Camera camera)
         {
-            if (_WorldArt == null) return;
+            if (_WorldArt == null || _WorldImages == null) return;
             float depth = camera.WorldToScreenPoint(transform.position).z;
-            for (int i = 0; i < _WorldArt.Length; i++)
+            int count = Mathf.Min(_WorldArt.Length, _WorldImages.Length);
+            for (int i = 0; i < count; i++)
             {
                 var image = _WorldImages[i];
                 var art = _WorldArt[i];
+                if (!art) continue;
+                if (!image) { art.enabled = false; continue; }
                 bool replacedBody = _PossessedGlowReplacesBody && IsPossessed && _PossessedGlow &&
                     _PossessedGlow.activeInHierarchy && image == _CartImage;
-                art.enabled = image != _AreaImage && !replacedBody && _Root.activeInHierarchy && image.gameObject.activeInHierarchy && depth > camera.nearClipPlane;
+                // The area reads through the repeated ghost pattern only; the old cursor bound markers are retired.
+                bool boundMarker = image == _Left || image == _Right;
+                art.enabled = image != _AreaImage && !boundMarker && !replacedBody && _Root.activeInHierarchy && image.gameObject.activeInHierarchy && depth > camera.nearClipPlane;
                 art.flipX = image == _Right;
                 if (!art.enabled) continue;
                 var sprite = image.sprite;
@@ -252,7 +258,7 @@ namespace HauntedFish.Multiplayer
             if (!_Trap || _Trap.InputMode != TrapInputMode.MouseClick || _Trap.Phase != TrapPhase.Active)
                 _Cart.localScale = Vector3.one * (nearby && (!_Trap || _Trap.PlacementMode != TrapPlacementMode.HallwayCeiling) ? 1.12f : 1);
             _Left.color = _Right.color = possessed ? HotelPalette.Peach : HotelPalette.Moss;
-            PresentPossession(possessed);
+            PresentPossession(possessed || _Trap && _Trap.PiercesBodies && _Trap.Phase == TrapPhase.Active);
             PresentPattern(camera);
             UpdateWorldArt(camera);
         }

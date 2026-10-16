@@ -4,7 +4,7 @@ using Ink.Runtime;
 
 namespace Monologue.Dialogue
 {
-    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI, Spin, LobbyShot, LobbyLine, ParallaxTo }
+    public enum StorySequenceStepKind { SetVisible, SetVariant, PushTo, MoveUI, SlideUI, Knock, Wait, ExpandPanel, FlashFrames, DollyTo, CreateUI, Spin, LobbyShot, LobbyLine, ParallaxTo, OutroTitle, RollCredits }
 
     public readonly struct StorySequenceStep
     {
@@ -71,6 +71,17 @@ namespace Monologue.Dialogue
                 if (queue == null) throw new InvalidOperationException("LobbyLine requires a local introduction sequence.");
                 queue(new StorySequenceStep(StorySequenceStepKind.LobbyLine, "player", text, seconds: seconds));
             });
+            story.BindExternalFunction("OutroTitle", (string text, float seconds) =>
+            {
+                if (queue == null) throw new InvalidOperationException("OutroTitle requires a local lobby sequence.");
+                queue(new StorySequenceStep(StorySequenceStepKind.OutroTitle, "title", text, seconds: seconds));
+            });
+            // The camera jibs back while the credits roll; both run for the same authored duration.
+            story.BindExternalFunction("RollCredits", (float seconds) =>
+            {
+                if (queue == null) throw new InvalidOperationException("RollCredits requires a local lobby sequence.");
+                queue(new StorySequenceStep(StorySequenceStepKind.RollCredits, "credits", seconds: seconds));
+            });
             story.BindExternalFunction("CreateUI", (string prefab, string instance, string parent) =>
             {
                 if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.CreateUI, instance, prefab, parent: parent));
@@ -111,6 +122,12 @@ namespace Monologue.Dialogue
                 if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.MoveUI, objectTag, seconds: seconds, x: x, y: y));
                 else OnMoveUIEvent?.Invoke(objectTag, x, y, seconds);
             });
+            // Pushed and let go: leaves at full speed and sliding friction brings it to rest.
+            story.BindExternalFunction("SlideUI", (string objectTag, float x, float y, float seconds) =>
+            {
+                if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.SlideUI, objectTag, seconds: seconds, x: x, y: y));
+                else OnMoveUIEvent?.Invoke(objectTag, x, y, seconds);
+            });
             story.BindExternalFunction("Knock", (string objectTag, int count, float interval) =>
             {
                 if (queue != null) queue(new StorySequenceStep(StorySequenceStepKind.Knock, objectTag, seconds: interval, count: count));
@@ -132,6 +149,8 @@ namespace Monologue.Dialogue
             story.UnbindExternalFunction("ParallaxTo");
             story.UnbindExternalFunction("LobbyShot");
             story.UnbindExternalFunction("LobbyLine");
+            story.UnbindExternalFunction("OutroTitle");
+            story.UnbindExternalFunction("RollCredits");
             story.UnbindExternalFunction("CreateUI");
             story.UnbindExternalFunction("ExpandPanel");
             story.UnbindExternalFunction("FlashFrames");
@@ -140,6 +159,7 @@ namespace Monologue.Dialogue
             story.UnbindExternalFunction("SetVariant");
             story.UnbindExternalFunction("PushTo");
             story.UnbindExternalFunction("MoveUI");
+            story.UnbindExternalFunction("SlideUI");
             story.UnbindExternalFunction("Knock");
             story.UnbindExternalFunction("Wait");
             story.UnbindExternalFunction("Spin");

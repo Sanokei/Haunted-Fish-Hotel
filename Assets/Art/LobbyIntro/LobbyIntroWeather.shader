@@ -92,14 +92,15 @@ Shader "HauntedFish/UI/Lobby Intro Weather"
                 float2 q = frac(p)-float2(0.2+n*0.6,0.5);
                 float length = _Length*lerp(0.6,1.45,n2);
                 float along = q.y/length;
-                float taper = saturate(1.0-abs(along)*2.0);
+                // Streak is brightest at its trailing end and fades toward the leading edge, like motion-blurred drops.
+                float taper = saturate(1.0-abs(along)*2.0)*lerp(1.0,0.45,saturate(along*0.5+0.5));
                 float width = _Width*lerp(0.6,1.5,n)*sqrt(taper+0.015);
                 float aa = max(fwidth(p.x)*0.7,0.004);
                 float crossSection = 1.0-smoothstep(width*0.15,width+aa,abs(q.x));
                 float body = crossSection*pow(taper,0.85);
                 // Broken specular response and a tiny softer head avoid rigid white strokes.
                 float breakup = lerp(0.35,1.0,noise(float2(q.y*39.0,n*71.0)));
-                float head = exp(-dot(q/float2(width*1.8+aa,length*0.11),q/float2(width*1.8+aa,length*0.11)))*0.22;
+                float head = 0.0;
                 return saturate(body*breakup+head)*lerp(0.25,0.95,n2)*step(0.19,n);
             }
             float ripple(float2 uv, float time)

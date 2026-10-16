@@ -1,0 +1,122 @@
+{
+  "Tenement_2ndAve808_HABS": {
+    "tiles": false,
+    "storeys": 5,
+    "width": 2048,
+    "height": 1024,
+    "roofRow": 0,
+    "litWindows": 12
+  },
+  "Tenement_2ndAve863_HABS": {
+    "tiles": false,
+    "storeys": 5,
+    "width": 2048,
+    "height": 1024,
+    "roofRow": 0,
+    "litWindows": 14
+  },
+  "Tenement_2ndAve873_HABS": {
+    "tiles": false,
+    "storeys": 5,
+    "width": 2048,
+    "height": 1024,
+    "roofRow": 0,
+    "litWindows": 14
+  },
+  "Tenement_2ndAve867_FireEscape_HABS": {
+    "tiles": false,
+    "storeys": 5,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 16
+  },
+  "Tenement_2ndAve887_HABS": {
+    "tiles": false,
+    "storeys": 5,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 9
+  },
+  "CastIron_PerryBlock_HABS": {
+    "tiles": false,
+    "storeys": 4,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 11
+  },
+  "ArtDeco_FederalBldg_Monroe": {
+    "tiles": false,
+    "storeys": 4,
+    "width": 2048,
+    "height": 1024,
+    "roofRow": 0,
+    "litWindows": 28
+  },
+  "ACG_Facade012": {
+    "tiles": true,
+    "storeys": 12,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 178
+  },
+  "ACG_Facade013": {
+    "tiles": true,
+    "storeys": 12,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 72
+  },
+  "ACG_Facade014": {
+    "tiles": true,
+    "storeys": 12,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 246
+  },
+  "ACG_Facade015": {
+    "tiles": true,
+    "storeys": 12,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 184
+  },
+  "ACG_Facade016": {
+    "tiles": true,
+    "storeys": 12,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 164
+  },
+  "ACG_Facade018A": {
+    "tiles": true,
+    "storeys": 6,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 1
+  },
+  "ACG_Facade019A": {
+    "tiles": true,
+    "storeys": 6,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 3
+  },
+  "ACG_Facade020A": {
+    "tiles": true,
+    "storeys": 6,
+    "width": 2048,
+    "height": 2048,
+    "roofRow": 0,
+    "litWindows": 9
+  }
+}

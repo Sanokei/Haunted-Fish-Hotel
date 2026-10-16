@@ -119,7 +119,7 @@ namespace Monologue.Dialogue
                         !_Objects.ContainsKey(step.Target) && created.Add(step.Target);
                 }
                 else if (created.Contains(step.Target) && (step.Kind == StorySequenceStepKind.SetVisible ||
-                    step.Kind == StorySequenceStepKind.MoveUI || step.Kind == StorySequenceStepKind.Knock)) supported = true;
+                    step.Kind == StorySequenceStepKind.MoveUI || step.Kind == StorySequenceStepKind.SlideUI || step.Kind == StorySequenceStepKind.Knock)) supported = true;
                 if (!supported) throw new InvalidOperationException("Unbound story UI operation: " + step.Kind + "(" + step.Target + ")");
             }
         }
@@ -197,14 +197,17 @@ namespace Monologue.Dialogue
                     }
                     break;
                 case StorySequenceStepKind.MoveUI:
-                    if (_Objects[step.Target].PulseSound && _Audio) _Audio.PlayOneShot(_Objects[step.Target].PulseSound);
+                case StorySequenceStepKind.SlideUI:
+                    // A slide continues the preceding MoveUI, which already played the element's sound.
+                    if (step.Kind == StorySequenceStepKind.MoveUI && _Objects[step.Target].PulseSound && _Audio) _Audio.PlayOneShot(_Objects[step.Target].PulseSound);
                     var element = _Objects[step.Target];
                     var start = element.Target.anchoredPosition;
+                    bool slide = step.Kind == StorySequenceStepKind.SlideUI;
                     yield return Tween(step.Seconds, t =>
                     {
                         element.Target.anchoredPosition = Vector2.Lerp(start, new Vector2(step.X, step.Y), t);
                         if (element.ContactShadow) element.ContactShadow.anchoredPosition = element.Target.anchoredPosition + element.ShadowOffset;
-                    });
+                    }, slide ? FrictionSlide : (Func<float, float>)null);
                     break;
                 case StorySequenceStepKind.PushTo:
                 case StorySequenceStepKind.ExpandPanel:
@@ -249,7 +252,8 @@ namespace Monologue.Dialogue
                         if (knocked.PulseLabel) knocked.PulseLabel.SetActive(true);
                         if (knocked.PulseSound && _Audio) _Audio.PlayOneShot(knocked.PulseSound);
                         float pulse = Mathf.Min(.2f, step.Seconds);
-                        yield return Tween(pulse, t => knocked.Target.anchoredPosition = rest + new Vector2(Mathf.Sin(t * Mathf.PI * 4) * (1 - t) * 9, 0));
+                        // Each knock rattles the door in its frame: a firm jolt that dies out in about a cycle and a half.
+                        yield return Tween(pulse, t => knocked.Target.anchoredPosition = rest + new Vector2(Mathf.Sin(t * Mathf.PI * 3) * (1 - t) * 5, -Mathf.Sin(t * Mathf.PI) * (1 - t) * 2));
                         knocked.Target.anchoredPosition = rest;
                         if (knocked.PulseLabel) knocked.PulseLabel.SetActive(false);
                         if (step.Seconds > pulse) yield return new WaitForSecondsRealtime(step.Seconds - pulse);
@@ -264,13 +268,15 @@ namespace Monologue.Dialogue
                 case StorySequenceStepKind.Wait: yield return new WaitForSecondsRealtime(step.Seconds); break;
             }
         }
-        static IEnumerator Tween(float seconds, Action<float> apply)
+        // Constant sliding friction: velocity falls linearly from the push to zero, so distance eases out quadratically.
+        static float FrictionSlide(float t) => t * (2 - t);
+        static IEnumerator Tween(float seconds, Action<float> apply, Func<float, float> ease = null)
         {
             if (seconds <= 0) { apply(1); yield break; }
             for (float elapsed = 0; elapsed < seconds; elapsed += Time.unscaledDeltaTime)
             {
                 float t = Mathf.Clamp01(elapsed / seconds);
-                apply(t * t * (3 - 2 * t));
+                apply(ease != null ? ease(t) : t * t * (3 - 2 * t));
                 yield return null;
             }
             apply(1);

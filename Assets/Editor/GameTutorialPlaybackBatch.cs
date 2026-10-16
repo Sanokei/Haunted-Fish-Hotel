@@ -22,7 +22,7 @@ public static class GameTutorialPlaybackBatch
         for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
             if (UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).isDirty)
                 throw new InvalidOperationException("Refusing a dirty scene.");
-        string evidence = Path.GetFullPath("Temp/ReadyUpNativeValidation");
+        string evidence = System.IO.Path.GetFullPath("Temp/ReadyUpNativeValidation");
         Directory.CreateDirectory(evidence);
         int checks = 0;
         try
@@ -59,13 +59,13 @@ public static class GameTutorialPlaybackBatch
                 }
                 finally { PrefabUtility.UnloadPrefabContents(root); }
             }
-            File.WriteAllText(Path.Combine(evidence, "result.txt"), "PASS " + checks +
+            File.WriteAllText(System.IO.Path.Combine(evidence, "result.txt"), "PASS " + checks +
                 " native imported ready-page binding, font-height and lifecycle checks. No screenshot, play-mode input or live multiplayer pass claimed.");
             EditorApplication.Exit(0);
         }
         catch (Exception error)
         {
-            File.WriteAllText(Path.Combine(evidence, "result.txt"), "FAIL " + error);
+            File.WriteAllText(System.IO.Path.Combine(evidence, "result.txt"), "FAIL " + error);
             EditorApplication.Exit(1);
         }
     }

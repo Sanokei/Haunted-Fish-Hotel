@@ -163,7 +163,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 40
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fbe3ce089dc641b5521f410afd58b99b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -250,7 +250,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 39
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: f50a6773901051a44b991797b612954c, type: 3}
   m_Color: {r: 0.9254901960784314, g: 0.996078431372549, b: 0.792156862745098, a: 1}
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f79ffa294c04cb588d4bc5812c11ff8, type: 3}
   _DangerPattern: {fileID: 21300000, guid: 605180dacd324b3893a1bde3fef7d1bf, type: 3}
-  _RangeMarker: {fileID: 21300000, guid: ad74e6bf18f9482baf05852f6c78e8ab, type: 3}
+  _RangeMarker: {fileID: 21300000, guid: f2d731fbec4f0034c9fb47445958777b, type: 3}
   m_Name:
   m_EditorClassIdentifier:
   _Root: {fileID: 31000103}
@@ -667,7 +667,6 @@ MonoBehaviour:
   - {fileID: 92000022}
   - {fileID: 92000032}
   - {fileID: 93000012}
-
 --- !u!114 &31000999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,7 +681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   _FamilyTag: angler
   _DisplayName: Angler fish
-  _InputMode: 0
+  _InputMode: 2
   _Behaviour: 3
   _Impact: 2
   _PiercingSpeed: 14
@@ -762,7 +761,6 @@ GameObject:
   m_Name: Authored trap artwork 0
   m_TagString: Untagged
   m_IsActive: 1
-
 --- !u!4 &92000001
 Transform:
   m_ObjectHideFlags: 0
@@ -776,7 +774,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31000093}
-
 --- !u!212 &92000002
 SpriteRenderer:
   serializedVersion: 2
@@ -824,7 +821,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -18
+  m_SortingOrder: 12
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: f50a6773901051a44b991797b612954c, type: 3}
   m_Color: {r: 0.9254902, g: 0.99607843, b: 0.7921569, a: 1}
@@ -850,7 +847,6 @@ GameObject:
   m_Name: Authored trap artwork 1
   m_TagString: Untagged
   m_IsActive: 1
-
 --- !u!4 &92000011
 Transform:
   m_ObjectHideFlags: 0
@@ -864,7 +860,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31000093}
-
 --- !u!212 &92000012
 SpriteRenderer:
   serializedVersion: 2
@@ -912,7 +907,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -18
+  m_SortingOrder: 12
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ad74e6bf18f9482baf05852f6c78e8ab, type: 3}
   m_Color: {r: 0.9254902, g: 0.99607843, b: 0.7921569, a: 1}
@@ -938,7 +933,6 @@ GameObject:
   m_Name: Authored trap artwork 2
   m_TagString: Untagged
   m_IsActive: 1
-
 --- !u!4 &92000021
 Transform:
   m_ObjectHideFlags: 0
@@ -952,7 +946,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31000093}
-
 --- !u!212 &92000022
 SpriteRenderer:
   serializedVersion: 2
@@ -1000,7 +993,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -18
+  m_SortingOrder: 12
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ad74e6bf18f9482baf05852f6c78e8ab, type: 3}
   m_Color: {r: 0.9254902, g: 0.99607843, b: 0.7921569, a: 1}
@@ -1026,7 +1019,6 @@ GameObject:
   m_Name: Authored trap artwork 3
   m_TagString: Untagged
   m_IsActive: 1
-
 --- !u!4 &92000031
 Transform:
   m_ObjectHideFlags: 0
@@ -1040,7 +1032,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31000093}
-
 --- !u!212 &92000032
 SpriteRenderer:
   serializedVersion: 2
@@ -1088,7 +1079,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -10
+  m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fbe3ce089dc641b5521f410afd58b99b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1115,7 +1106,6 @@ GameObject:
   m_Name: Authored clipped ghost range
   m_TagString: Untagged
   m_IsActive: 1
-
 --- !u!4 &92000101
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,7 +1119,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31000093}
-
 --- !u!23 &92000102
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1176,7 +1165,7 @@ MeshRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -20
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &92000103
@@ -1289,7 +1278,6 @@ GameObject:
   m_Name: Authored possessed angler glow
   m_TagString: Untagged
   m_IsActive: 1
-
 --- !u!4 &93000011
 Transform:
   m_ObjectHideFlags: 0
@@ -1303,7 +1291,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31000093}
-
 --- !u!212 &93000012
 SpriteRenderer:
   serializedVersion: 2
@@ -1351,7 +1338,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -9
+  m_SortingOrder: 21
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 960ff0e8d4cfe0b1fc0859efd41bd353, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1377,7 +1364,6 @@ GameObject:
   m_Name: Possessed lure light
   m_TagString: Untagged
   m_IsActive: 1
-
 --- !u!4 &93000021
 Transform:
   m_ObjectHideFlags: 0
@@ -1391,7 +1377,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31000093}
-
 --- !u!108 &93000022
 Light:
   m_ObjectHideFlags: 0
