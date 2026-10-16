@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 namespace HauntedFish.BossFight
 {
-    // One captured pointer owns either physical striker or an existing 3D defense, never cue-ball.
+    // One captured pointer owns an existing 3D defense. Strikers are keyboard-only (WASD, shift to boost); the cue ball
+    // and both strikers still block the pick so a defense under them cannot be grabbed through them.
     public sealed class BossDragInput : MonoBehaviour
     {
         [SerializeField] BossArenaManager _Arena;
@@ -52,7 +53,7 @@ namespace HauntedFish.BossFight
             {
                 var hit=_Hits[i];if(hit.distance>=distance||!hit.collider)continue;
                 var piece=hit.collider.GetComponentInParent<BossDefensePiece>();
-                bool striker=hit.rigidbody==owned;bool defense=piece&&_Board.Owns(actor,piece.Slot);
+                bool striker=false;bool defense=piece&&_Board.Owns(actor,piece.Slot);
                 // Cue ball and opponent are real blockers to pointer capture; cannot select through them.
                 bool known=piece||hit.rigidbody==_Arena.Puck||hit.rigidbody==_FishStriker||hit.rigidbody==_GhostStriker;
                 if(!known)continue;distance=hit.distance;_Striker=striker;_Slot=defense?piece.Slot:-1;

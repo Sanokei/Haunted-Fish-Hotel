@@ -14,6 +14,8 @@ namespace HauntedFish.Multiplayer
         public float Rotation, Progress;
         public string FamilyTag;
         public int Phase, Activations;
+        // Counts fish struck, so every peer can play the hit.
+        public int Hits;
     }
 
     [Serializable]
@@ -68,7 +70,8 @@ namespace HauntedFish.Multiplayer
             foreach (var zone in ForbiddenZones)
             {
                 if (origin.z + offset.z + half.z <= zone.min.z || origin.z + offset.z - half.z >= zone.max.z) continue;
-                if (origin.x + offset.x >= zone.max.x) left = Mathf.Max(left, zone.max.x + half.x - offset.x);
+                // Side is judged from the zone centre so a trap touching the zone edge is not flipped behind it.
+                if (origin.x + offset.x >= zone.center.x) left = Mathf.Max(left, zone.max.x + half.x - offset.x);
                 else right = Mathf.Min(right, zone.min.x - half.x - offset.x);
             }
             return new Vector2(Mathf.Max(left, origin.x - travel), Mathf.Min(right, origin.x + travel));
@@ -496,6 +499,7 @@ namespace HauntedFish.Multiplayer
             trap.name = prefab.DisplayName + " " + record.Id;
             trap.gameObject.SetActive(true);
             trap.Initialize(this, record, record.Id);
+            _State.Cubes[_State.Cubes.Count - 1] = trap.CaptureState();
             _Objects.Add(record.Id, trap);
             player.HeldTrapFamily = "";
             _NextPlacement = Time.unscaledTime + .2f;
@@ -572,6 +576,12 @@ namespace HauntedFish.Multiplayer
                     }
                     var haunting = _Haunting ? _Haunting : GameSceneController.Current ? GameSceneController.Current.Haunting : null;
                     if (haunting) haunting.ApplyTrapDamage(trap, before, Time.deltaTime);
+                    int hitIndex = _State.Cubes.FindIndex(p => p.Id == item.Key);
+                    if (hitIndex >= 0 && _State.Cubes[hitIndex].Hits != trap.CaptureState().Hits)
+                    {
+                        _State.Cubes[hitIndex] = trap.CaptureState();
+                        _Dirty = true;
+                    }
                 }
 
                 Publish(authority);

@@ -271,15 +271,16 @@ namespace HauntedFish.Tutorials
                     initialCeilingPosition = observedPresentation.FixedCeilingLayout.position; sawSway = false; break;
                 case "angler-place":
                     PrepareTrapDemo(AnglerDefinition, -4);
-                    float spare = activeTrap.Limits.y - activeTrap.CollisionBounds.max.x - activeTrap.BodyHalfSize.x -
+                    // A fresh angler waits at the right end of its run and drives left through the fish.
+                    float spare = activeTrap.CollisionBounds.min.x - activeTrap.Limits.x - activeTrap.BodyHalfSize.x -
                         2 * ActorRadius(Fish) - 2 * ActorRadius(OtherFish);
                     float gap = spare / 4;
-                    Require(gap > .05f, "angler authored travel band has clear entry and exit space");
-                    float firstX = activeTrap.CollisionBounds.max.x + ActorRadius(Fish) + gap;
-                    float secondX = firstX + ActorRadius(Fish) + ActorRadius(OtherFish) + gap;
+                    Require(gap > .05f, $"angler authored travel band has clear entry and exit space (limits={activeTrap.Limits} bounds={activeTrap.CollisionBounds} half={activeTrap.BodyHalfSize} fish={ActorRadius(Fish)}/{ActorRadius(OtherFish)} gap={gap})");
+                    float firstX = activeTrap.CollisionBounds.min.x - ActorRadius(Fish) - gap;
+                    float secondX = firstX - ActorRadius(Fish) - ActorRadius(OtherFish) - gap;
                     PrepareActor(Fish, true, new Vector3(firstX, 1, 0));
                     PrepareActor(OtherFish, true, new Vector3(secondX, 1, 0));
-                    Require(secondX + ActorRadius(OtherFish) + activeTrap.BodyHalfSize.x + gap < activeTrap.Limits.y,
+                    Require(secondX - ActorRadius(OtherFish) - activeTrap.BodyHalfSize.x - gap > activeTrap.Limits.x,
                         "angler authored travel band fits two victims and body exit");
                     ObservePresentation(); break;
                 case "angler-light":
@@ -291,7 +292,9 @@ namespace HauntedFish.Tutorials
                     firstBody = Fish.BodyController.bounds; secondBody = OtherFish.BodyController.bounds;
                     beforeDeath = Fish.GhostEmergenceVersion; otherBeforeDeath = OtherFish.GhostEmergenceVersion;
                     sawFirstSoul = sawSecondSoul = false; slowSpeed = float.MaxValue; clearSpeed = 0;
-                    previousTrapX = entryX = activeTrap.Position.x; trapAxis = 1; break;
+                    previousTrapX = entryX = activeTrap.Position.x;
+                    // The angler is fired, not steered: one activation runs it to the far end of its travel.
+                    Require(World.AcceptTrapAction(Ghost, activeTrap.Index, new TrapInput(TrapInputKind.Activate, 0)), "angler activation"); break;
                 case "fish-light": if (Spotlight) Spotlight.gameObject.SetActive(true); break;
                 case "ghost-fly": break;
                 case "package":
@@ -327,6 +330,8 @@ namespace HauntedFish.Tutorials
                 case "fall":
                     Require(World.AcceptTrapAction(Ghost, activeTrap.Index, new TrapInput(TrapInputKind.Activate)), "production Space chandelier activate"); initialFish = activeTrap.Position; break;
                 case "reset":
+                    // Dropping ejects the ghost; re-possess the fallen chandelier to reset it, as in Game.
+                    GhostFlight.position = activeTrap.Position; World.Possess(Ghost, activeTrap.Index, GhostFlight.position);
                     Require(World.AcceptTrapAction(Ghost, activeTrap.Index, new TrapInput(TrapInputKind.Reset)), "production F / gamepad B reset"); break;
                 case "click":
                     World.Possess(Ghost, -1, GhostFlight.position); Spawn("click", 10);
@@ -467,7 +472,7 @@ namespace HauntedFish.Tutorials
                     var body = activeTrap.CollisionBounds;
                     bool inside = body.Intersects(firstBody) || body.Intersects(secondBody);
                     if (inside) slowSpeed = Mathf.Min(slowSpeed, speed);
-                    else if (activeTrap.Position.x > entryX + .01f) clearSpeed = Mathf.Max(clearSpeed, speed);
+                    else if (activeTrap.Position.x < entryX - .01f) clearSpeed = Mathf.Max(clearSpeed, speed);
                 }
                 previousTrapX = activeTrap.Position.x;
                 sawFirstSoul |= Fish.IsDead && Fish.DeathEmergence && Fish.DeathEmergence.gameObject.activeInHierarchy;
@@ -518,7 +523,7 @@ namespace HauntedFish.Tutorials
             {
                 Require(Fish.IsDead && OtherFish.IsDead && Fish.ControlMode == HotelControlMode.Spectator && OtherFish.ControlMode == HotelControlMode.Spectator &&
                     Fish.GhostEmergenceVersion == beforeDeath + 1 && OtherFish.GhostEmergenceVersion == otherBeforeDeath + 1 &&
-                    activeTrap.CollisionBounds.min.x > secondBody.max.x, "angler-crosses-multiple-fish");
+                    activeTrap.CollisionBounds.max.x < secondBody.min.x, "angler-crosses-multiple-fish");
                 Require(slowSpeed < float.MaxValue && clearSpeed > slowSpeed * 1.2f, "angler-body-slowdown");
                 Require(sawFirstSoul && sawSecondSoul && !Fish.DeathEmergence.gameObject.activeSelf && !OtherFish.DeathEmergence.gameObject.activeSelf,
                     "authored-death-soul-and-clear");

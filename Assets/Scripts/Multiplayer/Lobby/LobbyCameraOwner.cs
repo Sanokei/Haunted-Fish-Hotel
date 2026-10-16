@@ -49,10 +49,22 @@ namespace HauntedFish.Multiplayer
 
         public bool RequiresTrackingTarget => true;
         public void Validate() => ForwardDistance = Mathf.Max(.01f, ForwardDistance);
-        public void Reset() => _Target = null;
+        [Tooltip("How far the player can walk forward before the camera starts following.")]
+        [Min(0f)] public float DeadZoneForward = 2f;
+        [Tooltip("How far the player can walk back toward the camera before it retreats.")]
+        [Min(0f)] public float DeadZoneBack = 1f;
+        [System.NonSerialized] bool _HasStart;
+        [System.NonSerialized] float _Travel;
+
+        // Cinemachine calls Reset on re-enable/cut; keep the spawn anchor so the mapping stays
+        // position-based and the camera rails back when the player returns toward it.
+        public void Reset() { }
         public void Bind(Transform target)
         {
+            if (target == _Target && _HasStart) return;
             _Target = target;
+            _HasStart = target;
+            _Travel = 0f;
             if (target) _StartPosition = target.position;
         }
 
@@ -64,8 +76,13 @@ namespace HauntedFish.Multiplayer
             var start = spline.transform.TransformPoint((Vector3)spline.Spline[0].Position);
             var end = spline.transform.TransformPoint((Vector3)spline.Spline[1].Position);
             var forward = Vector3.ProjectOnPlane(end - start, Vector3.up).normalized;
-            var progress = Mathf.Clamp01(Vector3.Dot(target.position - _StartPosition, forward)
-                / Mathf.Max(.01f, ForwardDistance));
+            // Dead zone: the camera holds while the player moves inside a window around its
+            // current spot and only follows once they pass the window's front or back edge.
+            var travel = Vector3.Dot(target.position - _StartPosition, forward);
+            if (travel > _Travel + DeadZoneForward) _Travel = travel - DeadZoneForward;
+            else if (travel < _Travel - DeadZoneBack) _Travel = travel + DeadZoneBack;
+            _Travel = Mathf.Clamp(_Travel, 0f, ForwardDistance);
+            var progress = _Travel / Mathf.Max(.01f, ForwardDistance);
             // Knot units explicitly limit movement to the first segment, even if the rail is extended.
             return spline.Spline.ConvertIndexUnit(progress, PathIndexUnit.Knot, positionUnits);
         }

@@ -13,7 +13,7 @@ namespace HauntedFish.Multiplayer
         public void Configure(int id,TrapDefinition definition)
         {
             PackageId=id;FamilyTag=definition.Family;
-            if(_Item){_Item.sprite=definition.Artwork;Fit(_Item,_ItemWorldSize);}
+            var itemArea=_ItemWorldSize;
             if(_Box)
             {
                 if(_Box.drawMode==SpriteDrawMode.Simple)Fit(_Box,_BoxWorldSize);
@@ -24,10 +24,13 @@ namespace HauntedFish.Multiplayer
                     var size=BoxSize(definition.Family);
                     _Box.transform.localScale=Vector3.one*SliceScale;
                     _Box.size=size/SliceScale;
+                    // Trap rides centred on top of whichever box shape it came in.
+                    itemArea=size*ItemFill;
                 }
             }
+            if(_Item){_Item.sprite=definition.Artwork;_Item.transform.localPosition=new Vector3(0,0,_Item.transform.localPosition.z);Fit(_Item,itemArea);}
         }
-        const float SliceScale=.2f;
+        const float SliceScale=.2f,ItemFill=.72f;
         static Vector2 BoxSize(string family)=>family switch
         {
             "cart"=>new Vector2(3.6f,2.1f),

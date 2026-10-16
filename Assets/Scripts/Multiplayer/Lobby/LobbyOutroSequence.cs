@@ -20,7 +20,7 @@ namespace HauntedFish.Multiplayer
         [SerializeField] TextAsset _FishWinInk;
         [SerializeField] TextAsset _FishDefeatInk;
         [SerializeField] TextAsset _CreditsInk;
-        [Tooltip("Credits source. '# ' heading, '- ' small print, '@handle' gets the Instagram mark, '//' is a note.")]
+        [Tooltip("Credits source. '# ' heading, '- ' small print, '@handle' gets the Instagram mark, '[logo] Name' shows Resources/CreditsLogos/Name, '//' is a note.")]
         [SerializeField] TextAsset _CreditsText;
         [Header("World")]
         [SerializeField] CinemachineCamera _Camera;
@@ -47,12 +47,12 @@ namespace HauntedFish.Multiplayer
 
         public bool Playing { get; private set; }
         public event Action PlayingChanged;
-        public bool CreditsPending => !_CreditsShown && _CreditsInk && !(RememberCredits && PlayerPrefs.GetInt(CreditsSeenKey, 0) == 1);
+        public bool CreditsPending => _CreditsInk && !(RememberCredits && PlayerPrefs.GetInt(CreditsSeenKey, 0) == 1);
 
         InputAction _Skip;
         float _SkipHeld;
         Coroutine _Routine;
-        bool _CreditsShown, _CreditsAllowed, _Active, _CreditsBuilt, _Cheering;
+        bool _CreditsAllowed, _Active, _CreditsBuilt, _Cheering;
         Transform _Actor;
         Vector3 _ActorHome, _ActorScale;
         float _CheerStart;
@@ -82,6 +82,14 @@ namespace HauntedFish.Multiplayer
             LobbyOutroKind.FishDefeat => _FishDefeatInk,
             _ => null,
         };
+        // Blacks out the lobby while a returning match result waits for its first shot.
+        public void CoverScreen(bool cover)
+        {
+            if (Playing) return;
+            if (!cover) { ResetOverlay(); return; }
+            if (_Overlay) _Overlay.alpha = 1;
+            if (_Fade) _Fade.color = Color.black;
+        }
         public bool PlayOutcome(LobbyOutroKind kind) => Play(InkFor(kind));
         // Leaving the lobby shows the credits only while they are still pending.
         public bool PlayCredits() => CreditsPending && Play(_CreditsInk);
@@ -187,6 +195,7 @@ namespace HauntedFish.Multiplayer
             _Camera.transform.SetPositionAndRotation(_CrashStart.position, _CrashStart.rotation);
             SetFieldOfView(_CameraFieldOfView);
             _Camera.PreviousStateIsValid = false;
+            if (_Fade) _Fade.color = Color.clear;
         }
 
         // Accelerates the whole way in, slams to a stop, then a short overshoot settles on the close-up.
@@ -216,6 +225,12 @@ namespace HauntedFish.Multiplayer
             _Overlay.alpha = 1;
             _Title.text = text;
             _Title.gameObject.SetActive(true);
+            // Sit the card at the top so it never covers the winner's face.
+            _Title.verticalAlignment = VerticalAlignmentOptions.Top;
+            _Title.margin = new Vector4(0, 40, 0, 0);
+            // A dark outline keeps the card readable over the bright close-up; TMP only has its material once active.
+            _Title.outlineWidth = .16f;
+            _Title.outlineColor = new Color32(20, 12, 10, 255);
             var rect = _Title.rectTransform;
             float punch = Mathf.Min(.35f, seconds);
             yield return Tween(punch, t =>
@@ -246,7 +261,6 @@ namespace HauntedFish.Multiplayer
                 LayoutRebuilder.ForceRebuildLayoutImmediate(_CreditsContent);
                 viewport = _CreditsViewport.rect.height;
                 roll = _CreditsContent.rect.height + viewport;
-                _CreditsShown = true;
             }
             yield return Tween(total, t =>
             {
@@ -260,7 +274,7 @@ namespace HauntedFish.Multiplayer
                 _Fade.color = new Color(0, 0, 0, Mathf.Max(dim, black));
                 if (credits) _CreditsContent.anchoredPosition = new Vector2(0, -viewport + roll * t);
             });
-            if (credits && RememberCredits) { PlayerPrefs.SetInt(CreditsSeenKey, 1); PlayerPrefs.Save(); }
+            if (credits) MarkCreditsSeen();
         }
 
         void Update()
@@ -272,9 +286,8 @@ namespace HauntedFish.Multiplayer
             // A held skip counts as having seen the credits, like the introduction.
             if (progress >= 1) { if (_CreditsAllowed) MarkCreditsSeen(); Stop(true); }
         }
-        void MarkCreditsSeen()
+        static void MarkCreditsSeen()
         {
-            _CreditsShown = true;
             if (RememberCredits) { PlayerPrefs.SetInt(CreditsSeenKey, 1); PlayerPrefs.Save(); }
         }
 
@@ -310,6 +323,7 @@ namespace HauntedFish.Multiplayer
             {
                 var line = raw.TrimEnd('\r');
                 if (line.StartsWith("//")) continue;
+                if (line.StartsWith("[logo] ")) { AddLogo(line.Substring(7).Trim()); continue; }
                 var template = line.StartsWith("# ") ? _HeadingTemplate : line.StartsWith("- ") ? _SmallTemplate : _LineTemplate;
                 if (!template) template = _LineTemplate;
                 var text = line.StartsWith("# ") || line.StartsWith("- ") ? line.Substring(2) : line;
@@ -356,6 +370,27 @@ namespace HauntedFish.Multiplayer
             image.sprite = InstagramMark(); image.color = _IconColor; image.raycastTarget = false;
             var element = icon.GetComponent<LayoutElement>();
             element.preferredWidth = element.preferredHeight = size * .82f;
+        }
+        // A centered logo row, sized off the body text so it scales with the roll.
+        void AddLogo(string name)
+        {
+            var texture = Resources.Load<Texture2D>("CreditsLogos/" + name);
+            if (!texture) { Debug.LogWarning("Missing credits logo: " + name, this); return; }
+            var row = new GameObject("Credits logo " + name, typeof(RectTransform), typeof(HorizontalLayoutGroup), typeof(ContentSizeFitter));
+            row.transform.SetParent(_CreditsContent, false);
+            var layout = row.GetComponent<HorizontalLayoutGroup>();
+            layout.childAlignment = TextAnchor.MiddleCenter;
+            layout.childControlWidth = layout.childControlHeight = true;
+            layout.childForceExpandWidth = layout.childForceExpandHeight = false;
+            row.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            var logo = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(LayoutElement));
+            logo.transform.SetParent(row.transform, false);
+            var image = logo.GetComponent<Image>();
+            image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(.5f, .5f), 100);
+            image.preserveAspect = true; image.raycastTarget = false;
+            var element = logo.GetComponent<LayoutElement>();
+            element.preferredHeight = _LineTemplate.fontSize * 1.8f;
+            element.preferredWidth = element.preferredHeight * texture.width / texture.height;
         }
         // The outline camera mark: rounded square, lens ring and flash dot, drawn once with soft edges.
         static Sprite InstagramMark()

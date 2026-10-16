@@ -15,9 +15,13 @@ GameObject:
   - component: {fileID: 31900003}
   - component: {fileID: 31000123}
   - component: {fileID: 31000999}
+  - component: {fileID: 8228628842873594569}
   m_Layer: 0
-  m_Name: AnglerFishTrap
+  m_Name: TutorialAngler
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &31000093
 Transform:
@@ -26,6 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31000092}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -49,16 +54,193 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31000092}
-  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_LayerOverridePriority: 0
-  m_Material: {fileID: 0}
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 2.8, y: 2.24423174, z: 1}
+  m_Size: {x: 2.8, y: 2.2442317, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &31900001
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31000092}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.8, y: 1.2272041, z: 1}
+  m_Center: {x: 0, y: -0.50851387, z: 0}
+--- !u!65 &31900002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31000092}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4994458, y: 0.36675063, z: 1}
+  m_Center: {x: -0.533199, y: 0.28846347, z: 0}
+--- !u!65 &31900003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31000092}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5474055, y: 0.44010076, z: 1}
+  m_Center: {x: -0.4993451, y: 0.69188917, z: 0}
+--- !u!114 &31000123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31000092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f79ffa294c04cb588d4bc5812c11ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Root: {fileID: 31000103}
+  _SceneArt: {fileID: 31000095}
+  _Area: {fileID: 31000108}
+  _Cart: {fileID: 31000120}
+  _Left: {fileID: 31000114}
+  _Right: {fileID: 31000118}
+  _OpaqueArtBounds:
+    serializedVersion: 2
+    x: 0.020507812
+    y: 0.111328125
+    width: 0.9692383
+    height: 0.77685547
+  _WorldImages:
+  - {fileID: 31000110}
+  - {fileID: 31000114}
+  - {fileID: 31000118}
+  - {fileID: 31000122}
+  - {fileID: 93000003}
+  _WorldArt:
+  - {fileID: 92000002}
+  - {fileID: 92000012}
+  - {fileID: 92000022}
+  - {fileID: 92000032}
+  - {fileID: 93000012}
+  _DangerPattern: {fileID: 21300000, guid: 605180dacd324b3893a1bde3fef7d1bf, type: 3}
+  _RangeMarker: {fileID: 21300000, guid: ad74e6bf18f9482baf05852f6c78e8ab, type: 3}
+  _PossessedLight: {fileID: 93000022}
+  _PossessedGlow: {fileID: 93000000}
+  _PossessedGlowReplacesBody: 1
+  _SuspendedPivot: {fileID: 0}
+  _FixedCeilingLayout: {fileID: 0}
+  _SwayDegrees: 3
+  _SwayFrequency: 2.2
+  _PatternRenderer: {fileID: 92000102}
+--- !u!114 &31000999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31000092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ef417169cd4e8babd75f6e62b3bea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _FamilyTag: angler
+  _DisplayName: Angler fish
+  _InputMode: 2
+  _Behaviour: 3
+  _Impact: 2
+  _StunSeconds: 1
+  _KnockbackDistance: 1.2
+  _KnockbackSeconds: 0.22
+  _PiercingSpeed: 14
+  _BodySpeedFactor: 0.25
+  _PlacementMode: 0
+  _Icon: {fileID: 21300000, guid: fbe3ce089dc641b5521f410afd58b99b, type: 3}
+  _Collider: {fileID: 31000094}
+  _SolidParts:
+  - {fileID: 31900001}
+  - {fileID: 31900002}
+  - {fileID: 31900003}
+  _Presentation: {fileID: 31000123}
+  _ArmedOffset: {x: 0, y: 0, z: 0}
+  _BackgroundSize: {x: 14.8, y: 3}
+  _BackgroundOffset: {x: 0, y: 0.35}
+  _ObjectSize: {x: 2.8, y: 2.2442317}
+  _MoveSpeed: 5
+  _TravelHalfWidth: 6
+  _ActivationSeconds: 0.35
+  _FallDistance: 3.4
+  _FallSeconds: 0.7
+  _ResetDelay: 2
+  _AutoReset: 0
+  _Activated:
+    m_PersistentCalls:
+      m_Calls: []
+  _Landed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8228628842873594569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31000092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db403f7a9a08674bb3f4dc3faa09e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HauntedFish.Multiplayer.GhostTrapAudio
+  _Move: {fileID: 0}
+  _MoveInterval: 0.45
+  _Activate: {fileID: 8300000, guid: 713493a5b2d040c45a3ef49ed19b3178, type: 3}
+  _Impact: {fileID: 0}
+  _Volume: 0.8
 --- !u!1 &31000095
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,6 +253,9 @@ GameObject:
   m_Layer: 0
   m_Name: Scene artwork
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &31000096
 Transform:
@@ -79,6 +264,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31000095}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -101,6 +287,9 @@ GameObject:
   m_Layer: 0
   m_Name: Angler scene artwork
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &31000098
 Transform:
@@ -109,9 +298,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31000097}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.014811083, y: 0.000705290, z: 0}
-  m_LocalScale: {x: 0.141057935, y: 0.141057935, z: 1}
+  m_LocalPosition: {x: -0.014811083, y: 0.00070529, z: 0}
+  m_LocalScale: {x: 0.14105794, y: 0.14105794, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000096}
@@ -188,6 +378,9 @@ GameObject:
   m_Layer: 0
   m_Name: Fixed aisle
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &31000101
 Transform:
@@ -196,6 +389,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31000100}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -253,7 +447,7 @@ SpriteRenderer:
   m_SortingOrder: 39
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: f50a6773901051a44b991797b612954c, type: 3}
-  m_Color: {r: 0.9254901960784314, g: 0.996078431372549, b: 0.792156862745098, a: 1}
+  m_Color: {r: 0.9254902, g: 0.99607843, b: 0.7921569, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -276,6 +470,9 @@ GameObject:
   m_Layer: 5
   m_Name: Shared aisle visibility
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!224 &31000104
 RectTransform:
@@ -314,6 +511,10 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 150
   m_TargetDisplay: 0
@@ -327,8 +528,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -338,6 +539,8 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!1 &31000107
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +555,9 @@ GameObject:
   m_Layer: 5
   m_Name: Fixed aisle area
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &31000108
 RectTransform:
@@ -392,11 +598,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9254901960784314, g: 0.996078431372549, b: 0.792156862745098, a: 1}
+  m_Color: {r: 0.9254902, g: 0.99607843, b: 0.7921569, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -425,6 +632,9 @@ GameObject:
   m_Layer: 5
   m_Name: Left travel limit
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &31000112
 RectTransform:
@@ -463,11 +673,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.396078431372549, g: 0.5215686274509804, b: 0.42745098039215684, a: 1}
+  m_Color: {r: 0.39607844, g: 0.52156866, b: 0.42745098, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -496,6 +707,9 @@ GameObject:
   m_Layer: 5
   m_Name: Right travel limit
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &31000116
 RectTransform:
@@ -534,11 +748,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.396078431372549, g: 0.5215686274509804, b: 0.42745098039215684, a: 1}
+  m_Color: {r: 0.39607844, g: 0.52156866, b: 0.42745098, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -567,6 +782,9 @@ GameObject:
   m_Layer: 5
   m_Name: Moving angler fish
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &31000120
 RectTransform:
@@ -606,11 +824,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -625,128 +844,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &31000123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31000092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f79ffa294c04cb588d4bc5812c11ff8, type: 3}
-  _DangerPattern: {fileID: 21300000, guid: 605180dacd324b3893a1bde3fef7d1bf, type: 3}
-  _RangeMarker: {fileID: 21300000, guid: f2d731fbec4f0034c9fb47445958777b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  _Root: {fileID: 31000103}
-  _Area: {fileID: 31000108}
-  _Cart: {fileID: 31000120}
-  _Left: {fileID: 31000114}
-  _Right: {fileID: 31000118}
-  _SceneArt: {fileID: 31000095}
-  _OpaqueArtBounds:
-    serializedVersion: 2
-    x: 0.0205078125
-    y: 0.1113281250
-    width: 0.9692382812
-    height: 0.7768554688
-  _PatternRenderer: {fileID: 92000102}
-  _PossessedLight: {fileID: 93000022}
-  _PossessedGlow: {fileID: 93000000}
-  _PossessedGlowReplacesBody: 1
-  _WorldImages:
-  - {fileID: 31000110}
-  - {fileID: 31000114}
-  - {fileID: 31000118}
-  - {fileID: 31000122}
-  - {fileID: 93000003}
-  _WorldArt:
-  - {fileID: 92000002}
-  - {fileID: 92000012}
-  - {fileID: 92000022}
-  - {fileID: 92000032}
-  - {fileID: 93000012}
---- !u!114 &31000999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31000092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ef417169cd4e8babd75f6e62b3bea9, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  _FamilyTag: angler
-  _DisplayName: Angler fish
-  _InputMode: 2
-  _Behaviour: 3
-  _Impact: 2
-  _PiercingSpeed: 14
-  _BodySpeedFactor: 0.25
-  _StunSeconds: 1
-  _KnockbackDistance: 1.2
-  _KnockbackSeconds: 0.22
-  _Icon: {fileID: 21300000, guid: fbe3ce089dc641b5521f410afd58b99b, type: 3}
-  _Collider: {fileID: 31000094}
-  _SolidParts:
-  - {fileID: 31900001}
-  - {fileID: 31900002}
-  - {fileID: 31900003}
-  _Presentation: {fileID: 31000123}
-  _ArmedOffset: {x: 0, y: 0, z: 0}
-  _BackgroundSize: {x: 14.8, y: 3}
-  _BackgroundOffset: {x: 0, y: 0.35}
-  _ObjectSize: {x: 2.8, y: 2.24423174}
-  _MoveSpeed: 5
-  _TravelHalfWidth: 6
-  _ActivationSeconds: 0.35
-  _FallDistance: 3.4
-  _FallSeconds: 0.7
-  _ResetDelay: 2
-  _AutoReset: 0
-  _Activated:
-    m_PersistentCalls:
-      m_Calls: []
-  _Landed:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!65 &31900001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31000092}
-  m_Enabled: 1
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_LayerOverridePriority: 0
-  m_Material: {fileID: 0}
-  serializedVersion: 3
-  m_Size: {x: 2.80000000, y: 1.22720403, z: 1}
-  m_Center: {x: 0.00000000, y: -0.50851385, z: 0}
---- !u!65 &31900002
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31000092}
-  m_Enabled: 1
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_LayerOverridePriority: 0
-  m_Material: {fileID: 0}
-  serializedVersion: 3
-  m_Size: {x: 1.49944584, y: 0.36675063, z: 1}
-  m_Center: {x: -0.53319899, y: 0.28846348, z: 0}
 --- !u!1 &92000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +857,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored trap artwork 0
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &92000001
 Transform:
@@ -772,8 +872,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &92000002
 SpriteRenderer:
   serializedVersion: 2
@@ -846,6 +948,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored trap artwork 1
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &92000011
 Transform:
@@ -858,8 +963,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &92000012
 SpriteRenderer:
   serializedVersion: 2
@@ -932,6 +1039,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored trap artwork 2
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &92000021
 Transform:
@@ -944,8 +1054,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &92000022
 SpriteRenderer:
   serializedVersion: 2
@@ -1018,6 +1130,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored trap artwork 3
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &92000031
 Transform:
@@ -1030,8 +1145,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &92000032
 SpriteRenderer:
   serializedVersion: 2
@@ -1105,6 +1222,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored clipped ghost range
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &92000101
 Transform:
@@ -1117,8 +1237,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &92000102
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1176,23 +1298,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92000100}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &31900003
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31000092}
-  m_Enabled: 1
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_IncludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_ExcludeLayers: {serializedVersion: 2, m_Bits: 0}
-  m_LayerOverridePriority: 0
-  m_Material: {fileID: 0}
-  serializedVersion: 3
-  m_Size: {x: 1.54740554, y: 0.44010076, z: 1}
-  m_Center: {x: -0.49934509, y: 0.69188917, z: 0}
 --- !u!1 &93000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,6 +1312,9 @@ GameObject:
   m_Layer: 5
   m_Name: Possessed angler glow
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!224 &93000001
 RectTransform:
@@ -1245,11 +1353,12 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1277,6 +1386,9 @@ GameObject:
   m_Layer: 0
   m_Name: Authored possessed angler glow
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &93000011
 Transform:
@@ -1289,8 +1401,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &93000012
 SpriteRenderer:
   serializedVersion: 2
@@ -1363,6 +1477,9 @@ GameObject:
   m_Layer: 0
   m_Name: Possessed lure light
   m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &93000021
 Transform:
@@ -1375,8 +1492,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2, y: 0.44, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31000093}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &93000022
 Light:
   m_ObjectHideFlags: 0
@@ -1385,15 +1504,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93000020}
   m_Enabled: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 2
-  m_Shape: 0
   m_Color: {r: 0.28, g: 1, b: 0.82, a: 1}
   m_Intensity: 1.8
   m_Range: 3.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 0
     m_Resolution: -1
@@ -1402,11 +1520,31 @@ Light:
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
-  m_CullingMask: {serializedVersion: 2, m_Bits: 4294967295}
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1417,5 +1555,9 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1

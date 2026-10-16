@@ -53,9 +53,6 @@ public static class TutorialRecordingAuthoring
             var safe = new GameObject("Authored starting safe hallway");
             safe.transform.SetParent(root.transform); safe.transform.position = new Vector3(-12, 2, 0);
             var safeCollider = safe.AddComponent<BoxCollider>(); safeCollider.isTrigger = true; safeCollider.size = new Vector3(6, 4, 2);
-            var safeSign = new GameObject("Safe hallway caption"); safeSign.transform.SetParent(safe.transform);
-            safeSign.transform.localPosition = new Vector3(0, -1.6f, -.7f);
-            var sign = safeSign.AddComponent<TextMesh>(); sign.text = "SAFE HALLWAY"; sign.fontSize = 32; sign.characterSize = .075f; sign.anchor = TextAnchor.MiddleCenter; sign.color = new Color(.95f, .63f, .48f);
             var door = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/HallwayDoor.prefab"), hall.transform);
             door.transform.position = new Vector3(12, 2.055f, 1.9f);
             var worldObject = new GameObject("Production scoped trap inventory"); worldObject.transform.SetParent(root.transform);
@@ -95,7 +92,7 @@ public static class TutorialRecordingAuthoring
             var carry = new GameObject("Authored held trap artwork"); carry.transform.SetParent(root.transform);
             director.CarriedPreview = carry.transform; director.CarryArt = carry.AddComponent<SpriteRenderer>();
             director.CarryArt.sprite = cart.Icon; director.CarryArt.color = new Color(1, .8f, .65f, .7f); director.CarryArt.sortingOrder = 8;
-            Fit(director.CarryArt, cart.ObjectSize); carry.SetActive(false);
+            Fit(director.CarryArt, cart.ObjectSize * .55f); carry.SetActive(false); // Opened package reads as a held item, not a placed trap.
             var cameraRoot = new GameObject("Tutorial Output Camera");
             cameraRoot.transform.SetParent(root.transform); cameraRoot.tag = "MainCamera";
             director.Output = cameraRoot.AddComponent<Camera>(); director.Output.clearFlags = CameraClearFlags.SolidColor;
@@ -121,6 +118,8 @@ public static class TutorialRecordingAuthoring
             Rect(director.Caption.rectTransform, new Vector2(.035f, .018f), new Vector2(.965f, .132f), Vector2.zero, Vector2.zero);
             director.Progress = Label(canvasRoot.transform, "Role footer", 20, new Color(.97255f, .91765f, .80392f));
             Rect(director.Progress.rectTransform, new Vector2(.035f, .94f), new Vector2(.965f, .985f), Vector2.zero, Vector2.zero);
+            // Instructions live on the intertitle cards between scenes; nothing is drawn over gameplay.
+            foreach (var hidden in new Component[] { shade, director.Heading, director.Caption, director.Progress }) hidden.gameObject.SetActive(false);
             var material = AssetDatabase.LoadAssetAtPath<Material>(Folder + "/TutorialSpotlight.mat");
             if (!material) { material = new Material(AssetDatabase.LoadAssetAtPath<Shader>("Assets/Resources/GameMouseSpotlight.shader")); AssetDatabase.CreateAsset(material, Folder + "/TutorialSpotlight.mat"); }
             material.renderQueue = 3000; EditorUtility.SetDirty(material);
@@ -167,7 +166,7 @@ public static class TutorialRecordingAuthoring
         var player = root.GetComponent<HotelPlayer>(); player.Networked = false; player.enabled = true;
         player.GhostId = ghost ? 0u : uint.MaxValue;
         foreach (var renderer in root.GetComponentsInChildren<SpriteRenderer>(true))
-            { if (renderer.name == "Fish Body") renderer.sortingOrder = 6; else if (renderer.name == "Fish Fin") renderer.sortingOrder = 5; }
+            { if (renderer.name == "Fish Body") renderer.sortingOrder = 61; else if (renderer.name == "Fish Fin") renderer.sortingOrder = 60; } // In front of danger bands, as in Game.
         root.transform.position = new Vector3(-8, 1, 0);
         return player;
     }

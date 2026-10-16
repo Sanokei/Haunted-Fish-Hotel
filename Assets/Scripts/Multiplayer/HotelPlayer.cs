@@ -69,6 +69,10 @@ namespace HauntedFish.Multiplayer
         [SyncVar] public Vector3 BossReturnPosition;
         [SyncVar] public int BossResultVersion;
         [SyncVar] public bool BossWon;
+        // The boss fight ends the match: 0 still playing, 1 the fish won, 2 the ghost won.
+        [SyncVar] public int MatchResult;
+        // Seconds the ghost still has to stall to win; 0 when no countdown is running.
+        [SyncVar] public float StallRemaining;
         [SyncVar] public float Health = 100;
         [SyncVar] public bool IsDead;
         [SyncVar] bool _Stunned;
@@ -184,6 +188,8 @@ namespace HauntedFish.Multiplayer
             BossMatchEpoch = 0;
             BossArenaJson = "";
             BossResultVersion = 0;
+            MatchResult = 0;
+            StallRemaining = 0;
             RoundReleased = RoundIntroComplete = RoundCinematicComplete = RoundReady = false;
             RoundReadyCount = RoundParticipantCount = 0;
             GhostSetupRemaining = 0;

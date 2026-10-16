@@ -29,9 +29,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Flicker: 0.0075
-    - _Grain: 0.008
-    - _Vignette: 0.035
+    - _Bloom: 0.18
+    - _Dust: 0.55
+    - _Flicker: 0.12
+    - _Fps: 16
+    - _Grain: 0.06
+    - _Jolt: 0.04
+    - _Scratches: 0.5
+    - _Sepia: 0.85
+    - _Vignette: 0.7
+    - _Weave: 0.0025
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

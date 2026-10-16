@@ -34,6 +34,8 @@ namespace HauntedFish.Multiplayer
         [SerializeField] RectTransform _FixedCeilingLayout;
         [SerializeField] float _SwayDegrees = 3, _SwayFrequency = 2.2f;
         Quaternion _SuspendedRestRotation = Quaternion.identity;
+        // Trap artwork faces left; mirror it while the trap travels right.
+        float _Facing = 1, _LastX = float.NaN;
         public bool IsPossessed { get; private set; }
         // Read-only authored presentation observations used by native recording/QA.
         public bool PossessionLightVisible => _PossessedLight && _PossessedLight.enabled || _PossessedGlow && _PossessedGlow.activeInHierarchy;
@@ -109,7 +111,8 @@ namespace HauntedFish.Multiplayer
                 art.transform.rotation = camera.transform.rotation * image.rectTransform.rotation;
                 var size = sprite.bounds.size;
                 var parentScale = transform.lossyScale;
-                art.transform.localScale = new Vector3(Vector3.Distance(_Corners[0], _Corners[3]) / Mathf.Max(.0001f, size.x * Mathf.Abs(parentScale.x)),
+                float mirror = _Cart && image.transform.IsChildOf(_Cart) ? _Facing : 1;
+                art.transform.localScale = new Vector3(mirror * Vector3.Distance(_Corners[0], _Corners[3]) / Mathf.Max(.0001f, size.x * Mathf.Abs(parentScale.x)),
                     Vector3.Distance(_Corners[0], _Corners[1]) / Mathf.Max(.0001f, size.y * Mathf.Abs(parentScale.y)), 1);
                 art.transform.position -= art.transform.TransformVector(sprite.bounds.center);
             }
@@ -205,14 +208,15 @@ namespace HauntedFish.Multiplayer
                 _Cart.sizeDelta = new Vector2(_Trap.ObjectSize.x * projectedRight.magnitude / widthFraction, _Trap.ObjectSize.y * height / heightFraction);
                 if (_Trap.PlacementMode == TrapPlacementMode.HallwayCeiling)
                 {
+                    // The drop zone runs from just under the hanging chandelier down to the floor.
+                    // Same default floor as GhostPlacementWorld when no Game scene owns one (tutorial stage).
                     var scene = GameSceneController.Current;
-                    if (scene)
-                    {
-                        float hallwayHeight = scene.HallwayCeilingY - scene.HallwayBounds.max.y;
-                        float areaWidth = _Trap.BackgroundSize.x;
-                        _Area.position = camera.WorldToScreenPoint(new Vector3(_Origin.x, scene.HallwayBounds.max.y + hallwayHeight * .5f, _Origin.z));
-                        _Area.sizeDelta = new Vector2(areaWidth * projectedRight.magnitude, hallwayHeight * height);
-                    }
+                    float floorY = scene ? scene.HallwayBounds.max.y : 0;
+                    float topY = Mathf.Max(floorY, (_Origin + _Trap.ArmedOffset).y - _Trap.BodyHalfSize.y);
+                    float dropHeight = topY - floorY;
+                    float areaWidth = _Trap.BackgroundSize.x;
+                    _Area.position = camera.WorldToScreenPoint(new Vector3(_Origin.x, floorY + dropHeight * .5f, _Origin.z));
+                    _Area.sizeDelta = new Vector2(areaWidth * projectedRight.magnitude, dropHeight * height);
                     var art = _CartImage ? _CartImage.sprite : null;
                     float aspect = art ? art.rect.width * widthFraction / (art.rect.height * heightFraction) : 1;
                     float artHeight = Mathf.Min(_Trap.BodyHalfSize.y * 2, Mathf.Min(_Trap.ObjectSize.y, _Trap.ObjectSize.x / aspect));
@@ -259,6 +263,12 @@ namespace HauntedFish.Multiplayer
                 _Cart.localScale = Vector3.one * (nearby && (!_Trap || _Trap.PlacementMode != TrapPlacementMode.HallwayCeiling) ? 1.12f : 1);
             _Left.color = _Right.color = possessed ? HotelPalette.Peach : HotelPalette.Moss;
             PresentPossession(possessed || _Trap && _Trap.PiercesBodies && _Trap.Phase == TrapPhase.Active);
+            if (_Trap && _Trap.Travels)
+            {
+                float x = transform.position.x;
+                if (!float.IsNaN(_LastX) && Mathf.Abs(x - _LastX) > .0005f) _Facing = x > _LastX ? -1 : 1;
+                _LastX = x;
+            }
             PresentPattern(camera);
             UpdateWorldArt(camera);
         }

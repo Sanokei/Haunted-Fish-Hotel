@@ -45,15 +45,13 @@ public sealed class BossDefenseNativeRegression : MonoBehaviour
   Check(arena.Puck.constraints==(RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationX|RigidbodyConstraints.FreezeRotationZ),"cue-ball permits lateral velocity and horizontal bounce");
   arena.BeginEditorPractice();arena.SetLocalViewer(1,true);yield return new WaitForSeconds(1.2f);var fish=strikers[0].position.z<strikers[1].position.z?strikers[0]:strikers[1];var start=fish.position;var camera=arena.Camera;Capture("fish-before.png",camera);
   drag.Tick(1,board.Epoch,true,true,camera.WorldToScreenPoint(start),false,false,false,.05f);Check(!drag.StrikerCaptured,"hover alone cannot move striker");
-  drag.Tick(1,board.Epoch,true,true,camera.WorldToScreenPoint(start),true,true,false,.05f);Check(drag.StrikerCaptured,"actual camera ray captures owned physical striker");
-  var target=start+new Vector3(.9f,0,.8f);for(int i=0;i<8;i++){var axis=drag.Tick(1,board.Epoch,true,true,camera.WorldToScreenPoint(target),false,true,false,.05f);arena.SetEditorPracticeInput(axis,false);yield return new WaitForFixedUpdate();}
-  Check(fish.position.x>start.x+.1f&&fish.position.z>start.z+.1f,"real Rigidbody moved laterally AND forward under drag");Capture("fish-after-drag.png",camera);Check(fish.position.z<=-.5f&&Mathf.Abs(fish.position.x-1000)<3,"drag stays in fish half");
-  drag.Tick(1,board.Epoch,true,true,camera.WorldToScreenPoint(target),false,false,true,.05f);Check(!drag.StrikerCaptured,"release ends capture");arena.SetEditorPracticeInput(Vector2.zero,false);
+  drag.Tick(1,board.Epoch,true,true,camera.WorldToScreenPoint(start),true,true,false,.05f);Check(!drag.StrikerCaptured,"strikers are keyboard-only: clicking one never captures it");drag.Cancel();
+  for(int i=0;i<8;i++){arena.SetEditorPracticeInput(new Vector2(.7f,.7f),false);yield return new WaitForFixedUpdate();}
+  var walked=fish.position-start;Check(walked.x>.1f&&walked.z>.1f,"WASD axis moves the real Rigidbody laterally AND forward");Capture("fish-after-keys.png",camera);Check(fish.position.z<=-.5f&&Mathf.Abs(fish.position.x-1000)<3,"striker stays in fish half");
+  var boostStart=fish.position;for(int i=0;i<8;i++){arena.SetEditorPracticeInput(new Vector2(-1,0)*BossArenaManager.MaxAxis,false);yield return new WaitForFixedUpdate();}
+  Check(boostStart.x-fish.position.x>walked.x*1.3f,"shift boost axis moves the striker faster than plain WASD");arena.SetEditorPracticeInput(Vector2.zero,false);
   var puckStart=arena.Puck.position;drag.Tick(1,board.Epoch,true,true,camera.WorldToScreenPoint(puckStart),true,true,false,.05f);Check(!drag.StrikerCaptured,"cue-ball cannot be captured as striker");drag.Cancel();
-  // Test a real ghost-end projection against the same horizontal two-axis physical policy.
-  var ghost=fish==strikers[0]?strikers[1]:strikers[0];arena.SetEditorPracticeViewer(BossViewerSide.Ghost);var ghostStart=ghost.position;var ghostCamera=arena.Camera;drag.Tick(2,board.Epoch,true,true,ghostCamera.WorldToScreenPoint(ghostStart),true,true,false,.05f);Check(drag.StrikerCaptured,"ghost-end actual ray captures only ghost striker");
-  for(int i=0;i<8;i++){var axis=drag.Tick(2,board.Epoch,true,true,ghostCamera.WorldToScreenPoint(ghostStart+new Vector3(.8f,0,-.8f)),false,true,false,.05f);arena.SetEditorPracticeGhostInput(axis);yield return new WaitForFixedUpdate();}
-  Check(ghost.position.x>ghostStart.x+.1f&&ghost.position.z<ghostStart.z-.1f,"ghost physical Rigidbody moves on both mirrored axes");Capture("ghost-after-drag.png",ghostCamera);drag.Cancel();arena.SetEditorPracticeGhostInput(Vector2.zero);arena.SetEditorPracticeViewer(BossViewerSide.Fish);
+  var ghost=fish==strikers[0]?strikers[1]:strikers[0];
   Check(arena.AxisToTarget(ghost.position,ghost.position+new Vector3(.5f,0,-.5f),.05f,true).x>0,"mirrored ghost world X target keeps lateral direction");
   // Native click/drag of an actual rack model, using the same production capture/validation event.
   arena.Puck.isKinematic=true;arena.Puck.position=new Vector3(1000,1.7f,1.2f);fish.position=new Vector3(1001.5f,1.7f,-3.6f);board.Begin(board.Epoch+1,1,2,true);board.SetPlayable(true,true);Physics.SyncTransforms();

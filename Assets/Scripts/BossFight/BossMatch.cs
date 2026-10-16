@@ -6,8 +6,11 @@ namespace HauntedFish.BossFight
     {
         public readonly uint Epoch, FishId, GhostId;
         public readonly bool WinnerFish, Cancelled;
-        public BossMatchResult(uint epoch, uint fish, uint ghost, bool win, bool cancel)
+        // Ghost lives taken so far this game, including earlier fights.
+        public readonly int FishScore;
+        public BossMatchResult(uint epoch, uint fish, uint ghost, bool win, bool cancel, int fishScore = 0)
         {
+            FishScore = fishScore;
             Epoch = epoch;
             FishId = fish;
             GhostId = ghost;
@@ -28,14 +31,16 @@ namespace HauntedFish.BossFight
         public bool ResultIssued { get; private set; }
 
         public event Action<BossMatchResult> Completed;
-        public bool TryBegin(uint fish, uint ghost)
+        // The ghost's lives are shared by every fish: each fight resumes from the lives already taken.
+        public bool TryBegin(uint fish, uint ghost, int ghostLivesLost = 0)
         {
             if (Active || fish == 0 || ghost == 0 || fish == ghost)
                 return false;
             Epoch++;
             FishId = fish;
             GhostId = ghost;
-            FishScore = GhostScore = 0;
+            FishScore = Math.Max(0, Math.Min(FishGoalsToWin - 1, ghostLivesLost));
+            GhostScore = 0;
             ResultIssued = false;
             Active = true;
             return true;
@@ -66,7 +71,7 @@ namespace HauntedFish.BossFight
         {
             Active = false;
             ResultIssued = true;
-            Completed?.Invoke(new BossMatchResult(Epoch, FishId, GhostId, win, cancel));
+            Completed?.Invoke(new BossMatchResult(Epoch, FishId, GhostId, win, cancel, FishScore));
         }
     }
 }

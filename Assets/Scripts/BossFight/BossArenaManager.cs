@@ -58,6 +58,10 @@ namespace HauntedFish.BossFight
         float _SnapshotInterval = .05f, _InputTimeout = .3f;
         [SerializeField, Min(.05f)]
         float _PaddleRadius = .48f;
+        // Holding shift sends an axis longer than 1; the paddle moves up to this many times faster.
+        [SerializeField, Min(1)]
+        float _BoostMultiplier = 1.9f;
+        public const float MaxAxis = 2;
         readonly BossMatch _Match = new BossMatch();
         Vector2 _FishAxis, _GhostAxis;
         float _FishInputTime, _GhostInputTime, _NextSnapshot, _NextServe;
@@ -107,6 +111,9 @@ namespace HauntedFish.BossFight
             _Puck.isKinematic = !authority || !_Match.Active;
             _FishPaddle.isKinematic = _GhostPaddle.isKinematic = true;
             _Puck.detectCollisions=authority; _FishPaddle.detectCollisions=_GhostPaddle.detectCollisions=true;
+            // Kinematic strikers swept by MovePosition need speculative contacts or a fast stroke skips the cue.
+            _Puck.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            _FishPaddle.collisionDetectionMode = _GhostPaddle.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             _FishAxis = _GhostAxis = Vector2.zero;
         }
 
@@ -133,10 +140,10 @@ namespace HauntedFish.BossFight
             if(_Hud)_Hud.Present(_EditorPractice?new BossArenaSnapshot{FishScore=_PracticeFishScore,GhostScore=_PracticeGhostScore,ResultIssued=_PracticeRoundEnded,WinnerFish=_PracticeWinnerFish}:_View,ViewerSide,_LocalWatching,_EditorPractice);
         }
 
-        public bool TryBegin(uint fishId, uint ghostId)
+        public bool TryBegin(uint fishId, uint ghostId, int ghostLivesLost = 0)
         {
             if (_EditorPractice) return false;
-            if (!_Authority || _CompletionPending || !_Match.TryBegin(fishId, ghostId))
+            if (!_Authority || _CompletionPending || !_Match.TryBegin(fishId, ghostId, ghostLivesLost))
                 return false;
             if(_Defenses){_Defenses.Begin(_Match.Epoch,fishId,ghostId);_Defenses.SetPlayable(true,false);}
             if(_DragInput)_DragInput.Cancel();
@@ -202,9 +209,9 @@ namespace HauntedFish.BossFight
                 else { _Puck.isKinematic = false; _Puck.linearVelocity = _PracticeVelocity; }
             }
             _PracticePaused = paused;
-            _PracticeAxis = !paused && float.IsFinite(axis.x) && float.IsFinite(axis.y) ? Vector2.ClampMagnitude(axis, 1) : Vector2.zero;
+            _PracticeAxis = !paused && float.IsFinite(axis.x) && float.IsFinite(axis.y) ? Vector2.ClampMagnitude(axis, MaxAxis) : Vector2.zero;
         }
-        public void SetEditorPracticeGhostInput(Vector2 axis){if(!_EditorPractice)return;_PracticeGhostManual=true;_PracticeGhostAxis=!_PracticePaused&&float.IsFinite(axis.x)&&float.IsFinite(axis.y)?Vector2.ClampMagnitude(axis,1):Vector2.zero;}
+        public void SetEditorPracticeGhostInput(Vector2 axis){if(!_EditorPractice)return;_PracticeGhostManual=true;_PracticeGhostAxis=!_PracticePaused&&float.IsFinite(axis.x)&&float.IsFinite(axis.y)?Vector2.ClampMagnitude(axis,MaxAxis):Vector2.zero;}
         public void SetEditorPracticeViewer(BossViewerSide side){if(!_EditorPractice)return;_PracticeViewerSide=side;RefreshViewer();}
         public void StopEditorPractice()
         {
@@ -219,7 +226,7 @@ namespace HauntedFish.BossFight
         {
             if (!_Authority || !_Ready || !_Match.Active || !float.IsFinite(axis.x) || !float.IsFinite(axis.y))
                 return false;
-            axis = Vector2.ClampMagnitude(axis, 1);
+            axis = Vector2.ClampMagnitude(axis, MaxAxis);
             if (id == _Match.FishId)
             {
                 _FishAxis = axis;
@@ -253,7 +260,7 @@ namespace HauntedFish.BossFight
             if (!_CompletionPending) return _Match.Cancel(id);
             _CompletionPending = false; _ReactionUntil = 0; _Cancelled = true;
             if (_Reactions) _Reactions.ResetPose();
-            Publish(); Completed?.Invoke(new BossMatchResult(_Match.Epoch, FishId, GhostId, false, true));
+            Publish(); Completed?.Invoke(new BossMatchResult(_Match.Epoch, FishId, GhostId, false, true, _Match.FishScore));
             return true;
         }
         public bool RegisterGoal(bool fishScored)
@@ -384,12 +391,49 @@ namespace HauntedFish.BossFight
 
         void MovePaddle(Rigidbody body, Vector2 axis, bool ghost)
         {
-            Vector3 p = body.position + new Vector3(axis.x, 0, axis.y) * (_PaddleSpeed * Time.fixedDeltaTime);
+            float boost = axis.sqrMagnitude > 1.0001f ? Mathf.Lerp(1, _BoostMultiplier, (axis.magnitude - 1) / (MaxAxis - 1)) : 1;
+            Vector3 p = body.position + new Vector3(axis.x, 0, axis.y).normalized * (Mathf.Min(axis.magnitude, 1) * boost * _PaddleSpeed * Time.fixedDeltaTime);
             p.x = Mathf.Clamp(p.x, _Centre.x - _HalfSize.x + _PaddleRadius, _Centre.x + _HalfSize.x - _PaddleRadius);
             p.z = Mathf.Clamp(p.z, _Centre.z + (ghost ? .55f : -_HalfSize.y + _PaddleRadius), _Centre.z + (ghost ? _HalfSize.y - _PaddleRadius : -.55f));
             p.y = _Centre.y + .1f;
             if(_Defenses)p=_Defenses.ClampStriker(body.position,p,_PaddleRadius);
             body.MovePosition(p);
+            PushPuckClear(body.position, p);
+        }
+
+        // Backstop for tunnelling: if this stroke's swept circle reaches the cue, place the cue just outside the
+        // striker's end position and hand it the striker's velocity, the same result a solid contact would give.
+        void PushPuckClear(Vector3 from, Vector3 to)
+        {
+            if (_Puck.isKinematic || !_Puck.detectCollisions) return;
+            float reach = _PaddleRadius + PuckRadius;
+            Vector3 cue = _Puck.position; cue.y = to.y;
+            Vector3 stroke = to - from; stroke.y = 0;
+            float t = stroke.sqrMagnitude > 1e-8f ? Mathf.Clamp01(Vector3.Dot(cue - from, stroke) / stroke.sqrMagnitude) : 1;
+            Vector3 closest = from + stroke * t; closest.y = to.y;
+            if ((cue - closest).sqrMagnitude >= reach * reach) return;
+            Vector3 away = cue - to; away.y = 0;
+            // The striker overtook the cue this step: it belongs in front of the stroke, not behind it.
+            if (stroke.sqrMagnitude > 1e-8f && Vector3.Dot(away, stroke) < 0) away = Vector3.ProjectOnPlane(away, stroke.normalized) + stroke.normalized * reach;
+            if (away.sqrMagnitude < 1e-6f) away = stroke.sqrMagnitude > 1e-8f ? stroke : Vector3.forward;
+            away.Normalize();
+            Vector3 placed = to + away * (reach + .01f); placed.y = _Puck.position.y;
+            float r = PuckRadius;
+            placed.x = Mathf.Clamp(placed.x, _Centre.x - _HalfSize.x + r, _Centre.x + _HalfSize.x - r);
+            _Puck.position = placed;
+            Vector3 strikerVelocity = stroke / Time.fixedDeltaTime;
+            Vector3 v = _Puck.linearVelocity; v.y = 0;
+            float along = Vector3.Dot(v - strikerVelocity, away);
+            if (along < 0) v -= away * (along * 1.8f);
+            _Puck.linearVelocity = Vector3.ClampMagnitude(v, _PuckSpeedLimit);
+        }
+        float PuckRadius
+        {
+            get
+            {
+                var sphere = _Puck.GetComponent<SphereCollider>();
+                return sphere ? sphere.radius * Mathf.Max(_Puck.transform.lossyScale.x, _Puck.transform.lossyScale.z) : .3f;
+            }
         }
 
         void OnCompleted(BossMatchResult result)

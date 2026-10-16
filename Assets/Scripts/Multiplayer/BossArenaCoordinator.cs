@@ -28,6 +28,14 @@ namespace HauntedFish.Multiplayer
         [SerializeField] GameCameraOwner _GameCamera;
         [SerializeField] string _SceneName = "BossFight";
         [SerializeField, Min(0)] float _ReturnGhostSeconds = 3;
+        [Tooltip("Seconds the boss result shows before everyone travels back to the lobby outro.")]
+        [SerializeField, Min(0)] float _MatchEndSeconds = 3;
+        [Tooltip("The ghost wins by stalling this long; time spent in boss fights does not count.")]
+        [SerializeField, Min(1)] float _StallSeconds = 60;
+        float _ReturnToLobbyAt, _StallElapsed;
+        bool _RoundHadFish;
+        string _RecordedRound, _RulesRound;
+        int _GhostLivesLost;
         readonly Dictionary<HotelPlayer, Vector3> _Watchers = new Dictionary<HotelPlayer, Vector3>();
         float _ReturnDeadline;
         string _ReturnScope, _ReturnKey;
@@ -106,6 +114,13 @@ namespace HauntedFish.Multiplayer
             else if (!_Loading) StartCoroutine(LoadArena());
             return true;
         }
+        // Shift is the striker boost: the axis is stretched past 1 and the arena reads the excess as extra speed.
+        static Vector2 Boosted(Vector2 axis)
+        {
+            var keyboard=Keyboard.current;
+            bool boost=keyboard!=null&&(keyboard.leftShiftKey.isPressed||keyboard.rightShiftKey.isPressed);
+            return boost&&axis.sqrMagnitude>.0001f?axis.normalized*Mathf.Min(axis.magnitude*BossArenaManager.MaxAxis,BossArenaManager.MaxAxis):axis;
+        }
         static HotelPlayer FindPlayer(uint id)
         {
             var players = HotelPlayer.ActivePlayers;
@@ -160,7 +175,7 @@ namespace HauntedFish.Multiplayer
 #endif
             _AuthorityOwned = true; _MovedToArena = false; _Ready.Clear();
             _Arena.SetAuthority(true);
-            if (!_Arena.TryBegin(fish.NetId, ghost.NetId)) { _Fish = _Ghost = null; return; }
+            if (!_Arena.TryBegin(fish.NetId, ghost.NetId, _RulesRound == fish.RoundStateKey ? _GhostLivesLost : 0)) { _Fish = _Ghost = null; return; }
             _World.SuspendGhost(ghost);
             fish.ResetSceneMotion(); ghost.ResetSceneMotion();
             fish.InBossFight = ghost.InBossFight = true;
@@ -190,7 +205,7 @@ namespace HauntedFish.Multiplayer
             return Authority && _Arena && _Arena.Active && player && player.InBossFight &&
                 (!player.Networked || player.IsServer) && player.RoundStateKey == key && player.RoundVersion == version &&
                 key == _ScopeKey && epoch == _Arena.MatchEpoch && float.IsFinite(axis.x) && float.IsFinite(axis.y) &&
-                _Arena.ApplyInput(player.NetId, Vector2.ClampMagnitude(axis, 1));
+                _Arena.ApplyInput(player.NetId, Vector2.ClampMagnitude(axis, BossArenaManager.MaxAxis));
         }
         void OnDefenseMove(int slot,uint sequence,Vector2 target)
         {
@@ -247,6 +262,54 @@ namespace HauntedFish.Multiplayer
             }
             if (remaining <= 0) _ReturnKey = null;
         }
+        static void Kill(HotelPlayer fish)
+        {
+            var body = fish.BodyController;
+            float halfHeight = body ? Mathf.Max(body.radius, body.height * .5f) : .875f;
+            float floorY = fish.transform.position.y + (body ? body.center.y : 0) - halfHeight;
+            fish.Health = 0;
+            fish.BecomeSpectator(floorY);
+            fish.GhostEmergencePosition = fish.transform.position;
+            fish.GhostEmergenceVersion++;
+        }
+        // Server rules outside the arena: the ghost wins when every fish is dead or it stalls long enough.
+        void TickMatchRules()
+        {
+            var game = GameSceneController.Current;
+            if (!Authority || _ReturnToLobbyAt > 0 || !game || !game.Released) return;
+            HotelPlayer reference = null;
+            var players = HotelPlayer.ActivePlayers;
+            for (int i = 0; i < players.Count && !reference; i++)
+                if (players[i].RoundReleased && !string.IsNullOrEmpty(players[i].RoundStateKey)) reference = players[i];
+            if (!reference) return;
+            if (_RulesRound != reference.RoundStateKey) { _RulesRound = reference.RoundStateKey; _StallElapsed = 0; _GhostLivesLost = 0; _RoundHadFish = false; }
+            bool fighting = _Fish || _PendingFish || _Loading || _Arena && _Arena.Active;
+            if (!fighting) _StallElapsed += Time.unscaledDeltaTime;
+            float remaining = Mathf.Max(0, _StallSeconds - _StallElapsed);
+            for (int i = 0; i < players.Count; i++)
+                if (SameRound(players[i], reference.InventoryScope, reference.RoundStateKey, reference.RoundVersion)) players[i].StallRemaining = remaining;
+            // A round that never had a living fish (e.g. a solo ghost test) is not a ghost win.
+            if (game.LivingFishCount > 0) _RoundHadFish = true;
+            if (_RoundHadFish && game.AllFishDead || _StallElapsed >= _StallSeconds)
+                EndMatch(reference.InventoryScope, reference.RoundStateKey, reference.RoundVersion, false);
+        }
+        void EndMatch(string scope, string key, int version, bool fishWon)
+        {
+            if (_ReturnToLobbyAt > 0) return;
+            var players = HotelPlayer.ActivePlayers;
+            for (int i = 0; i < players.Count; i++)
+                if (SameRound(players[i], scope, key, version)) players[i].MatchResult = fishWon ? 1 : 2;
+            _ReturnToLobbyAt = Time.unscaledTime + (float.IsFinite(_MatchEndSeconds) ? _MatchEndSeconds : 3);
+        }
+        void TickMatchEnd()
+        {
+            if (_ReturnToLobbyAt <= 0 || Time.unscaledTime < _ReturnToLobbyAt || !Authority) return;
+            var travel = GameSceneController.Current && GameSceneController.Current.Session ? GameSceneController.Current.Session.SceneTravel : null;
+            // Retry until the travel is free; it refuses while peers are still loading.
+            if (!travel || !travel.CanTravel) return;
+            _ReturnToLobbyAt = 0;
+            travel.ReturnToLobby();
+        }
         void Completed(BossMatchResult result)
         {
             if (!_Fish || !_Arena || result.Epoch != _Arena.MatchEpoch) return;
@@ -255,16 +318,22 @@ namespace HauntedFish.Multiplayer
             _ReturnDeadline = loss ? Time.unscaledTime + (float.IsFinite(_ReturnGhostSeconds) ? Mathf.Max(0, _ReturnGhostSeconds) : 3) : Time.unscaledTime;
             _Fish.BossWon = result.WinnerFish && !result.Cancelled;
             _Fish.BossResultVersion++;
+            if (!result.Cancelled) _GhostLivesLost = result.FishScore;
+            // Beating the ghost's last life ends the game for everyone.
+            if (result.WinnerFish && !result.Cancelled) EndMatch(_ReturnScope, _ReturnKey, _ReturnVersion, true);
+            var loser = loss ? _Fish : null;
             foreach (var pair in _Watchers)
             {
                 var actor = pair.Key;
                 if (!actor) continue;
                 actor.BossWatching = false;
-                actor.BossReturnPosition = loss && actor == _Fish && GameSceneController.Current ? GameSceneController.Current.SpawnPosition(0) : pair.Value;
+                actor.BossReturnPosition = pair.Value;
                 actor.BossReturnLocked = loss && actor != _Ghost;
                 ReturnActor(actor, actor == _Ghost);
             }
             _Watchers.Clear(); _Fish = _Ghost = null;
+            // Losing to the ghost kills that fish where it entered; the rest of the hotel plays on.
+            if (loser) Kill(loser);
             TickReturnGate();
         }
 #if UNITY_EDITOR
@@ -317,8 +386,14 @@ namespace HauntedFish.Multiplayer
         }
         void Update()
         {
-            WatchPlayers(); TickReturnGate();
+            WatchPlayers(); TickReturnGate(); TickMatchRules(); TickMatchEnd();
             var local = HotelPlayer.LocalPlayer;
+            // Each client keeps its own side of the result for the lobby outro before the scene travels.
+            if (local && local.MatchResult != 0 && _RecordedRound != local.RoundStateKey)
+            {
+                _RecordedRound = local.RoundStateKey;
+                LobbyOutcome.Record(local.ControlMode == HotelControlMode.Ghost || local.NetId == local.GhostId, local.MatchResult == 1);
+            }
             if (!local || !local.ControlsReady)
             {
 #if UNITY_EDITOR
@@ -350,14 +425,14 @@ namespace HauntedFish.Multiplayer
             }
             SetCamera(local.BossWatching && _Arena ? (local.Networked ? local.NetId : 1u) : 0);
             if (local.BossWatching && _Arena) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
-            Vector2 dragAxis=Vector2.zero;bool practiceDrag=false;
+            bool practiceDrag=false;
 #if UNITY_EDITOR
             practiceDrag=_EditorPreview&&_Arena&&_Arena.EditorPracticing;
 #endif
             if(_Arena&&_Arena.DragInput)
             {
                 var mouse=Mouse.current;bool allowed=BossPaddleInputPolicy.InputAllowed(local.InputBlocked,Time.timeScale)&&(local.InBossFight||practiceDrag);
-                if(mouse!=null)dragAxis=_Arena.DragInput.Tick(practiceDrag?1:local.NetId,practiceDrag?_Arena.Defenses.Epoch:_Arena.MatchEpoch,practiceDrag,allowed,mouse.position.ReadValue(),mouse.leftButton.wasPressedThisFrame,mouse.leftButton.isPressed,mouse.leftButton.wasReleasedThisFrame,.05f);
+                if(mouse!=null)_Arena.DragInput.Tick(practiceDrag?1:local.NetId,practiceDrag?_Arena.Defenses.Epoch:_Arena.MatchEpoch,practiceDrag,allowed,mouse.position.ReadValue(),mouse.leftButton.wasPressedThisFrame,mouse.leftButton.isPressed,mouse.leftButton.wasReleasedThisFrame,.05f);
                 else _Arena.DragInput.Cancel();
             }
 #if UNITY_EDITOR
@@ -368,7 +443,8 @@ namespace HauntedFish.Multiplayer
                 var practiceAxis = Vector2.zero;
                 if (!blocked && keyboard != null)
                     practiceAxis = new Vector2((keyboard.dKey.isPressed ? 1 : 0) - (keyboard.aKey.isPressed ? 1 : 0), (keyboard.wKey.isPressed ? 1 : 0) - (keyboard.sKey.isPressed ? 1 : 0));
-                if(_Arena.DragInput){if(_Arena.DragInput.DefenseCaptured)practiceAxis=Vector2.zero;else if(_Arena.DragInput.StrikerCaptured)practiceAxis=dragAxis;}
+                practiceAxis=Boosted(practiceAxis);
+                if(_Arena.DragInput&&_Arena.DragInput.DefenseCaptured)practiceAxis=Vector2.zero;
                 _Arena.SetEditorPracticeInput(practiceAxis, blocked);
             }
 #endif
@@ -378,7 +454,8 @@ namespace HauntedFish.Multiplayer
                 bool blocked = !BossPaddleInputPolicy.InputAllowed(local.InputBlocked, Time.timeScale);
                 var axis = blocked ? Vector2.zero : local.Movement.BossAxis;
                 if(local.NetId==_Arena.GhostId) axis=-axis;
-                if(_Arena.DragInput){if(_Arena.DragInput.DefenseCaptured)axis=Vector2.zero;else if(_Arena.DragInput.StrikerCaptured)axis=dragAxis;}
+                if(!blocked)axis=Boosted(axis);
+                if(_Arena.DragInput&&_Arena.DragInput.DefenseCaptured)axis=Vector2.zero;
                 if (local.Networked) local.SendBossInput(axis, local.RoundStateKey, local.RoundVersion, _Arena.MatchEpoch);
                 else AcceptInput(local, axis, local.RoundStateKey, local.RoundVersion, _Arena.MatchEpoch);
             }

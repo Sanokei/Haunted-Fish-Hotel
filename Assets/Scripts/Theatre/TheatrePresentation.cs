@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using HauntedFish.Multiplayer;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,6 +27,9 @@ namespace HauntedFish.Theatre
         [SerializeField] Image _FishTabBackground,_GhostTabBackground;
         [SerializeField] TMP_Text _FishTabLabel,_GhostTabLabel;
         bool _Returning;
+        // Theatre owns the soundscape while open: lobby radio, fire and storm are muted, not stopped, so they resume in place.
+        [SerializeField] AudioSource _ProjectorAudio,_MusicAudio;
+        readonly List<AudioSource> _MutedOutside=new List<AudioSource>();float _NextMuteScan;
         [SerializeField] float _MinX=-9,_MaxX=9,_ExitX=-8.5f,_Speed=3;
         HotelPlayer _Owner; HauntedHotelMultiplayer _Session; Coroutine _Playback;
         Vector3 _WalkerOrigin; bool _CursorVisible;CursorLockMode _CursorLock; bool _Open,_ExitSent,_ResumeVideo; int _ClipIndex,_QueuedRole=-1;
@@ -50,12 +54,14 @@ namespace HauntedFish.Theatre
             _Walker.localPosition=_WalkerOrigin;
             // Reuse that player's actual art in the authored proxy, without changing the network visual.
             BindRealArt(_OwnSilhouette,owner);_OwnSilhouette.enabled=true;RefreshConnectedSilhouettes();PlayFish();
+            MuteOutside();if(_ProjectorAudio){_ProjectorAudio.loop=true;_ProjectorAudio.Play();}if(_MusicAudio){HotelAudioRouting.RouteMusic(_MusicAudio);_MusicAudio.loop=true;_MusicAudio.Play();}
         }
         public void Close()
         {
             if(_Open){bool menu=_Session&&_Session.MemberMenuOpen;Cursor.visible=menu||_CursorVisible;Cursor.lockState=menu?CursorLockMode.None:_CursorLock;}
             _Returning=false;_Open=false;_Owner=null;_Session=null;_ResumeVideo=false;_QueuedRole=-1;
             if(_Playback!=null){StopCoroutine(_Playback);_Playback=null;}
+            if(_ProjectorAudio)_ProjectorAudio.Stop();if(_MusicAudio)_MusicAudio.Stop();RestoreOutside();
             if(_Video)_Video.Stop();if(_CountdownRoot)_CountdownRoot.SetActive(false);if(_OwnSilhouette)_OwnSilhouette.enabled=false;if(_ConnectedSilhouettes!=null)foreach(var r in _ConnectedSilhouettes)if(r)r.enabled=false;if(_Camera)_Camera.transform.localPosition=_CameraOrigin;
         }
         void Update()
@@ -71,7 +77,14 @@ namespace HauntedFish.Theatre
             if(axis!=0)_OwnSilhouette.flipX=axis<0;
             if(point.x<=_ExitX)RequestExit();
         }
-        void LateUpdate(){if(_Open){RefreshConnectedSilhouettes();if(!_Camera.orthographic){var p=_CameraOrigin;p.x+=Mathf.Clamp(_Walker.localPosition.x-_WalkerOrigin.x,-7.5f,7.5f);_Camera.transform.localPosition=p;}Cursor.visible=_Session&&_Session.MemberMenuOpen;Cursor.lockState=CursorLockMode.None;Cursor.SetCursor(null,Vector2.zero,CursorMode.Auto);}}
+        void MuteOutside()
+        {
+            _NextMuteScan=Time.unscaledTime+.5f;
+            foreach(var source in FindObjectsByType<AudioSource>(FindObjectsInactive.Include,FindObjectsSortMode.None))
+                if(source&&source.gameObject.scene!=gameObject.scene&&!source.mute&&!source.GetComponentInParent<MemberMenuTutorial>(true)&&!_MutedOutside.Contains(source)){source.mute=true;_MutedOutside.Add(source);}
+        }
+        void RestoreOutside(){foreach(var source in _MutedOutside)if(source)source.mute=false;_MutedOutside.Clear();}
+        void LateUpdate(){if(_Open){if(Time.unscaledTime>=_NextMuteScan)MuteOutside();RefreshConnectedSilhouettes();if(!_Camera.orthographic){var p=_CameraOrigin;p.x+=Mathf.Clamp(_Walker.localPosition.x-_WalkerOrigin.x,-7.5f,7.5f);_Camera.transform.localPosition=p;}Cursor.visible=_Session&&_Session.MemberMenuOpen;Cursor.lockState=CursorLockMode.None;Cursor.SetCursor(null,Vector2.zero,CursorMode.Auto);}}
 
         void BindRealArt(SpriteRenderer target,HotelPlayer player){target.sprite=null;foreach(var source in player.GetComponentsInChildren<SpriteRenderer>(true))if(source.sprite&&source.name.IndexOf("Body",StringComparison.OrdinalIgnoreCase)>=0){target.sprite=source.sprite;target.flipX=source.flipX;break;}target.color=Color.black;if(target.sprite){float height=target.sprite.bounds.size.y*Mathf.Abs(target.transform.lossyScale.y);if(height>.001f)target.transform.localScale*=_SilhouetteHeight/height;}}
         void RefreshConnectedSilhouettes(){if(_ConnectedSilhouettes==null)return;int slot=0;if(_Session)foreach(var player in HotelPlayer.ActivePlayers){if(!player||player==_Owner||!player.isActiveAndEnabled||!player.Networked||!player.Identity.IsSpawned)continue;if(slot>=_ConnectedSilhouettes.Length)break;var r=_ConnectedSilhouettes[slot++];if(!r)continue;BindRealArt(r,player);r.enabled=r.sprite;}

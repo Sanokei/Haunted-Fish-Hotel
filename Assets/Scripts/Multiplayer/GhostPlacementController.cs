@@ -46,38 +46,6 @@ namespace HauntedFish.Multiplayer
         [SerializeField] GameObject _PlacementPreview;
         [SerializeField] SpriteRenderer _PlacementPreviewSprite;
         void HidePlacementPreview() { if (_PlacementPreview) _PlacementPreview.SetActive(false); }
-        void PresentPlacementPreview(GhostTrap definition, Vector3 placement, bool clear)
-        {
-            if (!_PlacementPreview || !_PlacementPreviewSprite || !_PreviewSprite || !_PreviewSprite.sprite || !definition) return;
-
-            // The carried artwork follows flight. This separate destination uses
-            // exactly the final body center validated by PlacementPoint and RPCs.
-            _PlacementPreview.transform.SetPositionAndRotation(placement + definition.ArmedOffset + definition.ColliderOffset, Quaternion.identity);
-            _PlacementPreviewSprite.sprite = _PreviewSprite.sprite;
-            _PlacementPreviewSprite.sharedMaterial = _PreviewSprite.sharedMaterial;
-            _PlacementPreviewSprite.sortingLayerID = _PreviewSprite.sortingLayerID;
-            _PlacementPreviewSprite.sortingOrder = _PreviewSprite.sortingOrder;
-            var presentation = definition.GetComponentInChildren<GhostTrapAreaPresentation>(true);
-            var bounds = presentation ? presentation.OpaqueArtBounds : new Rect(0, 0, 1, 1);
-            float widthFraction = Mathf.Max(.01f, bounds.width), heightFraction = Mathf.Max(.01f, bounds.height);
-            var sprite = _PreviewSprite.sprite;
-            float aspect = sprite.rect.width * widthFraction / (sprite.rect.height * heightFraction);
-            float artHeight = Mathf.Min(definition.BodyHalfSize.y * 2, Mathf.Min(definition.ObjectSize.y, definition.ObjectSize.x / aspect));
-            var size = sprite.bounds.size;
-            float scaleX = artHeight * aspect / (widthFraction * Mathf.Max(.001f, size.x));
-            float scaleY = artHeight / (heightFraction * Mathf.Max(.001f, size.y));
-            float centerX = sprite.bounds.min.x + size.x * bounds.center.x;
-            float topY = sprite.bounds.min.y + size.y * bounds.yMax;
-            // Fit the opaque artwork exactly like the released trap, including
-            // transparent texture padding and authored sprite pivots.
-            _PlacementPreviewSprite.transform.localPosition = new Vector3(-centerX * scaleX, definition.BodyHalfSize.y - topY * scaleY, 0);
-            _PlacementPreviewSprite.transform.localRotation = Quaternion.identity;
-            _PlacementPreviewSprite.transform.localScale = new Vector3(scaleX, scaleY, 1);
-            var color = clear ? HotelPalette.Light : HotelPalette.Rust;
-            color.a *= .6f;
-            _PlacementPreviewSprite.color = color;
-            _PlacementPreview.SetActive(true);
-        }
         GameCameraOwner _Camera;
         GameSceneController _Scene;
         [SerializeField]
@@ -128,7 +96,7 @@ namespace HauntedFish.Multiplayer
             _HudMode = -1;
         }
         string _PreparedRoundKey;
-        const float PossessedGhostAlpha = .35f;
+        const float PossessedGhostAlpha = .25f;
         public void Configure(GameCameraOwner camera, GameSceneController scene)
         {
             _Camera = camera;
@@ -189,6 +157,9 @@ namespace HauntedFish.Multiplayer
 
             _Map.Enable();
             _Hud.SetActive(true);
+            // The ghost plays without the on-screen control bar; the HUD keeps only overlays.
+            if (_Label && _Label.transform.parent.gameObject.activeSelf)
+                _Label.transform.parent.gameObject.SetActive(false);
             _Supply = _TrapManager ? _TrapManager.ClosestPackage(_Position) : null;
             _Flight.gameObject.SetActive(true);
             if (_Pending && player.GhostPlacementReply != _Reply)
@@ -315,7 +286,6 @@ namespace HauntedFish.Multiplayer
             var heldDefinition = _World.Definition(_Family);
             bool ceilingPlacement = _Possessed && heldDefinition && heldDefinition.PlacementMode == TrapPlacementMode.HallwayCeiling;
             var target = _Position;
-            if (ceilingPlacement && Mouse.current != null && HallwayPointer(HotelViewCamera.Current, _Point.ReadValue<Vector2>(), out var pointed)) target = pointed;
             bool clear = _World.PlacementPoint(target, _Family, out var placement);
             if (ceilingPlacement)
             {
@@ -336,7 +306,8 @@ namespace HauntedFish.Multiplayer
             if (forbidden.HasValue) ShowForbiddenArea(HotelViewCamera.Current, forbidden.Value);
             if (_PreviewSprite)
                 _PreviewSprite.color = clear ? HotelPalette.Light : HotelPalette.Rust;
-            if (ceilingPlacement && !_Pending) PresentPlacementPreview(heldDefinition, placement, clear);
+            // Like every other family, only the carried trap is shown; no separate ceiling ghost.
+            HidePlacementPreview();
             int nearbyTrap = NearbyTrapId = _World.NearbyCube(_Position, player);
             bool nearby = _TrapManager && _TrapManager.InPickupRange(_Position, _Supply);
             if (_TrapManager)

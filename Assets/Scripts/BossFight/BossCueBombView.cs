@@ -10,6 +10,8 @@ namespace HauntedFish.BossFight
     {
         [SerializeField] Animator _Fuse, _Blast, _FishStun, _GhostStun;
         [SerializeField] Transform _BlastRoot;
+        // Flipbook fireball (Kenney smoke-particles explosion sheet) under the blast root, burst once per detonation.
+        [SerializeField] ParticleSystem _Fireball;
         static readonly int Idle = Animator.StringToHash("Idle");
         static readonly int Burn = Animator.StringToHash("Burn");
         static readonly int Boom = Animator.StringToHash("Boom");
@@ -45,6 +47,7 @@ namespace HauntedFish.BossFight
             {
                 _BlastRoot.position = position;
                 _Blast.Play(Boom, 0, 0);
+                if (_Fireball) { _Fireball.Clear(true); _Fireball.Play(true); }
             }
             var marker = victim == BossSide.Fish ? _FishStun : victim == BossSide.Ghost ? _GhostStun : null;
             if (marker) marker.Play(Stun, 0, 0);

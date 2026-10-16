@@ -1,5 +1,5 @@
 // Lobby credits roll. "# " is a heading, "- " is small print, "@handle" gets the Instagram mark,
-// blank lines are spacing, and lines starting with "//" are notes that never show on screen.
+// "[logo] Name" shows Resources/CreditsLogos/Name, blank lines are spacing, and lines starting with "//" are notes that never show on screen.
 // Every asset credit below comes from a license or source file in the project.
 // NOT YET CREDITED (no license or source file found; add them before release):
 //   Art/Cars, Art/MetroStation, Art/LiquorBottles, Art/Cigarettes, Art/TrafficCone, Art/Radio,
@@ -30,6 +30,8 @@ Bi10
 # Music
 Maple Leaf Rag
 - Scott Joplin, 1916 piano roll performance. Public domain, via Wikimedia Commons
+The Entertainer
+- Scott Joplin, 1902 piano roll. Public domain, via Wikimedia Commons
 Lobby introduction organ
 - Original composition for Haunted Fish Hotel
 
@@ -44,6 +46,8 @@ Street Lamp 01, Street Lamp 02
 - Josh Dean, Poly Haven. CC0 1.0
 Lowpoly Island
 - alfance, sketchfab.com. CC BY
+Bomb
+- Quaternius, poly.pizza. CC0 1.0
 
 
 
@@ -59,8 +63,10 @@ Damask Vintage Background Black
 - Karen Arnold, publicdomainpictures.net. CC0 1.0
 Dark Halloween ornaments
 - nemo (nonemo.itch.io). CC0 1.0
-UI Pack, Input Prompts
+UI Pack, Input Prompts, Smoke Particles
 - Kenney (www.kenney.nl). CC0 1.0
+Ghost shader after Luigi's Mansion Ghost Capture
+- Mix and Jam. MIT License
 
 
 
@@ -86,15 +92,26 @@ Indoor storm
 - Ylmir, alxl (OpenGameArt). seth-m, cognito perceptu, TRP (Freesound). CC0 1.0
 Fireplace #4
 - Joseph Sardin, BigSoundBank.com. CC0 1.0
+Cart crash
+- Gravity Sound. CC BY 4.0, via Wikimedia Commons
+Cart squeak and angler yawn
+- MKFI, ezwa. Wikimedia Commons. Public domain
+Chandelier sway and crash
+- Andreas.Mustola, miguelab1998, matt_ratz (Freesound). CC0 1.0
+Cinema projector
+- Carlosjvives. CC BY 4.0, via Wikimedia Commons
 Front desk, footsteps and fish sounds
 - LoafDV, FlashTrauma, Felix Blume (Freesound). Independent.nu, Johannes Pinter (OpenGameArt). CC0 1.0
 
 
 
 # Built with
-Unity
-ink by inkle
-- MIT License
+[logo] Unity
+
+[logo] inkle
+- ink. MIT License
+
+[logo] Blender
 
 
 

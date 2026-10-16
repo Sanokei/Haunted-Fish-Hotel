@@ -123,6 +123,7 @@ namespace HauntedFish.Multiplayer
         }
         void OnDisable()
         {
+            _OutcomeRoutine = null;
             _SkipIntroduction.Disable();
             if (_IntroductionPresentation) _IntroductionPresentation.SkipRequested -= SkipIntroduction;
             if (_Outro) _Outro.PlayingChanged -= OnOutroPlayingChanged;
@@ -206,6 +207,20 @@ namespace HauntedFish.Multiplayer
         void CopyCode() { if (CanUseDesk) GUIUtility.systemCopyBuffer = _Lobby.Code; }
         void JoinRoom(string code) { if (CanUseDesk) _Lobby.JoinLobby(code); }
 
+        Coroutine _OutcomeRoutine;
+        // The outro may not be enabled yet while the lobby is still loading; keep the result until it actually plays.
+        IEnumerator PlayOutcomeWhenReady()
+        {
+            for (int frame = 0; frame < 30 && LobbyOutcome.Pending != LobbyOutroKind.None; frame++)
+            {
+                yield return null;
+                if (_Outro.PlayOutcome(LobbyOutcome.Pending)) LobbyOutcome.Take();
+            }
+            // Never leave the lobby blacked out if the outro could not start.
+            if (LobbyOutcome.Pending != LobbyOutroKind.None) { LobbyOutcome.Take(); _Outro.CoverScreen(false); }
+            _OutcomeRoutine = null;
+        }
+
         public void PrepareIntroduction()
         {
             if (!isActiveAndEnabled) return;
@@ -214,7 +229,8 @@ namespace HauntedFish.Multiplayer
             {
                 _IntroductionPlayed = true;
                 if (_LightningEffect) _LightningEffect.StartAmbient();
-                _Outro.PlayOutcome(LobbyOutcome.Take());
+                _Outro.CoverScreen(true);
+                if (_OutcomeRoutine == null) _OutcomeRoutine = StartCoroutine(PlayOutcomeWhenReady());
                 return;
             }
             if (_IntroductionPlayed)

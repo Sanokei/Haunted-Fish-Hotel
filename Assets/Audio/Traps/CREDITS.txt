@@ -1,0 +1,11 @@
+Trap sound effects, edited and mastered for Haunted Fish Hotel. Sources on Wikimedia Commons and Freesound:
+
+Trap_Cart_Squeak       "Squeaky door hinge.ogg" - MKFI, Public domain
+Trap_Cart_Crash        "Crash hit 2 (Gravity Sound).wav" - Gravity Sound, CC BY 4.0
+Trap_Angler_Yawn       "Yawning 1.ogg" - ezwa, Public domain
+Trap_Chandelier_Release "0005_Crystal Lamp with Swing Front.wav" - Andreas.Mustola (Freesound 84526), CC0
+Trap_Chandelier_Crash  "37.Fall_of_a_chandelier.wav" - miguelab1998 (Freesound 408611), CC0
+                       "Shattering Chandelier.mp3" - matt_ratz (Freesound 541601), CC0
+
+Credited in Dialogue/LobbyOutro/LobbyCredits.txt (Sound section).
+https://creativecommons.org/licenses/by/4.0/

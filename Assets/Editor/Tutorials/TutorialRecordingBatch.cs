@@ -105,7 +105,7 @@ public static class TutorialRecordingBatch
         { SessionState.SetBool(Key, false); return; }
         Attach(); // Resumes explicit armed command; never starts a new Play session on load.
     }
-    static void Attach() { EditorApplication.update -= Tick; EditorApplication.update += Tick; deadline = EditorApplication.timeSinceStartup + 300; }
+    static void Attach() { EditorApplication.update -= Tick; EditorApplication.update += Tick; deadline = EditorApplication.timeSinceStartup + 900; } // Both roles share one budget; Ghost alone runs ~2 min of source.
     static string Name => role == 0 ? "Fish" : "Ghost";
     static void Tick()
     {

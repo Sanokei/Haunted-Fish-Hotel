@@ -10,7 +10,7 @@ EXTERNAL Wait(seconds)
 ~ LobbyShot("crash_dolly", 0.9)
 // The winner celebrates before the card lands.
 ~ LobbyShot("cheer", 1.8)
-~ OutroTitle("Win", 2.5)
+~ OutroTitle("Ghosts Win", 2.5)
 // Jib back up and away from the winner while the credits roll.
 ~ RollCredits(48)
 ~ Wait(0.5)

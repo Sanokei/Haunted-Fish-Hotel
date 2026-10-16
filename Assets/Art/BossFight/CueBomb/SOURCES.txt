@@ -1,0 +1,7 @@
+SkullBomb.obj / .mtl
+  "Bomb" by Quaternius, https://poly.pizza/m/0oNZ1y6ghg  - CC0 1.0. Converted from GLB to OBJ.
+ExplosionSheet.png
+  Kenney Smoke Particles (explosion00-08), https://kenney.nl/assets/smoke-particles - CC0 1.0. Packed 3x3.
+../GhostPlacement.shader
+  Ported from ghost.shadergraph in https://github.com/mixandjam/LuigisMansion-GhostCapture - MIT License, (c) Mix and Jam.
+Credited in Dialogue/LobbyOutro/LobbyCredits.txt.

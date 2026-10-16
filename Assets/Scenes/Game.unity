@@ -490,6 +490,8 @@ MonoBehaviour:
   _GameCamera: {fileID: 24000032}
   _SceneName: BossFight
   _ReturnGhostSeconds: 3
+  _MatchEndSeconds: 3
+  _StallSeconds: 5
 --- !u!1 &550011
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,7 +2070,7 @@ SpriteRenderer:
   m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &31000045
 GameObject:

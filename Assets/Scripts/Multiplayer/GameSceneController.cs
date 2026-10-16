@@ -39,6 +39,42 @@ namespace HauntedFish.Multiplayer
                 _GraceCountdown.text = second.ToString();
             }
         }
+        // The ghost's stall clock, top right: a plain timer from 60, then the bubbly digit pops each second for the last 10.
+        GraceCountdownPresentation _StallView;
+        Text _StallDigit;
+        int _StallSecond = -1;
+        float _StallPopAt;
+        void RenderStallCountdown(HotelPlayer local)
+        {
+            bool visible = local && local.RoundReleased && local.StallRemaining > 0 && local.MatchResult == 0 && !local.InBossFight && !local.BossWatching;
+            if (!_StallDigit && visible && _GraceCountdownPrefab)
+            {
+                _StallView = Instantiate(_GraceCountdownPrefab, transform, false);
+                _StallView.name = "Ghost stall countdown";
+                _StallDigit = _StallView.Digit;
+                var rect = _StallDigit.rectTransform;
+                rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(1, 1);
+                rect.anchoredPosition = new Vector2(-36, -24);
+                _StallDigit.alignment = TextAnchor.UpperRight;
+                if (_GraceCountdownFont) _StallDigit.font = _GraceCountdownFont;
+            }
+            if (!_StallDigit) return;
+            _StallDigit.gameObject.SetActive(visible);
+            if (!visible) { _StallSecond = -1; return; }
+            int second = Mathf.CeilToInt(local.StallRemaining);
+            bool finale = second <= 10;
+            if (second != _StallSecond)
+            {
+                _StallSecond = second;
+                _StallDigit.text = second.ToString();
+                _StallDigit.fontSize = finale ? 160 : 72;
+                if (finale) _StallPopAt = Time.unscaledTime;
+            }
+            // Same bubbly digit as the 5 to 1 grace countdown: each final second lands big and settles.
+            float pop = finale ? Mathf.Clamp01((Time.unscaledTime - _StallPopAt) / .35f) : 1;
+            float eased = 1 - (1 - pop) * (1 - pop) * (1 - pop);
+            _StallDigit.rectTransform.localScale = Vector3.one * Mathf.Lerp(1.6f, 1, eased);
+        }
         bool _SetupStarted;
         float _SetupDeadline;
         int _DisplayedSetupSecond = -1;
@@ -107,6 +143,7 @@ namespace HauntedFish.Multiplayer
             }
         }
         public bool AllFishDead => _Released && LivingFishCount == 0;
+        public bool Released => _Released;
         public HauntedHotelMultiplayer Session => _Session;
 
         readonly List<HotelPlayer> _OrderedPlayers = new List<HotelPlayer>();
@@ -268,6 +305,7 @@ namespace HauntedFish.Multiplayer
                 }
             }
             RenderGraceCountdown(local);
+            RenderStallCountdown(local);
             if (_SetupCaption)
             {
                 bool show = local && local.RoundIntroComplete && !local.RoundReleased;
@@ -335,7 +373,7 @@ namespace HauntedFish.Multiplayer
                 }
         }
 
-        void OnDestroy() { if (_GraceView) Destroy(_GraceView.gameObject); }
+        void OnDestroy() { if (_GraceView) Destroy(_GraceView.gameObject); if (_StallView) Destroy(_StallView.gameObject); }
         void OnEnable() => Activate();
         void OnDisable() => Exit();
         public void Enter(HauntedHotelMultiplayer session)

@@ -54,12 +54,14 @@ namespace HauntedFish.Multiplayer
         public bool HasMotionContacts => _MotionContacts.Count > 0;
         public float MotionDirection { get; private set; }
         public bool PiercesBodies => _Behaviour == TrapBehaviour.PiercingSlide;
+        public bool Falls => _Behaviour == TrapBehaviour.Fall;
+        public bool Travels => _Behaviour == TrapBehaviour.Slide || _Behaviour == TrapBehaviour.PiercingSlide;
         public TrapImpact Impact => _Behaviour == TrapBehaviour.PiercingSlide ? TrapImpact.Lethal : _Impact;
         public float StunSeconds => _StunSeconds;
         public float KnockbackDistance => _KnockbackDistance;
         public float KnockbackSeconds => _KnockbackSeconds;
         public bool CanBeginImpact(HotelPlayer fish) => Impact == TrapImpact.DamageOverTime || !_Impacts.Contains(fish);
-        public void RecordImpact(HotelPlayer fish) { if (Impact != TrapImpact.DamageOverTime) _Impacts.TryStrike(fish); }
+        public void RecordImpact(HotelPlayer fish) { if (Impact != TrapImpact.DamageOverTime && _Impacts.TryStrike(fish)) _State.Hits++; }
         const float PushSeparation = .12f;
         const float ContactMargin = .01f;
         const float MinimumMovement = .000001f;
@@ -162,6 +164,14 @@ namespace HauntedFish.Multiplayer
             _PassageSweep?.Clear();
             _MotionContacts.Clear();
             MotionDirection = 0;
+            // A fresh angler waits at the right end of its run.
+            if (_Behaviour == TrapBehaviour.PiercingSlide && state.Activations == 0 && state.Phase == (int)TrapPhase.Armed &&
+                Mathf.Abs(state.Position.x - (state.Origin + ArmedOffset).x) < .001f)
+            {
+                // Limits read _State, so adopt the new origin before measuring the run.
+                _State = state;
+                state.Position.x = Limits.y;
+            }
             ApplyState(state);
             if (_Presentation)
                 _Presentation.ConfigureTrap(this);
@@ -195,6 +205,9 @@ namespace HauntedFish.Multiplayer
                 _State.Phase = (int)TrapPhase.Armed;
                 _State.Progress = 0;
                 _State.Position = _State.Origin + ArmedOffset;
+                // The angler always re-arms at the right end of its run.
+                if (_Behaviour == TrapBehaviour.PiercingSlide)
+                    _State.Position.x = Limits.y;
                 ApplyState(_State);
                 Physics.SyncTransforms();
                 return true;
@@ -302,6 +315,7 @@ namespace HauntedFish.Multiplayer
             Physics.SyncTransforms();
             int count;
             var target = _State.Origin + ArmedOffset;
+            if (_Behaviour == TrapBehaviour.PiercingSlide) target.x = Limits.y;
             if (World && (!World.FootprintAllowed(target + ColliderOffset, BodyHalfSize) || !World.TrapFootprintClear(this, target, _State.Rotation, _State.Id))) return false;
             var rotation = Matrix4x4.Rotate(transform.rotation);
             var half = HalfExtents;

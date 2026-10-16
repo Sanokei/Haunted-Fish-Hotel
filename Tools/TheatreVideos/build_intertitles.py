@@ -19,6 +19,8 @@ try:
 except (ValueError, OSError, KeyError) as error:
     parser.error(str(error))
 WORK = ROOT / 'Tools/TheatreVideos/Evidence'
+UNDERCRANK = 1.2  # gameplay plays at 120%, like hand-cranked footage projected at speed
+IRIS_SECONDS, IRIS_RADIUS = .45, 760  # radius covers the 1280x720 frame corner
 WORK.mkdir(parents=True, exist_ok=True)
 
 
@@ -59,9 +61,14 @@ for role, capture in captures.items():
             # but only actual demonstrations are emitted as gameplay.
             if kind == 'TutorialDemo' and seconds > 0:
                 segment = WORK / f'{role}-segment-{len(pieces):02}.mp4'
-                # Strip the baked lower captions and upper role label. Retain the
-                # complete gameplay viewport, letterboxed without stretching it.
-                run(['-ss', str(timeline), '-i', str(source), '-t', str(seconds), '-vf', 'crop=1280:460:0:68,pad=1280:720:0:130:black,setsar=1,fps=30', '-an', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p', str(segment)])
+                # Captions are not drawn during capture, so the full gameplay frame is kept.
+                # Silent-comedy presentation: undercranked so action plays a touch fast,
+                # and each scene opens and closes on an iris like a Keaton two-reeler.
+                shown = seconds / UNDERCRANK
+                iris = (f"geq=lum='if(lt(hypot(X-W/2,Y-H/2),{IRIS_RADIUS}*min(1,min(T,{shown:.3f}-T)/{IRIS_SECONDS})),lum(X,Y),0)'"
+                        f":cb='if(lt(hypot(X-W/2,Y-H/2),{IRIS_RADIUS}*min(1,min(T,{shown:.3f}-T)/{IRIS_SECONDS})),cb(X,Y),128)'"
+                        f":cr='if(lt(hypot(X-W/2,Y-H/2),{IRIS_RADIUS}*min(1,min(T,{shown:.3f}-T)/{IRIS_SECONDS})),cr(X,Y),128)'")
+                run(['-ss', str(timeline), '-i', str(source), '-t', str(seconds), '-vf', f'scale=1280:720,setsar=1,setpts=PTS/{UNDERCRANK},fps=30,format=yuv420p,{iris}', '-an', '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p', str(segment)])
                 pieces.append(segment)
             timeline += seconds
     listing = WORK / f'{role}-concat.txt'
