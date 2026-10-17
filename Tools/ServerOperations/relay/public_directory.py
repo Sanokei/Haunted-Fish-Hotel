@@ -3,10 +3,13 @@
 import concurrent.futures,hmac,json,os,pathlib,secrets,socket,threading,time
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from relay_policy import RelayPolicy,PolicyError
-IP='37.27.158.17'
-policy=RelayPolicy(IP,pathlib.Path('/etc/haunted-fish/turn.secret').read_text().strip().encode())
+# HF_DEV=1 serves a loopback development directory without the TLS proxy (local browser testing only).
+DEV=os.environ.get('HF_DEV')=='1'
+IP=os.environ.get('HF_RELAY_IP','127.0.0.1' if DEV else '37.27.158.17')
+SECRET=os.environ['HF_TURN_SECRET'].encode() if DEV else pathlib.Path('/etc/haunted-fish/turn.secret').read_text().strip().encode()
+policy=RelayPolicy(IP,SECRET,allow_private=DEV)
 auth={};challenge_lock=threading.Lock();challenges={}
-probe=socket.socket(socket.AF_INET,socket.SOCK_DGRAM);probe.bind((IP,49160));probe.settimeout(1)
+probe=socket.socket(socket.AF_INET,socket.SOCK_DGRAM);probe.bind((IP,49160 if not DEV else 0));probe.settimeout(1)
 def receive_proofs():
  while True:
   try:payload,endpoint=probe.recvfrom(256)
@@ -47,10 +50,19 @@ class Handler(BaseHTTPRequestHandler):
  def execute(self,data,ip):
   path=self.path.split('?')[0];method=self.command
   with policy.lock:policy.reap()
-  if path=='/health' and method=='GET':return {'status':'ok','protocol':'mirage159-turn-v1'}
+  if path=='/health' and method=='GET':return {'status':'ok','protocol':'mirage159-turn-v1','transports':['udp','webrtc']}
   if path=='/sessions' and method=='POST':
-   sid=secrets.token_urlsafe(24);token=secrets.token_urlsafe(32);credentials=policy.issue(ip,sid);auth[sid]=token
+   transport=data.get('transport','udp')
+   sid=secrets.token_urlsafe(24);token=secrets.token_urlsafe(32);credentials=policy.issue(ip,sid,transport);auth[sid]=token
+   # Production browsers may only reach peers through coturn; the loopback directory has no TURN server.
+   if transport=='webrtc':credentials['icePolicy']='all' if DEV else 'relay'
    return dict(credentials,session=sid,token=token)
+  if DEV and path=='/dev/rooms' and method=='GET':return {'rooms':sorted(policy.rooms)}
+  if path=='/signal' and method=='GET':
+   return {'messages':policy.drain(self.authorized())}
+  if path=='/signal' and method=='POST':
+   policy.signal(self.authorized(),str(data.get('room','')).upper(),str(data.get('to','')),data.get('kind'),data.get('sdp',''))
+   return {'status':'sent'}
   if path=='/sessions/heartbeat' and method=='POST':
    policy.renew(self.authorized());return {'status':'renewed'}
   if path=='/sessions' and method=='DELETE':
@@ -102,10 +114,10 @@ class Handler(BaseHTTPRequestHandler):
   try:
    if self.client_address[0]!='127.0.0.1':raise PolicyError('Trusted TLS proxy required')
    import ipaddress
-   ip=str(ipaddress.ip_address(self.headers.get('X-Real-IP','')))
+   ip=str(ipaddress.ip_address(self.headers.get('X-Real-IP','127.0.0.1' if DEV else '')))
    if pathlib.Path('/var/lib/haunted-fish-traffic/cutoff-active').exists():raise PolicyError('Traffic cutoff active')
    length=int(self.headers.get('Content-Length','0'))
-   if length<0 or length>4096 or self.headers.get('Transfer-Encoding'):raise PolicyError('Request too large')
+   if length<0 or length>16384 or self.headers.get('Transfer-Encoding'):raise PolicyError('Request too large')
    data=json.loads(self.rfile.read(length)) if length else {}
    if not isinstance(data,dict):raise PolicyError('JSON object required')
    result=self.execute(data,ip);status=200
@@ -118,8 +130,14 @@ class Handler(BaseHTTPRequestHandler):
    else:
     result={'error':'Unable to complete room request'};status=400
   except (ValueError,TypeError,KeyError):result={'error':'Invalid room request'};status=400
-  body=json.dumps(result).encode();self.send_response(status);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(body)));self.send_header('Cache-Control','no-store');
+  body=json.dumps(result).encode();self.send_response(status);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(body)));self.send_header('Cache-Control','no-store');self.cors()
   if status in (429,503):self.send_header('Retry-After','65')
   self.end_headers();self.wfile.write(body)
+ def cors(self):
+  # Browser builds call the directory cross-origin; bearer tokens (never cookies) carry authority, so any origin is safe.
+  self.send_header('Access-Control-Allow-Origin','*');self.send_header('Access-Control-Allow-Headers','Authorization, Content-Type')
+  self.send_header('Access-Control-Allow-Methods','GET, POST, DELETE, OPTIONS');self.send_header('Access-Control-Max-Age','600')
+ def do_OPTIONS(self):
+  self.send_response(204);self.cors();self.send_header('Content-Length','0');self.end_headers()
  do_GET=do_POST=do_DELETE=handle_request
-if __name__=='__main__':Server(('127.0.0.1',8765),Handler).serve_forever()
+if __name__=='__main__':Server(('127.0.0.1',int(os.environ.get('HF_DIRECTORY_PORT','8765'))),Handler).serve_forever()

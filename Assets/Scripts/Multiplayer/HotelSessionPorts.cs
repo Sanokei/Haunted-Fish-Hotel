@@ -29,6 +29,8 @@ namespace HauntedFish.Multiplayer
         int Port { get; }
         float RetryDelay { get; }
         IEnumerator Prepare(int port);
+        // Joiners finish any transport handshake with the host before Mirage connects.
+        IEnumerator ConnectToHost(Room room);
         IEnumerator EndSession();
     }
 

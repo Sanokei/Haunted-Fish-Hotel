@@ -3735,6 +3735,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 21000003, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+      propertyPath: _sceneId
+      value: 2051221777
+      objectReference: {fileID: 0}
     - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: Networked
       value: 0

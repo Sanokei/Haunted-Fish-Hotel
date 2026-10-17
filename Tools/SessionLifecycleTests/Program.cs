@@ -171,6 +171,29 @@ static class Program
             f.Session.JoinLobby("RELAY2");
             Check(f.Directory.Requests.Single().Relay, "Relay join selects the reservation-aware directory path");
         }
+        using (var f = new Fixture())
+        {
+            f.Transport.ClientStartsAtConnect = () => f.Network.ClientStarts;
+            f.Session.JoinLobby("LINK01");
+            f.Runtime.Frame();
+            Check(f.Transport.HostConnections == 1 && f.Transport.ClientStartsSeenAtConnect == 0 && f.Network.ClientStarts == 1,
+                "Joiners finish the transport handshake before Mirage starts the client");
+        }
+        using (var f = new Fixture())
+        {
+            f.Transport.HostFailure = "The lobby host did not answer.";
+            f.Session.JoinLobby("LINK02");
+            f.Runtime.Frame();
+            f.Runtime.Frame();
+            Check(f.Session.State == HotelSessionState.Failed && f.Session.Status == "The lobby host did not answer." && f.Network.ClientStarts == 0,
+                "A failed host handshake fails the join without starting a client");
+        }
+        using (var f = new Fixture())
+        {
+            f.Session.CreateLobby();
+            f.Runtime.Frame();
+            Check(f.Transport.HostConnections == 0, "Hosts never perform a joiner handshake");
+        }
     }
 
     static void TestAdmissionTimeoutAndFailure()
@@ -593,6 +616,17 @@ static class Program
             PreparedPort = port;
             OnPrepare?.Invoke();
             while (PreparationPending) yield return null;
+        }
+        public int HostConnections;
+        public string HostFailure;
+        public Func<int> ClientStartsAtConnect;
+        public int ClientStartsSeenAtConnect = -1;
+        public IEnumerator ConnectToHost(Room room)
+        {
+            HostConnections++;
+            if (ClientStartsAtConnect != null) ClientStartsSeenAtConnect = ClientStartsAtConnect();
+            if (HostFailure != null) { Ready = false; Failure = HostFailure; }
+            yield break;
         }
         public IEnumerator EndSession() { Ends++; yield break; }
     }

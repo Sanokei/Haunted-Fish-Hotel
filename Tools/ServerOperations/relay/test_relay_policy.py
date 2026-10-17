@@ -64,6 +64,38 @@ class PolicyTests(unittest.TestCase):
    self.issue(n);self.p.reserve(str(n),"ABC123",str(n))
   self.assertIsNone(self.p.quickplay("2","DEF456","owner-two",True))
 
+ def webrtc_room(self):
+  self.p.issue("198.51.100.1","host","webrtc");self.p.create("host","RTC123","owner-rtc","join-rtc")
+  self.p.issue("198.51.100.2","guest","webrtc");return self.p.reserve("guest","RTC123","ticket")
+ def test_webrtc_room_needs_no_udp_endpoint(self):
+  reservation=self.webrtc_room()
+  self.assertEqual((reservation["address"],reservation["port"]),("RTC123",1))
+  self.assertIn("turn:8.8.8.8:3478?transport=udp",self.p.issue("198.51.100.3","other","webrtc")["urls"])
+ def test_transports_do_not_mix(self):
+  self.webrtc_room();self.issue(5)
+  with self.assertRaises(PolicyError):self.p.reserve("5","RTC123","desktop")
+  self.room();self.p.issue("198.51.100.6","browser","webrtc")
+  with self.assertRaises(PolicyError):self.p.reserve("browser","ABC123","browser")
+ def test_webrtc_reservation_outlives_ice(self):
+  self.webrtc_room();self.now+=20
+  self.assertEqual(self.p.consume("host","RTC123","owner-rtc","ticket"),"guest")
+ def test_signal_between_owner_and_reserved_peer(self):
+  self.webrtc_room()
+  self.p.signal("guest","RTC123","host","offer","v=0 offer")
+  self.assertEqual(self.p.drain("host"),[{"from":"guest","room":"RTC123","kind":"offer","sdp":"v=0 offer"}])
+  self.assertEqual(self.p.drain("host"),[])
+  self.p.signal("host","RTC123","guest","answer","v=0 answer")
+  self.assertEqual(self.p.drain("guest")[0]["kind"],"answer")
+ def test_signal_rejects_outsiders(self):
+  self.webrtc_room();self.p.issue("198.51.100.7","outsider","webrtc")
+  with self.assertRaises(PolicyError):self.p.signal("outsider","RTC123","host","offer","x")
+  with self.assertRaises(PolicyError):self.p.signal("host","RTC123","outsider","answer","x")
+  with self.assertRaises(PolicyError):self.p.signal("guest","RTC123","host","script","x")
+  with self.assertRaises(PolicyError):self.p.signal("guest","RTC123","host","offer","x"*12001)
+ def test_admitted_peer_keeps_signalling(self):
+  self.webrtc_room();self.p.consume("host","RTC123","owner-rtc","ticket")
+  self.p.signal("host","RTC123","guest","bye","")
+  self.assertEqual(self.p.drain("guest")[0]["kind"],"bye")
  def test_cutoff(self):
   self.room();self.p.cutoff()
   with self.assertRaises(PolicyError):self.p.issue("198.51.100.2","2")

@@ -140,6 +140,17 @@ namespace HauntedFish.Multiplayer
                 yield break;
             }
 
+            if (invitation != null)
+            {
+                SetState(HotelSessionState.Connecting, "Connecting to lobby...");
+                yield return _Transport.ConnectToHost(result);
+                if (!Current(version)) yield break;
+                if (!_Transport.Ready)
+                {
+                    yield return FailSession(_Transport.Failure ?? "Unable to reach the lobby host.");
+                    yield break;
+                }
+            }
             result.quickplay = invitation == null || quickplay;
             Room = result;
             SetState(HotelSessionState.Connecting, "Connecting to lobby...");

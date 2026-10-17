@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditor.SceneManagement;
@@ -13,6 +14,9 @@ public static class WebGLReleaseBuild {
     public static void Run() {
         PlayerSettings.SplashScreen.show = false;
         PlayerSettings.SplashScreen.showUnityLogo = false;
+        // Gzip with the JS fallback loads on hosts that don't send Content-Encoding headers (e.g. itch.io).
+        PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
+        PlayerSettings.WebGL.decompressionFallback = true;
 
         var scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
 
@@ -20,6 +24,12 @@ public static class WebGLReleaseBuild {
         // each scene gives any newly added identities a valid id before the player build.
         foreach (var path in scenes) {
             var scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+            // OnValidate does not reliably run for inactive identities on load, so call it directly.
+            var onValidate = typeof(Mirage.NetworkIdentity).GetMethod("OnValidate", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            foreach (var identity in scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<Mirage.NetworkIdentity>(true))) {
+                onValidate.Invoke(identity, null);
+                EditorUtility.SetDirty(identity);
+            }
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
         }

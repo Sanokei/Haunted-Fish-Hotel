@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 namespace HauntedFish.Multiplayer
 {
     // This authored component prepares one verified allocation before Mirage starts its peer.
-    public sealed class HotelTurnSocketFactory : SocketFactory, IHasPort
+    public sealed class HotelTurnSocketFactory : SocketFactory, IHasPort, IHotelRelaySocketFactory
     {
         [Serializable] sealed class Session { public string address, username, password, token; public int port, lease; }
         [Serializable] sealed class EndpointProof { public string address; public int port, lease; }
@@ -25,6 +25,8 @@ namespace HauntedFish.Multiplayer
         public float RetryDelay { get; private set; }
         public bool Ready => _Verified && Failure == null && _Prepared != null && _Prepared.Ready;
         public IPEndPoint RelayEndPoint => _Prepared?.RelayEndPoint;
+        public string RoomAddress => RelayEndPoint?.Address.ToString();
+        public int RoomPort => RelayEndPoint?.Port ?? 0;
         // The legacy lobby interface configures Port; real bind/connect endpoints use verified allocations.
         public int Port { get; set; } = 7777;
         public override int MaxPacketSize => 1200;
@@ -102,6 +104,8 @@ namespace HauntedFish.Multiplayer
                 callback(request.result == UnityWebRequest.Result.Success ? request.downloadHandler.text : null);
             }
         }
+        // UDP peers address the host's allocation directly; Mirage's own connect request is the handshake.
+        public IEnumerator ConnectToHost(Room room) { yield break; }
         public IEnumerator EndSession()
         {
             _Verified = false;

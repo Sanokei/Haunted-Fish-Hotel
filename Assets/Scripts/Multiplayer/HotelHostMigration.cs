@@ -74,10 +74,10 @@ namespace HauntedFish.Multiplayer
             _PreparedHostSocket = root.AddComponent(_Socket.GetType()) as SocketFactory;
             JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(_Socket), _PreparedHostSocket);
             if (_PreparedHostSocket is IHasPort port) port.Port = _Port;
-            var relay = _PreparedHostSocket as HotelTurnSocketFactory;
+            var relay = _PreparedHostSocket as IHotelRelaySocketFactory;
             var address = UnityHotelSessionTransport.LocalAddress();
             var endpointPort = _Port;
-            if (relay)
+            if (relay != null)
             {
                 yield return relay.Prepare(_DirectoryUrl);
                 if (!relay.Ready)
@@ -85,11 +85,11 @@ namespace HauntedFish.Multiplayer
                     _Network.LobbyPlayers.HostPrepared(string.Empty);
                     yield break;
                 }
-                address = relay.RelayEndPoint.Address.ToString();
-                endpointPort = relay.RelayEndPoint.Port;
+                address = relay.RoomAddress;
+                endpointPort = relay.RoomPort;
             }
             string failure = null;
-            yield return HotelRoomDirectory.Request(_DirectoryUrl, relay ? relay.AuthorizationToken : null,
+            yield return HotelRoomDirectory.Request(_DirectoryUrl, relay?.AuthorizationToken,
                 "/rooms", "POST", JsonUtility.ToJson(new CreateRoom { address = address, port = endpointPort, capacity = _Lifecycle.Room != null ? _Lifecycle.Room.capacity : _Capacity }),
                 (room, error) => { _PreparedHostRoom = room; failure = error; });
             if (failure != null || _PreparedHostRoom == null)
@@ -108,10 +108,10 @@ namespace HauntedFish.Multiplayer
             {
                 yield return new WaitForSecondsRealtime(5f);
                 var room = _PreparedHostRoom;
-                var relay = _PreparedHostSocket as HotelTurnSocketFactory;
+                var relay = _PreparedHostSocket as IHotelRelaySocketFactory;
                 if (room == null || !_PreparedHostSocket) yield break;
                 string failure = null;
-                yield return HotelRoomDirectory.Request(_DirectoryUrl, relay ? relay.AuthorizationToken : null,
+                yield return HotelRoomDirectory.Request(_DirectoryUrl, relay?.AuthorizationToken,
                     "/rooms/" + room.code + "/heartbeat", "POST",
                     JsonUtility.ToJson(new RoomHeartbeat { ownerKey = room.ownerKey, players = 1 }),
                     (value, error) => failure = error);
@@ -136,11 +136,11 @@ namespace HauntedFish.Multiplayer
             var socket = _PreparedHostSocket;
             _PreparedHostRoom = null;
             _PreparedHostSocket = null;
-            var relay = socket as HotelTurnSocketFactory;
+            var relay = socket as IHotelRelaySocketFactory;
             if (room != null)
-                yield return HotelRoomDirectory.Request(_DirectoryUrl, relay ? relay.AuthorizationToken : null,
+                yield return HotelRoomDirectory.Request(_DirectoryUrl, relay?.AuthorizationToken,
                     "/rooms/" + room.code, "DELETE", JsonUtility.ToJson(new RoomHeartbeat { ownerKey = room.ownerKey }), IgnoreRoomResponse);
-            if (relay) yield return relay.EndSession();
+            if (relay != null) yield return relay.EndSession();
             if (socket) UnityEngine.Object.Destroy(socket.gameObject);
         }
 

@@ -13,14 +13,14 @@ namespace HauntedFish.Multiplayer
         readonly Func<string> _DirectoryUrl;
         int _Port;
         string _Address;
-        HotelTurnSocketFactory Relay => _Socket() as HotelTurnSocketFactory;
+        IHotelRelaySocketFactory Relay => _Socket() as IHotelRelaySocketFactory;
         public bool Supported => _Socket() && _Socket().IsSupported && _Socket() is IHasPort;
-        public bool UsesRelay => Relay;
-        public bool Ready => !Relay || Relay.Ready;
-        public string Failure => Relay ? Relay.Failure : null;
-        public string Address => Relay ? Relay.RelayEndPoint.Address.ToString() : _Address;
-        public int Port => Relay ? Relay.RelayEndPoint.Port : _Port;
-        public float RetryDelay => Relay ? Relay.RetryDelay : 0f;
+        public bool UsesRelay => Relay != null;
+        public bool Ready => Relay == null || Relay.Ready;
+        public string Failure => Relay?.Failure;
+        public string Address => Relay != null ? Relay.RoomAddress : _Address;
+        public int Port => Relay != null ? Relay.RoomPort : _Port;
+        public float RetryDelay => Relay?.RetryDelay ?? 0f;
 
         public UnityHotelSessionTransport(Func<SocketFactory> socket, Func<string> directoryUrl)
         {
@@ -33,12 +33,17 @@ namespace HauntedFish.Multiplayer
             _Port = port;
             ((IHasPort)_Socket()).Port = port;
             _Address = LocalAddress();
-            if (Relay) yield return Relay.Prepare(_DirectoryUrl());
+            if (Relay != null) yield return Relay.Prepare(_DirectoryUrl());
+        }
+
+        public IEnumerator ConnectToHost(Room room)
+        {
+            if (Relay != null) yield return Relay.ConnectToHost(room);
         }
 
         public IEnumerator EndSession()
         {
-            if (Relay) yield return Relay.EndSession();
+            if (Relay != null) yield return Relay.EndSession();
         }
 
         internal static string LocalAddress()
@@ -49,7 +54,8 @@ namespace HauntedFish.Multiplayer
                     if (address.AddressFamily == AddressFamily.InterNetwork && !IPAddress.IsLoopback(address))
                         return address.ToString();
             }
-            catch (SocketException) { }
+            // Browsers have no DNS or interface APIs; relay sessions never publish this address there.
+            catch (Exception) { }
             return "127.0.0.1";
         }
     }

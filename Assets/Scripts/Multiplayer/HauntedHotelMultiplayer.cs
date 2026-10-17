@@ -64,7 +64,7 @@ namespace HauntedFish.Multiplayer
         public bool Busy => _Lifecycle != null && _Lifecycle.Busy;
         public bool Transitioning => Busy || (_SceneTravel && _SceneTravel.Loading);
         public float ConnectionProgress => HotelSessionProgress.For(State);
-        HotelTurnSocketFactory _Relay => _Socket as HotelTurnSocketFactory;
+        IHotelRelaySocketFactory _Relay => _Socket as IHotelRelaySocketFactory;
 
         public event Action StateChanged;
         public event Action<INetworkPlayer> PlayerAdmitted;
@@ -78,11 +78,17 @@ namespace HauntedFish.Multiplayer
                 enabled = false;
                 return;
             }
+            // Browsers cannot open the authored UDP relay socket; they reach the same coturn server over WebRTC.
+            if (!_Socket.IsSupported && Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                _Socket = _Socket.gameObject.AddComponent<HotelWebRtcSocketFactory>();
+                _DirectoryUrl = LocalDirectoryOverride() ?? _DirectoryUrl;
+            }
             _Network = new HotelNetworkSession(_Server, _Client, _ServerObjects, _ClientObjects, _Socket,
                 _PlayerPrefab, _DialoguePrefab, _AdditionalPrefabs, Session, _SceneTravel, SpawnPosition);
             _Lifecycle = new HotelSessionLifecycle(_Network,
                 new UnityHotelSessionTransport(() => _Socket, () => _DirectoryUrl),
-                new UnityHotelSessionDirectory(() => _DirectoryUrl, () => _Relay ? _Relay.AuthorizationToken : null, this),
+                new UnityHotelSessionDirectory(() => _DirectoryUrl, () => _Relay?.AuthorizationToken, this),
                 this, this, _Port, _Capacity, _RetryInterval, _AdmissionTimeout);
             _Lifecycle.Changed += PublishState;
             _Network.LobbyPlayers.AllowEditorSolo = Application.isEditor;
@@ -101,6 +107,21 @@ namespace HauntedFish.Multiplayer
                 positionCharacters: _Network.PositionCharacters) { CanStartGame = () => _Network.LobbyPlayers.CanStartGame });
             _SceneTravel.StateChanged += PublishState;
             SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        // A page served from this machine may name a loopback directory (?directory=http://127.0.0.1:8790)
+        // so browser builds can be tested against Tools/ServerOperations/relay in HF_DEV mode.
+        static string LocalDirectoryOverride()
+        {
+            if (!Uri.TryCreate(Application.absoluteURL, UriKind.Absolute, out var page) || !page.IsLoopback) return null;
+            foreach (var pair in page.Query.TrimStart('?').Split('&'))
+            {
+                var parts = pair.Split(new[] { '=' }, 2);
+                if (parts.Length == 2 && parts[0] == "directory" &&
+                    Uri.TryCreate(Uri.UnescapeDataString(parts[1]), UriKind.Absolute, out var directory) && directory.IsLoopback)
+                    return directory.ToString().TrimEnd('/');
+            }
+            return null;
         }
 
         bool HasAuthoredDependencies()
