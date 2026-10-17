@@ -113,7 +113,7 @@ namespace HauntedFish.Theatre
         }
         IEnumerator PrepareAndPlay(VideoClip clip)
         {
-            _Video.Stop();_Video.clip=clip;_Video.isLooping=false;_Video.Prepare();
+            _Video.Stop();WebVideoSource.Assign(_Video,clip);_Video.isLooping=false;_Video.Prepare();
             float began=Time.realtimeSinceStartup;
             while(!_Video.isPrepared&&Time.realtimeSinceStartup-began<15)yield return null;
             if(!_Video.isPrepared){Debug.LogWarning("Cinema film could not prepare; use ESC How To instructions.",this);_Playback=null;yield break;}

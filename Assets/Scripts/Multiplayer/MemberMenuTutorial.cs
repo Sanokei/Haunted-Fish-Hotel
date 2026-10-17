@@ -59,17 +59,18 @@ namespace HauntedFish.Multiplayer
             _Title.text = content && !string.IsNullOrEmpty(content.Title) ? content.Title : (ghost ? "PLAY AS THE GHOST" : "PLAY AS A FISH");
             _InputPrompts.SetTemplate(content ? FormatInstructions(content) : "Tutorial instructions are unavailable.");
             Canvas.ForceUpdateCanvases(); _Scroll.verticalNormalizedPosition = 1;
-            _Video.clip = content ? content.Recording : null;
+            var clip = content ? content.Recording : null;
+            WebVideoSource.Assign(_Video, clip);
             _Video.isLooping = content && content.Loop;
             var hasAudio = content && content.HasAudio;
             _Audio.mute = !hasAudio;
             _Video.audioOutputMode = hasAudio ? VideoAudioOutputMode.AudioSource : VideoAudioOutputMode.None;
             _Playback.interactable = _Replay.interactable = false;
             _PlaybackLabel.text = "Play";
-            _Status.text = _Video.clip ? "Loading video..." : "Video unavailable; use the instructions.";
-            if (_Video.clip)
+            _Status.text = clip ? "Loading video..." : "Video unavailable; use the instructions.";
+            if (clip)
             {
-                _Video.controlledAudioTrackCount = hasAudio ? (ushort)Mathf.Min(1, _Video.clip.audioTrackCount) : (ushort)0;
+                _Video.controlledAudioTrackCount = hasAudio ? (ushort)Mathf.Min(1, clip.audioTrackCount) : (ushort)0;
                 if (_Video.controlledAudioTrackCount > 0) { _Video.EnableAudioTrack(0, true); _Video.SetTargetAudioSource(0, _Audio); }
                 _Video.Prepare();
             }
