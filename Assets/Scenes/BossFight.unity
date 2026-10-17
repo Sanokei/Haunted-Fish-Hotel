@@ -6355,7 +6355,7 @@ MonoBehaviour:
   - {fileID: 718528083}
   - {fileID: 718528081}
   _PanicHeat: 0.65
-  _AngryRise: 1.6
+  _AngryRise: 0.6
   _RiseSeconds: 0.8
 --- !u!1 &731344952
 GameObject:
@@ -8231,7 +8231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &969976688
 Transform:
   m_ObjectHideFlags: 0
@@ -15461,7 +15461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1974223225
 Transform:
   m_ObjectHideFlags: 0
@@ -19547,6 +19547,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: df15f064a5de4e289ab0be6167dac1e0, type: 3}
   - {fileID: 8300000, guid: 95e71cd93e51446d9c6b3fd4fc718825, type: 3}
   - {fileID: 8300000, guid: 312c874d61ce4447bca9fa3d0f15b5a4, type: 3}
+  _ExteriorRainLoop: {fileID: 0}
+  _ExteriorThunderClips: []
   _ThunderOnsetSeconds:
   - 0.06
   - 0.06
@@ -19749,6 +19751,7 @@ MonoBehaviour:
   _Hud: {fileID: 1119873192}
   _Defenses: {fileID: 470086783}
   _DragInput: {fileID: 470086782}
+  _DefensesEnabled: 0
   _Bomb: {fileID: 5814000000000000099}
   _BombView: {fileID: 5814000000000000100}
   _FishSpawn: {fileID: 5107514401114919917}
@@ -19764,6 +19767,7 @@ MonoBehaviour:
   _SnapshotInterval: 0.05
   _InputTimeout: 0.3
   _PaddleRadius: 0.48
+  _BoostMultiplier: 1.9
 --- !u!4 &7872901434888862006
 Transform:
   m_ObjectHideFlags: 0

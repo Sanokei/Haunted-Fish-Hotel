@@ -15,7 +15,6 @@ namespace HauntedFish.BossFight
         static readonly int Idle = Animator.StringToHash("Idle");
         static readonly int Burn = Animator.StringToHash("Burn");
         static readonly int Boom = Animator.StringToHash("Boom");
-        static readonly int Stun = Animator.StringToHash("Stun");
 
         public bool ValidateAuthoredBindings(out string error)
         {
@@ -49,8 +48,7 @@ namespace HauntedFish.BossFight
                 _Blast.Play(Boom, 0, 0);
                 if (_Fireball) { _Fireball.Clear(true); _Fireball.Play(true); }
             }
-            var marker = victim == BossSide.Fish ? _FishStun : victim == BossSide.Ghost ? _GhostStun : null;
-            if (marker) marker.Play(Stun, 0, 0);
+            // The stunned paddle shows the piranha stun (BossArenaManager); the old stun marker stays idle.
         }
 
         void OnDisable() => Defuse();

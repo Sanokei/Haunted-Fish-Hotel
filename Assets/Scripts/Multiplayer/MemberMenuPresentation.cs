@@ -15,13 +15,14 @@ namespace HauntedFish.Multiplayer
         [SerializeField] CanvasGroup _ModalGroup;
         [SerializeField] Button _Resume, _RoomTab, _SettingsTab, _HowToTab, _Apply, _Cancel, _DisplayChange;
         [SerializeField] Slider _Volume, _MusicVolume, _EffectsVolume;
-        [SerializeField] TMP_Text _VolumeLabel, _MusicVolumeLabel, _EffectsVolumeLabel, _DisplayLabel, _Status, _Heading;
+        [SerializeField] TMP_Text _VolumeLabel, _MusicVolumeLabel, _EffectsVolumeLabel, _DisplayLabel, _Status;
+        [SerializeField] Image _Heading;
         readonly MemberMenuSettingsDraft _Draft = new MemberMenuSettingsDraft();
         readonly MemberMenuNavigation _Tabs = new MemberMenuNavigation();
         bool _Initialized;
         public bool SettingsOpen => _Settings && _Settings.activeSelf;
         public bool HowToOpen => _HowTo && _HowTo.activeSelf;
-        public TMP_Text Heading => _Heading;
+        public Image Heading => _Heading;
         public bool HasAuthoredBindings => _Root && _Roster && _Settings && _HowTo && _Tutorial &&
             _Canvas && _Blocker && _ModalGroup && _Resume && _RoomTab && _SettingsTab && _HowToTab &&
             _Apply && _Cancel && _DisplayChange && _Volume && _MusicVolume && _EffectsVolume &&

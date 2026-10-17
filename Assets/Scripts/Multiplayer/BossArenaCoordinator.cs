@@ -32,6 +32,8 @@ namespace HauntedFish.Multiplayer
         [SerializeField, Min(0)] float _MatchEndSeconds = 3;
         [Tooltip("The ghost wins by stalling this long; time spent in boss fights does not count.")]
         [SerializeField, Min(1)] float _StallSeconds = 60;
+        [Tooltip("Seconds added back to the stall clock each time the fish scores in the boss fight.")]
+        [SerializeField, Min(0)] float _FishGoalBonusSeconds = 20;
         float _ReturnToLobbyAt, _StallElapsed;
         bool _RoundHadFish;
         string _RecordedRound, _RulesRound;
@@ -80,6 +82,7 @@ namespace HauntedFish.Multiplayer
             {
                 _AuthorityOwned = Authority; _Arena.SetAuthority(_AuthorityOwned);
                 _Arena.Completed -= Completed; _Arena.Completed += Completed;
+                _Arena.FishGoalScored -= OnFishGoal; _Arena.FishGoalScored += OnFishGoal;
                 _Arena.SnapshotChanged -= Publish; _Arena.SnapshotChanged += Publish;
             }
             SceneManager.sceneLoaded += Loaded;
@@ -153,6 +156,7 @@ namespace HauntedFish.Multiplayer
             _Arena.SetAuthority(_AuthorityOwned);
             if(_Arena.DragInput){_Arena.DragInput.DefenseMoveRequested-=OnDefenseMove;_Arena.DragInput.DefenseMoveRequested+=OnDefenseMove;}
             _Arena.Completed += Completed;
+            _Arena.FishGoalScored += OnFishGoal;
             _Arena.SnapshotChanged += Publish;
             if (_PendingFish) BeginPending();
 #if UNITY_EDITOR
@@ -293,6 +297,8 @@ namespace HauntedFish.Multiplayer
             if (_RoundHadFish && game.AllFishDead || _StallElapsed >= _StallSeconds)
                 EndMatch(reference.InventoryScope, reference.RoundStateKey, reference.RoundVersion, false);
         }
+        // Elapsed may go negative so the bonus can push the clock above its starting value.
+        void OnFishGoal() { if (Authority) _StallElapsed -= _FishGoalBonusSeconds; }
         void EndMatch(string scope, string key, int version, bool fishWon)
         {
             if (_ReturnToLobbyAt > 0) return;
@@ -512,7 +518,7 @@ namespace HauntedFish.Multiplayer
             if (_Arena)
             {
                 if (_AuthorityOwned && _Arena.Active) _Arena.Cancel(_Arena.FishId);
-                _Arena.Completed -= Completed; _Arena.SnapshotChanged -= Publish;if(_Arena.DragInput){_Arena.DragInput.DefenseMoveRequested-=OnDefenseMove;_Arena.DragInput.Cancel();}
+                _Arena.Completed -= Completed; _Arena.FishGoalScored -= OnFishGoal; _Arena.SnapshotChanged -= Publish;if(_Arena.DragInput){_Arena.DragInput.DefenseMoveRequested-=OnDefenseMove;_Arena.DragInput.Cancel();}
             }
             if (_AuthorityOwned)
             {

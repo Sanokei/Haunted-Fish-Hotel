@@ -30,6 +30,8 @@ namespace HauntedFish.BossFight
         [SerializeField] BossHudPresentation _Hud;
         [SerializeField] BossDefenseBoard _Defenses;
         [SerializeField] BossDragInput _DragInput;
+        // Building defenses on the table is switched off: the pieces stay authored but hidden and unused.
+        [SerializeField] bool _DefensesEnabled;
         [SerializeField] BossCueBomb _Bomb;
         [SerializeField] BossCueBombView _BombView;
         uint _PracticeDefenseEpoch;
@@ -79,6 +81,7 @@ namespace HauntedFish.BossFight
         BossMatchResult _PendingResult;
         public event Action<BossMatchResult> Completed;
         public event Action<string> SnapshotChanged;
+        public event Action FishGoalScored;
         public Rigidbody Puck => _Puck;
         public BossDefenseBoard Defenses=>_Defenses;
         public BossDragInput DragInput=>_DragInput;
@@ -92,10 +95,16 @@ namespace HauntedFish.BossFight
         public uint GhostId => _EditorPractice ? 0 : _Authority ? _Match.GhostId : _View?.GhostId ?? 0;
         public uint MatchEpoch => _Authority ? _Match.Epoch : _View?.Epoch ?? 0;
         public bool ParticipantsReady => _Authority ? _Ready : _View != null && _View.ParticipantsReady;
+        public int FishScore => _EditorPractice ? _PracticeFishScore : _View?.FishScore ?? 0;
         public string Snapshot => _View == null ? string.Empty : JsonUtility.ToJson(_View);
 
         void Awake()
         {
+            if(!_DefensesEnabled)
+            {
+                if(_Defenses)for(int i=0;_Defenses.Piece(i);i++)_Defenses.Piece(i).gameObject.SetActive(false);
+                _Defenses=null;_DragInput=null;
+            }
             _Match.Completed += OnCompleted;
             if(_Defenses)_Defenses.Changed+=Publish;
             if(_Bomb){_Bomb.Changed+=OnFuseChanged;_Bomb.Detonated+=OnDetonated;_Bomb.Defused+=OnFuseDefused;}
@@ -282,6 +291,7 @@ namespace HauntedFish.BossFight
             _ReactionFinal = fishScored ? _Match.FishScore+1 >= BossMatch.FishGoalsToWin : _Match.GhostScore+1 >= BossMatch.GhostGoalsToWin;
             _ReactionUntil = Time.unscaledTime + (_Reactions ? _Reactions.ReactionDuration(_ReactionFinal) : 0);
             if (!_Match.Score(_Match.Epoch, fishScored)) return false;
+            if (fishScored) FishGoalScored?.Invoke();
             if (_Match.Active)
                 ScheduleServe();
             Publish();
@@ -561,7 +571,7 @@ namespace HauntedFish.BossFight
         {
             if (!_BombView && !_Reactions) return;
             if (_BombEpoch != s.Epoch) { _BombEpoch = s.Epoch; _ObservedBlast = s.BlastEvent; _ObservedFuseRevision = uint.MaxValue; _ObservedFuseArmed = false; }
-            if (s.BlastEvent > _ObservedBlast) { _ObservedBlast = s.BlastEvent; ShowBlast(s.BlastPosition, (BossSide)s.BlastVictim); }
+            if (s.BlastEvent > _ObservedBlast) { _ObservedBlast = s.BlastEvent; _Stun.Stun((BossSide)s.BlastVictim, Time.unscaledTime, BossBlast.DefaultStunSeconds); ShowBlast(s.BlastPosition, (BossSide)s.BlastVictim); }
             if (s.FuseArmed)
             {
                 if (s.FuseRevision != _ObservedFuseRevision) { _ObservedFuseRevision = s.FuseRevision; ShowFuse(true, s.FuseHeat, s.FuseSeconds); }

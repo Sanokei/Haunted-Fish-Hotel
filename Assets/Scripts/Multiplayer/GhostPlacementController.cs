@@ -96,7 +96,7 @@ namespace HauntedFish.Multiplayer
             _HudMode = -1;
         }
         string _PreparedRoundKey;
-        const float PossessedGhostAlpha = .25f;
+        const float PossessedGhostAlpha = .15f;
         public void Configure(GameCameraOwner camera, GameSceneController scene)
         {
             _Camera = camera;

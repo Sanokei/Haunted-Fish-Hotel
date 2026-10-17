@@ -35,7 +35,7 @@ half4 col=tex2D(_MainTex,uv);
 // Feather each ghost toward its cell edge instead of a hard alpha cut.
 float2 edge=min(local,1-local);
 col.a*=smoothstep(0,.22,min(edge.x,edge.y));
-col.a*=.3; return col;
+col.a*=.18; return col;
 }
 ENDCG
 }

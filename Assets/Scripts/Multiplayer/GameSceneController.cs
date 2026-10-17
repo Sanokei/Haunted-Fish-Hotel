@@ -39,14 +39,14 @@ namespace HauntedFish.Multiplayer
                 _GraceCountdown.text = second.ToString();
             }
         }
-        // The ghost's stall clock, top right: a plain timer from 60, then the bubbly digit pops each second for the last 10.
+        // The ghost's stall clock, top right (held, still shown, through the boss fight): a plain timer from 60, then the bubbly digit pops each second for the last 10.
         GraceCountdownPresentation _StallView;
         Text _StallDigit;
         int _StallSecond = -1;
         float _StallPopAt;
         void RenderStallCountdown(HotelPlayer local)
         {
-            bool visible = local && local.RoundReleased && local.StallRemaining > 0 && local.MatchResult == 0 && !local.InBossFight && !local.BossWatching;
+            bool visible = local && local.RoundReleased && local.StallRemaining > 0 && local.MatchResult == 0;
             if (!_StallDigit && visible && _GraceCountdownPrefab)
             {
                 _StallView = Instantiate(_GraceCountdownPrefab, transform, false);

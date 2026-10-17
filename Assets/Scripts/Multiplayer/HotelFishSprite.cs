@@ -23,7 +23,10 @@ namespace HauntedFish.Multiplayer
         bool _Stunned;
         bool _FacingLeft, _Walking, _Talking, _Running;
         bool _FacingInitialized, _Corpse;
-        public void SetCorpse(bool corpse) { _Corpse = corpse; if (corpse) SetStunned(false); }
+        public void SetCorpse(bool corpse) { if (corpse && !_Corpse) _CorpseSince = Time.time; _Corpse = corpse; if (corpse) SetStunned(false); }
+        float _CorpseSince;
+        // The fish keels over belly-up as it hits the floor; the soul waits for this to finish.
+        public const float CorpseFallSeconds = .45f;
         public void SetStunned(bool stunned)
         {
             stunned &= !_Corpse;
@@ -105,6 +108,9 @@ namespace HauntedFish.Multiplayer
             if (camera) transform.rotation = camera.transform.rotation;
             if (_Corpse)
             {
+                float fall = Mathf.Clamp01((Time.time - _CorpseSince) / CorpseFallSeconds);
+                fall = fall * fall;
+                transform.rotation = (camera ? camera.transform.rotation : transform.rotation) * Quaternion.Euler(0, 0, (_FacingLeft ? -180 : 180) * fall);
                 _FinPivot.localRotation = _FinRestRotation;
                 _FinPivot.localScale = Vector3.Scale(_FinRestScale, new Vector3(_FacingLeft ? -1 : 1, 1, 1));
                 return;

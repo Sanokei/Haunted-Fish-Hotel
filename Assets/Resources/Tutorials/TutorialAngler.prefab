@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 31900003}
   - component: {fileID: 31000123}
   - component: {fileID: 31000999}
-  - component: {fileID: 8228628842873594569}
+  - component: {fileID: 8105913038061581234}
   m_Layer: 0
   m_Name: TutorialAngler
   m_TagString: Untagged
@@ -224,7 +224,7 @@ MonoBehaviour:
   _Landed:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8228628842873594569
+--- !u!114 &8105913038061581234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,7 +454,7 @@ SpriteRenderer:
   m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &31000103
 GameObject:
@@ -933,7 +933,7 @@ SpriteRenderer:
   m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &92000010
 GameObject:

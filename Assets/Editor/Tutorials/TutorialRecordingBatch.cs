@@ -47,7 +47,10 @@ public static class TutorialRecordingBatch
             throw new InvalidOperationException("Open the authored TutorialRecording scene and enter Play explicitly first.");
         if (SessionState.GetBool(Key, false)) throw new InvalidOperationException("A tutorial run is already armed.");
         Directory.CreateDirectory(Evidence);
-        var journal = new Journal { Background = Application.runInBackground, Scenes = EditorSceneManager.GetSceneManagerSetup().Select(s => new SceneRecord { Path = s.path, Loaded = s.isLoaded, Active = s.isActive }).ToArray() };
+        // GetSceneManagerSetup throws in Play mode; the runtime scene list carries the same paths.
+        var active = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        var scenes = Enumerable.Range(0, UnityEngine.SceneManagement.SceneManager.sceneCount).Select(UnityEngine.SceneManagement.SceneManager.GetSceneAt);
+        var journal = new Journal { Background = Application.runInBackground, Scenes = scenes.Select(s => new SceneRecord { Path = s.path, Loaded = s.isLoaded, Active = s == active }).ToArray() };
         SessionState.SetString(Key + ".Journal", JsonUtility.ToJson(journal));
         File.WriteAllLines(Evidence + "/protected-before.txt", protectedPaths.Select(p => p + " " + Hash(p)));
         SessionState.SetBool(Key + ".Batch", false);

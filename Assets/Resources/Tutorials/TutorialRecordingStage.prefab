@@ -307,11 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09284e714004f24bc063a9391c432b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HauntedFish.Multiplayer.GhostPlacementWorld
-  _TrapPrefabs:
-  - {fileID: 31000999, guid: 6e97424c56fac634083188ab7c2d7dc7, type: 3}
-  - {fileID: 31000999, guid: 8658676a703f16740920051653454777, type: 3}
-  - {fileID: 31000999, guid: 90da934f47d0a08468075a8b483323b7, type: 3}
-  - {fileID: 31000999, guid: e8bf6c9e3bf65600b18d27293a1649f2, type: 3}
+  _TrapPrefabs: []
   _TrapContainer: {fileID: 8338375555291145211}
   _GraceZone: {fileID: 6857741719069122800}
   _HallwayPlacementReach: 4
@@ -442,8 +438,9 @@ Transform:
   - {fileID: 5433942425448931714}
   - {fileID: 8338375555291145211}
   - {fileID: 4392982010311744428}
-  - {fileID: 1082790918383741719}
+  - {fileID: 82441963}
   - {fileID: 8615869596180749305}
+  - {fileID: 4613714899702688254}
   - {fileID: 3794345334002369912}
   - {fileID: 6519310612821739894}
   - {fileID: 6821593003971969775}
@@ -455,11 +452,10 @@ Transform:
   - {fileID: 8031563395553559473}
   - {fileID: 7849644412481896870}
   - {fileID: 6506428885049032775}
+  - {fileID: 95001031}
   - {fileID: 412474594008022525}
   - {fileID: 1043834862474389595}
   - {fileID: 7009590836475034362}
-  - {fileID: 82441963}
-  - {fileID: 95001031}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &242606801975031782
@@ -483,12 +479,12 @@ MonoBehaviour:
   Caption: {fileID: 4523817324669855553}
   Progress: {fileID: 1414917069686389453}
   Spotlight: {fileID: 2364455850021812295}
-  Fish: {fileID: 1082790918383741712}
-  OtherFish: {fileID: 82441964}
+  Fish: {fileID: 82441964}
+  OtherFish: {fileID: 4613714899702688249}
   Ghost: {fileID: 8615869596180749310}
   Haunting: {fileID: 95001020}
-  FishStunEffect: {fileID: 1082790917669116182}
-  FishStunAnimation: {fileID: 1082790917669116177}
+  FishStunEffect: {fileID: 823002346}
+  FishStunAnimation: {fileID: 823002349}
   GhostFlight: {fileID: 3794345334002369912}
   CarriedPreview: {fileID: 6519310612821739894}
   GhostArt: {fileID: 3543733667907285589}
@@ -764,7 +760,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.27160493, y: 0.27160493, z: 0.27160493}
+  m_LocalScale: {x: 0.08288125, y: 0.08288125, z: 0.08288125}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4173343303930472214}
@@ -778,8 +774,8 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2571044670611970569}
   m_Enabled: 1
-  m_CastShadows: 2
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -795,7 +791,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7832355c27d8dfb99f9fcb54054eea8f, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -816,17 +812,17 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 38
+  m_SortingOrder: 8
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: bccfec07ac53dd846bc79ebdedc0004a, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 683369b848f947b6a450d6d1ae3ab23f, type: 3}
   m_Color: {r: 1, g: 0.8, b: 0.65, a: 0.7}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.89, y: 4.05}
+  m_Size: {x: 16.59, y: 10.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!1 &2909046449040551902
 GameObject:
@@ -1231,7 +1227,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 50
+  m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ad74e6bf18f9482baf05852f6c78e8ab, type: 3}
   m_Color: {r: 0.9254902, g: 0.99607843, b: 0.7921569, a: 1}
@@ -1700,7 +1696,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 21000001, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: m_Name
-      value: Authored second fish - production impact target
+      value: Authored fish - production motor
       objectReference: {fileID: 0}
     - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1754,18 +1750,6 @@ PrefabInstance:
       propertyPath: Networked
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21000024, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2647969585365710181, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_SortingOrder
-      value: 61
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1787,6 +1771,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b188f437b64a23829c11a5a1821e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &823002346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 883400003, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+  m_PrefabInstance: {fileID: 95001001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &823002349 stripped
+Animation:
+  m_CorrespondingSourceObject: {fileID: 883400004, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
+  m_PrefabInstance: {fileID: 95001001}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &614540825760968301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1913,7 +1907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65771315b3b94aa8aa49d4e146b6d1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1082790918396331093
+--- !u!1001 &4613714899690112700
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1923,7 +1917,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 21000001, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: m_Name
-      value: Authored fish - production motor
+      value: Authored second fish - production impact target
       objectReference: {fileID: 0}
     - target: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1977,37 +1971,15 @@ PrefabInstance:
       propertyPath: Networked
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21000024, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2647969585365710181, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_SortingOrder
-      value: 61
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
---- !u!111 &1082790917669116177 stripped
-Animation:
-  m_CorrespondingSourceObject: {fileID: 883400004, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-  m_PrefabInstance: {fileID: 1082790918396331093}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1082790917669116182 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 883400003, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-  m_PrefabInstance: {fileID: 1082790918396331093}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1082790918383741712 stripped
+--- !u!114 &4613714899702688249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-  m_PrefabInstance: {fileID: 1082790918396331093}
+  m_PrefabInstance: {fileID: 4613714899690112700}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -2015,10 +1987,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b188f437b64a23829c11a5a1821e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1082790918383741719 stripped
+--- !u!4 &4613714899702688254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 21000002, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-  m_PrefabInstance: {fileID: 1082790918396331093}
+  m_PrefabInstance: {fileID: 4613714899690112700}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6144801475636508472
 PrefabInstance:
@@ -2217,14 +2189,6 @@ PrefabInstance:
     - target: {fileID: 21000005, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
       propertyPath: Networked
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 21000024, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_SortingOrder
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2647969585365710181, guid: f5b5cfb71726435bbf95b7c7bb47ad54, type: 3}
-      propertyPath: m_SortingOrder
-      value: 61
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

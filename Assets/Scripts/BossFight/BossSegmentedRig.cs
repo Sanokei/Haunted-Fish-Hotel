@@ -22,7 +22,7 @@ namespace HauntedFish.BossFight
         [SerializeField] Renderer[] _AllArtwork;
         [SerializeField,Range(0,1)] float _PanicHeat=.65f;
         // Once the boss is angry (variant 1+) it rises from behind the table so its whole face shows.
-        [SerializeField] float _AngryRise=1.6f;
+        [SerializeField] float _AngryRise=.6f;
         [SerializeField,Min(.05f)] float _RiseSeconds=.8f;
         // The authored juggle and panic clips swing the tentacles too hard for ordinary rallies: keep their timing and
         // shape, but blend each pose part of the way back toward the rest pose.

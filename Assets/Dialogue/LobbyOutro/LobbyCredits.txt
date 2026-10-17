@@ -1,16 +1,17 @@
 // Lobby credits roll. "# " is a heading, "- " is small print, "@handle" gets the Instagram mark,
-// "[logo] Name" shows Resources/CreditsLogos/Name, blank lines are spacing, and lines starting with "//" are notes that never show on screen.
+// "[logo] Name" shows Resources/CreditsLogos/Name ("[wordmark] Name" shows it large), blank lines are spacing, and lines starting with "//" are notes that never show on screen.
 // Every asset credit below comes from a license or source file in the project.
 // NOT YET CREDITED (no license or source file found; add them before release):
 //   Art/Cars, Art/MetroStation, Art/LiquorBottles, Art/Cigarettes, Art/TrafficCone, Art/Radio,
 //   Art/UrbanCity, Art/UrbanBits, Art/UrbanTextures, Art/Seamless-Oak-Texture-2.jpg,
 //   Art/RadioAds (vintage radio adverts), Art/lobby - no master effects.mp3, Art/Video/BubbleTransition.mp4,
 //   and the music from Jamie Smith and Bi10 (track names).
+[wordmark] WORDMARK
+
 # A game by
 Sano Kei
 Constance @heab.tea
 Jamie Smith
-Bi10
 
 
 
@@ -23,7 +24,6 @@ Constance @heab.tea
 
 # Including music from
 Jamie Smith
-Bi10
 
 
 
@@ -117,6 +117,7 @@ Front desk, footsteps and fish sounds
 
 # Special thanks to
 Ferrous Blue
+Bi10
 
 
 

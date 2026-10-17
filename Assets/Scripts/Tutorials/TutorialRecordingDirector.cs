@@ -330,15 +330,18 @@ namespace HauntedFish.Tutorials
                 case "fall":
                     Require(World.AcceptTrapAction(Ghost, activeTrap.Index, new TrapInput(TrapInputKind.Activate)), "production Space chandelier activate"); initialFish = activeTrap.Position; break;
                 case "reset":
-                    // Dropping ejects the ghost; re-possess the fallen chandelier to reset it, as in Game.
-                    GhostFlight.position = activeTrap.Position; World.Possess(Ghost, activeTrap.Index, GhostFlight.position);
-                    Require(World.AcceptTrapAction(Ghost, activeTrap.Index, new TrapInput(TrapInputKind.Reset)), "production F / gamepad B reset"); break;
+                    // A fallen chandelier can't be possessed; it rehangs itself after its production reset delay.
+                    GhostFlight.position = activeTrap.Position;
+                    Require(activeTrap.AcceptInput(new TrapInput(TrapInputKind.Reset), Time.unscaledTime), "production chandelier reset"); break;
                 case "click":
                     World.Possess(Ghost, -1, GhostFlight.position); Spawn("click", 10);
                     GhostFlight.position = activeTrap.Position; World.Possess(Ghost, activeTrap.Index, GhostFlight.position);
                     Require(World.AcceptTrapAction(Ghost, activeTrap.Index, new TrapInput(TrapInputKind.Click, point: activeTrap.CollisionBounds.center)), "production mouse click activates stationary trap"); break;
                 case "dispose":
-                    Require(World.Dispose(Ghost, activeTrap.Index), "production Q disposal");
+                    // The fallen chandelier can't be possessed, so show Q discarding a held trap instead.
+                    if (Ghost.ControlledCube >= 0) World.Possess(Ghost, -1, GhostFlight.position);
+                    Require(World.Hold(Ghost, "cart", GhostFlight.position), "production held cart for disposal");
+                    Require(World.Dispose(Ghost, -1), "production Q disposal");
                     Require(Ghost.ControlledCube == -1, "disposal releases possession"); activeTrap = null; break;
                 case "boss":
                     fishAxis = trapAxis = 0; Hallway.SetActive(false); GhostFlight.gameObject.SetActive(false); Fish.gameObject.SetActive(false);
@@ -491,7 +494,7 @@ namespace HauntedFish.Tutorials
         void Spawn(string family, float x)
         {
             if (Ghost.ControlledCube >= 0) World.Possess(Ghost, -1, GhostFlight.position);
-            Require(World.Hold(Ghost, family, GhostFlight.position), "production held " + family);
+            Require(World.Hold(Ghost, family, GhostFlight.position), "production held " + family + " (cube=" + Ghost.ControlledCube + " held=" + Ghost.HeldTrapFamily + " def=" + (bool)World.Definition(family) + ")");
             Require(World.PlacementPoint(new Vector3(x, 1, 0), family, out var point), "production placement point for " + family);
             Require(World.TryPlace(Ghost, point, family), "production placed " + family);
             activeTrap = LastPlacedTrap(); controlled = activeTrap.Index;
@@ -532,6 +535,7 @@ namespace HauntedFish.Tutorials
                 Require(Mathf.Abs(Fish.transform.position.x - initialFish.x) > .8f, "actual motor " + action + " displacement");
             if (action == "cart-move") Require(Mathf.Abs(activeTrap.Position.x - initialFish.x) > .5f, "actual cart swept movement");
             if (action == "fall") Require(activeTrap.Position.y < initialFish.y - .5f, "actual chandelier fell");
+            if (action == "reset") Require(activeTrap.Phase == TrapPhase.Armed, "production chandelier auto-reset (phase=" + activeTrap.Phase + " pos=" + activeTrap.Position + ")");
             if (action == "boss") Require(initialPuckDistance > .1f, "actual boss physics cue ball advanced");
             fishAxis = trapAxis = 0; fishRun = false;
             if (activeTrap) activeTrap.StopInput();

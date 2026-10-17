@@ -16,6 +16,7 @@ namespace HauntedFish.Multiplayer
         [SerializeField] Canvas _Canvas;
         [SerializeField, Min(.01f)] float _WorldWidth = 2.5f, _TimingScale = 1;
         Vector3 _DeathPosition;
+        bool _Waiting;
 
         public void PlayAt(Vector3 position)
         {
@@ -31,12 +32,17 @@ namespace HauntedFish.Multiplayer
             _DeathPosition = position;
             gameObject.SetActive(true);
             _UI.Prepare();
-            PresentAnchor();
             StartCoroutine(Animate(steps));
         }
 
         IEnumerator Animate(IReadOnlyList<StorySequenceStep> steps)
         {
+            // Let the corpse land before the soul rises out of it.
+            if (_Canvas) _Canvas.enabled = false;
+            _Waiting = true;
+            yield return new WaitForSeconds(HotelFishSprite.CorpseFallSeconds + .1f);
+            _Waiting = false;
+            PresentAnchor();
             foreach (var step in steps)
                 yield return _UI.Play(new StorySequenceStep(step.Kind, step.Target, step.Variant,
                     step.Seconds * _TimingScale, step.X, step.Y, step.Count, step.Visible, step.Parent));
@@ -46,12 +52,13 @@ namespace HauntedFish.Multiplayer
         public void Stop()
         {
             StopAllCoroutines();
+            _Waiting = false;
             if (_UI) _UI.Close();
             if (_Canvas) _Canvas.enabled = false;
             if (gameObject.activeSelf) gameObject.SetActive(false);
         }
 
-        void LateUpdate() => PresentAnchor();
+        void LateUpdate() { if (!_Waiting) PresentAnchor(); }
         void PresentAnchor()
         {
             var camera = HotelViewCamera.Current;

@@ -45,8 +45,8 @@ public static class MemberMenuValidation
         var prefab = PrefabUtility.LoadPrefabContents("Assets/Resources/MemberMenu.prefab");
         try
         {
-            var heading = prefab.GetComponent<MemberMenuPresentation>().Heading;
-            if (heading.font != font) { heading.font = font; PrefabUtility.SaveAsPrefabAsset(prefab, "Assets/Resources/MemberMenu.prefab"); }
+            // The heading is an authored Image now, so there is no heading font to sync.
+            _ = font;
         }
         finally { PrefabUtility.UnloadPrefabContents(prefab); }
     }

@@ -491,7 +491,8 @@ MonoBehaviour:
   _SceneName: BossFight
   _ReturnGhostSeconds: 3
   _MatchEndSeconds: 3
-  _StallSeconds: 5
+  _StallSeconds: 60
+  _FishGoalBonusSeconds: 20
 --- !u!1 &550011
 GameObject:
   m_ObjectHideFlags: 0

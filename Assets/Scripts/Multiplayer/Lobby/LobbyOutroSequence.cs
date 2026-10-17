@@ -324,6 +324,7 @@ namespace HauntedFish.Multiplayer
                 var line = raw.TrimEnd('\r');
                 if (line.StartsWith("//")) continue;
                 if (line.StartsWith("[logo] ")) { AddLogo(line.Substring(7).Trim()); continue; }
+                if (line.StartsWith("[wordmark] ")) { AddLogo(line.Substring(11).Trim(), 8f); continue; }
                 var template = line.StartsWith("# ") ? _HeadingTemplate : line.StartsWith("- ") ? _SmallTemplate : _LineTemplate;
                 if (!template) template = _LineTemplate;
                 var text = line.StartsWith("# ") || line.StartsWith("- ") ? line.Substring(2) : line;
@@ -372,7 +373,7 @@ namespace HauntedFish.Multiplayer
             element.preferredWidth = element.preferredHeight = size * .82f;
         }
         // A centered logo row, sized off the body text so it scales with the roll.
-        void AddLogo(string name)
+        void AddLogo(string name, float lines = 1.8f)
         {
             var texture = Resources.Load<Texture2D>("CreditsLogos/" + name);
             if (!texture) { Debug.LogWarning("Missing credits logo: " + name, this); return; }
@@ -389,7 +390,7 @@ namespace HauntedFish.Multiplayer
             image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(.5f, .5f), 100);
             image.preserveAspect = true; image.raycastTarget = false;
             var element = logo.GetComponent<LayoutElement>();
-            element.preferredHeight = _LineTemplate.fontSize * 1.8f;
+            element.preferredHeight = _LineTemplate.fontSize * lines;
             element.preferredWidth = element.preferredHeight * texture.width / texture.height;
         }
         // The outline camera mark: rounded square, lens ring and flash dot, drawn once with soft edges.
