@@ -11,7 +11,7 @@ using UnityEngine.UI;
 namespace HauntedFish.Multiplayer
 {
     // Local lobby outro: crash dolly into the winner, a short celebration, the Win/Defeat card,
-    // then a jib back while the credits roll. Leaving through the front door plays the credits alone.
+    // then a jib back while the credits roll. Leaving through the front door always plays the credits alone.
     public sealed class LobbyOutroSequence : MonoBehaviour
     {
         [Header("Compiled Ink")]
@@ -52,7 +52,7 @@ namespace HauntedFish.Multiplayer
         InputAction _Skip;
         float _SkipHeld;
         Coroutine _Routine;
-        bool _CreditsAllowed, _Active, _CreditsBuilt, _Cheering;
+        bool _CreditsAllowed, _RecordCredits, _Active, _CreditsBuilt, _Cheering;
         Transform _Actor;
         Vector3 _ActorHome, _ActorScale;
         float _CheerStart;
@@ -90,11 +90,11 @@ namespace HauntedFish.Multiplayer
             if (_Overlay) _Overlay.alpha = 1;
             if (_Fade) _Fade.color = Color.black;
         }
-        public bool PlayOutcome(LobbyOutroKind kind) => Play(InkFor(kind));
-        // Leaving the lobby shows the credits only while they are still pending.
-        public bool PlayCredits() => CreditsPending && Play(_CreditsInk);
+        public bool PlayOutcome(LobbyOutroKind kind) => Play(InkFor(kind), CreditsPending, true);
+        // The front door always rolls the credits and never touches the seen flag.
+        public bool PlayCredits() => Play(_CreditsInk, true, false);
 
-        bool Play(TextAsset ink)
+        bool Play(TextAsset ink, bool credits, bool recordCredits)
         {
             if (Playing || !ink || !isActiveAndEnabled) return false;
             try
@@ -102,7 +102,8 @@ namespace HauntedFish.Multiplayer
                 var steps = StoryFunctions.ReadAnimationSequence(ink.text);
                 foreach (var step in steps)
                     if (!Supports(step)) throw new InvalidOperationException("Unsupported lobby outro step: " + step.Kind + " " + step.Target);
-                _CreditsAllowed = CreditsPending;
+                _CreditsAllowed = credits && _CreditsInk;
+                _RecordCredits = recordCredits;
                 SetPlaying(true);
                 _Routine = StartCoroutine(Run(steps));
                 return true;
@@ -274,7 +275,7 @@ namespace HauntedFish.Multiplayer
                 _Fade.color = new Color(0, 0, 0, Mathf.Max(dim, black));
                 if (credits) _CreditsContent.anchoredPosition = new Vector2(0, -viewport + roll * t);
             });
-            if (credits) MarkCreditsSeen();
+            if (credits && _RecordCredits) MarkCreditsSeen();
         }
 
         void Update()
@@ -284,7 +285,7 @@ namespace HauntedFish.Multiplayer
             float progress = Mathf.Clamp01(_SkipHeld / Mathf.Max(.1f, _SkipHoldSeconds));
             if (_SkipCircle) { _SkipCircle.gameObject.SetActive(progress > 0); _SkipCircle.Progress = progress; }
             // A held skip counts as having seen the credits, like the introduction.
-            if (progress >= 1) { if (_CreditsAllowed) MarkCreditsSeen(); Stop(true); }
+            if (progress >= 1) { if (_CreditsAllowed && _RecordCredits) MarkCreditsSeen(); Stop(true); }
         }
         static void MarkCreditsSeen()
         {
