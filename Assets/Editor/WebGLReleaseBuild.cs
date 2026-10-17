@@ -10,6 +10,40 @@ using UnityEngine;
 public static class WebGLReleaseBuild {
     const string OutputPath = "Builds/WebGL";
 
+    // itch.io rejects any file over 200 MB. DXT needs block-aligned (multiple of 4) sizes, so most of the
+    // hand-painted art silently fell back to RGBA32. Give unaligned textures ASTC, which browsers without
+    // native ASTC decode at load time, and crunch the aligned ones. Manual WebGL overrides are kept.
+    const int TextureBudgetPixels = 512 * 512;
+
+    static void ApplyWebGLTextureBudget() {
+        int changed = 0;
+        foreach (var guid in AssetDatabase.FindAssets("t:Texture2D", new[] { "Assets" })) {
+            var path = AssetDatabase.GUIDToAssetPath(guid);
+            if (!(AssetImporter.GetAtPath(path) is TextureImporter importer)) continue;
+            if (importer.textureType != TextureImporterType.Sprite && importer.textureType != TextureImporterType.Default) continue;
+            var current = importer.GetPlatformTextureSettings("WebGL");
+            bool ours = current.format == TextureImporterFormat.DXT5Crunched || current.format == TextureImporterFormat.DXT1Crunched || current.format == TextureImporterFormat.ASTC_6x6;
+            if (current.overridden && !ours) continue;
+            importer.GetSourceTextureWidthAndHeight(out var width, out var height);
+            if (width * height < TextureBudgetPixels) continue;
+            int maxSize = Mathf.Min(importer.maxTextureSize, 2048);
+            float scale = Mathf.Min(1f, (float)maxSize / Mathf.Max(width, height));
+            int w = Mathf.RoundToInt(width * scale), h = Mathf.RoundToInt(height * scale);
+            bool aligned = w % 4 == 0 && h % 4 == 0;
+            var format = aligned
+                ? (importer.DoesSourceTextureHaveAlpha() ? TextureImporterFormat.DXT5Crunched : TextureImporterFormat.DXT1Crunched)
+                : TextureImporterFormat.ASTC_6x6;
+            if (current.overridden && current.format == format && current.maxTextureSize == maxSize) continue;
+            importer.SetPlatformTextureSettings(new TextureImporterPlatformSettings {
+                name = "WebGL", overridden = true, maxTextureSize = maxSize, format = format,
+                compressionQuality = 70, crunchedCompression = aligned, textureCompression = TextureImporterCompression.CompressedHQ,
+            });
+            importer.SaveAndReimport();
+            changed++;
+        }
+        Debug.Log($"WEBGL_TEXTURE_BUDGET changed={changed}");
+    }
+
     [MenuItem("Haunted Fish/Build WebGL Release")]
     public static void Run() {
         PlayerSettings.SplashScreen.show = false;
@@ -17,6 +51,8 @@ public static class WebGLReleaseBuild {
         // Gzip with the JS fallback loads on hosts that don't send Content-Encoding headers (e.g. itch.io).
         PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
         PlayerSettings.WebGL.decompressionFallback = true;
+
+        ApplyWebGLTextureBudget();
 
         var scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
 

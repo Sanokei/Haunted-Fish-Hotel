@@ -119,12 +119,12 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
+    textureFormat: 29
+    textureCompression: 2
+    compressionQuality: 70
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -142,6 +142,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -149,10 +150,9 @@ TextureImporter:
       spriteID: 9ad716d396beef7bfbf0e4bddd67e70e
       internalID: 21300000
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
-      customData:
     - serializedVersion: 2
       name: TRAP-Chandelier-v1-ceiling-base
       rect:
@@ -164,6 +164,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -171,10 +172,9 @@ TextureImporter:
       spriteID: 33a0985b7fed2379b39415c53f8a981d
       internalID: 21300002
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
-      customData:
     - serializedVersion: 2
       name: TRAP-Chandelier-v1-suspended-line-body
       rect:
@@ -186,6 +186,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -193,18 +194,17 @@ TextureImporter:
       spriteID: 7dbfc75f2921bbcafc121ee65690355c
       internalID: 21300004
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
-      customData:
     outline: []
-    customData:
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
-    indices:
+    indices: 
     edges: []
     weights: []
     secondaryTextures: []
@@ -214,8 +214,8 @@ TextureImporter:
       TRAP-Chandelier-v1: 21300000
       TRAP-Chandelier-v1-ceiling-base: 21300002
       TRAP-Chandelier-v1-suspended-line-body: 21300004
-  mipmapLimitGroupName:
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

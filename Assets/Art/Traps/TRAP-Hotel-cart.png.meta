@@ -116,12 +116,12 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
+    textureFormat: 29
+    textureCompression: 2
+    compressionQuality: 70
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -139,6 +139,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -146,10 +147,9 @@ TextureImporter:
       spriteID: 7989e618e23b55d824349b324d7f999e
       internalID: 21300000
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
-      customData:
     - serializedVersion: 2
       name: TRAP-Hotel-cart-icon
       rect:
@@ -161,6 +161,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -168,18 +169,17 @@ TextureImporter:
       spriteID: 14d79a204f19257bce890e424757e0e3
       internalID: 21300002
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
-      customData:
     outline: []
-    customData:
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
-    indices:
+    indices: 
     edges: []
     weights: []
     secondaryTextures: []
@@ -188,8 +188,8 @@ TextureImporter:
     nameFileIdTable:
       TRAP-Hotel-cart: 21300000
       TRAP-Hotel-cart-icon: 21300002
-  mipmapLimitGroupName:
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
